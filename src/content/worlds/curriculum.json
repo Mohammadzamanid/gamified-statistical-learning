@@ -1,0 +1,261 @@
+{
+  "id": "curriculum.statlas",
+  "title": "The Statlas Expedition",
+  "version": "0.1.0",
+  "worlds": [
+    {
+      "id": "w.counting-shores",
+      "title": "The Counting Shores",
+      "tagline": "Where every voyage begins with a tally",
+      "description": "A coastline of harbors and tide charts where you learn to read, count, and summarize the world before sailing into deeper waters.",
+      "regionIds": [
+        "r.harbor-tallies",
+        "r.averages-atoll"
+      ],
+      "order": 0
+    }
+  ],
+  "regions": [
+    {
+      "id": "r.harbor-tallies",
+      "worldId": "w.counting-shores",
+      "title": "Harbor of Tallies",
+      "tagline": "Counting, categories, and the first charts",
+      "description": "The fishing harbor keeps a ledger of every catch. Learn to read data, tell categories from quantities, and find the center of a dataset.",
+      "moduleIds": [
+        "m.harbor-1"
+      ],
+      "prerequisites": [],
+      "mapX": 28,
+      "mapY": 62
+    },
+    {
+      "id": "r.averages-atoll",
+      "worldId": "w.counting-shores",
+      "title": "Averages Atoll",
+      "tagline": "Spread, range, and resistant measures",
+      "description": "A ring of islands where the tides teach spread and variation. Unlocks when the Harbor of Tallies is charted.",
+      "moduleIds": [
+        "m.atoll-1"
+      ],
+      "prerequisites": [
+        "r.harbor-tallies"
+      ],
+      "mapX": 64,
+      "mapY": 36
+    }
+  ],
+  "modules": [
+    {
+      "id": "m.harbor-1",
+      "regionId": "r.harbor-tallies",
+      "title": "The Harbor Ledger",
+      "description": "Read the catch ledger, classify variables, and summarize with mean, median, and mode.",
+      "lessonIds": [
+        "l.reading-tallies",
+        "l.middle-harbor"
+      ],
+      "prerequisites": [],
+      "difficulty": 1
+    },
+    {
+      "id": "m.atoll-1",
+      "regionId": "r.averages-atoll",
+      "title": "Tides of Spread",
+      "description": "Range and why the middle is not the whole story.",
+      "lessonIds": [
+        "l.spread-1"
+      ],
+      "prerequisites": [
+        "m.harbor-1"
+      ],
+      "difficulty": 2
+    }
+  ],
+  "lessons": [
+    {
+      "id": "l.reading-tallies",
+      "moduleId": "m.harbor-1",
+      "title": "Reading the Tide Tallies",
+      "narrativeIntro": "The harbormaster hands you the week's catch ledger. Before any voyage, an explorer must read the numbers as fluently as the stars.",
+      "objectiveIds": [
+        "obj.read-data",
+        "obj.compute-mean"
+      ],
+      "concepts": [
+        {
+          "id": "c.data-vs-category",
+          "title": "Quantities and categories",
+          "summary": "Numbers you can average versus labels you can only count.",
+          "body": "A quantitative variable is measured with numbers that have magnitude, like fish caught per day. A categorical variable sorts things into groups, like the type of boat. You can compute a mean of fish counts; you can only tally boat types."
+        },
+        {
+          "id": "c.mean",
+          "title": "The mean",
+          "summary": "Add everything, divide by how many.",
+          "body": "The mean shares the total out equally: add all the values, then divide by the number of values. If five days brought 2, 4, 4, 6, and 9 fish, the total is 25 and the mean is 25 / 5 = 5 fish per day."
+        }
+      ],
+      "questionIds": [
+        "q.multiselect-categorical",
+        "q.mean-fish-catch",
+        "q.pct-rainy-days",
+        "q.fraction-quarter",
+        "q.ordering-data-cycle",
+        "q.graph-tallest-bar"
+      ],
+      "prerequisites": [],
+      "estimatedMinutes": 12
+    },
+    {
+      "id": "l.middle-harbor",
+      "moduleId": "m.harbor-1",
+      "title": "The Middle of the Harbor",
+      "narrativeIntro": "One enormous catch can drag the mean off course. The median holds steady in rough seas.",
+      "objectiveIds": [
+        "obj.compute-median",
+        "obj.choose-measure"
+      ],
+      "concepts": [
+        {
+          "id": "c.median",
+          "title": "The median",
+          "summary": "Sort the values; the median is the middle one.",
+          "body": "Sort the data from smallest to largest. With an odd count, the median is the middle value; with an even count, it is the mean of the two middle values. The median ignores how extreme the ends are, so outliers barely move it."
+        }
+      ],
+      "questionIds": [
+        "q.median-market",
+        "q.mc-which-average",
+        "q.matching-measures",
+        "q.method-select",
+        "q.error-id-causation",
+        "q.short-why-median"
+      ],
+      "prerequisites": [
+        "l.reading-tallies"
+      ],
+      "estimatedMinutes": 14
+    },
+    {
+      "id": "l.spread-1",
+      "moduleId": "m.atoll-1",
+      "title": "The Reach of the Tide",
+      "narrativeIntro": "Two harbors can share a mean and still live different lives. Range tells you how far the tide reaches.",
+      "objectiveIds": [
+        "obj.compute-range"
+      ],
+      "concepts": [
+        {
+          "id": "c.range",
+          "title": "The range",
+          "summary": "Largest minus smallest.",
+          "body": "The range is the simplest measure of spread: subtract the smallest value from the largest. A large range warns you that the mean alone hides a lot of variation."
+        }
+      ],
+      "questionIds": [
+        "q.range-tides"
+      ],
+      "prerequisites": [
+        "l.middle-harbor"
+      ],
+      "estimatedMinutes": 8
+    }
+  ],
+  "objectives": [
+    {
+      "id": "obj.read-data",
+      "text": "Distinguish categorical from quantitative variables and read simple charts.",
+      "skillIds": [
+        "skill.data-literacy"
+      ]
+    },
+    {
+      "id": "obj.compute-mean",
+      "text": "Compute and interpret the mean of a small dataset.",
+      "skillIds": [
+        "skill.mean"
+      ]
+    },
+    {
+      "id": "obj.compute-median",
+      "text": "Compute and interpret the median of a small dataset.",
+      "skillIds": [
+        "skill.median"
+      ]
+    },
+    {
+      "id": "obj.choose-measure",
+      "text": "Choose an appropriate measure of center for a distribution.",
+      "skillIds": [
+        "skill.choose-measure"
+      ]
+    },
+    {
+      "id": "obj.compute-range",
+      "text": "Compute the range as a first measure of spread.",
+      "skillIds": [
+        "skill.range"
+      ]
+    },
+    {
+      "id": "obj.percent-fraction",
+      "text": "Convert fluently between fractions, decimals, and percentages.",
+      "skillIds": [
+        "skill.percent-fraction"
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "id": "skill.data-literacy",
+      "title": "Data literacy",
+      "description": "Reading datasets, charts, and variable types.",
+      "prerequisites": []
+    },
+    {
+      "id": "skill.mean",
+      "title": "Mean",
+      "description": "Computing and interpreting the arithmetic mean.",
+      "prerequisites": [
+        "skill.data-literacy"
+      ]
+    },
+    {
+      "id": "skill.median",
+      "title": "Median",
+      "description": "Computing and interpreting the median.",
+      "prerequisites": [
+        "skill.data-literacy"
+      ]
+    },
+    {
+      "id": "skill.choose-measure",
+      "title": "Choosing measures",
+      "description": "Selecting center measures based on distribution shape.",
+      "prerequisites": [
+        "skill.mean",
+        "skill.median"
+      ]
+    },
+    {
+      "id": "skill.range",
+      "title": "Range",
+      "description": "Computing the range of a dataset.",
+      "prerequisites": [
+        "skill.data-literacy"
+      ]
+    },
+    {
+      "id": "skill.percent-fraction",
+      "title": "Percents and fractions",
+      "description": "Moving between fractions, decimals, and percentages.",
+      "prerequisites": []
+    }
+  ],
+  "masteryRule": {
+    "streakToMaster": 3,
+    "minAccuracy": 0.8,
+    "minAttempts": 4
+  }
+}

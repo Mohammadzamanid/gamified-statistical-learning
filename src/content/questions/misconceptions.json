@@ -1,0 +1,60 @@
+[
+  {
+    "id": "mc.mean-median-confusion",
+    "title": "Mean confused with median",
+    "description": "The learner reports the median when the mean is asked, or vice versa.",
+    "detector": "confused-statistic",
+    "detectorParams": {},
+    "remediationId": "rem.mean-vs-median"
+  },
+  {
+    "id": "mc.sum-not-mean",
+    "title": "Sum reported instead of mean",
+    "description": "The learner adds the values but forgets to divide by the count.",
+    "detector": "confused-statistic",
+    "detectorParams": {},
+    "remediationId": "rem.divide-by-count"
+  },
+  {
+    "id": "mc.decimal-vs-percent",
+    "title": "Decimal given instead of percentage",
+    "description": "The learner answers 0.3 when 30% is expected.",
+    "detector": "decimal-instead-of-percentage",
+    "remediationId": "rem.percent-decimal"
+  },
+  {
+    "id": "mc.percent-vs-decimal",
+    "title": "Percentage given instead of decimal",
+    "description": "The learner answers 30 when 0.3 is expected.",
+    "detector": "percentage-instead-of-decimal",
+    "remediationId": "rem.percent-decimal"
+  },
+  {
+    "id": "mc.reversed-fraction",
+    "title": "Fraction reversed",
+    "description": "Numerator and denominator swapped.",
+    "detector": "reversed-fraction",
+    "remediationId": "rem.fraction-order"
+  },
+  {
+    "id": "mc.outlier-mean",
+    "title": "Mean treated as outlier-resistant",
+    "description": "Believing the mean is unaffected by extreme values.",
+    "detector": "tagged-distractor",
+    "remediationId": "rem.outliers-pull-mean"
+  },
+  {
+    "id": "mc.axis-misread",
+    "title": "Chart axis misread",
+    "description": "Reading the wrong axis or bar from a chart.",
+    "detector": "tagged-distractor",
+    "remediationId": "rem.read-axes-first"
+  },
+  {
+    "id": "mc.correlation-causation",
+    "title": "Correlation read as causation",
+    "description": "Concluding that association proves cause.",
+    "detector": "tagged-distractor",
+    "remediationId": "rem.correlation-not-causation"
+  }
+]

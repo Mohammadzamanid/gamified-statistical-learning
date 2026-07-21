@@ -1,0 +1,18 @@
+[
+  {
+    "id": "ds.harbor-catch",
+    "title": "Harbor catch ledger, one week",
+    "description": "Fish landed per day at the Harbor of Tallies.",
+    "columns": [
+      { "name": "Day", "kind": "categorical" },
+      { "name": "Fish landed", "kind": "numeric", "unit": "fish" }
+    ],
+    "rows": [
+      ["Mon", 2],
+      ["Tue", 4],
+      ["Wed", 4],
+      ["Thu", 6],
+      ["Fri", 9]
+    ]
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "id": "rem.mean-vs-median",
+    "title": "Mean vs median",
+    "explanation": "That value is the median — the middle of the sorted list. The mean shares the total out equally: add every value, then divide by how many values there are.",
+    "microLesson": "Sort 2, 4, 4, 6, 9. The middle value (median) is 4. The mean is (2+4+4+6+9)/5 = 25/5 = 5. They answer different questions: the median is the middle position; the mean is the balance point.",
+    "followUpQuestionIds": ["q.remed-mean-basic"],
+    "skillIds": ["skill.mean", "skill.median"]
+  },
+  {
+    "id": "rem.divide-by-count",
+    "title": "Divide by the count",
+    "explanation": "You found the total. The mean is the total divided by the number of values — the last step turns a sum into an average.",
+    "microLesson": "Mean = total / count. If the total catch is 25 fish over 5 days, the mean is 25 / 5 = 5 fish per day.",
+    "followUpQuestionIds": ["q.remed-mean-basic"],
+    "skillIds": ["skill.mean"]
+  },
+  {
+    "id": "rem.percent-decimal",
+    "title": "Percent and decimal are two costumes for one number",
+    "explanation": "0.30 and 30% are the same quantity in different forms. Multiply a decimal by 100 to speak in percent; divide a percent by 100 to get the decimal.",
+    "microLesson": "Percent means 'per hundred'. 30% = 30/100 = 0.30. When a question asks for a percent, answer on the 0–100 scale; when it asks for a proportion, answer on the 0–1 scale.",
+    "followUpQuestionIds": [],
+    "skillIds": ["skill.percent-fraction"]
+  },
+  {
+    "id": "rem.fraction-order",
+    "title": "Part over whole",
+    "explanation": "A fraction of a group is part / whole. Put the part on top and the whole underneath — 3 of 12 boats is 3/12, not 12/3.",
+    "microLesson": "Ask: out of how many in total? That total is the denominator. The count you care about is the numerator.",
+    "followUpQuestionIds": [],
+    "skillIds": ["skill.percent-fraction"]
+  },
+  {
+    "id": "rem.outliers-pull-mean",
+    "title": "Outliers pull the mean",
+    "explanation": "The mean is the balance point of the data, so one extreme value drags it toward itself. The median only cares about position, so it barely moves.",
+    "microLesson": "Incomes 30, 32, 35, 38, 900 (thousands): the median is 35, but the mean jumps to 207. The single huge value moved the mean far more than the median.",
+    "followUpQuestionIds": ["q.median-market"],
+    "skillIds": ["skill.choose-measure"]
+  },
+  {
+    "id": "rem.read-axes-first",
+    "title": "Read the axes before the bars",
+    "explanation": "Charts answer questions only after you know what each axis measures. Check the axis labels and units first, then find the bar or point.",
+    "microLesson": "Habit for every chart: 1) read the title, 2) read both axis labels and units, 3) only then compare bars or points.",
+    "followUpQuestionIds": [],
+    "skillIds": ["skill.data-literacy"]
+  },
+  {
+    "id": "rem.correlation-not-causation",
+    "title": "Association is not proof of cause",
+    "explanation": "Two things rising together does not show one causes the other — a third factor or coincidence can produce the same pattern.",
+    "microLesson": "Ice-cream sales and drownings rise together every summer. Neither causes the other; hot weather drives both. To claim cause, you need an experiment or a design that rules out other explanations.",
+    "followUpQuestionIds": [],
+    "skillIds": ["skill.data-literacy"]
+  }
+]

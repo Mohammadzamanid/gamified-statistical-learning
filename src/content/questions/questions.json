@@ -1,0 +1,642 @@
+[
+  {
+    "id": "q.multiselect-categorical",
+    "topicId": "t.data-literacy",
+    "objectiveId": "obj.read-data",
+    "skillIds": [
+      "skill.data-literacy"
+    ],
+    "difficulty": 1,
+    "interaction": "multiple-selection",
+    "prompt": "The harbor ledger records several things about each boat. Select every CATEGORICAL variable.",
+    "choices": [
+      {
+        "id": "ch.boat-type",
+        "text": "Type of boat (skiff, trawler, sailboat)"
+      },
+      {
+        "id": "ch.fish-count",
+        "text": "Number of fish landed"
+      },
+      {
+        "id": "ch.home-port",
+        "text": "Home port of the boat"
+      },
+      {
+        "id": "ch.length",
+        "text": "Length of the boat in meters"
+      }
+    ],
+    "answer": {
+      "kind": "choice",
+      "correctChoiceIds": [
+        "ch.boat-type",
+        "ch.home-port"
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Categorical variables sort things into named groups."
+      },
+      {
+        "level": 2,
+        "text": "Ask of each one: could I sensibly compute its average? If yes, it is quantitative."
+      }
+    ],
+    "explanation": "Boat type and home port are labels that group boats — categorical. Fish count and length are measured quantities — quantitative.",
+    "solutionSteps": [
+      "Check each variable: does it name a group or measure an amount?",
+      "Boat type and home port name groups → categorical.",
+      "Fish count and length are numeric amounts → quantitative."
+    ],
+    "misconceptionIds": [],
+    "estimatedSeconds": 45
+  },
+  {
+    "id": "q.mean-fish-catch",
+    "topicId": "t.center",
+    "objectiveId": "obj.compute-mean",
+    "skillIds": [
+      "skill.mean"
+    ],
+    "difficulty": 1,
+    "interaction": "numeric-input",
+    "prompt": "Over five days the harbor landed 2, 4, 4, 6, and 9 fish. What is the MEAN number of fish per day?",
+    "visual": {
+      "kind": "bar-chart",
+      "datasetId": "ds.harbor-catch",
+      "caption": "Fish landed per day",
+      "accessibleDescription": "Bar chart of fish landed per day: Monday 2, Tuesday 4, Wednesday 4, Thursday 6, Friday 9."
+    },
+    "datasetId": "ds.harbor-catch",
+    "answer": {
+      "kind": "numeric",
+      "value": 5,
+      "tolerance": 0.001,
+      "unit": "fish"
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "The mean shares the total out equally across the days."
+      },
+      {
+        "level": 2,
+        "text": "First add all five values, then divide by 5."
+      },
+      {
+        "level": 3,
+        "text": "2 + 4 + 4 + 6 + 9 = 25. Now divide by the number of days."
+      }
+    ],
+    "explanation": "Mean = total / count = (2 + 4 + 4 + 6 + 9) / 5 = 25 / 5 = 5 fish per day.",
+    "solutionSteps": [
+      "Add the values: 2 + 4 + 4 + 6 + 9 = 25.",
+      "Count the values: 5 days.",
+      "Divide: 25 / 5 = 5."
+    ],
+    "misconceptionIds": [
+      "mc.mean-median-confusion",
+      "mc.sum-not-mean"
+    ],
+    "estimatedSeconds": 60,
+    "parameters": {
+      "mc.mean-median-confusion": {
+        "wrongValue": 4
+      },
+      "mc.sum-not-mean": {
+        "wrongValue": 25
+      }
+    }
+  },
+  {
+    "id": "q.pct-rainy-days",
+    "topicId": "t.percent",
+    "objectiveId": "obj.percent-fraction",
+    "skillIds": [
+      "skill.percent-fraction"
+    ],
+    "difficulty": 1,
+    "interaction": "percentage-input",
+    "prompt": "The log shows 12 rainy days out of the last 40. What PERCENT of days were rainy? (Answer on the 0–100 scale.)",
+    "answer": {
+      "kind": "numeric",
+      "value": 30,
+      "tolerance": 0.01,
+      "unit": "%"
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Start with the fraction of rainy days: part over whole."
+      },
+      {
+        "level": 2,
+        "text": "12 / 40 = 0.30. Percent means per hundred."
+      }
+    ],
+    "explanation": "12 / 40 = 0.30, and 0.30 expressed per hundred is 30%.",
+    "solutionSteps": [
+      "Write the proportion: 12 / 40 = 0.30.",
+      "Convert to percent: 0.30 × 100 = 30%."
+    ],
+    "misconceptionIds": [
+      "mc.decimal-vs-percent"
+    ],
+    "estimatedSeconds": 60
+  },
+  {
+    "id": "q.fraction-quarter",
+    "topicId": "t.percent",
+    "objectiveId": "obj.percent-fraction",
+    "skillIds": [
+      "skill.percent-fraction"
+    ],
+    "difficulty": 1,
+    "interaction": "fraction-input",
+    "prompt": "3 of the 12 boats in the harbor are sailboats. What fraction of the boats are sailboats? (You can answer as a fraction like 3/12 or as a decimal.)",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.25,
+      "tolerance": 0.0005
+    },
+    "acceptedAlternatives": [],
+    "hints": [
+      {
+        "level": 1,
+        "text": "Part over whole: sailboats over all boats."
+      },
+      {
+        "level": 2,
+        "text": "3/12 simplifies — divide top and bottom by 3."
+      }
+    ],
+    "explanation": "3 of 12 is 3/12 = 1/4 = 0.25.",
+    "solutionSteps": [
+      "Write part/whole: 3/12.",
+      "Simplify: 1/4 = 0.25."
+    ],
+    "misconceptionIds": [
+      "mc.reversed-fraction"
+    ],
+    "estimatedSeconds": 50
+  },
+  {
+    "id": "q.ordering-data-cycle",
+    "topicId": "t.data-literacy",
+    "objectiveId": "obj.read-data",
+    "skillIds": [
+      "skill.data-literacy"
+    ],
+    "difficulty": 1,
+    "interaction": "ordering",
+    "prompt": "Put the steps of a small data investigation in order, from first to last.",
+    "items": [
+      {
+        "id": "it.ask",
+        "text": "Ask a clear question"
+      },
+      {
+        "id": "it.collect",
+        "text": "Collect the data"
+      },
+      {
+        "id": "it.organize",
+        "text": "Organize it into a table or chart"
+      },
+      {
+        "id": "it.summarize",
+        "text": "Summarize with a statistic"
+      },
+      {
+        "id": "it.interpret",
+        "text": "Interpret the result in context"
+      }
+    ],
+    "answer": {
+      "kind": "ordering",
+      "correctOrder": [
+        "it.ask",
+        "it.collect",
+        "it.organize",
+        "it.summarize",
+        "it.interpret"
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "You cannot collect data before knowing what you are asking."
+      }
+    ],
+    "explanation": "Every investigation runs question → data → organization → summary → interpretation. Skipping the question step is how datasets end up answering nothing.",
+    "solutionSteps": [],
+    "misconceptionIds": [],
+    "estimatedSeconds": 45
+  },
+  {
+    "id": "q.graph-tallest-bar",
+    "topicId": "t.data-literacy",
+    "objectiveId": "obj.read-data",
+    "skillIds": [
+      "skill.data-literacy"
+    ],
+    "difficulty": 1,
+    "interaction": "graph-interpretation",
+    "prompt": "Using the catch chart, on which day did the harbor land the MOST fish?",
+    "visual": {
+      "kind": "bar-chart",
+      "datasetId": "ds.harbor-catch",
+      "caption": "Fish landed per day",
+      "accessibleDescription": "Bar chart of fish landed per day: Monday 2, Tuesday 4, Wednesday 4, Thursday 6, Friday 9. Friday is the tallest bar."
+    },
+    "datasetId": "ds.harbor-catch",
+    "choices": [
+      {
+        "id": "ch.mon",
+        "text": "Monday",
+        "misconceptionId": "mc.axis-misread"
+      },
+      {
+        "id": "ch.thu",
+        "text": "Thursday"
+      },
+      {
+        "id": "ch.fri",
+        "text": "Friday"
+      }
+    ],
+    "answer": {
+      "kind": "choice",
+      "correctChoiceIds": [
+        "ch.fri"
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Height encodes the count. Find the tallest bar, then read its label below."
+      }
+    ],
+    "explanation": "Friday's bar reaches 9 fish, the highest in the week.",
+    "solutionSteps": [],
+    "misconceptionIds": [
+      "mc.axis-misread"
+    ],
+    "estimatedSeconds": 30
+  },
+  {
+    "id": "q.median-market",
+    "topicId": "t.center",
+    "objectiveId": "obj.compute-median",
+    "skillIds": [
+      "skill.median"
+    ],
+    "difficulty": 1,
+    "interaction": "numeric-input",
+    "prompt": "Market prices for five crates were 3, 15, 8, 7, and 12 coins. What is the MEDIAN price?",
+    "answer": {
+      "kind": "numeric",
+      "value": 8,
+      "tolerance": 0.001,
+      "unit": "coins"
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Sort the prices first."
+      },
+      {
+        "level": 2,
+        "text": "Sorted: 3, 7, 8, 12, 15. The median is the middle position."
+      }
+    ],
+    "explanation": "Sorted, the prices are 3, 7, 8, 12, 15. With five values the median is the third: 8 coins.",
+    "solutionSteps": [
+      "Sort: 3, 7, 8, 12, 15.",
+      "Count: 5 values, so the middle is position 3.",
+      "Median = 8."
+    ],
+    "misconceptionIds": [
+      "mc.mean-median-confusion"
+    ],
+    "estimatedSeconds": 60,
+    "parameters": {
+      "mc.mean-median-confusion": {
+        "wrongValue": 9
+      }
+    }
+  },
+  {
+    "id": "q.mc-which-average",
+    "topicId": "t.center",
+    "objectiveId": "obj.choose-measure",
+    "skillIds": [
+      "skill.choose-measure"
+    ],
+    "difficulty": 2,
+    "interaction": "multiple-choice",
+    "prompt": "One trawler lands a record 90-fish haul in an otherwise ordinary week. Which measure of center will that single haul move the LEAST?",
+    "choices": [
+      {
+        "id": "ch.mean",
+        "text": "The mean",
+        "misconceptionId": "mc.outlier-mean"
+      },
+      {
+        "id": "ch.median",
+        "text": "The median"
+      },
+      {
+        "id": "ch.total",
+        "text": "The total"
+      }
+    ],
+    "answer": {
+      "kind": "choice",
+      "correctChoiceIds": [
+        "ch.median"
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Which measure only cares about the middle position, not the size of the extremes?"
+      }
+    ],
+    "explanation": "The median depends only on the middle of the sorted list, so one extreme haul barely moves it. The mean and the total absorb the full 90.",
+    "solutionSteps": [],
+    "misconceptionIds": [
+      "mc.outlier-mean"
+    ],
+    "estimatedSeconds": 45
+  },
+  {
+    "id": "q.matching-measures",
+    "topicId": "t.center",
+    "objectiveId": "obj.choose-measure",
+    "skillIds": [
+      "skill.choose-measure",
+      "skill.mean",
+      "skill.median"
+    ],
+    "difficulty": 2,
+    "interaction": "matching",
+    "prompt": "Match each statistic to what it tells you.",
+    "items": [
+      {
+        "id": "lt.mean",
+        "text": "Mean"
+      },
+      {
+        "id": "lt.median",
+        "text": "Median"
+      },
+      {
+        "id": "lt.mode",
+        "text": "Mode"
+      },
+      {
+        "id": "lt.range",
+        "text": "Range"
+      }
+    ],
+    "rightItems": [
+      {
+        "id": "rt.balance",
+        "text": "The balance point: total shared equally"
+      },
+      {
+        "id": "rt.middle",
+        "text": "The middle of the sorted values"
+      },
+      {
+        "id": "rt.common",
+        "text": "The most frequent value"
+      },
+      {
+        "id": "rt.spread",
+        "text": "Largest minus smallest"
+      }
+    ],
+    "answer": {
+      "kind": "matching",
+      "pairs": [
+        {
+          "left": "lt.mean",
+          "right": "rt.balance"
+        },
+        {
+          "left": "lt.median",
+          "right": "rt.middle"
+        },
+        {
+          "left": "lt.mode",
+          "right": "rt.common"
+        },
+        {
+          "left": "lt.range",
+          "right": "rt.spread"
+        }
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Mode and 'most' share a first letter."
+      }
+    ],
+    "explanation": "Mean balances the total, median marks the middle, mode is the most frequent value, and range measures the reach from smallest to largest.",
+    "solutionSteps": [],
+    "misconceptionIds": [],
+    "estimatedSeconds": 60
+  },
+  {
+    "id": "q.method-select",
+    "topicId": "t.center",
+    "objectiveId": "obj.choose-measure",
+    "skillIds": [
+      "skill.choose-measure"
+    ],
+    "difficulty": 2,
+    "interaction": "method-selection",
+    "prompt": "You are summarizing crew incomes in a port where a few captains earn vastly more than everyone else. Which summary best represents a TYPICAL crew member's income?",
+    "choices": [
+      {
+        "id": "ch.mean2",
+        "text": "The mean income",
+        "misconceptionId": "mc.outlier-mean"
+      },
+      {
+        "id": "ch.median2",
+        "text": "The median income"
+      },
+      {
+        "id": "ch.max",
+        "text": "The highest income"
+      }
+    ],
+    "answer": {
+      "kind": "choice",
+      "correctChoiceIds": [
+        "ch.median2"
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Skewed data with extreme high values pulls one of these measures upward."
+      }
+    ],
+    "explanation": "With a right-skewed income distribution, the mean is dragged up by the few very high earners. The median stays with the typical member.",
+    "solutionSteps": [],
+    "misconceptionIds": [
+      "mc.outlier-mean"
+    ],
+    "estimatedSeconds": 45
+  },
+  {
+    "id": "q.error-id-causation",
+    "topicId": "t.data-literacy",
+    "objectiveId": "obj.read-data",
+    "skillIds": [
+      "skill.data-literacy"
+    ],
+    "difficulty": 2,
+    "interaction": "error-identification",
+    "prompt": "A pamphlet claims: 'Harbors with more seagulls catch more fish. Therefore seagulls cause bigger catches.' What is the FLAW in this conclusion?",
+    "choices": [
+      {
+        "id": "ch.sample",
+        "text": "The sample of harbors is too small to compute anything"
+      },
+      {
+        "id": "ch.cause",
+        "text": "It treats an association as proof of cause"
+      },
+      {
+        "id": "ch.units",
+        "text": "Fish and seagulls are measured in different units"
+      }
+    ],
+    "answer": {
+      "kind": "choice",
+      "correctChoiceIds": [
+        "ch.cause"
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Could something else — busier harbors, more food waste — drive both numbers up?"
+      }
+    ],
+    "explanation": "Seagulls and catches can rise together because busy harbors attract both. The association is real; the causal claim is unearned.",
+    "solutionSteps": [],
+    "misconceptionIds": [
+      "mc.correlation-causation"
+    ],
+    "estimatedSeconds": 50
+  },
+  {
+    "id": "q.short-why-median",
+    "topicId": "t.center",
+    "objectiveId": "obj.choose-measure",
+    "skillIds": [
+      "skill.choose-measure"
+    ],
+    "difficulty": 2,
+    "interaction": "short-explanation",
+    "prompt": "In one or two sentences: why can the median be a better summary than the mean when the data contain an extreme value? (Use the word 'outlier'.)",
+    "answer": {
+      "kind": "text",
+      "requiredKeywords": [
+        "outlier"
+      ],
+      "forbiddenKeywords": []
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Think about which measure the extreme value pulls toward itself."
+      }
+    ],
+    "explanation": "An outlier drags the mean toward itself because the mean uses every value's size. The median depends only on the middle position, so it resists outliers.",
+    "solutionSteps": [],
+    "misconceptionIds": [],
+    "estimatedSeconds": 90
+  },
+  {
+    "id": "q.remed-mean-basic",
+    "topicId": "t.center",
+    "objectiveId": "obj.compute-mean",
+    "skillIds": [
+      "skill.mean"
+    ],
+    "difficulty": 1,
+    "interaction": "numeric-input",
+    "prompt": "Warm-up: three crates hold 4, 6, and 8 fish. What is the mean number of fish per crate?",
+    "answer": {
+      "kind": "numeric",
+      "value": 6,
+      "tolerance": 0.001,
+      "unit": "fish"
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Add the three values, then divide by 3."
+      }
+    ],
+    "explanation": "(4 + 6 + 8) / 3 = 18 / 3 = 6.",
+    "solutionSteps": [
+      "Total: 4 + 6 + 8 = 18.",
+      "Divide by the count: 18 / 3 = 6."
+    ],
+    "misconceptionIds": [
+      "mc.sum-not-mean"
+    ],
+    "estimatedSeconds": 40,
+    "parameters": {
+      "mc.sum-not-mean": {
+        "wrongValue": 18
+      }
+    }
+  },
+  {
+    "id": "q.range-tides",
+    "topicId": "t.spread",
+    "objectiveId": "obj.compute-range",
+    "skillIds": [
+      "skill.range"
+    ],
+    "difficulty": 2,
+    "interaction": "numeric-input",
+    "prompt": "Tide heights this week were 1.2, 2.8, 1.9, 3.4, and 2.1 meters. What is the RANGE of the tide heights?",
+    "answer": {
+      "kind": "numeric",
+      "value": 2.2,
+      "tolerance": 0.001,
+      "unit": "m"
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Range = largest value minus smallest value."
+      },
+      {
+        "level": 2,
+        "text": "Largest is 3.4, smallest is 1.2."
+      }
+    ],
+    "explanation": "Range = 3.4 − 1.2 = 2.2 meters.",
+    "solutionSteps": [
+      "Find the largest: 3.4.",
+      "Find the smallest: 1.2.",
+      "Subtract: 3.4 − 1.2 = 2.2."
+    ],
+    "misconceptionIds": [],
+    "estimatedSeconds": 45
+  }
+]
