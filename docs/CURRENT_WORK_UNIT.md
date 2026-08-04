@@ -129,11 +129,16 @@ Tag `stage-1-baseline` is **not** present on the remote — `git ls-remote --tag
 
 ## Remaining work
 
-One item, and it requires the owner's credentials rather than more reconstruction work:
+Two items, both requiring the owner's credentials rather than more reconstruction work:
 
-- **Push the `stage-1-baseline` tag** (and optionally create the GitHub Release with the two export artifacts) from a
-  machine with normal GitHub access, using the commands under "Blocked: tag push". Everything else in R-00 is done and
-  verified.
+- **R-00d — Push the `stage-1-baseline` tag** (and optionally create the GitHub Release with the two export artifacts)
+  from a machine with normal GitHub access, using the commands under "Blocked: tag push".
+- **R-00e — Set the repository to private.** It was created **public**; the protocol asked for private. The session
+  cannot change it (`PATCH /repos/:owner/:repo` → `403 "Repository settings writes are not permitted through this
+  proxy."`). Fix at **Settings → General → Danger Zone → Change repository visibility → Private**. The repository has
+  been public since creation, so treat everything pushed so far as having been publicly visible.
+
+Everything else in R-00 is done and verified.
 
 **Next cycle starts a new unit: S2-01 — wire the region-completed achievement trigger.** Per the one-unit-per-cycle
 rule, it was deliberately not started here. S2-01 does not depend on the tag.
