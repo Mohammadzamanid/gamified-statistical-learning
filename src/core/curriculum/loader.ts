@@ -61,7 +61,14 @@ export function loadContentBundle(input: ContentBundleInput): Result<ContentBund
   const achievements = z.array(AchievementSchema).safeParse(input.achievements);
   if (!achievements.success) return err(formatZodError("achievements", achievements.error));
 
-  const refCheck = checkReferences(curriculum.data, questions.data, misconceptions.data, remediations.data, datasets.data);
+  const refCheck = checkReferences(
+    curriculum.data,
+    questions.data,
+    misconceptions.data,
+    remediations.data,
+    datasets.data,
+    achievements.data
+  );
   if (!refCheck.ok) return err(refCheck.error);
 
   return ok({
@@ -80,7 +87,8 @@ function checkReferences(
   questions: Question[],
   misconceptions: Misconception[],
   remediations: Remediation[],
-  datasets: Dataset[]
+  datasets: Dataset[],
+  achievements: Achievement[]
 ): Result<null> {
   const problems: string[] = [];
   const questionIds = new Set(questions.map((q) => q.id));
@@ -118,6 +126,20 @@ function checkReferences(
   }
   for (const r of remediations) {
     for (const q of r.followUpQuestionIds) if (!questionIds.has(q)) problems.push(`remediation ${r.id} follow-up ${q} missing`);
+  }
+  // An achievement whose trigger points at a missing id can never fire, and would do so
+  // silently. Validate every id-bearing trigger kind.
+  for (const a of achievements) {
+    const t = a.trigger;
+    if (t.kind === "region-completed" && !regionIds.has(t.regionId)) {
+      problems.push(`achievement ${a.id} references missing region ${t.regionId}`);
+    }
+    if (t.kind === "lesson-completed" && !lessonIds.has(t.lessonId)) {
+      problems.push(`achievement ${a.id} references missing lesson ${t.lessonId}`);
+    }
+    if (t.kind === "skill-mastered" && !skillIds.has(t.skillId)) {
+      problems.push(`achievement ${a.id} references missing skill ${t.skillId}`);
+    }
   }
 
   return problems.length === 0 ? ok(null) : err(problems.slice(0, 10).join("; "));

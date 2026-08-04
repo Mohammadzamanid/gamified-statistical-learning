@@ -123,7 +123,7 @@ export function submitAnswer(
     xp: save.xp + (feedback.correct ? (session.hintsUsedThisQuestion > 0 ? 5 : 10) : 1)
   };
 
-  const earned = evaluateAchievements(nextSave, content.achievements);
+  const earned = evaluateAchievements(nextSave, content.achievements, content.curriculum);
   if (earned.length > 0) nextSave = { ...nextSave, achievements: [...nextSave.achievements, ...earned] };
 
   // Guided retry: inject the remediation follow-up right after this question.
@@ -179,7 +179,7 @@ export function advance(content: ContentBundle, save: SaveFile, session: LessonS
         }
       }
     };
-    const earnedOnCompletion = evaluateAchievements(nextSave, content.achievements);
+    const earnedOnCompletion = evaluateAchievements(nextSave, content.achievements, content.curriculum);
     if (earnedOnCompletion.length > 0) {
       nextSave = { ...nextSave, achievements: [...nextSave.achievements, ...earnedOnCompletion] };
     }

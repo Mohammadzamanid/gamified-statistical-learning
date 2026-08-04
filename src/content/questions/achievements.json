@@ -2,5 +2,7 @@
   { "id": "ach.first-cast", "title": "First Cast", "description": "Answer your first question.", "trigger": { "kind": "questions-answered", "count": 1 }, "icon": "anchor" },
   { "id": "ach.steady-hand", "title": "Steady Hand", "description": "Answer three questions correctly in a row.", "trigger": { "kind": "streak", "count": 3 }, "icon": "compass" },
   { "id": "ach.mean-mastered", "title": "Keeper of the Balance", "description": "Master the Mean skill.", "trigger": { "kind": "skill-mastered", "skillId": "skill.mean" }, "icon": "scale" },
-  { "id": "ach.first-lesson", "title": "Tallies Charted", "description": "Complete Reading the Tide Tallies.", "trigger": { "kind": "lesson-completed", "lessonId": "l.reading-tallies" }, "icon": "map" }
+  { "id": "ach.first-lesson", "title": "Tallies Charted", "description": "Complete Reading the Tide Tallies.", "trigger": { "kind": "lesson-completed", "lessonId": "l.reading-tallies" }, "icon": "map" },
+  { "id": "ach.harbor-charted", "title": "Harbour Charted", "description": "Complete every lesson in the Harbor of Tallies.", "trigger": { "kind": "region-completed", "regionId": "r.harbor-tallies" }, "icon": "harbor" },
+  { "id": "ach.atoll-charted", "title": "Atoll Charted", "description": "Complete every lesson in Averages Atoll.", "trigger": { "kind": "region-completed", "regionId": "r.averages-atoll" }, "icon": "island" }
 ]

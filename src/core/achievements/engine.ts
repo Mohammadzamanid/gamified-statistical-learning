@@ -1,7 +1,20 @@
 /** Deterministic achievement evaluation against the save state. */
 import type { Achievement, SaveFile } from "../../shared/schemas";
+import { isRegionCompleted, type RegionGraph } from "../curriculum/progress";
 
-export function evaluateAchievements(save: SaveFile, all: readonly Achievement[]): string[] {
+/**
+ * Returns the ids of achievements newly earned by this save, in `all` order.
+ *
+ * Never returns an achievement already listed in `save.achievements`, and never
+ * returns the same id twice within one call, so appending the result to the save
+ * cannot duplicate an award.
+ *
+ * `graph` is required rather than optional on purpose: region-completed triggers
+ * previously evaluated to a hard-coded `false`, which silently withheld every
+ * region award. Making the curriculum a required argument means a caller that
+ * forgets it fails to compile instead of silently reintroducing that defect.
+ */
+export function evaluateAchievements(save: SaveFile, all: readonly Achievement[], graph: RegionGraph): string[] {
   const earned = new Set(save.achievements);
   const newlyEarned: string[] = [];
 
@@ -31,11 +44,14 @@ export function evaluateAchievements(save: SaveFile, all: readonly Achievement[]
         hit = save.lessonProgress[t.lessonId]?.status === "completed";
         break;
       case "region-completed":
-        // Region completion is derived by the caller; the engine only checks a marker lesson set.
-        hit = false;
+        hit = isRegionCompleted(graph, save, t.regionId);
         break;
     }
-    if (hit) newlyEarned.push(ach.id);
+    if (hit) {
+      // Guard the id here too, so a duplicated entry in `all` awards only once.
+      earned.add(ach.id);
+      newlyEarned.push(ach.id);
+    }
   }
   return newlyEarned;
 }

@@ -19,12 +19,35 @@ export function isLessonUnlocked(curriculum: Curriculum, save: SaveFile, lessonI
   return lesson.prerequisites.every((p) => lessonStatus(save, p) === "completed");
 }
 
-export function isRegionCompleted(curriculum: Curriculum, save: SaveFile, regionId: string): boolean {
-  const region = curriculum.regions.find((r) => r.id === regionId);
-  if (!region) return false;
-  const lessonIds = curriculum.modules
-    .filter((m) => region.moduleIds.includes(m.id))
-    .flatMap((m) => m.lessonIds);
+/**
+ * The minimal curriculum shape region completion needs. `Curriculum` satisfies it
+ * structurally, so callers keep passing the full curriculum, while tests can supply a
+ * small graph without constructing an entire valid curriculum.
+ */
+export interface RegionGraph {
+  regions: readonly { id: string; moduleIds: readonly string[] }[];
+  modules: readonly { id: string; lessonIds: readonly string[] }[];
+}
+
+/**
+ * A region is completed when every lesson of every one of its modules is completed.
+ *
+ * Deliberately conservative: it returns false rather than true whenever the graph
+ * cannot be fully resolved, because a false positive here awards an achievement the
+ * learner never earned. Guarded cases — unknown region, a region listing no modules,
+ * a module id that does not resolve, and modules that between them hold no lessons.
+ */
+export function isRegionCompleted(graph: RegionGraph, save: SaveFile, regionId: string): boolean {
+  const region = graph.regions.find((r) => r.id === regionId);
+  if (!region || region.moduleIds.length === 0) return false;
+
+  const lessonIds: string[] = [];
+  for (const moduleId of region.moduleIds) {
+    const mod = graph.modules.find((m) => m.id === moduleId);
+    if (!mod) return false; // dangling module reference — never award on incomplete data
+    lessonIds.push(...mod.lessonIds);
+  }
+
   return lessonIds.length > 0 && lessonIds.every((l) => lessonStatus(save, l) === "completed");
 }
 
