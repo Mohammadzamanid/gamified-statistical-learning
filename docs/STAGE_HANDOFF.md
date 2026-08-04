@@ -27,8 +27,11 @@ after Stage 1 was lost because commits were never pushed to a durable remote. Re
 | Remote | `https://github.com/Mohammadzamanid/gamified-statistical-learning` (private) |
 | Default branch | `main` |
 | Pristine Stage 1 import | `7add4bc` — pushed and remote-verified |
-| Last unit completed | R-00b — repository establishment + verified baseline |
-| Stage tag | `stage-1-baseline` |
+| Baseline docs + CI | `1b0a5dd` — pushed and remote-verified |
+| Last unit completed | R-00c — hash recording + milestone exports |
+| Head of `main` | `d4e250434c465f85e4307a226a9af2cbc9788c17` — pushed and remote-verified |
+| Stage tag | `stage-1-baseline` — **created locally, NOT on GitHub** (unit R-00d, blocked; see §2.1) |
+| Milestone exports | `../gsl-exports/` — source ZIP + git bundle + manifest + SHA-256 checksums |
 | Working tree | clean |
 | Node / npm used | v22.22.2 / 10.9.7 |
 | Test suite | 73 tests / 14 files, all passing |
@@ -37,6 +40,25 @@ after Stage 1 was lost because commits were never pushed to a durable remote. Re
 
 Full measured baseline — content counts, interaction coverage, validation results — is in
 `RECONSTRUCTION_CONTEXT.md` §4. Do not restate those numbers from memory; re-measure or cite that section.
+
+### 2.1 One thing is deliberately unfinished
+
+The `stage-1-baseline` tag exists locally and inside the exported git bundle, but **is not on GitHub**. The hosted
+reconstruction session cannot write tags or releases: `git push` of `refs/tags/*` returns 403 while `refs/heads/*`
+succeeds, and both the `git/tags`/`git/refs` and `releases` REST endpoints are refused by the session proxy. This is an
+environment restriction, not a permissions problem — the commit the tag points at is on GitHub and verified.
+
+Backlog unit **R-00d** tracks it. It needs the owner's own credentials:
+
+```bash
+git tag -a stage-1-baseline d4e250434c465f85e4307a226a9af2cbc9788c17 \
+  -m "Verified surviving Stage 1 reconstruction baseline"
+git push origin stage-1-baseline
+git ls-remote --tags origin        # verify
+```
+
+If a future session finds tags still unpushable, do not silently skip tagging and do not claim it was done — record it
+as blocked, exactly as R-00d does.
 
 ## 3. How to resume (read in this order)
 

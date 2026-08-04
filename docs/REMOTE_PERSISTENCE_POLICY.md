@@ -103,6 +103,19 @@ git ls-remote --tags origin | grep stage-N-complete   # verify
 
 A tag is not created until the stage's final commit is pushed and verified. Tags are never deleted or moved.
 
+**Known environment limitation (observed 2026-08-04).** The hosted Claude Code session used for reconstruction can
+push branches but **cannot write tags or releases**. `git push origin <tag>` returns `HTTP 403` for `refs/tags/*` while
+`refs/heads/*` succeeds, and the `git/tags`, `git/refs`, and `releases` REST endpoints are all refused by the session
+proxy. When this happens:
+
+- **Do not** treat the tag as optional, and **do not** report it as done.
+- Record the tag as a **Blocked** unit in the backlog, naming the exact failure (see unit R-00d).
+- Ensure the tag still exists in the milestone git bundle, so it is not lost.
+- Hand the owner the exact commands to push it from a machine with normal credentials.
+
+Branch pushes are unaffected, so **commit persistence — the thing that actually protects the work — is never blocked by
+this.**
+
 ## 5. Milestone archive policy
 
 At the completion of every major stage, produce, **outside normal Git history**:

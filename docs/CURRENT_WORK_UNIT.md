@@ -45,7 +45,7 @@ Read but **not modified** (surviving Stage 1, authoritative):
 | 6 | Reconstruction documentation committed | This commit |
 | 7 | CI workflow uses only scripts defined in `package.json` | Yes — no `test:a11y` |
 | 8 | Baseline commit pushed and remote hash verified equal | Yes — `1b0a5dd`, MATCH |
-| 9 | `stage-1-baseline` tag pushed and verified | Yes |
+| 9 | `stage-1-baseline` tag pushed and verified | **No — blocked by environment** (see below) |
 | 10 | Milestone source ZIP + Git bundle + checksums created outside Git history | Yes — `../gsl-exports/` |
 | 11 | Working tree clean | Yes |
 | 12 | No Stage 2 source changes started | Yes — none |
@@ -80,8 +80,34 @@ No test was modified. The baseline was green exactly as it survived.
 
 ## Current status
 
-**Complete** — documentation and CI authored, validation green, commit pushed and remote-verified, tag pushed, export
-bundle produced, working tree clean. No Stage 2 work started.
+**Complete, with one explicitly blocked sub-item.** Documentation and CI authored, validation green, commit pushed and
+remote-verified, export bundle produced, working tree clean, no Stage 2 work started. The `stage-1-baseline` **tag
+could not be pushed** from the hosted session — see "Blocked: tag push" below. The tag is not silently skipped and is
+not claimed as done.
+
+### Blocked: tag push
+
+The annotated tag `stage-1-baseline` (tag object `7faa5896` → commit `d4e2504`) exists locally and inside the exported
+git bundle, but **is not on GitHub**. Three routes were attempted; all were refused by the session's egress policy:
+
+| Route | Result |
+|---|---|
+| `git push origin stage-1-baseline` | `HTTP 403` — pushes to `refs/heads/*` succeed, `refs/tags/*` refused |
+| `POST /repos/:owner/:repo/git/tags`, `/git/refs` | `403 Write access to this GitHub API path is not permitted through this proxy.` |
+| `POST /repos/:owner/:repo/releases` | `403 Creating, editing, or deleting releases is not permitted for this session type.` |
+
+This is an environment restriction, not a permissions or repository problem: the commit the tag points at is on GitHub
+and verified. To finish it from a machine with normal GitHub credentials:
+
+```bash
+git tag -a stage-1-baseline d4e250434c465f85e4307a226a9af2cbc9788c17 \
+  -m "Verified surviving Stage 1 reconstruction baseline"
+git push origin stage-1-baseline
+git ls-remote --tags origin
+```
+
+The GitHub Release is deferred for the same reason. The source ZIP and git bundle in `../gsl-exports/` are the
+intended release assets and already carry the tag.
 
 ## Local commit
 
@@ -98,14 +124,19 @@ Verified by comparing `git rev-parse HEAD` with `git ls-remote origin refs/heads
 - R-00b: `1b0a5dd16e0a51346f2e64e6ad104995060f7fb7` — **MATCH**
 - R-00c: **MATCH** (confirmed at push time)
 
-Tag `stage-1-baseline` confirmed present on the remote via `git ls-remote --tags origin`.
+Tag `stage-1-baseline` is **not** present on the remote — `git ls-remote --tags origin` returns nothing. See
+"Blocked: tag push" above.
 
 ## Remaining work
 
-None for this unit.
+One item, and it requires the owner's credentials rather than more reconstruction work:
+
+- **Push the `stage-1-baseline` tag** (and optionally create the GitHub Release with the two export artifacts) from a
+  machine with normal GitHub access, using the commands under "Blocked: tag push". Everything else in R-00 is done and
+  verified.
 
 **Next cycle starts a new unit: S2-01 — wire the region-completed achievement trigger.** Per the one-unit-per-cycle
-rule, it was deliberately not started here.
+rule, it was deliberately not started here. S2-01 does not depend on the tag.
 
 ## Explicitly not in scope
 
