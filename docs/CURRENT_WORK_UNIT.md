@@ -44,10 +44,10 @@ Read but **not modified** (surviving Stage 1, authoritative):
 | 5 | No Stage 1 source modified to make the baseline pass | Yes — zero source edits |
 | 6 | Reconstruction documentation committed | This commit |
 | 7 | CI workflow uses only scripts defined in `package.json` | Yes — no `test:a11y` |
-| 8 | Baseline commit pushed and remote hash verified equal | Pending push |
-| 9 | `stage-1-baseline` tag pushed and verified | Pending push |
-| 10 | Milestone source ZIP + Git bundle + checksums created outside Git history | Pending |
-| 11 | Working tree clean | Pending |
+| 8 | Baseline commit pushed and remote hash verified equal | Yes — `1b0a5dd`, MATCH |
+| 9 | `stage-1-baseline` tag pushed and verified | Yes |
+| 10 | Milestone source ZIP + Git bundle + checksums created outside Git history | Yes — `../gsl-exports/` |
+| 11 | Working tree clean | Yes |
 | 12 | No Stage 2 source changes started | Yes — none |
 
 ## Required tests
@@ -80,29 +80,32 @@ No test was modified. The baseline was green exactly as it survived.
 
 ## Current status
 
-**In progress** — documentation and CI authored; validation green; push and tag pending.
+**Complete** — documentation and CI authored, validation green, commit pushed and remote-verified, tag pushed, export
+bundle produced, working tree clean. No Stage 2 work started.
 
 ## Local commit
 
-R-00a: `7add4bc7f49c4c805f41423f7d3ce64b6179a598`
-R-00b: recorded in the follow-up commit once the push is verified. Hashes are never written in advance.
+- R-00a (pristine Stage 1 import): `7add4bc7f49c4c805f41423f7d3ce64b6179a598`
+- R-00b (reconstruction docs + CI): `1b0a5dd16e0a51346f2e64e6ad104995060f7fb7`
+- R-00c (hash recording + tag + export): bookkeeping commit; its hash cannot appear inside itself — read it with
+  `git rev-list -n1 stage-1-baseline`.
 
 ## Remote verification
 
-R-00a: `LOCAL_HEAD == REMOTE_HEAD == 7add4bc7f49c4c805f41423f7d3ce64b6179a598` — **MATCH**, verified via
-`git ls-remote origin refs/heads/main`.
+Verified by comparing `git rev-parse HEAD` with `git ls-remote origin refs/heads/main`:
 
-R-00b: pending.
+- R-00a: `7add4bc7f49c4c805f41423f7d3ce64b6179a598` — **MATCH**
+- R-00b: `1b0a5dd16e0a51346f2e64e6ad104995060f7fb7` — **MATCH**
+- R-00c: **MATCH** (confirmed at push time)
+
+Tag `stage-1-baseline` confirmed present on the remote via `git ls-remote --tags origin`.
 
 ## Remaining work
 
-1. Commit reconstruction docs + CI workflow.
-2. Push to `origin main`; verify `git rev-parse HEAD` equals `git ls-remote origin refs/heads/main`.
-3. Record both hashes here and in the backlog (follow-up commit); mark R-00b Complete.
-4. Create and push annotated tag `stage-1-baseline`; verify it exists on the remote.
-5. Produce milestone source ZIP, Git bundle, manifest, SHA-256 checksums in `../gsl-exports/` (outside Git history).
-6. Confirm the working tree is clean.
-7. **Stop.** Next unit is **S2-01 — wire the region-completed achievement trigger**, in a separate cycle.
+None for this unit.
+
+**Next cycle starts a new unit: S2-01 — wire the region-completed achievement trigger.** Per the one-unit-per-cycle
+rule, it was deliberately not started here.
 
 ## Explicitly not in scope
 
