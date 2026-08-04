@@ -1,41 +1,127 @@
-# STAGE_HANDOFF.md — from Stage 1 to Stage 2
+# STAGE_HANDOFF.md — reconstruction handoff
 
-## State at handoff (2026-07-21)
+**Supersedes the Stage 1 → Stage 2 handoff.** The original is preserved verbatim in git history at commit `7add4bc`
+(`git show 7add4bc:docs/STAGE_HANDOFF.md`). Its still-binding contracts, traps, and priorities are carried forward
+below — nothing was discarded.
 
-- 73/73 tests passing (14 files). Typecheck clean, lint clean.
-- `npm run build` and `npm run package:linux` validated; packaged binary launches.
-- Windows installer **not** built (Linux environment). Configured in `electron-builder.yml`.
-- Repo is a working vertical slice: profile → world map → region → lesson → questions with misconception remediation → logbook, with full persistence.
+**Last updated:** 2026-08-04, at the close of unit R-00b.
 
-## How to resume
+---
+
+## 1. Where this project stands
+
+This repository is a **reconstruction**. The predecessor was developed in an ephemeral environment and everything
+after Stage 1 was lost because commits were never pushed to a durable remote. Read
+`RECONSTRUCTION_CONTEXT.md` before anything else.
+
+- **Stage 1: surviving, verified, green.** Not re-created — the original commit `7add4bc` was carried forward from the
+  archive's own `.git` directory, with authorship intact.
+- **Stages 2–6: not started, and not recoverable.** They must be **reconstructed** from the surviving Stage 1 source,
+  the specifications, and the known defect history. They may never be described as recovered source, and no metric may
+  be recalled from prior reports — every count must be measured from this repository.
+
+## 2. Exact state at handoff
+
+| Fact | Value |
+|---|---|
+| Remote | `https://github.com/Mohammadzamanid/gamified-statistical-learning` (private) |
+| Default branch | `main` |
+| Pristine Stage 1 import | `7add4bc` — pushed and remote-verified |
+| Last unit completed | R-00b — repository establishment + verified baseline |
+| Stage tag | `stage-1-baseline` |
+| Working tree | clean |
+| Node / npm used | v22.22.2 / 10.9.7 |
+| Test suite | 73 tests / 14 files, all passing |
+| Build | passing (285.73 kB, 83.82 kB gzip) |
+| Source modified during reconstruction | **none** |
+
+Full measured baseline — content counts, interaction coverage, validation results — is in
+`RECONSTRUCTION_CONTEXT.md` §4. Do not restate those numbers from memory; re-measure or cite that section.
+
+## 3. How to resume (read in this order)
 
 ```bash
-npm install
-npm test            # must stay green
+git clone https://github.com/Mohammadzamanid/gamified-statistical-learning.git
+cd gamified-statistical-learning
+git status
+git rev-parse HEAD
+git ls-remote origin refs/heads/main | awk '{print $1}'   # must match
+npm ci
+npm test            # must stay green: 73/73
 npm run typecheck && npm run lint
 npm run dev         # renderer + electron dev
 ```
 
-Read `PROJECT_CONTEXT.md`, then `IMPLEMENTATION_STATUS.md`, then this file. **Do not restart the repo.**
+Then read:
 
-## Stage 2 priorities (ordered)
+1. `docs/RECONSTRUCTION_CONTEXT.md` — what happened and what is real
+2. `docs/REMOTE_PERSISTENCE_POLICY.md` — **the rules; non-negotiable**
+3. `docs/RECONSTRUCTION_BACKLOG.md` — pick exactly one unit
+4. `docs/CURRENT_WORK_UNIT.md` — what was in flight
+5. Surviving Stage 1 docs: `PROJECT_CONTEXT.md`, `ARCHITECTURE.md`, `DECISIONS.md`, `IMPLEMENTATION_STATUS.md`
 
-1. **Wire region-completed achievement trigger** (`src/core/achievements/engine.ts` — currently stubbed false; add tests).
-2. **Implement next interaction types** by pedagogy value: `step-by-step-calculation`, `point-placement`, `drag-and-drop` (registry flags flip to true; add evaluator + renderer + tests per type).
-3. **Content breadth**: World 2 (spread & shape: variance, sd, outliers, skew) reusing the schema; every addition gated by `npm run test:content`.
-4. **Lab simulations**: sampling-distribution / CLT explorer instruments (currently placeholders in `LabScreen.tsx`); keep them driven by `src/core/statistics`.
-5. **Review mode**: a dedicated "Due today" flow surfacing `dueItems` from the scheduler (data already computed on Logbook screen).
-6. **Windows validation**: on a real Windows machine run `npm run package:win`, smoke-test installer + save paths, then update `IMPLEMENTATION_STATUS.md`.
+**Do not restart the repository.** Build on what exists.
 
-## Contracts you must not break
+## 4. The one rule that matters most
 
-- `SAVE_SCHEMA_VERSION` + `MIGRATIONS` — any save-shape change requires a migration and round-trip tests.
-- Preload API surface (`window.statlas`) — additive changes only.
-- Content JSON schemas — additive; removals require a content-migration note in DECISIONS.md.
-- Accessibility invariants: keyboard reachability, ARIA on custom widgets, never color-only signaling.
+The predecessor was lost to local-only commits. Therefore: **a work unit is not Complete until its commit is pushed
+and `git rev-parse HEAD` is verified equal to `git ls-remote origin refs/heads/main`.** Record both hashes in the
+backlog. Then stop — one unit per cycle. Destructive git operations (force push, hard reset, clean, history rewriting,
+branch/tag deletion) are forbidden without explicit owner permission. See `REMOTE_PERSISTENCE_POLICY.md`.
 
-## Known traps
+## 5. Next unit
+
+**S2-01 — Wire the region-completed achievement trigger.**
+
+`src/core/achievements/engine.ts` returns `false` unconditionally for the region-completed trigger (Stage 1 known
+defect #1, and priority 1 in the original handoff). It is the smallest genuine defect in the surviving code, it is
+covered by an existing test file, and fixing it first proves the whole unit-by-unit loop — implement, test, validate,
+commit, push, verify — before larger units depend on it. S2-16 (boss investigations) needs it working.
+
+Do **not** start S2-02 in the same cycle.
+
+## 6. Contracts you must not break
+
+Carried forward from Stage 1 and still binding:
+
+- **`SAVE_SCHEMA_VERSION` + `MIGRATIONS`** — any save-shape change requires a migration in
+  `src/core/persistence/migrations.ts` plus round-trip tests.
+- **Preload API surface (`window.statlas`)** — additive changes only.
+- **Content JSON schemas** — additive; removals require a content-migration note in `DECISIONS.md`.
+- **Accessibility invariants** — keyboard reachability, ARIA on custom widgets, never colour-only signalling.
+- **Honest interaction registry (D-005)** — unimplemented types stay `implemented: false` and the renderer shows a
+  plain "not yet available" notice. Never fake an interaction.
+- **Honest status reporting (D-008, pillar 2)** — never claim an untested platform. `IMPLEMENTATION_STATUS.md` must
+  stay truthful after every stage.
+
+## 7. Remaining Stage 2 priorities from the original handoff
+
+Preserved for continuity; now decomposed into units S2-01 … S2-17 in `RECONSTRUCTION_BACKLOG.md`.
+
+1. Wire region-completed achievement trigger → **S2-01**
+2. Implement interaction types by pedagogy value: `step-by-step-calculation`, `point-placement`, `drag-and-drop`
+   → **S2-02 … S2-04**
+3. Content breadth: World 2 (spread & shape — variance, sd, outliers, skew), every addition gated by
+   `npm run test:content` → **S2-09**
+4. Lab simulations: sampling-distribution / CLT explorer, kept driven by `src/core/statistics` → **S2-11**
+5. Review mode: "Due today" flow surfacing scheduler `dueItems` → **S2-13**
+6. Windows validation on a real Windows machine → **X-02 (Blocked — needs the owner's hardware)**
+
+## 8. Known traps
+
+From Stage 1, confirmed still relevant:
 
 - `/bin/sh` is dash in the dev container — use bash heredocs.
 - Electron headless needs `--no-sandbox` + xvfb; dbus/GPU errors are cosmetic.
-- Vitest and Electron tsconfigs are separate; run both typechecks.
+- Vitest and Electron tsconfigs are separate — run **both** typechecks (`npm run typecheck` does this).
+- `eslint.config.js` emits a cosmetic `MODULE_TYPELESS_PACKAGE_JSON` warning. Adding `"type": "module"` would force an
+  ESM migration of the electron build — deferred deliberately (D-002). Do not "fix" it casually.
+
+Added during reconstruction:
+
+- **`test:a11y` does not exist.** Accessibility runs via `tests/unit/accessibility.test.ts` under `npm test`. Adding an
+  a11y script requires editing `package.json` *and* the CI workflow together (unit S2-14).
+- **Windows cannot be validated here.** Reconstruction runs on Linux. `package:win` is configured but never compiled.
+  A green CI build proves buildability only, never that the GUI was manually exercised (unit X-02, Blocked).
+- `npm ci` reports 21 dependency advisories in the `electron-builder` toolchain. Left untouched on purpose so the
+  recorded baseline equals the surviving artifact; tracked as unit R-01.

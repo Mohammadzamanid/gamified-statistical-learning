@@ -1,0 +1,71 @@
+name: CI
+
+# Baseline reconstruction CI.
+#
+# Every step below invokes a script that is actually defined in package.json.
+# NOTE: there is deliberately no `test:a11y` step — that script does not exist.
+# Accessibility is covered by tests/unit/accessibility.test.ts under `npm test`.
+# Adding an a11y step requires adding the script to package.json first (unit S2-14).
+#
+# A green run here is evidence of buildability only. It is NOT evidence that the
+# Electron GUI was manually exercised, and never evidence of Windows support.
+
+on:
+  push:
+    branches:
+      - main
+      - 'reconstruct/**'
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Typecheck, lint, test, build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      # Node 22 matches the toolchain the Stage 1 baseline was validated on
+      # (Node v22.22.2 / npm 10.9.7 — see docs/RECONSTRUCTION_CONTEXT.md).
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      # `npm ci` (not `npm install`) so the committed lock file is authoritative.
+      - name: Install dependencies from lock file
+        run: npm ci
+
+      - name: Typecheck (renderer + electron tsconfigs)
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Test suite
+        run: npm test
+
+      # Run explicitly for a clear signal, even though `npm test` also covers
+      # these paths — a regression in the statistics core or in content
+      # cross-reference integrity should be identifiable at a glance.
+      - name: Statistical tests
+        run: npm run test:statistics
+
+      - name: Content validation
+        run: npm run test:content
+
+      - name: Production build
+        run: npm run build
