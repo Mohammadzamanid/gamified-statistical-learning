@@ -74,6 +74,10 @@ arrangement. `SaveFile` holds `skillStates`, `reviewQueue`, `lessonProgress`, `a
 no in-question state. Closing the app mid-question therefore restarts *that question*; no completed work is lost.
 Acceptable now, but the save/resume audit must either persist it or state the behaviour deliberately. → **S2-19**.
 
+*Update (S2-06):* the review queue now persists its session state across a save/load, which sets the precedent and
+the migration machinery for doing the same here. It does **not** fix F-2 — what S2-06 persists is the learner's
+position in the review queue, not a half-finished step run, point placement or arrangement. F-2 remains open.
+
 **F-3 — Three types remain stubbed.**
 `formula-construction`, `simulation-prediction`, `confidence-rating` keep `implemented: false` and their honest
 "not yet available" notice. `simulation-prediction` is deliberately sequenced after the laboratory instruments exist
