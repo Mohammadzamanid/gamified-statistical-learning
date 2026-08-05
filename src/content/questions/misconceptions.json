@@ -70,5 +70,45 @@
     "description": "A variable written with digits (boat number, postcode) is classified as numerical even though its values are labels, not quantities.",
     "detector": "placement-mapping",
     "remediationId": "rem.categorical-vs-numerical"
+  },
+  {
+    "id": "mc.count-off-by-one",
+    "title": "The count changes between passes",
+    "description": "The learner accepts two different totals for the same collection, treating a skipped or double-counted item as a property of the counting direction rather than an error.",
+    "detector": "tagged-distractor",
+    "detectorParams": {},
+    "remediationId": "rem.count-in-groups"
+  },
+  {
+    "id": "mc.carry-dropped",
+    "title": "The carried ten is dropped",
+    "description": "When a column adds to more than nine the learner writes the units digit and forgets to carry the ten into the next column.",
+    "detector": "known-wrong-answer",
+    "detectorParams": {},
+    "remediationId": "rem.carry-the-ten"
+  },
+  {
+    "id": "mc.subtract-smaller-from-larger",
+    "title": "Digits subtracted in whichever order avoids borrowing",
+    "description": "Within a column the learner takes the smaller digit from the larger one regardless of which is on top, instead of borrowing.",
+    "detector": "tagged-distractor",
+    "detectorParams": {},
+    "remediationId": "rem.borrow-not-flip"
+  },
+  {
+    "id": "mc.multiply-as-add",
+    "title": "Multiplying treated as adding",
+    "description": "The learner adds the two numbers instead of counting equal groups, so 7 x 4 is answered as 11.",
+    "detector": "known-wrong-answer",
+    "detectorParams": {},
+    "remediationId": "rem.equal-groups"
+  },
+  {
+    "id": "mc.divide-reversed",
+    "title": "Divided the wrong way round",
+    "description": "The learner divides the number of groups by the amount being shared instead of the other way round.",
+    "detector": "tagged-distractor",
+    "detectorParams": {},
+    "remediationId": "rem.who-is-shared"
   }
 ]

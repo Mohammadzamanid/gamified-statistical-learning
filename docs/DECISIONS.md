@@ -43,3 +43,27 @@ Question-level detectors inspect a single response and all decline a `steps` res
 `classifyMisconception` honours those before falling back to detectors. This keeps step errors inside the existing
 remediation pipeline — micro-lesson, guided retry, injected follow-up — rather than creating a second, parallel feedback
 path. The content loader validates these ids so a step cannot classify to something no remediation covers. (S2-02)
+
+**D-012 — Lesson demonstrations are content, not one component per lesson.**
+Scope §5 requires an interactive visual demonstration in every Complete lesson, and placeholder controls do not count.
+Seventeen bespoke widgets in Region 1 alone would be seventeen things to keep accessible, keyboard-operable and tested,
+so a demonstration is instead a `Demonstration` record: labelled controls with ranges and steps, a **named** formula,
+a prediction, and an observation. `DEMONSTRATION_ARITY` ties each formula to the number of controls it consumes, and
+the schema refuses a divisor whose range reaches zero. The arithmetic lives in `src/core/curriculum/demonstration.ts`
+(per D-001), so `DemonstrationPanel` computes nothing — the visible readout and the screen-reader text are generated
+from the same call and cannot drift apart. Adding a lesson needs no new React; adding a *new kind* of relationship
+needs one enum member and one `case`. (S2-08)
+
+**D-013 — The prediction gates the controls.**
+Requirement 5 asks for a learner prediction before the reveal, and a prediction made after seeing the answer is not a
+prediction. The panel therefore starts with the controls disabled: the reveal note, the live readout and the
+observation appear only once a prediction is locked in. This is a deliberate friction, and it is why the demonstration
+carries the prediction rather than the question bank. (S2-08)
+
+**D-014 — Completeness is a declared list a test has to defend.**
+`tests/helpers/complete-lessons.ts` names the lessons claiming all 18 structure requirements. Two audits read it:
+`lesson-structure` holds everything on the list to the 18 checks, and `region1-architecture` holds everything off it to
+the skeleton shape S2-07 delivered. A lesson therefore cannot sit in between — growing a skeleton past its seed question
+fails the second audit, and adding an id without the content fails the first. Beginner safety is enforced the same way:
+a symbol may only appear in a lesson's prose, questions or remediations if that lesson or one of its prerequisites
+explains it, which is why the counting lesson is written without `+`. (S2-08)

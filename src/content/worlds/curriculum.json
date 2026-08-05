@@ -243,7 +243,7 @@
       "id": "l.r1-counting",
       "moduleId": "m.r1-counting",
       "title": "Counting",
-      "narrativeIntro": "Before the expedition can chart anything, counting must be second nature.",
+      "narrativeIntro": "Every crate that crosses the quay is written on a tally sheet, and every chart the expedition ever draws starts from one of those sheets. Get the count wrong and everything built on top of it is wrong too.",
       "objectiveIds": [
         "obj.r1-counting"
       ],
@@ -256,16 +256,90 @@
         }
       ],
       "questionIds": [
-        "q.r1-counting"
+        "q.r1-counting",
+        "q.r1-counting-independent",
+        "q.r1-counting-misconception",
+        "q.r1-counting-application",
+        "q.r1-counting-teachback",
+        "q.r1-counting-mastery"
       ],
       "prerequisites": [],
-      "estimatedMinutes": 8
+      "estimatedMinutes": 18,
+      "demonstration": {
+        "id": "dem.r1-counting",
+        "title": "The harbour tally sheet",
+        "experience": "Every crate landed gets one mark. Marks are drawn in groups of five — four uprights with one struck across — so that nobody has to start again from one to read the sheet.",
+        "accessibleDescription": "Two controls. The first sets how many complete struck groups of five marks are on the sheet. The second sets how many single marks are left over. The readout gives the total number of crates: five for every complete group, plus the leftover marks.",
+        "controls": [
+          {
+            "id": "ctl.groups",
+            "label": "Complete groups of five",
+            "min": 0,
+            "max": 8,
+            "step": 1,
+            "initial": 2
+          },
+          {
+            "id": "ctl.singles",
+            "label": "Single marks left over",
+            "min": 0,
+            "max": 4,
+            "step": 1,
+            "initial": 2
+          }
+        ],
+        "formula": "tally",
+        "readoutLabel": "Crates counted",
+        "readoutPrecision": 0,
+        "prediction": {
+          "prompt": "The sheet shows 2 complete groups and 2 single marks, so 12 crates. If one more complete group is drawn, what happens to the total?",
+          "options": [
+            {
+              "id": "opt.one",
+              "text": "It goes up by 1"
+            },
+            {
+              "id": "opt.five",
+              "text": "It goes up by 5"
+            },
+            {
+              "id": "opt.double",
+              "text": "It doubles"
+            }
+          ],
+          "correctOptionId": "opt.five",
+          "revealNote": "Each complete group stands for five marks, so one extra group is five extra crates. That is exactly why the marks are grouped: most of the counting is done before you start reading."
+        },
+        "observation": "Move the group control and the total jumps in fives. Move the singles control and it creeps up in ones. Both controls add crates — they just add them at different rates."
+      },
+      "formalTerm": {
+        "term": "Count",
+        "definition": "The count of a collection is how many things are in it: one number said for each thing, in order, with nothing skipped and nothing counted twice. The last number said is the count."
+      },
+      "guidedQuestionIds": [
+        "q.r1-counting"
+      ],
+      "independentQuestionIds": [
+        "q.r1-counting-independent"
+      ],
+      "misconceptionQuestionIds": [
+        "q.r1-counting-misconception"
+      ],
+      "applicationQuestionIds": [
+        "q.r1-counting-application"
+      ],
+      "teachBackQuestionIds": [
+        "q.r1-counting-teachback"
+      ],
+      "masteryCheckQuestionIds": [
+        "q.r1-counting-mastery"
+      ]
     },
     {
       "id": "l.r1-addition",
       "moduleId": "m.r1-counting",
       "title": "Addition",
-      "narrativeIntro": "Before the expedition can chart anything, addition must be second nature.",
+      "narrativeIntro": "Two jetties, two piles of crates, one number wanted for the log book. Adding is how separate amounts become a single total — the first thing any harbour record has to do.",
       "objectiveIds": [
         "obj.r1-addition"
       ],
@@ -278,18 +352,107 @@
         }
       ],
       "questionIds": [
-        "q.r1-addition"
+        "q.r1-addition",
+        "q.r1-addition-independent",
+        "q.r1-addition-misconception",
+        "q.r1-addition-application",
+        "q.r1-addition-teachback",
+        "q.r1-addition-mastery"
       ],
       "prerequisites": [
         "l.r1-counting"
       ],
-      "estimatedMinutes": 8
+      "estimatedMinutes": 18,
+      "demonstration": {
+        "id": "dem.r1-addition",
+        "title": "Two jetties, one total",
+        "experience": "The north jetty and the south jetty each hold a pile of crates. The harbourmaster does not care which pile a crate came from — the log book wants one number for the whole quay.",
+        "accessibleDescription": "Two controls, one for the number of crates on each jetty. The readout gives the two piles added together as a single total for the quay.",
+        "controls": [
+          {
+            "id": "ctl.north",
+            "label": "Crates on the north jetty",
+            "min": 0,
+            "max": 20,
+            "step": 1,
+            "initial": 7
+          },
+          {
+            "id": "ctl.south",
+            "label": "Crates on the south jetty",
+            "min": 0,
+            "max": 20,
+            "step": 1,
+            "initial": 5
+          }
+        ],
+        "formula": "sum",
+        "readoutLabel": "Crates on the quay",
+        "readoutPrecision": 0,
+        "prediction": {
+          "prompt": "There are 7 crates north and 5 south. If the piles are swapped — 5 north and 7 south — what happens to the total?",
+          "options": [
+            {
+              "id": "opt.same",
+              "text": "It stays at 12"
+            },
+            {
+              "id": "opt.smaller",
+              "text": "It gets smaller"
+            },
+            {
+              "id": "opt.join",
+              "text": "It becomes 57"
+            }
+          ],
+          "correctOptionId": "opt.same",
+          "revealNote": "Swapping the piles moves crates about but adds none and removes none, so the total cannot change. 7 + 5 and 5 + 7 are both 12."
+        },
+        "observation": "Raise either control by one and the total rises by exactly one. Set both controls to the same number and the total is double it."
+      },
+      "formalTerm": {
+        "term": "Sum",
+        "definition": "The sum is the result of adding amounts together. The amounts being added are the addends, and the order they are added in never changes the sum.",
+        "notation": "a + b",
+        "symbols": [
+          {
+            "symbol": "a",
+            "meaning": "the first amount being added — here, the crates on the north jetty"
+          },
+          {
+            "symbol": "+",
+            "meaning": "the plus sign: combine the two amounts into one total"
+          },
+          {
+            "symbol": "b",
+            "meaning": "the second amount being added — here, the crates on the south jetty"
+          }
+        ]
+      },
+      "guidedQuestionIds": [
+        "q.r1-addition"
+      ],
+      "independentQuestionIds": [
+        "q.r1-addition-independent"
+      ],
+      "misconceptionQuestionIds": [
+        "q.r1-addition-misconception"
+      ],
+      "applicationQuestionIds": [
+        "q.r1-addition-application"
+      ],
+      "teachBackQuestionIds": [
+        "q.r1-addition-teachback"
+      ],
+      "masteryCheckQuestionIds": [
+        "q.r1-addition-mastery"
+      ]
     },
     {
       "id": "l.r1-subtraction",
       "moduleId": "m.r1-counting",
       "title": "Subtraction",
-      "narrativeIntro": "Before the expedition can chart anything, subtraction must be second nature.",
+      "narrativeIntro": "Crates leave the quay as well as arrive. Subtraction is how the log book tracks what is still there, and how the expedition compares one day's landing with another.",
       "objectiveIds": [
         "obj.r1-subtraction"
       ],
@@ -302,18 +465,107 @@
         }
       ],
       "questionIds": [
-        "q.r1-subtraction"
+        "q.r1-subtraction",
+        "q.r1-subtraction-independent",
+        "q.r1-subtraction-misconception",
+        "q.r1-subtraction-application",
+        "q.r1-subtraction-teachback",
+        "q.r1-subtraction-mastery"
       ],
       "prerequisites": [
         "l.r1-addition"
       ],
-      "estimatedMinutes": 8
+      "estimatedMinutes": 18,
+      "demonstration": {
+        "id": "dem.r1-subtraction",
+        "title": "What is still on the quay",
+        "experience": "Crates are landed in the morning and sold across the day. The harbourmaster wants to know what is still standing on the quay at closing time.",
+        "accessibleDescription": "Two controls: how many crates were landed, and how many were sold. The readout gives the crates still on the quay, which is the landed amount with the sold amount taken away.",
+        "controls": [
+          {
+            "id": "ctl.landed",
+            "label": "Crates landed",
+            "min": 0,
+            "max": 30,
+            "step": 1,
+            "initial": 12
+          },
+          {
+            "id": "ctl.sold",
+            "label": "Crates sold",
+            "min": 0,
+            "max": 30,
+            "step": 1,
+            "initial": 5
+          }
+        ],
+        "formula": "difference",
+        "readoutLabel": "Crates still on the quay",
+        "readoutPrecision": 0,
+        "prediction": {
+          "prompt": "Twelve crates were landed and 5 sold, leaving 7. If 2 more crates are sold, what happens to the number still on the quay?",
+          "options": [
+            {
+              "id": "opt.down",
+              "text": "It goes down by 2"
+            },
+            {
+              "id": "opt.up",
+              "text": "It goes up by 2"
+            },
+            {
+              "id": "opt.same",
+              "text": "It stays the same"
+            }
+          ],
+          "correctOptionId": "opt.down",
+          "revealNote": "Every extra crate sold is one fewer left standing. Taking more away always leaves less behind."
+        },
+        "observation": "Raise both controls by the same amount and the readout does not move: subtraction reports the gap between the two numbers, not how big they are. Push 'sold' past 'landed' and the readout drops below zero — a real number, with its own lesson later in this region."
+      },
+      "formalTerm": {
+        "term": "Difference",
+        "definition": "The difference is what is left when one amount is taken away from another — and, in the same breath, how much bigger one amount is than the other. Both questions are answered by the same subtraction.",
+        "notation": "a - b",
+        "symbols": [
+          {
+            "symbol": "a",
+            "meaning": "the amount you start with — here, the crates landed"
+          },
+          {
+            "symbol": "-",
+            "meaning": "the minus sign: take the second amount away from the first"
+          },
+          {
+            "symbol": "b",
+            "meaning": "the amount taken away — here, the crates sold"
+          }
+        ]
+      },
+      "guidedQuestionIds": [
+        "q.r1-subtraction"
+      ],
+      "independentQuestionIds": [
+        "q.r1-subtraction-independent"
+      ],
+      "misconceptionQuestionIds": [
+        "q.r1-subtraction-misconception"
+      ],
+      "applicationQuestionIds": [
+        "q.r1-subtraction-application"
+      ],
+      "teachBackQuestionIds": [
+        "q.r1-subtraction-teachback"
+      ],
+      "masteryCheckQuestionIds": [
+        "q.r1-subtraction-mastery"
+      ]
     },
     {
       "id": "l.r1-multiplication",
       "moduleId": "m.r1-counting",
       "title": "Multiplication",
-      "narrativeIntro": "Before the expedition can chart anything, multiplication must be second nature.",
+      "narrativeIntro": "When every boat carries the same load, adding them one at a time is slow and easy to get wrong. Multiplication is the shortcut, and it is the idea that totals, areas and averages are all built on.",
       "objectiveIds": [
         "obj.r1-multiplication"
       ],
@@ -326,18 +578,107 @@
         }
       ],
       "questionIds": [
-        "q.r1-multiplication"
+        "q.r1-multiplication",
+        "q.r1-multiplication-independent",
+        "q.r1-multiplication-misconception",
+        "q.r1-multiplication-application",
+        "q.r1-multiplication-teachback",
+        "q.r1-multiplication-mastery"
       ],
       "prerequisites": [
         "l.r1-subtraction"
       ],
-      "estimatedMinutes": 8
+      "estimatedMinutes": 18,
+      "demonstration": {
+        "id": "dem.r1-multiplication",
+        "title": "A fleet of equal loads",
+        "experience": "Every boat in the fleet is loaded to the same mark, so the quay knows exactly how many crates each one carries before it ties up.",
+        "accessibleDescription": "Two controls: how many boats there are, and how many crates each boat carries. The readout gives the total crates, which is the number of boats multiplied by the crates on each one.",
+        "controls": [
+          {
+            "id": "ctl.boats",
+            "label": "Boats in the fleet",
+            "min": 1,
+            "max": 8,
+            "step": 1,
+            "initial": 4
+          },
+          {
+            "id": "ctl.each",
+            "label": "Crates on each boat",
+            "min": 0,
+            "max": 12,
+            "step": 1,
+            "initial": 6
+          }
+        ],
+        "formula": "product",
+        "readoutLabel": "Crates altogether",
+        "readoutPrecision": 0,
+        "prediction": {
+          "prompt": "Four boats carry 6 crates each, so 24 crates. A fifth boat arrives, loaded the same. What happens to the total?",
+          "options": [
+            {
+              "id": "opt.one",
+              "text": "It goes up by 1"
+            },
+            {
+              "id": "opt.six",
+              "text": "It goes up by 6"
+            },
+            {
+              "id": "opt.double",
+              "text": "It doubles"
+            }
+          ],
+          "correctOptionId": "opt.six",
+          "revealNote": "One more boat adds a whole group, not a single crate: 5 x 6 = 30, which is the old 24 plus one more group of 6."
+        },
+        "observation": "Set 'crates on each boat' to 1 and the total equals the number of boats — multiplying by one changes nothing. Set it to 0 and the total is nothing, however large the fleet."
+      },
+      "formalTerm": {
+        "term": "Product",
+        "definition": "The product is the result of multiplying. Multiplying counts equal groups: how many groups there are, times how many are in each group. It only works when the groups really are the same size.",
+        "notation": "a x b",
+        "symbols": [
+          {
+            "symbol": "a",
+            "meaning": "the number of equal groups — here, the boats"
+          },
+          {
+            "symbol": "x",
+            "meaning": "the multiplication sign, read as 'lots of': a lots of b"
+          },
+          {
+            "symbol": "b",
+            "meaning": "how many are in each group — here, the crates on one boat"
+          }
+        ]
+      },
+      "guidedQuestionIds": [
+        "q.r1-multiplication"
+      ],
+      "independentQuestionIds": [
+        "q.r1-multiplication-independent"
+      ],
+      "misconceptionQuestionIds": [
+        "q.r1-multiplication-misconception"
+      ],
+      "applicationQuestionIds": [
+        "q.r1-multiplication-application"
+      ],
+      "teachBackQuestionIds": [
+        "q.r1-multiplication-teachback"
+      ],
+      "masteryCheckQuestionIds": [
+        "q.r1-multiplication-mastery"
+      ]
     },
     {
       "id": "l.r1-division",
       "moduleId": "m.r1-counting",
       "title": "Division",
-      "narrativeIntro": "Before the expedition can chart anything, division must be second nature.",
+      "narrativeIntro": "A catch has to be shared out, and everyone has to get the same. Division answers 'how many each?' — and it is the exact operation the mean is built from, so it is worth being sure of now.",
       "objectiveIds": [
         "obj.r1-division"
       ],
@@ -350,12 +691,101 @@
         }
       ],
       "questionIds": [
-        "q.r1-division"
+        "q.r1-division",
+        "q.r1-division-independent",
+        "q.r1-division-misconception",
+        "q.r1-division-application",
+        "q.r1-division-teachback",
+        "q.r1-division-mastery"
       ],
       "prerequisites": [
         "l.r1-multiplication"
       ],
-      "estimatedMinutes": 8
+      "estimatedMinutes": 20,
+      "demonstration": {
+        "id": "dem.r1-division",
+        "title": "Sharing the catch",
+        "experience": "One pile of crates on the quay, several boats waiting, and a rule the crews insist on: every boat leaves with the same number of crates.",
+        "accessibleDescription": "Two controls: how many crates are to be shared, and how many boats they are shared between. The readout gives each boat's share, shown to two decimal places because an equal share is not always a whole number of crates.",
+        "controls": [
+          {
+            "id": "ctl.crates",
+            "label": "Crates to share",
+            "min": 0,
+            "max": 60,
+            "step": 1,
+            "initial": 24
+          },
+          {
+            "id": "ctl.boats",
+            "label": "Boats to share between",
+            "min": 1,
+            "max": 8,
+            "step": 1,
+            "initial": 4
+          }
+        ],
+        "formula": "quotient",
+        "readoutLabel": "Crates for each boat",
+        "readoutPrecision": 2,
+        "prediction": {
+          "prompt": "Twenty-four crates shared between 4 boats gives 6 each. Two more boats join and the same 24 crates are shared again. What happens to each boat's share?",
+          "options": [
+            {
+              "id": "opt.more",
+              "text": "Each boat gets more"
+            },
+            {
+              "id": "opt.less",
+              "text": "Each boat gets less"
+            },
+            {
+              "id": "opt.same",
+              "text": "Each boat gets the same as before"
+            }
+          ],
+          "correctOptionId": "opt.less",
+          "revealNote": "The same pile split more ways gives everyone less: 24 / 6 = 4 crates each, down from 6. Nothing was taken away — it is just spread further."
+        },
+        "observation": "Share 24 crates between 5 boats and the readout says 4.80 — not a whole crate each. Division does not always land on a whole number, and that leftover is what fractions and decimals exist to describe."
+      },
+      "formalTerm": {
+        "term": "Quotient",
+        "definition": "The quotient is the result of dividing: how much each part gets when an amount is shared equally, or how many equal groups an amount makes. Anything left over that cannot make another whole group is the remainder.",
+        "notation": "a / b",
+        "symbols": [
+          {
+            "symbol": "a",
+            "meaning": "the amount being shared out — here, the crates. It is called the dividend"
+          },
+          {
+            "symbol": "/",
+            "meaning": "the division sign: share the first amount equally into the second number of parts"
+          },
+          {
+            "symbol": "b",
+            "meaning": "how many parts it is shared into — here, the boats. It is called the divisor"
+          }
+        ]
+      },
+      "guidedQuestionIds": [
+        "q.r1-division"
+      ],
+      "independentQuestionIds": [
+        "q.r1-division-independent"
+      ],
+      "misconceptionQuestionIds": [
+        "q.r1-division-misconception"
+      ],
+      "applicationQuestionIds": [
+        "q.r1-division-application"
+      ],
+      "teachBackQuestionIds": [
+        "q.r1-division-teachback"
+      ],
+      "masteryCheckQuestionIds": [
+        "q.r1-division-mastery"
+      ]
     },
     {
       "id": "l.r1-fractions",

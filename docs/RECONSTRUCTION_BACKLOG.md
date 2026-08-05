@@ -37,9 +37,11 @@ defect repair and engine capability precede content breadth.
 | S2-06 | 2 | Dedicated spaced-review queue | Roadmap "adaptive review"; handoff priority 5 | S2-01 | Due calculation, review screen, overdue, new-vs-review, mixed topics, rescheduling, persistence, interrupted resume, deterministic-clock tests | **Complete** | `e8e0cb2` | `e8e0cb2` | Yes — MATCH | 236 pass, 24 files (was 211/22) | Full SHA `e8e0cb2b8a02ce933671aa8cf4c2a5c727760855`. Pure review core with the clock always passed in; session frozen at start so resume is meaningful. **Save schema 1 → 2** with a real migration (first schema change since the baseline). Screen routed and reachable from the top bar. |
 | S2-07 | 2 | Region 1 curriculum architecture | Roadmap "Region 1 completion" | S2-05 | Complete lesson + prerequisite graph; every required topic represented and reachable | **Complete** | `dd39d38` | `dd39d38` | Yes — MATCH | 246 pass, 25 files (was 236/24) | Full SHA `dd39d38c57b4083d7829a698a56960b6ff484c8c`. All 17 scope §2 topics given a skill, objective, lesson and seed question across 4 new modules with a prerequisite graph. Reachability walked from a fresh save; cycles rejected. **Architecture only** — a skeleton-honesty check keeps these from being mistaken for finished lessons (S2-08). |
 
-**S2-08 onward: see `STAGE2_RECONSTRUCTION_BACKLOG.md`, which is authoritative.**
+| S2-08 | 2 | Region 1 lessons and interactions | Addendum §5 lesson-completeness requirements | S2-07 | Every Region 1 lesson satisfies all 18 structure requirements | **Partial** | `pending` | `pending` | pending | 301 pass, 28 files (was 246/25) | **5 of 17 lessons Complete** — Module 1 (`m.r1-counting`) only. The other 12 topic lessons are still skeletons and are named in `STAGE2_CURRENT_WORK.md`. Lessons gained a data-driven `demonstration` and `formalTerm` plus six practice roles (D-012…D-014); `tests/audit/lesson-structure.test.ts` (24 checks) enforces all 18 requirements and **drives** every demonstration control, so an inert one fails. 5 new misconceptions, each triggered through the real session engine. Not Complete, and not counted toward stage closure. |
 
-The completed Stage 2 rows above are kept here because the persistence policy requires verified hashes in
+**S2-09 onward: see `STAGE2_RECONSTRUCTION_BACKLOG.md`, which is authoritative.**
+
+The Stage 2 rows above are kept here because the persistence policy requires verified hashes in
 both backlogs. The remaining Stage 2 units are *not* duplicated here: this file's original decomposition
 predates the authoritative Stage 2 unit list and used different numbers for the same work (for example, it had
 S2-05 as `formula-construction`, where the authoritative list has S2-05 as the interaction-type audit). Keeping two

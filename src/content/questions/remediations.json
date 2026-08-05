@@ -70,5 +70,45 @@
     "microLesson": "Ask: would adding two of these values mean anything? Adding two catches (4 fish + 6 fish = 10 fish) is meaningful, so catch is numerical. Adding two boat numbers (boat 3 + boat 7) is meaningless, so boat number is categorical. Postcodes, shirt numbers and phone numbers are all categorical for the same reason.",
     "followUpQuestionIds": [],
     "skillIds": ["skill.data-literacy"]
+  },
+  {
+    "id": "rem.count-in-groups",
+    "title": "A count does not depend on where you start",
+    "explanation": "Counting pairs one number with each item, and each item is used exactly once. Nothing was added to the row or removed from it between your two passes, so the two totals cannot both be right — one pass skipped an item or counted one twice.",
+    "microLesson": "Two habits fix this. First, move in one direction and touch or mark each item as you say its number, so you can see where you have reached. Second, group as you go: put the items into rows of five, count the rows in fives, then add the leftovers. Grouping means a slip costs you one group to recount, not the whole row.",
+    "followUpQuestionIds": ["q.remed-count-in-groups"],
+    "skillIds": ["skill.r1-counting"]
+  },
+  {
+    "id": "rem.carry-the-ten",
+    "title": "The ten has to go somewhere",
+    "explanation": "A column can only hold one digit. When the units add to more than nine, the ten inside that answer belongs in the tens column — writing only the units digit throws it away, which is why the answer comes out ten short.",
+    "microLesson": "Take 47 + 38. The units are 7 + 8 = 15. That is 1 ten and 5 units: write the 5 under the units, and carry the 1 ten to the top of the tens column. The tens are now 4 + 3 + 1 = 8, so the answer is 85 — not 75. A quick check catches the slip every time: 47 is nearly 50 and 38 is nearly 40, so the answer should be near 90.",
+    "followUpQuestionIds": ["q.remed-carry-the-ten"],
+    "skillIds": ["skill.r1-addition"]
+  },
+  {
+    "id": "rem.borrow-not-flip",
+    "title": "Borrow a ten instead of flipping the digits",
+    "explanation": "In a subtraction column the top digit is what you have and the bottom digit is what you are taking away. When the top digit is smaller you cannot swap them round — that answers a different question. You borrow a ten from the next column instead.",
+    "microLesson": "Take 52 - 27. The units column asks for 2 take away 7, which cannot be done as it stands. Borrow one of the 5 tens: the units become 12, and the tens drop to 4. Now 12 - 7 = 5 and 4 - 2 = 2, giving 25. Flipping the units to 7 - 2 gives 35, which is ten too big — and a rough check says 52 - 27 should be about 25.",
+    "followUpQuestionIds": ["q.remed-borrow-not-flip"],
+    "skillIds": ["skill.r1-subtraction"]
+  },
+  {
+    "id": "rem.equal-groups",
+    "title": "Multiplying counts groups, not the two numbers",
+    "explanation": "Adding the two numbers together answers 'how many altogether if I combine these two amounts'. Multiplying answers something else: how many there are when you have that many equal groups of that size. 7 x 4 is seven groups of four, which is 28, not 11.",
+    "microLesson": "Write it out the long way and count what you get: 7 x 4 means 4 + 4 + 4 + 4 + 4 + 4 + 4 = 28. Adding gives 7 + 4 = 11, which is what you would get from one group of seven and one group of four — a different situation entirely. A sanity check: multiplying by anything above 1 makes the number bigger than either of the two numbers you started with.",
+    "followUpQuestionIds": ["q.remed-equal-groups"],
+    "skillIds": ["skill.r1-multiplication"]
+  },
+  {
+    "id": "rem.who-is-shared",
+    "title": "The amount being shared goes first",
+    "explanation": "Division is not like addition or multiplication — the order matters. The thing being shared out is written first, and the number of parts it is shared between is written second. Reversing them asks how much of a boat each crate gets.",
+    "microLesson": "Forty crates between 8 boats is 40 / 8 = 5 crates each. Written the other way round, 8 / 40 asks how much of a boat belongs to each crate, which is a different question and gives an answer smaller than one. Before dividing, name the two roles out loud: 'the crates are being shared, the boats are sharing them.' If each part should end up with several of something, an answer below one means the two numbers went in the wrong order.",
+    "followUpQuestionIds": ["q.remed-who-is-shared"],
+    "skillIds": ["skill.r1-division"]
   }
 ]

@@ -1445,7 +1445,7 @@
     "difficulty": 1,
     "misconceptionIds": [],
     "estimatedSeconds": 60,
-    "accessibilityDescription": "A numeric input question about counting.",
+    "accessibilityDescription": "A tally written as two struck groups of five marks followed by two single marks. Each block of four uprights stands for a struck group of five. Enter the total as a number.",
     "interaction": "numeric-input",
     "prompt": "The tally sheet shows one mark for each crate landed: |||| |||| ||. How many crates is that?",
     "answer": {
@@ -1453,7 +1453,21 @@
       "value": 12,
       "tolerance": 0
     },
-    "explanation": "Two full groups of five make ten, and two more marks make twelve crates."
+    "explanation": "Two full groups of five make ten, and two more marks make twelve crates.",
+    "hints": [
+      {
+        "level": 1,
+        "text": "A struck block of marks stands for five, not four."
+      },
+      {
+        "level": 2,
+        "text": "Count the complete groups first: 5, then 10. Then add the loose marks."
+      }
+    ],
+    "solutionSteps": [
+      "There are 2 complete groups of five: 5, then 10.",
+      "The 2 loose marks take the count to 12."
+    ]
   },
   {
     "id": "q.r1-addition",
@@ -1465,7 +1479,7 @@
     "difficulty": 1,
     "misconceptionIds": [],
     "estimatedSeconds": 60,
-    "accessibilityDescription": "A numeric input question about addition.",
+    "accessibilityDescription": "A word problem adding Monday's 7 crates to Tuesday's 5 crates. Enter the total as a number.",
     "interaction": "numeric-input",
     "prompt": "Monday's boats landed 7 crates and Tuesday's landed 5. How many crates altogether?",
     "answer": {
@@ -1474,7 +1488,22 @@
       "tolerance": 0,
       "unit": "crates"
     },
-    "explanation": "7 + 5 = 12 crates. Starting at 7 and counting on five gives 8, 9, 10, 11, 12."
+    "explanation": "7 + 5 = 12 crates. Starting at 7 and counting on five gives 8, 9, 10, 11, 12.",
+    "hints": [
+      {
+        "level": 1,
+        "text": "Start from the larger number and count on."
+      },
+      {
+        "level": 2,
+        "text": "Start at 7 and count on five: 8, 9, 10, 11, 12."
+      }
+    ],
+    "solutionSteps": [
+      "Start at 7.",
+      "Count on 5: 8, 9, 10, 11, 12.",
+      "The total is 12."
+    ]
   },
   {
     "id": "q.r1-subtraction",
@@ -1486,7 +1515,7 @@
     "difficulty": 1,
     "misconceptionIds": [],
     "estimatedSeconds": 60,
-    "accessibilityDescription": "A numeric input question about subtraction.",
+    "accessibilityDescription": "A word problem: 12 crates landed and 5 sold. Enter how many are left as a number.",
     "interaction": "numeric-input",
     "prompt": "You landed 12 crates and sold 5 at the quayside. How many crates are left?",
     "answer": {
@@ -1495,7 +1524,22 @@
       "tolerance": 0,
       "unit": "crates"
     },
-    "explanation": "12 - 5 = 7 crates remain."
+    "explanation": "12 - 5 = 7 crates remain. Counting back five from 12 gives 11, 10, 9, 8, 7.",
+    "hints": [
+      {
+        "level": 1,
+        "text": "Start at 12 and count back five."
+      },
+      {
+        "level": 2,
+        "text": "12, 11, 10, 9, 8, 7."
+      }
+    ],
+    "solutionSteps": [
+      "Start at 12.",
+      "Count back 5: 11, 10, 9, 8, 7.",
+      "Seven crates are left."
+    ]
   },
   {
     "id": "q.r1-multiplication",
@@ -1507,7 +1551,7 @@
     "difficulty": 1,
     "misconceptionIds": [],
     "estimatedSeconds": 60,
-    "accessibilityDescription": "A numeric input question about multiplication.",
+    "accessibilityDescription": "A word problem: 4 boats each landing 6 crates. Enter the total number of crates as a number.",
     "interaction": "numeric-input",
     "prompt": "Four boats each land 6 crates. How many crates is that in total?",
     "answer": {
@@ -1516,7 +1560,21 @@
       "tolerance": 0,
       "unit": "crates"
     },
-    "explanation": "4 x 6 = 24 crates, the same as 6 + 6 + 6 + 6."
+    "explanation": "4 x 6 = 24 crates, the same as 6 + 6 + 6 + 6.",
+    "hints": [
+      {
+        "level": 1,
+        "text": "Every boat carries the same number, so these are equal groups."
+      },
+      {
+        "level": 2,
+        "text": "6 + 6 + 6 + 6, or 4 x 6."
+      }
+    ],
+    "solutionSteps": [
+      "There are 4 equal groups of 6.",
+      "6 + 6 + 6 + 6 = 24, which is 4 x 6."
+    ]
   },
   {
     "id": "q.r1-division",
@@ -1528,7 +1586,7 @@
     "difficulty": 1,
     "misconceptionIds": [],
     "estimatedSeconds": 60,
-    "accessibilityDescription": "A numeric input question about division.",
+    "accessibilityDescription": "A word problem: 24 crates shared equally between 4 boats. Enter each boat's share as a number.",
     "interaction": "numeric-input",
     "prompt": "Twenty-four crates are shared equally between 4 boats. How many crates does each boat get?",
     "answer": {
@@ -1537,7 +1595,21 @@
       "tolerance": 0,
       "unit": "crates"
     },
-    "explanation": "24 / 4 = 6 crates each."
+    "explanation": "24 / 4 = 6 crates each. Counting up in fours to 24 takes six steps, so every boat gets six crates.",
+    "hints": [
+      {
+        "level": 1,
+        "text": "How many fours make 24?"
+      },
+      {
+        "level": 2,
+        "text": "4 x 6 = 24, so each boat gets 6."
+      }
+    ],
+    "solutionSteps": [
+      "Count up in fours to 24: 4, 8, 12, 16, 20, 24 — six steps.",
+      "Each boat gets 6 crates."
+    ]
   },
   {
     "id": "q.r1-fractions",
@@ -1879,5 +1951,1125 @@
       ]
     },
     "explanation": "Crates landed is a quantity you could total or average, so it is numerical. Weather and home port sort cases into groups, so they are categorical."
+  },
+  {
+    "id": "q.r1-counting-independent",
+    "topicId": "t.r1-counting",
+    "objectiveId": "obj.r1-counting",
+    "skillIds": [
+      "skill.r1-counting"
+    ],
+    "difficulty": 2,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A tally written as three complete groups of five marks, then three single marks. Each block of four uprights stands for a struck group of five. Enter the total as a number.",
+    "interaction": "numeric-input",
+    "prompt": "Wednesday's sheet reads |||| |||| |||| ||| — three struck groups and three loose marks. How many crates landed?",
+    "answer": {
+      "kind": "numeric",
+      "value": 18,
+      "tolerance": 0,
+      "unit": "crates"
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Every struck block stands for five marks, not four."
+      },
+      {
+        "level": 2,
+        "text": "Count the complete groups first: 5, 10, 15. Then add the loose marks."
+      }
+    ],
+    "explanation": "Three complete groups make 15, and three loose marks take the count to 18 crates.",
+    "solutionSteps": [
+      "Count the complete groups of five: there are 3.",
+      "Three groups of five is 15.",
+      "The 3 loose marks take the total to 18."
+    ]
+  },
+  {
+    "id": "q.r1-counting-misconception",
+    "topicId": "t.r1-counting",
+    "objectiveId": "obj.r1-counting",
+    "skillIds": [
+      "skill.r1-counting"
+    ],
+    "difficulty": 2,
+    "misconceptionIds": [
+      "mc.count-off-by-one"
+    ],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A multiple-choice question about two counts of the same row of crates disagreeing. Choose one option.",
+    "interaction": "multiple-choice",
+    "prompt": "Mira counts a row of crates from the left and reaches 9. She counts the same row again from the right and reaches 8. What has happened?",
+    "choices": [
+      {
+        "id": "ch.direction",
+        "text": "Counting from the other end can give a different total — direction changes the count.",
+        "misconceptionId": "mc.count-off-by-one"
+      },
+      {
+        "id": "ch.slip",
+        "text": "One crate was missed or counted twice on the second pass. The same row always has the same count."
+      },
+      {
+        "id": "ch.zero",
+        "text": "She should have started counting at zero rather than one."
+      }
+    ],
+    "answer": {
+      "kind": "choice",
+      "correctChoiceIds": [
+        "ch.slip"
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Nothing was added to the row or taken away between the two passes."
+      },
+      {
+        "level": 2,
+        "text": "If the row did not change, the count cannot change either — so one pass was done wrong."
+      }
+    ],
+    "explanation": "Counting matches one number to each crate. Nothing about the row changed between passes, so the two answers cannot both be right: one pass skipped a crate or counted one twice."
+  },
+  {
+    "id": "q.r1-counting-application",
+    "topicId": "t.r1-counting",
+    "objectiveId": "obj.r1-counting",
+    "skillIds": [
+      "skill.r1-counting"
+    ],
+    "difficulty": 3,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A word problem comparing a shift tally of 7 groups of five plus 3 single marks against a manifest total of 40 barrels. Enter the shortfall as a number.",
+    "interaction": "numeric-input",
+    "prompt": "A dockhand's shift tally shows 7 complete groups of five and 3 single marks. The ship's manifest says 40 barrels were unloaded. How many barrels did the tally miss?",
+    "answer": {
+      "kind": "numeric",
+      "value": 2,
+      "tolerance": 0,
+      "unit": "barrels"
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Work out the tally total first."
+      },
+      {
+        "level": 2,
+        "text": "7 groups of five is 35, plus 3 loose marks."
+      }
+    ],
+    "explanation": "The tally records 7 groups of five, which is 35, and 3 loose marks make 38 barrels. The manifest says 40, so 2 barrels were never marked.",
+    "solutionSteps": [
+      "Seven complete groups of five is 35.",
+      "Three loose marks take the tally to 38.",
+      "The manifest says 40, so the tally is short by 2."
+    ]
+  },
+  {
+    "id": "q.r1-counting-teachback",
+    "topicId": "t.r1-counting",
+    "objectiveId": "obj.r1-counting",
+    "skillIds": [
+      "skill.r1-counting"
+    ],
+    "difficulty": 2,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A written-explanation question. Type your answer in the text box; it must contain the words 'each' and 'once'.",
+    "interaction": "short-explanation",
+    "prompt": "A new deckhand asks why counting the same row of crates twice must give the same answer. Explain it in your own words. Use the words 'each' and 'once'.",
+    "answer": {
+      "kind": "text",
+      "requiredKeywords": [
+        "each",
+        "once"
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Think about what you do to every single crate as you count."
+      },
+      {
+        "level": 2,
+        "text": "Say what happens to each crate, and how many times it happens."
+      }
+    ],
+    "explanation": "Counting pairs one number with each crate, and each crate is used exactly once. Nothing about the row changes between passes, so the last number said must be the same both times."
+  },
+  {
+    "id": "q.r1-counting-mastery",
+    "topicId": "t.r1-counting",
+    "objectiveId": "obj.r1-counting",
+    "skillIds": [
+      "skill.r1-counting"
+    ],
+    "difficulty": 3,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A word problem: a tally of 5 complete groups of five and 4 single marks, then 3 more crates landed and marked. Enter the new total as a number.",
+    "interaction": "numeric-input",
+    "prompt": "The sheet shows 5 complete groups of five and 4 single marks. Three more crates are landed and marked. What is the total now?",
+    "answer": {
+      "kind": "numeric",
+      "value": 32,
+      "tolerance": 0,
+      "unit": "crates"
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Total the sheet before the new crates arrive."
+      },
+      {
+        "level": 2,
+        "text": "5 groups of five is 25; then add the loose marks, then the new crates."
+      }
+    ],
+    "explanation": "Five complete groups of five is 25, the 4 loose marks take it to 29, and the 3 new crates make 32.",
+    "solutionSteps": [
+      "Five complete groups of five is 25.",
+      "The 4 loose marks take the total to 29.",
+      "The 3 new crates take it to 32."
+    ]
+  },
+  {
+    "id": "q.remed-count-in-groups",
+    "topicId": "t.r1-counting",
+    "objectiveId": "obj.r1-counting",
+    "skillIds": [
+      "skill.r1-counting"
+    ],
+    "difficulty": 1,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A short tally of two struck groups of five and one single mark. Enter the total as a number.",
+    "interaction": "numeric-input",
+    "prompt": "Count this short tally by group: |||| |||| | — two struck groups of five and one loose mark. How many crates?",
+    "answer": {
+      "kind": "numeric",
+      "value": 11,
+      "tolerance": 0
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Each struck block is five."
+      }
+    ],
+    "explanation": "Two groups of five make 10, and one loose mark makes 11."
+  },
+  {
+    "id": "q.r1-addition-independent",
+    "topicId": "t.r1-addition",
+    "objectiveId": "obj.r1-addition",
+    "skillIds": [
+      "skill.r1-addition"
+    ],
+    "difficulty": 2,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A word problem adding a morning catch of 23 crates to an afternoon catch of 19 crates. Enter the total as a number.",
+    "interaction": "numeric-input",
+    "prompt": "The morning catch is 23 crates and the afternoon catch is 19. How many crates for the whole day?",
+    "answer": {
+      "kind": "numeric",
+      "value": 42,
+      "tolerance": 0,
+      "unit": "crates"
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Add the tens, then the units."
+      },
+      {
+        "level": 2,
+        "text": "20 + 10 = 30, and 3 + 9 = 12. Now put those together."
+      }
+    ],
+    "explanation": "23 + 19 = 42 crates for the day. The tens make 30 and the units make 12, which together are 42.",
+    "solutionSteps": [
+      "Tens: 20 + 10 = 30.",
+      "Units: 3 + 9 = 12.",
+      "30 + 12 = 42."
+    ]
+  },
+  {
+    "id": "q.r1-addition-misconception",
+    "topicId": "t.r1-addition",
+    "objectiveId": "obj.r1-addition",
+    "skillIds": [
+      "skill.r1-addition"
+    ],
+    "difficulty": 3,
+    "misconceptionIds": [
+      "mc.carry-dropped"
+    ],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A two-digit addition, 47 plus 38, that needs a carry. Enter the total as a number.",
+    "interaction": "numeric-input",
+    "prompt": "The week's ledgers are totalled: 47 crates from the north jetty and 38 from the south. How many crates is that?",
+    "parameters": {
+      "mc.carry-dropped": {
+        "wrongValue": 75
+      }
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": 85,
+      "tolerance": 0,
+      "unit": "crates"
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "The units column comes to more than nine — that ten has to go somewhere."
+      },
+      {
+        "level": 2,
+        "text": "7 + 8 = 15: write the 5, carry the 1 ten into the tens column."
+      }
+    ],
+    "explanation": "7 + 8 = 15, so write 5 and carry 1 ten. The tens are then 4 + 3 + 1 = 8. The answer is 85.",
+    "solutionSteps": [
+      "Units: 7 + 8 = 15. Write 5, carry 1 ten.",
+      "Tens: 4 + 3 + 1 = 8.",
+      "The total is 85."
+    ]
+  },
+  {
+    "id": "q.r1-addition-application",
+    "topicId": "t.r1-addition",
+    "objectiveId": "obj.r1-addition",
+    "skillIds": [
+      "skill.r1-addition"
+    ],
+    "difficulty": 3,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A word problem adding 145 coins of catch pay to 68 coins of salvage pay. Enter the total as a number.",
+    "interaction": "numeric-input",
+    "prompt": "A crew is paid 145 coins for the catch and 68 coins for the salvage. How many coins do they have altogether?",
+    "answer": {
+      "kind": "numeric",
+      "value": 213,
+      "tolerance": 0,
+      "unit": "coins"
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Add the hundreds, tens and units separately, then combine."
+      },
+      {
+        "level": 2,
+        "text": "145 + 60 = 205, and then 8 more."
+      }
+    ],
+    "explanation": "145 + 68 = 213 coins. Adding the 60 first gives 205, and the last 8 takes it to 213.",
+    "solutionSteps": [
+      "145 + 60 = 205.",
+      "205 + 8 = 213."
+    ]
+  },
+  {
+    "id": "q.r1-addition-teachback",
+    "topicId": "t.r1-addition",
+    "objectiveId": "obj.r1-addition",
+    "skillIds": [
+      "skill.r1-addition"
+    ],
+    "difficulty": 2,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A written-explanation question. Type your answer in the text box; it must contain the words 'order' and 'total'.",
+    "interaction": "short-explanation",
+    "prompt": "Explain why 7 + 5 and 5 + 7 give the same answer. Use the words 'order' and 'total'.",
+    "answer": {
+      "kind": "text",
+      "requiredKeywords": [
+        "order",
+        "total"
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Picture two piles of crates being pushed together."
+      },
+      {
+        "level": 2,
+        "text": "Say what changes when you swap the piles, and what does not."
+      }
+    ],
+    "explanation": "Adding combines two amounts into one total. Swapping the order moves the piles around but adds nothing and removes nothing, so the total is unchanged: 7 + 5 and 5 + 7 are both 12."
+  },
+  {
+    "id": "q.r1-addition-mastery",
+    "topicId": "t.r1-addition",
+    "objectiveId": "obj.r1-addition",
+    "skillIds": [
+      "skill.r1-addition"
+    ],
+    "difficulty": 3,
+    "misconceptionIds": [
+      "mc.carry-dropped"
+    ],
+    "estimatedSeconds": 150,
+    "accessibilityDescription": "A three-step calculation of 47 plus 38, one column at a time. Each step asks for a number; enter it and submit before the next step appears.",
+    "interaction": "step-by-step-calculation",
+    "prompt": "Work through 47 + 38 one column at a time.",
+    "answer": {
+      "kind": "steps",
+      "steps": [
+        {
+          "id": "st.units",
+          "prompt": "Add the units column: 7 + 8. What do you get?",
+          "value": 15,
+          "tolerance": 0,
+          "hints": [
+            "Count on from 7, eight times.",
+            "7 + 8 is 15."
+          ],
+          "explanation": "7 + 8 = 15. That is more than nine, so one whole ten has to be carried into the tens column."
+        },
+        {
+          "id": "st.tens",
+          "prompt": "Now the tens column: 4 + 3, plus the ten you carried. How many tens?",
+          "value": 8,
+          "tolerance": 0,
+          "hints": [
+            "Do not forget the ten carried from the units.",
+            "4 + 3 + 1 = 8."
+          ],
+          "explanation": "4 + 3 = 7 tens, and the carried ten makes 8 tens.",
+          "misconceptionValues": [
+            {
+              "value": 7,
+              "misconceptionId": "mc.carry-dropped"
+            }
+          ]
+        },
+        {
+          "id": "st.total",
+          "prompt": "Put 8 tens and 5 units together. What is 47 + 38?",
+          "value": 85,
+          "tolerance": 0,
+          "hints": [
+            "8 tens is 80.",
+            "80 + 5 = 85."
+          ],
+          "explanation": "8 tens is 80, and 80 + 5 = 85."
+        }
+      ]
+    },
+    "explanation": "47 + 38 = 85. The units make 15, which is 5 with one ten carried; the tens are then 4 + 3 + 1 = 8."
+  },
+  {
+    "id": "q.remed-carry-the-ten",
+    "topicId": "t.r1-addition",
+    "objectiveId": "obj.r1-addition",
+    "skillIds": [
+      "skill.r1-addition"
+    ],
+    "difficulty": 2,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A two-digit addition, 26 plus 17, that needs a carry. Enter the total as a number.",
+    "interaction": "numeric-input",
+    "prompt": "The north jetty logged 26 crates and the south logged 17. Add them, remembering the carry.",
+    "answer": {
+      "kind": "numeric",
+      "value": 43,
+      "tolerance": 0
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "6 + 7 = 13. Write the 3 and carry the ten."
+      }
+    ],
+    "explanation": "6 + 7 = 13, so write 3 and carry 1 ten. The tens are 2 + 1 + 1 = 4. The answer is 43."
+  },
+  {
+    "id": "q.r1-subtraction-independent",
+    "topicId": "t.r1-subtraction",
+    "objectiveId": "obj.r1-subtraction",
+    "skillIds": [
+      "skill.r1-subtraction"
+    ],
+    "difficulty": 2,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A word problem: 34 crates in a hold, 18 unloaded. Enter how many remain as a number.",
+    "interaction": "numeric-input",
+    "prompt": "A hold has 34 crates and 18 are unloaded. How many crates remain?",
+    "answer": {
+      "kind": "numeric",
+      "value": 16,
+      "tolerance": 0,
+      "unit": "crates"
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Take away 10 first, then the remaining 8."
+      },
+      {
+        "level": 2,
+        "text": "34 - 10 = 24, and 24 - 8 = 16."
+      }
+    ],
+    "explanation": "34 - 18 = 16 crates remain. Taking away 10 leaves 24, and taking away the other 8 leaves 16.",
+    "solutionSteps": [
+      "34 - 10 = 24.",
+      "24 - 8 = 16."
+    ]
+  },
+  {
+    "id": "q.r1-subtraction-misconception",
+    "topicId": "t.r1-subtraction",
+    "objectiveId": "obj.r1-subtraction",
+    "skillIds": [
+      "skill.r1-subtraction"
+    ],
+    "difficulty": 3,
+    "misconceptionIds": [
+      "mc.subtract-smaller-from-larger"
+    ],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A worked subtraction of 52 minus 27 containing one wrong line. Choose the line that is wrong.",
+    "interaction": "error-identification",
+    "prompt": "A crewmate works out 52 - 27 like this. Units: '7 take away 2 is 5.' Tens: '5 take away 2 is 3.' Answer: 35. Which line is the mistake?",
+    "choices": [
+      {
+        "id": "ch.units",
+        "text": "The units line. The column asks for 2 take away 7, not 7 take away 2 — a ten must be borrowed instead of flipping the digits."
+      },
+      {
+        "id": "ch.tens",
+        "text": "The tens line. 5 take away 2 is not 3."
+      },
+      {
+        "id": "ch.none",
+        "text": "Nothing is wrong — 35 is the correct answer.",
+        "misconceptionId": "mc.subtract-smaller-from-larger"
+      },
+      {
+        "id": "ch.swap",
+        "text": "The whole calculation. It should have been written 27 - 52."
+      }
+    ],
+    "answer": {
+      "kind": "choice",
+      "correctChoiceIds": [
+        "ch.units"
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Check the answer roughly first: 52 - 27 should be about 25."
+      },
+      {
+        "level": 2,
+        "text": "In the units column the top digit is 2 and the bottom digit is 7. You cannot take 7 from 2 without borrowing."
+      }
+    ],
+    "explanation": "The units column is 2 take away 7, which cannot be done directly. Borrow a ten: 12 - 7 = 5, leaving 4 tens against 2 tens, so 4 - 2 = 2. The answer is 25, not 35."
+  },
+  {
+    "id": "q.r1-subtraction-application",
+    "topicId": "t.r1-subtraction",
+    "objectiveId": "obj.r1-subtraction",
+    "skillIds": [
+      "skill.r1-subtraction"
+    ],
+    "difficulty": 3,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A word problem comparing 128 crates in against 96 crates out. Enter the difference as a number.",
+    "interaction": "numeric-input",
+    "prompt": "The harbour recorded 128 crates coming in and 96 crates going out. How many more came in than went out?",
+    "answer": {
+      "kind": "numeric",
+      "value": 32,
+      "tolerance": 0,
+      "unit": "crates"
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "This asks for a difference, not what is left over — the same subtraction answers both."
+      },
+      {
+        "level": 2,
+        "text": "128 - 96: take away 100 and then add 4 back."
+      }
+    ],
+    "explanation": "128 - 96 = 32. Thirty-two more crates came in than went out.",
+    "solutionSteps": [
+      "128 - 100 = 28.",
+      "96 is 4 less than 100, so add 4 back: 28 + 4 = 32."
+    ]
+  },
+  {
+    "id": "q.r1-subtraction-teachback",
+    "topicId": "t.r1-subtraction",
+    "objectiveId": "obj.r1-subtraction",
+    "skillIds": [
+      "skill.r1-subtraction"
+    ],
+    "difficulty": 2,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A written-explanation question. Type your answer in the text box; it must contain the words 'left' and 'difference'.",
+    "interaction": "short-explanation",
+    "prompt": "Subtraction answers two questions that sound different. Explain both in your own words. Use the words 'left' and 'difference'.",
+    "answer": {
+      "kind": "text",
+      "requiredKeywords": [
+        "left",
+        "difference"
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "One question is about taking away. The other is about comparing."
+      },
+      {
+        "level": 2,
+        "text": "Say what is left after some are removed, and how you find the difference between two amounts."
+      }
+    ],
+    "explanation": "12 - 5 answers both 'five crates were sold from twelve, so seven are left' and 'twelve is seven more than five'. Taking away and finding the difference are the same subtraction."
+  },
+  {
+    "id": "q.r1-subtraction-mastery",
+    "topicId": "t.r1-subtraction",
+    "objectiveId": "obj.r1-subtraction",
+    "skillIds": [
+      "skill.r1-subtraction"
+    ],
+    "difficulty": 3,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A word problem: 205 crates in a hold, 138 sold. Enter how many are left as a number.",
+    "interaction": "numeric-input",
+    "prompt": "A hold holds 205 crates and 138 are sold. How many crates are left?",
+    "answer": {
+      "kind": "numeric",
+      "value": 67,
+      "tolerance": 0,
+      "unit": "crates"
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Both columns need borrowing — work steadily from the units."
+      },
+      {
+        "level": 2,
+        "text": "205 - 138: 205 - 100 = 105, then take away 38."
+      }
+    ],
+    "explanation": "205 - 138 = 67 crates remain. Taking away 100 leaves 105, then 30 leaves 75, then 8 leaves 67.",
+    "solutionSteps": [
+      "205 - 100 = 105.",
+      "105 - 30 = 75.",
+      "75 - 8 = 67."
+    ]
+  },
+  {
+    "id": "q.remed-borrow-not-flip",
+    "topicId": "t.r1-subtraction",
+    "objectiveId": "obj.r1-subtraction",
+    "skillIds": [
+      "skill.r1-subtraction"
+    ],
+    "difficulty": 2,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A two-digit subtraction, 41 minus 26, that needs borrowing. Enter the answer as a number.",
+    "interaction": "numeric-input",
+    "prompt": "A hold had 41 crates and 26 were unloaded. Work out what is left, borrowing rather than flipping the digits.",
+    "answer": {
+      "kind": "numeric",
+      "value": 15,
+      "tolerance": 0
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "The units column is 1 take away 6, so borrow a ten and make it 11 take away 6."
+      }
+    ],
+    "explanation": "Borrow a ten: 11 - 6 = 5, and the tens become 3 - 2 = 1. The answer is 15."
+  },
+  {
+    "id": "q.r1-multiplication-independent",
+    "topicId": "t.r1-multiplication",
+    "objectiveId": "obj.r1-multiplication",
+    "skillIds": [
+      "skill.r1-multiplication"
+    ],
+    "difficulty": 2,
+    "misconceptionIds": [
+      "mc.multiply-as-add"
+    ],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A multiple-choice question asking which calculation counts 7 crates on each of 5 pallets. Choose one option.",
+    "interaction": "method-selection",
+    "prompt": "Seven crates are stacked on each of 5 pallets. Which calculation gives the number of crates?",
+    "choices": [
+      {
+        "id": "ch.times",
+        "text": "5 x 7"
+      },
+      {
+        "id": "ch.plus",
+        "text": "5 + 7",
+        "misconceptionId": "mc.multiply-as-add"
+      },
+      {
+        "id": "ch.minus",
+        "text": "7 - 5"
+      },
+      {
+        "id": "ch.square",
+        "text": "7 x 7"
+      }
+    ],
+    "answer": {
+      "kind": "choice",
+      "correctChoiceIds": [
+        "ch.times"
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "There are 5 equal groups, and each group holds 7."
+      },
+      {
+        "level": 2,
+        "text": "Adding 7 five times is 7 + 7 + 7 + 7 + 7 — which calculation is the short way of writing that?"
+      }
+    ],
+    "explanation": "Five equal groups of seven is 5 x 7 = 35, the short way of writing 7 + 7 + 7 + 7 + 7."
+  },
+  {
+    "id": "q.r1-multiplication-misconception",
+    "topicId": "t.r1-multiplication",
+    "objectiveId": "obj.r1-multiplication",
+    "skillIds": [
+      "skill.r1-multiplication"
+    ],
+    "difficulty": 3,
+    "misconceptionIds": [
+      "mc.multiply-as-add"
+    ],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A word problem: 7 boats each carrying 4 crates. Enter the total number of crates as a number.",
+    "interaction": "numeric-input",
+    "prompt": "Seven boats each carry 4 crates. How many crates altogether?",
+    "parameters": {
+      "mc.multiply-as-add": {
+        "wrongValue": 11
+      }
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": 28,
+      "tolerance": 0,
+      "unit": "crates"
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Every boat carries the same amount, so this is equal groups."
+      },
+      {
+        "level": 2,
+        "text": "4 + 4 + 4 + 4 + 4 + 4 + 4, or 7 x 4."
+      }
+    ],
+    "explanation": "Seven groups of four is 7 x 4 = 28 crates.",
+    "solutionSteps": [
+      "There are 7 equal groups of 4.",
+      "7 x 4 = 28."
+    ]
+  },
+  {
+    "id": "q.r1-multiplication-application",
+    "topicId": "t.r1-multiplication",
+    "objectiveId": "obj.r1-multiplication",
+    "skillIds": [
+      "skill.r1-multiplication"
+    ],
+    "difficulty": 3,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A word problem: 9 full pallets holding 12 crates each. Enter the total number of crates as a number.",
+    "interaction": "numeric-input",
+    "prompt": "A pallet holds 12 crates and the quay has 9 full pallets. How many crates are on the quay?",
+    "answer": {
+      "kind": "numeric",
+      "value": 108,
+      "tolerance": 0,
+      "unit": "crates"
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Nine groups of twelve."
+      },
+      {
+        "level": 2,
+        "text": "10 x 12 = 120, which is one pallet too many."
+      }
+    ],
+    "explanation": "9 x 12 = 108 crates. Ten pallets would be 120, which is one pallet too many, so take 12 away.",
+    "solutionSteps": [
+      "10 x 12 = 120.",
+      "That is one pallet too many, so subtract 12: 120 - 12 = 108."
+    ]
+  },
+  {
+    "id": "q.r1-multiplication-teachback",
+    "topicId": "t.r1-multiplication",
+    "objectiveId": "obj.r1-multiplication",
+    "skillIds": [
+      "skill.r1-multiplication"
+    ],
+    "difficulty": 2,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A written-explanation question. Type your answer in the text box; it must contain the words 'groups' and 'same'.",
+    "interaction": "short-explanation",
+    "prompt": "Explain why 4 x 6 is quicker than adding 6 four times. Use the words 'groups' and 'same'.",
+    "answer": {
+      "kind": "text",
+      "requiredKeywords": [
+        "groups",
+        "same"
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "What has to be true about the groups before you are allowed to multiply?"
+      },
+      {
+        "level": 2,
+        "text": "Say what multiplying counts, and why it saves work."
+      }
+    ],
+    "explanation": "Multiplying is a shortcut for adding equal groups. When every group is the same size you only need to know how many groups there are and how big each one is, instead of adding them one at a time."
+  },
+  {
+    "id": "q.r1-multiplication-mastery",
+    "topicId": "t.r1-multiplication",
+    "objectiveId": "obj.r1-multiplication",
+    "skillIds": [
+      "skill.r1-multiplication"
+    ],
+    "difficulty": 4,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A two-part word problem: 6 boats each landing 8 crates in the morning and 5 in the afternoon. Enter the total number of crates as a number.",
+    "interaction": "numeric-input",
+    "prompt": "Six boats each land 8 crates in the morning and 5 crates in the afternoon. How many crates in total?",
+    "answer": {
+      "kind": "numeric",
+      "value": 78,
+      "tolerance": 0,
+      "unit": "crates"
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Work out what one boat lands across the whole day first."
+      },
+      {
+        "level": 2,
+        "text": "Each boat lands 8 + 5 = 13 crates, and there are 6 boats."
+      }
+    ],
+    "explanation": "Each boat lands 8 + 5 = 13 crates, and 6 x 13 = 78 crates altogether.",
+    "solutionSteps": [
+      "One boat: 8 + 5 = 13 crates.",
+      "Six boats: 6 x 13 = 78."
+    ]
+  },
+  {
+    "id": "q.remed-equal-groups",
+    "topicId": "t.r1-multiplication",
+    "objectiveId": "obj.r1-multiplication",
+    "skillIds": [
+      "skill.r1-multiplication"
+    ],
+    "difficulty": 1,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A word problem: 3 boats each carrying 5 crates, written out as 5 plus 5 plus 5. Enter the total as a number.",
+    "interaction": "numeric-input",
+    "prompt": "Three boats each carry 5 crates. Count them out one group at a time: 5 + 5 + 5. How many crates is that?",
+    "answer": {
+      "kind": "numeric",
+      "value": 15,
+      "tolerance": 0
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Count on in fives: 5, 10, ..."
+      }
+    ],
+    "explanation": "5 + 5 + 5 = 15, which is exactly what 3 x 5 means: three groups of five."
+  },
+  {
+    "id": "q.r1-division-independent",
+    "topicId": "t.r1-division",
+    "objectiveId": "obj.r1-division",
+    "skillIds": [
+      "skill.r1-division"
+    ],
+    "difficulty": 2,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A word problem: 35 crates shared equally between 5 boats. Enter each boat's share as a number.",
+    "interaction": "numeric-input",
+    "prompt": "Thirty-five crates are shared equally between 5 boats. How many crates does each boat get?",
+    "answer": {
+      "kind": "numeric",
+      "value": 7,
+      "tolerance": 0,
+      "unit": "crates"
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "How many fives make 35?"
+      },
+      {
+        "level": 2,
+        "text": "5 x 7 = 35."
+      }
+    ],
+    "explanation": "35 / 5 = 7 crates each. Counting up in fives to 35 takes seven steps, so seven crates go to every boat.",
+    "solutionSteps": [
+      "Count up in fives to 35: 5, 10, 15, 20, 25, 30, 35 — that is 7 steps.",
+      "So each boat gets 7."
+    ]
+  },
+  {
+    "id": "q.r1-division-misconception",
+    "topicId": "t.r1-division",
+    "objectiveId": "obj.r1-division",
+    "skillIds": [
+      "skill.r1-division"
+    ],
+    "difficulty": 3,
+    "misconceptionIds": [
+      "mc.divide-reversed"
+    ],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A multiple-choice question asking which calculation shares 40 crates between 8 boats. Choose one option.",
+    "interaction": "multiple-choice",
+    "prompt": "Forty crates are shared equally between 8 boats. Which calculation gives each boat's share?",
+    "choices": [
+      {
+        "id": "ch.right",
+        "text": "40 / 8"
+      },
+      {
+        "id": "ch.reversed",
+        "text": "8 / 40",
+        "misconceptionId": "mc.divide-reversed"
+      },
+      {
+        "id": "ch.times",
+        "text": "40 x 8"
+      },
+      {
+        "id": "ch.minus",
+        "text": "40 - 8"
+      }
+    ],
+    "answer": {
+      "kind": "choice",
+      "correctChoiceIds": [
+        "ch.right"
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "The crates are the thing being shared out; the boats are who it is shared between."
+      },
+      {
+        "level": 2,
+        "text": "Each boat should end up with several crates, so the answer must be bigger than 1."
+      }
+    ],
+    "explanation": "The amount being shared goes first: 40 / 8 = 5 crates each. Written the other way, 8 / 40 asks how much of a boat each crate gets, which is not what the crews want to know."
+  },
+  {
+    "id": "q.r1-division-application",
+    "topicId": "t.r1-division",
+    "objectiveId": "obj.r1-division",
+    "skillIds": [
+      "skill.r1-division"
+    ],
+    "difficulty": 3,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A word problem: a crew of 6 sharing 96 coins equally. Enter each person's share as a number.",
+    "interaction": "numeric-input",
+    "prompt": "A crew of 6 shares 96 coins equally. How many coins does each crew member get?",
+    "answer": {
+      "kind": "numeric",
+      "value": 16,
+      "tolerance": 0,
+      "unit": "coins"
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Split the 96 into parts that are easy to share: 60 and 36."
+      },
+      {
+        "level": 2,
+        "text": "60 / 6 = 10 and 36 / 6 = 6."
+      }
+    ],
+    "explanation": "96 / 6 = 16 coins each. Splitting the 96 into 60 and 36 makes it easier: 10 coins each from the 60 and 6 each from the 36.",
+    "solutionSteps": [
+      "60 / 6 = 10.",
+      "36 / 6 = 6.",
+      "10 + 6 = 16 coins each."
+    ]
+  },
+  {
+    "id": "q.r1-division-teachback",
+    "topicId": "t.r1-division",
+    "objectiveId": "obj.r1-division",
+    "skillIds": [
+      "skill.r1-division"
+    ],
+    "difficulty": 2,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A written-explanation question. Type your answer in the text box; it must contain the words 'equally' and 'share'.",
+    "interaction": "short-explanation",
+    "prompt": "Explain what division tells you when an amount is split between several people. Use the words 'equally' and 'share'.",
+    "answer": {
+      "kind": "text",
+      "requiredKeywords": [
+        "equally",
+        "share"
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Everyone must end up with the same amount — say so."
+      },
+      {
+        "level": 2,
+        "text": "Say what the answer to a division actually counts."
+      }
+    ],
+    "explanation": "Division splits an amount into equal parts and reports the size of one part: how much each person gets when the total is shared equally between them."
+  },
+  {
+    "id": "q.r1-division-mastery",
+    "topicId": "t.r1-division",
+    "objectiveId": "obj.r1-division",
+    "skillIds": [
+      "skill.r1-division"
+    ],
+    "difficulty": 4,
+    "misconceptionIds": [],
+    "estimatedSeconds": 180,
+    "accessibilityDescription": "A three-step calculation packing 45 crates into pallets of 6. Each step asks for a number; enter it and submit before the next step appears.",
+    "interaction": "step-by-step-calculation",
+    "prompt": "Forty-five crates are packed into pallets of 6. Work out how many full pallets there are and how many crates are left over.",
+    "answer": {
+      "kind": "steps",
+      "steps": [
+        {
+          "id": "st.pallets",
+          "prompt": "How many full pallets of 6 can be filled from 45 crates?",
+          "value": 7,
+          "tolerance": 0,
+          "unit": "pallets",
+          "hints": [
+            "Count up in sixes: 6, 12, 18, 24, ...",
+            "6 x 7 = 42, and 6 x 8 = 48 is too many."
+          ],
+          "explanation": "6 x 7 = 42, and 6 x 8 = 48 which is more than 45. So 7 pallets can be filled."
+        },
+        {
+          "id": "st.used",
+          "prompt": "How many crates sit on those full pallets?",
+          "value": 42,
+          "tolerance": 0,
+          "unit": "crates",
+          "hints": [
+            "Multiply the number of full pallets by 6."
+          ],
+          "explanation": "7 pallets of 6 crates is 7 x 6 = 42 crates."
+        },
+        {
+          "id": "st.left",
+          "prompt": "How many crates are left over?",
+          "value": 3,
+          "tolerance": 0,
+          "unit": "crates",
+          "hints": [
+            "Take the packed crates away from the 45 you started with."
+          ],
+          "explanation": "45 - 42 = 3 crates are left, not enough to fill another pallet."
+        }
+      ]
+    },
+    "explanation": "45 / 6 gives 7 full pallets with 3 crates left over. The leftover is called the remainder."
+  },
+  {
+    "id": "q.remed-who-is-shared",
+    "topicId": "t.r1-division",
+    "objectiveId": "obj.r1-division",
+    "skillIds": [
+      "skill.r1-division"
+    ],
+    "difficulty": 1,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A word problem: 12 crates shared equally between 3 boats. Enter each boat's share as a number.",
+    "interaction": "numeric-input",
+    "prompt": "Twelve crates are shared equally between 3 boats. How many crates does each boat get?",
+    "answer": {
+      "kind": "numeric",
+      "value": 4,
+      "tolerance": 0
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "The crates are being shared, so the crates go first: 12 / 3."
+      }
+    ],
+    "explanation": "12 / 3 = 4 crates each. The amount being shared always goes first."
   }
 ]

@@ -12,9 +12,10 @@ available.
 
 | | |
 |---|---|
-| Last completed unit | **S2-01** — region-completion achievement repair |
-| Commit | `6798b6a71beb3e15ec43e791ca60fa36e2a0c214` — pushed, remote-verified, **MATCH** |
-| Next unit | **S2-02** — step-by-step calculation interaction (not started) |
+| Last completed unit | **S2-07** — Region 1 curriculum architecture |
+| Commit | `dd39d38c57b4083d7829a698a56960b6ff484c8c` — pushed, remote-verified, **MATCH** |
+| Last unit attempted | **S2-08** — Region 1 lessons and interactions — **Partial**, 5 of 17 lessons Complete |
+| Next unit | **S2-08 continued** — Module 2 (`m.r1-parts`): fractions, decimals, percentages, ratios, proportions |
 | Still open from Stage 0 | **R-00d** (push `stage-1-baseline` tag) and **R-00e** (set repository private) — both blocked, both need the owner's credentials |
 
 ---

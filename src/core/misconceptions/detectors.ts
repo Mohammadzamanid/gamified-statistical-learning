@@ -111,6 +111,20 @@ function reversedConditional(ctx: DetectorContext): boolean {
 }
 
 /**
+ * A named error whose result the content can predict, in whichever form the
+ * question asked for it.
+ *
+ * The same mistake shows up two ways: as a distractor on a multiple-choice
+ * question ("5 + 7" when 5 x 7 was meant), and as a specific wrong number on a
+ * numeric one (11 when 7 x 4 was asked). Splitting those into two misconception
+ * ids would double-count one error in every report and hand the learner two
+ * remediations for a single gap, so one misconception answers to both shapes.
+ */
+function knownWrongAnswer(ctx: DetectorContext): boolean {
+  return taggedDistractor(ctx) || confusedStatistic(ctx);
+}
+
+/**
  * A point placement the evaluator already classified geometrically.
  *
  * The evaluator owns the geometry — declared wrong placements, and the axes-swapped
@@ -152,4 +166,5 @@ export function registerBuiltInDetectors(): void {
   registerDetector("sign-error", signError);
   registerDetector("unit-error", unitError);
   registerDetector("reversed-conditional", reversedConditional);
+  registerDetector("known-wrong-answer", knownWrongAnswer);
 }

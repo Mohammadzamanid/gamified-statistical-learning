@@ -16,6 +16,7 @@ import { describe, expect, it } from "vitest";
 import { loadShippedContent } from "../../src/content";
 import { isLessonUnlocked } from "../../src/core/curriculum/progress";
 import { createEmptySave, type SaveFile } from "../../src/shared/schemas";
+import { COMPLETE_LESSONS } from "../helpers/complete-lessons";
 
 const content = loadShippedContent();
 const REGION_1 = "r.harbor-tallies";
@@ -173,17 +174,38 @@ describe("every Region 1 lesson is structurally valid", () => {
 });
 
 describe("skeleton honesty", () => {
-  it("the new topic lessons are still skeletons, not finished lessons", () => {
-    // S2-07 delivers architecture only. If one of these grows past a seed
-    // question it is being treated as finished work, and the backlog entry for
-    // S2-08 needs updating rather than the fact being left implicit.
-    const seedLessons = region1Lessons.filter((l) => l.id.startsWith("l.r1-"));
+  // S2-07 delivered architecture only; S2-08 fills the lessons in, a module at a
+  // time. The guard is therefore no longer "every topic lesson is a skeleton" but
+  // "every topic lesson is either a declared-Complete lesson or still a skeleton" —
+  // updated deliberately as part of S2-08, not deleted to make the suite pass.
+  // Anything in COMPLETE_LESSONS has to survive all 18 checks in
+  // tests/audit/lesson-structure.test.ts.
+  const seedLessons = region1Lessons.filter((l) => l.id.startsWith("l.r1-"));
+
+  it("accounts for all 17 topic lessons", () => {
     expect(seedLessons.length).toBe(REQUIRED_TOPICS.length);
-    for (const lesson of seedLessons) {
+  });
+
+  it("lessons not declared Complete still look like skeletons", () => {
+    const skeletons = seedLessons.filter((l) => !COMPLETE_LESSONS.includes(l.id));
+    // 17 topics, 5 filled in by S2-08. This number must be reduced deliberately.
+    expect(skeletons.length, "the Complete list and the content have diverged").toBe(12);
+    for (const lesson of skeletons) {
       expect(
         lesson.questionIds.length,
-        `${lesson.id} has grown beyond a seed question — is S2-08 underway? Update the backlog.`
+        `${lesson.id} has grown beyond a seed question but is not in COMPLETE_LESSONS — declare it and let the structure audit check it.`
       ).toBe(1);
+      expect(lesson.demonstration, `${lesson.id} has a demonstration but is not declared Complete`).toBeUndefined();
+    }
+  });
+
+  it("lessons declared Complete have genuinely outgrown the skeleton", () => {
+    // The mirror image: a lesson cannot be listed as Complete while still
+    // carrying the single seed question S2-07 gave it.
+    for (const id of COMPLETE_LESSONS) {
+      const lesson = region1Lessons.find((l) => l.id === id);
+      expect(lesson, `${id} is declared Complete but is not a Region 1 lesson`).toBeDefined();
+      expect(lesson!.questionIds.length, `${id} is declared Complete but still has one seed question`).toBeGreaterThan(1);
     }
   });
 });
