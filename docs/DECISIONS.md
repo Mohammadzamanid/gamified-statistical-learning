@@ -28,3 +28,18 @@ Windows NSIS packaging is configured but never claimed as tested until run on re
 
 **D-009 — Per-question deterministic shuffle.**
 Ordering/choice shuffles are seeded from the question id so a learner sees a stable arrangement across re-renders, and tests are reproducible.
+
+**D-010 — Multi-step calculations are a distinct answer kind, not prose.**
+`solutionSteps` is display-only text, so step-by-step work got a real `steps` answer kind: ordered numeric steps, each
+with its own tolerance, unit, hints, explanation, and misconception map. The schema makes the `step-by-step-calculation`
+interaction and the `steps` answer imply each other, so neither can be authored without the other. Run logic lives in
+`src/core/questions/step-calculation.ts` as pure functions (per D-001), leaving the renderer a thin shell and making the
+whole state machine testable without a DOM. A completed run submits one `steps` response through the ordinary session
+pipeline, so mastery, review scheduling, and achievements still update exactly once per question. (S2-02)
+
+**D-011 — Step misconceptions are declared per step, and outrank question-level detectors.**
+Question-level detectors inspect a single response and all decline a `steps` response, so a step declares its own
+`misconceptionValues` mapping a wrong value to a misconception id. The evaluator emits `stepMisconceptionIds` and
+`classifyMisconception` honours those before falling back to detectors. This keeps step errors inside the existing
+remediation pipeline — micro-lesson, guided retry, injected follow-up — rather than creating a second, parallel feedback
+path. The content loader validates these ids so a step cannot classify to something no remediation covers. (S2-02)

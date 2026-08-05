@@ -112,11 +112,15 @@ None for this unit.
 
 ## Local commit
 
-Recorded in a follow-up commit once the push is verified; hashes are never written in advance.
+`48bac65064d45b376d88d92bd775957ecc78105f`
 
 ## Remote verification
 
-`git rev-parse HEAD` compared against `git ls-remote origin refs/heads/main` — see the backlog row.
+```
+LOCAL_HEAD  = 48bac65064d45b376d88d92bd775957ecc78105f
+REMOTE_HEAD = 48bac65064d45b376d88d92bd775957ecc78105f
+VERIFIED: MATCH
+```
 
 ## Result
 
