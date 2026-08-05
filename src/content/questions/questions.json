@@ -866,5 +866,227 @@
     ],
     "accessibilityDescription": "A three-step procedure: count, locate the middle position, read that value.",
     "estimatedSeconds": 120
+  },
+  {
+    "id": "q.point-quarter-line",
+    "topicId": "t.percent",
+    "objectiveId": "obj.percent-fraction",
+    "skillIds": [
+      "skill.percent-fraction"
+    ],
+    "difficulty": 1,
+    "interaction": "point-placement",
+    "prompt": "Place the marker at one quarter of the way along this number line, where 0 is the start and 1 is the whole.",
+    "pointField": {
+      "kind": "number-line",
+      "xMin": 0,
+      "xMax": 1,
+      "xStep": 0.05,
+      "xLabel": "Fraction of the whole",
+      "xTicks": [
+        0,
+        0.25,
+        0.5,
+        0.75,
+        1
+      ],
+      "accessibleDescription": "A number line from 0 to 1, with labelled ticks at 0, 0.25, 0.5, 0.75 and 1."
+    },
+    "answer": {
+      "kind": "point",
+      "x": 0.25,
+      "toleranceX": 0.025,
+      "misconceptionPoints": [
+        {
+          "x": 0.75,
+          "misconceptionId": "mc.reversed-fraction"
+        }
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "A quarter means one part out of four equal parts."
+      },
+      {
+        "level": 2,
+        "text": "Split the line into four equal pieces. You want the end of the first piece."
+      }
+    ],
+    "explanation": "One quarter is 0.25: the line from 0 to 1 splits into four equal parts, and a quarter is the end of the first part.",
+    "misconceptionIds": [
+      "mc.reversed-fraction"
+    ],
+    "accessibilityDescription": "Place a marker on a number line from 0 to 1.",
+    "estimatedSeconds": 45
+  },
+  {
+    "id": "q.point-median-line",
+    "topicId": "t.center",
+    "objectiveId": "obj.compute-median",
+    "skillIds": [
+      "skill.median"
+    ],
+    "difficulty": 2,
+    "interaction": "point-placement",
+    "prompt": "The sorted crate prices are 3, 7, 8, 12, 15 coins. Place the marker on the MEDIAN price.",
+    "pointField": {
+      "kind": "number-line",
+      "xMin": 0,
+      "xMax": 16,
+      "xStep": 1,
+      "xLabel": "Price in coins",
+      "xTicks": [
+        0,
+        4,
+        8,
+        12,
+        16
+      ],
+      "accessibleDescription": "A number line of prices from 0 to 16 coins, with labelled ticks every 4 coins."
+    },
+    "answer": {
+      "kind": "point",
+      "x": 8,
+      "toleranceX": 0,
+      "misconceptionPoints": [
+        {
+          "x": 9,
+          "misconceptionId": "mc.mean-median-confusion"
+        }
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "The median is the middle value of the sorted list."
+      },
+      {
+        "level": 2,
+        "text": "Five prices sorted: the third one is the middle."
+      }
+    ],
+    "explanation": "With five sorted values the median is the third: 8 coins. The mean is 9, which is a different point.",
+    "misconceptionIds": [
+      "mc.mean-median-confusion"
+    ],
+    "accessibilityDescription": "Place a marker on a price number line from 0 to 16 coins.",
+    "estimatedSeconds": 60
+  },
+  {
+    "id": "q.point-thursday-catch",
+    "topicId": "t.read-data",
+    "objectiveId": "obj.read-data",
+    "skillIds": [
+      "skill.data-literacy"
+    ],
+    "difficulty": 2,
+    "interaction": "point-placement",
+    "prompt": "On this chart, day 4 is Thursday and the harbor landed 6 fish that day. Plot the point for Thursday's catch: go across to the day, then up to the number of fish.",
+    "pointField": {
+      "kind": "coordinate-plane",
+      "xMin": 1,
+      "xMax": 5,
+      "xStep": 1,
+      "xLabel": "Day number",
+      "xTicks": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "yMin": 0,
+      "yMax": 10,
+      "yStep": 1,
+      "yLabel": "Fish landed",
+      "yTicks": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10
+      ],
+      "accessibleDescription": "A grid with day number 1 to 5 along the bottom and fish landed 0 to 10 up the side."
+    },
+    "answer": {
+      "kind": "point",
+      "x": 4,
+      "y": 6,
+      "toleranceX": 0,
+      "toleranceY": 0,
+      "swappedAxesMisconceptionId": "mc.axes-swapped"
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "The first number is the day; read it along the bottom axis."
+      },
+      {
+        "level": 2,
+        "text": "Along the corridor to day 4, then up the stairs to 6 fish."
+      }
+    ],
+    "explanation": "Thursday is day 4 and the catch was 6 fish, so the point is at day 4, 6 fish. Placing it at day 6, 4 fish swaps the axes.",
+    "misconceptionIds": [
+      "mc.axes-swapped"
+    ],
+    "accessibilityDescription": "Plot a point on a grid of day number against fish landed.",
+    "estimatedSeconds": 75
+  },
+  {
+    "id": "q.point-approx-mean",
+    "topicId": "t.center",
+    "objectiveId": "obj.compute-mean",
+    "skillIds": [
+      "skill.mean"
+    ],
+    "difficulty": 2,
+    "interaction": "point-placement",
+    "prompt": "The week's catches were 2, 4, 4, 6 and 9 fish. Without calculating exactly, place the marker at roughly where the MEAN sits — the point that balances the values.",
+    "pointField": {
+      "kind": "number-line",
+      "xMin": 0,
+      "xMax": 10,
+      "xStep": 0.5,
+      "xLabel": "Fish per day",
+      "xTicks": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10
+      ],
+      "accessibleDescription": "A number line of fish per day from 0 to 10, with labelled ticks every 2 fish."
+    },
+    "answer": {
+      "kind": "point",
+      "x": 5,
+      "toleranceX": 1,
+      "misconceptionPoints": [
+        {
+          "x": 9,
+          "misconceptionId": "mc.outlier-mean"
+        }
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "The mean balances the values: most days are low, one day is high."
+      },
+      {
+        "level": 2,
+        "text": "It must sit between the smallest value (2) and the largest (9), nearer the cluster."
+      }
+    ],
+    "explanation": "The mean is 5 fish per day. It sits above most of the values because the single large day of 9 pulls it upward, but nowhere near 9 itself.",
+    "misconceptionIds": [
+      "mc.outlier-mean"
+    ],
+    "accessibilityDescription": "Place a marker on a number line of fish per day from 0 to 10.",
+    "estimatedSeconds": 60
   }
 ]

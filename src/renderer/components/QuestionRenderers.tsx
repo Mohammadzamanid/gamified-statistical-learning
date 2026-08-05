@@ -3,7 +3,7 @@
  * RawResponse on submit. The registry decides which interactions are live;
  * unimplemented ones render an honest "not yet available" notice.
  */
-import { useMemo, useState } from "react";
+import { useMemo, useState, type MouseEvent as ReactMouseEvent } from "react";
 import type { Question } from "../../shared/schemas";
 import type { RawResponse } from "../../core/questions/types";
 import { getInteraction } from "../../core/questions/registry";
@@ -16,6 +16,14 @@ import {
   stepsOf,
   submitStep
 } from "../../core/questions/step-calculation";
+import {
+  clampToField,
+  describePoint,
+  isPlane,
+  pointFieldOf,
+  startPosition,
+  type PointPosition
+} from "../../core/questions/point-placement";
 
 export interface RendererProps {
   question: Question;
@@ -381,6 +389,148 @@ function StepByStep({ question, disabled, onSubmit }: RendererProps): JSX.Elemen
   );
 }
 
+/**
+ * Point placement on a number line or coordinate plane.
+ *
+ * Two equal input paths, both routed through core/questions/point-placement so
+ * they cannot diverge: clicking or dragging on the plot, and a native range
+ * slider per axis. The sliders are what make this keyboard-operable — arrows,
+ * Home/End and PageUp/PageDown all work without any custom key handling — and
+ * they carry the accessible name and current value for assistive tech. The
+ * marker's position is also announced as text through a polite live region.
+ */
+function PointPlacement({ question, disabled, onSubmit }: RendererProps): JSX.Element {
+  const field = pointFieldOf(question);
+  const [pos, setPos] = useState<PointPosition>(() => (field ? startPosition(field) : { x: 0, y: null }));
+
+  if (!field) {
+    return (
+      <div className="card">
+        <p className="muted">This point-placement question is missing its field description.</p>
+      </div>
+    );
+  }
+
+  const plane = isPlane(field);
+  const W = 480;
+  const H = plane ? 260 : 90;
+  const PAD = 36;
+  const xToPx = (x: number) => PAD + ((x - field.xMin) / (field.xMax - field.xMin)) * (W - 2 * PAD);
+  const yMin = field.yMin ?? 0;
+  const yMax = field.yMax ?? 1;
+  const yToPx = (y: number) => H - PAD - ((y - yMin) / (yMax - yMin)) * (H - 2 * PAD);
+  const markerX = xToPx(pos.x);
+  const markerY = plane ? yToPx(pos.y ?? yMin) : H / 2;
+
+  /** Pointer path: map a click on the plot back onto the field grid. */
+  const placeFromPointer = (event: ReactMouseEvent<SVGSVGElement>) => {
+    if (disabled) return;
+    const rect = event.currentTarget.getBoundingClientRect();
+    const px = ((event.clientX - rect.left) / rect.width) * W;
+    const x = field.xMin + ((px - PAD) / (W - 2 * PAD)) * (field.xMax - field.xMin);
+    if (!plane) {
+      setPos(clampToField(field, { x, y: null }));
+      return;
+    }
+    const py = ((event.clientY - rect.top) / rect.height) * H;
+    const y = yMin + ((H - PAD - py) / (H - 2 * PAD)) * (yMax - yMin);
+    setPos(clampToField(field, { x, y }));
+  };
+
+  const description = describePoint(field, pos);
+
+  return (
+    <div className="stack">
+      <p className="faint">
+        Place the marker. Drag or click on the plot, or use the sliders below — arrow keys move one step at a time.
+      </p>
+
+      {/* Decorative duplicate of the sliders: the sliders below are the accessible control. */}
+      <svg
+        width="100%"
+        viewBox={`0 0 ${W} ${H}`}
+        role="img"
+        aria-label={`${field.accessibleDescription} Marker at ${description}.`}
+        style={{ maxWidth: W, cursor: disabled ? "default" : "crosshair" }}
+        onClick={placeFromPointer}
+      >
+        <line x1={PAD} y1={plane ? H - PAD : H / 2} x2={W - PAD} y2={plane ? H - PAD : H / 2} stroke="currentColor" strokeWidth={1.5} />
+        {plane && <line x1={PAD} y1={PAD} x2={PAD} y2={H - PAD} stroke="currentColor" strokeWidth={1.5} />}
+
+        {field.xTicks.map((t) => (
+          <g key={`x${t}`}>
+            <line x1={xToPx(t)} y1={(plane ? H - PAD : H / 2) - 5} x2={xToPx(t)} y2={(plane ? H - PAD : H / 2) + 5} stroke="currentColor" />
+            <text x={xToPx(t)} y={(plane ? H - PAD : H / 2) + 20} textAnchor="middle" fontSize={11} fill="currentColor">
+              {t}
+            </text>
+          </g>
+        ))}
+        {plane &&
+          field.yTicks.map((t) => (
+            <g key={`y${t}`}>
+              <line x1={PAD - 5} y1={yToPx(t)} x2={PAD + 5} y2={yToPx(t)} stroke="currentColor" />
+              <text x={PAD - 9} y={yToPx(t) + 4} textAnchor="end" fontSize={11} fill="currentColor">
+                {t}
+              </text>
+            </g>
+          ))}
+
+        {/* The marker is a ring plus a centre dot: shape, not colour alone. */}
+        <circle cx={markerX} cy={markerY} r={8} fill="none" stroke="currentColor" strokeWidth={2} />
+        <circle cx={markerX} cy={markerY} r={2.5} fill="currentColor" />
+      </svg>
+
+      <div className="field" style={{ maxWidth: 360 }}>
+        <label htmlFor={`pt-x-${question.id}`}>{field.xLabel}</label>
+        <input
+          id={`pt-x-${question.id}`}
+          type="range"
+          min={field.xMin}
+          max={field.xMax}
+          step={field.xStep}
+          value={pos.x}
+          disabled={disabled}
+          aria-valuetext={`${field.xLabel} ${pos.x}`}
+          aria-describedby={`pt-status-${question.id}`}
+          onChange={(e) => setPos((p) => clampToField(field, { ...p, x: Number(e.target.value) }))}
+        />
+      </div>
+
+      {plane && (
+        <div className="field" style={{ maxWidth: 360 }}>
+          <label htmlFor={`pt-y-${question.id}`}>{field.yLabel}</label>
+          <input
+            id={`pt-y-${question.id}`}
+            type="range"
+            min={yMin}
+            max={yMax}
+            step={field.yStep ?? 1}
+            value={pos.y ?? yMin}
+            disabled={disabled}
+            aria-valuetext={`${field.yLabel ?? "y"} ${pos.y ?? yMin}`}
+            aria-describedby={`pt-status-${question.id}`}
+            onChange={(e) => setPos((p) => clampToField(field, { ...p, y: Number(e.target.value) }))}
+          />
+        </div>
+      )}
+
+      <p id={`pt-status-${question.id}`} role="status" aria-live="polite" className="faint">
+        Marker at {description}.
+      </p>
+
+      <div>
+        <button
+          className="btn primary"
+          disabled={disabled}
+          onClick={() => onSubmit(plane ? { kind: "point", x: pos.x, y: pos.y ?? yMin } : { kind: "point", x: pos.x })}
+        >
+          Submit placement
+        </button>
+      </div>
+    </div>
+  );
+}
+
 export function QuestionInteraction(props: RendererProps): JSX.Element {
   const descriptor = getInteraction(props.question.interaction);
   if (!descriptor || !descriptor.implemented) {
@@ -412,6 +562,8 @@ export function QuestionInteraction(props: RendererProps): JSX.Element {
       return <ShortText {...props} />;
     case "step-by-step-calculation":
       return <StepByStep {...props} />;
+    case "point-placement":
+      return <PointPlacement {...props} />;
     default:
       return (
         <div className="card">

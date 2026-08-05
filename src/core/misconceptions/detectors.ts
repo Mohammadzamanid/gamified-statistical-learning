@@ -110,8 +110,25 @@ function reversedConditional(ctx: DetectorContext): boolean {
   return confusedStatistic(ctx);
 }
 
+/**
+ * A point placement the evaluator already classified geometrically.
+ *
+ * The evaluator owns the geometry — declared wrong placements, and the axes-swapped
+ * rule — because only it holds the target and its per-axis tolerances. This detector
+ * is the bridge that lets such a misconception name a registered detector like every
+ * other one, instead of leaving a dangling name in content.
+ */
+function pointGeometry(ctx: DetectorContext): boolean {
+  if (ctx.response.kind !== "point") return false;
+  const target = ctx.params["misconceptionId"];
+  if (typeof target !== "string") return false;
+  const ids = ctx.evaluation.signals["pointMisconceptionIds"];
+  return Array.isArray(ids) && ids.includes(target);
+}
+
 export function registerBuiltInDetectors(): void {
   registerDetector("tagged-distractor", taggedDistractor);
+  registerDetector("point-geometry", pointGeometry);
   registerDetector("decimal-instead-of-percentage", decimalInsteadOfPercentage);
   registerDetector("percentage-instead-of-decimal", percentageInsteadOfDecimal);
   registerDetector("confused-statistic", confusedStatistic);

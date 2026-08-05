@@ -76,7 +76,10 @@ describe("end-to-end lesson session (headless)", () => {
           { stepId: "st.pct.proportion", text: "0.3" },
           { stepId: "st.pct.scale", text: "30" }
         ]
-      }
+      },
+      "q.point-quarter-line": { kind: "point", x: 0.25 },
+      "q.point-thursday-catch": { kind: "point", x: 4, y: 6 },
+      "q.point-approx-mean": { kind: "point", x: 5 }
     };
     let t = 1000;
     while (!session.finished) {

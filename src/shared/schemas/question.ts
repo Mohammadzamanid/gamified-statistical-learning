@@ -98,13 +98,36 @@ export const StepsAnswerSchema = z.object({
   steps: z.array(CalculationStepSchema).min(2)
 });
 
+/**
+ * Placing a point answers "where is this value?" rather than "what is this value?".
+ *
+ * `y` is absent on a one-dimensional number line and present on a coordinate
+ * plane. Tolerances are per axis because the two axes rarely share a scale, and
+ * because some questions want an approximate placement ("about where is the
+ * mean?") while others want an exact one.
+ */
+export const PointAnswerSchema = z.object({
+  kind: z.literal("point"),
+  x: z.number(),
+  y: z.number().optional(),
+  toleranceX: z.number().min(0).default(0),
+  toleranceY: z.number().min(0).default(0),
+  /** Specific wrong placements that identify a misconception, in priority order. */
+  misconceptionPoints: z
+    .array(z.object({ x: z.number(), y: z.number().optional(), misconceptionId: IdSchema }))
+    .default([]),
+  /** When set, a placement matching the target with the axes exchanged classifies as this. */
+  swappedAxesMisconceptionId: IdSchema.optional()
+});
+
 export const AnswerSpecSchema = z.discriminatedUnion("kind", [
   NumericAnswerSchema,
   ChoiceAnswerSchema,
   OrderingAnswerSchema,
   MatchingAnswerSchema,
   TextAnswerSchema,
-  StepsAnswerSchema
+  StepsAnswerSchema,
+  PointAnswerSchema
 ]);
 export type AnswerSpec = z.infer<typeof AnswerSpecSchema>;
 
@@ -125,6 +148,43 @@ export const VisualSpecSchema = z.object({
   }
 });
 
+/**
+ * The axis or plane a point is placed on.
+ *
+ * `step` is the granularity of keyboard movement and of snapping, so a learner
+ * using arrow keys can always land exactly on a meaningful value rather than
+ * being forced into pixel-accurate pointer work.
+ */
+export const PointFieldSchema = z
+  .object({
+    kind: z.enum(["number-line", "coordinate-plane"]),
+    xMin: z.number(),
+    xMax: z.number(),
+    xStep: z.number().positive(),
+    xLabel: NonEmptyString,
+    xTicks: z.array(z.number()).default([]),
+    yMin: z.number().optional(),
+    yMax: z.number().optional(),
+    yStep: z.number().positive().optional(),
+    yLabel: NonEmptyString.optional(),
+    yTicks: z.array(z.number()).default([]),
+    /** Required: a point field is a visual, so it always needs a text equivalent. */
+    accessibleDescription: NonEmptyString
+  })
+  .superRefine((f, ctx) => {
+    if (f.xMax <= f.xMin) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, message: "xMax must be greater than xMin" });
+    }
+    if (f.kind === "coordinate-plane") {
+      if (f.yMin === undefined || f.yMax === undefined || f.yStep === undefined || !f.yLabel) {
+        ctx.addIssue({ code: z.ZodIssueCode.custom, message: "coordinate-plane requires yMin, yMax, yStep and yLabel" });
+      } else if (f.yMax <= f.yMin) {
+        ctx.addIssue({ code: z.ZodIssueCode.custom, message: "yMax must be greater than yMin" });
+      }
+    }
+  });
+export type PointField = z.infer<typeof PointFieldSchema>;
+
 export const QuestionSchema = z.object({
   id: IdSchema,
   topicId: IdSchema,
@@ -143,6 +203,8 @@ export const QuestionSchema = z.object({
   /** Items for ordering / matching / drag-drop interactions. */
   items: z.array(z.object({ id: IdSchema, text: NonEmptyString })).optional(),
   rightItems: z.array(z.object({ id: IdSchema, text: NonEmptyString })).optional(),
+  /** Axis or plane for point-placement questions. */
+  pointField: PointFieldSchema.optional(),
   answer: AnswerSpecSchema,
   acceptedAlternatives: z.array(AcceptedAlternativeSchema).default([]),
   hints: z.array(HintSchema).default([]),
@@ -185,6 +247,42 @@ export const QuestionSchema = z.object({
         ctx.addIssue({ code: z.ZodIssueCode.custom, message: `duplicate step id ${s.id}` });
       }
       seen.add(s.id);
+    }
+  }
+  // Point placement, its answer, and its field all imply each other.
+  if (q.interaction === "point-placement") {
+    if (q.answer.kind !== "point") {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, message: "point-placement requires a point answer" });
+    }
+    if (!q.pointField) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, message: "point-placement requires a pointField" });
+    }
+  }
+  if (q.answer.kind === "point" && q.interaction !== "point-placement") {
+    ctx.addIssue({ code: z.ZodIssueCode.custom, message: "a point answer requires interaction point-placement" });
+  }
+  if (q.answer.kind === "point" && q.pointField) {
+    const f = q.pointField;
+    const a = q.answer;
+    // A target off the field could never be reached, and a plane needs a y target.
+    if (a.x < f.xMin || a.x > f.xMax) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, message: `point target x ${a.x} is outside the field` });
+    }
+    if (f.kind === "coordinate-plane") {
+      if (a.y === undefined) {
+        ctx.addIssue({ code: z.ZodIssueCode.custom, message: "coordinate-plane target requires y" });
+      } else if (f.yMin !== undefined && f.yMax !== undefined && (a.y < f.yMin || a.y > f.yMax)) {
+        ctx.addIssue({ code: z.ZodIssueCode.custom, message: `point target y ${a.y} is outside the field` });
+      }
+    }
+    if (f.kind === "number-line" && a.y !== undefined) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, message: "number-line target must not set y" });
+    }
+    if (a.swappedAxesMisconceptionId && f.kind !== "coordinate-plane") {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "swappedAxesMisconceptionId only applies to a coordinate-plane"
+      });
     }
   }
 });

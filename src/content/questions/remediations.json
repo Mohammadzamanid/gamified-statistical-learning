@@ -54,5 +54,13 @@
     "microLesson": "Ice-cream sales and drownings rise together every summer. Neither causes the other; hot weather drives both. To claim cause, you need an experiment or a design that rules out other explanations.",
     "followUpQuestionIds": [],
     "skillIds": ["skill.data-literacy"]
+  },
+  {
+    "id": "rem.axes-order",
+    "title": "Which number goes on which axis",
+    "explanation": "You placed the two numbers the right way round for each other, but on the wrong axes. A coordinate is written (across, up): the FIRST number moves you along the bottom axis, the SECOND moves you up the side axis.",
+    "microLesson": "Read (4, 6) as: go across to 4 on the bottom axis, then up to 6 on the side axis. Swapping them lands you at (6, 4), a different place entirely. A useful phrase: along the corridor, then up the stairs.",
+    "followUpQuestionIds": [],
+    "skillIds": ["skill.data-literacy"]
   }
 ]

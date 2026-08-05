@@ -104,7 +104,10 @@
         "q.ordering-data-cycle",
         "q.graph-tallest-bar",
         "q.step-mean-catch",
-        "q.step-percent-rainy"
+        "q.step-percent-rainy",
+        "q.point-quarter-line",
+        "q.point-thursday-catch",
+        "q.point-approx-mean"
       ],
       "prerequisites": [],
       "estimatedMinutes": 12
@@ -133,7 +136,8 @@
         "q.method-select",
         "q.error-id-causation",
         "q.short-why-median",
-        "q.step-median-market"
+        "q.step-median-market",
+        "q.point-median-line"
       ],
       "prerequisites": [
         "l.reading-tallies"

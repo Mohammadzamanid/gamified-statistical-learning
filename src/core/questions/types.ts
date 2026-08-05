@@ -7,7 +7,8 @@ export type RawResponse =
   | { kind: "ordering"; order: string[] }
   | { kind: "matching"; pairs: Array<{ left: string; right: string }> }
   | { kind: "text"; text: string }
-  | { kind: "steps"; steps: Array<{ stepId: string; text: string }> };
+  | { kind: "steps"; steps: Array<{ stepId: string; text: string }> }
+  | { kind: "point"; x: number; y?: number };
 
 /** Canonical response after normalization. */
 export type NormalizedResponse =
@@ -16,7 +17,8 @@ export type NormalizedResponse =
   | { kind: "ordering"; order: string[] }
   | { kind: "matching"; pairs: Array<{ left: string; right: string }> }
   | { kind: "text"; text: string }
-  | { kind: "steps"; steps: Array<{ stepId: string; value: number | null; rawText: string }> };
+  | { kind: "steps"; steps: Array<{ stepId: string; value: number | null; rawText: string }> }
+  | { kind: "point"; x: number; y: number | null };
 
 export interface EvaluationResult {
   correct: boolean;

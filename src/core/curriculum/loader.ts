@@ -131,6 +131,17 @@ function checkReferences(
         }
       }
     }
+    if (q.answer.kind === "point") {
+      for (const mp of q.answer.misconceptionPoints) {
+        if (!misconceptionIds.has(mp.misconceptionId)) {
+          problems.push(`question ${q.id} point target references missing misconception ${mp.misconceptionId}`);
+        }
+      }
+      const swapped = q.answer.swappedAxesMisconceptionId;
+      if (swapped && !misconceptionIds.has(swapped)) {
+        problems.push(`question ${q.id} references missing misconception ${swapped}`);
+      }
+    }
   }
   for (const mc of misconceptions) {
     if (!remediationIds.has(mc.remediationId)) problems.push(`misconception ${mc.id} references missing remediation ${mc.remediationId}`);

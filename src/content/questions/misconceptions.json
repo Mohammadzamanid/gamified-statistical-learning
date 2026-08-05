@@ -56,5 +56,12 @@
     "description": "Concluding that association proves cause.",
     "detector": "tagged-distractor",
     "remediationId": "rem.correlation-not-causation"
+  },
+  {
+    "id": "mc.axes-swapped",
+    "title": "Coordinate axes swapped",
+    "description": "The learner plots (y, x) instead of (x, y) — the right pair of numbers, applied to the wrong axes.",
+    "detector": "point-geometry",
+    "remediationId": "rem.axes-order"
   }
 ]

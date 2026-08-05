@@ -3,3 +3,4 @@ export * from "./normalize";
 export * from "./evaluators";
 export * from "./registry";
 export * from "./step-calculation";
+export * from "./point-placement";

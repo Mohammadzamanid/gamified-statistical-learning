@@ -1,6 +1,7 @@
 import type { AnswerSpec, Question } from "../../shared/schemas";
 import { approxEqual } from "../../shared/utilities/numeric";
 import { classifyStepValue, stepValueMatches } from "./step-calculation";
+import { classifyPoint, isAxesSwapped, pointMatches } from "./point-placement";
 import type { EvaluationResult, NormalizedResponse } from "./types";
 
 function evalAgainst(answer: AnswerSpec, response: NormalizedResponse): { correct: boolean; signals: Record<string, unknown> } {
@@ -55,6 +56,30 @@ function evalAgainst(answer: AnswerSpec, response: NormalizedResponse): { correc
       signals.missingKeywords = missing;
       signals.forbiddenKeywordsHit = forbidden;
       return { correct: missing.length === 0 && forbidden.length === 0, signals };
+    }
+    case "point": {
+      if (response.kind !== "point") return { correct: false, signals: { responseKindMismatch: true } };
+      const target = {
+        x: answer.x,
+        y: answer.y,
+        toleranceX: answer.toleranceX,
+        toleranceY: answer.toleranceY
+      };
+      const spec = {
+        ...target,
+        misconceptionPoints: answer.misconceptionPoints,
+        swappedAxesMisconceptionId: answer.swappedAxesMisconceptionId
+      };
+      const misconceptionId = classifyPoint(spec, response);
+      signals.placedX = response.x;
+      signals.placedY = response.y;
+      signals.targetX = answer.x;
+      signals.targetY = answer.y ?? null;
+      signals.offsetX = response.x - answer.x;
+      signals.offsetY = answer.y === undefined || response.y === null ? null : response.y - answer.y;
+      signals.axesSwapped = isAxesSwapped(target, response);
+      signals.pointMisconceptionIds = misconceptionId ? [misconceptionId] : [];
+      return { correct: pointMatches(target, response), signals };
     }
     case "steps": {
       if (response.kind !== "steps") return { correct: false, signals: { responseKindMismatch: true } };

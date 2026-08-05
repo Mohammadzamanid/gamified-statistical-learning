@@ -41,6 +41,8 @@ function correctResponseFor(question: Question): RawResponse {
       return { kind: "text", text: a.requiredKeywords.join(" ") };
     case "steps":
       return { kind: "steps", steps: a.steps.map((s) => ({ stepId: s.id, text: String(s.value) })) };
+    case "point":
+      return a.y === undefined ? { kind: "point", x: a.x } : { kind: "point", x: a.x, y: a.y };
   }
 }
 

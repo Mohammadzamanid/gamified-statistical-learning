@@ -6,51 +6,46 @@ Exactly one Stage 2 unit is active at a time. Rewritten at the start and end of 
 
 ## Current unit
 
-**S2-02 — Step-by-Step Calculation Interaction**
+**S2-03 — Point-Placement Interaction**
 
-Entered from `b19d51da2c892fed9ce19ccde44a6307163f41c4` (remote-verified, clean tree).
+Entered from `53c77f620eef832c80c330d2740088818c3e00c7` (remote-verified, clean tree).
 
 ## Objective
 
-Make `step-by-step-calculation` a genuinely live interaction — the first of the six Stage 1 stubs to be implemented.
-The learner works a calculation one numeric step at a time, so a mistake is caught and explained **where it happened**
-rather than only at the final answer.
-
-Chosen first among the stubs because the surviving Stage 1 handoff ranked it highest for pedagogy, and Region 1's
-arithmetic, fraction, and percentage lessons (S2-08) cannot be authored properly without it.
+Make `point-placement` live — the second of the Stage 1 interaction stubs. Placing a point answers *"where is this
+value?"* rather than *"what is this value?"*, which is the natural way to teach number lines, coordinates, and reading
+a chart, and the only way to ask for a deliberately approximate answer.
 
 ## Relevant files
 
 | File | Change |
 |---|---|
-| `src/core/questions/step-calculation.ts` | **New.** Pure run state machine: per-step submission, hints, retry, completion |
-| `src/shared/schemas/question.ts` | `CalculationStepSchema` + `StepsAnswerSchema`; interaction ↔ answer-kind cross-check; duplicate step-id check |
-| `src/core/questions/types.ts` | `steps` raw and normalized response kinds |
-| `src/core/questions/normalize.ts` | Step normalization, preserving step order |
-| `src/core/questions/evaluators.ts` | `steps` evaluation; emits `stepResults`, `firstFailedStepId`, `stepMisconceptionIds` |
-| `src/core/questions/registry.ts` | `responseKind` widened to include `steps`; flag flipped to `implemented: true` |
-| `src/core/misconceptions/engine.ts` | Step classifications honoured before question-level detectors |
-| `src/core/curriculum/loader.ts` | Step-level misconception references validated |
-| `src/renderer/components/QuestionRenderers.tsx` | `StepByStep` renderer |
-| `src/content/questions/questions.json` | 3 step questions |
-| `src/content/worlds/curriculum.json` | Attached to `l.reading-tallies` (2) and `l.middle-harbor` (1) |
-| `tests/integration/session-flow.test.ts` | Playthrough extended for the two new lesson questions |
+| `src/core/questions/point-placement.ts` | **New.** Pure geometry: snapping, clamping, keyboard movement, description, matching, classification |
+| `src/shared/schemas/question.ts` | `PointAnswerSchema` + `PointFieldSchema`; interaction ↔ answer ↔ field cross-checks; target-inside-field validation |
+| `src/core/questions/types.ts` | `point` raw and normalized response kinds |
+| `src/core/questions/normalize.ts` | Missing second axis recorded as `null`, not dropped |
+| `src/core/questions/evaluators.ts` | `point` evaluation; emits offsets, `axesSwapped`, `pointMisconceptionIds` |
+| `src/core/questions/registry.ts` | `responseKind` widened; flag flipped to `implemented: true` |
+| `src/core/misconceptions/engine.ts` | Pre-classification generalised to cover point as well as step signals |
+| `src/core/misconceptions/detectors.ts` | `point-geometry` detector registered |
+| `src/core/curriculum/loader.ts` | Point misconception references validated |
+| `src/renderer/components/QuestionRenderers.tsx` | `PointPlacement` renderer |
+| content | `mc.axes-swapped` + `rem.axes-order`; 4 point questions across two lessons |
+| `tests/integration/session-flow.test.ts` | Playthrough extended for the three new Region 1 questions |
 
 ## Acceptance criteria
 
 | # | Criterion | Met |
 |---|---|---|
-| 1 | Multi-step calculations | Yes — 3-step runs |
-| 2 | Per-step validation | Yes — each step checked on submission |
-| 3 | Equivalent numeric formats | Yes — `25`, `25.0`, `50/2`, `12/40`, percent signs, comma decimals, plus per-step `acceptedValues` |
-| 4 | Hints per step | Yes — per-step hints, counter resets on advance |
-| 5 | Misconception classification | Yes — declarative `misconceptionValues`, routed into the existing remediation pipeline |
-| 6 | Retry from the failed step | Yes — earlier accepted steps are preserved |
-| 7 | Final explanation | Yes — per-step explanation on pass, question explanation at the end |
-| 8 | Mastery update | Yes — one update per question, via the normal session path |
-| 9 | Keyboard accessibility | Yes — native input + buttons, Enter submits, `role="status"` live region, state in words not colour |
-| 10 | ≥3 real curriculum examples | Yes — 3, all inside real lessons, none a standalone demo |
-| 11 | Commit pushed and remote hash verified | Yes |
+| 1 | Number lines | Yes — 3 of the 4 shipped questions |
+| 2 | Coordinates | Yes — `q.point-thursday-catch` on a day × fish plane |
+| 3 | Graph reading | Yes — same question reads a chart's axes to plot a value |
+| 4 | Approximate values | Yes — `q.point-approx-mean`, tolerance 1, tests balance-point intuition rather than arithmetic |
+| 5 | Pointer interaction | Yes — click on the plot maps back onto the field grid |
+| 6 | Keyboard interaction | Yes — native range slider per axis; asserted reachable, see below |
+| 7 | Configurable tolerance | Yes — per axis, 0 for exact, >0 for approximate |
+| 8 | Accessible feedback | Yes — labelled sliders, `aria-valuetext`, polite live region, SVG `aria-label` carrying the marker position |
+| 9 | Commit pushed and remote hash verified | Yes |
 
 ## Required tests
 
@@ -65,46 +60,49 @@ Measured (Node v22.22.2 / npm 10.9.7):
 |---|---|
 | `npm run typecheck` | Pass |
 | `npm run lint` | Pass — 0 errors, 0 warnings |
-| `npm test` | Pass — **115 tests / 17 files** (was 90 / 15) |
+| `npm test` | Pass — **155 tests / 19 files** (was 115 / 17) |
 | `npm run test:statistics` | Pass — 18 tests / 3 files |
 | `npm run test:content` | Pass — 5 tests / 1 file |
-| `npm run build` | Pass — 297.78 kB (86.67 kB gzip) |
+| `npm run build` | Pass — 310.30 kB (90.08 kB gzip) |
 
-`test:a11y` was **not** run and is **not** claimed — that script still does not exist; it arrives in S2-20. The
-accessibility work here is structural (native controls, labels, live region, non-colour state) and is **not** the same
-as automated a11y verification.
+`test:a11y` was **not** run and is **not** claimed — the script still does not exist; it arrives in S2-20. The
+accessibility work here is structural, and the keyboard claim below is a real assertion, but neither is the same as
+automated a11y verification.
 
 ## Work completed
 
-1. **Structured steps.** `solutionSteps` was display-only prose, so steps became a real answer kind: a `steps` answer
-   holds ordered numeric steps, each with its own prompt, tolerance, unit, hints, explanation, and misconception map.
-   The schema makes the interaction and the answer kind imply each other, so neither can exist without the other.
+1. **Geometry in core, not in the renderer.** Snapping, clamping, movement, description, matching, and classification
+   all live in `point-placement.ts`, following the pattern S2-02 set. The renderer computes pixel positions and
+   nothing else.
 
-2. **Pure run engine.** All run logic is in `step-calculation.ts` with no React import, matching D-001's "session logic
-   in pure functions". The renderer is a shell. That is why the state machine is testable without a DOM.
+2. **Keyboard operability is asserted, not asserted-about.** A test walks from the control's start position to *every
+   shipped target* using `movePoint` alone — one step per simulated key press — and then submits that placement
+   through the real session engine and requires it to be marked correct. If a question were ever authored with a
+   target off the step grid, that test fails: the pointer could reach it but the keyboard could not.
 
-3. **Retry that keeps work.** A wrong submission moves the run to `awaiting-retry` and leaves `currentIndex` where it
-   is; accepted steps stay banked. The learner retries the failed step, not the whole calculation.
+3. **Snapping without float noise.** Naive stepping on a 0.05 grid produces values like `0.30000000000000004`, which
+   would miss a zero-tolerance target. Values are rounded to the precision the step implies.
 
-4. **Misconceptions reach remediation.** The evaluator emits `stepMisconceptionIds`, and `classifyMisconception` now
-   honours those before falling back to question-level detectors — which only understand single responses and would
-   all decline a `steps` response. A wrong step therefore produces the same micro-lesson, guided retry, and injected
-   follow-up as any other interaction, rather than a dead end.
+4. **Axes-swapped is detected geometrically.** Placing (6, 4) when (4, 6) was wanted is the classic coordinate error,
+   and it is derivable from the target rather than needing to be enumerated per question. Symmetric targets are
+   excluded, because a swap there is unprovable.
 
-5. **Reachability enforced.** The loader validates step-level misconception ids, so a step cannot classify to something
-   nothing can remediate.
+5. **Misconception pre-classification generalised.** The mechanism S2-02 introduced for steps now covers any
+   interaction that classifies during evaluation, so point errors reach the same micro-lesson, guided retry, and
+   follow-up as everything else. A `point-geometry` detector is registered so the new misconception names a real
+   detector rather than a dangling one.
 
-6. **One mastery update per question.** A completed run emits a single `steps` response through the ordinary session
-   pipeline, so mastery, review scheduling, and achievements update exactly once — consistent with every other type.
+6. **Content.** Four questions in two real lessons, plus `mc.axes-swapped` and its `rem.axes-order` remediation.
 
 ## Corrections made during the unit
 
-- **A pre-existing test broke and was extended, not weakened.** `session-flow.test.ts` drives a full playthrough of
-  `l.reading-tallies` from a hard-coded answer map; the two new questions were absent, so it failed with an opaque
-  `Cannot read properties of undefined`. Answers were added for them and an explicit assertion now names the missing
-  question id. Every original assertion is unchanged. The enumeration is deliberately still exhaustive so that adding
-  a lesson question fails loudly here — that is the drift guard working.
-- **A lint warning was introduced and removed** (unused binding) to hold the 0-error/0-warning baseline.
+- **The S2-02 drift guard fired, as designed.** Adding three questions to `l.reading-tallies` broke the enumerated
+  playthrough in `session-flow.test.ts` — this time with the clear message added in S2-02 rather than a `TypeError`.
+  Answers were added; no assertion was weakened.
+- **`toleranceY` made optional** in `PointTarget` after typecheck flagged number-line targets being forced to supply a
+  meaningless second-axis tolerance.
+- **A lint warning was introduced and removed** (unused destructured binding) to hold the 0/0 baseline.
+- **Regression probe:** disabling `isAxesSwapped` fails 4 tests across both new files, so the swap coverage is real.
 
 ## Remaining work
 
@@ -112,22 +110,17 @@ None for this unit.
 
 ## Local commit
 
-`48bac65064d45b376d88d92bd775957ecc78105f`
+Recorded in a follow-up commit once the push is verified; hashes are never written in advance.
 
 ## Remote verification
 
-```
-LOCAL_HEAD  = 48bac65064d45b376d88d92bd775957ecc78105f
-REMOTE_HEAD = 48bac65064d45b376d88d92bd775957ecc78105f
-VERIFIED: MATCH
-```
+`git rev-parse HEAD` compared against `git ls-remote origin refs/heads/main` — see the backlog row.
 
 ## Result
 
-**Complete.** `step-by-step-calculation` is live: **12 of 17** interaction types are now implemented, and content uses
-12 distinct types. Five stubs remain: `drag-and-drop`, `point-placement`, `formula-construction`,
-`simulation-prediction`, `confidence-rating`.
+**Complete.** `point-placement` is live: **13 of 17** interaction types implemented, content uses 13 distinct types.
+Four stubs remain: `drag-and-drop`, `formula-construction`, `simulation-prediction`, `confidence-rating`.
 
 ## Next unit
 
-**S2-03 — Point-Placement Interaction.** Not started in this cycle, per the one-unit-per-cycle rule.
+**S2-04 — Accessible Drag-and-Drop.** Not started in this cycle, per the one-unit-per-cycle rule.

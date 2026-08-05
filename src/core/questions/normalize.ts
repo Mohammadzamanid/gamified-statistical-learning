@@ -17,6 +17,10 @@ export function normalizeResponse(raw: RawResponse): NormalizedResponse {
       };
     case "text":
       return { kind: "text", text: raw.text.trim().toLowerCase().replace(/\s+/g, " ") };
+    case "point":
+      // A missing second axis is a number-line placement, recorded as null rather
+      // than dropped, so evaluation can tell "1-D" from "y not answered".
+      return { kind: "point", x: raw.x, y: raw.y ?? null };
     case "steps":
       // Step order carries meaning, so it is preserved rather than sorted.
       return {
