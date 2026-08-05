@@ -1434,5 +1434,450 @@
     "misconceptionIds": [],
     "accessibilityDescription": "Place five days into columns representing catch sizes to build a chart.",
     "estimatedSeconds": 90
+  },
+  {
+    "id": "q.r1-counting",
+    "topicId": "t.r1-counting",
+    "objectiveId": "obj.r1-counting",
+    "skillIds": [
+      "skill.r1-counting"
+    ],
+    "difficulty": 1,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A numeric input question about counting.",
+    "interaction": "numeric-input",
+    "prompt": "The tally sheet shows one mark for each crate landed: |||| |||| ||. How many crates is that?",
+    "answer": {
+      "kind": "numeric",
+      "value": 12,
+      "tolerance": 0
+    },
+    "explanation": "Two full groups of five make ten, and two more marks make twelve crates."
+  },
+  {
+    "id": "q.r1-addition",
+    "topicId": "t.r1-addition",
+    "objectiveId": "obj.r1-addition",
+    "skillIds": [
+      "skill.r1-addition"
+    ],
+    "difficulty": 1,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A numeric input question about addition.",
+    "interaction": "numeric-input",
+    "prompt": "Monday's boats landed 7 crates and Tuesday's landed 5. How many crates altogether?",
+    "answer": {
+      "kind": "numeric",
+      "value": 12,
+      "tolerance": 0,
+      "unit": "crates"
+    },
+    "explanation": "7 + 5 = 12 crates. Starting at 7 and counting on five gives 8, 9, 10, 11, 12."
+  },
+  {
+    "id": "q.r1-subtraction",
+    "topicId": "t.r1-subtraction",
+    "objectiveId": "obj.r1-subtraction",
+    "skillIds": [
+      "skill.r1-subtraction"
+    ],
+    "difficulty": 1,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A numeric input question about subtraction.",
+    "interaction": "numeric-input",
+    "prompt": "You landed 12 crates and sold 5 at the quayside. How many crates are left?",
+    "answer": {
+      "kind": "numeric",
+      "value": 7,
+      "tolerance": 0,
+      "unit": "crates"
+    },
+    "explanation": "12 - 5 = 7 crates remain."
+  },
+  {
+    "id": "q.r1-multiplication",
+    "topicId": "t.r1-multiplication",
+    "objectiveId": "obj.r1-multiplication",
+    "skillIds": [
+      "skill.r1-multiplication"
+    ],
+    "difficulty": 1,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A numeric input question about multiplication.",
+    "interaction": "numeric-input",
+    "prompt": "Four boats each land 6 crates. How many crates is that in total?",
+    "answer": {
+      "kind": "numeric",
+      "value": 24,
+      "tolerance": 0,
+      "unit": "crates"
+    },
+    "explanation": "4 x 6 = 24 crates, the same as 6 + 6 + 6 + 6."
+  },
+  {
+    "id": "q.r1-division",
+    "topicId": "t.r1-division",
+    "objectiveId": "obj.r1-division",
+    "skillIds": [
+      "skill.r1-division"
+    ],
+    "difficulty": 1,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A numeric input question about division.",
+    "interaction": "numeric-input",
+    "prompt": "Twenty-four crates are shared equally between 4 boats. How many crates does each boat get?",
+    "answer": {
+      "kind": "numeric",
+      "value": 6,
+      "tolerance": 0,
+      "unit": "crates"
+    },
+    "explanation": "24 / 4 = 6 crates each."
+  },
+  {
+    "id": "q.r1-fractions",
+    "topicId": "t.r1-fractions",
+    "objectiveId": "obj.r1-fractions",
+    "skillIds": [
+      "skill.r1-fractions"
+    ],
+    "difficulty": 1,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A fraction input question about fractions.",
+    "interaction": "fraction-input",
+    "prompt": "Three of the four holds on a boat are full. What fraction of the holds is full? (You may answer as a fraction or a decimal.)",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.75,
+      "tolerance": 0.0005
+    },
+    "explanation": "Three parts out of four equal parts is 3/4, which is 0.75."
+  },
+  {
+    "id": "q.r1-decimals",
+    "topicId": "t.r1-decimals",
+    "objectiveId": "obj.r1-decimals",
+    "skillIds": [
+      "skill.r1-decimals"
+    ],
+    "difficulty": 1,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A numeric input question about decimals.",
+    "interaction": "numeric-input",
+    "prompt": "Write one half as a decimal.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.5,
+      "tolerance": 0.0005
+    },
+    "explanation": "One half is five tenths, written 0.5."
+  },
+  {
+    "id": "q.r1-percentages",
+    "topicId": "t.r1-percentages",
+    "objectiveId": "obj.r1-percentages",
+    "skillIds": [
+      "skill.r1-percentages"
+    ],
+    "difficulty": 1,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A percentage input question about percentages.",
+    "interaction": "percentage-input",
+    "prompt": "A quarter of the fleet is in harbour. What percentage is that? (Answer on the 0-100 scale.)",
+    "answer": {
+      "kind": "numeric",
+      "value": 25,
+      "tolerance": 0.01,
+      "unit": "%"
+    },
+    "explanation": "A quarter is 25 out of every 100, so 25%."
+  },
+  {
+    "id": "q.r1-ratios",
+    "topicId": "t.r1-ratios",
+    "objectiveId": "obj.r1-ratios",
+    "skillIds": [
+      "skill.r1-ratios"
+    ],
+    "difficulty": 1,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A numeric input question about ratios.",
+    "interaction": "numeric-input",
+    "prompt": "A boat carries 2 crab pots for every 3 fish crates. If it carries 9 fish crates, how many crab pots does it carry?",
+    "answer": {
+      "kind": "numeric",
+      "value": 6,
+      "tolerance": 0,
+      "unit": "pots"
+    },
+    "explanation": "9 crates is three lots of 3, so the pots are three lots of 2, which is 6."
+  },
+  {
+    "id": "q.r1-proportions",
+    "topicId": "t.r1-proportions",
+    "objectiveId": "obj.r1-proportions",
+    "skillIds": [
+      "skill.r1-proportions"
+    ],
+    "difficulty": 1,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A numeric input question about proportions.",
+    "interaction": "numeric-input",
+    "prompt": "Of 40 days at sea, 10 were stormy. What PROPORTION of days were stormy? (Answer between 0 and 1.)",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.25,
+      "tolerance": 0.0005
+    },
+    "explanation": "10 out of 40 is 10/40 = 0.25 of the days."
+  },
+  {
+    "id": "q.r1-negatives",
+    "topicId": "t.r1-negatives",
+    "objectiveId": "obj.r1-negatives",
+    "skillIds": [
+      "skill.r1-negatives"
+    ],
+    "difficulty": 1,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A multiple choice question about negative numbers.",
+    "interaction": "multiple-choice",
+    "prompt": "Which temperature is COLDER?",
+    "choices": [
+      {
+        "id": "ch.neg5",
+        "text": "-5 degrees"
+      },
+      {
+        "id": "ch.neg2",
+        "text": "-2 degrees"
+      }
+    ],
+    "answer": {
+      "kind": "choice",
+      "correctChoiceIds": [
+        "ch.neg5"
+      ]
+    },
+    "explanation": "-5 is further below zero than -2, so -5 degrees is colder. With negatives, a bigger digit after the minus sign means a smaller number."
+  },
+  {
+    "id": "q.r1-number-lines",
+    "topicId": "t.r1-number-lines",
+    "objectiveId": "obj.r1-number-lines",
+    "skillIds": [
+      "skill.r1-number-lines"
+    ],
+    "difficulty": 1,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A point placement question about number lines.",
+    "interaction": "point-placement",
+    "prompt": "Place the marker on -2 on this number line.",
+    "pointField": {
+      "kind": "number-line",
+      "xMin": -5,
+      "xMax": 5,
+      "xStep": 1,
+      "xLabel": "Value",
+      "xTicks": [
+        -5,
+        0,
+        5
+      ],
+      "accessibleDescription": "A number line from -5 to 5 with labelled ticks at -5, 0 and 5."
+    },
+    "answer": {
+      "kind": "point",
+      "x": -2,
+      "toleranceX": 0
+    },
+    "explanation": "-2 sits two steps to the left of zero."
+  },
+  {
+    "id": "q.r1-coordinates",
+    "topicId": "t.r1-coordinates",
+    "objectiveId": "obj.r1-coordinates",
+    "skillIds": [
+      "skill.r1-coordinates"
+    ],
+    "difficulty": 1,
+    "misconceptionIds": [
+      "mc.axes-swapped"
+    ],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A point placement question about coordinates.",
+    "interaction": "point-placement",
+    "prompt": "Plot the point at 3 along and 2 up.",
+    "pointField": {
+      "kind": "coordinate-plane",
+      "xMin": 0,
+      "xMax": 5,
+      "xStep": 1,
+      "xLabel": "Along",
+      "xTicks": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "yMin": 0,
+      "yMax": 5,
+      "yStep": 1,
+      "yLabel": "Up",
+      "yTicks": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "accessibleDescription": "A grid with an along axis 0 to 5 and an up axis 0 to 5."
+    },
+    "answer": {
+      "kind": "point",
+      "x": 3,
+      "y": 2,
+      "toleranceX": 0,
+      "toleranceY": 0,
+      "swappedAxesMisconceptionId": "mc.axes-swapped"
+    },
+    "explanation": "Go along to 3 first, then up to 2. Plotting (2, 3) instead swaps the axes."
+  },
+  {
+    "id": "q.r1-tables",
+    "topicId": "t.r1-tables",
+    "objectiveId": "obj.r1-tables",
+    "skillIds": [
+      "skill.r1-tables"
+    ],
+    "difficulty": 1,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A multiple choice question about reading tables.",
+    "interaction": "multiple-choice",
+    "prompt": "A ledger has one row per day and columns for Day, Boats out and Crates landed. Where do you look to find how many crates were landed on Thursday?",
+    "choices": [
+      {
+        "id": "ch.cross",
+        "text": "The Thursday row, in the Crates landed column"
+      },
+      {
+        "id": "ch.rowtotal",
+        "text": "The bottom row of the table"
+      },
+      {
+        "id": "ch.boats",
+        "text": "The Thursday row, in the Boats out column"
+      }
+    ],
+    "answer": {
+      "kind": "choice",
+      "correctChoiceIds": [
+        "ch.cross"
+      ]
+    },
+    "explanation": "Find the row for the case you want (Thursday), then the column for the variable you want (Crates landed), and read the cell where they meet."
+  },
+  {
+    "id": "q.r1-variables",
+    "topicId": "t.r1-variables",
+    "objectiveId": "obj.r1-variables",
+    "skillIds": [
+      "skill.r1-variables"
+    ],
+    "difficulty": 1,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A multiple choice question about variables.",
+    "interaction": "multiple-choice",
+    "prompt": "The ledger records the harbour name, which is the same on every row. Is harbour name a useful variable in this ledger?",
+    "choices": [
+      {
+        "id": "ch.novary",
+        "text": "No - it never varies, so it tells you nothing about the differences between days"
+      },
+      {
+        "id": "ch.yesname",
+        "text": "Yes - anything written in a column is a variable"
+      }
+    ],
+    "answer": {
+      "kind": "choice",
+      "correctChoiceIds": [
+        "ch.novary"
+      ]
+    },
+    "explanation": "A variable has to vary. A column with the same value on every row cannot explain any difference between cases."
+  },
+  {
+    "id": "q.r1-cases",
+    "topicId": "t.r1-cases",
+    "objectiveId": "obj.r1-cases",
+    "skillIds": [
+      "skill.r1-cases"
+    ],
+    "difficulty": 1,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A numeric input question about data, cases and observations.",
+    "interaction": "numeric-input",
+    "prompt": "A ledger has one row per day and covers a 7-day week, with 3 columns. How many CASES does it contain?",
+    "answer": {
+      "kind": "numeric",
+      "value": 7,
+      "tolerance": 0,
+      "unit": "cases"
+    },
+    "explanation": "The case is a day, and there are 7 days, so 7 cases. The 3 columns are variables, not cases."
+  },
+  {
+    "id": "q.r1-variable-kinds",
+    "topicId": "t.r1-variable-kinds",
+    "objectiveId": "obj.r1-variable-kinds",
+    "skillIds": [
+      "skill.r1-variable-kinds"
+    ],
+    "difficulty": 1,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A multiple choice question about categorical and numerical variables.",
+    "interaction": "multiple-choice",
+    "prompt": "Which of these is a NUMERICAL variable?",
+    "choices": [
+      {
+        "id": "ch.crates",
+        "text": "Crates landed (2, 4, 9...)"
+      },
+      {
+        "id": "ch.weather2",
+        "text": "Weather (calm, choppy, rough)"
+      },
+      {
+        "id": "ch.port2",
+        "text": "Home port (Kirkwall, Stromness...)"
+      }
+    ],
+    "answer": {
+      "kind": "choice",
+      "correctChoiceIds": [
+        "ch.crates"
+      ]
+    },
+    "explanation": "Crates landed is a quantity you could total or average, so it is numerical. Weather and home port sort cases into groups, so they are categorical."
   }
 ]

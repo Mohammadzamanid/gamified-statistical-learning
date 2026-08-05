@@ -6,44 +6,38 @@ Exactly one Stage 2 unit is active at a time. Rewritten at the start and end of 
 
 ## Current unit
 
-**S2-06 — Dedicated spaced-review queue**
+**S2-07 — Region 1 curriculum architecture**
 
-Entered from `ebc84fbe8192839036a7e1825e565951bb22ec6a` (remote-verified, clean tree).
+Entered from `0901f5ad86baa3d33b42a838e979b06783ba2366` (remote-verified, clean tree).
 
 ## Objective
 
-Give review its own place in the app. The scheduler existed since Stage 1 and the Logbook already computed
-`dueItems`, but there was nowhere to actually *do* a review — the data had no home. This unit adds the queue, the
-session and the screen, and makes an interrupted review resumable.
+Give Region 1 its full shape before any lesson is written properly. Every one of the 17 topics in
+`STAGE2_RECONSTRUCTION_SCOPE.md` §2 gets a skill, an objective, a lesson and a seed question, arranged into modules
+with a prerequisite graph a learner can actually walk.
+
+This unit delivers **architecture, not finished lessons.** Completeness — the 18 structure requirements in scope §5 —
+is S2-08.
 
 ## Relevant files
 
 | File | Change |
 |---|---|
-| `src/core/spaced-repetition/review-queue.ts` | **New.** Pure selection and ordering: overdue/due/new, day arithmetic, question choice |
-| `src/renderer/state/review-session.ts` | **New.** Pure session: start, answer, reschedule, advance, end |
-| `src/renderer/screens/ReviewScreen.tsx` | **New.** The review screen |
-| `src/renderer/state/store.ts` | `review` screen + `beginReview` / `submitReview` / `nextReview` / `exitReview` |
-| `src/renderer/app/App.tsx`, `components/TopBar.tsx` | Route and a nav entry, so the screen is genuinely reachable |
-| `src/shared/schemas/profile.ts` | `ReviewSessionStateSchema`; `SaveFile.reviewSession` |
-| `src/shared/constants/app.ts` | `SAVE_SCHEMA_VERSION` 1 → 2 |
-| `src/core/persistence/migrations.ts` | Real `1 -> 2` migration |
-| `tests/integration/persistence.test.ts` | Migration test made version-agnostic |
+| `src/content/worlds/curriculum.json` | 17 skills, 17 objectives, 4 modules, 17 lessons, prerequisite graph |
+| `src/content/questions/questions.json` | 17 seed questions, one per topic |
+| `tests/audit/region1-architecture.test.ts` | **New.** 10 checks over coverage, graph soundness and skeleton honesty |
+| `.github/workflows/ci.yml` | Concurrency fix so a commit on `main` keeps its own CI run |
 
 ## Acceptance criteria
 
 | # | Criterion | Met |
 |---|---|---|
-| 1 | Due-review calculation | Yes — `buildReviewPlan`, clock passed in |
-| 2 | Review screen | Yes — routed and reachable from the top bar |
-| 3 | Overdue items | Yes — separated at the one-day boundary, most overdue first |
-| 4 | New versus review distinction | Yes — three named counts; a skill never met is *not* offered |
-| 5 | Mixed-topic review | Yes — due band interleaved, no skill twice in a row |
-| 6 | Correct/incorrect rescheduling | Yes — interval lengthens, or resets to a day and records a lapse |
-| 7 | Persistence | Yes — answers persist immediately, not at the end of a run |
-| 8 | Interrupted-session resume | Yes — the queue is **frozen**, and resume is proven across a real save/load |
-| 9 | Deterministic-clock tests | Yes — every test pins an instant; no wall-clock reads anywhere in the review core |
-| 10 | Commit pushed and remote hash verified | Yes |
+| 1 | Complete Region 1 lesson graph | Yes — 4 new modules, 17 new lessons (19 in the region) |
+| 2 | Prerequisite graph | Yes — chained within modules, modules chained from `m.r1-counting`; no cycles |
+| 3 | Every required topic represented | Yes — 17 of 17, asserted against the scope list |
+| 4 | Every required topic reachable | Yes — an unlock walk from a fresh save reaches every lesson |
+| 5 | Skeleton content not marked Complete | Yes — and enforced, see below |
+| 6 | Commit pushed and remote hash verified | Yes |
 
 ## Required tests
 
@@ -58,56 +52,54 @@ Measured (Node v22.22.2 / npm 10.9.7):
 |---|---|
 | `npm run typecheck` | Pass |
 | `npm run lint` | Pass — 0 errors, 0 warnings |
-| `npm test` | Pass — **236 tests / 24 files** (was 211 / 22) |
+| `npm test` | Pass — **246 tests / 25 files** (was 236 / 24) |
 | `npm run test:statistics` | Pass — 18 tests / 3 files |
 | `npm run test:content` | Pass — 5 tests / 1 file |
-| `npm run build` | Pass — 332.35 kB (95.55 kB gzip) |
+| `npm run build` | Pass — 358.13 kB (101.10 kB gzip) |
 
 `test:a11y` was **not** run and is **not** claimed; it arrives in S2-20.
 
 ## Work completed
 
-1. **The clock is an argument, never read inside.** Review is defined in days, so a hidden `Date.now()` would make
-   the system untestable and would drift with the machine's timezone. Every function in the review core takes `now`,
-   and every test pins a fixed instant — which is what lets the one-day overdue boundary be tested at all.
+1. **All 17 scope topics now exist as curriculum, not prose.** Counting, the four operations, fractions, decimals,
+   percentages, ratios, proportions, negative numbers, number lines, coordinates, tables, variables, cases, and
+   categorical-versus-numerical each have a skill, an objective, a lesson with a written concept, and one seed
+   question that genuinely teaches the point.
 
-2. **The queue is frozen when the session starts.** Rebuilding it on resume would silently change what "resume"
-   means: items already shown would drop out, and items that fell due meanwhile would appear. Freezing costs a save
-   schema change, and that is the honest price of the requirement. A test asserts the running session is unchanged
-   even when new work falls due a week later.
+2. **Four modules with a real prerequisite graph.** `m.r1-counting` (counting and the four operations) opens the
+   region; `m.r1-parts`, `m.r1-position` and `m.r1-data` each depend on it. Lessons chain inside a module, and each
+   module's first lesson depends on the last lesson of its prerequisite module.
 
-3. **Save schema 1 → 2, with a real migration.** Per the contract in `STAGE_HANDOFF.md` §6, the shape change ships
-   with a migration and round-trip tests. The migration writes an explicit `null` rather than leaning on the schema
-   default — a migration that depends on a default stops working the moment the default changes.
+3. **Reachability is walked, not assumed.** The audit starts from a fresh save, repeatedly completes whatever is
+   unlocked, and fails if any Region 1 lesson is still locked at the end. A cycle check runs alongside it, because a
+   cycle is the most likely way to make content permanently unreachable.
 
-4. **New is not the same as unpractised.** A skill only becomes a `new` review candidate once the learner has met it.
-   Offering untouched skills would turn review into a second, shuffled lesson path.
-
-5. **Review answers persist immediately.** A reschedule is the whole point of answering, so it is written on
-   submission rather than at the end of the run — an interruption must not lose it. Abandoning a session keeps every
-   reschedule and attempt already recorded, and drops only the queue position.
+4. **Skeleton honesty is enforced.** A check asserts each new lesson still has exactly one question. If one grows
+   past a seed, the test fails with a message pointing at S2-08 — so a half-finished lesson cannot quietly start
+   counting as finished work.
 
 ## Corrections made during the unit
 
-- **I guessed the mastery API and was wrong.** `applyAttempt` takes `(prev, attempt, rule)` and returns a
-  `MasteryUpdate`, not a bare state. Typecheck caught it; the review session now makes the same call the lesson
-  session does, so the two share one notion of progress.
-- **The migration test hardcoded version 1** and went stale the moment the version was bumped. It now asserts against
-  `SAVE_SCHEMA_VERSION` and additionally checks the new `1 -> 2` step ran — stronger than before, and it will not
-  quietly stop testing the chain at the next bump.
-- **`FeedbackPanel` needed props I had not passed**; caught by typecheck.
-- **The screen was initially unreachable.** The first version took props, which does not match the store-driven
-  screens; the bundle grew by only 0.24 kB, showing it had been tree-shaken out. Rewritten to the store pattern and
-  wired into the router and top bar — the bundle then grew by 7 kB, which is the evidence it is actually included.
+- **The CI concurrency rule was wrong for `main`, and it cost S2-06 its run.** `cancel-in-progress: true` applied to
+  every ref, so pushing the docs follow-up cancelled the unit commit's own CI. That run is now `cancelled`, not
+  passed, in the history. The rule now cancels only on non-`main` refs, so every persisted unit keeps a verified run
+  of its own. (S2-06 is still covered: `0901f5a` has identical source plus docs and passed.)
 
-## Verification that the tests have teeth
+## Verification that the guards have teeth
 
 Two deliberate probes, both reverted:
 
 | Probe | Result |
 |---|---|
-| Move the overdue boundary from ≥1 day to ≥2 days | **2 checks fail** |
-| Break session completion so the frozen queue never ends | **1 check fails** |
+| Introduce a prerequisite cycle between two lessons | **2 checks fail** |
+| Drop `l.r1-ratios` from its module | **3 checks fail** |
+
+## Known mismatch, recorded not silently fixed
+
+The surviving Stage 1 world places centre (`l.middle-harbor`) inside Region 1 and spread (`l.spread-1`) in Region 2.
+Under the Stage 2 scope both belong to **Region 2 — Describing and Visualizing Data**. Re-cutting the regions is
+Region 2 architecture work, so it is left alone here and recorded for **S2-11** rather than done half-way. Region 1
+therefore currently holds 19 lessons: the 17 new topic lessons plus the two inherited Stage 1 lessons.
 
 ## Remaining work
 
@@ -115,22 +107,17 @@ None for this unit.
 
 ## Local commit
 
-`e8e0cb2b8a02ce933671aa8cf4c2a5c727760855`
+Recorded in a follow-up commit once the push is verified; hashes are never written in advance.
 
 ## Remote verification
 
-```
-LOCAL_HEAD  = e8e0cb2b8a02ce933671aa8cf4c2a5c727760855
-REMOTE_HEAD = e8e0cb2b8a02ce933671aa8cf4c2a5c727760855
-VERIFIED: MATCH
-```
+`git rev-parse HEAD` compared against `git ls-remote origin refs/heads/main` — see the backlog row.
 
 ## Result
 
-**Complete.** Review has a queue, a session, a screen and a nav entry; overdue, due and new are distinguished by name;
-outcomes reschedule; and an interrupted session resumes on the same item with the same question across a real
-save/load round trip.
+**Complete.** Region 1 has its full topic architecture: 17 of 17 topics represented, ordered and reachable, with the
+skeleton state enforced so nothing here can be mistaken for a finished lesson.
 
 ## Next unit
 
-**S2-07 — Region 1 curriculum architecture.** Not started in this cycle, per the one-unit-per-cycle rule.
+**S2-08 — Region 1 lessons and interactions.** Not started in this cycle, per the one-unit-per-cycle rule.

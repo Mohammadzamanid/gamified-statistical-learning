@@ -23,7 +23,11 @@
       "tagline": "Counting, categories, and the first charts",
       "description": "The fishing harbor keeps a ledger of every catch. Learn to read data, tell categories from quantities, and find the center of a dataset.",
       "moduleIds": [
-        "m.harbor-1"
+        "m.harbor-1",
+        "m.r1-counting",
+        "m.r1-parts",
+        "m.r1-position",
+        "m.r1-data"
       ],
       "prerequisites": [],
       "mapX": 28,
@@ -68,6 +72,69 @@
       ],
       "prerequisites": [
         "m.harbor-1"
+      ],
+      "difficulty": 2
+    },
+    {
+      "id": "m.r1-counting",
+      "regionId": "r.harbor-tallies",
+      "title": "Counting the Catch",
+      "description": "Counting and the four operations, using the harbour ledger.",
+      "lessonIds": [
+        "l.r1-counting",
+        "l.r1-addition",
+        "l.r1-subtraction",
+        "l.r1-multiplication",
+        "l.r1-division"
+      ],
+      "prerequisites": [],
+      "difficulty": 1
+    },
+    {
+      "id": "m.r1-parts",
+      "regionId": "r.harbor-tallies",
+      "title": "Parts of a Whole",
+      "description": "Fractions, decimals, percentages, ratios and proportions.",
+      "lessonIds": [
+        "l.r1-fractions",
+        "l.r1-decimals",
+        "l.r1-percentages",
+        "l.r1-ratios",
+        "l.r1-proportions"
+      ],
+      "prerequisites": [
+        "m.r1-counting"
+      ],
+      "difficulty": 2
+    },
+    {
+      "id": "m.r1-position",
+      "regionId": "r.harbor-tallies",
+      "title": "Position and Direction",
+      "description": "Negative numbers, number lines and coordinates.",
+      "lessonIds": [
+        "l.r1-negatives",
+        "l.r1-number-lines",
+        "l.r1-coordinates"
+      ],
+      "prerequisites": [
+        "m.r1-counting"
+      ],
+      "difficulty": 2
+    },
+    {
+      "id": "m.r1-data",
+      "regionId": "r.harbor-tallies",
+      "title": "Reading the Ledger",
+      "description": "Tables, variables, cases and kinds of variable.",
+      "lessonIds": [
+        "l.r1-tables",
+        "l.r1-variables",
+        "l.r1-cases",
+        "l.r1-variable-kinds"
+      ],
+      "prerequisites": [
+        "m.r1-counting"
       ],
       "difficulty": 2
     }
@@ -171,6 +238,412 @@
         "l.middle-harbor"
       ],
       "estimatedMinutes": 8
+    },
+    {
+      "id": "l.r1-counting",
+      "moduleId": "m.r1-counting",
+      "title": "Counting",
+      "narrativeIntro": "Before the expedition can chart anything, counting must be second nature.",
+      "objectiveIds": [
+        "obj.r1-counting"
+      ],
+      "concepts": [
+        {
+          "id": "c.r1-counting",
+          "title": "Counting is matching",
+          "summary": "One number for each thing, in order, without skipping or repeating.",
+          "body": "To count a group you say one number for each item, in order, and never say a number twice or skip one. The last number you say is how many there are. Counting is the foundation everything else rests on: adding, sharing and measuring all start from a reliable count."
+        }
+      ],
+      "questionIds": [
+        "q.r1-counting"
+      ],
+      "prerequisites": [],
+      "estimatedMinutes": 8
+    },
+    {
+      "id": "l.r1-addition",
+      "moduleId": "m.r1-counting",
+      "title": "Addition",
+      "narrativeIntro": "Before the expedition can chart anything, addition must be second nature.",
+      "objectiveIds": [
+        "obj.r1-addition"
+      ],
+      "concepts": [
+        {
+          "id": "c.r1-addition",
+          "title": "Adding is combining",
+          "summary": "Putting groups together and counting the whole.",
+          "body": "Adding tells you how many there are altogether when groups are combined. The order does not matter: 7 + 5 is the same as 5 + 7. It helps to start from the larger number and count on."
+        }
+      ],
+      "questionIds": [
+        "q.r1-addition"
+      ],
+      "prerequisites": [
+        "l.r1-counting"
+      ],
+      "estimatedMinutes": 8
+    },
+    {
+      "id": "l.r1-subtraction",
+      "moduleId": "m.r1-counting",
+      "title": "Subtraction",
+      "narrativeIntro": "Before the expedition can chart anything, subtraction must be second nature.",
+      "objectiveIds": [
+        "obj.r1-subtraction"
+      ],
+      "concepts": [
+        {
+          "id": "c.r1-subtraction",
+          "title": "Subtracting is taking away, or finding a difference",
+          "summary": "How many are left, or how much bigger one amount is than another.",
+          "body": "Subtraction answers two questions that look different but are the same: how many remain after some are taken away, and how much bigger one number is than another. 12 - 5 is both 'five crates sold from twelve' and 'twelve is seven more than five'."
+        }
+      ],
+      "questionIds": [
+        "q.r1-subtraction"
+      ],
+      "prerequisites": [
+        "l.r1-addition"
+      ],
+      "estimatedMinutes": 8
+    },
+    {
+      "id": "l.r1-multiplication",
+      "moduleId": "m.r1-counting",
+      "title": "Multiplication",
+      "narrativeIntro": "Before the expedition can chart anything, multiplication must be second nature.",
+      "objectiveIds": [
+        "obj.r1-multiplication"
+      ],
+      "concepts": [
+        {
+          "id": "c.r1-multiplication",
+          "title": "Multiplying is repeated adding",
+          "summary": "Equal groups, counted quickly.",
+          "body": "When every group is the same size, multiplying is faster than adding them one at a time. 4 boats with 6 crates each is 6 + 6 + 6 + 6, which is 4 x 6 = 24. Like addition, the order does not matter."
+        }
+      ],
+      "questionIds": [
+        "q.r1-multiplication"
+      ],
+      "prerequisites": [
+        "l.r1-subtraction"
+      ],
+      "estimatedMinutes": 8
+    },
+    {
+      "id": "l.r1-division",
+      "moduleId": "m.r1-counting",
+      "title": "Division",
+      "narrativeIntro": "Before the expedition can chart anything, division must be second nature.",
+      "objectiveIds": [
+        "obj.r1-division"
+      ],
+      "concepts": [
+        {
+          "id": "c.r1-division",
+          "title": "Dividing is sharing equally",
+          "summary": "Splitting an amount into equal parts.",
+          "body": "Dividing answers 'how many each?' when an amount is shared equally, and 'how many groups?' when it is split into fixed-size groups. Sharing 24 crates between 4 boats gives 24 / 4 = 6 each. Division is the idea the mean is built on."
+        }
+      ],
+      "questionIds": [
+        "q.r1-division"
+      ],
+      "prerequisites": [
+        "l.r1-multiplication"
+      ],
+      "estimatedMinutes": 8
+    },
+    {
+      "id": "l.r1-fractions",
+      "moduleId": "m.r1-parts",
+      "title": "Fractions",
+      "narrativeIntro": "Before the expedition can chart anything, fractions must be second nature.",
+      "objectiveIds": [
+        "obj.r1-fractions"
+      ],
+      "concepts": [
+        {
+          "id": "c.r1-fractions",
+          "title": "A fraction names equal parts",
+          "summary": "The bottom number says how many equal parts; the top says how many you have.",
+          "body": "Write a fraction as top over bottom. The bottom (denominator) says how many equal parts the whole was split into; the top (numerator) says how many of those parts you are talking about. Three of four equal parts is 3/4. The parts must be equal, or the fraction means nothing."
+        }
+      ],
+      "questionIds": [
+        "q.r1-fractions"
+      ],
+      "prerequisites": [
+        "l.r1-division"
+      ],
+      "estimatedMinutes": 8
+    },
+    {
+      "id": "l.r1-decimals",
+      "moduleId": "m.r1-parts",
+      "title": "Decimals",
+      "narrativeIntro": "Before the expedition can chart anything, decimals must be second nature.",
+      "objectiveIds": [
+        "obj.r1-decimals"
+      ],
+      "concepts": [
+        {
+          "id": "c.r1-decimals",
+          "title": "Decimals are fractions written in place value",
+          "summary": "Digits after the point are tenths, hundredths, and so on.",
+          "body": "A decimal writes parts of a whole using place value instead of a bar. The first digit after the point is tenths, the next hundredths. So 0.5 is five tenths, the same amount as 1/2, and 0.25 is twenty-five hundredths, the same as 1/4."
+        }
+      ],
+      "questionIds": [
+        "q.r1-decimals"
+      ],
+      "prerequisites": [
+        "l.r1-fractions"
+      ],
+      "estimatedMinutes": 8
+    },
+    {
+      "id": "l.r1-percentages",
+      "moduleId": "m.r1-parts",
+      "title": "Percentages",
+      "narrativeIntro": "Before the expedition can chart anything, percentages must be second nature.",
+      "objectiveIds": [
+        "obj.r1-percentages"
+      ],
+      "concepts": [
+        {
+          "id": "c.r1-percentages",
+          "title": "Percent means per hundred",
+          "summary": "A percentage is a fraction whose bottom number is always 100.",
+          "body": "Percent means 'per hundred'. 25% means 25 out of every 100, which is 25/100, which is 0.25. Because the bottom number is always the same, percentages are easy to compare - which is why they are used everywhere in statistics."
+        }
+      ],
+      "questionIds": [
+        "q.r1-percentages"
+      ],
+      "prerequisites": [
+        "l.r1-decimals"
+      ],
+      "estimatedMinutes": 8
+    },
+    {
+      "id": "l.r1-ratios",
+      "moduleId": "m.r1-parts",
+      "title": "Ratios",
+      "narrativeIntro": "Before the expedition can chart anything, ratios must be second nature.",
+      "objectiveIds": [
+        "obj.r1-ratios"
+      ],
+      "concepts": [
+        {
+          "id": "c.r1-ratios",
+          "title": "A ratio compares two amounts",
+          "summary": "How much of one thing there is for each amount of another.",
+          "body": "A ratio compares two quantities directly: 2 crab pots for every 3 fish crates is the ratio 2 to 3. Unlike a fraction, a ratio need not be a part of a whole - it relates two separate amounts, and the order matters."
+        }
+      ],
+      "questionIds": [
+        "q.r1-ratios"
+      ],
+      "prerequisites": [
+        "l.r1-percentages"
+      ],
+      "estimatedMinutes": 8
+    },
+    {
+      "id": "l.r1-proportions",
+      "moduleId": "m.r1-parts",
+      "title": "Proportions",
+      "narrativeIntro": "Before the expedition can chart anything, proportions must be second nature.",
+      "objectiveIds": [
+        "obj.r1-proportions"
+      ],
+      "concepts": [
+        {
+          "id": "c.r1-proportions",
+          "title": "A proportion is a part of the whole",
+          "summary": "A number between 0 and 1 saying how much of the total something is.",
+          "body": "A proportion compares a part with the whole, not with another part. If 12 of 40 days were rainy, the proportion is 12/40 = 0.3. Proportions always sit between 0 and 1, and multiplying by 100 turns one into a percentage."
+        }
+      ],
+      "questionIds": [
+        "q.r1-proportions"
+      ],
+      "prerequisites": [
+        "l.r1-ratios"
+      ],
+      "estimatedMinutes": 8
+    },
+    {
+      "id": "l.r1-negatives",
+      "moduleId": "m.r1-position",
+      "title": "Negative numbers",
+      "narrativeIntro": "Before the expedition can chart anything, negative numbers must be second nature.",
+      "objectiveIds": [
+        "obj.r1-negatives"
+      ],
+      "concepts": [
+        {
+          "id": "c.r1-negatives",
+          "title": "Below zero",
+          "summary": "Numbers less than nothing, used for direction and depth.",
+          "body": "Negative numbers extend counting below zero. They describe direction as much as amount: -3 metres is three metres below the waterline, and -2 degrees is two degrees below freezing. The further a negative number is from zero, the smaller it is: -5 is less than -2."
+        }
+      ],
+      "questionIds": [
+        "q.r1-negatives"
+      ],
+      "prerequisites": [
+        "l.r1-division"
+      ],
+      "estimatedMinutes": 8
+    },
+    {
+      "id": "l.r1-number-lines",
+      "moduleId": "m.r1-position",
+      "title": "Number lines",
+      "narrativeIntro": "Before the expedition can chart anything, number lines must be second nature.",
+      "objectiveIds": [
+        "obj.r1-number-lines"
+      ],
+      "concepts": [
+        {
+          "id": "c.r1-number-lines",
+          "title": "Numbers have positions",
+          "summary": "A line where every number has one place, in order.",
+          "body": "A number line lays numbers out in order, evenly spaced. Left is smaller, right is larger, and zero sits between the negatives and the positives. Being able to place a value on a line is what later lets you see a mean, a median or a spread rather than just calculate it."
+        }
+      ],
+      "questionIds": [
+        "q.r1-number-lines"
+      ],
+      "prerequisites": [
+        "l.r1-negatives"
+      ],
+      "estimatedMinutes": 8
+    },
+    {
+      "id": "l.r1-coordinates",
+      "moduleId": "m.r1-position",
+      "title": "Coordinates",
+      "narrativeIntro": "Before the expedition can chart anything, coordinates must be second nature.",
+      "objectiveIds": [
+        "obj.r1-coordinates"
+      ],
+      "concepts": [
+        {
+          "id": "c.r1-coordinates",
+          "title": "Two numbers fix a place",
+          "summary": "Along first, then up.",
+          "body": "A coordinate pair locates a point using two number lines at right angles. The first number moves you along the bottom axis, the second moves you up the side axis. Order matters: (2, 5) and (5, 2) are different places. Every scatterplot you will ever read is built on this."
+        }
+      ],
+      "questionIds": [
+        "q.r1-coordinates"
+      ],
+      "prerequisites": [
+        "l.r1-number-lines"
+      ],
+      "estimatedMinutes": 8
+    },
+    {
+      "id": "l.r1-tables",
+      "moduleId": "m.r1-data",
+      "title": "Reading tables",
+      "narrativeIntro": "Before the expedition can chart anything, reading tables must be second nature.",
+      "objectiveIds": [
+        "obj.r1-tables"
+      ],
+      "concepts": [
+        {
+          "id": "c.r1-tables",
+          "title": "Rows, columns and cells",
+          "summary": "Find the row, find the column, read where they meet.",
+          "body": "A table stores data in rows and columns. Each row is usually one case; each column is one variable. To read a value you find the right row, then the right column, and read the cell where they cross. Reading the headers first is what stops you answering the wrong question."
+        }
+      ],
+      "questionIds": [
+        "q.r1-tables"
+      ],
+      "prerequisites": [
+        "l.r1-division"
+      ],
+      "estimatedMinutes": 8
+    },
+    {
+      "id": "l.r1-variables",
+      "moduleId": "m.r1-data",
+      "title": "Variables",
+      "narrativeIntro": "Before the expedition can chart anything, variables must be second nature.",
+      "objectiveIds": [
+        "obj.r1-variables"
+      ],
+      "concepts": [
+        {
+          "id": "c.r1-variables",
+          "title": "A variable is something that varies",
+          "summary": "A property recorded for every case, whose value can differ.",
+          "body": "A variable is a property you record for each case, and it earns the name because its value can change from case to case. 'Crates landed' is a variable because different days give different numbers. Something that is the same for everything you record is not a variable - it carries no information."
+        }
+      ],
+      "questionIds": [
+        "q.r1-variables"
+      ],
+      "prerequisites": [
+        "l.r1-tables"
+      ],
+      "estimatedMinutes": 8
+    },
+    {
+      "id": "l.r1-cases",
+      "moduleId": "m.r1-data",
+      "title": "Data, cases and observations",
+      "narrativeIntro": "Before the expedition can chart anything, data, cases and observations must be second nature.",
+      "objectiveIds": [
+        "obj.r1-cases"
+      ],
+      "concepts": [
+        {
+          "id": "c.r1-cases",
+          "title": "What one row means",
+          "summary": "A case is the thing you measured; an observation is one recorded value.",
+          "body": "Before reading any dataset, ask what one row represents - that is the case. In a ledger with one row per day, the case is a day. Each value in that row is an observation of one variable. Confusing cases with observations is how people end up counting the same thing twice."
+        }
+      ],
+      "questionIds": [
+        "q.r1-cases"
+      ],
+      "prerequisites": [
+        "l.r1-variables"
+      ],
+      "estimatedMinutes": 8
+    },
+    {
+      "id": "l.r1-variable-kinds",
+      "moduleId": "m.r1-data",
+      "title": "Categorical and numerical variables",
+      "narrativeIntro": "Before the expedition can chart anything, categorical and numerical variables must be second nature.",
+      "objectiveIds": [
+        "obj.r1-variable-kinds"
+      ],
+      "concepts": [
+        {
+          "id": "c.r1-variable-kinds",
+          "title": "Labels or quantities",
+          "summary": "Categorical values name a group; numerical values measure an amount.",
+          "body": "A numerical variable holds quantities you could sensibly add or average, like crates landed. A categorical variable sorts cases into groups, like weather or home port. The test is not whether it is written with digits - it is whether adding two values would mean anything. Which summaries and which charts are available to you depends entirely on this."
+        }
+      ],
+      "questionIds": [
+        "q.r1-variable-kinds"
+      ],
+      "prerequisites": [
+        "l.r1-cases"
+      ],
+      "estimatedMinutes": 8
     }
   ],
   "objectives": [
@@ -214,6 +687,125 @@
       "text": "Convert fluently between fractions, decimals, and percentages.",
       "skillIds": [
         "skill.percent-fraction"
+      ]
+    },
+    {
+      "id": "obj.r1-counting",
+      "text": "Understand and use counting.",
+      "skillIds": [
+        "skill.r1-counting"
+      ]
+    },
+    {
+      "id": "obj.r1-addition",
+      "text": "Understand and use addition.",
+      "skillIds": [
+        "skill.r1-addition"
+      ]
+    },
+    {
+      "id": "obj.r1-subtraction",
+      "text": "Understand and use subtraction.",
+      "skillIds": [
+        "skill.r1-subtraction"
+      ]
+    },
+    {
+      "id": "obj.r1-multiplication",
+      "text": "Understand and use multiplication.",
+      "skillIds": [
+        "skill.r1-multiplication"
+      ]
+    },
+    {
+      "id": "obj.r1-division",
+      "text": "Understand and use division.",
+      "skillIds": [
+        "skill.r1-division"
+      ]
+    },
+    {
+      "id": "obj.r1-fractions",
+      "text": "Understand and use fractions.",
+      "skillIds": [
+        "skill.r1-fractions"
+      ]
+    },
+    {
+      "id": "obj.r1-decimals",
+      "text": "Understand and use decimals.",
+      "skillIds": [
+        "skill.r1-decimals"
+      ]
+    },
+    {
+      "id": "obj.r1-percentages",
+      "text": "Understand and use percentages.",
+      "skillIds": [
+        "skill.r1-percentages"
+      ]
+    },
+    {
+      "id": "obj.r1-ratios",
+      "text": "Understand and use ratios.",
+      "skillIds": [
+        "skill.r1-ratios"
+      ]
+    },
+    {
+      "id": "obj.r1-proportions",
+      "text": "Understand and use proportions.",
+      "skillIds": [
+        "skill.r1-proportions"
+      ]
+    },
+    {
+      "id": "obj.r1-negatives",
+      "text": "Understand and use negative numbers.",
+      "skillIds": [
+        "skill.r1-negatives"
+      ]
+    },
+    {
+      "id": "obj.r1-number-lines",
+      "text": "Understand and use number lines.",
+      "skillIds": [
+        "skill.r1-number-lines"
+      ]
+    },
+    {
+      "id": "obj.r1-coordinates",
+      "text": "Understand and use coordinates.",
+      "skillIds": [
+        "skill.r1-coordinates"
+      ]
+    },
+    {
+      "id": "obj.r1-tables",
+      "text": "Understand and use reading tables.",
+      "skillIds": [
+        "skill.r1-tables"
+      ]
+    },
+    {
+      "id": "obj.r1-variables",
+      "text": "Understand and use variables.",
+      "skillIds": [
+        "skill.r1-variables"
+      ]
+    },
+    {
+      "id": "obj.r1-cases",
+      "text": "Understand and use data, cases and observations.",
+      "skillIds": [
+        "skill.r1-cases"
+      ]
+    },
+    {
+      "id": "obj.r1-variable-kinds",
+      "text": "Understand and use categorical and numerical variables.",
+      "skillIds": [
+        "skill.r1-variable-kinds"
       ]
     }
   ],
@@ -261,6 +853,108 @@
       "id": "skill.percent-fraction",
       "title": "Percents and fractions",
       "description": "Moving between fractions, decimals, and percentages.",
+      "prerequisites": []
+    },
+    {
+      "id": "skill.r1-counting",
+      "title": "Counting",
+      "description": "Region 1 foundation: counting.",
+      "prerequisites": []
+    },
+    {
+      "id": "skill.r1-addition",
+      "title": "Addition",
+      "description": "Region 1 foundation: addition.",
+      "prerequisites": []
+    },
+    {
+      "id": "skill.r1-subtraction",
+      "title": "Subtraction",
+      "description": "Region 1 foundation: subtraction.",
+      "prerequisites": []
+    },
+    {
+      "id": "skill.r1-multiplication",
+      "title": "Multiplication",
+      "description": "Region 1 foundation: multiplication.",
+      "prerequisites": []
+    },
+    {
+      "id": "skill.r1-division",
+      "title": "Division",
+      "description": "Region 1 foundation: division.",
+      "prerequisites": []
+    },
+    {
+      "id": "skill.r1-fractions",
+      "title": "Fractions",
+      "description": "Region 1 foundation: fractions.",
+      "prerequisites": []
+    },
+    {
+      "id": "skill.r1-decimals",
+      "title": "Decimals",
+      "description": "Region 1 foundation: decimals.",
+      "prerequisites": []
+    },
+    {
+      "id": "skill.r1-percentages",
+      "title": "Percentages",
+      "description": "Region 1 foundation: percentages.",
+      "prerequisites": []
+    },
+    {
+      "id": "skill.r1-ratios",
+      "title": "Ratios",
+      "description": "Region 1 foundation: ratios.",
+      "prerequisites": []
+    },
+    {
+      "id": "skill.r1-proportions",
+      "title": "Proportions",
+      "description": "Region 1 foundation: proportions.",
+      "prerequisites": []
+    },
+    {
+      "id": "skill.r1-negatives",
+      "title": "Negative numbers",
+      "description": "Region 1 foundation: negative numbers.",
+      "prerequisites": []
+    },
+    {
+      "id": "skill.r1-number-lines",
+      "title": "Number lines",
+      "description": "Region 1 foundation: number lines.",
+      "prerequisites": []
+    },
+    {
+      "id": "skill.r1-coordinates",
+      "title": "Coordinates",
+      "description": "Region 1 foundation: coordinates.",
+      "prerequisites": []
+    },
+    {
+      "id": "skill.r1-tables",
+      "title": "Reading tables",
+      "description": "Region 1 foundation: reading tables.",
+      "prerequisites": []
+    },
+    {
+      "id": "skill.r1-variables",
+      "title": "Variables",
+      "description": "Region 1 foundation: variables.",
+      "prerequisites": []
+    },
+    {
+      "id": "skill.r1-cases",
+      "title": "Cases and observations",
+      "description": "Region 1 foundation: data, cases and observations.",
+      "prerequisites": []
+    },
+    {
+      "id": "skill.r1-variable-kinds",
+      "title": "Kinds of variable",
+      "description": "Region 1 foundation: categorical and numerical variables.",
       "prerequisites": []
     }
   ],

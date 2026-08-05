@@ -15,7 +15,7 @@ Status vocabulary is defined in `STAGE2_RECONSTRUCTION_SCOPE.md` §9.
 | S2-04 | Accessible drag-and-drop | S2-03 | Reusable for sorting, matching, ordering, grouping, simple graph construction; complete keyboard alternative | **Complete** | `src/core/questions/drag-drop.ts` (new), `evaluators.ts`, `normalize.ts`, `types.ts`, `registry.ts`, `src/shared/schemas/question.ts`, `src/core/misconceptions/{engine,detectors}.ts`, `src/core/curriculum/loader.ts`, `QuestionRenderers.tsx`, content | `tests/unit/drag-drop.test.ts` (30), `tests/integration/drag-drop-flow.test.ts` (8) | `70e9527` | `70e9527` | Yes — MATCH | Full SHA `70e95277a0850c67d0af07148d7f0ac7497aab43`; recorded only after the push was verified. Suite 155→**193 tests**, 19→**21 files**. One `placement` primitive covers all five shapes — only the zone configuration differs. Every shipped arrangement is built in a test using **only** the operations the keyboard controls perform, never a drag. |
 | S2-05 | Interaction-type audit (all 17) | S2-04 | Per type: schema, renderer, evaluation, correct path, incorrect path, misconception path, keyboard operation, accessible name/instructions, ≥1 genuine curriculum use, save/resume where stateful | **Complete** | `docs/INTERACTION_AUDIT.md` (new), `src/renderer/components/rendered-interactions.ts` (new), `QuestionRenderers.tsx`, `tests/helpers/responses.ts` (new) | `tests/audit/interaction-audit.test.ts` (18) | `acc9bf3` | `acc9bf3` | Yes — MATCH | Full SHA `acc9bf36df47ab97613ec1f1bc77c8355b3cccd1`; recorded only after the push was verified. Suite 193→**211 tests**, 21→**22 files**. The audit is **enforced, not described**: renderer coverage is a shared module the test compares against the registry, and correct/wrong paths are driven from real content for every implemented type. Curriculum use is measured as reachable-from-a-lesson, so demos cannot satisfy it. 5 findings recorded (F-1…F-5), none claimed as fixed. |
 | S2-06 | Dedicated spaced-review queue | S2-01 | Due calculation, review screen, overdue items, new-vs-review distinction, mixed-topic review, correct/incorrect rescheduling, persistence, interrupted-session resume, deterministic-clock tests | **Complete** | `src/core/spaced-repetition/review-queue.ts` (new), `src/renderer/state/review-session.ts` (new), `src/renderer/screens/ReviewScreen.tsx` (new), `store.ts`, `App.tsx`, `TopBar.tsx`, `src/shared/schemas/profile.ts`, `constants/app.ts`, `persistence/migrations.ts` | `tests/unit/review-queue.test.ts` (13), `tests/integration/review-session.test.ts` (12) | `e8e0cb2` | `e8e0cb2` | Yes — MATCH | Full SHA `e8e0cb2b8a02ce933671aa8cf4c2a5c727760855`; recorded only after the push was verified. Suite 211→**236 tests**, 22→**24 files**. **Save schema 1 → 2** with a real migration, because resume requires persisting the in-flight queue. The queue is **frozen at start**, so resume shows what it showed before rather than a rebuilt queue. Clock is an argument everywhere — no `Date.now()` inside the review core. |
-| S2-07 | Region 1 curriculum architecture | S2-05 | Complete lesson + prerequisite graph; every required topic represented and reachable | Not started | `src/content/worlds/curriculum.json` | pending | — | — | — | Skeleton content must not be marked Complete. |
+| S2-07 | Region 1 curriculum architecture | S2-05 | Complete lesson + prerequisite graph; every required topic represented and reachable | **In progress** | `src/content/worlds/curriculum.json`, `src/content/questions/questions.json`, `.github/workflows/ci.yml` | `tests/audit/region1-architecture.test.ts` (10) | pending | pending | pending | Hashes recorded after push verification, never in advance. Suite 236→**246 tests**, 24→**25 files**. All **17 scope §2 topics** now have a skill, an objective, a lesson and a seed question, in 4 new modules with a prerequisite graph. **Architecture only** — a `skeleton honesty` check asserts each new lesson still has exactly one question, so none can be mistaken for finished work. Completeness is S2-08. |
 | S2-08 | Region 1 lessons and interactions | S2-07 | Every lesson satisfies all 18 structure requirements (scope §5) | Not started | `src/content/*` | pending | — | — | — | |
 | S2-09 | Region 1 validated content expansion | S2-08 | ≥100 validated interactions per completed major topic, multiple reasoning families, duplicate/near-duplicate gates, misconception mappings, a11y descriptions, machine- and human-readable reports | Not started | generators + report tooling | pending | — | — | — | Topic list comes from the curriculum graph, never from generator modules. |
 | S2-10 | Region 1 boss investigation | S2-09 | Multi-step saveable investigation combining Region 1 skills; awards region achievement; unlocks Region 2 | Not started | `src/content/*`, `src/renderer/screens/*` | pending | — | — | — | Award path already repaired and tested by S2-01. |
@@ -37,21 +37,26 @@ Measured from this repository — never recalled from earlier reports.
 
 | Metric | At Stage 1 baseline | Current |
 |---|---|---|
-| Test files | 14 | **24** |
-| Tests | 73 | **236** |
+| Test files | 14 | **25** |
+| Tests | 73 | **246** |
 | Regions | 2 | 2 |
-| Modules | 2 | 2 |
-| Lessons | 3 | 3 |
-| Authored questions | 14 | **25** |
+| Modules | 2 | **6** |
+| Skills | 6 | **23** |
+| Objectives | 6 | **23** |
+| Lessons | 3 | **20** |
+| Authored questions | 14 | **42** |
 | Misconceptions | 8 | **10** |
 | Remediations | 7 | **9** |
 | Achievements | 4 | **6** |
 | Datasets | 1 | 1 |
 | Interaction types implemented | 11 of 17 | **14 of 17** |
 | Interaction types used by content | 11 | **14** |
-| Renderer bundle | 285.73 kB (83.82 kB gzip) | **332.35 kB (95.55 kB gzip)** |
+| Renderer bundle | 285.73 kB (83.82 kB gzip) | **358.13 kB (101.10 kB gzip)** |
 
 Still stubbed (3): `formula-construction`, `simulation-prediction`, `confidence-rating`.
+
+**Region 1: 17 of 17 required topics represented**, each with a lesson and a seed question — architecture only, not
+Complete lessons (S2-08).
 
 **Save schema version: 2** (was 1 at the Stage 1 baseline). Migration `1 -> 2` adds `reviewSession`.
 

@@ -25,7 +25,11 @@ permissions:
 
 concurrency:
   group: ci-${{ github.ref }}
-  cancel-in-progress: true
+  # Never cancel a run on main. Every commit on main is a persisted work unit, and
+  # a unit whose CI was cancelled by the next commit has no verified run of its
+  # own — which is exactly what happened to S2-06's commit. On branches and PRs,
+  # superseding an in-flight run is still the right behaviour.
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 jobs:
   validate:
