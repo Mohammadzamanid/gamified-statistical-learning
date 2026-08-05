@@ -4,7 +4,7 @@
 (`git show 7add4bc:docs/STAGE_HANDOFF.md`). Its still-binding contracts, traps, and priorities are carried forward
 below — nothing was discarded.
 
-**Last updated:** 2026-08-04, at the close of unit S2-02.
+**Last updated:** 2026-08-04, at the close of unit S2-03.
 
 ---
 
@@ -16,8 +16,8 @@ after Stage 1 was lost because commits were never pushed to a durable remote. Re
 
 - **Stage 1: surviving, verified, green.** Not re-created — the original commit `7add4bc` was carried forward from the
   archive's own `.git` directory, with authorship intact.
-- **Stage 2: in progress, and not recoverable.** Reconstruction began 2026-08-04; S2-01 and S2-02 are complete. Nothing in
-  it is recovered source.
+- **Stage 2: in progress, and not recoverable.** Reconstruction began 2026-08-04; S2-01 through S2-03 are complete. Nothing
+  in it is recovered source.
 - **Stages 3–6: not started, and not recoverable.** They must be **reconstructed** from the surviving Stage 1 source,
   the specifications, and the known defect history. They may never be described as recovered source, and no metric may
   be recalled from prior reports — every count must be measured from this repository.
@@ -30,17 +30,17 @@ after Stage 1 was lost because commits were never pushed to a durable remote. Re
 | Default branch | `main` |
 | Pristine Stage 1 import | `7add4bc` — pushed and remote-verified |
 | Baseline docs + CI | `1b0a5dd` — pushed and remote-verified |
-| Last unit completed | **S2-02** — step-by-step calculation interaction (`48bac65`, remote-verified) |
+| Last unit completed | **S2-03** — point-placement interaction (`4c4d908`, remote-verified) |
 | Head of `main` | read it live: `git rev-parse HEAD` vs `git ls-remote origin refs/heads/main` — these must match |
 | Milestone snapshot commit | `d4e250434c465f85e4307a226a9af2cbc9788c17` — the commit the exports were built from |
 | Stage tag | `stage-1-baseline` — **created locally, NOT on GitHub** (unit R-00d, blocked; see §2.1) |
 | Milestone exports | `../gsl-exports/` — source ZIP + git bundle + manifest + SHA-256 checksums |
 | Working tree | clean |
 | Node / npm used | v22.22.2 / 10.9.7 |
-| Test suite | **115 tests / 17 files**, all passing (Stage 1 baseline was 73 / 14) |
-| Build | passing (**297.78 kB, 86.67 kB gzip**; baseline was 285.73 kB / 83.82 kB) |
-| Source modified since baseline | S2-01 and S2-02 — achievements + region completion, and the step-by-step calculation interaction |
-| Interaction types implemented | **12 of 17** (baseline 11); still stubbed: `drag-and-drop`, `point-placement`, `formula-construction`, `simulation-prediction`, `confidence-rating` |
+| Test suite | **155 tests / 19 files**, all passing (Stage 1 baseline was 73 / 14) |
+| Build | passing (**310.30 kB, 90.08 kB gzip**; baseline was 285.73 kB / 83.82 kB) |
+| Source modified since baseline | S2-01 … S2-03 — achievements + region completion, and the step-by-step calculation and point-placement interactions |
+| Interaction types implemented | **13 of 17** (baseline 11); still stubbed: `drag-and-drop`, `formula-construction`, `simulation-prediction`, `confidence-rating` |
 | Stage 2 | **in progress** — see `STAGE2_RECONSTRUCTION_SCOPE.md`, `STAGE2_RECONSTRUCTION_BACKLOG.md`, `STAGE2_CURRENT_WORK.md` |
 
 Full measured baseline — content counts, interaction coverage, validation results — is in
@@ -74,7 +74,7 @@ git status
 git rev-parse HEAD
 git ls-remote origin refs/heads/main | awk '{print $1}'   # must match
 npm ci
-npm test            # must stay green: 115/115
+npm test            # must stay green: 155/155
 npm run typecheck && npm run lint
 npm run dev         # renderer + electron dev
 ```
@@ -98,25 +98,24 @@ branch/tag deletion) are forbidden without explicit owner permission. See `REMOT
 
 ## 5. Next unit
 
-**S2-03 — Point-placement interaction.**
+**S2-04 — Accessible drag-and-drop.**
 
-S2-02 is done: `step-by-step-calculation` is live, and the `steps` answer kind plus the pure run engine in
-`src/core/questions/step-calculation.ts` set the pattern every remaining interaction should follow — schema first,
-pure logic in core, renderer as a thin shell, real content in real lessons before the registry flag flips.
+S2-03 is done: `point-placement` is live, and its keyboard test sets the bar for what "accessible" has to mean here —
+not "we added ARIA", but an assertion that every shipped target is reachable without a pointer.
 
-Scope for that cycle, from `STAGE2_RECONSTRUCTION_BACKLOG.md`: number lines, coordinates, graph reading, and
-approximate values, with **both** pointer and keyboard interaction, configurable tolerance, and accessible feedback.
-The keyboard path is a requirement, not an enhancement — a mouse-only placement control would fail the accessibility
-rules in `STAGE2_RECONSTRUCTION_SCOPE.md` §6.
+Scope for that cycle, from `STAGE2_RECONSTRUCTION_BACKLOG.md`: one reusable drag-and-drop usable for sorting,
+matching, ordering, grouping observations, and simple graph construction, with a **complete** keyboard alternative.
+Drag-and-drop is the hardest of the remaining stubs to make accessible, so follow the S2-03 precedent: put the
+reordering rules in core, keep the renderer thin, and assert keyboard reachability rather than describing it.
 
-Do **not** start S2-04 in the same cycle.
+Do **not** start S2-05 in the same cycle.
 
 ### Stage 1 known defects — current state
 
 | # | Defect | State |
 |---|---|---|
 | 1 | Region-completed achievement trigger stubbed `false` | **Fixed in S2-01** |
-| 2 | Six interaction types unimplemented | **Partly fixed** — `step-by-step-calculation` live (S2-02); 5 remain, S2-03 … S2-05 |
+| 2 | Six interaction types unimplemented | **Partly fixed** — `step-by-step-calculation` (S2-02) and `point-placement` (S2-03) live; 4 remain, S2-04 … S2-05 |
 | 3 | Laboratory simulations are placeholders | Open — S2-15 |
 | 4 | Only one world of content | Open — S2-07 … S2-14 |
 | 5 | Cosmetic `MODULE_TYPELESS_PACKAGE_JSON` lint warning | Open by choice (D-002) |

@@ -31,22 +31,17 @@ defect repair and engine capability precede content breadth.
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | S2-01 | 2 | Wire region-completed achievement trigger | Known defect #1; `STAGE_HANDOFF.md` priority 1 | R-00b | Trigger fires on genuine region completion; unit + integration tests; no false positives on partial completion | **Complete** | `6798b6a` | `6798b6a` | Yes — MATCH | 90 pass, 15 files (was 73/14) | Full SHA `6798b6a71beb3e15ec43e791ca60fa36e2a0c214`. Engine now delegates to `isRegionCompleted`; curriculum argument made **required** so omitting it fails to compile. Hardened against dangling module refs and vacuous empty-region completion. Loader now validates achievement-trigger references. Added `ach.harbor-charted` / `ach.atoll-charted`. New tests produce 7 failures against the old stub — genuine regression tests. Detail in `STAGE2_RECONSTRUCTION_BACKLOG.md`. |
 | S2-02 | 2 | Implement `step-by-step-calculation` interaction | Roadmap "missing interaction types"; registry `implemented: false` | S2-01 | Evaluator + renderer + a11y; registry flag → `true`; tests per type; content exercising it | **Complete** | `48bac65` | `48bac65` | Yes — MATCH | 115 pass, 17 files (was 90/15) | Full SHA `48bac65064d45b376d88d92bd775957ecc78105f`. New `steps` answer kind + pure run engine in `src/core/questions/step-calculation.ts`; per-step validation, hints, retry-from-failed-step; step misconceptions routed into the existing remediation pipeline; 3 questions inside real lessons. **12 of 17** interaction types now implemented. Detail in `STAGE2_RECONSTRUCTION_BACKLOG.md`. |
-| S2-03 | 2 | Implement `point-placement` interaction | as above | S2-02 | as above | Planned | — | — | — | — | Keyboard-operable alternative required, not mouse-only. |
-| S2-04 | 2 | Implement `drag-and-drop` interaction | as above | S2-03 | as above | Planned | — | — | — | — | Must ship a keyboard equivalent path. |
-| S2-05 | 2 | Implement `formula-construction` interaction | as above | S2-04 | as above | Planned | — | — | — | — | |
-| S2-06 | 2 | Implement `confidence-rating` interaction | as above | S2-05 | as above | Planned | — | — | — | — | Feeds metacognition; pairs with adaptive review. |
-| S2-07 | 2 | Implement `simulation-prediction` interaction | as above | S2-06, S2-11 | as above | Planned | — | — | — | — | Depends on lab simulation instruments existing. |
-| S2-08 | 2 | Complete Region 1 content | Roadmap "Region 1 completion" | S2-02..S2-06 | Region 1 objectives fully covered; `npm run test:content` green | Planned | — | — | — | — | Baseline Region 1 is partial (measured: 2 regions, 3 lessons, 14 questions total). |
-| S2-09 | 2 | Descriptive-statistics region (spread & shape) | Roadmap "descriptive-statistics region" | S2-08 | Variance, sd, outliers, skew as a new region reusing existing schema; content tests green | Planned | — | — | — | — | Surviving handoff calls this "World 2". |
-| S2-10 | 2 | Graph and table interpretation | Roadmap item | S2-09 | Interpretation content + interaction coverage; a11y for any chart | Planned | — | — | — | — | `graph-interpretation` interaction already implemented; this is breadth. |
-| S2-11 | 2 | Descriptive laboratory instruments | Roadmap "descriptive laboratory"; known defect #3 | S2-09 | Real instruments replace placeholders; driven by `src/core/statistics` | Planned | — | — | — | — | `LabScreen.tsx` placeholders must stop being labelled planned-only once real. |
-| S2-12 | 2 | Misconception remediation expansion | Roadmap item | S2-09 | New misconceptions + remediations for spread/shape; detector params per question (D-004) | Planned | — | — | — | — | Baseline measured: 8 misconceptions, 7 remediations. |
-| S2-13 | 2 | Adaptive review ("Due today") | Roadmap "adaptive review"; handoff priority 5 | S2-12 | Dedicated flow surfacing scheduler `dueItems`; tests | Planned | — | — | — | — | Data already computed on the Logbook screen. |
-| S2-14 | 2 | Accessibility harness | Roadmap "accessibility harness" | S2-04 | Automated a11y assertions over screens/widgets; wired into `npm test`; CI updated | Planned | — | — | — | — | **No `test:a11y` script exists.** Adding one requires a `package.json` script *and* a CI step. |
-| S2-15 | 2 | Validated content coverage gate | Roadmap "validated content coverage" | S2-08..S2-12 | Coverage assertion fails CI when an objective/skill has no question | Planned | — | — | — | — | Extends `tests/content/content.test.ts` cross-reference integrity. |
-| S2-16 | 2 | Boss investigations | Roadmap "boss investigations" | S2-15 | Multi-step region-capstone assessment; tests; achievement wiring via S2-01 | Planned | — | — | — | — | |
-| S2-17 | 2 | Save and resume verification | Roadmap "save and resume" | S2-16 | Fresh-save progression + mid-session resume proven by integration tests; migration added if save shape changes | Planned | — | — | — | — | `SAVE_SCHEMA_VERSION` + `MIGRATIONS` contract must not break. |
-| S2-99 | 2 | Stage 2 closure audit + tag | Stage completion policy | all S2 | All units Complete/explicitly blocked; metrics measured not recalled; `stage-2-complete` tag pushed; archive + bundle produced | Planned | — | — | — | — | |
+| S2-03 | 2 | Implement `point-placement` interaction | as above | S2-02 | as above | **Complete** | `4c4d908` | `4c4d908` | Yes — MATCH | 155 pass, 19 files (was 115/17) | Full SHA `4c4d908bf4395bacbb4c23968fbb86ce46b36fd3`. New `point` answer kind + `PointField` geometry; pure engine in `src/core/questions/point-placement.ts`; pointer **and** keyboard paths share one code path, and a test steps to every shipped target by keyboard alone. Axes-swapped derived from the target. 4 questions across 2 lessons. **13 of 17** interaction types implemented. |
+
+**S2-04 onward: see `STAGE2_RECONSTRUCTION_BACKLOG.md`, which is authoritative.**
+
+The Stage 2 rows above (S2-01 … S2-03) are kept here because the persistence policy requires verified hashes in
+both backlogs. The remaining Stage 2 units are *not* duplicated here: this file's original S2-04+ decomposition
+predates the authoritative Stage 2 unit list and used different numbers for the same work (for example, it had
+S2-05 as `formula-construction`, where the authoritative list has S2-05 as the interaction-type audit). Keeping two
+numberings risks a future session implementing the wrong unit, so the superseded rows were removed rather than
+left to drift. Nothing was lost — every one of those work items appears in the authoritative Stage 2 backlog.
+
 
 ## Stages 3–6 — roadmap granularity
 
