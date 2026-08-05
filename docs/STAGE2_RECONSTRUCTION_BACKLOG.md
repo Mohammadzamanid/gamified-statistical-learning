@@ -10,7 +10,7 @@ Status vocabulary is defined in `STAGE2_RECONSTRUCTION_SCOPE.md` §9.
 | ID | Work unit | Dependencies | Acceptance criteria | Status | Important files | Tests | Local commit | Remote commit | Push verified | Notes |
 |---|---|---|---|---|---|---|---|---|---|---|
 | S2-01 | Region-completion achievement repair | Stage 1 baseline | Completed region awards its achievement; incomplete region does not; no duplicates; award survives save/reload; existing tests stay green; new unit + integration tests pass; pushed and verified | **Complete** | `src/core/achievements/engine.ts`, `src/core/curriculum/progress.ts`, `src/core/curriculum/loader.ts`, `src/renderer/state/session.ts`, `src/content/questions/achievements.json` | `tests/unit/achievements.test.ts` (12), `tests/integration/region-completion.test.ts` (6) | `6798b6a` | `6798b6a` | Yes — MATCH | Full SHA `6798b6a71beb3e15ec43e791ca60fa36e2a0c214`; hashes recorded only **after** the push was verified. Suite 73→**90 tests**, 14→**15 files**. Verified the new tests fail (7 failures) against the old stubbed `false`, so they are genuine regression tests. `evaluateAchievements` now *requires* the curriculum, so a caller that omits it fails to compile rather than silently reintroducing the defect. |
-| S2-02 | Step-by-step calculation interaction | S2-01 | Multi-step calculation, per-step validation, equivalent numeric formats, per-step hints, misconception classification, retry from failed step, final explanation, mastery update, keyboard accessible; ≥3 real curriculum examples | Not started | `src/core/questions/*`, `src/renderer/features/*` | pending | — | — | — | Registry flag flips `implemented: false` → `true` only when renderer, evaluator, a11y, and real content all exist. |
+| S2-02 | Step-by-step calculation interaction | S2-01 | Multi-step calculation, per-step validation, equivalent numeric formats, per-step hints, misconception classification, retry from failed step, final explanation, mastery update, keyboard accessible; ≥3 real curriculum examples | **In progress** | `src/core/questions/step-calculation.ts` (new), `evaluators.ts`, `normalize.ts`, `types.ts`, `registry.ts`, `src/shared/schemas/question.ts`, `src/core/misconceptions/engine.ts`, `src/core/curriculum/loader.ts`, `src/renderer/components/QuestionRenderers.tsx`, content | `tests/unit/step-calculation.test.ts` (17), `tests/integration/step-calculation-flow.test.ts` (8) | pending | pending | pending | Hashes recorded after push verification, never in advance. Suite 90→**115 tests**, 15→**17 files**. Registry flipped to `implemented: true` only once schema, evaluator, renderer, a11y, and 3 real lesson questions all existed. |
 | S2-03 | Point-placement interaction | S2-02 | Number lines, coordinates, graph reading, approximate values; pointer **and** keyboard interaction; configurable tolerance; accessible feedback | Not started | `src/core/questions/*`, `src/renderer/features/*` | pending | — | — | — | Keyboard path is a requirement, not an enhancement. |
 | S2-04 | Accessible drag-and-drop | S2-03 | Reusable for sorting, matching, ordering, grouping, simple graph construction; complete keyboard alternative | Not started | `src/renderer/components/*` | pending | — | — | — | |
 | S2-05 | Interaction-type audit (all 17) | S2-04 | Per type: schema, renderer, evaluation, correct path, incorrect path, misconception path, keyboard operation, accessible name/instructions, ≥1 genuine curriculum use, save/resume where stateful | Not started | registry + audit doc | pending | — | — | — | Isolated technical demos do not satisfy the audit. Remove "not implemented" notices only where genuinely resolved. |
@@ -37,18 +37,26 @@ Measured from this repository — never recalled from earlier reports.
 
 | Metric | At Stage 1 baseline | Current |
 |---|---|---|
-| Test files | 14 | **15** |
-| Tests | 73 | **90** |
+| Test files | 14 | **17** |
+| Tests | 73 | **115** |
 | Regions | 2 | 2 |
 | Modules | 2 | 2 |
 | Lessons | 3 | 3 |
-| Authored questions | 14 | 14 |
+| Authored questions | 14 | **17** |
 | Misconceptions | 8 | 8 |
 | Remediations | 7 | 7 |
 | Achievements | 4 | **6** |
 | Datasets | 1 | 1 |
-| Interaction types implemented | 11 of 17 | 11 of 17 |
-| Renderer bundle | 285.73 kB (83.82 kB gzip) | **286.61 kB (83.99 kB gzip)** |
+| Interaction types implemented | 11 of 17 | **12 of 17** |
+| Interaction types used by content | 11 | **12** |
+| Renderer bundle | 285.73 kB (83.82 kB gzip) | **297.78 kB (86.67 kB gzip)** |
+
+Still stubbed (5): `drag-and-drop`, `point-placement`, `formula-construction`, `simulation-prediction`,
+`confidence-rating`.
+
+**Interaction-count rules note.** These are *authored question records*, not "validated available interactions".
+No topic yet meets the ≥100 threshold in `STAGE2_RECONSTRUCTION_SCOPE.md` §4, and no Region 1 or Region 2 topic is
+therefore marked Complete. Generator families and the per-topic report arrive in S2-09 / S2-17.
 
 Windows runtime status: **unverified**, unchanged. `package:win` is configured but has never been compiled or
 smoke-tested; reconstruction runs on Linux. No Windows claim is made.

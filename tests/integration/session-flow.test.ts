@@ -60,11 +60,30 @@ describe("end-to-end lesson session (headless)", () => {
       "q.pct-rainy-days": { kind: "numeric", text: "30" },
       "q.fraction-quarter": { kind: "numeric", text: "3/12" },
       "q.ordering-data-cycle": { kind: "ordering", order: ["it.ask", "it.collect", "it.organize", "it.summarize", "it.interpret"] },
-      "q.graph-tallest-bar": { kind: "choice", choiceIds: ["ch.fri"] }
+      "q.graph-tallest-bar": { kind: "choice", choiceIds: ["ch.fri"] },
+      "q.step-mean-catch": {
+        kind: "steps",
+        steps: [
+          { stepId: "st.mean.total", text: "25" },
+          { stepId: "st.mean.count", text: "5" },
+          { stepId: "st.mean.divide", text: "5" }
+        ]
+      },
+      "q.step-percent-rainy": {
+        kind: "steps",
+        steps: [
+          { stepId: "st.pct.part", text: "12" },
+          { stepId: "st.pct.proportion", text: "0.3" },
+          { stepId: "st.pct.scale", text: "30" }
+        ]
+      }
     };
     let t = 1000;
     while (!session.finished) {
       const qid = session.questionQueue[session.currentIndex]!;
+      // Answers are enumerated deliberately: adding a question to this lesson must
+      // fail loudly here rather than being silently skipped in the playthrough.
+      expect(answers[qid], `no answer defined for ${qid} — extend this playthrough`).toBeDefined();
       const submitted = submitAnswer(content, save, session, answers[qid]!, t)!;
       save = submitted.save;
       session = submitted.session;

@@ -39,6 +39,8 @@ function correctResponseFor(question: Question): RawResponse {
       return { kind: "matching", pairs: a.pairs.map((p) => ({ left: p.left, right: p.right })) };
     case "text":
       return { kind: "text", text: a.requiredKeywords.join(" ") };
+    case "steps":
+      return { kind: "steps", steps: a.steps.map((s) => ({ stepId: s.id, text: String(s.value) })) };
   }
 }
 

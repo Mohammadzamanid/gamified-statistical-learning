@@ -67,12 +67,44 @@ export const TextAnswerSchema = z.object({
   forbiddenKeywords: z.array(NonEmptyString).default([])
 });
 
+/**
+ * One numeric step of a step-by-step calculation.
+ *
+ * Steps are deliberately numeric: the learner carries out the procedure one
+ * quantity at a time, so a wrong step is caught and explained where it happened
+ * rather than only at the final answer.
+ */
+export const CalculationStepSchema = z.object({
+  id: IdSchema,
+  prompt: NonEmptyString,
+  value: z.number(),
+  tolerance: z.number().min(0).default(0),
+  unit: z.string().optional(),
+  /** Additional accepted values for equivalent forms, e.g. 0.3 alongside 30 on a percentage step. */
+  acceptedValues: z.array(z.number()).default([]),
+  /** Hints for this step only, revealed in order. */
+  hints: z.array(NonEmptyString).default([]),
+  /** Shown once the step has been answered correctly. */
+  explanation: NonEmptyString,
+  /** Wrong values that identify a specific misconception at this step, in priority order. */
+  misconceptionValues: z
+    .array(z.object({ value: z.number(), misconceptionId: IdSchema }))
+    .default([])
+});
+export type CalculationStep = z.infer<typeof CalculationStepSchema>;
+
+export const StepsAnswerSchema = z.object({
+  kind: z.literal("steps"),
+  steps: z.array(CalculationStepSchema).min(2)
+});
+
 export const AnswerSpecSchema = z.discriminatedUnion("kind", [
   NumericAnswerSchema,
   ChoiceAnswerSchema,
   OrderingAnswerSchema,
   MatchingAnswerSchema,
-  TextAnswerSchema
+  TextAnswerSchema,
+  StepsAnswerSchema
 ]);
 export type AnswerSpec = z.infer<typeof AnswerSpecSchema>;
 
@@ -136,6 +168,23 @@ export const QuestionSchema = z.object({
     const ids = new Set(q.choices.map((c) => c.id));
     for (const cid of q.answer.correctChoiceIds) {
       if (!ids.has(cid)) ctx.addIssue({ code: z.ZodIssueCode.custom, message: `correct choice ${cid} not among choices` });
+    }
+  }
+  // A steps answer and the step-by-step interaction imply each other. Either one
+  // without the other would render or evaluate as the wrong kind of question.
+  if (q.interaction === "step-by-step-calculation" && q.answer.kind !== "steps") {
+    ctx.addIssue({ code: z.ZodIssueCode.custom, message: "step-by-step-calculation requires a steps answer" });
+  }
+  if (q.answer.kind === "steps" && q.interaction !== "step-by-step-calculation") {
+    ctx.addIssue({ code: z.ZodIssueCode.custom, message: "a steps answer requires interaction step-by-step-calculation" });
+  }
+  if (q.answer.kind === "steps") {
+    const seen = new Set<string>();
+    for (const s of q.answer.steps) {
+      if (seen.has(s.id)) {
+        ctx.addIssue({ code: z.ZodIssueCode.custom, message: `duplicate step id ${s.id}` });
+      }
+      seen.add(s.id);
     }
   }
 });

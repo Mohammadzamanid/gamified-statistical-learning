@@ -102,7 +102,9 @@
         "q.pct-rainy-days",
         "q.fraction-quarter",
         "q.ordering-data-cycle",
-        "q.graph-tallest-bar"
+        "q.graph-tallest-bar",
+        "q.step-mean-catch",
+        "q.step-percent-rainy"
       ],
       "prerequisites": [],
       "estimatedMinutes": 12
@@ -130,7 +132,8 @@
         "q.matching-measures",
         "q.method-select",
         "q.error-id-causation",
-        "q.short-why-median"
+        "q.short-why-median",
+        "q.step-median-market"
       ],
       "prerequisites": [
         "l.reading-tallies"

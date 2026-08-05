@@ -17,5 +17,15 @@ export function normalizeResponse(raw: RawResponse): NormalizedResponse {
       };
     case "text":
       return { kind: "text", text: raw.text.trim().toLowerCase().replace(/\s+/g, " ") };
+    case "steps":
+      // Step order carries meaning, so it is preserved rather than sorted.
+      return {
+        kind: "steps",
+        steps: raw.steps.map((s) => ({
+          stepId: s.stepId,
+          value: parseUserNumber(s.text),
+          rawText: s.text.trim()
+        }))
+      };
   }
 }

@@ -8,7 +8,7 @@ import type { InteractionType } from "../../shared/schemas";
 export interface InteractionDescriptor {
   type: InteractionType;
   /** Which RawResponse kind this interaction produces. */
-  responseKind: "choice" | "numeric" | "ordering" | "matching" | "text";
+  responseKind: "choice" | "numeric" | "ordering" | "matching" | "text" | "steps";
   /** True once a working renderer exists. */
   implemented: boolean;
 }
@@ -44,7 +44,7 @@ export function registerDefaultInteractions(): void {
     ["simulation-prediction", "numeric", false],
     ["error-identification", "choice", true],
     ["method-selection", "choice", true],
-    ["step-by-step-calculation", "numeric", false],
+    ["step-by-step-calculation", "steps", true],
     ["short-explanation", "text", true],
     ["confidence-rating", "numeric", false]
   ];

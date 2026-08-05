@@ -638,5 +638,233 @@
     ],
     "misconceptionIds": [],
     "estimatedSeconds": 45
+  },
+  {
+    "id": "q.step-mean-catch",
+    "topicId": "t.center",
+    "objectiveId": "obj.compute-mean",
+    "skillIds": [
+      "skill.mean"
+    ],
+    "difficulty": 2,
+    "interaction": "step-by-step-calculation",
+    "prompt": "Work out the MEAN number of fish per day, one step at a time. The five days landed 2, 4, 4, 6, and 9 fish.",
+    "visual": {
+      "kind": "bar-chart",
+      "datasetId": "ds.harbor-catch",
+      "caption": "Fish landed per day",
+      "accessibleDescription": "Bar chart of fish landed per day: Monday 2, Tuesday 4, Wednesday 4, Thursday 6, Friday 9."
+    },
+    "datasetId": "ds.harbor-catch",
+    "answer": {
+      "kind": "steps",
+      "steps": [
+        {
+          "id": "st.mean.total",
+          "prompt": "Add all five values together. What is the total?",
+          "value": 25,
+          "tolerance": 0.001,
+          "unit": "fish",
+          "hints": [
+            "Add them in any order: 2 + 4 + 4 + 6 + 9.",
+            "2 + 4 = 6, then 6 + 4 = 10, then 10 + 6 = 16, then 16 + 9."
+          ],
+          "explanation": "2 + 4 + 4 + 6 + 9 = 25 fish landed across the whole week."
+        },
+        {
+          "id": "st.mean.count",
+          "prompt": "How many days are you sharing that total across?",
+          "value": 5,
+          "tolerance": 0.001,
+          "unit": "days",
+          "hints": [
+            "Count the days in the list, not the fish."
+          ],
+          "explanation": "There are 5 days, so the total is shared across 5 days."
+        },
+        {
+          "id": "st.mean.divide",
+          "prompt": "Divide the total by the number of days. What is the mean?",
+          "value": 5,
+          "tolerance": 0.001,
+          "unit": "fish per day",
+          "hints": [
+            "Work out 25 divided by 5.",
+            "The mean shares the total out equally: each day gets the same amount."
+          ],
+          "explanation": "25 / 5 = 5 fish per day. That is the mean.",
+          "misconceptionValues": [
+            {
+              "value": 25,
+              "misconceptionId": "mc.sum-not-mean"
+            }
+          ]
+        }
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Total first, then count, then divide."
+      }
+    ],
+    "explanation": "Mean = total / count = (2 + 4 + 4 + 6 + 9) / 5 = 25 / 5 = 5 fish per day.",
+    "solutionSteps": [
+      "Add the values: 25.",
+      "Count the values: 5.",
+      "Divide: 25 / 5 = 5."
+    ],
+    "misconceptionIds": [
+      "mc.sum-not-mean"
+    ],
+    "followUpQuestionId": "q.remed-mean-basic",
+    "accessibilityDescription": "A three-step calculation: total, then count, then divide.",
+    "estimatedSeconds": 120
+  },
+  {
+    "id": "q.step-percent-rainy",
+    "topicId": "t.percent",
+    "objectiveId": "obj.percent-fraction",
+    "skillIds": [
+      "skill.percent-fraction"
+    ],
+    "difficulty": 2,
+    "interaction": "step-by-step-calculation",
+    "prompt": "The log shows 12 rainy days out of the last 40. Turn that into a PERCENTAGE, one step at a time.",
+    "answer": {
+      "kind": "steps",
+      "steps": [
+        {
+          "id": "st.pct.part",
+          "prompt": "How many days were rainy? This is the part you are interested in.",
+          "value": 12,
+          "tolerance": 0.001,
+          "unit": "days",
+          "hints": [
+            "Read it straight from the log: the number of rainy days."
+          ],
+          "explanation": "12 days were rainy. That is the part."
+        },
+        {
+          "id": "st.pct.proportion",
+          "prompt": "Divide the part by the whole. What is 12 divided by 40? (You may type it as a fraction.)",
+          "value": 0.3,
+          "tolerance": 0.0005,
+          "acceptedValues": [],
+          "hints": [
+            "Part over whole: 12 / 40.",
+            "12 / 40 is the same as 3 / 10."
+          ],
+          "explanation": "12 / 40 = 0.3. This is the proportion of days that were rainy."
+        },
+        {
+          "id": "st.pct.scale",
+          "prompt": "Multiply that proportion by 100. What number do you get?",
+          "value": 30,
+          "tolerance": 0.01,
+          "hints": [
+            "Percent means 'per hundred', so scale the proportion up by 100.",
+            "0.3 x 100."
+          ],
+          "explanation": "0.3 x 100 = 30, so 30% of the days were rainy.",
+          "misconceptionValues": [
+            {
+              "value": 0.3,
+              "misconceptionId": "mc.decimal-vs-percent"
+            }
+          ]
+        }
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Part, then part over whole, then scale up by 100."
+      }
+    ],
+    "explanation": "12 / 40 = 0.3, and 0.3 per hundred is 30%.",
+    "solutionSteps": [
+      "Part = 12.",
+      "12 / 40 = 0.3.",
+      "0.3 x 100 = 30%."
+    ],
+    "misconceptionIds": [
+      "mc.decimal-vs-percent"
+    ],
+    "accessibilityDescription": "A three-step conversion: part, then proportion, then percentage.",
+    "estimatedSeconds": 120
+  },
+  {
+    "id": "q.step-median-market",
+    "topicId": "t.center",
+    "objectiveId": "obj.compute-median",
+    "skillIds": [
+      "skill.median"
+    ],
+    "difficulty": 2,
+    "interaction": "step-by-step-calculation",
+    "prompt": "Five crates sold for 3, 15, 8, 7, and 12 coins. Find the MEDIAN price one step at a time. Sorted, the prices are 3, 7, 8, 12, 15.",
+    "answer": {
+      "kind": "steps",
+      "steps": [
+        {
+          "id": "st.med.count",
+          "prompt": "How many prices are there?",
+          "value": 5,
+          "tolerance": 0.001,
+          "unit": "prices",
+          "hints": [
+            "Count the crates."
+          ],
+          "explanation": "There are 5 prices."
+        },
+        {
+          "id": "st.med.position",
+          "prompt": "With 5 values in order, which position is the middle one? Count from the left, starting at 1.",
+          "value": 3,
+          "tolerance": 0.001,
+          "hints": [
+            "Two values sit below the middle and two sit above it.",
+            "For 5 values the middle is position (5 + 1) / 2."
+          ],
+          "explanation": "Position 3 is the middle: two prices below it, two above it."
+        },
+        {
+          "id": "st.med.value",
+          "prompt": "Read the sorted list 3, 7, 8, 12, 15. What value sits in that middle position?",
+          "value": 8,
+          "tolerance": 0.001,
+          "unit": "coins",
+          "hints": [
+            "Count along the sorted list to position 3.",
+            "3 is first, 7 is second, so what is third?"
+          ],
+          "explanation": "The third sorted price is 8 coins, so the median is 8.",
+          "misconceptionValues": [
+            {
+              "value": 9,
+              "misconceptionId": "mc.mean-median-confusion"
+            }
+          ]
+        }
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Count, find the middle position, then read that value from the sorted list."
+      }
+    ],
+    "explanation": "Sorted, the prices are 3, 7, 8, 12, 15. With five values the middle is position 3, so the median is 8 coins.",
+    "solutionSteps": [
+      "Count: 5 values.",
+      "Middle position: 3.",
+      "Value at position 3: 8 coins."
+    ],
+    "misconceptionIds": [
+      "mc.mean-median-confusion"
+    ],
+    "accessibilityDescription": "A three-step procedure: count, locate the middle position, read that value.",
+    "estimatedSeconds": 120
   }
 ]

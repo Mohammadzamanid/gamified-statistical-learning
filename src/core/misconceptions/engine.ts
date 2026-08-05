@@ -46,9 +46,16 @@ export function classifyMisconception(
   library: MisconceptionLibrary,
   ctxBase: Omit<DetectorContext, "params">
 ): Misconception | null {
+  // A step-by-step run classifies each step as the evaluator checks it. Honour that
+  // result before falling back to the question-level detectors, which only understand
+  // a single response and would all decline a "steps" response.
+  const rawStepIds = ctxBase.evaluation.signals["stepMisconceptionIds"];
+  const stepMisconceptions: unknown[] = Array.isArray(rawStepIds) ? rawStepIds : [];
+
   for (const id of question.misconceptionIds) {
     const mc = library.misconceptions.get(id);
     if (!mc) continue;
+    if (stepMisconceptions.includes(id)) return mc;
     const detector = getDetector(mc.detector);
     if (!detector) continue;
     // Per-question overrides live under question.parameters[misconceptionId].

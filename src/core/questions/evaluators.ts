@@ -1,5 +1,6 @@
 import type { AnswerSpec, Question } from "../../shared/schemas";
 import { approxEqual } from "../../shared/utilities/numeric";
+import { classifyStepValue, stepValueMatches } from "./step-calculation";
 import type { EvaluationResult, NormalizedResponse } from "./types";
 
 function evalAgainst(answer: AnswerSpec, response: NormalizedResponse): { correct: boolean; signals: Record<string, unknown> } {
@@ -54,6 +55,27 @@ function evalAgainst(answer: AnswerSpec, response: NormalizedResponse): { correc
       signals.missingKeywords = missing;
       signals.forbiddenKeywordsHit = forbidden;
       return { correct: missing.length === 0 && forbidden.length === 0, signals };
+    }
+    case "steps": {
+      if (response.kind !== "steps") return { correct: false, signals: { responseKindMismatch: true } };
+      const submitted = new Map(response.steps.map((s) => [s.stepId, s]));
+      const stepResults = answer.steps.map((step) => {
+        const got = submitted.get(step.id);
+        return {
+          stepId: step.id,
+          value: got?.value ?? null,
+          correct: got !== undefined && stepValueMatches(step, got.value),
+          misconceptionId: got ? classifyStepValue(step, got.value) : null
+        };
+      });
+      signals.stepResults = stepResults;
+      signals.firstFailedStepId = stepResults.find((r) => !r.correct)?.stepId ?? null;
+      signals.stepMisconceptionIds = stepResults
+        .map((r) => r.misconceptionId)
+        .filter((id): id is string => id !== null);
+      // Every step must be present and correct — a partially worked run is not a correct answer.
+      const correct = stepResults.length === answer.steps.length && stepResults.every((r) => r.correct);
+      return { correct, signals };
     }
   }
 }

@@ -120,6 +120,17 @@ function checkReferences(
     for (const m of q.misconceptionIds) if (!misconceptionIds.has(m)) problems.push(`question ${q.id} references missing misconception ${m}`);
     if (q.datasetId && !datasetIds.has(q.datasetId)) problems.push(`question ${q.id} references missing dataset ${q.datasetId}`);
     if (q.followUpQuestionId && !questionIds.has(q.followUpQuestionId)) problems.push(`question ${q.id} follow-up ${q.followUpQuestionId} missing`);
+    // Step-level misconception mappings must resolve too, otherwise a wrong step
+    // classifies to an id nothing can remediate.
+    if (q.answer.kind === "steps") {
+      for (const step of q.answer.steps) {
+        for (const mv of step.misconceptionValues) {
+          if (!misconceptionIds.has(mv.misconceptionId)) {
+            problems.push(`question ${q.id} step ${step.id} references missing misconception ${mv.misconceptionId}`);
+          }
+        }
+      }
+    }
   }
   for (const mc of misconceptions) {
     if (!remediationIds.has(mc.remediationId)) problems.push(`misconception ${mc.id} references missing remediation ${mc.remediationId}`);

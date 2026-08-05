@@ -7,6 +7,15 @@ import { useMemo, useState } from "react";
 import type { Question } from "../../shared/schemas";
 import type { RawResponse } from "../../core/questions/types";
 import { getInteraction } from "../../core/questions/registry";
+import {
+  currentStep,
+  finalResponse,
+  retryCurrentStep,
+  revealStepHint,
+  startStepRun,
+  stepsOf,
+  submitStep
+} from "../../core/questions/step-calculation";
 
 export interface RendererProps {
   question: Question;
@@ -239,6 +248,139 @@ function ShortText({ question, disabled, onSubmit }: RendererProps): JSX.Element
   );
 }
 
+/**
+ * Step-by-step calculation.
+ *
+ * All run logic lives in core/questions/step-calculation; this component only
+ * renders it. Keyboard operation is native throughout — a text input plus
+ * buttons, with Enter to submit — and every state change is announced through a
+ * polite live region, so correctness is never signalled by colour alone.
+ */
+function StepByStep({ question, disabled, onSubmit }: RendererProps): JSX.Element {
+  const [run, setRun] = useState(() => startStepRun(question));
+  const [text, setText] = useState("");
+  const [hints, setHints] = useState<string[]>([]);
+  const [passed, setPassed] = useState<string[]>([]);
+
+  const steps = stepsOf(question);
+  const step = currentStep(question, run);
+  const total = steps.length;
+  const attempt = run.lastAttempt;
+  const blocked = disabled || run.status === "complete";
+  const awaitingRetry = run.status === "awaiting-retry";
+  const stepNumber = Math.min(run.currentIndex + 1, total);
+
+  const submit = () => {
+    if (!step || blocked || awaitingRetry || text.trim().length === 0) return;
+    const result = submitStep(question, run, text);
+    setRun(result.state);
+    if (result.attempt.correct) {
+      setText("");
+      setHints([]);
+      if (result.explanation) setPassed((p) => [...p, result.explanation as string]);
+      if (result.runComplete) onSubmit(finalResponse(result.state));
+    }
+  };
+
+  const retry = () => {
+    setRun((r) => retryCurrentStep(r));
+    setText("");
+  };
+
+  const takeHint = () => {
+    const revealed = revealStepHint(question, run);
+    setRun(revealed.state);
+    if (revealed.hint) setHints((h) => [...h, revealed.hint as string]);
+  };
+
+  return (
+    <div className="stack">
+      <p className="faint">
+        Work through this one step at a time. Each step is checked on its own, so a slip only costs that step.
+      </p>
+
+      <ol className="choice-list">
+        {steps.map((s, i) => {
+          const done = i < run.currentIndex;
+          const active = i === run.currentIndex && run.status !== "complete";
+          return (
+            <li key={s.id} className="choice" style={{ cursor: "default", justifyContent: "space-between" }}>
+              <span>
+                <span className="data faint">{i + 1}.</span> {s.prompt}
+              </span>
+              {/* Words, not colour, carry the state. */}
+              <span className="faint">{done ? "done" : active ? "current" : "to do"}</span>
+            </li>
+          );
+        })}
+      </ol>
+
+      {passed.length > 0 && (
+        <div className="stack">
+          {passed.map((e, i) => (
+            <p key={i} className="faint">
+              Step {i + 1}: {e}
+            </p>
+          ))}
+        </div>
+      )}
+
+      {step && run.status !== "complete" && (
+        <div className="field" style={{ maxWidth: 320 }}>
+          <label htmlFor={`step-${question.id}-${step.id}`}>
+            {`Step ${stepNumber} of ${total}: ${step.prompt}${step.unit ? ` (${step.unit})` : ""}`}
+          </label>
+          <input
+            id={`step-${question.id}-${step.id}`}
+            type="text"
+            inputMode="decimal"
+            className="data"
+            value={text}
+            disabled={blocked || awaitingRetry}
+            aria-describedby={`step-status-${question.id}`}
+            onChange={(e) => setText(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") submit();
+            }}
+          />
+        </div>
+      )}
+
+      {hints.map((h, i) => (
+        <p key={i} className="faint">
+          Hint {i + 1}: {h}
+        </p>
+      ))}
+
+      {/* One polite live region: step outcomes and completion are announced. */}
+      <p id={`step-status-${question.id}`} role="status" aria-live="polite" className="faint">
+        {run.status === "complete"
+          ? "All steps complete. Answer submitted."
+          : awaitingRetry && attempt
+            ? `Not quite on step ${stepNumber}. Try this step again.`
+            : `Step ${stepNumber} of ${total}.`}
+      </p>
+
+      <div className="row" style={{ gap: 8 }}>
+        {awaitingRetry ? (
+          <button className="btn primary" disabled={disabled} onClick={retry}>
+            {`Retry step ${stepNumber}`}
+          </button>
+        ) : (
+          <button className="btn primary" disabled={blocked || text.trim().length === 0} onClick={submit}>
+            {run.currentIndex === total - 1 ? "Submit final step" : "Check step"}
+          </button>
+        )}
+        {step && step.hints.length > run.hintsRevealedThisStep && (
+          <button className="btn ghost" disabled={blocked || awaitingRetry} onClick={takeHint}>
+            Hint for this step
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}
+
 export function QuestionInteraction(props: RendererProps): JSX.Element {
   const descriptor = getInteraction(props.question.interaction);
   if (!descriptor || !descriptor.implemented) {
@@ -268,6 +410,8 @@ export function QuestionInteraction(props: RendererProps): JSX.Element {
       return <Matching {...props} />;
     case "short-explanation":
       return <ShortText {...props} />;
+    case "step-by-step-calculation":
+      return <StepByStep {...props} />;
     default:
       return (
         <div className="card">
