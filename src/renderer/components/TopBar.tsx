@@ -28,6 +28,7 @@ export function TopBar(): JSX.Element {
           <nav className="row" aria-label="Main navigation">
             <button className="btn ghost small" onClick={() => navigate({ name: "world-map" })}>Chart</button>
             <button className="btn ghost small" onClick={() => navigate({ name: "lab" })}>Laboratory</button>
+            <button className="btn ghost small" onClick={() => navigate({ name: "review" })}>Review</button>
             <button className="btn ghost small" onClick={() => navigate({ name: "progress" })}>Logbook</button>
             <button className="btn ghost small" onClick={() => navigate({ name: "settings" })}>Settings</button>
             <button className="btn ghost small" onClick={() => navigate({ name: "about" })}>About</button>

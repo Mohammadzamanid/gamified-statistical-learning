@@ -7,6 +7,7 @@ import { SaveManager } from "../../src/core/persistence/save-manager";
 import { MemoryStorageAdapter } from "../../src/core/persistence/adapter";
 import { MIGRATIONS } from "../../src/core/persistence/migrations";
 import { createEmptySave } from "../../src/shared/schemas";
+import { SAVE_SCHEMA_VERSION } from "../../src/shared/constants/app";
 
 let dir: string;
 beforeEach(() => { dir = mkdtempSync(join(tmpdir(), "statlas-test-")); });
@@ -77,8 +78,11 @@ describe("persistence on the node adapter", () => {
       const imported = await mgr.importSave(JSON.stringify(oldSave));
       expect(imported.ok).toBe(true);
       if (imported.ok) {
-        expect(imported.value.schemaVersion).toBe(1);
-        expect(imported.value.xp).toBe(999);
+        // Assert against the current version rather than a literal, so a future
+        // schema bump does not silently stop exercising the whole chain.
+        expect(imported.value.schemaVersion).toBe(SAVE_SCHEMA_VERSION);
+        expect(imported.value.xp).toBe(999); // the temporary 0 -> 1 step ran
+        expect(imported.value.reviewSession).toBeNull(); // the real 1 -> 2 step ran
       }
     } finally {
       delete MIGRATIONS[0];

@@ -6,7 +6,14 @@
 export type Migration = (data: Record<string, unknown>) => Record<string, unknown>;
 
 export const MIGRATIONS: Record<number, Migration> = {
-  // 1 -> 2 will be added when the schema changes.
+  /**
+   * 1 -> 2 (S2-06): adds `reviewSession`, the persisted in-flight review queue.
+   *
+   * A version-1 save has no review session in progress, so the correct lift is an
+   * explicit null rather than relying on the schema default — a migration that
+   * leans on defaults silently stops working the moment the default changes.
+   */
+  1: (data) => ({ ...data, reviewSession: null })
 };
 
 export function migrateToVersion(

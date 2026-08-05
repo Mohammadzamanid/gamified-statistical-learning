@@ -33,6 +33,26 @@ export const ReviewItemSchema = z.object({
 });
 export type ReviewItem = z.infer<typeof ReviewItemSchema>;
 
+/**
+ * An in-flight review session, persisted so an interrupted session resumes
+ * exactly where it stopped rather than rebuilding a different queue.
+ *
+ * The queue is frozen at `startedAt`: rebuilding it on resume would drop items
+ * the learner had already been shown, or add ones that fell due meanwhile,
+ * making "resume" mean something different each time.
+ */
+export const ReviewSessionStateSchema = z.object({
+  startedAt: IsoDateTime,
+  /** Skill ids in the order they will be asked, fixed when the session started. */
+  skillQueue: z.array(IdSchema),
+  /** Question chosen per skill, so resume shows the same question. */
+  questionQueue: z.array(IdSchema),
+  currentIndex: z.number().int().min(0),
+  answeredCount: z.number().int().min(0).default(0),
+  correctCount: z.number().int().min(0).default(0)
+});
+export type ReviewSessionState = z.infer<typeof ReviewSessionStateSchema>;
+
 export const LessonProgressSchema = z.object({
   lessonId: IdSchema,
   status: z.enum(["locked", "available", "in-progress", "completed"]),
@@ -76,6 +96,8 @@ export const SaveFileSchema = z.object({
   lessonProgress: z.record(LessonProgressSchema).default({}),
   attemptLog: z.array(AttemptRecordSchema).default([]),
   achievements: z.array(IdSchema).default([]),
+  /** Null when no review session is in flight. */
+  reviewSession: ReviewSessionStateSchema.nullable().default(null),
   xp: z.number().int().min(0).default(0),
   updatedAt: IsoDateTime
 });

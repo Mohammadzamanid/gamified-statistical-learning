@@ -14,7 +14,7 @@ Status vocabulary is defined in `STAGE2_RECONSTRUCTION_SCOPE.md` §9.
 | S2-03 | Point-placement interaction | S2-02 | Number lines, coordinates, graph reading, approximate values; pointer **and** keyboard interaction; configurable tolerance; accessible feedback | **Complete** | `src/core/questions/point-placement.ts` (new), `evaluators.ts`, `normalize.ts`, `types.ts`, `registry.ts`, `src/shared/schemas/question.ts`, `src/core/misconceptions/{engine,detectors}.ts`, `src/core/curriculum/loader.ts`, `QuestionRenderers.tsx`, content | `tests/unit/point-placement.test.ts` (31), `tests/integration/point-placement-flow.test.ts` (9) | `4c4d908` | `4c4d908` | Yes — MATCH | Full SHA `4c4d908bf4395bacbb4c23968fbb86ce46b36fd3`; recorded only after the push was verified. Suite 115→**155 tests**, 17→**19 files**. Keyboard reachability is asserted, not asserted-about: a test steps to every shipped target with `movePoint` alone and submits the result through the real engine. |
 | S2-04 | Accessible drag-and-drop | S2-03 | Reusable for sorting, matching, ordering, grouping, simple graph construction; complete keyboard alternative | **Complete** | `src/core/questions/drag-drop.ts` (new), `evaluators.ts`, `normalize.ts`, `types.ts`, `registry.ts`, `src/shared/schemas/question.ts`, `src/core/misconceptions/{engine,detectors}.ts`, `src/core/curriculum/loader.ts`, `QuestionRenderers.tsx`, content | `tests/unit/drag-drop.test.ts` (30), `tests/integration/drag-drop-flow.test.ts` (8) | `70e9527` | `70e9527` | Yes — MATCH | Full SHA `70e95277a0850c67d0af07148d7f0ac7497aab43`; recorded only after the push was verified. Suite 155→**193 tests**, 19→**21 files**. One `placement` primitive covers all five shapes — only the zone configuration differs. Every shipped arrangement is built in a test using **only** the operations the keyboard controls perform, never a drag. |
 | S2-05 | Interaction-type audit (all 17) | S2-04 | Per type: schema, renderer, evaluation, correct path, incorrect path, misconception path, keyboard operation, accessible name/instructions, ≥1 genuine curriculum use, save/resume where stateful | **Complete** | `docs/INTERACTION_AUDIT.md` (new), `src/renderer/components/rendered-interactions.ts` (new), `QuestionRenderers.tsx`, `tests/helpers/responses.ts` (new) | `tests/audit/interaction-audit.test.ts` (18) | `acc9bf3` | `acc9bf3` | Yes — MATCH | Full SHA `acc9bf36df47ab97613ec1f1bc77c8355b3cccd1`; recorded only after the push was verified. Suite 193→**211 tests**, 21→**22 files**. The audit is **enforced, not described**: renderer coverage is a shared module the test compares against the registry, and correct/wrong paths are driven from real content for every implemented type. Curriculum use is measured as reachable-from-a-lesson, so demos cannot satisfy it. 5 findings recorded (F-1…F-5), none claimed as fixed. |
-| S2-06 | Dedicated spaced-review queue | S2-01 | Due calculation, review screen, overdue items, new-vs-review distinction, mixed-topic review, correct/incorrect rescheduling, persistence, interrupted-session resume, deterministic-clock tests | Not started | `src/core/spaced-repetition/*`, `src/renderer/screens/*` | pending | — | — | — | Logbook already computes `dueItems`. |
+| S2-06 | Dedicated spaced-review queue | S2-01 | Due calculation, review screen, overdue items, new-vs-review distinction, mixed-topic review, correct/incorrect rescheduling, persistence, interrupted-session resume, deterministic-clock tests | **In progress** | `src/core/spaced-repetition/review-queue.ts` (new), `src/renderer/state/review-session.ts` (new), `src/renderer/screens/ReviewScreen.tsx` (new), `store.ts`, `App.tsx`, `TopBar.tsx`, `src/shared/schemas/profile.ts`, `constants/app.ts`, `persistence/migrations.ts` | `tests/unit/review-queue.test.ts` (13), `tests/integration/review-session.test.ts` (12) | pending | pending | pending | Hashes recorded after push verification, never in advance. Suite 211→**236 tests**, 22→**24 files**. **Save schema 1 → 2** with a real migration, because resume requires persisting the in-flight queue. The queue is **frozen at start**, so resume shows what it showed before rather than a rebuilt queue. Clock is an argument everywhere — no `Date.now()` inside the review core. |
 | S2-07 | Region 1 curriculum architecture | S2-05 | Complete lesson + prerequisite graph; every required topic represented and reachable | Not started | `src/content/worlds/curriculum.json` | pending | — | — | — | Skeleton content must not be marked Complete. |
 | S2-08 | Region 1 lessons and interactions | S2-07 | Every lesson satisfies all 18 structure requirements (scope §5) | Not started | `src/content/*` | pending | — | — | — | |
 | S2-09 | Region 1 validated content expansion | S2-08 | ≥100 validated interactions per completed major topic, multiple reasoning families, duplicate/near-duplicate gates, misconception mappings, a11y descriptions, machine- and human-readable reports | Not started | generators + report tooling | pending | — | — | — | Topic list comes from the curriculum graph, never from generator modules. |
@@ -37,8 +37,8 @@ Measured from this repository — never recalled from earlier reports.
 
 | Metric | At Stage 1 baseline | Current |
 |---|---|---|
-| Test files | 14 | **22** |
-| Tests | 73 | **211** |
+| Test files | 14 | **24** |
+| Tests | 73 | **236** |
 | Regions | 2 | 2 |
 | Modules | 2 | 2 |
 | Lessons | 3 | 3 |
@@ -49,9 +49,11 @@ Measured from this repository — never recalled from earlier reports.
 | Datasets | 1 | 1 |
 | Interaction types implemented | 11 of 17 | **14 of 17** |
 | Interaction types used by content | 11 | **14** |
-| Renderer bundle | 285.73 kB (83.82 kB gzip) | **325.04 kB (93.81 kB gzip)** |
+| Renderer bundle | 285.73 kB (83.82 kB gzip) | **332.35 kB (95.55 kB gzip)** |
 
 Still stubbed (3): `formula-construction`, `simulation-prediction`, `confidence-rating`.
+
+**Save schema version: 2** (was 1 at the Stage 1 baseline). Migration `1 -> 2` adds `reviewSession`.
 
 **Interaction-count rules note.** These are *authored question records*, not "validated available interactions".
 No topic yet meets the ≥100 threshold in `STAGE2_RECONSTRUCTION_SCOPE.md` §4, and no Region 1 or Region 2 topic is

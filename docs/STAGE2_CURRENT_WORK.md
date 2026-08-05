@@ -6,42 +6,43 @@ Exactly one Stage 2 unit is active at a time. Rewritten at the start and end of 
 
 ## Current unit
 
-**S2-05 — Interaction-type audit (all 17)**
+**S2-06 — Dedicated spaced-review queue**
 
-Entered from `12996468471d3f24317260b4714c428248302e62` (remote-verified, clean tree).
+Entered from `ebc84fbe8192839036a7e1825e565951bb22ec6a` (remote-verified, clean tree).
 
 ## Objective
 
-Audit every registered interaction type before more content is layered on top, and make the audit **enforced rather
-than described** — a document that can silently go stale is not an audit.
+Give review its own place in the app. The scheduler existed since Stage 1 and the Logbook already computed
+`dueItems`, but there was nowhere to actually *do* a review — the data had no home. This unit adds the queue, the
+session and the screen, and makes an interrupted review resumable.
 
 ## Relevant files
 
 | File | Change |
 |---|---|
-| `tests/audit/interaction-audit.test.ts` | **New.** 18 checks over the registry, renderer coverage and shipped content |
-| `docs/INTERACTION_AUDIT.md` | **New.** Measured per-type table, what each check guards against, 5 findings |
-| `src/renderer/components/rendered-interactions.ts` | **New.** Single source of truth for which types have a renderer |
-| `src/renderer/components/QuestionRenderers.tsx` | Consults it, so the UI stays honest if flags and renderers ever drift |
-| `tests/helpers/responses.ts` | **New.** Exhaustive correct/incorrect response builders for any answer kind |
-| `tests/integration/region-completion.test.ts` | Uses the shared helper instead of its own private copy |
+| `src/core/spaced-repetition/review-queue.ts` | **New.** Pure selection and ordering: overdue/due/new, day arithmetic, question choice |
+| `src/renderer/state/review-session.ts` | **New.** Pure session: start, answer, reschedule, advance, end |
+| `src/renderer/screens/ReviewScreen.tsx` | **New.** The review screen |
+| `src/renderer/state/store.ts` | `review` screen + `beginReview` / `submitReview` / `nextReview` / `exitReview` |
+| `src/renderer/app/App.tsx`, `components/TopBar.tsx` | Route and a nav entry, so the screen is genuinely reachable |
+| `src/shared/schemas/profile.ts` | `ReviewSessionStateSchema`; `SaveFile.reviewSession` |
+| `src/shared/constants/app.ts` | `SAVE_SCHEMA_VERSION` 1 → 2 |
+| `src/core/persistence/migrations.ts` | Real `1 -> 2` migration |
+| `tests/integration/persistence.test.ts` | Migration test made version-agnostic |
 
 ## Acceptance criteria
 
-Per type: schema · renderer · evaluation · correct path · incorrect path · misconception path · keyboard operation ·
-accessible name and instructions · ≥1 genuine curriculum use · save/resume where stateful.
-
 | # | Criterion | Met |
 |---|---|---|
-| 1 | All 17 types audited | Yes — table in `INTERACTION_AUDIT.md` §1 |
-| 2 | Schema / renderer / evaluation recorded per type | Yes, and enforced |
-| 3 | Correct and incorrect paths exercised per type | Yes — driven from real content, every implemented type |
-| 4 | Misconception path recorded per type | Yes — 10 of 14 mapped; the 4 gaps are finding **F-1**, not hidden |
-| 5 | Keyboard operation recorded | Yes — structurally, with the limits stated in **F-5** |
-| 6 | Accessible name and instructions present | Yes, and enforced |
-| 7 | ≥1 genuine curriculum use | Yes — measured as reachable-from-a-lesson, so demos cannot satisfy it |
-| 8 | Save/resume where stateful | Recorded as finding **F-2**: in-progress state is *not* persisted |
-| 9 | Inappropriate "not implemented" notices removed | Yes — 3 removed across S2-02…S2-04; the 3 genuine stubs keep theirs |
+| 1 | Due-review calculation | Yes — `buildReviewPlan`, clock passed in |
+| 2 | Review screen | Yes — routed and reachable from the top bar |
+| 3 | Overdue items | Yes — separated at the one-day boundary, most overdue first |
+| 4 | New versus review distinction | Yes — three named counts; a skill never met is *not* offered |
+| 5 | Mixed-topic review | Yes — due band interleaved, no skill twice in a row |
+| 6 | Correct/incorrect rescheduling | Yes — interval lengthens, or resets to a day and records a lapse |
+| 7 | Persistence | Yes — answers persist immediately, not at the end of a run |
+| 8 | Interrupted-session resume | Yes — the queue is **frozen**, and resume is proven across a real save/load |
+| 9 | Deterministic-clock tests | Yes — every test pins an instant; no wall-clock reads anywhere in the review core |
 | 10 | Commit pushed and remote hash verified | Yes |
 
 ## Required tests
@@ -57,50 +58,56 @@ Measured (Node v22.22.2 / npm 10.9.7):
 |---|---|
 | `npm run typecheck` | Pass |
 | `npm run lint` | Pass — 0 errors, 0 warnings |
-| `npm test` | Pass — **211 tests / 22 files** (was 193 / 21) |
+| `npm test` | Pass — **236 tests / 24 files** (was 211 / 22) |
 | `npm run test:statistics` | Pass — 18 tests / 3 files |
 | `npm run test:content` | Pass — 5 tests / 1 file |
-| `npm run build` | Pass — 325.04 kB (93.81 kB gzip) |
+| `npm run build` | Pass — 332.35 kB (95.55 kB gzip) |
 
-`test:a11y` was **not** run and is **not** claimed; it arrives in S2-20. Finding F-5 states plainly that nothing here
-is automated accessibility testing.
+`test:a11y` was **not** run and is **not** claimed; it arrives in S2-20.
 
 ## Work completed
 
-1. **Renderer coverage became data.** `RENDERED_INTERACTION_TYPES` is now a module the renderer's switch consults and
-   the audit compares against the registry's `implemented` flags. Previously "does a renderer exist?" was answerable
-   only by reading a switch statement, so nothing could check it.
+1. **The clock is an argument, never read inside.** Review is defined in days, so a hidden `Date.now()` would make
+   the system untestable and would drift with the machine's timezone. Every function in the review core takes `now`,
+   and every test pins a fixed instant — which is what lets the one-day overdue boundary be tested at all.
 
-2. **Correct and wrong paths are exercised for every implemented type, from real content.** A shared helper builds a
-   correct and a deliberately wrong response for any answer kind; the audit runs both through the real evaluator for
-   every lesson-reachable question. Because the helper's switches are exhaustive over `AnswerSpec`, adding an answer
-   kind without teaching it about that kind is a compile error.
+2. **The queue is frozen when the session starts.** Rebuilding it on resume would silently change what "resume"
+   means: items already shown would drop out, and items that fell due meanwhile would appear. Freezing costs a save
+   schema change, and that is the honest price of the requirement. A test asserts the running session is unchanged
+   even when new work falls due a week later.
 
-3. **"Genuine curriculum use" is measured, not asserted.** A type counts only if a question using it is reachable
-   **from a lesson**, so an isolated technical demo cannot satisfy the audit — exactly what the unit asked for.
+3. **Save schema 1 → 2, with a real migration.** Per the contract in `STAGE_HANDOFF.md` §6, the shape change ships
+   with a migration and round-trip tests. The migration writes an explicit `null` rather than leaning on the schema
+   default — a migration that depends on a default stops working the moment the default changes.
 
-4. **New reverse-validation guards.** No orphaned question (every question is reachable from a lesson or as a
-   remediation follow-up), no orphaned remediation, no distractor or in-answer misconception the question does not
-   also declare, and no misconception naming an unregistered detector.
+4. **New is not the same as unpractised.** A skill only becomes a `new` review candidate once the learner has met it.
+   Offering untouched skills would turn review into a second, shuffled lesson path.
 
-5. **Findings recorded honestly, none claimed fixed.** F-1 four types with no misconception mapping (→ S2-16);
-   F-2 in-progress interaction state is not persisted (→ S2-19); F-3 three genuine stubs; F-4 one question reachable
-   only via remediation, by design; F-5 keyboard operability is structural, not browser-verified (→ S2-20).
+5. **Review answers persist immediately.** A reschedule is the whole point of answering, so it is written on
+   submission rather than at the end of the run — an interruption must not lose it. Abandoning a session keeps every
+   reschedule and attempt already recorded, and drops only the queue position.
 
 ## Corrections made during the unit
 
-- **A `require()` call failed under ESM** in the first draft of the audit; replaced with a normal import.
-- **Duplication removed:** `region-completion.test.ts` carried its own private response builder, which would have
-  drifted from the audit's. It now uses the shared helper.
+- **I guessed the mastery API and was wrong.** `applyAttempt` takes `(prev, attempt, rule)` and returns a
+  `MasteryUpdate`, not a bare state. Typecheck caught it; the review session now makes the same call the lesson
+  session does, so the two share one notion of progress.
+- **The migration test hardcoded version 1** and went stale the moment the version was bumped. It now asserts against
+  `SAVE_SCHEMA_VERSION` and additionally checks the new `1 -> 2` step ran — stronger than before, and it will not
+  quietly stop testing the chain at the next bump.
+- **`FeedbackPanel` needed props I had not passed**; caught by typecheck.
+- **The screen was initially unreachable.** The first version took props, which does not match the store-driven
+  screens; the bundle grew by only 0.24 kB, showing it had been tree-shaken out. Rewritten to the store pattern and
+  wired into the router and top bar — the bundle then grew by 7 kB, which is the evidence it is actually included.
 
-## Verification that the audit has teeth
+## Verification that the tests have teeth
 
-Two deliberate drift probes, both reverted:
+Two deliberate probes, both reverted:
 
 | Probe | Result |
 |---|---|
-| Flip `confidence-rating` to `implemented: true` with no renderer | **3 checks fail** |
-| Remove `matching` from renderer coverage while its flag stays true | **1 check fails** |
+| Move the overdue boundary from ≥1 day to ≥2 days | **2 checks fail** |
+| Break session completion so the frozen queue never ends | **1 check fails** |
 
 ## Remaining work
 
@@ -108,21 +115,18 @@ None for this unit.
 
 ## Local commit
 
-`acc9bf36df47ab97613ec1f1bc77c8355b3cccd1`
+Recorded in a follow-up commit once the push is verified; hashes are never written in advance.
 
 ## Remote verification
 
-```
-LOCAL_HEAD  = acc9bf36df47ab97613ec1f1bc77c8355b3cccd1
-REMOTE_HEAD = acc9bf36df47ab97613ec1f1bc77c8355b3cccd1
-VERIFIED: MATCH
-```
+`git rev-parse HEAD` compared against `git ls-remote origin refs/heads/main` — see the backlog row.
 
 ## Result
 
-**Complete.** 14 of 17 types implemented, every one with a renderer and at least one lesson-reachable question; 3
-stubs, none used by content, none with a renderer. Five findings recorded for later units.
+**Complete.** Review has a queue, a session, a screen and a nav entry; overdue, due and new are distinguished by name;
+outcomes reschedule; and an interrupted session resumes on the same item with the same question across a real
+save/load round trip.
 
 ## Next unit
 
-**S2-06 — Dedicated spaced-review queue.** Not started in this cycle, per the one-unit-per-cycle rule.
+**S2-07 — Region 1 curriculum architecture.** Not started in this cycle, per the one-unit-per-cycle rule.

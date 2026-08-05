@@ -1,6 +1,13 @@
 /** Central zustand store: settings, profiles, save, navigation, lesson session. */
 import { create } from "zustand";
 import { loadShippedContent } from "../../content";
+import type { FeedbackPlan } from "../../core/misconceptions/engine";
+import {
+  advanceReview,
+  endReviewSession,
+  startReviewSession,
+  submitReviewAnswer
+} from "./review-session";
 import type { ContentBundle } from "../../core/curriculum/loader";
 import { registerBuiltInDetectors } from "../../core/misconceptions/detectors";
 import { registerDefaultInteractions } from "../../core/questions/registry";
@@ -29,7 +36,8 @@ export type Screen =
   | { name: "lab" }
   | { name: "progress" }
   | { name: "settings" }
-  | { name: "about" };
+  | { name: "about" }
+  | { name: "review" };
 
 interface StoreState {
   client: PersistenceClient;
@@ -39,6 +47,10 @@ interface StoreState {
   save: SaveFile | null;
   screen: Screen;
   session: LessonSession | null;
+  /** Feedback for the review item just answered, or null while it is unanswered. */
+  reviewFeedback: FeedbackPlan | null;
+  /** When the current review question was shown, for response timing. */
+  reviewShownAtMs: number;
   recoveredFromBackup: boolean;
   bootError: string | null;
   booted: boolean;
@@ -53,6 +65,11 @@ interface StoreState {
   resetProgress(): Promise<void>;
 
   startLesson(lessonId: string): void;
+  /** Review actions. `now` is passed in so tests and the UI share one clock source. */
+  beginReview(): void;
+  submitReview(raw: RawResponse): void;
+  nextReview(): void;
+  exitReview(): void;
   submit(raw: RawResponse): void;
   requestHint(): void;
   next(): void;
@@ -70,6 +87,8 @@ export const useStore = create<StoreState>((set, get) => ({
   profiles: [],
   save: null,
   screen: { name: "welcome" },
+  reviewFeedback: null,
+  reviewShownAtMs: Date.now(),
   session: null,
   recoveredFromBackup: false,
   bootError: null,
@@ -175,5 +194,43 @@ export const useStore = create<StoreState>((set, get) => ({
 
   exitLesson() {
     set({ session: null, screen: { name: "world-map" } });
+  },
+
+  beginReview() {
+    const { content, save, client } = get();
+    if (!save) return;
+    const next = startReviewSession(content, save, new Date());
+    persistSave(client, next);
+    set({ save: next });
+  },
+
+  submitReview(raw) {
+    const { content, save, client, reviewShownAtMs } = get();
+    if (!save) return;
+    const now = new Date();
+    const result = submitReviewAnswer(content, save, raw, now, Math.max(0, now.getTime() - reviewShownAtMs));
+    if (!result) return;
+    // Review answers reschedule, so they are persisted immediately rather than
+    // at the end of a run: an interruption must not lose the reschedule.
+    persistSave(client, result.save);
+    set({ save: result.save, reviewFeedback: result.feedback });
+  },
+
+  nextReview() {
+    const { save, client } = get();
+    if (!save) return;
+    const next = advanceReview(save);
+    persistSave(client, next);
+    set({ save: next, reviewFeedback: null, reviewShownAtMs: Date.now() });
+  },
+
+  exitReview() {
+    const { save, client } = get();
+    if (save) {
+      const next = endReviewSession(save);
+      persistSave(client, next);
+      set({ save: next });
+    }
+    set({ reviewFeedback: null, screen: { name: "world-map" } });
   }
 }));

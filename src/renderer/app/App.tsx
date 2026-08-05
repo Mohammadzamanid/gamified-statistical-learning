@@ -9,6 +9,7 @@ import { LessonScreen } from "../screens/LessonScreen";
 import { QuestionScreen } from "../screens/QuestionScreen";
 import { LabScreen } from "../screens/LabScreen";
 import { ProgressScreen } from "../screens/ProgressScreen";
+import { ReviewScreen } from "../screens/ReviewScreen";
 import { SettingsScreen } from "../screens/SettingsScreen";
 import { AboutScreen } from "../screens/AboutScreen";
 
@@ -43,6 +44,7 @@ export function App(): JSX.Element {
       case "question": body = <QuestionScreen />; break;
       case "lab": body = <LabScreen />; break;
       case "progress": body = <ProgressScreen />; break;
+      case "review": body = <ReviewScreen />; break;
       case "settings": body = <SettingsScreen />; break;
       case "about": body = <AboutScreen />; break;
     }
