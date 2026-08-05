@@ -4,7 +4,7 @@
 (`git show 7add4bc:docs/STAGE_HANDOFF.md`). Its still-binding contracts, traps, and priorities are carried forward
 below — nothing was discarded.
 
-**Last updated:** 2026-08-04, at the close of unit S2-06.
+**Last updated:** 2026-08-04, at the close of unit S2-07.
 
 ---
 
@@ -16,7 +16,7 @@ after Stage 1 was lost because commits were never pushed to a durable remote. Re
 
 - **Stage 1: surviving, verified, green.** Not re-created — the original commit `7add4bc` was carried forward from the
   archive's own `.git` directory, with authorship intact.
-- **Stage 2: in progress, and not recoverable.** Reconstruction began 2026-08-04; S2-01 through S2-06 are complete. Nothing
+- **Stage 2: in progress, and not recoverable.** Reconstruction began 2026-08-04; S2-01 through S2-07 are complete. Nothing
   in it is recovered source.
 - **Stages 3–6: not started, and not recoverable.** They must be **reconstructed** from the surviving Stage 1 source,
   the specifications, and the known defect history. They may never be described as recovered source, and no metric may
@@ -30,16 +30,17 @@ after Stage 1 was lost because commits were never pushed to a durable remote. Re
 | Default branch | `main` |
 | Pristine Stage 1 import | `7add4bc` — pushed and remote-verified |
 | Baseline docs + CI | `1b0a5dd` — pushed and remote-verified |
-| Last unit completed | **S2-06** — dedicated spaced-review queue (`e8e0cb2`, remote-verified) |
+| Last unit completed | **S2-07** — Region 1 curriculum architecture (`dd39d38`, remote-verified) |
 | Head of `main` | read it live: `git rev-parse HEAD` vs `git ls-remote origin refs/heads/main` — these must match |
 | Milestone snapshot commit | `d4e250434c465f85e4307a226a9af2cbc9788c17` — the commit the exports were built from |
 | Stage tag | `stage-1-baseline` — **created locally, NOT on GitHub** (unit R-00d, blocked; see §2.1) |
 | Milestone exports | `../gsl-exports/` — source ZIP + git bundle + manifest + SHA-256 checksums |
 | Working tree | clean |
 | Node / npm used | v22.22.2 / 10.9.7 |
-| Test suite | **236 tests / 24 files**, all passing (Stage 1 baseline was 73 / 14) |
-| Build | passing (**332.35 kB, 95.55 kB gzip**; baseline was 285.73 kB / 83.82 kB) |
-| Source modified since baseline | S2-01 … S2-06 — achievements + region completion, three new interactions, the enforced interaction audit, and the review queue |
+| Test suite | **246 tests / 25 files**, all passing (Stage 1 baseline was 73 / 14) |
+| Build | passing (**358.13 kB, 101.10 kB gzip**; baseline was 285.73 kB / 83.82 kB) |
+| Source modified since baseline | S2-01 … S2-07 — achievements + region completion, three new interactions, the enforced interaction audit, the review queue, and the Region 1 topic architecture |
+| Curriculum | 2 regions · **6 modules** · **20 lessons** · **23 skills** · **42 questions** (baseline 2/2/3/6/14) |
 | Save schema version | **2** (baseline was 1) — migration `1 -> 2` adds `reviewSession` |
 | Interaction types implemented | **14 of 17** (baseline 11); still stubbed: `formula-construction`, `simulation-prediction`, `confidence-rating` |
 | Stage 2 | **in progress** — see `STAGE2_RECONSTRUCTION_SCOPE.md`, `STAGE2_RECONSTRUCTION_BACKLOG.md`, `STAGE2_CURRENT_WORK.md` |
@@ -75,7 +76,7 @@ git status
 git rev-parse HEAD
 git ls-remote origin refs/heads/main | awk '{print $1}'   # must match
 npm ci
-npm test            # must stay green: 236/236
+npm test            # must stay green: 246/246
 npm run typecheck && npm run lint
 npm run dev         # renderer + electron dev
 ```
@@ -100,22 +101,23 @@ branch/tag deletion) are forbidden without explicit owner permission. See `REMOT
 
 ## 5. Next unit
 
-**S2-07 — Region 1 curriculum architecture.**
+**S2-08 — Region 1 lessons and interactions.**
 
-S2-06 finished the engine-and-systems arc. Interactions are built and audited, review has a home, and achievements
-work. Everything from here is **content breadth**, and it starts with the shape rather than the words: the complete
-Region 1 lesson and prerequisite graph.
+S2-07 built the shape; S2-08 fills it. The 17 Region 1 lessons currently hold one concept and one seed question each —
+enough to be reachable and ordered, and deliberately no more.
 
-Scope for that cycle, from `STAGE2_RECONSTRUCTION_BACKLOG.md`: every required Region 1 topic represented and
-reachable, with a prerequisite graph that actually orders them. The scope document lists the topics
-(`STAGE2_RECONSTRUCTION_SCOPE.md` §2) — counting, the four operations, fractions, decimals, ratios, proportions,
-percentages, negative numbers, number lines, coordinates, tables, variables, and categorical versus numerical data.
+Scope for that cycle: every lesson must satisfy **all 18 structure requirements** in `STAGE2_RECONSTRUCTION_SCOPE.md`
+§5 — objective, narrative purpose, concrete beginner experience, interactive visual demonstration, prediction before
+the reveal, observation, plain-language explanation, formal term, notation only where appropriate with every symbol
+explained, guided practice, independent practice, a misconception-targeting challenge, real-world application,
+teach-it-back, mastery check, spaced-review scheduling, and an accessible textual equivalent for anything visual.
 
-**Skeleton content must not be marked Complete.** A lesson exists for the purposes of this unit when it is reachable
-and ordered; it becomes Complete only in S2-08, when it satisfies all 18 structure requirements in scope §5. Keep the
-two apart in the backlog rather than letting an outline count as a lesson.
+Two things to keep straight. A lesson of explanatory text plus questions is **not** Complete, and neither is one with
+placeholder controls. And `tests/audit/region1-architecture.test.ts` currently asserts each of these lessons still has
+exactly one question — that check exists to stop a half-finished lesson counting as done, so **update it deliberately
+as part of S2-08** rather than deleting it to make the suite pass.
 
-Do **not** start S2-08 in the same cycle.
+Do **not** start S2-09 in the same cycle.
 
 ### Open findings from the interaction audit
 
