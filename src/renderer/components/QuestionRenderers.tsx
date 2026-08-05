@@ -7,6 +7,7 @@ import { useMemo, useState, type MouseEvent as ReactMouseEvent } from "react";
 import type { Question } from "../../shared/schemas";
 import type { RawResponse } from "../../core/questions/types";
 import { getInteraction } from "../../core/questions/registry";
+import { hasRenderer } from "./rendered-interactions";
 import {
   currentStep,
   finalResponse,
@@ -700,7 +701,9 @@ function DragDrop({ question, disabled, onSubmit }: RendererProps): JSX.Element 
 
 export function QuestionInteraction(props: RendererProps): JSX.Element {
   const descriptor = getInteraction(props.question.interaction);
-  if (!descriptor || !descriptor.implemented) {
+  // Both the registry flag and an actual renderer are required. The audit keeps
+  // the two in step; this check keeps the UI honest if they ever drift.
+  if (!descriptor || !descriptor.implemented || !hasRenderer(props.question.interaction)) {
     return (
       <div className="card">
         <p className="muted">

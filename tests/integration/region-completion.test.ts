@@ -16,37 +16,14 @@ import { evaluateAchievements } from "../../src/core/achievements/engine";
 import { isRegionCompleted, isRegionUnlocked } from "../../src/core/curriculum/progress";
 import { NodeStorageAdapter } from "../../src/core/persistence/node-adapter";
 import { SaveManager } from "../../src/core/persistence/save-manager";
-import { createEmptySave, type Question, type SaveFile } from "../../src/shared/schemas";
-import type { RawResponse } from "../../src/core/questions/types";
+import { createEmptySave, type SaveFile } from "../../src/shared/schemas";
+import { correctResponseFor } from "../helpers/responses";
 
 const REGION_1 = "r.harbor-tallies";
 const REGION_1_ACHIEVEMENT = "ach.harbor-charted";
 const REGION_2 = "r.averages-atoll";
 
 const content = loadShippedContent();
-
-/** Builds a response that satisfies the question's declared answer. */
-function correctResponseFor(question: Question): RawResponse {
-  const a = question.answer;
-  switch (a.kind) {
-    case "choice":
-      return { kind: "choice", choiceIds: [...a.correctChoiceIds] };
-    case "numeric":
-      return { kind: "numeric", text: String(a.value) };
-    case "ordering":
-      return { kind: "ordering", order: [...a.correctOrder] };
-    case "matching":
-      return { kind: "matching", pairs: a.pairs.map((p) => ({ left: p.left, right: p.right })) };
-    case "text":
-      return { kind: "text", text: a.requiredKeywords.join(" ") };
-    case "steps":
-      return { kind: "steps", steps: a.steps.map((s) => ({ stepId: s.id, text: String(s.value) })) };
-    case "point":
-      return a.y === undefined ? { kind: "point", x: a.x } : { kind: "point", x: a.x, y: a.y };
-    case "placement":
-      return { kind: "placement", zones: a.zones.map((z) => ({ zoneId: z.zoneId, itemIds: [...z.itemIds] })) };
-  }
-}
 
 /** Answers every question in a lesson correctly through the real engine. */
 function playLesson(save: SaveFile, lessonId: string, startMs: number): SaveFile {
