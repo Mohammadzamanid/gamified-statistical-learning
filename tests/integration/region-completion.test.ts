@@ -43,6 +43,8 @@ function correctResponseFor(question: Question): RawResponse {
       return { kind: "steps", steps: a.steps.map((s) => ({ stepId: s.id, text: String(s.value) })) };
     case "point":
       return a.y === undefined ? { kind: "point", x: a.x } : { kind: "point", x: a.x, y: a.y };
+    case "placement":
+      return { kind: "placement", zones: a.zones.map((z) => ({ zoneId: z.zoneId, itemIds: [...z.itemIds] })) };
   }
 }
 

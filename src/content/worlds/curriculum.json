@@ -107,7 +107,9 @@
         "q.step-percent-rainy",
         "q.point-quarter-line",
         "q.point-thursday-catch",
-        "q.point-approx-mean"
+        "q.point-approx-mean",
+        "q.dd-variable-kinds",
+        "q.dd-build-bar-chart"
       ],
       "prerequisites": [],
       "estimatedMinutes": 12
@@ -137,7 +139,9 @@
         "q.error-id-causation",
         "q.short-why-median",
         "q.step-median-market",
-        "q.point-median-line"
+        "q.point-median-line",
+        "q.dd-sort-prices",
+        "q.dd-above-below-mean"
       ],
       "prerequisites": [
         "l.reading-tallies"

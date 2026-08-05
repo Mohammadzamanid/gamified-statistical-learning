@@ -120,6 +120,37 @@ export const PointAnswerSchema = z.object({
   swappedAxesMisconceptionId: IdSchema.optional()
 });
 
+/**
+ * A place items can be dropped into.
+ *
+ * One primitive covers every arrangement task the curriculum needs, because the
+ * zone configuration is what varies, not the mechanics:
+ * - ordering / sorting — one zone per position, each with capacity 1
+ * - matching — one zone per right-hand item, capacity 1
+ * - grouping observations — one zone per category, unlimited capacity
+ * - simple graph construction — one zone per bar or bin, unlimited capacity
+ */
+export const DropZoneSchema = z.object({
+  id: IdSchema,
+  label: NonEmptyString,
+  /** Maximum items accepted. Omit for unlimited. */
+  capacity: z.number().int().positive().optional(),
+  description: z.string().optional()
+});
+export type DropZone = z.infer<typeof DropZoneSchema>;
+
+export const PlacementAnswerSchema = z.object({
+  kind: z.literal("placement"),
+  /** The expected contents of each zone. Every declared item must appear exactly once. */
+  zones: z.array(z.object({ zoneId: IdSchema, itemIds: z.array(IdSchema) })).min(1),
+  /** When true the order of items inside a zone is part of the answer (sorting). */
+  orderMatters: z.boolean().default(false),
+  /** Specific wrong item→zone placements that identify a misconception. */
+  misconceptionPlacements: z
+    .array(z.object({ itemId: IdSchema, zoneId: IdSchema, misconceptionId: IdSchema }))
+    .default([])
+});
+
 export const AnswerSpecSchema = z.discriminatedUnion("kind", [
   NumericAnswerSchema,
   ChoiceAnswerSchema,
@@ -127,7 +158,8 @@ export const AnswerSpecSchema = z.discriminatedUnion("kind", [
   MatchingAnswerSchema,
   TextAnswerSchema,
   StepsAnswerSchema,
-  PointAnswerSchema
+  PointAnswerSchema,
+  PlacementAnswerSchema
 ]);
 export type AnswerSpec = z.infer<typeof AnswerSpecSchema>;
 
@@ -205,6 +237,8 @@ export const QuestionSchema = z.object({
   rightItems: z.array(z.object({ id: IdSchema, text: NonEmptyString })).optional(),
   /** Axis or plane for point-placement questions. */
   pointField: PointFieldSchema.optional(),
+  /** Zones items are dropped into, for drag-and-drop questions. */
+  dropZones: z.array(DropZoneSchema).optional(),
   answer: AnswerSpecSchema,
   acceptedAlternatives: z.array(AcceptedAlternativeSchema).default([]),
   hints: z.array(HintSchema).default([]),
@@ -283,6 +317,60 @@ export const QuestionSchema = z.object({
         code: z.ZodIssueCode.custom,
         message: "swappedAxesMisconceptionId only applies to a coordinate-plane"
       });
+    }
+  }
+  // Drag-and-drop, its placement answer, and its zones all imply each other.
+  if (q.interaction === "drag-and-drop") {
+    if (q.answer.kind !== "placement") {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, message: "drag-and-drop requires a placement answer" });
+    }
+    if (!q.dropZones || q.dropZones.length < 1) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, message: "drag-and-drop requires at least one dropZone" });
+    }
+  }
+  if (q.answer.kind === "placement" && q.interaction !== "drag-and-drop") {
+    ctx.addIssue({ code: z.ZodIssueCode.custom, message: "a placement answer requires interaction drag-and-drop" });
+  }
+  if (q.answer.kind === "placement" && q.dropZones && q.items) {
+    const zoneIds = new Set(q.dropZones.map((z) => z.id));
+    const itemIds = new Set(q.items.map((i) => i.id));
+    const capacityOf = new Map(q.dropZones.map((z) => [z.id, z.capacity]));
+    const placed = new Set<string>();
+
+    for (const zone of q.answer.zones) {
+      if (!zoneIds.has(zone.zoneId)) {
+        ctx.addIssue({ code: z.ZodIssueCode.custom, message: `answer references unknown zone ${zone.zoneId}` });
+      }
+      const capacity = capacityOf.get(zone.zoneId);
+      if (capacity !== undefined && zone.itemIds.length > capacity) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: `zone ${zone.zoneId} expects ${zone.itemIds.length} items but has capacity ${capacity}`
+        });
+      }
+      for (const itemId of zone.itemIds) {
+        if (!itemIds.has(itemId)) {
+          ctx.addIssue({ code: z.ZodIssueCode.custom, message: `answer references unknown item ${itemId}` });
+        }
+        // An item in two zones has no reachable correct answer.
+        if (placed.has(itemId)) {
+          ctx.addIssue({ code: z.ZodIssueCode.custom, message: `item ${itemId} is expected in more than one zone` });
+        }
+        placed.add(itemId);
+      }
+    }
+    for (const itemId of itemIds) {
+      if (!placed.has(itemId)) {
+        ctx.addIssue({ code: z.ZodIssueCode.custom, message: `item ${itemId} is never placed by the answer` });
+      }
+    }
+    for (const mp of q.answer.misconceptionPlacements) {
+      if (!zoneIds.has(mp.zoneId)) {
+        ctx.addIssue({ code: z.ZodIssueCode.custom, message: `misconception placement references unknown zone ${mp.zoneId}` });
+      }
+      if (!itemIds.has(mp.itemId)) {
+        ctx.addIssue({ code: z.ZodIssueCode.custom, message: `misconception placement references unknown item ${mp.itemId}` });
+      }
     }
   }
 });

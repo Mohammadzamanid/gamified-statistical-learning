@@ -2,6 +2,7 @@ import type { AnswerSpec, Question } from "../../shared/schemas";
 import { approxEqual } from "../../shared/utilities/numeric";
 import { classifyStepValue, stepValueMatches } from "./step-calculation";
 import { classifyPoint, isAxesSwapped, pointMatches } from "./point-placement";
+import { classifyPlacement, misplacedItems, placementMatches } from "./drag-drop";
 import type { EvaluationResult, NormalizedResponse } from "./types";
 
 function evalAgainst(answer: AnswerSpec, response: NormalizedResponse): { correct: boolean; signals: Record<string, unknown> } {
@@ -56,6 +57,21 @@ function evalAgainst(answer: AnswerSpec, response: NormalizedResponse): { correc
       signals.missingKeywords = missing;
       signals.forbiddenKeywordsHit = forbidden;
       return { correct: missing.length === 0 && forbidden.length === 0, signals };
+    }
+    case "placement": {
+      if (response.kind !== "placement") return { correct: false, signals: { responseKindMismatch: true } };
+      const spec = {
+        zones: answer.zones,
+        orderMatters: answer.orderMatters,
+        misconceptionPlacements: answer.misconceptionPlacements
+      };
+      const misplaced = misplacedItems(spec, response.zones);
+      const misconceptionId = classifyPlacement(spec, response.zones);
+      signals.submittedZones = response.zones;
+      signals.misplacedItemIds = misplaced;
+      signals.orderMatters = answer.orderMatters;
+      signals.placementMisconceptionIds = misconceptionId ? [misconceptionId] : [];
+      return { correct: placementMatches(spec, response.zones), signals };
     }
     case "point": {
       if (response.kind !== "point") return { correct: false, signals: { responseKindMismatch: true } };

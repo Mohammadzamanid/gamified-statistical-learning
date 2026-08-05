@@ -63,5 +63,12 @@
     "description": "The learner plots (y, x) instead of (x, y) — the right pair of numbers, applied to the wrong axes.",
     "detector": "point-geometry",
     "remediationId": "rem.axes-order"
+  },
+  {
+    "id": "mc.digits-mean-numerical",
+    "title": "Digits treated as numerical data",
+    "description": "A variable written with digits (boat number, postcode) is classified as numerical even though its values are labels, not quantities.",
+    "detector": "placement-mapping",
+    "remediationId": "rem.categorical-vs-numerical"
   }
 ]

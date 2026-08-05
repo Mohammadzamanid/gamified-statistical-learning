@@ -51,7 +51,7 @@ export function classifyMisconception(
   // step-by-step run classifies per step, a point placement classifies by position.
   // Honour those results before falling back to the detectors.
   const preClassified: unknown[] = [];
-  for (const key of ["stepMisconceptionIds", "pointMisconceptionIds"]) {
+  for (const key of ["stepMisconceptionIds", "pointMisconceptionIds", "placementMisconceptionIds"]) {
     const value = ctxBase.evaluation.signals[key];
     if (Array.isArray(value)) preClassified.push(...value);
   }

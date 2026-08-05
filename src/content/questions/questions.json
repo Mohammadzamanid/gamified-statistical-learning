@@ -1088,5 +1088,351 @@
     ],
     "accessibilityDescription": "Place a marker on a number line of fish per day from 0 to 10.",
     "estimatedSeconds": 60
+  },
+  {
+    "id": "q.dd-variable-kinds",
+    "topicId": "t.read-data",
+    "objectiveId": "obj.read-data",
+    "skillIds": [
+      "skill.data-literacy"
+    ],
+    "difficulty": 2,
+    "interaction": "drag-and-drop",
+    "prompt": "The harbour ledger records these five things about every catch. Sort each one into the right kind of variable.",
+    "items": [
+      {
+        "id": "it.boat-number",
+        "text": "Boat number (3, 7, 12…)"
+      },
+      {
+        "id": "it.home-port",
+        "text": "Home port (Kirkwall, Stromness…)"
+      },
+      {
+        "id": "it.fish-landed",
+        "text": "Fish landed (2, 4, 9…)"
+      },
+      {
+        "id": "it.weather",
+        "text": "Weather (calm, choppy, rough)"
+      },
+      {
+        "id": "it.hours-at-sea",
+        "text": "Hours at sea (3.5, 6, 8…)"
+      }
+    ],
+    "dropZones": [
+      {
+        "id": "z.categorical",
+        "label": "Categorical",
+        "description": "Values are labels or groups."
+      },
+      {
+        "id": "z.numerical",
+        "label": "Numerical",
+        "description": "Values are quantities you could add or average."
+      }
+    ],
+    "answer": {
+      "kind": "placement",
+      "zones": [
+        {
+          "zoneId": "z.categorical",
+          "itemIds": [
+            "it.boat-number",
+            "it.home-port",
+            "it.weather"
+          ]
+        },
+        {
+          "zoneId": "z.numerical",
+          "itemIds": [
+            "it.fish-landed",
+            "it.hours-at-sea"
+          ]
+        }
+      ],
+      "orderMatters": false,
+      "misconceptionPlacements": [
+        {
+          "itemId": "it.boat-number",
+          "zoneId": "z.numerical",
+          "misconceptionId": "mc.digits-mean-numerical"
+        }
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Ask whether adding two of the values would mean anything."
+      },
+      {
+        "level": 2,
+        "text": "Boat 3 plus boat 7 is meaningless — the digits are a name, not a quantity."
+      }
+    ],
+    "explanation": "Numerical variables hold quantities you can add or average: fish landed and hours at sea. Everything else labels a group — including boat number, whose digits are just a name.",
+    "misconceptionIds": [
+      "mc.digits-mean-numerical"
+    ],
+    "accessibilityDescription": "Sort five variables into a categorical group and a numerical group.",
+    "estimatedSeconds": 90
+  },
+  {
+    "id": "q.dd-sort-prices",
+    "topicId": "t.center",
+    "objectiveId": "obj.compute-median",
+    "skillIds": [
+      "skill.median"
+    ],
+    "difficulty": 2,
+    "interaction": "drag-and-drop",
+    "prompt": "Before you can find a median you must sort the data. Arrange these five crate prices from smallest to largest.",
+    "items": [
+      {
+        "id": "it.p3",
+        "text": "3 coins"
+      },
+      {
+        "id": "it.p15",
+        "text": "15 coins"
+      },
+      {
+        "id": "it.p8",
+        "text": "8 coins"
+      },
+      {
+        "id": "it.p7",
+        "text": "7 coins"
+      },
+      {
+        "id": "it.p12",
+        "text": "12 coins"
+      }
+    ],
+    "dropZones": [
+      {
+        "id": "z.sorted",
+        "label": "Sorted, smallest first",
+        "description": "Order matters here."
+      }
+    ],
+    "answer": {
+      "kind": "placement",
+      "zones": [
+        {
+          "zoneId": "z.sorted",
+          "itemIds": [
+            "it.p3",
+            "it.p7",
+            "it.p8",
+            "it.p12",
+            "it.p15"
+          ]
+        }
+      ],
+      "orderMatters": true,
+      "misconceptionPlacements": []
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Find the smallest price and put it first, then repeat with what is left."
+      },
+      {
+        "level": 2,
+        "text": "The smallest is 3 and the largest is 15."
+      }
+    ],
+    "explanation": "Sorted, the prices are 3, 7, 8, 12, 15. Sorting first is what makes the middle position meaningful — the median is the third value, 8 coins.",
+    "misconceptionIds": [],
+    "accessibilityDescription": "Arrange five prices into ascending order.",
+    "estimatedSeconds": 90
+  },
+  {
+    "id": "q.dd-above-below-mean",
+    "topicId": "t.center",
+    "objectiveId": "obj.compute-mean",
+    "skillIds": [
+      "skill.mean"
+    ],
+    "difficulty": 3,
+    "interaction": "drag-and-drop",
+    "prompt": "The week's catches were Mon 2, Tue 4, Wed 4, Thu 6, Fri 9 fish, and the MEAN is 5 fish per day. Sort each day by how its catch compares with the mean.",
+    "items": [
+      {
+        "id": "it.mon",
+        "text": "Monday — 2 fish"
+      },
+      {
+        "id": "it.tue",
+        "text": "Tuesday — 4 fish"
+      },
+      {
+        "id": "it.wed",
+        "text": "Wednesday — 4 fish"
+      },
+      {
+        "id": "it.thu",
+        "text": "Thursday — 6 fish"
+      },
+      {
+        "id": "it.fri",
+        "text": "Friday — 9 fish"
+      }
+    ],
+    "dropZones": [
+      {
+        "id": "z.below",
+        "label": "Below the mean",
+        "description": "Fewer than 5 fish."
+      },
+      {
+        "id": "z.above",
+        "label": "At or above the mean",
+        "description": "5 fish or more."
+      }
+    ],
+    "answer": {
+      "kind": "placement",
+      "zones": [
+        {
+          "zoneId": "z.below",
+          "itemIds": [
+            "it.mon",
+            "it.tue",
+            "it.wed"
+          ]
+        },
+        {
+          "zoneId": "z.above",
+          "itemIds": [
+            "it.thu",
+            "it.fri"
+          ]
+        }
+      ],
+      "orderMatters": false,
+      "misconceptionPlacements": [
+        {
+          "itemId": "it.tue",
+          "zoneId": "z.above",
+          "misconceptionId": "mc.mean-median-confusion"
+        }
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Compare each day's catch with 5, the mean."
+      },
+      {
+        "level": 2,
+        "text": "Careful: the middle value of the sorted list is 4, but the mean is 5. Use the mean."
+      }
+    ],
+    "explanation": "Compared with the mean of 5: Monday (2), Tuesday (4) and Wednesday (4) are below; Thursday (6) and Friday (9) are at or above. Splitting at 4 instead would be using the median, not the mean — most days sit below the mean here because one large day pulls it up.",
+    "misconceptionIds": [
+      "mc.mean-median-confusion"
+    ],
+    "accessibilityDescription": "Sort five days into below-the-mean and at-or-above-the-mean groups.",
+    "estimatedSeconds": 90
+  },
+  {
+    "id": "q.dd-build-bar-chart",
+    "topicId": "t.read-data",
+    "objectiveId": "obj.read-data",
+    "skillIds": [
+      "skill.data-literacy"
+    ],
+    "difficulty": 2,
+    "interaction": "drag-and-drop",
+    "prompt": "Build the catch chart: put each day into the column that matches how many fish it landed. Monday 2, Tuesday 4, Wednesday 4, Thursday 6, Friday 9.",
+    "items": [
+      {
+        "id": "it.b-mon",
+        "text": "Monday"
+      },
+      {
+        "id": "it.b-tue",
+        "text": "Tuesday"
+      },
+      {
+        "id": "it.b-wed",
+        "text": "Wednesday"
+      },
+      {
+        "id": "it.b-thu",
+        "text": "Thursday"
+      },
+      {
+        "id": "it.b-fri",
+        "text": "Friday"
+      }
+    ],
+    "dropZones": [
+      {
+        "id": "z.bar2",
+        "label": "2 fish"
+      },
+      {
+        "id": "z.bar4",
+        "label": "4 fish"
+      },
+      {
+        "id": "z.bar6",
+        "label": "6 fish"
+      },
+      {
+        "id": "z.bar9",
+        "label": "9 fish"
+      }
+    ],
+    "answer": {
+      "kind": "placement",
+      "zones": [
+        {
+          "zoneId": "z.bar2",
+          "itemIds": [
+            "it.b-mon"
+          ]
+        },
+        {
+          "zoneId": "z.bar4",
+          "itemIds": [
+            "it.b-tue",
+            "it.b-wed"
+          ]
+        },
+        {
+          "zoneId": "z.bar6",
+          "itemIds": [
+            "it.b-thu"
+          ]
+        },
+        {
+          "zoneId": "z.bar9",
+          "itemIds": [
+            "it.b-fri"
+          ]
+        }
+      ],
+      "orderMatters": false,
+      "misconceptionPlacements": []
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Read each day's catch from the list, then find the column with that number."
+      },
+      {
+        "level": 2,
+        "text": "Two days landed the same number of fish, so one column holds two days."
+      }
+    ],
+    "explanation": "Monday sits in the 2 column, Tuesday and Wednesday both in the 4 column, Thursday in 6 and Friday in 9. A column holding two days is exactly what a taller bar means: more days with that value.",
+    "misconceptionIds": [],
+    "accessibilityDescription": "Place five days into columns representing catch sizes to build a chart.",
+    "estimatedSeconds": 90
   }
 ]

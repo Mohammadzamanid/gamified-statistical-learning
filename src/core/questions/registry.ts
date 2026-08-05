@@ -8,7 +8,7 @@ import type { InteractionType } from "../../shared/schemas";
 export interface InteractionDescriptor {
   type: InteractionType;
   /** Which RawResponse kind this interaction produces. */
-  responseKind: "choice" | "numeric" | "ordering" | "matching" | "text" | "steps" | "point";
+  responseKind: "choice" | "numeric" | "ordering" | "matching" | "text" | "steps" | "point" | "placement";
   /** True once a working renderer exists. */
   implemented: boolean;
 }
@@ -37,7 +37,7 @@ export function registerDefaultInteractions(): void {
     ["fraction-input", "numeric", true],
     ["ordering", "ordering", true],
     ["matching", "matching", true],
-    ["drag-and-drop", "ordering", false],
+    ["drag-and-drop", "placement", true],
     ["graph-interpretation", "choice", true],
     ["point-placement", "point", true],
     ["formula-construction", "ordering", false],

@@ -12,7 +12,7 @@ Status vocabulary is defined in `STAGE2_RECONSTRUCTION_SCOPE.md` §9.
 | S2-01 | Region-completion achievement repair | Stage 1 baseline | Completed region awards its achievement; incomplete region does not; no duplicates; award survives save/reload; existing tests stay green; new unit + integration tests pass; pushed and verified | **Complete** | `src/core/achievements/engine.ts`, `src/core/curriculum/progress.ts`, `src/core/curriculum/loader.ts`, `src/renderer/state/session.ts`, `src/content/questions/achievements.json` | `tests/unit/achievements.test.ts` (12), `tests/integration/region-completion.test.ts` (6) | `6798b6a` | `6798b6a` | Yes — MATCH | Full SHA `6798b6a71beb3e15ec43e791ca60fa36e2a0c214`; hashes recorded only **after** the push was verified. Suite 73→**90 tests**, 14→**15 files**. Verified the new tests fail (7 failures) against the old stubbed `false`, so they are genuine regression tests. `evaluateAchievements` now *requires* the curriculum, so a caller that omits it fails to compile rather than silently reintroducing the defect. |
 | S2-02 | Step-by-step calculation interaction | S2-01 | Multi-step calculation, per-step validation, equivalent numeric formats, per-step hints, misconception classification, retry from failed step, final explanation, mastery update, keyboard accessible; ≥3 real curriculum examples | **Complete** | `src/core/questions/step-calculation.ts` (new), `evaluators.ts`, `normalize.ts`, `types.ts`, `registry.ts`, `src/shared/schemas/question.ts`, `src/core/misconceptions/engine.ts`, `src/core/curriculum/loader.ts`, `src/renderer/components/QuestionRenderers.tsx`, content | `tests/unit/step-calculation.test.ts` (17), `tests/integration/step-calculation-flow.test.ts` (8) | `48bac65` | `48bac65` | Yes — MATCH | Full SHA `48bac65064d45b376d88d92bd775957ecc78105f`; recorded only after the push was verified. Suite 90→**115 tests**, 15→**17 files**. Registry flipped to `implemented: true` only once schema, evaluator, renderer, a11y, and 3 real lesson questions all existed. |
 | S2-03 | Point-placement interaction | S2-02 | Number lines, coordinates, graph reading, approximate values; pointer **and** keyboard interaction; configurable tolerance; accessible feedback | **Complete** | `src/core/questions/point-placement.ts` (new), `evaluators.ts`, `normalize.ts`, `types.ts`, `registry.ts`, `src/shared/schemas/question.ts`, `src/core/misconceptions/{engine,detectors}.ts`, `src/core/curriculum/loader.ts`, `QuestionRenderers.tsx`, content | `tests/unit/point-placement.test.ts` (31), `tests/integration/point-placement-flow.test.ts` (9) | `4c4d908` | `4c4d908` | Yes — MATCH | Full SHA `4c4d908bf4395bacbb4c23968fbb86ce46b36fd3`; recorded only after the push was verified. Suite 115→**155 tests**, 17→**19 files**. Keyboard reachability is asserted, not asserted-about: a test steps to every shipped target with `movePoint` alone and submits the result through the real engine. |
-| S2-04 | Accessible drag-and-drop | S2-03 | Reusable for sorting, matching, ordering, grouping, simple graph construction; complete keyboard alternative | Not started | `src/renderer/components/*` | pending | — | — | — | |
+| S2-04 | Accessible drag-and-drop | S2-03 | Reusable for sorting, matching, ordering, grouping, simple graph construction; complete keyboard alternative | **In progress** | `src/core/questions/drag-drop.ts` (new), `evaluators.ts`, `normalize.ts`, `types.ts`, `registry.ts`, `src/shared/schemas/question.ts`, `src/core/misconceptions/{engine,detectors}.ts`, `src/core/curriculum/loader.ts`, `QuestionRenderers.tsx`, content | `tests/unit/drag-drop.test.ts` (30), `tests/integration/drag-drop-flow.test.ts` (8) | pending | pending | pending | Hashes recorded after push verification, never in advance. Suite 155→**193 tests**, 19→**21 files**. One `placement` primitive covers all five shapes — only the zone configuration differs. Every shipped arrangement is built in a test using **only** the operations the keyboard controls perform, never a drag. |
 | S2-05 | Interaction-type audit (all 17) | S2-04 | Per type: schema, renderer, evaluation, correct path, incorrect path, misconception path, keyboard operation, accessible name/instructions, ≥1 genuine curriculum use, save/resume where stateful | Not started | registry + audit doc | pending | — | — | — | Isolated technical demos do not satisfy the audit. Remove "not implemented" notices only where genuinely resolved. |
 | S2-06 | Dedicated spaced-review queue | S2-01 | Due calculation, review screen, overdue items, new-vs-review distinction, mixed-topic review, correct/incorrect rescheduling, persistence, interrupted-session resume, deterministic-clock tests | Not started | `src/core/spaced-repetition/*`, `src/renderer/screens/*` | pending | — | — | — | Logbook already computes `dueItems`. |
 | S2-07 | Region 1 curriculum architecture | S2-05 | Complete lesson + prerequisite graph; every required topic represented and reachable | Not started | `src/content/worlds/curriculum.json` | pending | — | — | — | Skeleton content must not be marked Complete. |
@@ -37,21 +37,21 @@ Measured from this repository — never recalled from earlier reports.
 
 | Metric | At Stage 1 baseline | Current |
 |---|---|---|
-| Test files | 14 | **19** |
-| Tests | 73 | **155** |
+| Test files | 14 | **21** |
+| Tests | 73 | **193** |
 | Regions | 2 | 2 |
 | Modules | 2 | 2 |
 | Lessons | 3 | 3 |
-| Authored questions | 14 | **21** |
-| Misconceptions | 8 | **9** |
-| Remediations | 7 | **8** |
+| Authored questions | 14 | **25** |
+| Misconceptions | 8 | **10** |
+| Remediations | 7 | **9** |
 | Achievements | 4 | **6** |
 | Datasets | 1 | 1 |
-| Interaction types implemented | 11 of 17 | **13 of 17** |
-| Interaction types used by content | 11 | **13** |
-| Renderer bundle | 285.73 kB (83.82 kB gzip) | **310.30 kB (90.08 kB gzip)** |
+| Interaction types implemented | 11 of 17 | **14 of 17** |
+| Interaction types used by content | 11 | **14** |
+| Renderer bundle | 285.73 kB (83.82 kB gzip) | **324.70 kB (93.72 kB gzip)** |
 
-Still stubbed (4): `drag-and-drop`, `formula-construction`, `simulation-prediction`, `confidence-rating`.
+Still stubbed (3): `formula-construction`, `simulation-prediction`, `confidence-rating`.
 
 **Interaction-count rules note.** These are *authored question records*, not "validated available interactions".
 No topic yet meets the ≥100 threshold in `STAGE2_RECONSTRUCTION_SCOPE.md` §4, and no Region 1 or Region 2 topic is

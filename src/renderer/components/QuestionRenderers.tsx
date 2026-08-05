@@ -17,6 +17,19 @@ import {
   submitStep
 } from "../../core/questions/step-calculation";
 import {
+  TRAY,
+  describePlacement,
+  isPlacementComplete,
+  isZoneFull,
+  itemsIn,
+  moveWithinZone,
+  orderMattersFor,
+  placeItem,
+  placementResponse,
+  startPlacement,
+  zonesOf
+} from "../../core/questions/drag-drop";
+import {
   clampToField,
   describePoint,
   isPlane,
@@ -531,6 +544,160 @@ function PointPlacement({ question, disabled, onSubmit }: RendererProps): JSX.El
   );
 }
 
+/**
+ * Drag-and-drop placement.
+ *
+ * Two complete paths, both calling core/questions/drag-drop so they cannot
+ * diverge:
+ * - pointer: HTML5 drag from the tray or any zone, drop onto a zone
+ * - keyboard: every item carries a native `<select>` naming its zone (including
+ *   "Not placed"), plus move-up/move-down buttons when order is part of the
+ *   answer. No custom key handling, so it works with whatever the learner's
+ *   assistive technology already does with a listbox and buttons.
+ *
+ * The select is not a fallback bolted on beside the "real" control — it is the
+ * same operation, and the test suite drives the core functions it calls.
+ */
+function DragDrop({ question, disabled, onSubmit }: RendererProps): JSX.Element {
+  const [state, setState] = useState(() => startPlacement(question));
+  const zones = zonesOf(question);
+  const ordered = orderMattersFor(question);
+  const label = (id: string) => question.items?.find((i) => i.id === id)?.text ?? id;
+  const complete = isPlacementComplete(state);
+
+  const move = (itemId: string, zoneId: string) => {
+    if (disabled) return;
+    setState((s) => placeItem(question, s, itemId, zoneId));
+  };
+
+  const renderItem = (itemId: string, zoneId: string, index: number, total: number) => (
+    <li key={itemId} className="choice" style={{ cursor: disabled ? "default" : "grab", justifyContent: "space-between" }}>
+      <span
+        draggable={!disabled}
+        onDragStart={(e) => e.dataTransfer.setData("text/plain", itemId)}
+      >
+        {ordered && zoneId !== TRAY ? <span className="data faint">{index + 1}. </span> : null}
+        {label(itemId)}
+      </span>
+      <span className="row" style={{ gap: 4 }}>
+        <label className="visually-hidden" htmlFor={`dd-${question.id}-${itemId}`}>
+          {`Zone for ${label(itemId)}`}
+        </label>
+        <select
+          id={`dd-${question.id}-${itemId}`}
+          value={zoneId}
+          disabled={disabled}
+          onChange={(e) => move(itemId, e.target.value)}
+        >
+          <option value={TRAY}>Not placed</option>
+          {zones.map((z) => (
+            <option key={z.id} value={z.id}>
+              {z.label}
+            </option>
+          ))}
+        </select>
+        {ordered && zoneId !== TRAY && (
+          <>
+            <button
+              className="btn ghost small"
+              aria-label={`Move ${label(itemId)} earlier`}
+              disabled={disabled || index === 0}
+              onClick={() => setState((s) => moveWithinZone(question, s, itemId, -1))}
+            >
+              ↑
+            </button>
+            <button
+              className="btn ghost small"
+              aria-label={`Move ${label(itemId)} later`}
+              disabled={disabled || index === total - 1}
+              onClick={() => setState((s) => moveWithinZone(question, s, itemId, 1))}
+            >
+              ↓
+            </button>
+          </>
+        )}
+      </span>
+    </li>
+  );
+
+  const tray = itemsIn(state, TRAY);
+
+  return (
+    <div className="stack">
+      <p className="faint">
+        {ordered
+          ? "Drag each item into a zone, or use its menu. Use the arrows to order items inside a zone."
+          : "Drag each item into a zone, or choose the zone from the menu beside it."}
+      </p>
+
+      <div className="stack">
+        <h4>Not yet placed</h4>
+        <ul
+          className="choice-list"
+          onDragOver={(e) => e.preventDefault()}
+          onDrop={(e) => {
+            e.preventDefault();
+            move(e.dataTransfer.getData("text/plain"), TRAY);
+          }}
+        >
+          {tray.length === 0 ? (
+            <li className="faint">All items placed.</li>
+          ) : (
+            tray.map((id, i) => renderItem(id, TRAY, i, tray.length))
+          )}
+        </ul>
+      </div>
+
+      {zones.map((zone) => {
+        const items = itemsIn(state, zone.id);
+        const full = isZoneFull(question, state, zone.id);
+        return (
+          <div key={zone.id} className="stack">
+            {/* Capacity and fullness are stated in words, never by colour alone. */}
+            <h4>
+              {zone.label}
+              <span className="faint">
+                {zone.capacity ? ` (holds ${zone.capacity})` : ""}
+                {full ? " — full" : ""}
+              </span>
+            </h4>
+            {zone.description && <p className="faint">{zone.description}</p>}
+            <ul
+              className="choice-list"
+              aria-label={zone.label}
+              onDragOver={(e) => e.preventDefault()}
+              onDrop={(e) => {
+                e.preventDefault();
+                move(e.dataTransfer.getData("text/plain"), zone.id);
+              }}
+            >
+              {items.length === 0 ? (
+                <li className="faint">Empty.</li>
+              ) : (
+                items.map((id, i) => renderItem(id, zone.id, i, items.length))
+              )}
+            </ul>
+          </div>
+        );
+      })}
+
+      <p role="status" aria-live="polite" className="faint">
+        {describePlacement(question, state)}
+      </p>
+
+      <div>
+        <button
+          className="btn primary"
+          disabled={disabled || !complete}
+          onClick={() => onSubmit(placementResponse(state))}
+        >
+          {complete ? "Submit arrangement" : `Place all items first (${tray.length} left)`}
+        </button>
+      </div>
+    </div>
+  );
+}
+
 export function QuestionInteraction(props: RendererProps): JSX.Element {
   const descriptor = getInteraction(props.question.interaction);
   if (!descriptor || !descriptor.implemented) {
@@ -564,6 +731,8 @@ export function QuestionInteraction(props: RendererProps): JSX.Element {
       return <StepByStep {...props} />;
     case "point-placement":
       return <PointPlacement {...props} />;
+    case "drag-and-drop":
+      return <DragDrop {...props} />;
     default:
       return (
         <div className="card">

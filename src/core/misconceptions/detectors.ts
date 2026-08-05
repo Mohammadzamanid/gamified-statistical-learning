@@ -126,9 +126,25 @@ function pointGeometry(ctx: DetectorContext): boolean {
   return Array.isArray(ids) && ids.includes(target);
 }
 
+/**
+ * An item dropped into a zone the content flagged as a known error.
+ *
+ * As with `point-geometry`, the evaluator does the matching because only it holds
+ * the expected arrangement; this detector exists so the misconception can name a
+ * registered detector rather than a dangling one.
+ */
+function placementMapping(ctx: DetectorContext): boolean {
+  if (ctx.response.kind !== "placement") return false;
+  const target = ctx.params["misconceptionId"];
+  if (typeof target !== "string") return false;
+  const ids = ctx.evaluation.signals["placementMisconceptionIds"];
+  return Array.isArray(ids) && ids.includes(target);
+}
+
 export function registerBuiltInDetectors(): void {
   registerDetector("tagged-distractor", taggedDistractor);
   registerDetector("point-geometry", pointGeometry);
+  registerDetector("placement-mapping", placementMapping);
   registerDetector("decimal-instead-of-percentage", decimalInsteadOfPercentage);
   registerDetector("percentage-instead-of-decimal", percentageInsteadOfDecimal);
   registerDetector("confused-statistic", confusedStatistic);

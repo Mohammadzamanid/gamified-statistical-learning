@@ -142,6 +142,13 @@ function checkReferences(
         problems.push(`question ${q.id} references missing misconception ${swapped}`);
       }
     }
+    if (q.answer.kind === "placement") {
+      for (const mp of q.answer.misconceptionPlacements) {
+        if (!misconceptionIds.has(mp.misconceptionId)) {
+          problems.push(`question ${q.id} placement references missing misconception ${mp.misconceptionId}`);
+        }
+      }
+    }
   }
   for (const mc of misconceptions) {
     if (!remediationIds.has(mc.remediationId)) problems.push(`misconception ${mc.id} references missing remediation ${mc.remediationId}`);

@@ -62,5 +62,13 @@
     "microLesson": "Read (4, 6) as: go across to 4 on the bottom axis, then up to 6 on the side axis. Swapping them lands you at (6, 4), a different place entirely. A useful phrase: along the corridor, then up the stairs.",
     "followUpQuestionIds": [],
     "skillIds": ["skill.data-literacy"]
+  },
+  {
+    "id": "rem.categorical-vs-numerical",
+    "title": "Digits do not make a variable numerical",
+    "explanation": "A variable is numerical only when its values are quantities you could sensibly add or average. Boat numbers are written with digits, but boat 7 is not 'more' than boat 3 — the digits are just names, so it is a categorical variable.",
+    "microLesson": "Ask: would adding two of these values mean anything? Adding two catches (4 fish + 6 fish = 10 fish) is meaningful, so catch is numerical. Adding two boat numbers (boat 3 + boat 7) is meaningless, so boat number is categorical. Postcodes, shirt numbers and phone numbers are all categorical for the same reason.",
+    "followUpQuestionIds": [],
+    "skillIds": ["skill.data-literacy"]
   }
 ]

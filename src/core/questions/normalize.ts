@@ -17,6 +17,15 @@ export function normalizeResponse(raw: RawResponse): NormalizedResponse {
       };
     case "text":
       return { kind: "text", text: raw.text.trim().toLowerCase().replace(/\s+/g, " ") };
+    case "placement":
+      // Zones are sorted for a stable shape; item order inside a zone is meaningful
+      // when the question says so, and is therefore preserved.
+      return {
+        kind: "placement",
+        zones: [...raw.zones]
+          .sort((a, b) => a.zoneId.localeCompare(b.zoneId))
+          .map((z) => ({ zoneId: z.zoneId, itemIds: [...z.itemIds] }))
+      };
     case "point":
       // A missing second axis is a number-line placement, recorded as null rather
       // than dropped, so evaluation can tell "1-D" from "y not answered".

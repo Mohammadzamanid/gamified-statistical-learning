@@ -79,7 +79,23 @@ describe("end-to-end lesson session (headless)", () => {
       },
       "q.point-quarter-line": { kind: "point", x: 0.25 },
       "q.point-thursday-catch": { kind: "point", x: 4, y: 6 },
-      "q.point-approx-mean": { kind: "point", x: 5 }
+      "q.point-approx-mean": { kind: "point", x: 5 },
+      "q.dd-variable-kinds": {
+        kind: "placement",
+        zones: [
+          { zoneId: "z.categorical", itemIds: ["it.boat-number", "it.home-port", "it.weather"] },
+          { zoneId: "z.numerical", itemIds: ["it.fish-landed", "it.hours-at-sea"] }
+        ]
+      },
+      "q.dd-build-bar-chart": {
+        kind: "placement",
+        zones: [
+          { zoneId: "z.bar2", itemIds: ["it.b-mon"] },
+          { zoneId: "z.bar4", itemIds: ["it.b-tue", "it.b-wed"] },
+          { zoneId: "z.bar6", itemIds: ["it.b-thu"] },
+          { zoneId: "z.bar9", itemIds: ["it.b-fri"] }
+        ]
+      }
     };
     let t = 1000;
     while (!session.finished) {

@@ -8,7 +8,8 @@ export type RawResponse =
   | { kind: "matching"; pairs: Array<{ left: string; right: string }> }
   | { kind: "text"; text: string }
   | { kind: "steps"; steps: Array<{ stepId: string; text: string }> }
-  | { kind: "point"; x: number; y?: number };
+  | { kind: "point"; x: number; y?: number }
+  | { kind: "placement"; zones: Array<{ zoneId: string; itemIds: string[] }> };
 
 /** Canonical response after normalization. */
 export type NormalizedResponse =
@@ -18,7 +19,8 @@ export type NormalizedResponse =
   | { kind: "matching"; pairs: Array<{ left: string; right: string }> }
   | { kind: "text"; text: string }
   | { kind: "steps"; steps: Array<{ stepId: string; value: number | null; rawText: string }> }
-  | { kind: "point"; x: number; y: number | null };
+  | { kind: "point"; x: number; y: number | null }
+  | { kind: "placement"; zones: Array<{ zoneId: string; itemIds: string[] }> };
 
 export interface EvaluationResult {
   correct: boolean;
