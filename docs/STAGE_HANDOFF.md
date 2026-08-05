@@ -4,7 +4,7 @@
 (`git show 7add4bc:docs/STAGE_HANDOFF.md`). Its still-binding contracts, traps, and priorities are carried forward
 below — nothing was discarded.
 
-**Last updated:** 2026-08-04, at the close of unit S2-04.
+**Last updated:** 2026-08-04, at the close of unit S2-05.
 
 ---
 
@@ -16,7 +16,7 @@ after Stage 1 was lost because commits were never pushed to a durable remote. Re
 
 - **Stage 1: surviving, verified, green.** Not re-created — the original commit `7add4bc` was carried forward from the
   archive's own `.git` directory, with authorship intact.
-- **Stage 2: in progress, and not recoverable.** Reconstruction began 2026-08-04; S2-01 through S2-04 are complete. Nothing
+- **Stage 2: in progress, and not recoverable.** Reconstruction began 2026-08-04; S2-01 through S2-05 are complete. Nothing
   in it is recovered source.
 - **Stages 3–6: not started, and not recoverable.** They must be **reconstructed** from the surviving Stage 1 source,
   the specifications, and the known defect history. They may never be described as recovered source, and no metric may
@@ -30,16 +30,16 @@ after Stage 1 was lost because commits were never pushed to a durable remote. Re
 | Default branch | `main` |
 | Pristine Stage 1 import | `7add4bc` — pushed and remote-verified |
 | Baseline docs + CI | `1b0a5dd` — pushed and remote-verified |
-| Last unit completed | **S2-04** — accessible drag-and-drop (`70e9527`, remote-verified) |
+| Last unit completed | **S2-05** — interaction-type audit (`acc9bf3`, remote-verified) |
 | Head of `main` | read it live: `git rev-parse HEAD` vs `git ls-remote origin refs/heads/main` — these must match |
 | Milestone snapshot commit | `d4e250434c465f85e4307a226a9af2cbc9788c17` — the commit the exports were built from |
 | Stage tag | `stage-1-baseline` — **created locally, NOT on GitHub** (unit R-00d, blocked; see §2.1) |
 | Milestone exports | `../gsl-exports/` — source ZIP + git bundle + manifest + SHA-256 checksums |
 | Working tree | clean |
 | Node / npm used | v22.22.2 / 10.9.7 |
-| Test suite | **193 tests / 21 files**, all passing (Stage 1 baseline was 73 / 14) |
-| Build | passing (**324.70 kB, 93.72 kB gzip**; baseline was 285.73 kB / 83.82 kB) |
-| Source modified since baseline | S2-01 … S2-04 — achievements + region completion, and the step-by-step, point-placement and drag-and-drop interactions |
+| Test suite | **211 tests / 22 files**, all passing (Stage 1 baseline was 73 / 14) |
+| Build | passing (**325.04 kB, 93.81 kB gzip**; baseline was 285.73 kB / 83.82 kB) |
+| Source modified since baseline | S2-01 … S2-05 — achievements + region completion, three new interactions, and the enforced interaction audit |
 | Interaction types implemented | **14 of 17** (baseline 11); still stubbed: `formula-construction`, `simulation-prediction`, `confidence-rating` |
 | Stage 2 | **in progress** — see `STAGE2_RECONSTRUCTION_SCOPE.md`, `STAGE2_RECONSTRUCTION_BACKLOG.md`, `STAGE2_CURRENT_WORK.md` |
 
@@ -74,7 +74,7 @@ git status
 git rev-parse HEAD
 git ls-remote origin refs/heads/main | awk '{print $1}'   # must match
 npm ci
-npm test            # must stay green: 193/193
+npm test            # must stay green: 211/211
 npm run typecheck && npm run lint
 npm run dev         # renderer + electron dev
 ```
@@ -85,7 +85,8 @@ Then read:
 2. `docs/REMOTE_PERSISTENCE_POLICY.md` — **the rules; non-negotiable**
 3. `docs/RECONSTRUCTION_BACKLOG.md` — pick exactly one unit
 4. `docs/CURRENT_WORK_UNIT.md` — what was in flight
-5. Surviving Stage 1 docs: `PROJECT_CONTEXT.md`, `ARCHITECTURE.md`, `DECISIONS.md`, `IMPLEMENTATION_STATUS.md`
+5. `docs/INTERACTION_AUDIT.md` — what each interaction type actually has, and 5 open findings
+6. Surviving Stage 1 docs: `PROJECT_CONTEXT.md`, `ARCHITECTURE.md`, `DECISIONS.md`, `IMPLEMENTATION_STATUS.md`
 
 **Do not restart the repository.** Build on what exists.
 
@@ -98,21 +99,29 @@ branch/tag deletion) are forbidden without explicit owner permission. See `REMOT
 
 ## 5. Next unit
 
-**S2-05 — Interaction-type audit (all 17).**
+**S2-06 — Dedicated spaced-review queue.**
 
-S2-04 finished the three interaction stubs this stage set out to build, leaving `formula-construction`,
-`simulation-prediction` and `confidence-rating` still `implemented: false`. Before adding more content on top, audit
-what actually exists.
+S2-05 closed the engine-capability arc: 14 of 17 interaction types are live, audited, and enforced. Review is the last
+system piece before content breadth (S2-07 onward), and the Logbook screen already computes `dueItems`, so the data
+exists without a home.
 
-Scope for that cycle, from `STAGE2_RECONSTRUCTION_BACKLOG.md`: for **each** of the 17 registered types record schema,
-renderer, evaluation, correct path, incorrect path, misconception path, keyboard operation, accessible name and
-instructions, at least one genuine curriculum use, and save/resume behaviour where stateful.
+Scope for that cycle, from `STAGE2_RECONSTRUCTION_BACKLOG.md`: due-review calculation, a review screen, overdue items,
+a new-versus-review distinction, mixed-topic review, correct/incorrect rescheduling, persistence, resume after an
+interrupted session, and **deterministic-clock tests** — review behaviour must never depend on the wall clock.
 
-Two rules matter most here. Isolated technical demos do not satisfy the audit — a type counts as used only if a real
-lesson question exercises it. And a "not yet available" notice may be removed only where the type is genuinely
-resolved; the three remaining stubs keep theirs.
+Do **not** start S2-07 in the same cycle.
 
-Do **not** start S2-06 in the same cycle.
+### Open findings from the interaction audit
+
+Recorded in `docs/INTERACTION_AUDIT.md` §3; each is owned by a later unit and none is fixed yet.
+
+| Finding | Owner |
+|---|---|
+| F-1 `multiple-selection`, `ordering`, `matching`, `short-explanation` have no misconception mapping | S2-16 |
+| F-2 in-progress interaction state is not persisted (steps, point, placement) | S2-19 |
+| F-3 three types remain genuine stubs; `simulation-prediction` waits on the laboratory | S2-15 / later |
+| F-4 `q.remed-mean-basic` is reachable only via remediation — by design | none |
+| F-5 keyboard operability is structural, not browser-verified | S2-20 |
 
 ### Stage 1 known defects — current state
 
