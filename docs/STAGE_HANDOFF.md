@@ -16,7 +16,9 @@ after Stage 1 was lost because commits were never pushed to a durable remote. Re
 
 - **Stage 1: surviving, verified, green.** Not re-created — the original commit `7add4bc` was carried forward from the
   archive's own `.git` directory, with authorship intact.
-- **Stages 2–6: not started, and not recoverable.** They must be **reconstructed** from the surviving Stage 1 source,
+- **Stage 2: in progress, and not recoverable.** Reconstruction began 2026-08-04; S2-01 is complete. Nothing in it is
+  recovered source.
+- **Stages 3–6: not started, and not recoverable.** They must be **reconstructed** from the surviving Stage 1 source,
   the specifications, and the known defect history. They may never be described as recovered source, and no metric may
   be recalled from prior reports — every count must be measured from this repository.
 
@@ -24,20 +26,21 @@ after Stage 1 was lost because commits were never pushed to a durable remote. Re
 
 | Fact | Value |
 |---|---|
-| Remote | `https://github.com/Mohammadzamanid/gamified-statistical-learning` (private) |
+| Remote | `https://github.com/Mohammadzamanid/gamified-statistical-learning` — **currently public**; private was requested (unit R-00e, blocked) |
 | Default branch | `main` |
 | Pristine Stage 1 import | `7add4bc` — pushed and remote-verified |
 | Baseline docs + CI | `1b0a5dd` — pushed and remote-verified |
-| Last unit completed | R-00 (a→c) — repository establishment and verified Stage 1 baseline |
+| Last unit completed | **S2-01** — region-completion achievement repair (`6798b6a`, remote-verified) |
 | Head of `main` | read it live: `git rev-parse HEAD` vs `git ls-remote origin refs/heads/main` — these must match |
 | Milestone snapshot commit | `d4e250434c465f85e4307a226a9af2cbc9788c17` — the commit the exports were built from |
 | Stage tag | `stage-1-baseline` — **created locally, NOT on GitHub** (unit R-00d, blocked; see §2.1) |
 | Milestone exports | `../gsl-exports/` — source ZIP + git bundle + manifest + SHA-256 checksums |
 | Working tree | clean |
 | Node / npm used | v22.22.2 / 10.9.7 |
-| Test suite | 73 tests / 14 files, all passing |
-| Build | passing (285.73 kB, 83.82 kB gzip) |
-| Source modified during reconstruction | **none** |
+| Test suite | **90 tests / 15 files**, all passing (Stage 1 baseline was 73 / 14) |
+| Build | passing (**286.61 kB, 83.99 kB gzip**; baseline was 285.73 kB / 83.82 kB) |
+| Source modified since baseline | S2-01 only — achievements engine, region completion, content loader, session call sites, achievements content |
+| Stage 2 | **in progress** — see `STAGE2_RECONSTRUCTION_SCOPE.md`, `STAGE2_RECONSTRUCTION_BACKLOG.md`, `STAGE2_CURRENT_WORK.md` |
 
 Full measured baseline — content counts, interaction coverage, validation results — is in
 `RECONSTRUCTION_CONTEXT.md` §4. Do not restate those numbers from memory; re-measure or cite that section.
@@ -70,7 +73,7 @@ git status
 git rev-parse HEAD
 git ls-remote origin refs/heads/main | awk '{print $1}'   # must match
 npm ci
-npm test            # must stay green: 73/73
+npm test            # must stay green: 90/90
 npm run typecheck && npm run lint
 npm run dev         # renderer + electron dev
 ```
@@ -94,14 +97,30 @@ branch/tag deletion) are forbidden without explicit owner permission. See `REMOT
 
 ## 5. Next unit
 
-**S2-01 — Wire the region-completed achievement trigger.**
+**S2-02 — Step-by-step calculation interaction.**
 
-`src/core/achievements/engine.ts` returns `false` unconditionally for the region-completed trigger (Stage 1 known
-defect #1, and priority 1 in the original handoff). It is the smallest genuine defect in the surviving code, it is
-covered by an existing test file, and fixing it first proves the whole unit-by-unit loop — implement, test, validate,
-commit, push, verify — before larger units depend on it. S2-16 (boss investigations) needs it working.
+S2-01 is done: region achievements now work end to end, which unblocks the boss investigations (S2-10, S2-18) that
+award them. `step-by-step-calculation` is next because the surviving Stage 1 handoff ranked it the highest-pedagogy
+of the six stubbed interaction types, and Region 1's arithmetic and fraction lessons (S2-08) cannot be authored
+properly without it.
 
-Do **not** start S2-02 in the same cycle.
+Scope for that cycle, from `STAGE2_RECONSTRUCTION_BACKLOG.md`: multi-step calculations, per-step validation,
+equivalent numeric formats, per-step hints, misconception classification, retry from the failed step, final
+explanation, mastery update, keyboard accessibility, and at least three real curriculum examples. The registry flag
+flips `implemented: false` → `true` only once renderer, evaluator, accessibility, **and** real content all exist —
+never before.
+
+Do **not** start S2-03 in the same cycle.
+
+### Stage 1 known defects — current state
+
+| # | Defect | State |
+|---|---|---|
+| 1 | Region-completed achievement trigger stubbed `false` | **Fixed in S2-01** |
+| 2 | Six interaction types unimplemented | Open — S2-02 … S2-05 |
+| 3 | Laboratory simulations are placeholders | Open — S2-15 |
+| 4 | Only one world of content | Open — S2-07 … S2-14 |
+| 5 | Cosmetic `MODULE_TYPELESS_PACKAGE_JSON` lint warning | Open by choice (D-002) |
 
 ## 6. Contracts you must not break
 

@@ -4,6 +4,23 @@ Exactly one unit is active at a time. This file is rewritten at the start and en
 
 ---
 
+## Active work is now in Stage 2
+
+Stage 0 (reconstruction infrastructure) is finished. The authoritative live unit document is
+**`STAGE2_CURRENT_WORK.md`** — read that first; this file keeps the Stage 0 record so the baseline story stays
+available.
+
+| | |
+|---|---|
+| Last completed unit | **S2-01** — region-completion achievement repair |
+| Commit | `6798b6a71beb3e15ec43e791ca60fa36e2a0c214` — pushed, remote-verified, **MATCH** |
+| Next unit | **S2-02** — step-by-step calculation interaction (not started) |
+| Still open from Stage 0 | **R-00d** (push `stage-1-baseline` tag) and **R-00e** (set repository private) — both blocked, both need the owner's credentials |
+
+---
+
+## Stage 0 record (closed)
+
 ## Current ID
 
 **R-00b — Establish repository, reconstruction documentation, CI, and verified Stage 1 baseline**

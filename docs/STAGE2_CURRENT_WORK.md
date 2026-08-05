@@ -90,11 +90,20 @@ None for this unit.
 
 ## Local commit
 
-Recorded in a follow-up commit once the push is verified; hashes are never written in advance.
+`6798b6a71beb3e15ec43e791ca60fa36e2a0c214`
 
 ## Remote verification
 
-`git rev-parse HEAD` compared against `git ls-remote origin refs/heads/main` — see the backlog row for both hashes.
+Verified by comparing `git rev-parse HEAD` with `git ls-remote origin refs/heads/main`:
+
+```
+LOCAL_HEAD  = 6798b6a71beb3e15ec43e791ca60fa36e2a0c214
+REMOTE_HEAD = 6798b6a71beb3e15ec43e791ca60fa36e2a0c214
+VERIFIED: MATCH
+```
+
+Re-confirmed after a session interruption: the commit is on remote `main` and the working tree is clean, so no work
+was lost. This is exactly the failure mode `REMOTE_PERSISTENCE_POLICY.md` exists to survive.
 
 ## Result
 
