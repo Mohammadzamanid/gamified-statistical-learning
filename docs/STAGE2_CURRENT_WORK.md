@@ -143,12 +143,14 @@ S2-09.
 
 ## Local commit
 
-`pending`
+`2f1ec31dee5d451b28fda8f85398b998d4a60217`
 
 ## Remote verification
 
 ```
-pending
+LOCAL_HEAD  = 2f1ec31dee5d451b28fda8f85398b998d4a60217
+REMOTE_HEAD = 2f1ec31dee5d451b28fda8f85398b998d4a60217
+VERIFIED: MATCH
 ```
 
 ## Next unit
