@@ -142,12 +142,14 @@ Expect a new generator module per topic group rather than one more operation spe
 
 ## Local commit
 
-`pending`
+`0de5fff7d76fc9982f75391da1d6f751d60cdfdb`
 
 ## Remote verification
 
 ```
-pending
+LOCAL_HEAD  = 0de5fff7d76fc9982f75391da1d6f751d60cdfdb
+REMOTE_HEAD = 0de5fff7d76fc9982f75391da1d6f751d60cdfdb
+VERIFIED: MATCH
 ```
 
 ## Next unit
