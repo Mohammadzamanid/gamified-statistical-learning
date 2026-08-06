@@ -4,7 +4,7 @@
 (`git show 7add4bc:docs/STAGE_HANDOFF.md`). Its still-binding contracts, traps, and priorities are carried forward
 below — nothing was discarded.
 
-**Last updated:** 2026-08-06, at the close of S2-08 — **Complete**.
+**Last updated:** 2026-08-06, at the close of S2-09 cycle 1 (**Partial**).
 
 ---
 
@@ -16,7 +16,7 @@ after Stage 1 was lost because commits were never pushed to a durable remote. Re
 
 - **Stage 1: surviving, verified, green.** Not re-created — the original commit `7add4bc` was carried forward from the
   archive's own `.git` directory, with authorship intact.
-- **Stage 2: in progress, and not recoverable.** Reconstruction began 2026-08-04; S2-01 through S2-08 are complete. Nothing
+- **Stage 2: in progress, and not recoverable.** Reconstruction began 2026-08-04; S2-01 through S2-08 are complete and S2-09 is **Partial**. Nothing
   in it is recovered source.
 - **Stages 3–6: not started, and not recoverable.** They must be **reconstructed** from the surviving Stage 1 source,
   the specifications, and the known defect history. They may never be described as recovered source, and no metric may
@@ -37,12 +37,14 @@ after Stage 1 was lost because commits were never pushed to a durable remote. Re
 | Milestone exports | `../gsl-exports/` — source ZIP + git bundle + manifest + SHA-256 checksums |
 | Working tree | clean |
 | Node / npm used | v22.22.2 / 10.9.7 |
-| Test suite | **365 tests / 31 files**, all passing (Stage 1 baseline was 73 / 14) |
-| Build | passing (**538.47 kB, 143.73 kB gzip**; baseline was 285.73 kB / 83.82 kB) |
+| Test suite | **403 tests / 33 files**, all passing (Stage 1 baseline was 73 / 14) |
+| Build | passing (**538.47 kB, 143.72 kB gzip**; baseline was 285.73 kB / 83.82 kB) |
 | Source modified since baseline | S2-01 … S2-08 — achievements + region completion, three new interactions, the enforced interaction audit, the review queue, the Region 1 topic architecture, and all 17 Region 1 lessons |
 | Curriculum | 2 regions · **6 modules** · **20 lessons** · **23 skills** · **145 questions** (baseline 2/2/3/6/14) |
 | Lessons Complete to scope §5 | **17 of 17** Region 1 topic lessons. No skeletons. Two inherited Stage 1 lessons are deliberately excluded — see §5 |
 | Misconceptions / remediations | **24 / 23** (baseline 8 / 7) |
+| Validated generated interactions | **3,192**, available to spaced review (baseline 0) |
+| Topics meeting scope §4 | **5 of 22** — see `docs/CONTENT_COVERAGE.md` |
 | Save schema version | **2** (baseline was 1) — migration `1 -> 2` adds `reviewSession` |
 | Interaction types implemented | **14 of 17** (baseline 11); still stubbed: `formula-construction`, `simulation-prediction`, `confidence-rating` |
 | Stage 2 | **in progress** — see `STAGE2_RECONSTRUCTION_SCOPE.md`, `STAGE2_RECONSTRUCTION_BACKLOG.md`, `STAGE2_CURRENT_WORK.md` |
@@ -78,7 +80,7 @@ git status
 git rev-parse HEAD
 git ls-remote origin refs/heads/main | awk '{print $1}'   # must match
 npm ci
-npm test            # must stay green: 365/365
+npm test            # must stay green: 403/403
 npm run typecheck && npm run lint
 npm run dev         # renderer + electron dev
 ```
@@ -103,59 +105,37 @@ branch/tag deletion) are forbidden without explicit owner permission. See `REMOT
 
 ## 5. Next unit
 
-**S2-09 — Region 1 validated content expansion.**
+**S2-09 continued — generators for Region 1's remaining 12 topics.**
 
-S2-08 is **Complete**: all 17 Region 1 topic lessons in `STAGE2_RECONSTRUCTION_SCOPE.md` §2 satisfy the 18 structure
-requirements of §5, enforced by 24 checks per lesson. No skeletons remain.
+S2-09's first cycle built the machinery scope §4 needs and took Module 1's five topics past the bar. **5 of 22 topics
+meet §4**; the other 17 have zero generator families and are reported in `docs/CONTENT_COVERAGE.md` as failures with
+reasons — which is what the scope requires of them, and never omission.
 
-**Two completions are not the same thing, and this is where they part.** Those lessons are Complete under **§5**
-(lesson structure). No *topic* is Complete under **§4**, which requires **≥100 validated interactions each**. Every
-Region 1 topic currently carries **7-8 authored questions and zero generator families**. Closing that gap is S2-09, and
-it is a much larger unit than any of the four lesson cycles.
+Remaining, all Region 1 unless noted: fractions · decimals · percentages · ratios · proportions · negatives ·
+number lines · coordinates · tables · variables · cases · categorical-versus-numerical. Five inherited Region 2 topics
+(mean, median, range, choosing measures, data literacy) belong to **S2-17**.
 
-What §4 demands, and what closure (§10) will fail on if it is faked:
+**The arithmetic template will not carry over.** `arithmeticFamilies` is parameterised by a two-number operation, and
+most remaining topics are not one: fractions need equivalence and comparison of parts, coordinates need point geometry,
+tables need a grid to read from. Expect a new generator module per topic group.
 
-- ≥100 validated interactions per Complete topic, spanning **several reasoning families** — 100 numeric variants of one
-  pattern is explicitly *not* Complete.
-- The authoritative topic list comes from the **curriculum graph**, never from the set of generator modules. A topic
-  with zero generators must appear in the report as a **failure**, not vanish from it.
-- Six distinct metrics reported separately per topic (authored records · generator families · reasoning families · raw
-  parameter combinations · valid combinations · final validated generated interactions · total available). They must
-  never be used interchangeably.
-- Per topic: invalid combinations rejected with reasons · exact duplicates · near duplicates · schema failures ·
-  correct-answer failures · missing accessibility descriptions · missing misconception mappings · unreachable
-  questions.
-- Near-duplicate detection normalises numbers, names, whitespace, punctuation and equivalent phrasing.
+### How the machinery works, and the one thing that will bite
 
-### What "Complete" costs for a lesson, measured across all four cycles
+Run `npm run report:coverage` to regenerate both report forms. A topic is Complete under §4 when it has ≥100 validated
+available interactions across ≥4 reasoning families, with no single reasoning *shape* above 50% and nothing
+unreachable. Declaring it means adding its skill id to `tests/helpers/complete-topics.ts`, which
+`tests/audit/content-coverage.test.ts` then enforces.
 
-Kept for Region 2 (S2-12 … S2-14), which faces the same 18 requirements. Per lesson: a practical narrative purpose ·
-a `demonstration` (controls, a named formula, a prediction, an observation, a text equivalent) · a `formalTerm` with
-every symbol explained · six questions, one per practice role. Any new misconception needs a remediation **with a
-follow-up question**. Adding the lesson id to `tests/helpers/complete-lessons.ts` **is** the completeness claim, and 24
-checks in `tests/audit/lesson-structure.test.ts` then have to pass. Add a per-module integration test alongside
-`module1-lessons.test.ts` … `module4-lessons.test.ts`, using `tests/helpers/lesson-playthrough.ts` for the mechanics.
+**`Candidate.expectedResponse` is mandatory and must be stated, never read back out of the question you built.** This
+is the trap: deriving the "correct" response from `question.answer` and evaluating it against `question.answer` cannot
+fail, for any answer kind. A probe deleting the whole answer check failed no test until this was fixed. Where a second
+independent computation exists, supply one — each arithmetic operation carries a `applyIndependently` that works the
+sum out a different way, so a typo in either route makes them disagree.
 
-Six traps, each of which cost time in Region 1:
-
-- **The demonstration must move.** The audit drives every control to the end of its range through
-  `src/core/curriculum/demonstration.ts` and fails if the readout does not change. A decorative control fails.
-- **Notation must already be explained.** A symbol may appear in a lesson's prose, questions, hints, solution steps or
-  remediations only if that lesson or one of its prerequisites explains it. The counting lesson had to be rewritten
-  without `+` and `x` for this reason.
-- **A step misconception must also be declared on the question.** `classifyMisconception` walks
-  `question.misconceptionIds`, so a `misconceptionValues` entry naming an undeclared id is dead content.
-- **Seed prompts are stubs.** All seventeen failed the stub check on first run. Give them real context when promoting
-  them to guided practice.
-- **Do not guess an API.** The Module 3 keyboard walk was written against an invented `movePoint` signature and cost
-  six failing checks. Read the module first.
-- **A new formula is a schema change.** Module 4 genuinely needed `table-cell` and `column-total`, and they were added
-  properly — enum member, `DEMONSTRATION_ARITY` entry, `apply` case, unit tests, and schema rules tying the selector
-  ranges and labels to the table. Do that rather than bending a lesson to fit an existing formula.
-
-**And check your own guards.** A probe in the last cycle found a check I had just written was vacuous: it skipped
-controls with no labels, which was the exact defect it existed to catch. Probe every new guard by breaking the thing
-it claims to protect.
+Three fingerprints do three different jobs, and merging them breaks everything:
+`exactFingerprint` (same question twice — a bug), `nearDuplicateFingerprint` (same numbers, renamed scenery —
+rejected), and `reasoningShape` (task with particulars stripped — *reported*, never rejected). Collapsing near-duplicate
+onto shape reduced 800 valid combinations to 9 on the first attempt.
 
 ### Region 1's two deliberate exceptions
 

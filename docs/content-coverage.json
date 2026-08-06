@@ -1,0 +1,741 @@
+{
+  "generatedFrom": "curriculum graph",
+  "topics": [
+    {
+      "skillId": "skill.choose-measure",
+      "title": "Choosing measures",
+      "lessonIds": [
+        "l.middle-harbor"
+      ],
+      "regionId": "r.harbor-tallies",
+      "authoredRecords": 4,
+      "generatorFamilies": 0,
+      "reasoningFamilies": [],
+      "rawCombinations": 0,
+      "validCombinations": 0,
+      "validatedGenerated": 0,
+      "totalAvailable": 4,
+      "rejections": {
+        "invalidCombinations": 0,
+        "invalidReasons": {},
+        "schemaFailures": 0,
+        "answerFailures": 0,
+        "missingAccessibility": 0,
+        "missingMisconceptionMapping": 0,
+        "exactDuplicates": 0,
+        "nearDuplicates": 0
+      },
+      "unreachableQuestions": [],
+      "largestShapeShare": 0.25,
+      "failures": [
+        "no generator families produce for this topic",
+        "4 available interactions, below the required 100",
+        "0 reasoning families represented, below the required 4"
+      ]
+    },
+    {
+      "skillId": "skill.data-literacy",
+      "title": "Data literacy",
+      "lessonIds": [
+        "l.reading-tallies"
+      ],
+      "regionId": "r.harbor-tallies",
+      "authoredRecords": 7,
+      "generatorFamilies": 0,
+      "reasoningFamilies": [],
+      "rawCombinations": 0,
+      "validCombinations": 0,
+      "validatedGenerated": 0,
+      "totalAvailable": 7,
+      "rejections": {
+        "invalidCombinations": 0,
+        "invalidReasons": {},
+        "schemaFailures": 0,
+        "answerFailures": 0,
+        "missingAccessibility": 0,
+        "missingMisconceptionMapping": 0,
+        "exactDuplicates": 0,
+        "nearDuplicates": 0
+      },
+      "unreachableQuestions": [],
+      "largestShapeShare": 0.14285714285714285,
+      "failures": [
+        "no generator families produce for this topic",
+        "7 available interactions, below the required 100",
+        "0 reasoning families represented, below the required 4"
+      ]
+    },
+    {
+      "skillId": "skill.mean",
+      "title": "Mean",
+      "lessonIds": [
+        "l.reading-tallies"
+      ],
+      "regionId": "r.harbor-tallies",
+      "authoredRecords": 6,
+      "generatorFamilies": 0,
+      "reasoningFamilies": [],
+      "rawCombinations": 0,
+      "validCombinations": 0,
+      "validatedGenerated": 0,
+      "totalAvailable": 6,
+      "rejections": {
+        "invalidCombinations": 0,
+        "invalidReasons": {},
+        "schemaFailures": 0,
+        "answerFailures": 0,
+        "missingAccessibility": 0,
+        "missingMisconceptionMapping": 0,
+        "exactDuplicates": 0,
+        "nearDuplicates": 0
+      },
+      "unreachableQuestions": [],
+      "largestShapeShare": 0.16666666666666666,
+      "failures": [
+        "no generator families produce for this topic",
+        "6 available interactions, below the required 100",
+        "0 reasoning families represented, below the required 4"
+      ]
+    },
+    {
+      "skillId": "skill.median",
+      "title": "Median",
+      "lessonIds": [
+        "l.middle-harbor"
+      ],
+      "regionId": "r.harbor-tallies",
+      "authoredRecords": 5,
+      "generatorFamilies": 0,
+      "reasoningFamilies": [],
+      "rawCombinations": 0,
+      "validCombinations": 0,
+      "validatedGenerated": 0,
+      "totalAvailable": 5,
+      "rejections": {
+        "invalidCombinations": 0,
+        "invalidReasons": {},
+        "schemaFailures": 0,
+        "answerFailures": 0,
+        "missingAccessibility": 0,
+        "missingMisconceptionMapping": 0,
+        "exactDuplicates": 0,
+        "nearDuplicates": 0
+      },
+      "unreachableQuestions": [],
+      "largestShapeShare": 0.2,
+      "failures": [
+        "no generator families produce for this topic",
+        "5 available interactions, below the required 100",
+        "0 reasoning families represented, below the required 4"
+      ]
+    },
+    {
+      "skillId": "skill.r1-addition",
+      "title": "Addition",
+      "lessonIds": [
+        "l.r1-addition"
+      ],
+      "regionId": "r.harbor-tallies",
+      "authoredRecords": 7,
+      "generatorFamilies": 8,
+      "reasoningFamilies": [
+        "calculation",
+        "comparison",
+        "error-identification",
+        "irrelevant-information-filtering",
+        "multi-step-reasoning",
+        "real-world-application",
+        "recognition"
+      ],
+      "rawCombinations": 800,
+      "validCombinations": 800,
+      "validatedGenerated": 720,
+      "totalAvailable": 727,
+      "rejections": {
+        "invalidCombinations": 0,
+        "invalidReasons": {},
+        "schemaFailures": 0,
+        "answerFailures": 0,
+        "missingAccessibility": 0,
+        "missingMisconceptionMapping": 0,
+        "exactDuplicates": 80,
+        "nearDuplicates": 0
+      },
+      "unreachableQuestions": [],
+      "largestShapeShare": 0.11004126547455295,
+      "failures": []
+    },
+    {
+      "skillId": "skill.r1-cases",
+      "title": "Cases and observations",
+      "lessonIds": [
+        "l.r1-cases"
+      ],
+      "regionId": "r.harbor-tallies",
+      "authoredRecords": 7,
+      "generatorFamilies": 0,
+      "reasoningFamilies": [],
+      "rawCombinations": 0,
+      "validCombinations": 0,
+      "validatedGenerated": 0,
+      "totalAvailable": 7,
+      "rejections": {
+        "invalidCombinations": 0,
+        "invalidReasons": {},
+        "schemaFailures": 0,
+        "answerFailures": 0,
+        "missingAccessibility": 0,
+        "missingMisconceptionMapping": 0,
+        "exactDuplicates": 0,
+        "nearDuplicates": 0
+      },
+      "unreachableQuestions": [],
+      "largestShapeShare": 0.14285714285714285,
+      "failures": [
+        "no generator families produce for this topic",
+        "7 available interactions, below the required 100",
+        "0 reasoning families represented, below the required 4"
+      ]
+    },
+    {
+      "skillId": "skill.r1-coordinates",
+      "title": "Coordinates",
+      "lessonIds": [
+        "l.r1-coordinates"
+      ],
+      "regionId": "r.harbor-tallies",
+      "authoredRecords": 7,
+      "generatorFamilies": 0,
+      "reasoningFamilies": [],
+      "rawCombinations": 0,
+      "validCombinations": 0,
+      "validatedGenerated": 0,
+      "totalAvailable": 7,
+      "rejections": {
+        "invalidCombinations": 0,
+        "invalidReasons": {},
+        "schemaFailures": 0,
+        "answerFailures": 0,
+        "missingAccessibility": 0,
+        "missingMisconceptionMapping": 0,
+        "exactDuplicates": 0,
+        "nearDuplicates": 0
+      },
+      "unreachableQuestions": [],
+      "largestShapeShare": 0.14285714285714285,
+      "failures": [
+        "no generator families produce for this topic",
+        "7 available interactions, below the required 100",
+        "0 reasoning families represented, below the required 4"
+      ]
+    },
+    {
+      "skillId": "skill.r1-counting",
+      "title": "Counting",
+      "lessonIds": [
+        "l.r1-counting"
+      ],
+      "regionId": "r.harbor-tallies",
+      "authoredRecords": 7,
+      "generatorFamilies": 8,
+      "reasoningFamilies": [
+        "calculation",
+        "comparison",
+        "error-identification",
+        "irrelevant-information-filtering",
+        "multi-step-reasoning",
+        "ordering",
+        "real-world-application",
+        "recognition"
+      ],
+      "rawCombinations": 1000,
+      "validCombinations": 848,
+      "validatedGenerated": 789,
+      "totalAvailable": 796,
+      "rejections": {
+        "invalidCombinations": 152,
+        "invalidReasons": {
+          "a tally never leaves five or more loose marks": 60,
+          "more groups than a shift sheet holds": 84,
+          "the two values are equal, so the wrong-order distractor is identical": 8
+        },
+        "schemaFailures": 0,
+        "answerFailures": 0,
+        "missingAccessibility": 0,
+        "missingMisconceptionMapping": 0,
+        "exactDuplicates": 59,
+        "nearDuplicates": 0
+      },
+      "unreachableQuestions": [],
+      "largestShapeShare": 0.12562814070351758,
+      "failures": []
+    },
+    {
+      "skillId": "skill.r1-decimals",
+      "title": "Decimals",
+      "lessonIds": [
+        "l.r1-decimals"
+      ],
+      "regionId": "r.harbor-tallies",
+      "authoredRecords": 7,
+      "generatorFamilies": 0,
+      "reasoningFamilies": [],
+      "rawCombinations": 0,
+      "validCombinations": 0,
+      "validatedGenerated": 0,
+      "totalAvailable": 7,
+      "rejections": {
+        "invalidCombinations": 0,
+        "invalidReasons": {},
+        "schemaFailures": 0,
+        "answerFailures": 0,
+        "missingAccessibility": 0,
+        "missingMisconceptionMapping": 0,
+        "exactDuplicates": 0,
+        "nearDuplicates": 0
+      },
+      "unreachableQuestions": [],
+      "largestShapeShare": 0.14285714285714285,
+      "failures": [
+        "no generator families produce for this topic",
+        "7 available interactions, below the required 100",
+        "0 reasoning families represented, below the required 4"
+      ]
+    },
+    {
+      "skillId": "skill.r1-division",
+      "title": "Division",
+      "lessonIds": [
+        "l.r1-division"
+      ],
+      "regionId": "r.harbor-tallies",
+      "authoredRecords": 7,
+      "generatorFamilies": 8,
+      "reasoningFamilies": [
+        "calculation",
+        "error-identification",
+        "irrelevant-information-filtering",
+        "multi-step-reasoning",
+        "real-world-application",
+        "recognition"
+      ],
+      "rawCombinations": 800,
+      "validCombinations": 301,
+      "validatedGenerated": 284,
+      "totalAvailable": 291,
+      "rejections": {
+        "invalidCombinations": 499,
+        "invalidReasons": {
+          "the share does not come out exactly, and remainders are a later lesson": 499
+        },
+        "schemaFailures": 0,
+        "answerFailures": 0,
+        "missingAccessibility": 0,
+        "missingMisconceptionMapping": 0,
+        "exactDuplicates": 4,
+        "nearDuplicates": 13
+      },
+      "unreachableQuestions": [],
+      "largestShapeShare": 0.13402061855670103,
+      "failures": []
+    },
+    {
+      "skillId": "skill.r1-fractions",
+      "title": "Fractions",
+      "lessonIds": [
+        "l.r1-fractions"
+      ],
+      "regionId": "r.harbor-tallies",
+      "authoredRecords": 8,
+      "generatorFamilies": 0,
+      "reasoningFamilies": [],
+      "rawCombinations": 0,
+      "validCombinations": 0,
+      "validatedGenerated": 0,
+      "totalAvailable": 8,
+      "rejections": {
+        "invalidCombinations": 0,
+        "invalidReasons": {},
+        "schemaFailures": 0,
+        "answerFailures": 0,
+        "missingAccessibility": 0,
+        "missingMisconceptionMapping": 0,
+        "exactDuplicates": 0,
+        "nearDuplicates": 0
+      },
+      "unreachableQuestions": [],
+      "largestShapeShare": 0.125,
+      "failures": [
+        "no generator families produce for this topic",
+        "8 available interactions, below the required 100",
+        "0 reasoning families represented, below the required 4"
+      ]
+    },
+    {
+      "skillId": "skill.r1-multiplication",
+      "title": "Multiplication",
+      "lessonIds": [
+        "l.r1-multiplication"
+      ],
+      "regionId": "r.harbor-tallies",
+      "authoredRecords": 7,
+      "generatorFamilies": 8,
+      "reasoningFamilies": [
+        "calculation",
+        "comparison",
+        "error-identification",
+        "irrelevant-information-filtering",
+        "multi-step-reasoning",
+        "real-world-application",
+        "recognition"
+      ],
+      "rawCombinations": 800,
+      "validCombinations": 761,
+      "validatedGenerated": 681,
+      "totalAvailable": 688,
+      "rejections": {
+        "invalidCombinations": 39,
+        "invalidReasons": {
+          "the product is larger than this topic's range": 39
+        },
+        "schemaFailures": 0,
+        "answerFailures": 0,
+        "missingAccessibility": 0,
+        "missingMisconceptionMapping": 0,
+        "exactDuplicates": 80,
+        "nearDuplicates": 0
+      },
+      "unreachableQuestions": [],
+      "largestShapeShare": 0.11627906976744186,
+      "failures": []
+    },
+    {
+      "skillId": "skill.r1-negatives",
+      "title": "Negative numbers",
+      "lessonIds": [
+        "l.r1-negatives"
+      ],
+      "regionId": "r.harbor-tallies",
+      "authoredRecords": 7,
+      "generatorFamilies": 0,
+      "reasoningFamilies": [],
+      "rawCombinations": 0,
+      "validCombinations": 0,
+      "validatedGenerated": 0,
+      "totalAvailable": 7,
+      "rejections": {
+        "invalidCombinations": 0,
+        "invalidReasons": {},
+        "schemaFailures": 0,
+        "answerFailures": 0,
+        "missingAccessibility": 0,
+        "missingMisconceptionMapping": 0,
+        "exactDuplicates": 0,
+        "nearDuplicates": 0
+      },
+      "unreachableQuestions": [],
+      "largestShapeShare": 0.14285714285714285,
+      "failures": [
+        "no generator families produce for this topic",
+        "7 available interactions, below the required 100",
+        "0 reasoning families represented, below the required 4"
+      ]
+    },
+    {
+      "skillId": "skill.r1-number-lines",
+      "title": "Number lines",
+      "lessonIds": [
+        "l.r1-number-lines"
+      ],
+      "regionId": "r.harbor-tallies",
+      "authoredRecords": 7,
+      "generatorFamilies": 0,
+      "reasoningFamilies": [],
+      "rawCombinations": 0,
+      "validCombinations": 0,
+      "validatedGenerated": 0,
+      "totalAvailable": 7,
+      "rejections": {
+        "invalidCombinations": 0,
+        "invalidReasons": {},
+        "schemaFailures": 0,
+        "answerFailures": 0,
+        "missingAccessibility": 0,
+        "missingMisconceptionMapping": 0,
+        "exactDuplicates": 0,
+        "nearDuplicates": 0
+      },
+      "unreachableQuestions": [],
+      "largestShapeShare": 0.14285714285714285,
+      "failures": [
+        "no generator families produce for this topic",
+        "7 available interactions, below the required 100",
+        "0 reasoning families represented, below the required 4"
+      ]
+    },
+    {
+      "skillId": "skill.r1-percentages",
+      "title": "Percentages",
+      "lessonIds": [
+        "l.r1-percentages"
+      ],
+      "regionId": "r.harbor-tallies",
+      "authoredRecords": 7,
+      "generatorFamilies": 0,
+      "reasoningFamilies": [],
+      "rawCombinations": 0,
+      "validCombinations": 0,
+      "validatedGenerated": 0,
+      "totalAvailable": 7,
+      "rejections": {
+        "invalidCombinations": 0,
+        "invalidReasons": {},
+        "schemaFailures": 0,
+        "answerFailures": 0,
+        "missingAccessibility": 0,
+        "missingMisconceptionMapping": 0,
+        "exactDuplicates": 0,
+        "nearDuplicates": 0
+      },
+      "unreachableQuestions": [],
+      "largestShapeShare": 0.14285714285714285,
+      "failures": [
+        "no generator families produce for this topic",
+        "7 available interactions, below the required 100",
+        "0 reasoning families represented, below the required 4"
+      ]
+    },
+    {
+      "skillId": "skill.r1-proportions",
+      "title": "Proportions",
+      "lessonIds": [
+        "l.r1-proportions"
+      ],
+      "regionId": "r.harbor-tallies",
+      "authoredRecords": 7,
+      "generatorFamilies": 0,
+      "reasoningFamilies": [],
+      "rawCombinations": 0,
+      "validCombinations": 0,
+      "validatedGenerated": 0,
+      "totalAvailable": 7,
+      "rejections": {
+        "invalidCombinations": 0,
+        "invalidReasons": {},
+        "schemaFailures": 0,
+        "answerFailures": 0,
+        "missingAccessibility": 0,
+        "missingMisconceptionMapping": 0,
+        "exactDuplicates": 0,
+        "nearDuplicates": 0
+      },
+      "unreachableQuestions": [],
+      "largestShapeShare": 0.14285714285714285,
+      "failures": [
+        "no generator families produce for this topic",
+        "7 available interactions, below the required 100",
+        "0 reasoning families represented, below the required 4"
+      ]
+    },
+    {
+      "skillId": "skill.r1-ratios",
+      "title": "Ratios",
+      "lessonIds": [
+        "l.r1-ratios"
+      ],
+      "regionId": "r.harbor-tallies",
+      "authoredRecords": 7,
+      "generatorFamilies": 0,
+      "reasoningFamilies": [],
+      "rawCombinations": 0,
+      "validCombinations": 0,
+      "validatedGenerated": 0,
+      "totalAvailable": 7,
+      "rejections": {
+        "invalidCombinations": 0,
+        "invalidReasons": {},
+        "schemaFailures": 0,
+        "answerFailures": 0,
+        "missingAccessibility": 0,
+        "missingMisconceptionMapping": 0,
+        "exactDuplicates": 0,
+        "nearDuplicates": 0
+      },
+      "unreachableQuestions": [],
+      "largestShapeShare": 0.14285714285714285,
+      "failures": [
+        "no generator families produce for this topic",
+        "7 available interactions, below the required 100",
+        "0 reasoning families represented, below the required 4"
+      ]
+    },
+    {
+      "skillId": "skill.r1-subtraction",
+      "title": "Subtraction",
+      "lessonIds": [
+        "l.r1-subtraction"
+      ],
+      "regionId": "r.harbor-tallies",
+      "authoredRecords": 7,
+      "generatorFamilies": 8,
+      "reasoningFamilies": [
+        "calculation",
+        "comparison",
+        "error-identification",
+        "irrelevant-information-filtering",
+        "multi-step-reasoning",
+        "ordering",
+        "real-world-application",
+        "recognition"
+      ],
+      "rawCombinations": 800,
+      "validCombinations": 797,
+      "validatedGenerated": 718,
+      "totalAvailable": 725,
+      "rejections": {
+        "invalidCombinations": 3,
+        "invalidReasons": {
+          "the result would fall below zero, which this topic has not taught yet": 3
+        },
+        "schemaFailures": 0,
+        "answerFailures": 0,
+        "missingAccessibility": 0,
+        "missingMisconceptionMapping": 0,
+        "exactDuplicates": 79,
+        "nearDuplicates": 0
+      },
+      "unreachableQuestions": [],
+      "largestShapeShare": 0.1103448275862069,
+      "failures": []
+    },
+    {
+      "skillId": "skill.r1-tables",
+      "title": "Reading tables",
+      "lessonIds": [
+        "l.r1-tables"
+      ],
+      "regionId": "r.harbor-tallies",
+      "authoredRecords": 7,
+      "generatorFamilies": 0,
+      "reasoningFamilies": [],
+      "rawCombinations": 0,
+      "validCombinations": 0,
+      "validatedGenerated": 0,
+      "totalAvailable": 7,
+      "rejections": {
+        "invalidCombinations": 0,
+        "invalidReasons": {},
+        "schemaFailures": 0,
+        "answerFailures": 0,
+        "missingAccessibility": 0,
+        "missingMisconceptionMapping": 0,
+        "exactDuplicates": 0,
+        "nearDuplicates": 0
+      },
+      "unreachableQuestions": [],
+      "largestShapeShare": 0.14285714285714285,
+      "failures": [
+        "no generator families produce for this topic",
+        "7 available interactions, below the required 100",
+        "0 reasoning families represented, below the required 4"
+      ]
+    },
+    {
+      "skillId": "skill.r1-variable-kinds",
+      "title": "Kinds of variable",
+      "lessonIds": [
+        "l.r1-variable-kinds"
+      ],
+      "regionId": "r.harbor-tallies",
+      "authoredRecords": 7,
+      "generatorFamilies": 0,
+      "reasoningFamilies": [],
+      "rawCombinations": 0,
+      "validCombinations": 0,
+      "validatedGenerated": 0,
+      "totalAvailable": 7,
+      "rejections": {
+        "invalidCombinations": 0,
+        "invalidReasons": {},
+        "schemaFailures": 0,
+        "answerFailures": 0,
+        "missingAccessibility": 0,
+        "missingMisconceptionMapping": 0,
+        "exactDuplicates": 0,
+        "nearDuplicates": 0
+      },
+      "unreachableQuestions": [],
+      "largestShapeShare": 0.14285714285714285,
+      "failures": [
+        "no generator families produce for this topic",
+        "7 available interactions, below the required 100",
+        "0 reasoning families represented, below the required 4"
+      ]
+    },
+    {
+      "skillId": "skill.r1-variables",
+      "title": "Variables",
+      "lessonIds": [
+        "l.r1-variables"
+      ],
+      "regionId": "r.harbor-tallies",
+      "authoredRecords": 7,
+      "generatorFamilies": 0,
+      "reasoningFamilies": [],
+      "rawCombinations": 0,
+      "validCombinations": 0,
+      "validatedGenerated": 0,
+      "totalAvailable": 7,
+      "rejections": {
+        "invalidCombinations": 0,
+        "invalidReasons": {},
+        "schemaFailures": 0,
+        "answerFailures": 0,
+        "missingAccessibility": 0,
+        "missingMisconceptionMapping": 0,
+        "exactDuplicates": 0,
+        "nearDuplicates": 0
+      },
+      "unreachableQuestions": [],
+      "largestShapeShare": 0.14285714285714285,
+      "failures": [
+        "no generator families produce for this topic",
+        "7 available interactions, below the required 100",
+        "0 reasoning families represented, below the required 4"
+      ]
+    },
+    {
+      "skillId": "skill.range",
+      "title": "Range",
+      "lessonIds": [
+        "l.spread-1"
+      ],
+      "regionId": "r.averages-atoll",
+      "authoredRecords": 1,
+      "generatorFamilies": 0,
+      "reasoningFamilies": [],
+      "rawCombinations": 0,
+      "validCombinations": 0,
+      "validatedGenerated": 0,
+      "totalAvailable": 1,
+      "rejections": {
+        "invalidCombinations": 0,
+        "invalidReasons": {},
+        "schemaFailures": 0,
+        "answerFailures": 0,
+        "missingAccessibility": 0,
+        "missingMisconceptionMapping": 0,
+        "exactDuplicates": 0,
+        "nearDuplicates": 0
+      },
+      "unreachableQuestions": [],
+      "largestShapeShare": 1,
+      "failures": [
+        "no generator families produce for this topic",
+        "1 available interactions, below the required 100",
+        "0 reasoning families represented, below the required 4",
+        "100% of interactions share one reasoning shape, above the 50% ceiling — this is the \"numeric variants of one pattern\" case"
+      ]
+    }
+  ]
+}

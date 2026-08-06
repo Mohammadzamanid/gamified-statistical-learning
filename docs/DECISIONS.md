@@ -108,3 +108,31 @@ therefore not a formality at the end of a unit — it is the only thing that dis
 consequences are now standing practice: a new check is probed by removing the thing it asserts, and the probe harness
 counts failed *suites* as well as failed checks, because content the schema rejects stops every suite loading and was
 previously being reported as zero failures. (S2-08)
+
+**D-020 — A generator states its answer; it never reads one back.**
+`Candidate.expectedResponse` is mandatory, and the pipeline evaluates *that* against the question the generator built.
+The obvious alternative — derive the correct response from `question.answer`, then check it against `question.answer` —
+is tautological for every answer kind, and it was in the code until a probe deleted the entire answer check and no test
+noticed. Where a second independent computation exists it is supplied: every arithmetic operation carries an
+`applyIndependently` that reaches the same number by a different route (repeated addition against multiplication,
+counting down against subtraction), so a typo in either route makes the two disagree and the combination is rejected.
+Where no independent computation exists — a question about matching a description to a situation — stating the intended
+option still catches a `build()` that marks a different one correct. (S2-09)
+
+**D-021 — Three fingerprints, because §4 names two different rules.**
+"Near-duplicate detection normalises numbers, names, whitespace, punctuation and equivalent phrasing" and "a topic with
+100 numeric variants of one reasoning pattern is not Complete" are a *rejection* rule and a *diversity* rule, and they
+cannot share a fingerprint: the first attempt used one, and 800 valid combinations collapsed to 9 because every numeric
+variant looked like a duplicate of every other. So `exactFingerprint` catches the same question twice (a generator bug),
+`nearDuplicateFingerprint` keeps the numbers and strips the scenery — catching the rename-the-objects trick, and
+rejecting it — and `reasoningShape` strips everything particular and is *reported*, feeding a ceiling of 50% on any
+single shape per topic. (S2-09)
+
+**D-022 — Generated practice is merged at load, not committed as JSON.**
+`loadPlayableContent()` runs the generators once and merges the accepted questions into the bundle; `loadShippedContent()`
+returns only what the JSON files declare. Two reasons for the split. Committing 3,000 generated records would put two
+copies of the same content in the repository, free to drift. And every audit that reasons about hand-written content —
+lesson structure, reachability, the interaction audit — keeps working from the authored bundle, so generated practice
+can never quietly satisfy a check about authored content. Generated ids are prefixed `q.gen.`, a check fails if one ever
+appears in a lesson, and another proves the spaced-review queue can pick them — which is what makes "available" honest
+rather than a number in a report. (S2-09)
