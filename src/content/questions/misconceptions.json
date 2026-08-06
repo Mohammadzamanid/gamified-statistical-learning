@@ -110,5 +110,37 @@
     "detector": "tagged-distractor",
     "detectorParams": {},
     "remediationId": "rem.who-is-shared"
+  },
+  {
+    "id": "mc.bigger-denominator-bigger-fraction",
+    "title": "Bigger bottom number read as a bigger fraction",
+    "description": "The learner compares fractions by the size of the denominator alone, so 1/8 is judged larger than 1/4 because 8 is larger than 4.",
+    "detector": "known-wrong-answer",
+    "detectorParams": {},
+    "remediationId": "rem.smaller-pieces"
+  },
+  {
+    "id": "mc.longer-decimal-is-bigger",
+    "title": "More digits read as a bigger decimal",
+    "description": "The learner compares decimals by how many digits follow the point, treating 0.25 as larger than 0.5 because it is longer.",
+    "detector": "known-wrong-answer",
+    "detectorParams": {},
+    "remediationId": "rem.line-up-the-point"
+  },
+  {
+    "id": "mc.ratio-part-as-whole",
+    "title": "A ratio part treated as a share of the whole",
+    "description": "Given a ratio of 3 parts to 5 parts, the learner reports the first part as 3/5 of the mixture instead of 3/8.",
+    "detector": "known-wrong-answer",
+    "detectorParams": {},
+    "remediationId": "rem.count-all-the-parts"
+  },
+  {
+    "id": "mc.additive-scaling",
+    "title": "Scaling by adding instead of multiplying",
+    "description": "The learner keeps a difference constant rather than a ratio, so if 2 crates cost 6 coins they conclude 4 crates cost 8 coins.",
+    "detector": "known-wrong-answer",
+    "detectorParams": {},
+    "remediationId": "rem.scale-both-together"
   }
 ]

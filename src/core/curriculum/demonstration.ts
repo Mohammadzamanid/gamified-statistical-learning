@@ -52,6 +52,11 @@ function apply(formula: DemonstrationFormula, a: number, b: number): number {
       return a / b;
     case "negate":
       return -a;
+    case "place-value":
+      // Deliberately not (10a + b) / 100: the learner is moving a tenths digit
+      // and a hundredths digit, and each column's contribution should be
+      // visible in the arithmetic that produces the readout.
+      return a / 10 + b / 100;
     case "percent-of":
       return (a / 100) * b;
     case "share-of":

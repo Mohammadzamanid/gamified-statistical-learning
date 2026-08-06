@@ -51,6 +51,16 @@ describe("demonstration arithmetic", () => {
     expect(demonstrationReadout(demo({ formula: "share-of" }), [2, 8])).toBe(25);
   });
 
+  it("gives each decimal column its own weight", () => {
+    // place-value is what makes the decimals lesson honest: a step on the tenths
+    // dial must outweigh nine steps on the hundredths one.
+    const d = demo({ formula: "place-value", readoutPrecision: 2 });
+    expect(demonstrationReadout(d, [5, 0])).toBeCloseTo(0.5, 10);
+    expect(demonstrationReadout(d, [2, 5])).toBeCloseTo(0.25, 10);
+    expect(demonstrationReadout(d, [0, 9])).toBeCloseTo(0.09, 10);
+    expect(demonstrationReadout(d, [1, 0])).toBeGreaterThan(demonstrationReadout(d, [0, 9]));
+  });
+
   it("computes a single-control formula", () => {
     const d = demo({
       formula: "negate",

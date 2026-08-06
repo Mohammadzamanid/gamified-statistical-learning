@@ -77,6 +77,17 @@ function freshSave(): SaveFile {
  * Symbols that never appear in ordinary English, so finding one is always
  * notation. Operators like + and x are handled separately, because they only
  * count as notation when they sit between two numbers ("exactly" contains an x).
+ *
+ * Two marks are deliberately out of scope, because in this curriculum they are
+ * punctuation far more often than notation and a guard that cannot tell the
+ * difference is worse than none:
+ *
+ *  - `=` is read aloud as "is" throughout, never introduced as a symbol.
+ *  - `:` was tried here and immediately produced a false positive on
+ *    "Count on 5: 8, 9, 10, 11, 12" — a colon ending a clause, not a ratio.
+ *
+ * Neither is unchecked overall: requirement 10 below still forces any lesson
+ * whose *notation* contains them (ratios, proportions) to explain them.
  */
 const ALWAYS_NOTATION = ["×", "÷", "√", "∑", "σ", "μ", "π", "≥", "≤", "≠", "≈", "^", "%"];
 const OPERATOR_BETWEEN_NUMBERS = /\d\s*([+\-x×÷/*])\s*\d/g;

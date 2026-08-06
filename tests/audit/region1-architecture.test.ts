@@ -188,8 +188,8 @@ describe("skeleton honesty", () => {
 
   it("lessons not declared Complete still look like skeletons", () => {
     const skeletons = seedLessons.filter((l) => !COMPLETE_LESSONS.includes(l.id));
-    // 17 topics, 5 filled in by S2-08. This number must be reduced deliberately.
-    expect(skeletons.length, "the Complete list and the content have diverged").toBe(12);
+    // 17 topics, 10 filled in by S2-08 so far. This number must be reduced deliberately.
+    expect(skeletons.length, "the Complete list and the content have diverged").toBe(7);
     for (const lesson of skeletons) {
       expect(
         lesson.questionIds.length,

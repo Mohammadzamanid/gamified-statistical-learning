@@ -35,6 +35,8 @@ export const DemonstrationFormulaSchema = z.enum([
   "quotient",
   /** -a */
   "negate",
+  /** a tenths plus b hundredths — the decimal point as place value. */
+  "place-value",
   /** a percent of b */
   "percent-of",
   /** a out of b, as a percentage */
@@ -50,6 +52,7 @@ export const DEMONSTRATION_ARITY: Readonly<Record<DemonstrationFormula, number>>
   product: 2,
   quotient: 2,
   negate: 1,
+  "place-value": 2,
   "percent-of": 2,
   "share-of": 2
 };

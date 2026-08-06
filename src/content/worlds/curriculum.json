@@ -791,7 +791,7 @@
       "id": "l.r1-fractions",
       "moduleId": "m.r1-parts",
       "title": "Fractions",
-      "narrativeIntro": "Before the expedition can chart anything, fractions must be second nature.",
+      "narrativeIntro": "Half a hold, a quarter of the catch, three of the four crates spoiled — the harbour's records are full of amounts that are not whole numbers. A fraction is how you name a part precisely enough to write it down and argue about it.",
       "objectiveIds": [
         "obj.r1-fractions"
       ],
@@ -804,18 +804,107 @@
         }
       ],
       "questionIds": [
-        "q.r1-fractions"
+        "q.r1-fractions",
+        "q.r1-fractions-independent",
+        "q.r1-fractions-misconception",
+        "q.r1-fractions-application",
+        "q.r1-fractions-teachback",
+        "q.r1-fractions-mastery"
       ],
       "prerequisites": [
         "l.r1-division"
       ],
-      "estimatedMinutes": 8
+      "estimatedMinutes": 20,
+      "demonstration": {
+        "id": "dem.r1-fractions",
+        "title": "Cutting the load",
+        "experience": "A single load of cargo is split into equal shares on the quay, and some of those shares are marked for one buyer. How much of the load does that buyer get?",
+        "accessibleDescription": "Two controls. The first sets how many of the equal shares are marked for the buyer. The second sets how many equal shares the whole load was cut into. The readout gives the buyer's share of the whole load, to two decimal places.",
+        "controls": [
+          {
+            "id": "ctl.taken",
+            "label": "Shares marked for the buyer",
+            "min": 0,
+            "max": 12,
+            "step": 1,
+            "initial": 1
+          },
+          {
+            "id": "ctl.parts",
+            "label": "Equal shares the load is cut into",
+            "min": 1,
+            "max": 12,
+            "step": 1,
+            "initial": 2
+          }
+        ],
+        "formula": "quotient",
+        "readoutLabel": "Share of the whole load",
+        "readoutPrecision": 2,
+        "prediction": {
+          "prompt": "One share of a load cut into 2 is half the load. If the same load is cut into 4 shares instead, and the buyer still takes just one, what happens to their share?",
+          "options": [
+            {
+              "id": "opt.bigger",
+              "text": "It gets bigger — 4 is a bigger number than 2"
+            },
+            {
+              "id": "opt.smaller",
+              "text": "It gets smaller"
+            },
+            {
+              "id": "opt.same",
+              "text": "It stays the same — it is still one share"
+            }
+          ],
+          "correctOptionId": "opt.smaller",
+          "revealNote": "The load did not grow. Cutting it into more shares makes every share smaller, so one share of four is less than one share of two. That is the single most important thing about the bottom number."
+        },
+        "observation": "Take 1 of 2, then 2 of 4, then 3 of 6, then 6 of 12. The readout does not move: they are all the same share of the load, written four different ways. Now raise only the bottom control and watch the share shrink."
+      },
+      "formalTerm": {
+        "term": "Fraction",
+        "definition": "A fraction names a number of equal parts of a whole. The bottom number, the denominator, says how many equal parts the whole was cut into; the top number, the numerator, says how many of those parts you are talking about. If the parts are not equal, the fraction means nothing.",
+        "notation": "a / b",
+        "symbols": [
+          {
+            "symbol": "a",
+            "meaning": "the numerator: how many parts you have — here, the shares marked for the buyer"
+          },
+          {
+            "symbol": "/",
+            "meaning": "read as 'out of': the parts you have, out of the parts there are"
+          },
+          {
+            "symbol": "b",
+            "meaning": "the denominator: how many equal parts the whole was cut into"
+          }
+        ]
+      },
+      "guidedQuestionIds": [
+        "q.r1-fractions"
+      ],
+      "independentQuestionIds": [
+        "q.r1-fractions-independent"
+      ],
+      "misconceptionQuestionIds": [
+        "q.r1-fractions-misconception"
+      ],
+      "applicationQuestionIds": [
+        "q.r1-fractions-application"
+      ],
+      "teachBackQuestionIds": [
+        "q.r1-fractions-teachback"
+      ],
+      "masteryCheckQuestionIds": [
+        "q.r1-fractions-mastery"
+      ]
     },
     {
       "id": "l.r1-decimals",
       "moduleId": "m.r1-parts",
       "title": "Decimals",
-      "narrativeIntro": "Before the expedition can chart anything, decimals must be second nature.",
+      "narrativeIntro": "Scales, log books and price lists do not write halves and quarters as fractions — they write 0.5 and 0.25. Decimals are the form every measuring instrument in the harbour reports in, so reading them is not optional.",
       "objectiveIds": [
         "obj.r1-decimals"
       ],
@@ -828,18 +917,108 @@
         }
       ],
       "questionIds": [
-        "q.r1-decimals"
+        "q.r1-decimals",
+        "q.r1-decimals-independent",
+        "q.r1-decimals-misconception",
+        "q.r1-decimals-application",
+        "q.r1-decimals-teachback",
+        "q.r1-decimals-mastery"
       ],
       "prerequisites": [
         "l.r1-fractions"
       ],
-      "estimatedMinutes": 8
+      "estimatedMinutes": 20,
+      "demonstration": {
+        "id": "dem.r1-decimals",
+        "title": "The weighing scale",
+        "experience": "The quayside scale reports weights below one tonne on two dials: a coarse dial marking tenths of a tonne, and a fine dial marking hundredths.",
+        "accessibleDescription": "Two controls. The first sets the tenths dial, worth one tenth of a tonne per step. The second sets the hundredths dial, worth one hundredth per step. The readout gives the total weight in tonnes, to two decimal places.",
+        "controls": [
+          {
+            "id": "ctl.tenths",
+            "label": "Tenths dial",
+            "min": 0,
+            "max": 9,
+            "step": 1,
+            "initial": 5
+          },
+          {
+            "id": "ctl.hundredths",
+            "label": "Hundredths dial",
+            "min": 0,
+            "max": 9,
+            "step": 1,
+            "initial": 0
+          }
+        ],
+        "formula": "place-value",
+        "readoutLabel": "Weight on the scale",
+        "readoutPrecision": 2,
+        "readoutUnit": "tonnes",
+        "prediction": {
+          "prompt": "The tenths dial is at 5 and the hundredths dial at 0, reading 0.50 tonnes. Which single change makes the scale read more: moving the tenths dial up by one, or moving the hundredths dial up by nine?",
+          "options": [
+            {
+              "id": "opt.tenths",
+              "text": "One step on the tenths dial"
+            },
+            {
+              "id": "opt.hundredths",
+              "text": "Nine steps on the hundredths dial"
+            },
+            {
+              "id": "opt.same",
+              "text": "They add the same amount"
+            }
+          ],
+          "correctOptionId": "opt.tenths",
+          "revealNote": "One tenth is more than nine hundredths, so a single step on the coarse dial beats nine steps on the fine one. Columns further from the point are worth less, however many of them there are."
+        },
+        "observation": "Set the tenths dial to 5 and the hundredths to 0: the scale reads 0.50, the same weight as 0.5. Now set tenths to 2 and hundredths to 5, giving 0.25 — a longer-looking number that weighs less. Length is not size."
+      },
+      "formalTerm": {
+        "term": "Decimal",
+        "definition": "A decimal writes parts of a whole using place-value columns instead of a bar. The first column after the point counts tenths, the next hundredths, and each column is worth a tenth of the one before it. To compare two decimals, compare the columns in order, starting at the tenths.",
+        "notation": "a . b",
+        "symbols": [
+          {
+            "symbol": "a",
+            "meaning": "the whole units — the tonnes you already have complete"
+          },
+          {
+            "symbol": ".",
+            "meaning": "the decimal point: everything to its right is a part of one unit, not a whole one"
+          },
+          {
+            "symbol": "b",
+            "meaning": "the parts of one unit, read column by column: tenths first, then hundredths"
+          }
+        ]
+      },
+      "guidedQuestionIds": [
+        "q.r1-decimals"
+      ],
+      "independentQuestionIds": [
+        "q.r1-decimals-independent"
+      ],
+      "misconceptionQuestionIds": [
+        "q.r1-decimals-misconception"
+      ],
+      "applicationQuestionIds": [
+        "q.r1-decimals-application"
+      ],
+      "teachBackQuestionIds": [
+        "q.r1-decimals-teachback"
+      ],
+      "masteryCheckQuestionIds": [
+        "q.r1-decimals-mastery"
+      ]
     },
     {
       "id": "l.r1-percentages",
       "moduleId": "m.r1-parts",
       "title": "Percentages",
-      "narrativeIntro": "Before the expedition can chart anything, percentages must be second nature.",
+      "narrativeIntro": "Two harbours report spoilage: one lost 18 crates of 30, the other 28 of 40. Which did worse? Percentages exist to answer that question, by putting every share on the same scale of a hundred — which is why almost every statistic you will meet is quoted as one.",
       "objectiveIds": [
         "obj.r1-percentages"
       ],
@@ -852,18 +1031,103 @@
         }
       ],
       "questionIds": [
-        "q.r1-percentages"
+        "q.r1-percentages",
+        "q.r1-percentages-independent",
+        "q.r1-percentages-misconception",
+        "q.r1-percentages-application",
+        "q.r1-percentages-teachback",
+        "q.r1-percentages-mastery"
       ],
       "prerequisites": [
         "l.r1-decimals"
       ],
-      "estimatedMinutes": 8
+      "estimatedMinutes": 20,
+      "demonstration": {
+        "id": "dem.r1-percentages",
+        "title": "Taking a cut of the catch",
+        "experience": "The harbourmaster takes a fixed percentage of every catch as a landing fee, whatever the size of the catch that day.",
+        "accessibleDescription": "Two controls. The first sets the fee as a percentage. The second sets the size of the day's catch in crates. The readout gives the number of crates taken as the fee.",
+        "controls": [
+          {
+            "id": "ctl.rate",
+            "label": "Landing fee (percent)",
+            "min": 0,
+            "max": 100,
+            "step": 5,
+            "initial": 25
+          },
+          {
+            "id": "ctl.catch",
+            "label": "Crates landed",
+            "min": 0,
+            "max": 200,
+            "step": 10,
+            "initial": 80
+          }
+        ],
+        "formula": "percent-of",
+        "readoutLabel": "Crates taken as the fee",
+        "readoutPrecision": 1,
+        "prediction": {
+          "prompt": "The fee is 25% and the catch is 80 crates, so 20 crates are taken. If the catch doubles to 160 crates and the fee stays at 25%, what happens to the crates taken?",
+          "options": [
+            {
+              "id": "opt.same",
+              "text": "It stays at 20 — the fee did not change"
+            },
+            {
+              "id": "opt.double",
+              "text": "It doubles to 40"
+            },
+            {
+              "id": "opt.plus25",
+              "text": "It goes up by 25, to 45"
+            }
+          ],
+          "correctOptionId": "opt.double",
+          "revealNote": "A percentage is not a fixed amount, it is a share. The same 25% share of twice as much catch is twice as many crates. That is the whole point of quoting a fee this way."
+        },
+        "observation": "Set the fee to 100% and the readout equals the whole catch; set it to 50% and it is exactly half. Set it to 10% and it is the catch with one digit knocked off — a hundred crates gives ten."
+      },
+      "formalTerm": {
+        "term": "Percentage",
+        "definition": "A percentage says how many in every hundred. Because the whole is always a hundred, two percentages can be compared directly even when they came from totals of different sizes. The same share can be written as a fraction, as a decimal, or as a percentage — 1/4, 0.25 and 25% are one amount in three costumes.",
+        "notation": "a %",
+        "symbols": [
+          {
+            "symbol": "a",
+            "meaning": "how many in every hundred — here, the crates taken from each hundred landed"
+          },
+          {
+            "symbol": "%",
+            "meaning": "the percent sign, read as 'in every hundred'"
+          }
+        ]
+      },
+      "guidedQuestionIds": [
+        "q.r1-percentages"
+      ],
+      "independentQuestionIds": [
+        "q.r1-percentages-independent"
+      ],
+      "misconceptionQuestionIds": [
+        "q.r1-percentages-misconception"
+      ],
+      "applicationQuestionIds": [
+        "q.r1-percentages-application"
+      ],
+      "teachBackQuestionIds": [
+        "q.r1-percentages-teachback"
+      ],
+      "masteryCheckQuestionIds": [
+        "q.r1-percentages-mastery"
+      ]
     },
     {
       "id": "l.r1-ratios",
       "moduleId": "m.r1-parts",
       "title": "Ratios",
-      "narrativeIntro": "Before the expedition can chart anything, ratios must be second nature.",
+      "narrativeIntro": "Brine is mixed by parts, crews are staffed by boats, and ballast is loaded against cargo. None of these compare a part with a whole — they compare two separate amounts, and getting the order or the scaling wrong spoils the mix.",
       "objectiveIds": [
         "obj.r1-ratios"
       ],
@@ -876,18 +1140,107 @@
         }
       ],
       "questionIds": [
-        "q.r1-ratios"
+        "q.r1-ratios",
+        "q.r1-ratios-independent",
+        "q.r1-ratios-misconception",
+        "q.r1-ratios-application",
+        "q.r1-ratios-teachback",
+        "q.r1-ratios-mastery"
       ],
       "prerequisites": [
         "l.r1-percentages"
       ],
-      "estimatedMinutes": 8
+      "estimatedMinutes": 20,
+      "demonstration": {
+        "id": "dem.r1-ratios",
+        "title": "Mixing the brine",
+        "experience": "The curing shed mixes brine by measures: so many measures of water poured for every measure of salt. Too little water and the fish is ruined; too much and it will not keep.",
+        "accessibleDescription": "Two controls. The first sets the measures of water in the batch, the second the measures of salt. The readout gives how many measures of water there are for every single measure of salt, to two decimal places.",
+        "controls": [
+          {
+            "id": "ctl.water",
+            "label": "Measures of water in the batch",
+            "min": 0,
+            "max": 40,
+            "step": 1,
+            "initial": 12
+          },
+          {
+            "id": "ctl.salt",
+            "label": "Measures of salt in the batch",
+            "min": 1,
+            "max": 10,
+            "step": 1,
+            "initial": 3
+          }
+        ],
+        "formula": "quotient",
+        "readoutLabel": "Measures of water per measure of salt",
+        "readoutPrecision": 2,
+        "prediction": {
+          "prompt": "The batch is 12 water to 3 salt, which is 4 measures of water per measure of salt. If you add 3 more of each — making it 15 water to 6 salt — what happens to the strength of the mix?",
+          "options": [
+            {
+              "id": "opt.same",
+              "text": "It stays the same — the same amount was added to both"
+            },
+            {
+              "id": "opt.weaker",
+              "text": "It changes: there is now less water per measure of salt"
+            },
+            {
+              "id": "opt.stronger",
+              "text": "It changes: there is now more water per measure of salt"
+            }
+          ],
+          "correctOptionId": "opt.weaker",
+          "revealNote": "Adding the same amount to both sides does not preserve a ratio. 15 to 6 is only 2.5 measures of water per measure of salt, down from 4 — a much saltier mix. To keep a ratio you multiply both sides, never add to them."
+        },
+        "observation": "Try 12 to 3, then 24 to 6, then 40 to 10. The readout stays at 4.00 every time: those are all the same mix in different batch sizes. Now add one to just the salt and watch the strength drop."
+      },
+      "formalTerm": {
+        "term": "Ratio",
+        "definition": "A ratio compares two amounts directly, in a fixed order: so much of the first for every so much of the second. Unlike a fraction it need not describe a part of a whole, and the two amounts can be scaled up or down together as long as both are multiplied by the same number. To turn a ratio into a fraction of the whole, add all the parts to find the total first.",
+        "notation": "a : b",
+        "symbols": [
+          {
+            "symbol": "a",
+            "meaning": "the amount of the first thing — here, the measures of water"
+          },
+          {
+            "symbol": ":",
+            "meaning": "read as 'to': it separates the two amounts and fixes their order"
+          },
+          {
+            "symbol": "b",
+            "meaning": "the amount of the second thing — here, the measures of salt"
+          }
+        ]
+      },
+      "guidedQuestionIds": [
+        "q.r1-ratios"
+      ],
+      "independentQuestionIds": [
+        "q.r1-ratios-independent"
+      ],
+      "misconceptionQuestionIds": [
+        "q.r1-ratios-misconception"
+      ],
+      "applicationQuestionIds": [
+        "q.r1-ratios-application"
+      ],
+      "teachBackQuestionIds": [
+        "q.r1-ratios-teachback"
+      ],
+      "masteryCheckQuestionIds": [
+        "q.r1-ratios-mastery"
+      ]
     },
     {
       "id": "l.r1-proportions",
       "moduleId": "m.r1-parts",
       "title": "Proportions",
-      "narrativeIntro": "Before the expedition can chart anything, proportions must be second nature.",
+      "narrativeIntro": "A harbour that spoiled 14 crates sounds worse than one that spoiled 9 — until you learn the first handled 50 and the second 30. A proportion is how you compare fairly when the totals differ, and almost every statistic in the rest of this expedition is built on one.",
       "objectiveIds": [
         "obj.r1-proportions"
       ],
@@ -900,12 +1253,114 @@
         }
       ],
       "questionIds": [
-        "q.r1-proportions"
+        "q.r1-proportions",
+        "q.r1-proportions-independent",
+        "q.r1-proportions-misconception",
+        "q.r1-proportions-application",
+        "q.r1-proportions-teachback",
+        "q.r1-proportions-mastery"
       ],
       "prerequisites": [
         "l.r1-ratios"
       ],
-      "estimatedMinutes": 8
+      "estimatedMinutes": 22,
+      "demonstration": {
+        "id": "dem.r1-proportions",
+        "title": "The same price, however many crates",
+        "experience": "Salt is sold at a fixed price per crate. Buy more crates and you pay more, but the price on each one never moves.",
+        "accessibleDescription": "Two controls. The first sets the price of a single crate in coins. The second sets how many crates are bought. The readout gives the total cost in coins.",
+        "controls": [
+          {
+            "id": "ctl.price",
+            "label": "Coins per crate",
+            "min": 1,
+            "max": 20,
+            "step": 1,
+            "initial": 3
+          },
+          {
+            "id": "ctl.crates",
+            "label": "Crates bought",
+            "min": 0,
+            "max": 20,
+            "step": 1,
+            "initial": 4
+          }
+        ],
+        "formula": "product",
+        "readoutLabel": "Total cost",
+        "readoutPrecision": 0,
+        "readoutUnit": "coins",
+        "prediction": {
+          "prompt": "At 3 coins per crate, 4 crates cost 12 coins. If you buy 8 crates instead — twice as many — what does the total become?",
+          "options": [
+            {
+              "id": "opt.plus4",
+              "text": "16 coins: 4 more crates, so 4 more coins"
+            },
+            {
+              "id": "opt.double",
+              "text": "24 coins: twice the crates, twice the cost"
+            },
+            {
+              "id": "opt.same",
+              "text": "12 coins: the price per crate has not changed"
+            }
+          ],
+          "correctOptionId": "opt.double",
+          "revealNote": "Two amounts are in proportion when one is always the same number of times the other. Doubling the crates doubles the cost, because the coins-per-crate rate is what stays fixed — not the difference between the two numbers."
+        },
+        "observation": "Keep the price at 3 and step the crates 1, 2, 3, 4: the total goes 3, 6, 9, 12 — climbing by the same amount each time. Set the crates to 0 and the cost is 0. Two amounts in proportion always start together at nothing."
+      },
+      "formalTerm": {
+        "term": "Proportion",
+        "definition": "The word does two jobs. A proportion is a part compared with its whole — a number between 0 and 1, which is why it is safe to compare two harbours of different sizes. Two quantities are also said to be in proportion when one is always the same number of times the other, so scaling one scales the other by the same factor.",
+        "notation": "a / b = c / d",
+        "symbols": [
+          {
+            "symbol": "a",
+            "meaning": "the part, or the first amount of the pair being scaled"
+          },
+          {
+            "symbol": "/",
+            "meaning": "read as 'out of', or 'shared across'"
+          },
+          {
+            "symbol": "b",
+            "meaning": "the whole the part came from, or the second amount of the first pair"
+          },
+          {
+            "symbol": "=",
+            "meaning": "the equals sign: the share on the left is exactly the same size as the one on the right"
+          },
+          {
+            "symbol": "c",
+            "meaning": "the matching part after scaling"
+          },
+          {
+            "symbol": "d",
+            "meaning": "the matching whole after scaling"
+          }
+        ]
+      },
+      "guidedQuestionIds": [
+        "q.r1-proportions"
+      ],
+      "independentQuestionIds": [
+        "q.r1-proportions-independent"
+      ],
+      "misconceptionQuestionIds": [
+        "q.r1-proportions-misconception"
+      ],
+      "applicationQuestionIds": [
+        "q.r1-proportions-application"
+      ],
+      "teachBackQuestionIds": [
+        "q.r1-proportions-teachback"
+      ],
+      "masteryCheckQuestionIds": [
+        "q.r1-proportions-mastery"
+      ]
     },
     {
       "id": "l.r1-negatives",

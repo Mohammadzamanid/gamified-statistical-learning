@@ -1621,7 +1621,7 @@
     "difficulty": 1,
     "misconceptionIds": [],
     "estimatedSeconds": 60,
-    "accessibilityDescription": "A fraction input question about fractions.",
+    "accessibilityDescription": "A word problem: 3 of the 4 equal holds on a boat are full. Answer as a fraction or as a decimal.",
     "interaction": "fraction-input",
     "prompt": "Three of the four holds on a boat are full. What fraction of the holds is full? (You may answer as a fraction or a decimal.)",
     "answer": {
@@ -1629,7 +1629,22 @@
       "value": 0.75,
       "tolerance": 0.0005
     },
-    "explanation": "Three parts out of four equal parts is 3/4, which is 0.75."
+    "explanation": "Three parts out of four equal parts is 3/4, which is 0.75.",
+    "hints": [
+      {
+        "level": 1,
+        "text": "The bottom number is how many equal holds there are altogether."
+      },
+      {
+        "level": 2,
+        "text": "Four holds in total, three of them full: three parts out of four."
+      }
+    ],
+    "solutionSteps": [
+      "The boat has 4 equal holds, so 4 goes on the bottom.",
+      "Three of them are full, so 3 goes on the top.",
+      "The fraction is 3/4, which is 0.75."
+    ]
   },
   {
     "id": "q.r1-decimals",
@@ -1641,15 +1656,29 @@
     "difficulty": 1,
     "misconceptionIds": [],
     "estimatedSeconds": 60,
-    "accessibilityDescription": "A numeric input question about decimals.",
+    "accessibilityDescription": "A word problem asking for one half written as a decimal. Enter the value as a number.",
     "interaction": "numeric-input",
-    "prompt": "Write one half as a decimal.",
+    "prompt": "Half a barrel of oil is left in the store. Write that amount as a decimal.",
     "answer": {
       "kind": "numeric",
       "value": 0.5,
       "tolerance": 0.0005
     },
-    "explanation": "One half is five tenths, written 0.5."
+    "explanation": "One half is five tenths, and tenths are the first column after the point, so it is written 0.5.",
+    "hints": [
+      {
+        "level": 1,
+        "text": "Think in tenths: how many tenths make a half?"
+      },
+      {
+        "level": 2,
+        "text": "Five tenths is a half, and tenths are the first column after the point."
+      }
+    ],
+    "solutionSteps": [
+      "A half is five tenths.",
+      "Tenths go in the first column after the point, giving 0.5."
+    ]
   },
   {
     "id": "q.r1-percentages",
@@ -1661,7 +1690,7 @@
     "difficulty": 1,
     "misconceptionIds": [],
     "estimatedSeconds": 60,
-    "accessibilityDescription": "A percentage input question about percentages.",
+    "accessibilityDescription": "A word problem: a quarter of the fleet is in harbour. Answer as a percentage on the 0 to 100 scale.",
     "interaction": "percentage-input",
     "prompt": "A quarter of the fleet is in harbour. What percentage is that? (Answer on the 0-100 scale.)",
     "answer": {
@@ -1670,7 +1699,22 @@
       "tolerance": 0.01,
       "unit": "%"
     },
-    "explanation": "A quarter is 25 out of every 100, so 25%."
+    "explanation": "A quarter is 25 out of every 100, so 25%.",
+    "hints": [
+      {
+        "level": 1,
+        "text": "Percent means 'in every hundred' — so how many boats in every hundred?"
+      },
+      {
+        "level": 2,
+        "text": "A quarter of 100 boats is 25 boats."
+      }
+    ],
+    "solutionSteps": [
+      "Percent means in every hundred, so imagine a fleet of 100.",
+      "A quarter of 100 is 25.",
+      "So a quarter is 25%."
+    ]
   },
   {
     "id": "q.r1-ratios",
@@ -1682,7 +1726,7 @@
     "difficulty": 1,
     "misconceptionIds": [],
     "estimatedSeconds": 60,
-    "accessibilityDescription": "A numeric input question about ratios.",
+    "accessibilityDescription": "A word problem: 2 crab pots for every 3 fish crates, scaled to 9 crates. Enter the number of pots.",
     "interaction": "numeric-input",
     "prompt": "A boat carries 2 crab pots for every 3 fish crates. If it carries 9 fish crates, how many crab pots does it carry?",
     "answer": {
@@ -1691,7 +1735,22 @@
       "tolerance": 0,
       "unit": "pots"
     },
-    "explanation": "9 crates is three lots of 3, so the pots are three lots of 2, which is 6."
+    "explanation": "9 crates is three lots of 3, so the pots are three lots of 2, which is 6.",
+    "hints": [
+      {
+        "level": 1,
+        "text": "How many lots of 3 crates are there in 9?"
+      },
+      {
+        "level": 2,
+        "text": "9 crates is three lots of 3, so scale the pots by three lots too."
+      }
+    ],
+    "solutionSteps": [
+      "9 crates is three lots of the 3-crate group.",
+      "Scale the pots the same way: 2 becomes 6.",
+      "So the boat carries 6 pots."
+    ]
   },
   {
     "id": "q.r1-proportions",
@@ -1703,7 +1762,7 @@
     "difficulty": 1,
     "misconceptionIds": [],
     "estimatedSeconds": 60,
-    "accessibilityDescription": "A numeric input question about proportions.",
+    "accessibilityDescription": "A word problem: 10 of 40 days at sea were stormy. Answer as a proportion between 0 and 1.",
     "interaction": "numeric-input",
     "prompt": "Of 40 days at sea, 10 were stormy. What PROPORTION of days were stormy? (Answer between 0 and 1.)",
     "answer": {
@@ -1711,7 +1770,22 @@
       "value": 0.25,
       "tolerance": 0.0005
     },
-    "explanation": "10 out of 40 is 10/40 = 0.25 of the days."
+    "explanation": "10 out of 40 is 10/40 = 0.25 of the days.",
+    "hints": [
+      {
+        "level": 1,
+        "text": "A proportion puts the total underneath and the part on top."
+      },
+      {
+        "level": 2,
+        "text": "10 out of 40 is the same as 1 out of 4."
+      }
+    ],
+    "solutionSteps": [
+      "The whole is 40 days and the part is 10.",
+      "10/40 simplifies to 1/4.",
+      "As a proportion that is 0.25."
+    ]
   },
   {
     "id": "q.r1-negatives",
@@ -3071,5 +3145,1229 @@
       }
     ],
     "explanation": "12 / 3 = 4 crates each. The amount being shared always goes first."
+  },
+  {
+    "id": "q.r1-fractions-independent",
+    "topicId": "t.r1-fractions",
+    "objectiveId": "obj.r1-fractions",
+    "skillIds": [
+      "skill.r1-fractions"
+    ],
+    "difficulty": 2,
+    "misconceptionIds": [
+      "mc.reversed-fraction"
+    ],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A word problem: 2 of 5 equal holds on a boat are loaded. Answer as a fraction or as a decimal.",
+    "interaction": "fraction-input",
+    "prompt": "A boat has 5 equal holds and 2 of them are loaded. What fraction of the holds is loaded?",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.4,
+      "tolerance": 0.0005
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "The bottom number is how many equal parts there are altogether."
+      },
+      {
+        "level": 2,
+        "text": "Five holds in total, two of them loaded: two parts out of five."
+      }
+    ],
+    "explanation": "Two of five equal parts is 2/5, which is 0.4. The total number of equal parts always goes on the bottom.",
+    "solutionSteps": [
+      "The whole is split into 5 equal holds, so 5 goes on the bottom.",
+      "Two of them are loaded, so 2 goes on the top.",
+      "The fraction is 2/5, or 0.4."
+    ]
+  },
+  {
+    "id": "q.r1-fractions-misconception",
+    "topicId": "t.r1-fractions",
+    "objectiveId": "obj.r1-fractions",
+    "skillIds": [
+      "skill.r1-fractions"
+    ],
+    "difficulty": 3,
+    "misconceptionIds": [
+      "mc.bigger-denominator-bigger-fraction"
+    ],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A multiple-choice question comparing one quarter of a barrel with one eighth of the same barrel. Choose one option.",
+    "interaction": "multiple-choice",
+    "prompt": "Two barrels are the same size. One is cut into 4 equal measures, the other into 8. Which is the larger single measure?",
+    "choices": [
+      {
+        "id": "ch.quarter",
+        "text": "A measure from the barrel cut into 4 — the fewer the pieces, the bigger each one is."
+      },
+      {
+        "id": "ch.eighth",
+        "text": "A measure from the barrel cut into 8, because 8 is a bigger number than 4.",
+        "misconceptionId": "mc.bigger-denominator-bigger-fraction"
+      },
+      {
+        "id": "ch.equal",
+        "text": "They are the same size, because both barrels hold the same amount."
+      }
+    ],
+    "answer": {
+      "kind": "choice",
+      "correctChoiceIds": [
+        "ch.quarter"
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Picture cutting one loaf into 4 slices and an identical loaf into 8."
+      },
+      {
+        "level": 2,
+        "text": "The same barrel shared between more measures gives each measure less — the same idea as sharing crates between more boats."
+      }
+    ],
+    "explanation": "Both barrels hold the same amount, so cutting one into more pieces makes each piece smaller. A quarter is larger than an eighth. On the bottom of a fraction, a bigger number means smaller pieces, not a bigger share."
+  },
+  {
+    "id": "q.r1-fractions-application",
+    "topicId": "t.r1-fractions",
+    "objectiveId": "obj.r1-fractions",
+    "skillIds": [
+      "skill.r1-fractions"
+    ],
+    "difficulty": 3,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A word problem: 18 of 24 crates in a shipment are cod. Answer as a fraction or as a decimal.",
+    "interaction": "fraction-input",
+    "prompt": "Of the 24 crates in a shipment, 18 hold cod. What fraction of the shipment is cod?",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.75,
+      "tolerance": 0.0005
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Write it first as the count of cod crates over the total count."
+      },
+      {
+        "level": 2,
+        "text": "18 out of 24 — both numbers can be divided by 6."
+      }
+    ],
+    "explanation": "18 out of 24 is 18/24. Dividing both numbers by 6 gives 3/4, which is 0.75. Three quarters of the shipment is cod.",
+    "solutionSteps": [
+      "The shipment has 24 crates in total, so 24 goes on the bottom.",
+      "18 of them hold cod, so 18 goes on the top.",
+      "18/24 simplifies to 3/4, which is 0.75."
+    ]
+  },
+  {
+    "id": "q.r1-fractions-teachback",
+    "topicId": "t.r1-fractions",
+    "objectiveId": "obj.r1-fractions",
+    "skillIds": [
+      "skill.r1-fractions"
+    ],
+    "difficulty": 2,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A written-explanation question. Type your answer in the text box; it must contain the words 'equal' and 'bottom'.",
+    "interaction": "short-explanation",
+    "prompt": "A deckhand cuts a rope into three pieces of very different lengths and calls one of them 'a third'. Explain why that is wrong. Use the words 'equal' and 'bottom'.",
+    "answer": {
+      "kind": "text",
+      "requiredKeywords": [
+        "equal",
+        "bottom"
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "What has to be true about the pieces before you can name one with a fraction?"
+      },
+      {
+        "level": 2,
+        "text": "Say what the bottom number of a fraction promises about the pieces."
+      }
+    ],
+    "explanation": "The bottom number of a fraction promises that the whole was split into that many equal parts. Three pieces of different lengths are not thirds — a third is what you get only when all three pieces are the same size."
+  },
+  {
+    "id": "q.r1-fractions-mastery",
+    "topicId": "t.r1-fractions",
+    "objectiveId": "obj.r1-fractions",
+    "skillIds": [
+      "skill.r1-fractions"
+    ],
+    "difficulty": 3,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A multiple-selection question listing four fractions. Select every fraction equal to one half.",
+    "interaction": "multiple-selection",
+    "prompt": "A half of the fleet is in port. Select EVERY fraction below that describes the same share.",
+    "choices": [
+      {
+        "id": "ch.2-4",
+        "text": "2 of 4 boats"
+      },
+      {
+        "id": "ch.3-6",
+        "text": "3 of 6 boats"
+      },
+      {
+        "id": "ch.2-5",
+        "text": "2 of 5 boats"
+      },
+      {
+        "id": "ch.5-10",
+        "text": "5 of 10 boats"
+      }
+    ],
+    "answer": {
+      "kind": "choice",
+      "correctChoiceIds": [
+        "ch.2-4",
+        "ch.3-6",
+        "ch.5-10"
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "A half means the top number is exactly half of the bottom one."
+      },
+      {
+        "level": 2,
+        "text": "Check each one: is the top number half the bottom number? 2 of 5 is not, because half of 5 is not 2."
+      }
+    ],
+    "explanation": "2 of 4, 3 of 6 and 5 of 10 are all one half, because in each the top number is exactly half the bottom. 2 of 5 is not: half of 5 would be two and a half boats. The same share can be written with many different pairs of numbers."
+  },
+  {
+    "id": "q.remed-fraction-order",
+    "topicId": "t.r1-fractions",
+    "objectiveId": "obj.r1-fractions",
+    "skillIds": [
+      "skill.r1-fractions"
+    ],
+    "difficulty": 1,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A word problem: 3 of 10 barrels are empty. Answer as a fraction or as a decimal.",
+    "interaction": "fraction-input",
+    "prompt": "Three of the ten barrels on the quay are empty. What fraction of the barrels is empty?",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.3,
+      "tolerance": 0.0005
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Ten barrels altogether, so 10 is the bottom number."
+      }
+    ],
+    "explanation": "Three out of ten is 3/10, or 0.3. The total always goes on the bottom, the part on the top."
+  },
+  {
+    "id": "q.remed-smaller-pieces",
+    "topicId": "t.r1-fractions",
+    "objectiveId": "obj.r1-fractions",
+    "skillIds": [
+      "skill.r1-fractions"
+    ],
+    "difficulty": 1,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A multiple-choice question comparing a third of a barrel with a sixth of an identical barrel. Choose one option.",
+    "interaction": "multiple-choice",
+    "prompt": "Two identical barrels are shared out. One is split into 3 equal measures, the other into 6. Which single measure is larger?",
+    "choices": [
+      {
+        "id": "ch.third",
+        "text": "A measure from the barrel split into 3"
+      },
+      {
+        "id": "ch.sixth",
+        "text": "A measure from the barrel split into 6"
+      }
+    ],
+    "answer": {
+      "kind": "choice",
+      "correctChoiceIds": [
+        "ch.third"
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "More pieces from the same barrel means each piece is smaller."
+      }
+    ],
+    "explanation": "Splitting the same barrel 6 ways gives smaller measures than splitting it 3 ways. A bigger bottom number means smaller pieces."
+  },
+  {
+    "id": "q.r1-decimals-independent",
+    "topicId": "t.r1-decimals",
+    "objectiveId": "obj.r1-decimals",
+    "skillIds": [
+      "skill.r1-decimals"
+    ],
+    "difficulty": 2,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A word problem asking for three quarters written as a decimal. Enter the value as a number.",
+    "interaction": "numeric-input",
+    "prompt": "Three quarters of a barrel of oil is left. Write that amount as a decimal.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.75,
+      "tolerance": 0.0005
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "A quarter is twenty-five hundredths."
+      },
+      {
+        "level": 2,
+        "text": "Three quarters is three lots of twenty-five hundredths: seventy-five hundredths."
+      }
+    ],
+    "explanation": "Three quarters is seventy-five hundredths, written 0.75. The 7 sits in the tenths column and the 5 in the hundredths column.",
+    "solutionSteps": [
+      "One quarter is 0.25.",
+      "Three quarters is three lots of that: 0.75."
+    ]
+  },
+  {
+    "id": "q.r1-decimals-misconception",
+    "topicId": "t.r1-decimals",
+    "objectiveId": "obj.r1-decimals",
+    "skillIds": [
+      "skill.r1-decimals"
+    ],
+    "difficulty": 3,
+    "misconceptionIds": [
+      "mc.longer-decimal-is-bigger"
+    ],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A multiple-choice question comparing the decimals 0.5 and 0.25. Choose one option.",
+    "interaction": "multiple-choice",
+    "prompt": "One net holds 0.5 of a tonne and another holds 0.25 of a tonne. Which net is heavier?",
+    "choices": [
+      {
+        "id": "ch.half",
+        "text": "The 0.5 net — five tenths is more than twenty-five hundredths."
+      },
+      {
+        "id": "ch.quarter",
+        "text": "The 0.25 net, because 0.25 has more digits than 0.5.",
+        "misconceptionId": "mc.longer-decimal-is-bigger"
+      },
+      {
+        "id": "ch.same",
+        "text": "They weigh the same, because both start with a zero."
+      }
+    ],
+    "answer": {
+      "kind": "choice",
+      "correctChoiceIds": [
+        "ch.half"
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Compare the first column after the point before looking at anything else."
+      },
+      {
+        "level": 2,
+        "text": "0.5 is five tenths; 0.25 is only two tenths and a bit. Five tenths is more."
+      }
+    ],
+    "explanation": "Compare the tenths column first: 0.5 has 5 tenths, 0.25 has 2. Five tenths beats two, so 0.5 is heavier. Writing 0.5 as 0.50 makes the comparison plain. Length is not size — extra digits sit in smaller and smaller columns."
+  },
+  {
+    "id": "q.r1-decimals-application",
+    "topicId": "t.r1-decimals",
+    "objectiveId": "obj.r1-decimals",
+    "skillIds": [
+      "skill.r1-decimals"
+    ],
+    "difficulty": 3,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A word problem adding two catch weights, 1.4 tonnes and 0.35 tonnes. Enter the total as a number.",
+    "interaction": "numeric-input",
+    "prompt": "The morning catch weighed 1.4 tonnes and the afternoon catch weighed 0.35 tonnes. What did the day's catch weigh?",
+    "answer": {
+      "kind": "numeric",
+      "value": 1.75,
+      "tolerance": 0.0005,
+      "unit": "tonnes"
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Line the decimal points up before adding — 1.4 is the same as 1.40."
+      },
+      {
+        "level": 2,
+        "text": "1.40 and 0.35: add the hundredths, then the tenths, then the whole tonnes."
+      }
+    ],
+    "explanation": "Writing 1.4 as 1.40 lines the columns up: 40 hundredths and 35 hundredths make 75 hundredths, so the total is 1.75 tonnes.",
+    "solutionSteps": [
+      "Write 1.4 as 1.40 so both numbers have the same columns.",
+      "Hundredths: 0 and 5 make 5. Tenths: 4 and 3 make 7.",
+      "The whole tonnes stay at 1, giving 1.75 tonnes."
+    ]
+  },
+  {
+    "id": "q.r1-decimals-teachback",
+    "topicId": "t.r1-decimals",
+    "objectiveId": "obj.r1-decimals",
+    "skillIds": [
+      "skill.r1-decimals"
+    ],
+    "difficulty": 2,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A written-explanation question. Type your answer in the text box; it must contain the words 'tenths' and 'column'.",
+    "interaction": "short-explanation",
+    "prompt": "A crewmate says 0.7 must be smaller than 0.65 because it is shorter. Explain why that is wrong. Use the words 'tenths' and 'column'.",
+    "answer": {
+      "kind": "text",
+      "requiredKeywords": [
+        "tenths",
+        "column"
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Which column do you compare first, and why?"
+      },
+      {
+        "level": 2,
+        "text": "Say what each column after the point is worth."
+      }
+    ],
+    "explanation": "Each column after the point is worth less than the one before it: tenths first, then hundredths. Compare the tenths column first — 0.7 has 7 tenths and 0.65 has only 6 — so 0.7 is larger. How long a decimal looks says nothing about its size."
+  },
+  {
+    "id": "q.r1-decimals-mastery",
+    "topicId": "t.r1-decimals",
+    "objectiveId": "obj.r1-decimals",
+    "skillIds": [
+      "skill.r1-decimals"
+    ],
+    "difficulty": 3,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "An ordering question with four decimal weights. Arrange them from lightest to heaviest.",
+    "interaction": "ordering",
+    "prompt": "Four nets are weighed. Put them in order from lightest to heaviest.",
+    "items": [
+      {
+        "id": "it.09",
+        "text": "0.09 tonnes"
+      },
+      {
+        "id": "it.2",
+        "text": "0.2 tonnes"
+      },
+      {
+        "id": "it.35",
+        "text": "0.35 tonnes"
+      },
+      {
+        "id": "it.5",
+        "text": "0.5 tonnes"
+      }
+    ],
+    "answer": {
+      "kind": "ordering",
+      "correctOrder": [
+        "it.09",
+        "it.2",
+        "it.35",
+        "it.5"
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Give every number the same number of columns first: 0.09, 0.20, 0.35, 0.50."
+      },
+      {
+        "level": 2,
+        "text": "Now compare the tenths column: 0, then 2, then 3, then 5."
+      }
+    ],
+    "explanation": "Written with the same columns they are 0.09, 0.20, 0.35 and 0.50. Comparing tenths first gives the order 0.09, 0.2, 0.35, 0.5. The longest-looking number, 0.09, is the lightest of all."
+  },
+  {
+    "id": "q.remed-line-up-the-point",
+    "topicId": "t.r1-decimals",
+    "objectiveId": "obj.r1-decimals",
+    "skillIds": [
+      "skill.r1-decimals"
+    ],
+    "difficulty": 1,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A multiple-choice question comparing the decimals 0.4 and 0.19. Choose one option.",
+    "interaction": "multiple-choice",
+    "prompt": "Which of these two weights is heavier: 0.4 tonnes or 0.19 tonnes?",
+    "choices": [
+      {
+        "id": "ch.4",
+        "text": "0.4 tonnes"
+      },
+      {
+        "id": "ch.19",
+        "text": "0.19 tonnes"
+      }
+    ],
+    "answer": {
+      "kind": "choice",
+      "correctChoiceIds": [
+        "ch.4"
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Write 0.4 as 0.40 and compare the tenths column."
+      }
+    ],
+    "explanation": "0.4 is 0.40, which is 4 tenths. 0.19 is only 1 tenth and a bit. The tenths column decides it, so 0.4 is heavier."
+  },
+  {
+    "id": "q.r1-percentages-independent",
+    "topicId": "t.r1-percentages",
+    "objectiveId": "obj.r1-percentages",
+    "skillIds": [
+      "skill.r1-percentages"
+    ],
+    "difficulty": 2,
+    "misconceptionIds": [
+      "mc.decimal-vs-percent"
+    ],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A word problem: 30 of 50 boats are rigged for trawling. Answer as a percentage on the 0 to 100 scale.",
+    "interaction": "percentage-input",
+    "prompt": "Thirty of the fleet's 50 boats are rigged for trawling. What percentage of the fleet is that? (Answer on the 0-100 scale.)",
+    "answer": {
+      "kind": "numeric",
+      "value": 60,
+      "tolerance": 0.01,
+      "unit": "%"
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Work out how many boats in every hundred that would be."
+      },
+      {
+        "level": 2,
+        "text": "50 boats doubled is 100, so double the 30 as well."
+      }
+    ],
+    "explanation": "Doubling 50 boats gives 100, so doubling the 30 rigged boats gives 60 in every hundred. That is 60%.",
+    "solutionSteps": [
+      "Percent means 'in every hundred', so scale the fleet up to 100.",
+      "50 doubled is 100, so double 30 as well: 60.",
+      "60 in every hundred is 60%."
+    ]
+  },
+  {
+    "id": "q.r1-percentages-misconception",
+    "topicId": "t.r1-percentages",
+    "objectiveId": "obj.r1-percentages",
+    "skillIds": [
+      "skill.r1-percentages"
+    ],
+    "difficulty": 3,
+    "misconceptionIds": [
+      "mc.decimal-vs-percent"
+    ],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A word problem: 1 of every 5 days was stormy. Answer as a percentage on the 0 to 100 scale.",
+    "interaction": "percentage-input",
+    "prompt": "One day in every five at sea was stormy. What percentage of days were stormy? (Answer on the 0-100 scale.)",
+    "answer": {
+      "kind": "numeric",
+      "value": 20,
+      "tolerance": 0.01,
+      "unit": "%"
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "This one is asking for a percentage, not a decimal — the answer belongs on the 0 to 100 scale."
+      },
+      {
+        "level": 2,
+        "text": "One in five is the same as 20 in every 100."
+      }
+    ],
+    "explanation": "One day in five is the same share as 20 days in every 100, so 20%. Written as a decimal the same share is 0.2 — the same amount, a different scale, and the question asked for the percentage."
+  },
+  {
+    "id": "q.r1-percentages-application",
+    "topicId": "t.r1-percentages",
+    "objectiveId": "obj.r1-percentages",
+    "skillIds": [
+      "skill.r1-percentages"
+    ],
+    "difficulty": 3,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A word problem: 25 percent of a 160-crate shipment is spoiled. Enter the number of crates.",
+    "interaction": "numeric-input",
+    "prompt": "An inspector finds that 25% of a 160-crate shipment is spoiled. How many crates is that?",
+    "answer": {
+      "kind": "numeric",
+      "value": 40,
+      "tolerance": 0,
+      "unit": "crates"
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "25% is a quarter."
+      },
+      {
+        "level": 2,
+        "text": "A quarter of 160 means sharing 160 into 4 equal parts."
+      }
+    ],
+    "explanation": "25% is 25 in every 100, which is a quarter. A quarter of 160 crates is 160 shared into 4 equal parts, which is 40 crates.",
+    "solutionSteps": [
+      "25% means 25 in every 100, which is one quarter.",
+      "160 shared into 4 equal parts is 40.",
+      "So 40 crates are spoiled."
+    ]
+  },
+  {
+    "id": "q.r1-percentages-teachback",
+    "topicId": "t.r1-percentages",
+    "objectiveId": "obj.r1-percentages",
+    "skillIds": [
+      "skill.r1-percentages"
+    ],
+    "difficulty": 2,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A written-explanation question. Type your answer in the text box; it must contain the words 'hundred' and 'compare'.",
+    "interaction": "short-explanation",
+    "prompt": "Two harbours report their catch: one landed 18 of 30 crates as cod, the other 28 of 40. Explain why turning both into percentages makes them easier to judge. Use the words 'hundred' and 'compare'.",
+    "answer": {
+      "kind": "text",
+      "requiredKeywords": [
+        "hundred",
+        "compare"
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "What is the same about every percentage, whatever it came from?"
+      },
+      {
+        "level": 2,
+        "text": "Say what changes when both shares are put on the same scale."
+      }
+    ],
+    "explanation": "A percentage always says how many in every hundred, so every percentage is measured against the same size of whole. That is what makes two shares built on different totals — 30 crates and 40 crates — safe to compare directly."
+  },
+  {
+    "id": "q.r1-percentages-mastery",
+    "topicId": "t.r1-percentages",
+    "objectiveId": "obj.r1-percentages",
+    "skillIds": [
+      "skill.r1-percentages"
+    ],
+    "difficulty": 3,
+    "misconceptionIds": [
+      "mc.decimal-vs-percent"
+    ],
+    "estimatedSeconds": 180,
+    "accessibilityDescription": "A three-step calculation turning 12 stormy days out of 40 into a percentage. Each step asks for a number; enter it and submit before the next step appears.",
+    "interaction": "step-by-step-calculation",
+    "prompt": "Twelve of the 40 days at sea were stormy. Work out the percentage one step at a time.",
+    "answer": {
+      "kind": "steps",
+      "steps": [
+        {
+          "id": "st.part",
+          "prompt": "How many of the days were stormy?",
+          "value": 12,
+          "tolerance": 0,
+          "unit": "days",
+          "hints": [
+            "The question tells you directly."
+          ],
+          "explanation": "12 days were stormy — that is the part you are describing."
+        },
+        {
+          "id": "st.share",
+          "prompt": "Share those 12 days across the 40: what is 12 divided by 40?",
+          "value": 0.3,
+          "tolerance": 0.0005,
+          "hints": [
+            "Both numbers divide by 4: 12 becomes 3, 40 becomes 10.",
+            "3 shared into 10 is 0.3."
+          ],
+          "explanation": "12 shared into 40 gives 0.3. That is the share written as a decimal."
+        },
+        {
+          "id": "st.scale",
+          "prompt": "Now put that share on the 0 to 100 scale. What is the percentage?",
+          "value": 30,
+          "tolerance": 0,
+          "unit": "%",
+          "hints": [
+            "A share of 1 would be 100%.",
+            "0.3 of 100 is 30."
+          ],
+          "explanation": "0.3 of every hundred is 30, so 30% of the days were stormy.",
+          "misconceptionValues": [
+            {
+              "value": 0.3,
+              "misconceptionId": "mc.decimal-vs-percent"
+            }
+          ]
+        }
+      ]
+    },
+    "explanation": "12 of 40 days is a share of 0.3, which on the 0 to 100 scale is 30%. The share and the percentage describe the same days — only the scale differs."
+  },
+  {
+    "id": "q.remed-percent-decimal",
+    "topicId": "t.r1-percentages",
+    "objectiveId": "obj.r1-percentages",
+    "skillIds": [
+      "skill.r1-percentages"
+    ],
+    "difficulty": 1,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A word problem: half the fleet is at sea. Answer as a percentage on the 0 to 100 scale.",
+    "interaction": "percentage-input",
+    "prompt": "Half the fleet is at sea. What percentage of the fleet is that? (Answer on the 0-100 scale.)",
+    "answer": {
+      "kind": "numeric",
+      "value": 50,
+      "tolerance": 0.01,
+      "unit": "%"
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Half of every hundred boats would be 50 boats."
+      }
+    ],
+    "explanation": "Half is 50 in every 100, so 50%. As a decimal the same share is 0.5 — the same amount on a different scale."
+  },
+  {
+    "id": "q.r1-ratios-independent",
+    "topicId": "t.r1-ratios",
+    "objectiveId": "obj.r1-ratios",
+    "skillIds": [
+      "skill.r1-ratios"
+    ],
+    "difficulty": 2,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A word problem: a brine mix uses 3 measures of salt to every 8 measures of water. Enter the water needed for 9 measures of salt.",
+    "interaction": "numeric-input",
+    "prompt": "The brine mix uses 3 measures of salt to every 8 measures of water. How much water is needed for 9 measures of salt?",
+    "answer": {
+      "kind": "numeric",
+      "value": 24,
+      "tolerance": 0,
+      "unit": "measures"
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "How many lots of 3 measures of salt are there in 9?"
+      },
+      {
+        "level": 2,
+        "text": "9 measures of salt is three lots of 3, so the water is three lots of 8."
+      }
+    ],
+    "explanation": "9 measures of salt is three lots of the 3-measure batch, so the water is three lots of 8, which is 24 measures. Both sides of a ratio are scaled by the same amount.",
+    "solutionSteps": [
+      "9 salt is three lots of the 3-measure batch.",
+      "Scale the water by the same three lots: 8 becomes 24.",
+      "So 24 measures of water are needed."
+    ]
+  },
+  {
+    "id": "q.r1-ratios-misconception",
+    "topicId": "t.r1-ratios",
+    "objectiveId": "obj.r1-ratios",
+    "skillIds": [
+      "skill.r1-ratios"
+    ],
+    "difficulty": 3,
+    "misconceptionIds": [
+      "mc.ratio-part-as-whole"
+    ],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A word problem: a mix has 3 parts salt to 5 parts water. Answer the salt's share of the whole mix as a fraction or decimal.",
+    "interaction": "fraction-input",
+    "prompt": "A brine mix is made of 3 parts salt to 5 parts water. What fraction of the finished mix is salt?",
+    "parameters": {
+      "mc.ratio-part-as-whole": {
+        "wrongValue": 0.6,
+        "tolerance": 0.0005
+      }
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": 0.375,
+      "tolerance": 0.0005
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "A fraction needs the whole on the bottom — so how many parts is the finished mix altogether?"
+      },
+      {
+        "level": 2,
+        "text": "3 parts salt and 5 parts water make 8 parts of mix in total."
+      }
+    ],
+    "explanation": "The finished mix is 3 parts salt plus 5 parts water, which is 8 parts in total. The salt is 3 of those 8 parts, so 3/8, which is 0.375. The 5 in the ratio counts the water, not the whole mix.",
+    "solutionSteps": [
+      "Add the parts to find the whole: 3 and 5 make 8 parts of mix.",
+      "The salt is 3 of those 8 parts.",
+      "3/8 is 0.375."
+    ]
+  },
+  {
+    "id": "q.r1-ratios-application",
+    "topicId": "t.r1-ratios",
+    "objectiveId": "obj.r1-ratios",
+    "skillIds": [
+      "skill.r1-ratios"
+    ],
+    "difficulty": 3,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A word problem: a crew of 2 deckhands to every 5 boats, scaled to 20 boats. Enter the number of deckhands.",
+    "interaction": "numeric-input",
+    "prompt": "The harbour keeps 2 deckhands on duty for every 5 boats in port. How many deckhands are needed when 20 boats are in port?",
+    "answer": {
+      "kind": "numeric",
+      "value": 8,
+      "tolerance": 0,
+      "unit": "deckhands"
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "How many lots of 5 boats are there in 20?"
+      },
+      {
+        "level": 2,
+        "text": "20 boats is four lots of 5, so the deckhands are four lots of 2."
+      }
+    ],
+    "explanation": "20 boats is four lots of the 5-boat group, so the deckhands are four lots of 2, which is 8.",
+    "solutionSteps": [
+      "20 boats is four lots of 5.",
+      "Scale the deckhands the same way: 2 becomes 8."
+    ]
+  },
+  {
+    "id": "q.r1-ratios-teachback",
+    "topicId": "t.r1-ratios",
+    "objectiveId": "obj.r1-ratios",
+    "skillIds": [
+      "skill.r1-ratios"
+    ],
+    "difficulty": 2,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A written-explanation question. Type your answer in the text box; it must contain the words 'order' and 'parts'.",
+    "interaction": "short-explanation",
+    "prompt": "Explain why a mix described as 2 to 3 is not the same as one described as 3 to 2. Use the words 'order' and 'parts'.",
+    "answer": {
+      "kind": "text",
+      "requiredKeywords": [
+        "order",
+        "parts"
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Name what the first number counts and what the second counts."
+      },
+      {
+        "level": 2,
+        "text": "Say what happens to the mixture if you read them the wrong way round."
+      }
+    ],
+    "explanation": "A ratio names its two amounts in a fixed order: the first number counts the first ingredient's parts and the second counts the second's. Swapping them swaps which ingredient there is more of, giving a different mixture entirely."
+  },
+  {
+    "id": "q.r1-ratios-mastery",
+    "topicId": "t.r1-ratios",
+    "objectiveId": "obj.r1-ratios",
+    "skillIds": [
+      "skill.r1-ratios"
+    ],
+    "difficulty": 3,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A drag-and-drop question. Sort four mixes into two zones: those matching the ratio 1 to 4, and those that do not.",
+    "interaction": "drag-and-drop",
+    "prompt": "The standard brine is 1 measure of salt to every 4 of water. Sort these mixes by whether they match the standard.",
+    "items": [
+      {
+        "id": "it.2-8",
+        "text": "2 salt to 8 water"
+      },
+      {
+        "id": "it.3-12",
+        "text": "3 salt to 12 water"
+      },
+      {
+        "id": "it.2-5",
+        "text": "2 salt to 5 water"
+      },
+      {
+        "id": "it.4-12",
+        "text": "4 salt to 12 water"
+      }
+    ],
+    "dropZones": [
+      {
+        "id": "z.matches",
+        "label": "Matches the standard brine",
+        "description": "Mixes with 4 measures of water for every measure of salt."
+      },
+      {
+        "id": "z.differs",
+        "label": "Does not match",
+        "description": "Mixes with some other strength."
+      }
+    ],
+    "answer": {
+      "kind": "placement",
+      "zones": [
+        {
+          "zoneId": "z.matches",
+          "itemIds": [
+            "it.2-8",
+            "it.3-12"
+          ]
+        },
+        {
+          "zoneId": "z.differs",
+          "itemIds": [
+            "it.2-5",
+            "it.4-12"
+          ]
+        }
+      ],
+      "orderMatters": false
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Scale the standard up: 1 to 4 doubled is 2 to 8; tripled is 3 to 12."
+      },
+      {
+        "level": 2,
+        "text": "For each mix, check whether the water is exactly four lots of the salt."
+      }
+    ],
+    "explanation": "A mix matches when the water is exactly four lots of the salt. 2 to 8 and 3 to 12 both are. 2 to 5 has too little water, and 4 to 12 has only three lots — adding the same amount to both sides does not preserve a ratio, multiplying does."
+  },
+  {
+    "id": "q.remed-count-all-the-parts",
+    "topicId": "t.r1-ratios",
+    "objectiveId": "obj.r1-ratios",
+    "skillIds": [
+      "skill.r1-ratios"
+    ],
+    "difficulty": 1,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A word problem: a mix of 1 part salt to 3 parts water. Enter the total number of parts in the finished mix.",
+    "interaction": "numeric-input",
+    "prompt": "A mix is 1 part salt to 3 parts water. How many parts is the finished mix altogether?",
+    "answer": {
+      "kind": "numeric",
+      "value": 4,
+      "tolerance": 0,
+      "unit": "parts"
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Add the salt parts to the water parts."
+      }
+    ],
+    "explanation": "1 part salt and 3 parts water make 4 parts of mix. That total is what goes on the bottom when you write a part as a fraction of the whole — so the salt is 1/4 of the mix, not 1/3."
+  },
+  {
+    "id": "q.r1-proportions-independent",
+    "topicId": "t.r1-proportions",
+    "objectiveId": "obj.r1-proportions",
+    "skillIds": [
+      "skill.r1-proportions"
+    ],
+    "difficulty": 2,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A word problem: 15 of 60 crates are damaged. Answer as a proportion between 0 and 1.",
+    "interaction": "numeric-input",
+    "prompt": "Of the 60 crates unloaded, 15 were damaged. What PROPORTION of the crates were damaged? (Answer between 0 and 1.)",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.25,
+      "tolerance": 0.0005
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "A proportion compares the part with the whole, so put the total underneath."
+      },
+      {
+        "level": 2,
+        "text": "15 out of 60 — both divide by 15, giving 1 out of 4."
+      }
+    ],
+    "explanation": "15 out of 60 is 15/60, which is 1/4, or 0.25. A proportion always sits between 0 and 1 because the part can never be bigger than the whole.",
+    "solutionSteps": [
+      "The whole is 60 crates and the part is 15.",
+      "15/60 simplifies to 1/4.",
+      "As a proportion that is 0.25."
+    ]
+  },
+  {
+    "id": "q.r1-proportions-misconception",
+    "topicId": "t.r1-proportions",
+    "objectiveId": "obj.r1-proportions",
+    "skillIds": [
+      "skill.r1-proportions"
+    ],
+    "difficulty": 3,
+    "misconceptionIds": [
+      "mc.additive-scaling"
+    ],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A word problem: 2 crates cost 6 coins, asking the cost of 6 crates at the same rate. Enter the cost as a number.",
+    "interaction": "numeric-input",
+    "prompt": "Two crates of salt cost 6 coins. At the same rate, what do 6 crates cost?",
+    "parameters": {
+      "mc.additive-scaling": {
+        "wrongValue": 10
+      }
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": 18,
+      "tolerance": 0,
+      "unit": "coins"
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "6 crates is three lots of 2 crates — so the price scales the same way."
+      },
+      {
+        "level": 2,
+        "text": "Three lots of 2 crates cost three lots of 6 coins."
+      }
+    ],
+    "explanation": "6 crates is three lots of the 2-crate order, so the cost is three lots of 6 coins: 18. Scaling keeps the price per crate the same. Adding 4 to both numbers instead would quietly change the rate.",
+    "solutionSteps": [
+      "6 crates is three lots of 2 crates.",
+      "Multiply the cost by the same three: 6 coins becomes 18.",
+      "Check: 18 coins for 6 crates is 3 coins each, the same as 6 coins for 2."
+    ]
+  },
+  {
+    "id": "q.r1-proportions-application",
+    "topicId": "t.r1-proportions",
+    "objectiveId": "obj.r1-proportions",
+    "skillIds": [
+      "skill.r1-proportions"
+    ],
+    "difficulty": 3,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A word problem comparing two harbours' spoiled-crate proportions, 9 of 30 and 14 of 50. Choose the harbour with the larger proportion.",
+    "interaction": "multiple-choice",
+    "prompt": "North harbour spoiled 9 of its 30 crates; south harbour spoiled 14 of its 50. Which harbour spoiled the larger PROPORTION of its crates?",
+    "choices": [
+      {
+        "id": "ch.north",
+        "text": "North harbour"
+      },
+      {
+        "id": "ch.south",
+        "text": "South harbour"
+      },
+      {
+        "id": "ch.equal",
+        "text": "Both spoiled the same proportion"
+      }
+    ],
+    "answer": {
+      "kind": "choice",
+      "correctChoiceIds": [
+        "ch.north"
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "The raw counts cannot be compared directly — the two harbours handled different totals."
+      },
+      {
+        "level": 2,
+        "text": "9 out of 30 is 0.3; 14 out of 50 is 0.28."
+      }
+    ],
+    "explanation": "North spoiled 9 of 30, a proportion of 0.3. South spoiled more crates outright, 14, but out of 50, which is 0.28. Against its own total, north did worse — which is exactly why proportions are used instead of raw counts."
+  },
+  {
+    "id": "q.r1-proportions-teachback",
+    "topicId": "t.r1-proportions",
+    "objectiveId": "obj.r1-proportions",
+    "skillIds": [
+      "skill.r1-proportions"
+    ],
+    "difficulty": 2,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A written-explanation question. Type your answer in the text box; it must contain the words 'whole' and 'between'.",
+    "interaction": "short-explanation",
+    "prompt": "Explain what a proportion measures and why it can never come out above 1. Use the words 'whole' and 'between'.",
+    "answer": {
+      "kind": "text",
+      "requiredKeywords": [
+        "whole",
+        "between"
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Say what the top number and the bottom number each count."
+      },
+      {
+        "level": 2,
+        "text": "What would it mean for the part to be bigger than the total?"
+      }
+    ],
+    "explanation": "A proportion compares a part with the whole it came from. The part is counted from inside that whole, so it can never exceed it — which is why a proportion always lands between 0 and 1."
+  },
+  {
+    "id": "q.r1-proportions-mastery",
+    "topicId": "t.r1-proportions",
+    "objectiveId": "obj.r1-proportions",
+    "skillIds": [
+      "skill.r1-proportions"
+    ],
+    "difficulty": 3,
+    "misconceptionIds": [
+      "mc.additive-scaling"
+    ],
+    "estimatedSeconds": 180,
+    "accessibilityDescription": "A three-step calculation scaling a recipe from 4 crates for 12 coins up to 10 crates. Each step asks for a number; enter it and submit before the next step appears.",
+    "interaction": "step-by-step-calculation",
+    "prompt": "Four crates of salt cost 12 coins. Work out the cost of 10 crates at the same rate.",
+    "answer": {
+      "kind": "steps",
+      "steps": [
+        {
+          "id": "st.rate",
+          "prompt": "First find the rate: what does one crate cost?",
+          "value": 3,
+          "tolerance": 0,
+          "unit": "coins",
+          "hints": [
+            "Share the 12 coins equally across the 4 crates."
+          ],
+          "explanation": "12 coins shared across 4 crates is 3 coins each. That rate is what stays fixed."
+        },
+        {
+          "id": "st.scale",
+          "prompt": "At 3 coins each, what do 10 crates cost?",
+          "value": 30,
+          "tolerance": 0,
+          "unit": "coins",
+          "hints": [
+            "Ten lots of 3 coins."
+          ],
+          "explanation": "10 crates at 3 coins each is 30 coins.",
+          "misconceptionValues": [
+            {
+              "value": 18,
+              "misconceptionId": "mc.additive-scaling"
+            }
+          ]
+        },
+        {
+          "id": "st.check",
+          "prompt": "Check the rate held: what is 30 coins shared across 10 crates?",
+          "value": 3,
+          "tolerance": 0,
+          "unit": "coins",
+          "hints": [
+            "Share the 30 coins across the 10 crates."
+          ],
+          "explanation": "3 coins each — the same rate you started with, so the scaling was done correctly."
+        }
+      ]
+    },
+    "explanation": "One crate costs 3 coins, so 10 crates cost 30. Checking at the end that the rate is still 3 coins per crate is what proves the two amounts stayed in proportion."
+  },
+  {
+    "id": "q.remed-scale-both-together",
+    "topicId": "t.r1-proportions",
+    "objectiveId": "obj.r1-proportions",
+    "skillIds": [
+      "skill.r1-proportions"
+    ],
+    "difficulty": 1,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A word problem: 3 crates cost 9 coins, asking the cost of 6 crates. Enter the cost as a number.",
+    "interaction": "numeric-input",
+    "prompt": "Three crates cost 9 coins. At the same rate, what do 6 crates cost?",
+    "answer": {
+      "kind": "numeric",
+      "value": 18,
+      "tolerance": 0,
+      "unit": "coins"
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "6 crates is double 3 crates, so double the cost too."
+      }
+    ],
+    "explanation": "Doubling the crates doubles the cost: 9 coins becomes 18. Each crate still costs 3 coins, which is what 'at the same rate' means."
   }
 ]

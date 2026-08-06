@@ -17,5 +17,10 @@ export const COMPLETE_LESSONS: readonly string[] = [
   "l.r1-addition",
   "l.r1-subtraction",
   "l.r1-multiplication",
-  "l.r1-division"
+  "l.r1-division",
+  "l.r1-fractions",
+  "l.r1-decimals",
+  "l.r1-percentages",
+  "l.r1-ratios",
+  "l.r1-proportions"
 ];

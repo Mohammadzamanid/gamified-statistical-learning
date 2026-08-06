@@ -14,12 +14,12 @@
  */
 import { beforeAll, describe, expect, it } from "vitest";
 import { loadShippedContent } from "../../src/content";
+import type { SaveFile } from "../../src/shared/schemas";
 import { clearDetectors, registerBuiltInDetectors } from "../../src/core/misconceptions/detectors";
 import { isLessonUnlocked } from "../../src/core/curriculum/progress";
 import { advance, startLesson, submitAnswer } from "../../src/renderer/state/session";
-import { createEmptySave, type SaveFile } from "../../src/shared/schemas";
 import type { RawResponse } from "../../src/core/questions/types";
-import { correctResponseFor } from "../helpers/responses";
+import { freshSave as makeSave, playLesson as play, skillsOfLesson } from "../helpers/lesson-playthrough";
 import { COMPLETE_LESSONS } from "../helpers/complete-lessons";
 
 const content = loadShippedContent();
@@ -27,44 +27,9 @@ const content = loadShippedContent();
 /** Module 1 in the order the curriculum declares, not source-array order. */
 const MODULE_1 = content.curriculum.modules.find((m) => m.id === "m.r1-counting")!;
 
-function freshSave(): SaveFile {
-  return createEmptySave({
-    id: "p.module1",
-    name: "Deckhand",
-    createdAt: new Date().toISOString(),
-    isGuest: false,
-    avatarSeed: 0
-  });
-}
-
-/** Answers every question of a lesson correctly, returning the resulting save. */
-function playLesson(save: SaveFile, lessonId: string, startMs: number): SaveFile {
-  let current = save;
-  let session = startLesson(content, lessonId, startMs)!;
-  expect(session, `${lessonId} would not start`).toBeTruthy();
-  let t = startMs;
-  let guard = 0;
-
-  while (!session.finished) {
-    expect(guard++, `${lessonId} session did not terminate`).toBeLessThan(50);
-    const qid = session.questionQueue[session.currentIndex]!;
-    const question = content.questions.get(qid);
-    expect(question, `${lessonId} asks missing question ${qid}`).toBeDefined();
-
-    const submitted = submitAnswer(content, current, session, correctResponseFor(question!), t)!;
-    expect(submitted.feedback.correct, `${qid} could not be answered correctly`).toBe(true);
-    current = submitted.save;
-    session = submitted.session;
-
-    const adv = advance(content, current, session, t + 500);
-    current = adv.save;
-    session = adv.session;
-    t += 1000;
-  }
-
-  expect(current.lessonProgress[lessonId]?.status, `${lessonId} did not complete`).toBe("completed");
-  return current;
-}
+const freshSave = (): SaveFile => makeSave("p.module1", "Deckhand");
+const playLesson = (save: SaveFile, lessonId: string, startMs: number): SaveFile =>
+  play(content, save, lessonId, startMs);
 
 describe("Module 1 can be played from a fresh profile", () => {
   beforeAll(() => {
@@ -72,8 +37,12 @@ describe("Module 1 can be played from a fresh profile", () => {
     registerBuiltInDetectors();
   });
 
-  it("covers exactly the lessons declared Complete", () => {
-    expect(MODULE_1.lessonIds).toEqual(COMPLETE_LESSONS);
+  it("has every one of its lessons declared Complete", () => {
+    // A module is only playable end to end here once all of its lessons claim
+    // completeness. Other modules may also be Complete — this is a subset check,
+    // not an equality one, so finishing a later module does not break this file.
+    const notDeclared = MODULE_1.lessonIds.filter((id) => !COMPLETE_LESSONS.includes(id));
+    expect(notDeclared, `Module 1 lessons missing from COMPLETE_LESSONS: ${notDeclared.join(", ")}`).toEqual([]);
   });
 
   it("unlocks one lesson at a time, in the declared order", () => {
@@ -101,12 +70,7 @@ describe("Module 1 can be played from a fresh profile", () => {
     let t = 1000;
     for (const lessonId of MODULE_1.lessonIds) save = playLesson(save, lessonId, (t += 60_000));
 
-    const skills = MODULE_1.lessonIds.flatMap((id) => {
-      const lesson = content.curriculum.lessons.find((l) => l.id === id)!;
-      return lesson.objectiveIds.flatMap(
-        (oid) => content.curriculum.objectives.find((o) => o.id === oid)?.skillIds ?? []
-      );
-    });
+    const skills = MODULE_1.lessonIds.flatMap((id) => skillsOfLesson(content, id));
 
     for (const skillId of new Set(skills)) {
       expect(save.skillStates[skillId]?.attempts, `${skillId} recorded no attempts`).toBeGreaterThan(0);

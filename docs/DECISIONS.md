@@ -67,3 +67,18 @@ the skeleton shape S2-07 delivered. A lesson therefore cannot sit in between —
 fails the second audit, and adding an id without the content fails the first. Beginner safety is enforced the same way:
 a symbol may only appear in a lesson's prose, questions or remediations if that lesson or one of its prerequisites
 explains it, which is why the counting lesson is written without `+`. (S2-08)
+
+**D-015 — One lesson-completeness claim, one shared playthrough.**
+Per-module integration tests (`module1-lessons.test.ts`, `module2-lessons.test.ts`, …) each drive their module through
+the real session engine, but the *mechanics* of doing that live once in `tests/helpers/lesson-playthrough.ts`. A module
+file therefore carries only what is genuinely module-specific: the misconceptions it declares and the exact wrong
+answer that triggers each one. Those slips stay hand-written on purpose — a generic wrong answer proves a question can
+be failed, not that the **named** error was diagnosed. The Complete-list assertion in each module file is a *subset*
+check, never an equality one, so finishing a later module cannot break an earlier module's test. (S2-08)
+
+**D-016 — A guard that cannot tell punctuation from notation is not shipped.**
+Extending the beginner-safety scanner to treat `:` between numbers as notation was tried and immediately flagged
+"Count on 5: 8, 9, 10, 11, 12" — a colon ending a clause. Rather than special-case around the false positive, `:` and
+`=` are both left out of the prose scan and the reasoning is recorded in the test itself. Neither goes unchecked
+overall: requirement 10 still forces any lesson whose **notation** contains them — ratios, proportions — to explain
+them. A narrower guard that is always right beats a broader one that has to be argued with. (S2-08)

@@ -20,16 +20,16 @@
     "title": "Percent and decimal are two costumes for one number",
     "explanation": "0.30 and 30% are the same quantity in different forms. Multiply a decimal by 100 to speak in percent; divide a percent by 100 to get the decimal.",
     "microLesson": "Percent means 'per hundred'. 30% = 30/100 = 0.30. When a question asks for a percent, answer on the 0–100 scale; when it asks for a proportion, answer on the 0–1 scale.",
-    "followUpQuestionIds": [],
-    "skillIds": ["skill.percent-fraction"]
+    "followUpQuestionIds": ["q.remed-percent-decimal"],
+    "skillIds": ["skill.percent-fraction", "skill.r1-percentages"]
   },
   {
     "id": "rem.fraction-order",
     "title": "Part over whole",
     "explanation": "A fraction of a group is part / whole. Put the part on top and the whole underneath — 3 of 12 boats is 3/12, not 12/3.",
     "microLesson": "Ask: out of how many in total? That total is the denominator. The count you care about is the numerator.",
-    "followUpQuestionIds": [],
-    "skillIds": ["skill.percent-fraction"]
+    "followUpQuestionIds": ["q.remed-fraction-order"],
+    "skillIds": ["skill.percent-fraction", "skill.r1-fractions"]
   },
   {
     "id": "rem.outliers-pull-mean",
@@ -110,5 +110,37 @@
     "microLesson": "Forty crates between 8 boats is 40 / 8 = 5 crates each. Written the other way round, 8 / 40 asks how much of a boat belongs to each crate, which is a different question and gives an answer smaller than one. Before dividing, name the two roles out loud: 'the crates are being shared, the boats are sharing them.' If each part should end up with several of something, an answer below one means the two numbers went in the wrong order.",
     "followUpQuestionIds": ["q.remed-who-is-shared"],
     "skillIds": ["skill.r1-division"]
+  },
+  {
+    "id": "rem.smaller-pieces",
+    "title": "A bigger bottom number means smaller pieces",
+    "explanation": "The bottom number of a fraction counts how many equal pieces the whole was cut into — it does not measure how much you have. Cutting the same whole into more pieces makes every piece smaller, so 1/8 is less than 1/4 even though 8 is more than 4.",
+    "microLesson": "Picture two identical loaves. Cut one into 4 slices and the other into 8. A slice from the second loaf is visibly thinner, and eight thin slices are needed to rebuild what four thick ones did. This is the sharing idea from the division lesson seen from the other side: the same amount split more ways gives each share less. When the top numbers match, the fraction with the SMALLER bottom number is the larger amount.",
+    "followUpQuestionIds": ["q.remed-smaller-pieces"],
+    "skillIds": ["skill.r1-fractions"]
+  },
+  {
+    "id": "rem.line-up-the-point",
+    "title": "Compare the columns, not the length",
+    "explanation": "A decimal is not longer-is-bigger. Each column after the point is worth a tenth of the one before it, so the tenths column decides the comparison before the hundredths column gets a say. 0.5 is larger than 0.25 because 5 tenths beats 2 tenths.",
+    "microLesson": "Give both numbers the same columns by padding with zeros, then read left to right. 0.5 becomes 0.50; against 0.25 the tenths are 5 against 2, so 0.50 wins and you never need the hundredths. The same trick settles 0.09 against 0.2: pad to 0.09 and 0.20, and the tenths are 0 against 2. Always pad first, then compare one column at a time.",
+    "followUpQuestionIds": ["q.remed-line-up-the-point"],
+    "skillIds": ["skill.r1-decimals"]
+  },
+  {
+    "id": "rem.count-all-the-parts",
+    "title": "Add the parts before you name a share",
+    "explanation": "In a ratio, the second number counts the other ingredient — not the whole mixture. To say what fraction of the mix one ingredient is, first add every part together to find the size of the whole.",
+    "microLesson": "A mix of 3 parts salt to 5 parts water has 3 and 5 make 8 parts in it altogether. The salt is 3 of those 8 parts, so 3/8 of the mix, not 3/5. The clue that something has gone wrong: the two shares must add up to the whole mixture, and 3/5 for salt plus 5/5 for water is more than one whole batch. Ratio compares part with part; a fraction compares part with whole.",
+    "followUpQuestionIds": ["q.remed-count-all-the-parts"],
+    "skillIds": ["skill.r1-ratios"]
+  },
+  {
+    "id": "rem.scale-both-together",
+    "title": "Scale by multiplying, not by adding",
+    "explanation": "Two amounts stay in proportion when one is always the same number of times the other. Adding the same amount to both keeps their difference fixed instead of their rate, which quietly changes the answer.",
+    "microLesson": "If 2 crates cost 6 coins, the rate is 3 coins per crate. For 4 crates, double both: 4 crates cost 12 coins, still 3 coins each. Adding 2 to each instead would give 4 crates for 8 coins, which is 2 coins each — a different price. The check that catches it every time: work out the rate at the end and see whether it matches the rate you started with.",
+    "followUpQuestionIds": ["q.remed-scale-both-together"],
+    "skillIds": ["skill.r1-proportions"]
   }
 ]
