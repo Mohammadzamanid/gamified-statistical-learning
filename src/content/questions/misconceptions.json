@@ -158,5 +158,29 @@
     "detector": "point-geometry",
     "detectorParams": {},
     "remediationId": "rem.read-the-scale"
+  },
+  {
+    "id": "mc.wrong-column-read",
+    "title": "Right row, wrong column",
+    "description": "The learner locates the correct case in a table but reads the value from a neighbouring column, answering a different variable's value.",
+    "detector": "known-wrong-answer",
+    "detectorParams": {},
+    "remediationId": "rem.row-then-column"
+  },
+  {
+    "id": "mc.constant-counted-as-variable",
+    "title": "A constant column counted as a variable",
+    "description": "A column holding the same value on every row is treated as a variable simply because it has a header.",
+    "detector": "known-wrong-answer",
+    "detectorParams": {},
+    "remediationId": "rem.a-variable-must-vary"
+  },
+  {
+    "id": "mc.cases-counted-as-observations",
+    "title": "Cases and observations confused",
+    "description": "Asked how many cases a dataset holds, the learner answers the number of recorded values — rows times columns — instead of the number of rows.",
+    "detector": "known-wrong-answer",
+    "detectorParams": {},
+    "remediationId": "rem.one-row-one-case"
   }
 ]

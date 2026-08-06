@@ -188,8 +188,10 @@ describe("skeleton honesty", () => {
 
   it("lessons not declared Complete still look like skeletons", () => {
     const skeletons = seedLessons.filter((l) => !COMPLETE_LESSONS.includes(l.id));
-    // 17 topics, 13 filled in by S2-08 so far. This number must be reduced deliberately.
-    expect(skeletons.length, "the Complete list and the content have diverged").toBe(4);
+    // All 17 topics are now finished lessons, so nothing is left in skeleton
+    // state. If this ever rises above zero, a lesson has been added without being
+    // declared Complete — which the structure audit would then never check.
+    expect(skeletons.length, "the Complete list and the content have diverged").toBe(0);
     for (const lesson of skeletons) {
       expect(
         lesson.questionIds.length,
@@ -207,5 +209,21 @@ describe("skeleton honesty", () => {
       expect(lesson, `${id} is declared Complete but is not a Region 1 lesson`).toBeDefined();
       expect(lesson!.questionIds.length, `${id} is declared Complete but still has one seed question`).toBeGreaterThan(1);
     }
+  });
+
+  it("names the only Region 1 lessons that are not Complete, and why", () => {
+    // S2-08 finished all 17 scope §2 topic lessons. Two lessons inherited from
+    // Stage 1 still sit inside the Region 1 container and are NOT Complete: they
+    // teach centre and tallies, which the Stage 2 scope places in Region 2, so
+    // re-cutting them is S2-11's job rather than something S2-08 skipped.
+    //
+    // This is asserted rather than written in a doc so the exception cannot grow
+    // quietly: a third un-Complete lesson appearing in Region 1 fails here.
+    const INHERITED_FROM_STAGE_1 = ["l.reading-tallies", "l.middle-harbor"];
+    const notComplete = region1Lessons.filter((l) => !COMPLETE_LESSONS.includes(l.id)).map((l) => l.id).sort();
+    expect(
+      notComplete,
+      "Region 1 holds an un-Complete lesson that is not one of the two known Stage 1 inheritances"
+    ).toEqual([...INHERITED_FROM_STAGE_1].sort());
   });
 });

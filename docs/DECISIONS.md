@@ -90,3 +90,21 @@ in the ordinary run of a lesson. That pattern is deliberate and already recorded
 the rule was widened rather than removed: a question is reachable if a lesson lists it **or** a remediation names it as
 a follow-up, and content reachable from neither still fails. Widening a rule to admit a legitimate case is not the same
 as weakening it — the orphan probe still fails three checks. (S2-08)
+
+**D-018 — A demonstration may index data, not only compute over it.**
+Region 1's last module teaches tables, variables and cases — structures rather than quantities — and every formula up
+to that point produced a number from two numbers. Rather than bend those lessons to fit arithmetic that does not
+describe them, `Demonstration` gained an optional `table` and two formulas that read it: `table-cell` (row × column)
+and `column-total`. Controls gained `valueLabels`, so a selector shows "Thursday" instead of "4" in both the panel and
+the spoken description — both call the same `formatControlValue`, so the two cannot drift. The schema ties a table
+selector's range **and** its labels to the table itself, which means an unnamed or out-of-range selector cannot ship.
+`apply` now takes the whole demonstration rather than two numbers, which is what made a data-reading readout possible
+at all. (S2-08)
+
+**D-019 — Probe every new guard by breaking what it protects.**
+A probe in the last S2-08 cycle found that a check written minutes earlier was vacuous: "table selectors name their
+positions" skipped controls that had no labels, which is precisely the defect it existed to catch. The probe habit is
+therefore not a formality at the end of a unit — it is the only thing that distinguishes a guard from a comment. Two
+consequences are now standing practice: a new check is probed by removing the thing it asserts, and the probe harness
+counts failed *suites* as well as failed checks, because content the schema rejects stops every suite loading and was
+previously being reported as zero failures. (S2-08)

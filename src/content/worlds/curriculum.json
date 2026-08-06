@@ -1687,7 +1687,7 @@
       "id": "l.r1-tables",
       "moduleId": "m.r1-data",
       "title": "Reading tables",
-      "narrativeIntro": "Before the expedition can chart anything, reading tables must be second nature.",
+      "narrativeIntro": "Nothing in this expedition arrives as a chart. It arrives as a ledger — rows of days, columns of measurements — and every summary, graph and conclusion that follows is only as good as your ability to find the right cell in it.",
       "objectiveIds": [
         "obj.r1-tables"
       ],
@@ -1700,18 +1700,145 @@
         }
       ],
       "questionIds": [
-        "q.r1-tables"
+        "q.r1-tables",
+        "q.r1-tables-independent",
+        "q.r1-tables-misconception",
+        "q.r1-tables-application",
+        "q.r1-tables-teachback",
+        "q.r1-tables-mastery"
       ],
       "prerequisites": [
         "l.r1-division"
       ],
-      "estimatedMinutes": 8
+      "estimatedMinutes": 20,
+      "demonstration": {
+        "id": "dem.r1-tables",
+        "title": "The harbour ledger",
+        "experience": "The week's ledger sits open on the desk: one row for each day, one column for each thing the harbourmaster records. Finding a value means choosing a row and a column.",
+        "accessibleDescription": "Two controls. The first chooses which day's row to read, from Monday to Friday. The second chooses which column, from boats out, crates landed and hours at sea. The readout gives the single value where that row meets that column.",
+        "controls": [
+          {
+            "id": "ctl.row",
+            "label": "Day (row)",
+            "min": 1,
+            "max": 5,
+            "step": 1,
+            "initial": 1,
+            "valueLabels": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ]
+          },
+          {
+            "id": "ctl.col",
+            "label": "Recorded (column)",
+            "min": 1,
+            "max": 3,
+            "step": 1,
+            "initial": 2,
+            "valueLabels": [
+              "Boats out",
+              "Crates landed",
+              "Hours at sea"
+            ]
+          }
+        ],
+        "formula": "table-cell",
+        "table": {
+          "rowLabels": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "columnLabels": [
+            "Boats out",
+            "Crates landed",
+            "Hours at sea"
+          ],
+          "cells": [
+            [
+              3,
+              12,
+              7
+            ],
+            [
+              5,
+              20,
+              9
+            ],
+            [
+              2,
+              6,
+              4
+            ],
+            [
+              4,
+              18,
+              8
+            ],
+            [
+              6,
+              27,
+              11
+            ]
+          ]
+        },
+        "readoutLabel": "Value in that cell",
+        "readoutPrecision": 0,
+        "prediction": {
+          "prompt": "The ledger is showing Monday's crates landed: 12. If you leave the day on Monday and move the column control to 'Hours at sea', what will the readout show?",
+          "options": [
+            {
+              "id": "opt.same",
+              "text": "Still 12 — the day has not changed"
+            },
+            {
+              "id": "opt.hours",
+              "text": "A different number, because it is now reading a different measurement"
+            },
+            {
+              "id": "opt.total",
+              "text": "The total of Monday's row"
+            }
+          ],
+          "correctOptionId": "opt.hours",
+          "revealNote": "A cell is fixed by two things at once. Changing either the row or the column lands you somewhere else in the ledger, and the new number answers a different question."
+        },
+        "observation": "Hold the day still and sweep the column: the numbers change completely, because they measure different things. Hold the column still and sweep the day: now the numbers are comparable, because they all measure the same thing on different days. Only the second sweep is worth comparing."
+      },
+      "formalTerm": {
+        "term": "Table",
+        "definition": "A table stores data in rows and columns. Each row is normally one case — the thing that was measured — and each column is one variable, one thing recorded about every case. A single value, the cell, is fixed by naming both: which row and which column. Reading the headers first is what stops you answering a different question from the one you were asked."
+      },
+      "guidedQuestionIds": [
+        "q.r1-tables"
+      ],
+      "independentQuestionIds": [
+        "q.r1-tables-independent"
+      ],
+      "misconceptionQuestionIds": [
+        "q.r1-tables-misconception"
+      ],
+      "applicationQuestionIds": [
+        "q.r1-tables-application"
+      ],
+      "teachBackQuestionIds": [
+        "q.r1-tables-teachback"
+      ],
+      "masteryCheckQuestionIds": [
+        "q.r1-tables-mastery"
+      ]
     },
     {
       "id": "l.r1-variables",
       "moduleId": "m.r1-data",
       "title": "Variables",
-      "narrativeIntro": "Before the expedition can chart anything, variables must be second nature.",
+      "narrativeIntro": "A column with a header looks like information. Some are not: they say the same thing on every row and can explain nothing. Knowing which of your columns can actually carry an answer is the first honest thing you do with a dataset.",
       "objectiveIds": [
         "obj.r1-variables"
       ],
@@ -1724,18 +1851,145 @@
         }
       ],
       "questionIds": [
-        "q.r1-variables"
+        "q.r1-variables",
+        "q.r1-variables-independent",
+        "q.r1-variables-misconception",
+        "q.r1-variables-application",
+        "q.r1-variables-teachback",
+        "q.r1-variables-mastery"
       ],
       "prerequisites": [
         "l.r1-tables"
       ],
-      "estimatedMinutes": 8
+      "estimatedMinutes": 20,
+      "demonstration": {
+        "id": "dem.r1-variables",
+        "title": "The column that never moves",
+        "experience": "The same ledger, but one of its columns is the harbour's own code number — written on every row, identical every time, because every one of these landings happened at this harbour.",
+        "accessibleDescription": "Two controls. The first chooses which day's row to read. The second chooses which column: crates landed, harbour code, or boats out. The readout gives the value in that cell. The harbour code column holds 7 on every row.",
+        "controls": [
+          {
+            "id": "ctl.row",
+            "label": "Day (row)",
+            "min": 1,
+            "max": 5,
+            "step": 1,
+            "initial": 1,
+            "valueLabels": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ]
+          },
+          {
+            "id": "ctl.col",
+            "label": "Column",
+            "min": 1,
+            "max": 3,
+            "step": 1,
+            "initial": 1,
+            "valueLabels": [
+              "Crates landed",
+              "Harbour code",
+              "Boats out"
+            ]
+          }
+        ],
+        "formula": "table-cell",
+        "table": {
+          "rowLabels": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "columnLabels": [
+            "Crates landed",
+            "Harbour code",
+            "Boats out"
+          ],
+          "cells": [
+            [
+              12,
+              7,
+              3
+            ],
+            [
+              20,
+              7,
+              5
+            ],
+            [
+              6,
+              7,
+              2
+            ],
+            [
+              18,
+              7,
+              4
+            ],
+            [
+              27,
+              7,
+              6
+            ]
+          ]
+        },
+        "readoutLabel": "Value in that cell",
+        "readoutPrecision": 0,
+        "prediction": {
+          "prompt": "Set the column to 'Harbour code' and then step through every day of the week. What do you expect the readout to do?",
+          "options": [
+            {
+              "id": "opt.change",
+              "text": "Change on each day, like the other columns"
+            },
+            {
+              "id": "opt.stay",
+              "text": "Stay at the same number all week"
+            },
+            {
+              "id": "opt.blank",
+              "text": "Go blank, because a code is not a measurement"
+            }
+          ],
+          "correctOptionId": "opt.stay",
+          "revealNote": "It reads 7 every single day. The column exists, it has a header, and it is completely useless for telling the days apart — because it never varies."
+        },
+        "observation": "Sweep the days with the column on 'Crates landed' and the readout moves all over: 12, 20, 6, 18, 27. Sweep them with the column on 'Harbour code' and it never leaves 7. A column that does not move cannot explain anything that does."
+      },
+      "formalTerm": {
+        "term": "Variable",
+        "definition": "A variable is a property recorded for every case, whose value is allowed to differ from case to case — and it earns the name only if it actually does. A column holding the same value on every row describes the dataset as a whole rather than distinguishing its cases, so it can never account for any difference between them. Having a header makes a column; having different values makes a variable."
+      },
+      "guidedQuestionIds": [
+        "q.r1-variables"
+      ],
+      "independentQuestionIds": [
+        "q.r1-variables-independent"
+      ],
+      "misconceptionQuestionIds": [
+        "q.r1-variables-misconception"
+      ],
+      "applicationQuestionIds": [
+        "q.r1-variables-application"
+      ],
+      "teachBackQuestionIds": [
+        "q.r1-variables-teachback"
+      ],
+      "masteryCheckQuestionIds": [
+        "q.r1-variables-mastery"
+      ]
     },
     {
       "id": "l.r1-cases",
       "moduleId": "m.r1-data",
       "title": "Data, cases and observations",
-      "narrativeIntro": "Before the expedition can chart anything, data, cases and observations must be second nature.",
+      "narrativeIntro": "'How much data do we have?' has three different answers, and picking the wrong one is how people end up counting the same boat five times. Before you read any dataset, you have to know what one row of it actually is.",
       "objectiveIds": [
         "obj.r1-cases"
       ],
@@ -1748,18 +2002,92 @@
         }
       ],
       "questionIds": [
-        "q.r1-cases"
+        "q.r1-cases",
+        "q.r1-cases-independent",
+        "q.r1-cases-misconception",
+        "q.r1-cases-application",
+        "q.r1-cases-teachback",
+        "q.r1-cases-mastery"
       ],
       "prerequisites": [
         "l.r1-variables"
       ],
-      "estimatedMinutes": 8
+      "estimatedMinutes": 20,
+      "demonstration": {
+        "id": "dem.r1-cases",
+        "title": "How much is in the ledger",
+        "experience": "A blank ledger is ruled up before the week starts: so many rows for the things being recorded, so many columns for the things recorded about each one.",
+        "accessibleDescription": "Two controls: how many rows the ledger has, and how many columns. The readout gives the number of observations — the number of individual values written in the ledger, which is the rows multiplied by the columns.",
+        "controls": [
+          {
+            "id": "ctl.rows",
+            "label": "Rows (one per case)",
+            "min": 1,
+            "max": 12,
+            "step": 1,
+            "initial": 7
+          },
+          {
+            "id": "ctl.cols",
+            "label": "Columns (one per variable)",
+            "min": 1,
+            "max": 6,
+            "step": 1,
+            "initial": 3
+          }
+        ],
+        "formula": "product",
+        "readoutLabel": "Observations recorded",
+        "readoutPrecision": 0,
+        "prediction": {
+          "prompt": "The ledger has 7 rows and 3 columns, holding 21 observations. If you add three more columns without adding a single row, what happens to the number of CASES?",
+          "options": [
+            {
+              "id": "opt.up",
+              "text": "It rises, because the ledger now holds more"
+            },
+            {
+              "id": "opt.same",
+              "text": "It stays at 7 — no new cases were added"
+            },
+            {
+              "id": "opt.double",
+              "text": "It doubles"
+            }
+          ],
+          "correctOptionId": "opt.same",
+          "revealNote": "Adding columns records more *about* the same seven things. The observation count climbs to 42, but the case count never moved: still 7. The two numbers answer different questions."
+        },
+        "observation": "Drag the columns control and the readout races upward while the number of rows — the cases — sits exactly where it was. Set the columns to 1 and the two counts finally agree, which is the only time they ever do."
+      },
+      "formalTerm": {
+        "term": "Case and observation",
+        "definition": "A case is the thing you measured — whatever one row of the table represents: a day, a boat, a delivery. An observation is a single recorded value, one cell. So a table holds as many cases as it has rows, and as many observations as it has rows times columns. Ask what one row stands for before anything else; a ledger with one row per delivery counts deliveries, not boats, however tempting it is to say otherwise."
+      },
+      "guidedQuestionIds": [
+        "q.r1-cases"
+      ],
+      "independentQuestionIds": [
+        "q.r1-cases-independent"
+      ],
+      "misconceptionQuestionIds": [
+        "q.r1-cases-misconception"
+      ],
+      "applicationQuestionIds": [
+        "q.r1-cases-application"
+      ],
+      "teachBackQuestionIds": [
+        "q.r1-cases-teachback"
+      ],
+      "masteryCheckQuestionIds": [
+        "q.r1-cases-mastery"
+      ]
     },
     {
       "id": "l.r1-variable-kinds",
       "moduleId": "m.r1-data",
       "title": "Categorical and numerical variables",
-      "narrativeIntro": "Before the expedition can chart anything, categorical and numerical variables must be second nature.",
+      "narrativeIntro": "The arithmetic will run on anything. Total a column of postcodes and a calculator answers without complaint — and the answer refers to nothing at all. Which summaries and which charts are honestly available to you is decided here, by what kind of variable you are holding.",
       "objectiveIds": [
         "obj.r1-variable-kinds"
       ],
@@ -1772,12 +2100,124 @@
         }
       ],
       "questionIds": [
-        "q.r1-variable-kinds"
+        "q.r1-variable-kinds",
+        "q.r1-variable-kinds-independent",
+        "q.r1-variable-kinds-misconception",
+        "q.r1-variable-kinds-application",
+        "q.r1-variable-kinds-teachback",
+        "q.r1-variable-kinds-mastery"
       ],
       "prerequisites": [
         "l.r1-cases"
       ],
-      "estimatedMinutes": 8
+      "estimatedMinutes": 22,
+      "demonstration": {
+        "id": "dem.r1-variable-kinds",
+        "title": "Totalling every column",
+        "experience": "The clerk runs a total down each column of the ledger in turn, without stopping to ask what the column holds. The arithmetic never fails. Whether the answer means anything is another matter.",
+        "accessibleDescription": "One control, choosing which column of the ledger to total: crates landed, boat number, or hours at sea. The readout gives the total of that column. Every total is a real number; only some of them describe anything.",
+        "controls": [
+          {
+            "id": "ctl.col",
+            "label": "Column to total",
+            "min": 1,
+            "max": 3,
+            "step": 1,
+            "initial": 1,
+            "valueLabels": [
+              "Crates landed",
+              "Boat number",
+              "Hours at sea"
+            ]
+          }
+        ],
+        "formula": "column-total",
+        "table": {
+          "rowLabels": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "columnLabels": [
+            "Crates landed",
+            "Boat number",
+            "Hours at sea"
+          ],
+          "cells": [
+            [
+              12,
+              3,
+              7
+            ],
+            [
+              20,
+              5,
+              9
+            ],
+            [
+              6,
+              2,
+              4
+            ],
+            [
+              18,
+              4,
+              8
+            ],
+            [
+              27,
+              6,
+              11
+            ]
+          ]
+        },
+        "readoutLabel": "Total of that column",
+        "readoutPrecision": 0,
+        "prediction": {
+          "prompt": "Totalling the crates column gives 83, the week's catch. What do you expect to happen when you total the boat-number column?",
+          "options": [
+            {
+              "id": "opt.refuse",
+              "text": "It will refuse — you cannot total names"
+            },
+            {
+              "id": "opt.number",
+              "text": "It will give a number, but that number will not describe anything"
+            },
+            {
+              "id": "opt.count",
+              "text": "It will give the number of boats"
+            }
+          ],
+          "correctOptionId": "opt.number",
+          "revealNote": "It reports 20, quite happily. There is no boat 20, no 20 of anything — the arithmetic simply added five labels together. Nothing stops you totalling a categorical column except knowing not to."
+        },
+        "observation": "Crates totals to 83, the week's catch, and hours to 39, the week's time at sea. Both mean something. Boat number totals to 20, which means nothing whatever — and looks exactly as respectable as the other two."
+      },
+      "formalTerm": {
+        "term": "Categorical and numerical variables",
+        "definition": "A numerical variable holds quantities you could sensibly add or average, like crates landed. A categorical variable sorts cases into groups, like weather or home port. The test is never whether the values are written with digits — it is whether adding two of them would mean anything. Boat numbers and postcodes are digits used as names, so they are categorical. The kind of variable decides which summaries and which charts are honestly available."
+      },
+      "guidedQuestionIds": [
+        "q.r1-variable-kinds"
+      ],
+      "independentQuestionIds": [
+        "q.r1-variable-kinds-independent"
+      ],
+      "misconceptionQuestionIds": [
+        "q.r1-variable-kinds-misconception"
+      ],
+      "applicationQuestionIds": [
+        "q.r1-variable-kinds-application"
+      ],
+      "teachBackQuestionIds": [
+        "q.r1-variable-kinds-teachback"
+      ],
+      "masteryCheckQuestionIds": [
+        "q.r1-variable-kinds-mastery"
+      ]
     }
   ],
   "objectives": [

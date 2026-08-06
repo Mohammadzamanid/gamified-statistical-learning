@@ -7,12 +7,7 @@
  * and makes the spoken/screen-reader text and the visible text provably the
  * same string rather than two hand-written descriptions that can drift.
  */
-import {
-  DEMONSTRATION_ARITY,
-  type Demonstration,
-  type DemonstrationControl,
-  type DemonstrationFormula
-} from "../../shared/schemas";
+import { DEMONSTRATION_ARITY, type Demonstration, type DemonstrationControl } from "../../shared/schemas";
 
 /** The control values a demonstration starts at. */
 export function initialValues(demo: Demonstration): number[] {
@@ -38,7 +33,19 @@ export function setControlValue(demo: Demonstration, values: readonly number[], 
   return updated;
 }
 
-function apply(formula: DemonstrationFormula, a: number, b: number): number {
+/** Reads `cells[row][column]` from a 1-based selection, or throws if it is off the grid. */
+function cellAt(demo: Demonstration, row: number, column: number): number {
+  const table = demo.table;
+  if (!table) throw new Error(`demonstration ${demo.id}: formula ${demo.formula} needs a table`);
+  const cell = table.cells[Math.round(row) - 1]?.[Math.round(column) - 1];
+  if (cell === undefined) {
+    throw new Error(`demonstration ${demo.id}: no cell at row ${row}, column ${column}`);
+  }
+  return cell;
+}
+
+function apply(demo: Demonstration, a: number, b: number): number {
+  const formula = demo.formula;
   switch (formula) {
     case "tally":
       return a * 5 + b;
@@ -61,6 +68,14 @@ function apply(formula: DemonstrationFormula, a: number, b: number): number {
       return (a / 100) * b;
     case "share-of":
       return (a / b) * 100;
+    case "table-cell":
+      return cellAt(demo, a, b);
+    case "column-total": {
+      const table = demo.table;
+      if (!table) throw new Error(`demonstration ${demo.id}: column-total needs a table`);
+      const column = Math.round(a) - 1;
+      return table.cells.reduce((total, row) => total + (row[column] ?? 0), 0);
+    }
   }
 }
 
@@ -79,7 +94,7 @@ export function demonstrationReadout(demo: Demonstration, values: readonly numbe
   for (const v of values) {
     if (!Number.isFinite(v)) throw new Error(`demonstration ${demo.id}: control value is not a finite number`);
   }
-  return apply(demo.formula, values[0]!, values[1] ?? 0);
+  return apply(demo, values[0]!, values[1] ?? 0);
 }
 
 /** The readout rounded and suffixed exactly as the panel shows it. */
@@ -89,7 +104,17 @@ export function formatReadout(demo: Demonstration, values: readonly number[]): s
   return demo.readoutUnit ? `${shown} ${demo.readoutUnit}` : shown;
 }
 
-function formatControlValue(control: DemonstrationControl, value: number): string {
+/**
+ * What a control's current setting reads as.
+ *
+ * A labelled control selects a thing, not a quantity, so it shows the thing's
+ * name — "Thursday", not "4". Exported because the panel must display exactly
+ * what the spoken description says, and the two would drift if each formatted
+ * the value itself.
+ */
+export function formatControlValue(control: DemonstrationControl, value: number): string {
+  const label = control.valueLabels[Math.round(value) - 1];
+  if (label !== undefined) return label;
   const decimals = Number.isInteger(control.step) ? 0 : String(control.step).split(".")[1]!.length;
   const shown = value.toFixed(decimals);
   return control.unit ? `${shown} ${control.unit}` : shown;

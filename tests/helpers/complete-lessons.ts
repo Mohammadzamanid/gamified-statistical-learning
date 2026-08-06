@@ -25,5 +25,9 @@ export const COMPLETE_LESSONS: readonly string[] = [
   "l.r1-proportions",
   "l.r1-negatives",
   "l.r1-number-lines",
-  "l.r1-coordinates"
+  "l.r1-coordinates",
+  "l.r1-tables",
+  "l.r1-variables",
+  "l.r1-cases",
+  "l.r1-variable-kinds"
 ];

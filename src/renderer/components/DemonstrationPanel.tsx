@@ -16,6 +16,7 @@ import type { Demonstration } from "../../shared/schemas";
 import {
   clampToControl,
   describeDemonstration,
+  formatControlValue,
   formatReadout,
   initialValues,
   setControlValue
@@ -60,29 +61,31 @@ export function DemonstrationPanel({ demo }: { demo: Demonstration }): JSX.Eleme
                 max={control.max}
                 step={control.step}
                 value={values[i]}
-                aria-valuetext={`${values[i]}${control.unit ? ` ${control.unit}` : ""}`}
+                aria-valuetext={formatControlValue(control, values[i]!)}
                 onChange={(e) => {
                   setValues(setControlValue(demo, values, i, Number(e.target.value)));
                   setMoved(true);
                 }}
               />
               <output htmlFor={inputId} className="pill">
-                {values[i]}
-                {control.unit ? ` ${control.unit}` : ""}
+                {formatControlValue(control, values[i]!)}
               </output>
-              <input
-                type="number"
-                aria-label={`${control.label}, exact value`}
-                min={control.min}
-                max={control.max}
-                step={control.step}
-                value={values[i]}
-                style={{ width: 90 }}
-                onChange={(e) => {
-                  setValues(setControlValue(demo, values, i, clampToControl(control, Number(e.target.value))));
-                  setMoved(true);
-                }}
-              />
+              {/* A labelled control picks a thing, so there is no number to type. */}
+              {control.valueLabels.length === 0 && (
+                <input
+                  type="number"
+                  aria-label={`${control.label}, exact value`}
+                  min={control.min}
+                  max={control.max}
+                  step={control.step}
+                  value={values[i]}
+                  style={{ width: 90 }}
+                  onChange={(e) => {
+                    setValues(setControlValue(demo, values, i, clampToControl(control, Number(e.target.value))));
+                    setMoved(true);
+                  }}
+                />
+              )}
             </div>
           );
         })}

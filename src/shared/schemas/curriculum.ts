@@ -40,7 +40,18 @@ export const DemonstrationFormulaSchema = z.enum([
   /** a percent of b */
   "percent-of",
   /** a out of b, as a percentage */
-  "share-of"
+  "share-of",
+  /**
+   * The cell where row a meets column b of the demonstration's `table`.
+   *
+   * The data-structure topics are not arithmetic — a table, a variable and a case
+   * are shapes rather than quantities — so they need a readout that indexes data
+   * instead of computing over it. Rows and columns are 1-based, matching the
+   * labels a learner reads off the screen.
+   */
+  "table-cell",
+  /** The total of column a of the demonstration's `table`. */
+  "column-total"
 ]);
 export type DemonstrationFormula = z.infer<typeof DemonstrationFormulaSchema>;
 
@@ -54,11 +65,16 @@ export const DEMONSTRATION_ARITY: Readonly<Record<DemonstrationFormula, number>>
   negate: 1,
   "place-value": 2,
   "percent-of": 2,
-  "share-of": 2
+  "share-of": 2,
+  "table-cell": 2,
+  "column-total": 1
 };
 
 /** Formulas that divide by the second control, so its range must exclude zero. */
 const DIVIDES_BY_SECOND: ReadonlyArray<DemonstrationFormula> = ["quotient", "share-of"];
+
+/** Formulas that read from the demonstration's `table` rather than computing. */
+const READS_TABLE: ReadonlyArray<DemonstrationFormula> = ["table-cell", "column-total"];
 
 export const DemonstrationControlSchema = z
   .object({
@@ -68,7 +84,14 @@ export const DemonstrationControlSchema = z
     max: z.number(),
     step: z.number().positive(),
     initial: z.number(),
-    unit: z.string().optional()
+    unit: z.string().optional(),
+    /**
+     * Names for the control's positions, when it selects a thing rather than a
+     * quantity: a row, a column, a variable. Position 1 is `valueLabels[0]`.
+     * The panel then shows "Thursday" where it would otherwise show "4", and the
+     * spoken description says the same word.
+     */
+    valueLabels: z.array(NonEmptyString).default([])
   })
   .superRefine((c, ctx) => {
     if (c.max <= c.min) {
@@ -77,8 +100,52 @@ export const DemonstrationControlSchema = z
     if (c.initial < c.min || c.initial > c.max) {
       ctx.addIssue({ code: z.ZodIssueCode.custom, message: `control ${c.id}: initial ${c.initial} is outside its range` });
     }
+    // A labelled control is a 1-based selector, so its range and its labels have
+    // to agree exactly — otherwise some position on the slider has no name.
+    if (c.valueLabels.length > 0) {
+      if (c.min !== 1 || c.step !== 1 || c.max !== c.valueLabels.length) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: `control ${c.id}: a labelled control must run 1..${c.valueLabels.length} in steps of 1`
+        });
+      }
+      if (c.unit) {
+        ctx.addIssue({ code: z.ZodIssueCode.custom, message: `control ${c.id}: a labelled control has no unit` });
+      }
+    }
   });
 export type DemonstrationControl = z.infer<typeof DemonstrationControlSchema>;
+
+/**
+ * A small grid of numbers a demonstration reads from.
+ *
+ * Present only for the table formulas. The labels are what the learner sees and
+ * hears; the cells are what the readout indexes.
+ */
+export const DemonstrationTableSchema = z
+  .object({
+    rowLabels: z.array(NonEmptyString).min(2),
+    columnLabels: z.array(NonEmptyString).min(2),
+    /** `cells[row][column]`, matching the label arrays. */
+    cells: z.array(z.array(z.number()).min(2)).min(2)
+  })
+  .superRefine((t, ctx) => {
+    if (t.cells.length !== t.rowLabels.length) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: `table has ${t.cells.length} rows of cells but ${t.rowLabels.length} row labels`
+      });
+    }
+    t.cells.forEach((row, i) => {
+      if (row.length !== t.columnLabels.length) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: `table row ${i + 1} has ${row.length} cells but there are ${t.columnLabels.length} column labels`
+        });
+      }
+    });
+  });
+export type DemonstrationTable = z.infer<typeof DemonstrationTableSchema>;
 
 /**
  * A manipulable the learner changes and watches respond.
@@ -98,6 +165,8 @@ export const DemonstrationSchema = z
     accessibleDescription: NonEmptyString,
     controls: z.array(DemonstrationControlSchema).min(1).max(2),
     formula: DemonstrationFormulaSchema,
+    /** Required by the table formulas, forbidden otherwise. */
+    table: DemonstrationTableSchema.optional(),
     readoutLabel: NonEmptyString,
     /** Decimal places the readout is shown to. */
     readoutPrecision: z.number().int().min(0).max(4).default(0),
@@ -140,6 +209,42 @@ export const DemonstrationSchema = z
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         message: `formula ${d.formula} divides by ${d.controls[1].id}, whose minimum must be greater than zero`
+      });
+    }
+
+    // Table formulas index data rather than computing over it, so the controls
+    // are selectors and their ranges must match the table exactly. A control that
+    // can point outside the grid has positions with no cell behind them.
+    const readsTable = READS_TABLE.includes(d.formula);
+    if (readsTable && !d.table) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, message: `formula ${d.formula} requires a table` });
+    }
+    if (!readsTable && d.table) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, message: `formula ${d.formula} does not read a table` });
+    }
+    if (readsTable && d.table) {
+      const expected =
+        d.formula === "table-cell"
+          ? [d.table.rowLabels, d.table.columnLabels]
+          : [d.table.columnLabels];
+      expected.forEach((labels, i) => {
+        const control = d.controls[i];
+        if (!control) return;
+        if (control.min !== 1 || control.max !== labels.length || control.step !== 1) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: `control ${control.id} selects from the table and must run 1..${labels.length} in steps of 1`
+          });
+        }
+        // A table selector must name what it is selecting. Without labels the
+        // learner drags a slider to "4" with nothing to say which row that is,
+        // and the spoken description reads out an index instead of a day.
+        if (control.valueLabels.join(" ") !== labels.join(" ")) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: `control ${control.id} must label its positions with the table's own labels: ${labels.join(", ")}`
+          });
+        }
       });
     }
   });

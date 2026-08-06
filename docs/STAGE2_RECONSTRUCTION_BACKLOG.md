@@ -16,7 +16,7 @@ Status vocabulary is defined in `STAGE2_RECONSTRUCTION_SCOPE.md` §9.
 | S2-05 | Interaction-type audit (all 17) | S2-04 | Per type: schema, renderer, evaluation, correct path, incorrect path, misconception path, keyboard operation, accessible name/instructions, ≥1 genuine curriculum use, save/resume where stateful | **Complete** | `docs/INTERACTION_AUDIT.md` (new), `src/renderer/components/rendered-interactions.ts` (new), `QuestionRenderers.tsx`, `tests/helpers/responses.ts` (new) | `tests/audit/interaction-audit.test.ts` (18) | `acc9bf3` | `acc9bf3` | Yes — MATCH | Full SHA `acc9bf36df47ab97613ec1f1bc77c8355b3cccd1`; recorded only after the push was verified. Suite 193→**211 tests**, 21→**22 files**. The audit is **enforced, not described**: renderer coverage is a shared module the test compares against the registry, and correct/wrong paths are driven from real content for every implemented type. Curriculum use is measured as reachable-from-a-lesson, so demos cannot satisfy it. 5 findings recorded (F-1…F-5), none claimed as fixed. |
 | S2-06 | Dedicated spaced-review queue | S2-01 | Due calculation, review screen, overdue items, new-vs-review distinction, mixed-topic review, correct/incorrect rescheduling, persistence, interrupted-session resume, deterministic-clock tests | **Complete** | `src/core/spaced-repetition/review-queue.ts` (new), `src/renderer/state/review-session.ts` (new), `src/renderer/screens/ReviewScreen.tsx` (new), `store.ts`, `App.tsx`, `TopBar.tsx`, `src/shared/schemas/profile.ts`, `constants/app.ts`, `persistence/migrations.ts` | `tests/unit/review-queue.test.ts` (13), `tests/integration/review-session.test.ts` (12) | `e8e0cb2` | `e8e0cb2` | Yes — MATCH | Full SHA `e8e0cb2b8a02ce933671aa8cf4c2a5c727760855`; recorded only after the push was verified. Suite 211→**236 tests**, 22→**24 files**. **Save schema 1 → 2** with a real migration, because resume requires persisting the in-flight queue. The queue is **frozen at start**, so resume shows what it showed before rather than a rebuilt queue. Clock is an argument everywhere — no `Date.now()` inside the review core. |
 | S2-07 | Region 1 curriculum architecture | S2-05 | Complete lesson + prerequisite graph; every required topic represented and reachable | **Complete** | `src/content/worlds/curriculum.json`, `src/content/questions/questions.json`, `.github/workflows/ci.yml` | `tests/audit/region1-architecture.test.ts` (10) | `dd39d38` | `dd39d38` | Yes — MATCH | Full SHA `dd39d38c57b4083d7829a698a56960b6ff484c8c`; recorded only after the push was verified. Suite 236→**246 tests**, 24→**25 files**. All **17 scope §2 topics** now have a skill, an objective, a lesson and a seed question, in 4 new modules with a prerequisite graph. **Architecture only** — a `skeleton honesty` check asserts each new lesson still has exactly one question, so none can be mistaken for finished work. Completeness is S2-08. |
-| S2-08 | Region 1 lessons and interactions | S2-07 | Every lesson satisfies all 18 structure requirements (scope §5) | **Partial** | `src/shared/schemas/curriculum.ts`, `src/core/curriculum/demonstration.ts` (new), `src/core/misconceptions/detectors.ts`, `src/renderer/components/DemonstrationPanel.tsx` (new), `src/renderer/screens/LessonScreen.tsx`, `src/content/worlds/curriculum.json`, `src/content/questions/{questions,misconceptions,remediations}.json`, `tests/helpers/complete-lessons.ts` (new) | `tests/audit/lesson-structure.test.ts` (24), `tests/unit/demonstration.test.ts` (17), `tests/integration/module1-lessons.test.ts` (12), `tests/audit/region1-architecture.test.ts` (12, was 10) | `629dd74` | `629dd74` | Yes — MATCH | Full SHA `629dd74b763013016ae09a40064be2a976b394d7`; recorded only after the push was verified. **Unmet criterion, named: only 13 of the 17 Region 1 lessons satisfy the 18 requirements.** Modules 1 (`m.r1-counting`), 2 (`m.r1-parts`) and 3 (`m.r1-position`) are finished; `l.r1-tables`, `l.r1-variables`, `l.r1-cases` and `l.r1-variable-kinds` are still skeletons. Cycles `629dd74`, `2f1ec31`, `def8b1d` — all remote-verified. Suite 246→**337 tests**, 25→**30 files**. Lessons can now carry a data-driven `demonstration`, a `formalTerm` with every symbol explained, and six practice roles (D-012…D-014). The audit **drives** each demonstration through the real core module, so a placeholder control fails; beginner safety is enforced by requiring a symbol to be explained by the lesson or one of its prerequisites, which caught the counting lesson using `+` and `x`. The skeleton-honesty guard was **updated deliberately** and now fails in both directions. |
+| S2-08 | Region 1 lessons and interactions | S2-07 | Every lesson satisfies all 18 structure requirements (scope §5) | **Complete** | `src/shared/schemas/curriculum.ts`, `src/core/curriculum/demonstration.ts` (new), `src/core/misconceptions/detectors.ts`, `src/renderer/components/DemonstrationPanel.tsx` (new), `src/renderer/screens/LessonScreen.tsx`, `src/content/worlds/curriculum.json`, `src/content/questions/{questions,misconceptions,remediations}.json`, `tests/helpers/complete-lessons.ts` (new) | `tests/audit/lesson-structure.test.ts` (24), `tests/unit/demonstration.test.ts` (17), `tests/integration/module1-lessons.test.ts` (12), `tests/audit/region1-architecture.test.ts` (12, was 10) | `629dd74` | `629dd74` | Yes — MATCH | Full SHA `629dd74b763013016ae09a40064be2a976b394d7`; recorded only after the push was verified. **All 17 of the 17 scope §2 Region 1 topic lessons satisfy the 18 requirements**, across four cycles: `629dd74` (Module 1), `2f1ec31` (Module 2), `def8b1d` (Module 3), `pending` (Module 4) — each remote-verified. Suite 246→**365 tests**, 25→**31 files**. Lessons carry a data-driven `demonstration`, a `formalTerm` with every symbol explained, and six practice roles (D-012…D-014, D-017). The audit **drives** each demonstration through the real core module, so a placeholder control fails; beginner safety is enforced by requiring a symbol to be explained by the lesson or a prerequisite. **Named exception:** `l.reading-tallies` and `l.middle-harbor` are Stage 1 lessons inside the Region 1 container teaching Region 2 topics; they are **not** Complete and are re-cut in S2-11. A check asserts they are the only two, so the exception cannot grow. No topic is Complete under scope §4 (7-8 authored questions each, zero generators) — that is S2-09. |
 | S2-09 | Region 1 validated content expansion | S2-08 | ≥100 validated interactions per completed major topic, multiple reasoning families, duplicate/near-duplicate gates, misconception mappings, a11y descriptions, machine- and human-readable reports | Not started | generators + report tooling | pending | — | — | — | Topic list comes from the curriculum graph, never from generator modules. |
 | S2-10 | Region 1 boss investigation | S2-09 | Multi-step saveable investigation combining Region 1 skills; awards region achievement; unlocks Region 2 | Not started | `src/content/*`, `src/renderer/screens/*` | pending | — | — | — | Award path already repaired and tested by S2-01. |
 | S2-11 | Region 2 world and curriculum architecture | S2-10 | Distinct world, narrative, module sequence, prerequisite graph, objectives, laboratory unlocks, boss specification | Not started | `src/content/worlds/curriculum.json` | pending | — | — | — | Regions must feel related but not visually interchangeable. |
@@ -37,33 +37,32 @@ Measured from this repository — never recalled from earlier reports.
 
 | Metric | At Stage 1 baseline | Current |
 |---|---|---|
-| Test files | 14 | **30** |
-| Tests | 73 | **337** |
+| Test files | 14 | **31** |
+| Tests | 73 | **365** |
 | Regions | 2 | 2 |
 | Modules | 2 | **6** |
 | Skills | 6 | **23** |
 | Objectives | 6 | **23** |
 | Lessons | 3 | **20** |
-| Authored questions | 14 | **121** |
-| Misconceptions | 8 | **21** |
-| Remediations | 7 | **20** |
+| Authored questions | 14 | **145** |
+| Misconceptions | 8 | **24** |
+| Remediations | 7 | **23** |
 | Achievements | 4 | **6** |
 | Datasets | 1 | 1 |
 | Interaction types implemented | 11 of 17 | **14 of 17** |
 | Interaction types used by content | 11 | **14** |
-| Renderer bundle | 285.73 kB (83.82 kB gzip) | **493.11 kB (133.34 kB gzip)** |
+| Renderer bundle | 285.73 kB (83.82 kB gzip) | **538.47 kB (143.73 kB gzip)** |
 
 Still stubbed (3): `formula-construction`, `simulation-prediction`, `confidence-rating`.
 
-**Region 1: 17 of 17 required topics represented**; **13 of 17 lessons are Complete** to the 18 structure requirements
-(Modules 1, 2 and 3 — counting, the four operations, fractions, decimals, percentages, ratios, proportions, negative
-numbers, number lines, coordinates). The other 4 are still seed-question skeletons and are named in the S2-08 row. Enforced by `tests/audit/lesson-structure.test.ts` and the skeleton guard in
-`tests/audit/region1-architecture.test.ts`.
+**Region 1: 17 of 17 required topics represented, and all 17 lessons are Complete** to the 18 structure
+requirements. No skeletons remain. Two Stage 1 lessons inside the Region 1 container (`l.reading-tallies`,
+`l.middle-harbor`) teach Region 2 topics and are deliberately not upgraded — see the S2-08 row and S2-11.
 
 **Save schema version: 2** (was 1 at the Stage 1 baseline). Migration `1 -> 2` adds `reviewSession`.
 
 **Interaction-count rules note.** These are *authored question records*, not "validated available interactions".
-The thirteen Complete-lesson topics have **7-8 authored questions each** and **zero generator families**. No topic yet meets the
+All seventeen Region 1 topics have **7-8 authored questions each** and **zero generator families**. No topic yet meets the
 ≥100 threshold in `STAGE2_RECONSTRUCTION_SCOPE.md` §4, so no Region 1 or Region 2 *topic* is Complete — the five
 Complete *lessons* are a statement about lesson structure (§5) only, and the two must not be conflated. Generator
 families and the per-topic report arrive in S2-09 / S2-17.

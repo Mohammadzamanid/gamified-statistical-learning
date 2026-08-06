@@ -12,10 +12,9 @@ available.
 
 | | |
 |---|---|
-| Last completed unit | **S2-07** — Region 1 curriculum architecture |
-| Commit | `dd39d38c57b4083d7829a698a56960b6ff484c8c` — pushed, remote-verified, **MATCH** |
-| Last unit attempted | **S2-08** — Region 1 lessons and interactions — **Partial**, 13 of 17 lessons Complete (cycles `629dd74`, `2f1ec31`, `def8b1d`, remote-verified) |
-| Next unit | **S2-08 continued** — Module 4 (`m.r1-data`): reading tables, variables, cases, categorical versus numerical |
+| Last completed unit | **S2-08** — Region 1 lessons and interactions (all 17 topic lessons, 4 cycles) |
+| Commit | cycles `629dd74`, `2f1ec31`, `def8b1d` and this one — each pushed and remote-verified |
+| Next unit | **S2-09** — Region 1 validated content expansion (≥100 validated interactions per topic) |
 | Still open from Stage 0 | **R-00d** (push `stage-1-baseline` tag) and **R-00e** (set repository private) — both blocked, both need the owner's credentials |
 
 ---

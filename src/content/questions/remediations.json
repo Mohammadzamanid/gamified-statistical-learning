@@ -68,8 +68,8 @@
     "title": "Digits do not make a variable numerical",
     "explanation": "A variable is numerical only when its values are quantities you could sensibly add or average. Boat numbers are written with digits, but boat 7 is not 'more' than boat 3 — the digits are just names, so it is a categorical variable.",
     "microLesson": "Ask: would adding two of these values mean anything? Adding two catches (4 fish + 6 fish = 10 fish) is meaningful, so catch is numerical. Adding two boat numbers (boat 3 + boat 7) is meaningless, so boat number is categorical. Postcodes, shirt numbers and phone numbers are all categorical for the same reason.",
-    "followUpQuestionIds": [],
-    "skillIds": ["skill.data-literacy"]
+    "followUpQuestionIds": ["q.remed-categorical-vs-numerical"],
+    "skillIds": ["skill.data-literacy", "skill.r1-variable-kinds"]
   },
   {
     "id": "rem.count-in-groups",
@@ -158,5 +158,29 @@
     "microLesson": "Two labelled values are all you need. If the rule reads 0 at one label and 10 at the next, and there are five marks between them, then each mark is worth 2. Work that out first, then count in twos rather than ones. A quick sanity check: your answer should sit between the two labels you counted from, not somewhere below both of them.",
     "followUpQuestionIds": ["q.remed-read-the-scale"],
     "skillIds": ["skill.r1-number-lines"]
+  },
+  {
+    "id": "rem.row-then-column",
+    "title": "Name the row and the column before reading the number",
+    "explanation": "A cell is fixed by two things at once: which row it sits in and which column. Landing on the right row is only half of it — the values beside each other on that row measure completely different things, so reading the wrong one answers a different question with a number that looks perfectly plausible.",
+    "microLesson": "Say both out loud before you read anything: 'Thursday, crates landed.' Then find the Thursday row, run a finger across to the crates column, and read where they meet. The habit costs a second and catches the slip every time, because the mistake never announces itself — 4 boats and 18 crates are both just numbers on Thursday's row.",
+    "followUpQuestionIds": ["q.remed-row-then-column"],
+    "skillIds": ["skill.r1-tables"]
+  },
+  {
+    "id": "rem.a-variable-must-vary",
+    "title": "A header is not a variable",
+    "explanation": "A column earns the name variable only if its values actually differ between cases. One that reads the same on every row states a fact about the whole dataset rather than about any case in it, so it can never explain why one case differs from another.",
+    "microLesson": "Run your eye down the column and ask one question: do the values ever change? Harbour name reading Kirkwall on all seven rows tells you where the data came from — useful to know, useless for comparing the days, because every day shares it. The same goes for a survey where all 200 respondents answer 'dockworker'. Agreement is not strength: a column with no variation separates nobody from anybody.",
+    "followUpQuestionIds": ["q.remed-a-variable-must-vary"],
+    "skillIds": ["skill.r1-variables"]
+  },
+  {
+    "id": "rem.one-row-one-case",
+    "title": "Count rows for cases, cells for observations",
+    "explanation": "Cases and observations are different counts answering different questions. The number of cases is the number of rows — the things you measured. The number of observations is the number of values recorded, which is rows times columns. Adding a column adds observations without adding a single case.",
+    "microLesson": "Start every dataset by asking what one row represents. A ledger with one row per boat over 12 boats and 4 columns holds 12 cases and 48 observations. Watch for the trap where a row is not what it first seems: if the ledger has one row per delivery and some boats delivered three times, the case is a delivery, and counting rows would badly overcount the boats.",
+    "followUpQuestionIds": ["q.remed-one-row-one-case"],
+    "skillIds": ["skill.r1-cases"]
   }
 ]

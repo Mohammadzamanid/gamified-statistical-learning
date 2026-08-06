@@ -1956,7 +1956,7 @@
     "difficulty": 1,
     "misconceptionIds": [],
     "estimatedSeconds": 60,
-    "accessibilityDescription": "A multiple choice question about reading tables.",
+    "accessibilityDescription": "A multiple-choice question about where to look in a ledger with one row per day and columns for day, boats out and crates landed. Choose one option.",
     "interaction": "multiple-choice",
     "prompt": "A ledger has one row per day and columns for Day, Boats out and Crates landed. Where do you look to find how many crates were landed on Thursday?",
     "choices": [
@@ -1979,7 +1979,22 @@
         "ch.cross"
       ]
     },
-    "explanation": "Find the row for the case you want (Thursday), then the column for the variable you want (Crates landed), and read the cell where they meet."
+    "explanation": "Find the row for the case you want (Thursday), then the column for the variable you want (Crates landed), and read the cell where they meet.",
+    "hints": [
+      {
+        "level": 1,
+        "text": "Two things fix a value: which case, and which variable."
+      },
+      {
+        "level": 2,
+        "text": "Thursday tells you the row; crates landed tells you the column."
+      }
+    ],
+    "solutionSteps": [
+      "Find the row for the case: Thursday.",
+      "Find the column for the variable: crates landed.",
+      "Read the cell where they meet."
+    ]
   },
   {
     "id": "q.r1-variables",
@@ -1991,7 +2006,7 @@
     "difficulty": 1,
     "misconceptionIds": [],
     "estimatedSeconds": 60,
-    "accessibilityDescription": "A multiple choice question about variables.",
+    "accessibilityDescription": "A multiple-choice question about whether a column holding the same harbour name on every row is a useful variable. Choose one option.",
     "interaction": "multiple-choice",
     "prompt": "The ledger records the harbour name, which is the same on every row. Is harbour name a useful variable in this ledger?",
     "choices": [
@@ -2010,7 +2025,22 @@
         "ch.novary"
       ]
     },
-    "explanation": "A variable has to vary. A column with the same value on every row cannot explain any difference between cases."
+    "explanation": "A variable has to vary. A column with the same value on every row cannot explain any difference between cases.",
+    "hints": [
+      {
+        "level": 1,
+        "text": "Ask whether the column's values ever differ between rows."
+      },
+      {
+        "level": 2,
+        "text": "If every row says the same thing, what difference could it ever explain?"
+      }
+    ],
+    "solutionSteps": [
+      "Look down the column: every row reads the same.",
+      "A value shared by every case cannot distinguish any of them.",
+      "So it is not a useful variable here."
+    ]
   },
   {
     "id": "q.r1-cases",
@@ -2022,7 +2052,7 @@
     "difficulty": 1,
     "misconceptionIds": [],
     "estimatedSeconds": 60,
-    "accessibilityDescription": "A numeric input question about data, cases and observations.",
+    "accessibilityDescription": "A word problem: a ledger with one row per day covering 7 days, with 3 columns. Enter the number of cases as a number.",
     "interaction": "numeric-input",
     "prompt": "A ledger has one row per day and covers a 7-day week, with 3 columns. How many CASES does it contain?",
     "answer": {
@@ -2031,7 +2061,22 @@
       "tolerance": 0,
       "unit": "cases"
     },
-    "explanation": "The case is a day, and there are 7 days, so 7 cases. The 3 columns are variables, not cases."
+    "explanation": "The case is a day, and there are 7 days, so 7 cases. The 3 columns are variables, not cases.",
+    "hints": [
+      {
+        "level": 1,
+        "text": "Ask what one row stands for — that is the case."
+      },
+      {
+        "level": 2,
+        "text": "One row per day over 7 days."
+      }
+    ],
+    "solutionSteps": [
+      "One row stands for one day.",
+      "The week has 7 days, so 7 rows.",
+      "That is 7 cases; the 3 columns are variables."
+    ]
   },
   {
     "id": "q.r1-variable-kinds",
@@ -2043,7 +2088,7 @@
     "difficulty": 1,
     "misconceptionIds": [],
     "estimatedSeconds": 60,
-    "accessibilityDescription": "A multiple choice question about categorical and numerical variables.",
+    "accessibilityDescription": "A multiple-choice question asking which of three variables is numerical. Choose one option.",
     "interaction": "multiple-choice",
     "prompt": "Which of these is a NUMERICAL variable?",
     "choices": [
@@ -2066,7 +2111,22 @@
         "ch.crates"
       ]
     },
-    "explanation": "Crates landed is a quantity you could total or average, so it is numerical. Weather and home port sort cases into groups, so they are categorical."
+    "explanation": "Crates landed is a quantity you could total or average, so it is numerical. Weather and home port sort cases into groups, so they are categorical.",
+    "hints": [
+      {
+        "level": 1,
+        "text": "Ask of each one: would adding two of these values mean anything?"
+      },
+      {
+        "level": 2,
+        "text": "Two catches add to a bigger catch. Two weathers add to nothing."
+      }
+    ],
+    "solutionSteps": [
+      "Try adding two values of each variable.",
+      "Crates landed totals meaningfully; weather and home port do not.",
+      "So crates landed is the numerical one."
+    ]
   },
   {
     "id": "q.r1-counting-independent",
@@ -5279,5 +5339,1059 @@
       }
     ],
     "explanation": "Along to 2, then up to 1. The first number of the pair always moves you along the bottom axis."
+  },
+  {
+    "id": "q.r1-tables-independent",
+    "topicId": "t.r1-tables",
+    "objectiveId": "obj.r1-tables",
+    "skillIds": [
+      "skill.r1-tables"
+    ],
+    "difficulty": 2,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A five-row ledger with columns for boats out, crates landed and hours at sea. The week's ledger reads: Monday 3 boats, 12 crates, 7 hours; Tuesday 5 boats, 20 crates, 9 hours; Wednesday 2 boats, 6 crates, 4 hours; Thursday 4 boats, 18 crates, 8 hours; Friday 6 boats, 27 crates, 11 hours. Enter Tuesday's crate count as a number.",
+    "interaction": "numeric-input",
+    "prompt": "Using the week's ledger — Monday 3 boats, 12 crates, 7 hours; Tuesday 5 boats, 20 crates, 9 hours; Wednesday 2 boats, 6 crates, 4 hours — how many CRATES were landed on Tuesday?",
+    "answer": {
+      "kind": "numeric",
+      "value": 20,
+      "tolerance": 0,
+      "unit": "crates"
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Find the Tuesday row first, then look across to the crates column."
+      },
+      {
+        "level": 2,
+        "text": "Tuesday's row reads 5 boats, 20 crates, 9 hours."
+      }
+    ],
+    "explanation": "Tuesday is the second row, and the crates column is the second value in it: 20 crates. Finding the row first and the column second keeps the two from getting mixed up.",
+    "solutionSteps": [
+      "Find the row for the case you want: Tuesday.",
+      "Find the column for the variable you want: crates landed.",
+      "Read where they meet: 20."
+    ]
+  },
+  {
+    "id": "q.r1-tables-misconception",
+    "topicId": "t.r1-tables",
+    "objectiveId": "obj.r1-tables",
+    "skillIds": [
+      "skill.r1-tables"
+    ],
+    "difficulty": 3,
+    "misconceptionIds": [
+      "mc.wrong-column-read"
+    ],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A five-row ledger with columns for boats out, crates landed and hours at sea. The week's ledger reads: Monday 3 boats, 12 crates, 7 hours; Tuesday 5 boats, 20 crates, 9 hours; Wednesday 2 boats, 6 crates, 4 hours; Thursday 4 boats, 18 crates, 8 hours; Friday 6 boats, 27 crates, 11 hours. Enter Thursday's hours at sea as a number.",
+    "interaction": "numeric-input",
+    "prompt": "Using the same ledger — Wednesday 2 boats, 6 crates, 4 hours; Thursday 4 boats, 18 crates, 8 hours; Friday 6 boats, 27 crates, 11 hours — how many HOURS AT SEA does Thursday record?",
+    "parameters": {
+      "mc.wrong-column-read": {
+        "wrongValue": 4
+      }
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": 8,
+      "tolerance": 0,
+      "unit": "hours"
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Check the column header before reading the number — boats, crates and hours all sit on the same row."
+      },
+      {
+        "level": 2,
+        "text": "Thursday's row is 4 boats, 18 crates, 8 hours. The question asks for hours."
+      }
+    ],
+    "explanation": "Thursday's row holds three values: 4 boats, 18 crates, 8 hours. The question asks for hours at sea, so the answer is 8. Reading the first number instead gives 4, which is a boat count and answers a different question entirely."
+  },
+  {
+    "id": "q.r1-tables-application",
+    "topicId": "t.r1-tables",
+    "objectiveId": "obj.r1-tables",
+    "skillIds": [
+      "skill.r1-tables"
+    ],
+    "difficulty": 3,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A five-row ledger with columns for boats out, crates landed and hours at sea. The week's ledger reads: Monday 3 boats, 12 crates, 7 hours; Tuesday 5 boats, 20 crates, 9 hours; Wednesday 2 boats, 6 crates, 4 hours; Thursday 4 boats, 18 crates, 8 hours; Friday 6 boats, 27 crates, 11 hours. Choose the day with the largest crate count.",
+    "interaction": "multiple-choice",
+    "prompt": "Across the whole week — Monday 12 crates, Tuesday 20, Wednesday 6, Thursday 18, Friday 27 — which day landed the most crates?",
+    "choices": [
+      {
+        "id": "ch.fri",
+        "text": "Friday"
+      },
+      {
+        "id": "ch.tue",
+        "text": "Tuesday"
+      },
+      {
+        "id": "ch.thu",
+        "text": "Thursday"
+      },
+      {
+        "id": "ch.mon",
+        "text": "Monday"
+      }
+    ],
+    "answer": {
+      "kind": "choice",
+      "correctChoiceIds": [
+        "ch.fri"
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Compare down a single column rather than across a row."
+      },
+      {
+        "level": 2,
+        "text": "The crate counts are 12, 20, 6, 18 and 27."
+      }
+    ],
+    "explanation": "Reading down the crates column gives 12, 20, 6, 18 and 27, so Friday landed the most. Comparing values means staying inside one column: the numbers in a row measure different things and cannot be ranked against each other."
+  },
+  {
+    "id": "q.r1-tables-teachback",
+    "topicId": "t.r1-tables",
+    "objectiveId": "obj.r1-tables",
+    "skillIds": [
+      "skill.r1-tables"
+    ],
+    "difficulty": 2,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A written-explanation question. Type your answer in the text box; it must contain the words 'row' and 'column'.",
+    "interaction": "short-explanation",
+    "prompt": "A new clerk reads a ledger by counting cells from the top left until the numbers run out. Explain the reliable way to find a value instead. Use the words 'row' and 'column'.",
+    "answer": {
+      "kind": "text",
+      "requiredKeywords": [
+        "row",
+        "column"
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Say what you look for first and what you look for second."
+      },
+      {
+        "level": 2,
+        "text": "Say what the headers are for."
+      }
+    ],
+    "explanation": "Find the row for the case you want, then the column for the variable you want, and read the cell where they meet. The headers name what each column holds, which is what makes the second step possible at all."
+  },
+  {
+    "id": "q.r1-tables-mastery",
+    "topicId": "t.r1-tables",
+    "objectiveId": "obj.r1-tables",
+    "skillIds": [
+      "skill.r1-tables"
+    ],
+    "difficulty": 3,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A matching question. Match each described value to the day and column it comes from in the week's ledger. The week's ledger reads: Monday 3 boats, 12 crates, 7 hours; Tuesday 5 boats, 20 crates, 9 hours; Wednesday 2 boats, 6 crates, 4 hours; Thursday 4 boats, 18 crates, 8 hours; Friday 6 boats, 27 crates, 11 hours.",
+    "interaction": "matching",
+    "prompt": "Match each value from the week's ledger to what it records.",
+    "items": [
+      {
+        "id": "it.27",
+        "text": "27"
+      },
+      {
+        "id": "it.2",
+        "text": "2"
+      },
+      {
+        "id": "it.9",
+        "text": "9"
+      },
+      {
+        "id": "it.18",
+        "text": "18"
+      }
+    ],
+    "rightItems": [
+      {
+        "id": "rt.fri-crates",
+        "text": "Friday's crates landed"
+      },
+      {
+        "id": "rt.wed-boats",
+        "text": "Wednesday's boats out"
+      },
+      {
+        "id": "rt.tue-hours",
+        "text": "Tuesday's hours at sea"
+      },
+      {
+        "id": "rt.thu-crates",
+        "text": "Thursday's crates landed"
+      }
+    ],
+    "answer": {
+      "kind": "matching",
+      "pairs": [
+        {
+          "left": "it.27",
+          "right": "rt.fri-crates"
+        },
+        {
+          "left": "it.2",
+          "right": "rt.wed-boats"
+        },
+        {
+          "left": "it.9",
+          "right": "rt.tue-hours"
+        },
+        {
+          "left": "it.18",
+          "right": "rt.thu-crates"
+        }
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Work from the value back to its row and column, checking both before you commit."
+      },
+      {
+        "level": 2,
+        "text": "Only one day landed 27 crates, and only one day sent out 2 boats."
+      }
+    ],
+    "explanation": "Every value in a table is fixed by two things at once — which row it is in and which column. 27 is Friday's crate count; 2 is Wednesday's boat count; 9 is Tuesday's hours; 18 is Thursday's crates. Naming only one of the two never identifies a value."
+  },
+  {
+    "id": "q.remed-row-then-column",
+    "topicId": "t.r1-tables",
+    "objectiveId": "obj.r1-tables",
+    "skillIds": [
+      "skill.r1-tables"
+    ],
+    "difficulty": 1,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A three-row ledger: Monday 3 boats and 12 crates; Tuesday 5 boats and 20 crates; Wednesday 2 boats and 6 crates. Enter Monday's boat count as a number.",
+    "interaction": "numeric-input",
+    "prompt": "A short ledger reads: Monday 3 boats, 12 crates; Tuesday 5 boats, 20 crates; Wednesday 2 boats, 6 crates. How many BOATS went out on Monday?",
+    "answer": {
+      "kind": "numeric",
+      "value": 3,
+      "tolerance": 0,
+      "unit": "boats"
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Row first: Monday. Then the column the question names: boats."
+      }
+    ],
+    "explanation": "Monday's row is 3 boats, 12 crates. The question asks for boats, so the answer is 3. Say the row and the column out loud before reading the number."
+  },
+  {
+    "id": "q.r1-variables-independent",
+    "topicId": "t.r1-variables",
+    "objectiveId": "obj.r1-variables",
+    "skillIds": [
+      "skill.r1-variables"
+    ],
+    "difficulty": 2,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A multiple-selection question listing four ledger columns. Select every column that is a useful variable.",
+    "interaction": "multiple-selection",
+    "prompt": "A ledger has these four columns. Select EVERY one that is a useful variable for comparing the days.",
+    "choices": [
+      {
+        "id": "ch.crates",
+        "text": "Crates landed — 12, 20, 6, 18, 27"
+      },
+      {
+        "id": "ch.harbour",
+        "text": "Harbour name — Kirkwall on every row"
+      },
+      {
+        "id": "ch.weather",
+        "text": "Weather — calm, rough, calm, choppy, calm"
+      },
+      {
+        "id": "ch.year",
+        "text": "Year — 1887 on every row"
+      }
+    ],
+    "answer": {
+      "kind": "choice",
+      "correctChoiceIds": [
+        "ch.crates",
+        "ch.weather"
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Look down each column and ask whether the values ever change."
+      },
+      {
+        "level": 2,
+        "text": "Two of these columns hold the same value on every single row."
+      }
+    ],
+    "explanation": "Crates landed and weather both change from day to day, so either could explain a difference between the days. Harbour name and year are the same on every row: they are true of the whole ledger, not facts that distinguish one case from another."
+  },
+  {
+    "id": "q.r1-variables-misconception",
+    "topicId": "t.r1-variables",
+    "objectiveId": "obj.r1-variables",
+    "skillIds": [
+      "skill.r1-variables"
+    ],
+    "difficulty": 3,
+    "misconceptionIds": [
+      "mc.constant-counted-as-variable"
+    ],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A word problem: a ledger with four columns, one of which holds the same value on every row. Enter how many are useful variables.",
+    "interaction": "numeric-input",
+    "prompt": "A ledger has four columns: crates landed, boats out, weather, and harbour name — and the harbour name reads Kirkwall on every row. How many of the four columns are useful VARIABLES?",
+    "parameters": {
+      "mc.constant-counted-as-variable": {
+        "wrongValue": 4
+      }
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": 3,
+      "tolerance": 0,
+      "unit": "variables"
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "A column only counts if its values differ between rows."
+      },
+      {
+        "level": 2,
+        "text": "Three of the four columns change from day to day; one never does."
+      }
+    ],
+    "explanation": "Crates landed, boats out and weather all change between days, so three columns are useful variables. Harbour name is Kirkwall on every row — it has a header and a column, but it varies not at all, so it can never explain a difference between the days. Counting all four treats a header as proof of a variable.",
+    "solutionSteps": [
+      "Check each column for whether its values differ between rows.",
+      "Crates landed, boats out and weather all vary.",
+      "Harbour name does not, so 3 columns are useful variables."
+    ]
+  },
+  {
+    "id": "q.r1-variables-application",
+    "topicId": "t.r1-variables",
+    "objectiveId": "obj.r1-variables",
+    "skillIds": [
+      "skill.r1-variables"
+    ],
+    "difficulty": 3,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A multiple-choice question about which extra column would help explain differing catches. Choose one option.",
+    "interaction": "multiple-choice",
+    "prompt": "The harbourmaster wants to know why some days land more crates than others. Which extra column would help most?",
+    "choices": [
+      {
+        "id": "ch.hours",
+        "text": "Hours at sea — different on every day"
+      },
+      {
+        "id": "ch.harbour2",
+        "text": "Harbour name — the same on every day"
+      },
+      {
+        "id": "ch.title",
+        "text": "The ledger's title, written once at the top"
+      }
+    ],
+    "answer": {
+      "kind": "choice",
+      "correctChoiceIds": [
+        "ch.hours"
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "To explain a difference between days, you need something that itself differs between days."
+      },
+      {
+        "level": 2,
+        "text": "Only one of these takes a different value on different days."
+      }
+    ],
+    "explanation": "Hours at sea changes from day to day, so it can line up with the days that landed more and the days that landed fewer. A column that is identical everywhere, or a title written once, cannot explain any difference because it has no differences of its own."
+  },
+  {
+    "id": "q.r1-variables-teachback",
+    "topicId": "t.r1-variables",
+    "objectiveId": "obj.r1-variables",
+    "skillIds": [
+      "skill.r1-variables"
+    ],
+    "difficulty": 2,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A written-explanation question. Type your answer in the text box; it must contain the words 'vary' and 'every'.",
+    "interaction": "short-explanation",
+    "prompt": "Explain why a column holding the same value on every row is not a useful variable. Use the words 'vary' and 'every'.",
+    "answer": {
+      "kind": "text",
+      "requiredKeywords": [
+        "vary",
+        "every"
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Say what the word 'variable' is promising."
+      },
+      {
+        "level": 2,
+        "text": "Say what such a column could and could not tell you about the differences between cases."
+      }
+    ],
+    "explanation": "A variable has to vary. If a column reads the same on every row it describes the whole dataset rather than distinguishing its cases, so it can never explain why one case differs from another."
+  },
+  {
+    "id": "q.r1-variables-mastery",
+    "topicId": "t.r1-variables",
+    "objectiveId": "obj.r1-variables",
+    "skillIds": [
+      "skill.r1-variables"
+    ],
+    "difficulty": 3,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A multiple-choice question about a survey where every respondent gave the same answer. Choose one option.",
+    "interaction": "multiple-choice",
+    "prompt": "A survey asks 200 dockworkers their job title, and all 200 answer 'dockworker'. What can that column tell you about differences between the workers?",
+    "choices": [
+      {
+        "id": "ch.nothing",
+        "text": "Nothing — it holds one value, so it cannot separate them at all"
+      },
+      {
+        "id": "ch.all",
+        "text": "That being a dockworker causes whatever the survey found"
+      },
+      {
+        "id": "ch.strong",
+        "text": "That job title is the strongest variable in the survey, since everyone agreed"
+      }
+    ],
+    "answer": {
+      "kind": "choice",
+      "correctChoiceIds": [
+        "ch.nothing"
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Ask what you could compare using that column."
+      },
+      {
+        "level": 2,
+        "text": "Everyone shares the value, so no two workers differ on it."
+      }
+    ],
+    "explanation": "Every worker holds the same value, so the column separates nobody from anybody. Agreement is not strength here — a column with no variation carries no information about differences, however many rows it has."
+  },
+  {
+    "id": "q.remed-a-variable-must-vary",
+    "topicId": "t.r1-variables",
+    "objectiveId": "obj.r1-variables",
+    "skillIds": [
+      "skill.r1-variables"
+    ],
+    "difficulty": 1,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A multiple-choice question about a column reading the same value on every row. Choose one option.",
+    "interaction": "multiple-choice",
+    "prompt": "A ledger column reads 'Kirkwall' on all seven rows. Is it a useful variable for comparing those seven days?",
+    "choices": [
+      {
+        "id": "ch.no",
+        "text": "No — it never changes, so it cannot explain any difference"
+      },
+      {
+        "id": "ch.yes",
+        "text": "Yes — it has a header, so it is a variable"
+      }
+    ],
+    "answer": {
+      "kind": "choice",
+      "correctChoiceIds": [
+        "ch.no"
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Ask whether the values differ between rows."
+      }
+    ],
+    "explanation": "It never varies, so it cannot explain any difference between the days. Having a header makes a column; having different values makes a variable."
+  },
+  {
+    "id": "q.r1-cases-independent",
+    "topicId": "t.r1-cases",
+    "objectiveId": "obj.r1-cases",
+    "skillIds": [
+      "skill.r1-cases"
+    ],
+    "difficulty": 2,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A word problem: a ledger with one row per boat, 12 boats and 4 columns. Enter the number of observations.",
+    "interaction": "numeric-input",
+    "prompt": "A ledger has one row per boat, covering 12 boats, with 4 columns. How many OBSERVATIONS does it hold?",
+    "answer": {
+      "kind": "numeric",
+      "value": 48,
+      "tolerance": 0,
+      "unit": "observations"
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "An observation is one recorded value — one cell of the table."
+      },
+      {
+        "level": 2,
+        "text": "Every one of the 12 rows holds 4 values."
+      }
+    ],
+    "explanation": "Each of the 12 boats has 4 values recorded, so there are 12 x 4 = 48 observations. The 12 is the number of cases; the 48 is the number of values.",
+    "solutionSteps": [
+      "Each row holds 4 recorded values.",
+      "There are 12 rows.",
+      "12 x 4 = 48 observations."
+    ]
+  },
+  {
+    "id": "q.r1-cases-misconception",
+    "topicId": "t.r1-cases",
+    "objectiveId": "obj.r1-cases",
+    "skillIds": [
+      "skill.r1-cases"
+    ],
+    "difficulty": 3,
+    "misconceptionIds": [
+      "mc.cases-counted-as-observations"
+    ],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A word problem: a ledger with one row per boat, 12 boats and 4 columns. Enter the number of cases.",
+    "interaction": "numeric-input",
+    "prompt": "The same ledger has one row per boat, covering 12 boats, with 4 columns. How many CASES does it hold?",
+    "parameters": {
+      "mc.cases-counted-as-observations": {
+        "wrongValue": 48
+      }
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": 12,
+      "tolerance": 0,
+      "unit": "cases"
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Ask what one row represents — that is the case."
+      },
+      {
+        "level": 2,
+        "text": "One row per boat, and there are 12 boats."
+      }
+    ],
+    "explanation": "One row is one boat, so there are 12 cases. Answering 48 counts the recorded values instead: that is the number of observations. Cases are what you measured; observations are the measurements.",
+    "solutionSteps": [
+      "Ask what one row stands for: one boat.",
+      "There are 12 boats, so 12 rows.",
+      "That gives 12 cases."
+    ]
+  },
+  {
+    "id": "q.r1-cases-application",
+    "topicId": "t.r1-cases",
+    "objectiveId": "obj.r1-cases",
+    "skillIds": [
+      "skill.r1-cases"
+    ],
+    "difficulty": 3,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A multiple-choice question about what one row represents in a ledger with one row per delivery. Choose one option.",
+    "interaction": "multiple-choice",
+    "prompt": "A ledger has one row for every delivery made, and some boats made several deliveries in the week. What is the case in this dataset?",
+    "choices": [
+      {
+        "id": "ch.delivery",
+        "text": "A delivery"
+      },
+      {
+        "id": "ch.boat",
+        "text": "A boat"
+      },
+      {
+        "id": "ch.week",
+        "text": "The week"
+      }
+    ],
+    "answer": {
+      "kind": "choice",
+      "correctChoiceIds": [
+        "ch.delivery"
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Ask what one row stands for, not what the data is about in general."
+      },
+      {
+        "level": 2,
+        "text": "A boat with three deliveries takes up three rows, so a row is not a boat."
+      }
+    ],
+    "explanation": "One row is one delivery, so the case is a delivery. A boat that delivered three times appears on three rows, which is exactly why the case is not the boat — and why counting rows would overcount the boats."
+  },
+  {
+    "id": "q.r1-cases-teachback",
+    "topicId": "t.r1-cases",
+    "objectiveId": "obj.r1-cases",
+    "skillIds": [
+      "skill.r1-cases"
+    ],
+    "difficulty": 2,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A written-explanation question. Type your answer in the text box; it must contain the words 'row' and 'value'.",
+    "interaction": "short-explanation",
+    "prompt": "Explain the difference between a case and an observation, and how to tell how many of each a table holds. Use the words 'row' and 'value'.",
+    "answer": {
+      "kind": "text",
+      "requiredKeywords": [
+        "row",
+        "value"
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Say what one row of the table stands for."
+      },
+      {
+        "level": 2,
+        "text": "Say what a single cell of the table stands for."
+      }
+    ],
+    "explanation": "A case is what one row represents — the thing you measured. An observation is one recorded value, a single cell. So the number of cases is the number of rows, and the number of observations is the rows multiplied by the columns."
+  },
+  {
+    "id": "q.r1-cases-mastery",
+    "topicId": "t.r1-cases",
+    "objectiveId": "obj.r1-cases",
+    "skillIds": [
+      "skill.r1-cases"
+    ],
+    "difficulty": 3,
+    "misconceptionIds": [
+      "mc.cases-counted-as-observations"
+    ],
+    "estimatedSeconds": 150,
+    "accessibilityDescription": "A three-step calculation about a ledger with 9 rows and 5 columns. Each step asks for a number; enter it and submit before the next step appears.",
+    "interaction": "step-by-step-calculation",
+    "prompt": "A ledger has one row per crew and covers 9 crews, recording 5 things about each. Work through what it holds.",
+    "answer": {
+      "kind": "steps",
+      "steps": [
+        {
+          "id": "st.cases",
+          "prompt": "What does one row stand for here, counted up: how many CASES are there?",
+          "value": 9,
+          "tolerance": 0,
+          "unit": "cases",
+          "hints": [
+            "One row per crew, and there are 9 crews."
+          ],
+          "explanation": "One row is one crew, so there are 9 cases.",
+          "misconceptionValues": [
+            {
+              "value": 45,
+              "misconceptionId": "mc.cases-counted-as-observations"
+            }
+          ]
+        },
+        {
+          "id": "st.variables",
+          "prompt": "How many VARIABLES are recorded?",
+          "value": 5,
+          "tolerance": 0,
+          "unit": "variables",
+          "hints": [
+            "Five things are recorded about each crew, one per column."
+          ],
+          "explanation": "Five things are recorded about each crew, so 5 columns and 5 variables."
+        },
+        {
+          "id": "st.observations",
+          "prompt": "How many OBSERVATIONS does the ledger hold altogether?",
+          "value": 45,
+          "tolerance": 0,
+          "unit": "observations",
+          "hints": [
+            "Every one of the 9 rows holds 5 values.",
+            "9 x 5."
+          ],
+          "explanation": "9 rows of 5 values each is 45 observations."
+        }
+      ]
+    },
+    "explanation": "9 cases, 5 variables and 45 observations. The three numbers describe different things: what was measured, what was recorded about it, and how many values that comes to."
+  },
+  {
+    "id": "q.remed-one-row-one-case",
+    "topicId": "t.r1-cases",
+    "objectiveId": "obj.r1-cases",
+    "skillIds": [
+      "skill.r1-cases"
+    ],
+    "difficulty": 1,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A word problem: a ledger with one row per day, covering 5 days and 3 columns. Enter the number of cases.",
+    "interaction": "numeric-input",
+    "prompt": "A ledger has one row per day, covering 5 days, with 3 columns. How many CASES is that?",
+    "answer": {
+      "kind": "numeric",
+      "value": 5,
+      "tolerance": 0,
+      "unit": "cases"
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Count the rows, not the cells."
+      }
+    ],
+    "explanation": "One row per day and 5 days gives 5 cases. The 15 values inside are the observations — a different count answering a different question."
+  },
+  {
+    "id": "q.r1-variable-kinds-independent",
+    "topicId": "t.r1-variable-kinds",
+    "objectiveId": "obj.r1-variable-kinds",
+    "skillIds": [
+      "skill.r1-variable-kinds"
+    ],
+    "difficulty": 2,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A multiple-selection question listing four variables. Select every one that is categorical.",
+    "interaction": "multiple-selection",
+    "prompt": "Select EVERY variable below that is categorical.",
+    "choices": [
+      {
+        "id": "ch.weather3",
+        "text": "Weather (calm, choppy, rough)"
+      },
+      {
+        "id": "ch.hours3",
+        "text": "Hours at sea (7, 9, 4...)"
+      },
+      {
+        "id": "ch.port3",
+        "text": "Home port (Kirkwall, Stromness...)"
+      },
+      {
+        "id": "ch.crates3",
+        "text": "Crates landed (12, 20, 6...)"
+      }
+    ],
+    "answer": {
+      "kind": "choice",
+      "correctChoiceIds": [
+        "ch.weather3",
+        "ch.port3"
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Ask of each one: would adding two of these values mean anything?"
+      },
+      {
+        "level": 2,
+        "text": "Adding two weathers or two port names is meaningless; adding two crate counts is not."
+      }
+    ],
+    "explanation": "Weather and home port sort cases into groups, and adding two of their values would mean nothing, so both are categorical. Hours at sea and crates landed are quantities you could total or average, so both are numerical."
+  },
+  {
+    "id": "q.r1-variable-kinds-misconception",
+    "topicId": "t.r1-variable-kinds",
+    "objectiveId": "obj.r1-variable-kinds",
+    "skillIds": [
+      "skill.r1-variable-kinds"
+    ],
+    "difficulty": 3,
+    "misconceptionIds": [
+      "mc.digits-mean-numerical"
+    ],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A drag-and-drop question. Sort four variables into two zones: categorical and numerical. Items can be moved with the keyboard.",
+    "interaction": "drag-and-drop",
+    "prompt": "Sort these four ledger columns by what kind of variable each one is.",
+    "items": [
+      {
+        "id": "it.boat-no",
+        "text": "Boat number (3, 7, 11...)"
+      },
+      {
+        "id": "it.crates4",
+        "text": "Crates landed (12, 20, 6...)"
+      },
+      {
+        "id": "it.weather4",
+        "text": "Weather (calm, rough...)"
+      },
+      {
+        "id": "it.hours4",
+        "text": "Hours at sea (7, 9, 4...)"
+      }
+    ],
+    "dropZones": [
+      {
+        "id": "z.categorical",
+        "label": "Categorical",
+        "description": "Values that name a group."
+      },
+      {
+        "id": "z.numerical",
+        "label": "Numerical",
+        "description": "Values that measure an amount."
+      }
+    ],
+    "answer": {
+      "kind": "placement",
+      "zones": [
+        {
+          "zoneId": "z.categorical",
+          "itemIds": [
+            "it.boat-no",
+            "it.weather4"
+          ]
+        },
+        {
+          "zoneId": "z.numerical",
+          "itemIds": [
+            "it.crates4",
+            "it.hours4"
+          ]
+        }
+      ],
+      "orderMatters": false,
+      "misconceptionPlacements": [
+        {
+          "itemId": "it.boat-no",
+          "zoneId": "z.numerical",
+          "misconceptionId": "mc.digits-mean-numerical"
+        }
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Digits are not the test. Ask instead whether adding two values would mean anything."
+      },
+      {
+        "level": 2,
+        "text": "Adding boat 3 and boat 7 gives 10, which is not a boat and not an amount — the digits are just names."
+      }
+    ],
+    "explanation": "Crates landed and hours at sea are quantities: totalling them is meaningful. Weather names a group, with no digits to mislead anyone. Boat number is the trap — it is written with digits, but boat 7 is not 'more' than boat 3 and adding them gives nothing, so it is categorical too."
+  },
+  {
+    "id": "q.r1-variable-kinds-application",
+    "topicId": "t.r1-variable-kinds",
+    "objectiveId": "obj.r1-variable-kinds",
+    "skillIds": [
+      "skill.r1-variable-kinds"
+    ],
+    "difficulty": 3,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A multiple-choice question about whether averaging postcodes is meaningful. Choose one option.",
+    "interaction": "multiple-choice",
+    "prompt": "A clerk reports that the average postcode of the harbour's suppliers is 34,712. What is wrong with that?",
+    "choices": [
+      {
+        "id": "ch.meaningless",
+        "text": "Postcodes are labels, so their average is a number with no meaning"
+      },
+      {
+        "id": "ch.rounding",
+        "text": "Nothing is wrong, but the average should be rounded"
+      },
+      {
+        "id": "ch.median",
+        "text": "Nothing is wrong, but the median would have been better"
+      }
+    ],
+    "answer": {
+      "kind": "choice",
+      "correctChoiceIds": [
+        "ch.meaningless"
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Ask whether adding two postcodes together would mean anything."
+      },
+      {
+        "level": 2,
+        "text": "The arithmetic runs perfectly well — the question is whether its answer refers to anything."
+      }
+    ],
+    "explanation": "A postcode names a place; it does not measure an amount. Adding two of them produces a number that identifies nothing, so averaging them does too. The calculator will happily give an answer — deciding whether that answer means anything is your job, not its."
+  },
+  {
+    "id": "q.r1-variable-kinds-teachback",
+    "topicId": "t.r1-variable-kinds",
+    "objectiveId": "obj.r1-variable-kinds",
+    "skillIds": [
+      "skill.r1-variable-kinds"
+    ],
+    "difficulty": 2,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A written-explanation question. Type your answer in the text box; it must contain the words 'digits' and 'adding'.",
+    "interaction": "short-explanation",
+    "prompt": "Explain the test for telling a numerical variable from a categorical one, and why boat number fails it. Use the words 'digits' and 'adding'.",
+    "answer": {
+      "kind": "text",
+      "requiredKeywords": [
+        "digits",
+        "adding"
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "The test is a question you ask about the values, not about how they look."
+      },
+      {
+        "level": 2,
+        "text": "Say what happens when you try it on boat numbers."
+      }
+    ],
+    "explanation": "The test is whether adding two values would mean anything. Crates landed passes: two catches combine into a bigger catch. Boat number fails: boat 3 and boat 7 add to 10, which is not an amount of anything. Being written in digits is not the test."
+  },
+  {
+    "id": "q.r1-variable-kinds-mastery",
+    "topicId": "t.r1-variable-kinds",
+    "objectiveId": "obj.r1-variable-kinds",
+    "skillIds": [
+      "skill.r1-variable-kinds"
+    ],
+    "difficulty": 3,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A multiple-choice question about which summary suits a categorical variable. Choose one option.",
+    "interaction": "multiple-choice",
+    "prompt": "A ledger records each boat's home port. Which summary of that column is meaningful?",
+    "choices": [
+      {
+        "id": "ch.count",
+        "text": "How many boats come from each port"
+      },
+      {
+        "id": "ch.mean",
+        "text": "The average home port"
+      },
+      {
+        "id": "ch.range",
+        "text": "The range of the home ports"
+      }
+    ],
+    "answer": {
+      "kind": "choice",
+      "correctChoiceIds": [
+        "ch.count"
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Averages and ranges need values you can add or subtract."
+      },
+      {
+        "level": 2,
+        "text": "What can you do with labels? You can count how many fall in each group."
+      }
+    ],
+    "explanation": "Home port is categorical, so counting how many boats fall into each group is the summary available to you. An average or a range would need values that can be added or subtracted, and port names cannot be. Which summaries you may use is decided by the kind of variable, not by preference."
+  },
+  {
+    "id": "q.remed-categorical-vs-numerical",
+    "topicId": "t.r1-variable-kinds",
+    "objectiveId": "obj.r1-variable-kinds",
+    "skillIds": [
+      "skill.r1-variable-kinds"
+    ],
+    "difficulty": 1,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A multiple-choice question about whether boat number is categorical or numerical. Choose one option.",
+    "interaction": "multiple-choice",
+    "prompt": "Boat numbers in the ledger read 3, 7 and 11. Is boat number a categorical or a numerical variable?",
+    "choices": [
+      {
+        "id": "ch.cat",
+        "text": "Categorical — the digits are names, and adding them means nothing"
+      },
+      {
+        "id": "ch.numeric",
+        "text": "Numerical — the values are written as numbers"
+      }
+    ],
+    "answer": {
+      "kind": "choice",
+      "correctChoiceIds": [
+        "ch.cat"
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Try adding boat 3 and boat 7 and ask what the answer would be."
+      }
+    ],
+    "explanation": "Boat 3 plus boat 7 is not boat 10 and is not an amount of anything, so boat number is categorical despite its digits. The test is what adding would mean, never how the value is written."
   }
 ]

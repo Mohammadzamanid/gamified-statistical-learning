@@ -13,8 +13,11 @@ import {
   setControlValue
 } from "../../src/core/curriculum/demonstration";
 import { DemonstrationSchema, type Demonstration } from "../../src/shared/schemas";
+import type { z } from "zod";
 
-function demo(overrides: Partial<Demonstration> = {}): Demonstration {
+type DemonstrationInput = z.input<typeof DemonstrationSchema>;
+
+function demo(overrides: Partial<DemonstrationInput> = {}): Demonstration {
   return DemonstrationSchema.parse({
     id: "dem.test",
     title: "Test",
@@ -36,6 +39,27 @@ function demo(overrides: Partial<Demonstration> = {}): Demonstration {
       revealNote: "It goes up."
     },
     observation: "It moved.",
+    ...overrides
+  });
+}
+
+/** A 3-row, 2-column ledger used by the table-formula checks. */
+function tableDemo(overrides: Partial<DemonstrationInput> = {}): Demonstration {
+  return demo({
+    formula: "table-cell",
+    controls: [
+      { id: "ctl.row", label: "Day", min: 1, max: 3, step: 1, initial: 1, valueLabels: ["Mon", "Tue", "Wed"] },
+      { id: "ctl.col", label: "Column", min: 1, max: 2, step: 1, initial: 1, valueLabels: ["Crates", "Boats"] }
+    ],
+    table: {
+      rowLabels: ["Mon", "Tue", "Wed"],
+      columnLabels: ["Crates", "Boats"],
+      cells: [
+        [4, 2],
+        [9, 7],
+        [6, 3]
+      ]
+    },
     ...overrides
   });
 }
@@ -69,6 +93,28 @@ describe("demonstration arithmetic", () => {
     expect(demonstrationReadout(d, [3])).toBe(-3);
   });
 
+  it("reads a cell where a row meets a column", () => {
+    // The data-structure lessons index a table rather than computing over it.
+    // Rows and columns are 1-based, matching the labels the learner reads.
+    const d = tableDemo();
+    expect(demonstrationReadout(d, [1, 1])).toBe(4);
+    expect(demonstrationReadout(d, [2, 2])).toBe(7);
+    expect(demonstrationReadout(d, [3, 1])).toBe(6);
+  });
+
+  it("totals a column", () => {
+    const d = tableDemo({
+      formula: "column-total",
+      controls: [{ id: "ctl.col", label: "Column", min: 1, max: 2, step: 1, initial: 1, valueLabels: ["Crates", "Boats"] }]
+    });
+    expect(demonstrationReadout(d, [1])).toBe(4 + 9 + 6);
+    expect(demonstrationReadout(d, [2])).toBe(2 + 7 + 3);
+  });
+
+  it("refuses a cell that is off the grid", () => {
+    expect(() => demonstrationReadout(tableDemo(), [9, 1])).toThrow(/no cell at row 9/);
+  });
+
   it("refuses the wrong number of values instead of computing with undefined", () => {
     expect(() => demonstrationReadout(demo(), [4])).toThrow(/needs 2 value/);
     expect(() => demonstrationReadout(demo(), [4, 2, 1])).toThrow(/needs 2 value/);
@@ -91,7 +137,7 @@ describe("control values", () => {
   });
 
   it("snaps to the control's step so keyboard and pointer agree", () => {
-    const control = { id: "ctl.a", label: "A", min: 0, max: 1, step: 0.25, initial: 0.5 };
+    const control = { id: "ctl.a", label: "A", min: 0, max: 1, step: 0.25, initial: 0.5, valueLabels: [] };
     expect(clampToControl(control, 0.3)).toBe(0.25);
     expect(clampToControl(control, 0.4)).toBe(0.5);
   });
@@ -122,6 +168,15 @@ describe("what the learner is told", () => {
     expect(spoken).toContain("First: 4");
     expect(spoken).toContain("Second: 2");
     expect(spoken).toContain("Total: 6");
+  });
+
+  it("names a labelled control's setting instead of its index", () => {
+    // A learner picks "Tuesday", not "2" — and the spoken text must say the same
+    // word the panel shows, or the two descriptions drift apart.
+    const spoken = describeDemonstration(tableDemo(), [2, 1]);
+    expect(spoken).toContain("Day: Tue");
+    expect(spoken).not.toContain("Day: 2");
+    expect(spoken).toContain("Column: Crates");
   });
 
   it("describes the state actually on screen, not the initial one", () => {
@@ -162,6 +217,51 @@ describe("the schema refuses demonstrations that could not work", () => {
         }
       })
     ).toThrow(/not one of the options/);
+  });
+
+  it("rejects a table formula with no table", () => {
+    expect(() => demo({ formula: "table-cell" })).toThrow(/requires a table/);
+  });
+
+  it("rejects a table on a formula that computes rather than indexes", () => {
+    expect(() => tableDemo({ formula: "sum" })).toThrow(/does not read a table/);
+  });
+
+  it("rejects a selector whose range does not match the table", () => {
+    expect(() =>
+      tableDemo({
+        controls: [
+          { id: "ctl.row", label: "Day", min: 1, max: 9, step: 1, initial: 1 },
+          { id: "ctl.col", label: "Column", min: 1, max: 2, step: 1, initial: 1 }
+        ]
+      })
+    ).toThrow(/must run 1\.\.3/);
+  });
+
+  it("rejects a label list that does not match its control's range", () => {
+    expect(() =>
+      demo({
+        controls: [
+          { id: "ctl.a", label: "First", min: 0, max: 10, step: 1, initial: 4, valueLabels: ["one", "two"] },
+          { id: "ctl.b", label: "Second", min: 1, max: 10, step: 1, initial: 2 }
+        ]
+      })
+    ).toThrow(/labelled control must run 1\.\.2/);
+  });
+
+  it("rejects a table whose cells and labels disagree", () => {
+    expect(() =>
+      tableDemo({
+        table: {
+          rowLabels: ["Mon", "Tue", "Wed"],
+          columnLabels: ["Crates", "Boats"],
+          cells: [
+            [4, 2],
+            [9, 7]
+          ]
+        }
+      })
+    ).toThrow(/2 rows of cells but 3 row labels/);
   });
 
   it("rejects an initial value outside its own control's range", () => {
