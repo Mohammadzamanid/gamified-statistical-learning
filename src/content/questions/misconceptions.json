@@ -142,5 +142,21 @@
     "detector": "known-wrong-answer",
     "detectorParams": {},
     "remediationId": "rem.scale-both-together"
+  },
+  {
+    "id": "mc.negative-magnitude",
+    "title": "Negatives ordered by their digits",
+    "description": "The learner compares negative numbers by the digit after the minus sign, so -12 is judged larger than -7 because 12 is larger than 7.",
+    "detector": "known-wrong-answer",
+    "detectorParams": {},
+    "remediationId": "rem.below-zero"
+  },
+  {
+    "id": "mc.tick-counted-not-scaled",
+    "title": "Ticks counted instead of the scale being read",
+    "description": "On a line whose labelled marks are more than one unit apart, the learner counts marks as if each were worth one, landing at a fraction of the intended value.",
+    "detector": "point-geometry",
+    "detectorParams": {},
+    "remediationId": "rem.read-the-scale"
   }
 ]

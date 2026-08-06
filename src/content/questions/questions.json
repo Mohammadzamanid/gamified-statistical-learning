@@ -1797,9 +1797,9 @@
     "difficulty": 1,
     "misconceptionIds": [],
     "estimatedSeconds": 60,
-    "accessibilityDescription": "A multiple choice question about negative numbers.",
+    "accessibilityDescription": "A multiple-choice question comparing the temperatures -5 degrees and -2 degrees. Choose the colder one.",
     "interaction": "multiple-choice",
-    "prompt": "Which temperature is COLDER?",
+    "prompt": "The deck log records two dawn readings. Which temperature is COLDER?",
     "choices": [
       {
         "id": "ch.neg5",
@@ -1816,7 +1816,21 @@
         "ch.neg5"
       ]
     },
-    "explanation": "-5 is further below zero than -2, so -5 degrees is colder. With negatives, a bigger digit after the minus sign means a smaller number."
+    "explanation": "-5 is further below zero than -2, so -5 degrees is colder. With negatives, a bigger digit after the minus sign means a smaller number.",
+    "hints": [
+      {
+        "level": 1,
+        "text": "Picture both readings on a line with zero in the middle."
+      },
+      {
+        "level": 2,
+        "text": "The one further below zero is the colder."
+      }
+    ],
+    "solutionSteps": [
+      "-5 sits five steps below zero; -2 sits two.",
+      "Further below zero means colder, so -5 degrees is colder."
+    ]
   },
   {
     "id": "q.r1-number-lines",
@@ -1828,9 +1842,9 @@
     "difficulty": 1,
     "misconceptionIds": [],
     "estimatedSeconds": 60,
-    "accessibilityDescription": "A point placement question about number lines.",
+    "accessibilityDescription": "A number line from -5 to 5 with marks every unit, labelled at -5, 0 and 5. Place the marker at -2. The marker can be moved with the arrow keys.",
     "interaction": "point-placement",
-    "prompt": "Place the marker on -2 on this number line.",
+    "prompt": "This harbour rule runs from -5 to 5. Place the marker on -2.",
     "pointField": {
       "kind": "number-line",
       "xMin": -5,
@@ -1849,7 +1863,21 @@
       "x": -2,
       "toleranceX": 0
     },
-    "explanation": "-2 sits two steps to the left of zero."
+    "explanation": "-2 sits two steps to the left of zero, on the negative side of the rule.",
+    "hints": [
+      {
+        "level": 1,
+        "text": "-2 lies below zero, so move to the left of the labelled 0."
+      },
+      {
+        "level": 2,
+        "text": "Two steps left of zero."
+      }
+    ],
+    "solutionSteps": [
+      "Find the labelled 0 in the middle of the line.",
+      "Step twice to the left to reach -2."
+    ]
   },
   {
     "id": "q.r1-coordinates",
@@ -1863,9 +1891,9 @@
       "mc.axes-swapped"
     ],
     "estimatedSeconds": 60,
-    "accessibilityDescription": "A point placement question about coordinates.",
+    "accessibilityDescription": "A grid with an along axis 0 to 5 and an up axis 0 to 5. Plot the point 3 along and 2 up. The point can be moved with the arrow keys.",
     "interaction": "point-placement",
-    "prompt": "Plot the point at 3 along and 2 up.",
+    "prompt": "A crate is logged as 3 along the quay and 2 up the rack. Plot its position.",
     "pointField": {
       "kind": "coordinate-plane",
       "xMin": 0,
@@ -1902,7 +1930,21 @@
       "toleranceY": 0,
       "swappedAxesMisconceptionId": "mc.axes-swapped"
     },
-    "explanation": "Go along to 3 first, then up to 2. Plotting (2, 3) instead swaps the axes."
+    "explanation": "Go along the bottom axis to 3 first, then up the side axis to 2. Plotting (2, 3) instead swaps the axes.",
+    "hints": [
+      {
+        "level": 1,
+        "text": "Along the corridor first, then up the stairs."
+      },
+      {
+        "level": 2,
+        "text": "Along the bottom axis to 3, then up the side axis to 2."
+      }
+    ],
+    "solutionSteps": [
+      "Move along the bottom axis to 3.",
+      "From there move up the side axis to 2."
+    ]
   },
   {
     "id": "q.r1-tables",
@@ -4369,5 +4411,873 @@
       }
     ],
     "explanation": "Doubling the crates doubles the cost: 9 coins becomes 18. Each crate still costs 3 coins, which is what 'at the same rate' means."
+  },
+  {
+    "id": "q.r1-negatives-independent",
+    "topicId": "t.r1-negatives",
+    "objectiveId": "obj.r1-negatives",
+    "skillIds": [
+      "skill.r1-negatives"
+    ],
+    "difficulty": 2,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "An ordering question with four temperature readings. Arrange them from coldest to warmest.",
+    "interaction": "ordering",
+    "prompt": "Four dawn readings are taken from the ship's thermometer. Put them in order from coldest to warmest.",
+    "items": [
+      {
+        "id": "it.n7",
+        "text": "-7 degrees"
+      },
+      {
+        "id": "it.n3",
+        "text": "-3 degrees"
+      },
+      {
+        "id": "it.0",
+        "text": "0 degrees"
+      },
+      {
+        "id": "it.2",
+        "text": "2 degrees"
+      }
+    ],
+    "answer": {
+      "kind": "ordering",
+      "correctOrder": [
+        "it.n7",
+        "it.n3",
+        "it.0",
+        "it.2"
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Zero is not the coldest reading here — anything below it is colder."
+      },
+      {
+        "level": 2,
+        "text": "Among the negatives, the one furthest below zero is the coldest."
+      }
+    ],
+    "explanation": "Below zero, further from zero means colder: -7 is colder than -3. Then comes 0, then the only reading above freezing, 2 degrees."
+  },
+  {
+    "id": "q.r1-negatives-misconception",
+    "topicId": "t.r1-negatives",
+    "objectiveId": "obj.r1-negatives",
+    "skillIds": [
+      "skill.r1-negatives"
+    ],
+    "difficulty": 3,
+    "misconceptionIds": [
+      "mc.negative-magnitude"
+    ],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A multiple-choice question comparing the readings -12 and -7. Choose the larger number.",
+    "interaction": "multiple-choice",
+    "prompt": "Two hold temperatures are logged: -12 degrees and -7 degrees. Which is the LARGER number?",
+    "choices": [
+      {
+        "id": "ch.n7",
+        "text": "-7, because it is closer to zero"
+      },
+      {
+        "id": "ch.n12",
+        "text": "-12, because 12 is bigger than 7",
+        "misconceptionId": "mc.negative-magnitude"
+      },
+      {
+        "id": "ch.neither",
+        "text": "Neither — negative numbers cannot be compared"
+      }
+    ],
+    "answer": {
+      "kind": "choice",
+      "correctChoiceIds": [
+        "ch.n7"
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Picture both on a line with zero in the middle. Which one sits further to the left?"
+      },
+      {
+        "level": 2,
+        "text": "-12 is twelve steps below zero and -7 is only seven. The one that has fallen less far is the larger."
+      }
+    ],
+    "explanation": "The minus sign says which side of zero a number is on, not how big it is. -12 has fallen twelve steps below zero and -7 only seven, so -7 is the larger of the two — and the warmer hold."
+  },
+  {
+    "id": "q.r1-negatives-application",
+    "topicId": "t.r1-negatives",
+    "objectiveId": "obj.r1-negatives",
+    "skillIds": [
+      "skill.r1-negatives"
+    ],
+    "difficulty": 3,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A word problem: the hold floor sits 4 metres below the waterline and the deck 3 metres above it. Enter the distance between them.",
+    "interaction": "numeric-input",
+    "prompt": "The hold floor sits 4 metres below the waterline, and the deck rails stand 3 metres above it. How many metres is it from hold floor to deck rails?",
+    "answer": {
+      "kind": "numeric",
+      "value": 7,
+      "tolerance": 0,
+      "unit": "metres"
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "The waterline is zero. Count the distance up to it first, then onwards."
+      },
+      {
+        "level": 2,
+        "text": "4 metres up to the waterline, then 3 more to the rails."
+      }
+    ],
+    "explanation": "The waterline is zero, so the floor is at -4 and the rails at 3. Climbing from the floor takes 4 metres to reach the waterline and 3 more to reach the rails: 7 metres in all. Distances across zero add together.",
+    "solutionSteps": [
+      "Floor to waterline: 4 metres.",
+      "Waterline to rails: 3 metres.",
+      "Altogether: 7 metres."
+    ]
+  },
+  {
+    "id": "q.r1-negatives-teachback",
+    "topicId": "t.r1-negatives",
+    "objectiveId": "obj.r1-negatives",
+    "skillIds": [
+      "skill.r1-negatives"
+    ],
+    "difficulty": 2,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A written-explanation question. Type your answer in the text box; it must contain the words 'zero' and 'further'.",
+    "interaction": "short-explanation",
+    "prompt": "A crewmate insists -9 must be bigger than -4 because nine is bigger than four. Explain why that is wrong. Use the words 'zero' and 'further'.",
+    "answer": {
+      "kind": "text",
+      "requiredKeywords": [
+        "zero",
+        "further"
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Say what the minus sign is telling you about where the number sits."
+      },
+      {
+        "level": 2,
+        "text": "Say what happens to a number's size as it moves further from zero on the left."
+      }
+    ],
+    "explanation": "The minus sign says the number lies below zero. The further below zero it goes, the smaller it gets, so -9 is smaller than -4. Digits measure distance from zero; the sign says which way."
+  },
+  {
+    "id": "q.r1-negatives-mastery",
+    "topicId": "t.r1-negatives",
+    "objectiveId": "obj.r1-negatives",
+    "skillIds": [
+      "skill.r1-negatives"
+    ],
+    "difficulty": 3,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A word problem: a thermometer reads -3 degrees at dawn and rises 8 degrees by noon. Enter the noon reading.",
+    "interaction": "numeric-input",
+    "prompt": "The deck thermometer reads -3 degrees at dawn and climbs 8 degrees by noon. What does it read at noon?",
+    "answer": {
+      "kind": "numeric",
+      "value": 5,
+      "tolerance": 0,
+      "unit": "degrees"
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Count up from -3, passing through zero on the way."
+      },
+      {
+        "level": 2,
+        "text": "It takes 3 degrees to reach zero, which leaves 5 more to climb."
+      }
+    ],
+    "explanation": "Climbing 3 degrees brings the reading to zero, and the remaining 5 degrees carry it to 5. Rising past zero is the same steady count in the same direction.",
+    "solutionSteps": [
+      "From -3, climbing 3 degrees reaches 0.",
+      "That leaves 5 of the 8 degrees.",
+      "0 climbing 5 gives 5 degrees."
+    ]
+  },
+  {
+    "id": "q.remed-below-zero",
+    "topicId": "t.r1-negatives",
+    "objectiveId": "obj.r1-negatives",
+    "skillIds": [
+      "skill.r1-negatives"
+    ],
+    "difficulty": 1,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A multiple-choice question comparing the readings -6 and -2. Choose the colder one.",
+    "interaction": "multiple-choice",
+    "prompt": "Two thermometers read -6 degrees and -2 degrees. Which reading is colder?",
+    "choices": [
+      {
+        "id": "ch.n6",
+        "text": "-6 degrees"
+      },
+      {
+        "id": "ch.n2",
+        "text": "-2 degrees"
+      }
+    ],
+    "answer": {
+      "kind": "choice",
+      "correctChoiceIds": [
+        "ch.n6"
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Which one has fallen further below zero?"
+      }
+    ],
+    "explanation": "-6 has fallen six steps below zero and -2 only two, so -6 is the colder and the smaller number."
+  },
+  {
+    "id": "q.r1-number-lines-independent",
+    "topicId": "t.r1-number-lines",
+    "objectiveId": "obj.r1-number-lines",
+    "skillIds": [
+      "skill.r1-number-lines"
+    ],
+    "difficulty": 2,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "An ordering question with four positions on a number line. Arrange them from left to right.",
+    "interaction": "ordering",
+    "prompt": "Four buoys are marked on the harbour rule. Put them in the order you would meet them walking from left to right.",
+    "items": [
+      {
+        "id": "it.n8",
+        "text": "The buoy at -8"
+      },
+      {
+        "id": "it.n1",
+        "text": "The buoy at -1"
+      },
+      {
+        "id": "it.3",
+        "text": "The buoy at 3"
+      },
+      {
+        "id": "it.9",
+        "text": "The buoy at 9"
+      }
+    ],
+    "answer": {
+      "kind": "ordering",
+      "correctOrder": [
+        "it.n8",
+        "it.n1",
+        "it.3",
+        "it.9"
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "On a number line, left is always smaller and right is always larger."
+      },
+      {
+        "level": 2,
+        "text": "Start at the buoy furthest below zero and work upwards."
+      }
+    ],
+    "explanation": "A number line puts every value in one place, in order: -8, then -1, then 3, then 9. Walking right is walking towards larger numbers, whatever their sign."
+  },
+  {
+    "id": "q.r1-number-lines-misconception",
+    "topicId": "t.r1-number-lines",
+    "objectiveId": "obj.r1-number-lines",
+    "skillIds": [
+      "skill.r1-number-lines"
+    ],
+    "difficulty": 3,
+    "misconceptionIds": [
+      "mc.tick-counted-not-scaled"
+    ],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A number line from 0 to 20 with marks every 2 units, labelled at 0, 10 and 20. Place the marker at the value 14. The marker can be moved with the arrow keys.",
+    "interaction": "point-placement",
+    "prompt": "This depth rule is marked every 2 metres. Place the marker at 14 metres.",
+    "pointField": {
+      "kind": "number-line",
+      "xMin": 0,
+      "xMax": 20,
+      "xStep": 1,
+      "xLabel": "Metres",
+      "xTicks": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14,
+        16,
+        18,
+        20
+      ],
+      "accessibleDescription": "A rule from 0 to 20 metres with a mark every 2 metres, labelled at 0, 10 and 20."
+    },
+    "answer": {
+      "kind": "point",
+      "x": 14,
+      "toleranceX": 0,
+      "toleranceY": 0,
+      "misconceptionPoints": [
+        {
+          "x": 7,
+          "misconceptionId": "mc.tick-counted-not-scaled"
+        }
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Each mark is worth 2 metres, not 1 — check the labels before counting."
+      },
+      {
+        "level": 2,
+        "text": "The mark at 10 is labelled. From there, two more marks takes you to 14."
+      }
+    ],
+    "explanation": "The marks are 2 metres apart, so counting them as single metres lands you at 7 — half the depth you wanted. Read the labelled values first, then count in the size the marks actually are.",
+    "solutionSteps": [
+      "The labels show 0, 10 and 20, and there are five marks between each pair.",
+      "So one mark is worth 2 metres.",
+      "From the labelled 10, two marks further along is 14."
+    ]
+  },
+  {
+    "id": "q.r1-number-lines-application",
+    "topicId": "t.r1-number-lines",
+    "objectiveId": "obj.r1-number-lines",
+    "skillIds": [
+      "skill.r1-number-lines"
+    ],
+    "difficulty": 3,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A word problem: a sounding rule marked every 4 metres, with the sounding on the third mark below zero. Enter the depth as a number.",
+    "interaction": "numeric-input",
+    "prompt": "A sounding rule runs below the waterline with a mark every 4 metres. The lead line comes to rest on the third mark below zero. What depth does that show? (Below the waterline counts as negative.)",
+    "answer": {
+      "kind": "numeric",
+      "value": -12,
+      "tolerance": 0,
+      "unit": "metres"
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Work out what one mark is worth, then how many of them you have gone."
+      },
+      {
+        "level": 2,
+        "text": "Three marks at 4 metres each, and all of them below zero."
+      }
+    ],
+    "explanation": "Three marks of 4 metres each is 12 metres, and they run below the waterline, so the depth reads -12 metres. The size comes from the scale; the sign comes from the direction.",
+    "solutionSteps": [
+      "Each mark is worth 4 metres.",
+      "Three marks is 12 metres.",
+      "They lie below zero, so the reading is -12."
+    ]
+  },
+  {
+    "id": "q.r1-number-lines-teachback",
+    "topicId": "t.r1-number-lines",
+    "objectiveId": "obj.r1-number-lines",
+    "skillIds": [
+      "skill.r1-number-lines"
+    ],
+    "difficulty": 2,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A written-explanation question. Type your answer in the text box; it must contain the words 'order' and 'spaced'.",
+    "interaction": "short-explanation",
+    "prompt": "Explain what a number line shows that a plain list of numbers does not. Use the words 'order' and 'spaced'.",
+    "answer": {
+      "kind": "text",
+      "requiredKeywords": [
+        "order",
+        "spaced"
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Say what the positions along the line tell you."
+      },
+      {
+        "level": 2,
+        "text": "Say why the gaps between the marks have to be even."
+      }
+    ],
+    "explanation": "A number line puts values in order along a line and keeps them evenly spaced, so the distance between two marks means something: you can see at a glance not just which value is larger but by how much."
+  },
+  {
+    "id": "q.r1-number-lines-mastery",
+    "topicId": "t.r1-number-lines",
+    "objectiveId": "obj.r1-number-lines",
+    "skillIds": [
+      "skill.r1-number-lines"
+    ],
+    "difficulty": 3,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A number line from -20 to 20 with marks every unit, labelled at -20, -10, 0, 10 and 20. Place the marker at -15. The marker can be moved with the arrow keys.",
+    "interaction": "point-placement",
+    "prompt": "Place the marker at -15 on this rule.",
+    "pointField": {
+      "kind": "number-line",
+      "xMin": -20,
+      "xMax": 20,
+      "xStep": 1,
+      "xLabel": "Value",
+      "xTicks": [
+        -20,
+        -10,
+        0,
+        10,
+        20
+      ],
+      "accessibleDescription": "A rule from -20 to 20 with labels at -20, -10, 0, 10 and 20."
+    },
+    "answer": {
+      "kind": "point",
+      "x": -15,
+      "toleranceX": 0,
+      "toleranceY": 0
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "-15 lies below zero, so work leftwards from 0."
+      },
+      {
+        "level": 2,
+        "text": "It sits exactly halfway between the labelled -10 and -20."
+      }
+    ],
+    "explanation": "-15 is fifteen steps to the left of zero, which puts it exactly midway between the -10 and -20 labels."
+  },
+  {
+    "id": "q.remed-read-the-scale",
+    "topicId": "t.r1-number-lines",
+    "objectiveId": "obj.r1-number-lines",
+    "skillIds": [
+      "skill.r1-number-lines"
+    ],
+    "difficulty": 1,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A number line from 0 to 10 with marks every unit, labelled at 0, 5 and 10. Place the marker at 6. The marker can be moved with the arrow keys.",
+    "interaction": "point-placement",
+    "prompt": "This rule is marked every 1 metre and labelled at 0, 5 and 10. Place the marker at 6 metres.",
+    "pointField": {
+      "kind": "number-line",
+      "xMin": 0,
+      "xMax": 10,
+      "xStep": 1,
+      "xLabel": "Metres",
+      "xTicks": [
+        0,
+        5,
+        10
+      ],
+      "accessibleDescription": "A rule from 0 to 10 metres, labelled at 0, 5 and 10."
+    },
+    "answer": {
+      "kind": "point",
+      "x": 6,
+      "toleranceX": 0,
+      "toleranceY": 0
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Find the labelled 5 first, then step on by one."
+      }
+    ],
+    "explanation": "Here each mark really is worth 1 metre, so 6 is one step past the labelled 5. Always check what one mark is worth before you start counting."
+  },
+  {
+    "id": "q.r1-coordinates-independent",
+    "topicId": "t.r1-coordinates",
+    "objectiveId": "obj.r1-coordinates",
+    "skillIds": [
+      "skill.r1-coordinates"
+    ],
+    "difficulty": 2,
+    "misconceptionIds": [
+      "mc.axes-swapped"
+    ],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A grid with an along axis 0 to 6 and an up axis 0 to 6. Plot the point 4 along and 1 up. The point can be moved with the arrow keys.",
+    "interaction": "point-placement",
+    "prompt": "A crate is stored 4 berths along the quay and 1 level up the rack. Plot its position.",
+    "pointField": {
+      "kind": "coordinate-plane",
+      "xMin": 0,
+      "xMax": 6,
+      "xStep": 1,
+      "xLabel": "Along",
+      "xTicks": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "yMin": 0,
+      "yMax": 6,
+      "yStep": 1,
+      "yLabel": "Up",
+      "yTicks": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "accessibleDescription": "A grid with an along axis from 0 to 6 and an up axis from 0 to 6."
+    },
+    "answer": {
+      "kind": "point",
+      "x": 4,
+      "y": 1,
+      "toleranceX": 0,
+      "toleranceY": 0,
+      "swappedAxesMisconceptionId": "mc.axes-swapped"
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Move along the bottom axis first, then up the side one."
+      },
+      {
+        "level": 2,
+        "text": "Along to 4, then up to 1."
+      }
+    ],
+    "explanation": "Along the corridor, then up the stairs: 4 along the bottom axis and 1 up the side one. Plotting 1 along and 4 up puts the crate in a different berth entirely.",
+    "solutionSteps": [
+      "Go along the bottom axis to 4.",
+      "From there go up the side axis to 1."
+    ]
+  },
+  {
+    "id": "q.r1-coordinates-misconception",
+    "topicId": "t.r1-coordinates",
+    "objectiveId": "obj.r1-coordinates",
+    "skillIds": [
+      "skill.r1-coordinates"
+    ],
+    "difficulty": 3,
+    "misconceptionIds": [
+      "mc.axes-swapped"
+    ],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A grid with an along axis 0 to 6 and an up axis 0 to 6. Plot the point 1 along and 5 up. The point can be moved with the arrow keys.",
+    "interaction": "point-placement",
+    "prompt": "The harbourmaster's log gives a berth as 1 along and 5 up. Plot it.",
+    "pointField": {
+      "kind": "coordinate-plane",
+      "xMin": 0,
+      "xMax": 6,
+      "xStep": 1,
+      "xLabel": "Along",
+      "xTicks": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "yMin": 0,
+      "yMax": 6,
+      "yStep": 1,
+      "yLabel": "Up",
+      "yTicks": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "accessibleDescription": "A grid with an along axis from 0 to 6 and an up axis from 0 to 6."
+    },
+    "answer": {
+      "kind": "point",
+      "x": 1,
+      "y": 5,
+      "toleranceX": 0,
+      "toleranceY": 0,
+      "swappedAxesMisconceptionId": "mc.axes-swapped"
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "The first number always moves you along the bottom axis, even when it is the smaller of the two."
+      },
+      {
+        "level": 2,
+        "text": "Along to 1 — only one step — then up to 5."
+      }
+    ],
+    "explanation": "The first number belongs to the bottom axis whatever its size, so this berth is only 1 along but 5 up. Reading it as 5 along and 1 up lands on a different berth: the pair is an instruction in a fixed order, not a set of two numbers."
+  },
+  {
+    "id": "q.r1-coordinates-application",
+    "topicId": "t.r1-coordinates",
+    "objectiveId": "obj.r1-coordinates",
+    "skillIds": [
+      "skill.r1-coordinates"
+    ],
+    "difficulty": 3,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A multiple-choice question listing four berths given as coordinate pairs. Choose the one furthest along the quay.",
+    "interaction": "multiple-choice",
+    "prompt": "Four crates are logged at these positions, each written as (along, up). Which one is stored furthest ALONG the quay?",
+    "choices": [
+      {
+        "id": "ch.a",
+        "text": "(2, 7)"
+      },
+      {
+        "id": "ch.b",
+        "text": "(6, 1)"
+      },
+      {
+        "id": "ch.c",
+        "text": "(3, 5)"
+      },
+      {
+        "id": "ch.d",
+        "text": "(1, 9)"
+      }
+    ],
+    "answer": {
+      "kind": "choice",
+      "correctChoiceIds": [
+        "ch.b"
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "'Along' is the first number in each pair — ignore the second one entirely."
+      },
+      {
+        "level": 2,
+        "text": "Compare 2, 6, 3 and 1."
+      }
+    ],
+    "explanation": "Furthest along means the largest first number, so (6, 1) wins. (1, 9) has the largest number of all, but it sits in the second position, which measures height up the rack, not distance along the quay."
+  },
+  {
+    "id": "q.r1-coordinates-teachback",
+    "topicId": "t.r1-coordinates",
+    "objectiveId": "obj.r1-coordinates",
+    "skillIds": [
+      "skill.r1-coordinates"
+    ],
+    "difficulty": 2,
+    "misconceptionIds": [],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A written-explanation question. Type your answer in the text box; it must contain the words 'along' and 'order'.",
+    "interaction": "short-explanation",
+    "prompt": "Explain why (2, 5) and (5, 2) are different places, and how you know which number to use first. Use the words 'along' and 'order'.",
+    "answer": {
+      "kind": "text",
+      "requiredKeywords": [
+        "along",
+        "order"
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "Say what each of the two numbers is measuring."
+      },
+      {
+        "level": 2,
+        "text": "Say what goes wrong if the pair is read the other way round."
+      }
+    ],
+    "explanation": "A coordinate pair is read in a fixed order: the first number moves you along the bottom axis, the second up the side one. Swapping them swaps the two instructions, so (2, 5) and (5, 2) land in different places."
+  },
+  {
+    "id": "q.r1-coordinates-mastery",
+    "topicId": "t.r1-coordinates",
+    "objectiveId": "obj.r1-coordinates",
+    "skillIds": [
+      "skill.r1-coordinates"
+    ],
+    "difficulty": 3,
+    "misconceptionIds": [],
+    "estimatedSeconds": 120,
+    "accessibilityDescription": "A matching question. Match each coordinate pair, written as (along, up), to the berth it describes.",
+    "interaction": "matching",
+    "prompt": "Match each logged position, written as (along, up), to the berth it describes.",
+    "items": [
+      {
+        "id": "it.p1",
+        "text": "(0, 4)"
+      },
+      {
+        "id": "it.p2",
+        "text": "(4, 0)"
+      },
+      {
+        "id": "it.p3",
+        "text": "(3, 3)"
+      },
+      {
+        "id": "it.p4",
+        "text": "(0, 0)"
+      }
+    ],
+    "rightItems": [
+      {
+        "id": "rt.up",
+        "text": "At the start of the quay, four levels up the rack"
+      },
+      {
+        "id": "rt.along",
+        "text": "Four berths along the quay, on the ground"
+      },
+      {
+        "id": "rt.both",
+        "text": "Three berths along and three levels up"
+      },
+      {
+        "id": "rt.origin",
+        "text": "At the corner where both axes start"
+      }
+    ],
+    "answer": {
+      "kind": "matching",
+      "pairs": [
+        {
+          "left": "it.p1",
+          "right": "rt.up"
+        },
+        {
+          "left": "it.p2",
+          "right": "rt.along"
+        },
+        {
+          "left": "it.p3",
+          "right": "rt.both"
+        },
+        {
+          "left": "it.p4",
+          "right": "rt.origin"
+        }
+      ]
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "A zero in the first position means you never move along at all."
+      },
+      {
+        "level": 2,
+        "text": "(0, 4) and (4, 0) use the same two digits and describe opposite berths."
+      }
+    ],
+    "explanation": "(0, 4) means no distance along and four levels up; (4, 0) means four along and nothing up. (3, 3) is the only one where both instructions match, and (0, 0) is the corner where both axes begin."
+  },
+  {
+    "id": "q.remed-axes-order",
+    "topicId": "t.r1-coordinates",
+    "objectiveId": "obj.r1-coordinates",
+    "skillIds": [
+      "skill.r1-coordinates"
+    ],
+    "difficulty": 1,
+    "misconceptionIds": [
+      "mc.axes-swapped"
+    ],
+    "estimatedSeconds": 60,
+    "accessibilityDescription": "A grid with an along axis 0 to 5 and an up axis 0 to 5. Plot the point 2 along and 1 up. The point can be moved with the arrow keys.",
+    "interaction": "point-placement",
+    "prompt": "Plot the berth logged as 2 along and 1 up. Remember: along the corridor first, then up the stairs.",
+    "pointField": {
+      "kind": "coordinate-plane",
+      "xMin": 0,
+      "xMax": 5,
+      "xStep": 1,
+      "xLabel": "Along",
+      "xTicks": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "yMin": 0,
+      "yMax": 5,
+      "yStep": 1,
+      "yLabel": "Up",
+      "yTicks": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "accessibleDescription": "A grid with an along axis from 0 to 5 and an up axis from 0 to 5."
+    },
+    "answer": {
+      "kind": "point",
+      "x": 2,
+      "y": 1,
+      "toleranceX": 0,
+      "toleranceY": 0,
+      "swappedAxesMisconceptionId": "mc.axes-swapped"
+    },
+    "hints": [
+      {
+        "level": 1,
+        "text": "The first number is always the along one."
+      }
+    ],
+    "explanation": "Along to 2, then up to 1. The first number of the pair always moves you along the bottom axis."
   }
 ]

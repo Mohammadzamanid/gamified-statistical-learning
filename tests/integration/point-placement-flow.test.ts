@@ -8,6 +8,7 @@
 import { beforeAll, describe, expect, it } from "vitest";
 import { loadShippedContent } from "../../src/content";
 import { clearDetectors, registerBuiltInDetectors } from "../../src/core/misconceptions/detectors";
+import { buildLibrary, runFeedbackPipeline } from "../../src/core/misconceptions/engine";
 import { submitAnswer } from "../../src/renderer/state/session";
 import { getInteraction, registerDefaultInteractions } from "../../src/core/questions/registry";
 import {
@@ -23,6 +24,7 @@ import { createEmptySave, type SaveFile } from "../../src/shared/schemas";
 import type { RawResponse } from "../../src/core/questions/types";
 
 const content = loadShippedContent();
+const library = buildLibrary(content.misconceptions, content.remediations);
 
 beforeAll(() => {
   clearDetectors();
@@ -50,6 +52,34 @@ function sessionOn(lessonId: string, questionId: string) {
 const pointQuestions = () =>
   [...content.questions.values()].filter((q) => q.interaction === "point-placement");
 
+/**
+ * The lesson a question can be met from.
+ *
+ * Usually the lesson that lists it. Some questions are deliberately reachable
+ * only through a remediation follow-up — the learner meets them after getting
+ * something wrong, never in the ordinary run of a lesson (audit finding F-4).
+ * Those are legitimate, so this resolves them to the lesson whose misconception
+ * routes there. Anything reachable from neither is orphaned content, and the
+ * checks below still fail on it.
+ */
+function hostLessonFor(questionId: string): string | null {
+  const direct = content.curriculum.lessons.find((l) => l.questionIds.includes(questionId));
+  if (direct) return direct.id;
+
+  const remediationIds = new Set(
+    content.remediations.filter((r) => r.followUpQuestionIds.includes(questionId)).map((r) => r.id)
+  );
+  const misconceptionIds = new Set(
+    content.misconceptions.filter((m) => remediationIds.has(m.remediationId)).map((m) => m.id)
+  );
+  if (misconceptionIds.size === 0) return null;
+
+  const host = content.curriculum.lessons.find((l) =>
+    l.questionIds.some((qid) => content.questions.get(qid)?.misconceptionIds.some((m) => misconceptionIds.has(m)))
+  );
+  return host?.id ?? null;
+}
+
 describe("point placement is a live interaction", () => {
   it("is registered as implemented and produces a point response", () => {
     const descriptor = getInteraction("point-placement");
@@ -57,7 +87,7 @@ describe("point placement is a live interaction", () => {
     expect(descriptor?.responseKind).toBe("point");
   });
 
-  it("ships number-line, coordinate-plane and approximate examples, all inside lessons", () => {
+  it("ships number-line, coordinate-plane and approximate examples, all reachable", () => {
     const qs = pointQuestions();
     expect(qs.length).toBeGreaterThanOrEqual(3);
 
@@ -68,9 +98,10 @@ describe("point placement is a live interaction", () => {
     // At least one question asks for an approximate placement rather than an exact one.
     expect(qs.some((q) => q.answer.kind === "point" && q.answer.toleranceX > 0)).toBe(true);
 
-    const inLessons = new Set(content.curriculum.lessons.flatMap((l) => l.questionIds));
     for (const q of qs) {
-      expect(inLessons.has(q.id), `${q.id} must be reachable from a lesson`).toBe(true);
+      // Updated in S2-08: a placement may live in a lesson OR be a remediation
+      // follow-up. Both are reachable; neither is not.
+      expect(hostLessonFor(q.id), `${q.id} is reachable from no lesson and no remediation`).not.toBeNull();
       expect(pointFieldOf(q)!.accessibleDescription.length).toBeGreaterThan(0);
     }
   });
@@ -121,9 +152,16 @@ describe("every shipped target is reachable by keyboard alone", () => {
       const response: RawResponse = isPlane(field)
         ? { kind: "point", x: pos.x, y: pos.y ?? 0 }
         : { kind: "point", x: pos.x };
-      const lesson = content.curriculum.lessons.find((l) => l.questionIds.includes(q.id))!;
-      const result = submitAnswer(content, freshSave(), sessionOn(lesson.id, q.id), response, 5000)!;
-      expect(result.feedback.correct, `${q.id} rejected its keyboard-reachable answer`).toBe(true);
+      // Remediation-only placements are not in any lesson queue, so they are
+      // submitted through the engine directly rather than via a session.
+      const owning = content.curriculum.lessons.find((l) => l.questionIds.includes(q.id));
+      if (owning) {
+        const result = submitAnswer(content, freshSave(), sessionOn(owning.id, q.id), response, 5000)!;
+        expect(result.feedback.correct, `${q.id} rejected its keyboard-reachable answer`).toBe(true);
+      } else {
+        const plan = runFeedbackPipeline(q, response, library, 0);
+        expect(plan.correct, `${q.id} rejected its keyboard-reachable answer`).toBe(true);
+      }
     }
   });
 

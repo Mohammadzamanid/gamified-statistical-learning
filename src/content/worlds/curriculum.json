@@ -1366,7 +1366,7 @@
       "id": "l.r1-negatives",
       "moduleId": "m.r1-position",
       "title": "Negative numbers",
-      "narrativeIntro": "Before the expedition can chart anything, negative numbers must be second nature.",
+      "narrativeIntro": "A sounding of 12 and a mast height of 12 are not the same number, and a log book that cannot tell them apart will run a ship aground. Below zero is where depth, debt and cold all live, and every one of them turns up in data.",
       "objectiveIds": [
         "obj.r1-negatives"
       ],
@@ -1379,18 +1379,96 @@
         }
       ],
       "questionIds": [
-        "q.r1-negatives"
+        "q.r1-negatives",
+        "q.r1-negatives-independent",
+        "q.r1-negatives-misconception",
+        "q.r1-negatives-application",
+        "q.r1-negatives-teachback",
+        "q.r1-negatives-mastery"
       ],
       "prerequisites": [
         "l.r1-division"
       ],
-      "estimatedMinutes": 8
+      "estimatedMinutes": 20,
+      "demonstration": {
+        "id": "dem.r1-negatives",
+        "title": "The sounding line",
+        "experience": "A weighted line is paid out over the side to find the depth. The harbour measures everything from the waterline, so the surface itself counts as zero.",
+        "accessibleDescription": "One control, setting how many metres of sounding line have been paid out below the surface. The readout gives the height of the weight compared with the waterline, in metres — a number below zero, because the weight is below the surface.",
+        "controls": [
+          {
+            "id": "ctl.depth",
+            "label": "Metres of line paid out below the surface",
+            "min": 0,
+            "max": 20,
+            "step": 1,
+            "initial": 5
+          }
+        ],
+        "formula": "negate",
+        "readoutLabel": "Height compared with the waterline",
+        "readoutPrecision": 0,
+        "readoutUnit": "metres",
+        "prediction": {
+          "prompt": "Five metres of line are out, so the weight sits at -5 metres. If you pay out more line, to 8 metres down, what happens to that height reading?",
+          "options": [
+            {
+              "id": "opt.up",
+              "text": "It rises, because 8 is a bigger number than 5"
+            },
+            {
+              "id": "opt.down",
+              "text": "It falls further below zero, to -8"
+            },
+            {
+              "id": "opt.same",
+              "text": "It stays at -5 — only the line moved"
+            }
+          ],
+          "correctOptionId": "opt.down",
+          "revealNote": "The weight went further down, so the height reading went further down too. -8 is smaller than -5, even though 8 is bigger than 5. The digits measure how far from zero; the minus sign says which way."
+        },
+        "observation": "Pay the line all the way out and the reading falls to -20 — the smallest number the rule can show, made of the largest digits on it. Bring the line right in and the reading climbs to 0, the surface itself."
+      },
+      "formalTerm": {
+        "term": "Negative number",
+        "definition": "A negative number is a number below zero. The minus sign in front of it says which side of zero it lies on, not how large it is, so the further a negative number sits from zero the smaller it is: -9 is less than -4. Negatives are how a single scale can record depth as well as height, or loss as well as gain.",
+        "notation": "- a",
+        "symbols": [
+          {
+            "symbol": "-",
+            "meaning": "here it marks the number as below zero — a direction, not the subtraction you met earlier"
+          },
+          {
+            "symbol": "a",
+            "meaning": "how far below zero the number sits — here, the metres of line paid out"
+          }
+        ]
+      },
+      "guidedQuestionIds": [
+        "q.r1-negatives"
+      ],
+      "independentQuestionIds": [
+        "q.r1-negatives-independent"
+      ],
+      "misconceptionQuestionIds": [
+        "q.r1-negatives-misconception"
+      ],
+      "applicationQuestionIds": [
+        "q.r1-negatives-application"
+      ],
+      "teachBackQuestionIds": [
+        "q.r1-negatives-teachback"
+      ],
+      "masteryCheckQuestionIds": [
+        "q.r1-negatives-mastery"
+      ]
     },
     {
       "id": "l.r1-number-lines",
       "moduleId": "m.r1-position",
       "title": "Number lines",
-      "narrativeIntro": "Before the expedition can chart anything, number lines must be second nature.",
+      "narrativeIntro": "Every chart in this expedition is a number line in disguise: the bottom of a bar chart, the scale of a thermometer, the rule a sounding is read against. Learn to place a value on a line and you can see a mean or a spread instead of merely calculating one.",
       "objectiveIds": [
         "obj.r1-number-lines"
       ],
@@ -1403,18 +1481,92 @@
         }
       ],
       "questionIds": [
-        "q.r1-number-lines"
+        "q.r1-number-lines",
+        "q.r1-number-lines-independent",
+        "q.r1-number-lines-misconception",
+        "q.r1-number-lines-application",
+        "q.r1-number-lines-teachback",
+        "q.r1-number-lines-mastery"
       ],
       "prerequisites": [
         "l.r1-negatives"
       ],
-      "estimatedMinutes": 8
+      "estimatedMinutes": 20,
+      "demonstration": {
+        "id": "dem.r1-number-lines",
+        "title": "Two markers on the harbour rule",
+        "experience": "A long rule runs the length of the quay with zero at the harbour gate, positive numbers to the right and negative ones to the left. Two markers slide along it.",
+        "accessibleDescription": "Two controls, one for each marker's position on a rule running from -10 to 10. The readout gives how many steps you take going from the blue marker to the red one; it is negative when red lies to the left of blue.",
+        "controls": [
+          {
+            "id": "ctl.red",
+            "label": "Red marker position",
+            "min": -10,
+            "max": 10,
+            "step": 1,
+            "initial": 6
+          },
+          {
+            "id": "ctl.blue",
+            "label": "Blue marker position",
+            "min": -10,
+            "max": 10,
+            "step": 1,
+            "initial": 2
+          }
+        ],
+        "formula": "difference",
+        "readoutLabel": "Steps from blue to red",
+        "readoutPrecision": 0,
+        "prediction": {
+          "prompt": "Red sits at 6 and blue at 2, so red is 4 steps to the right of blue. If blue is dragged to 8 — past red — what does the readout become?",
+          "options": [
+            {
+              "id": "opt.four",
+              "text": "4 again, because distance has no direction"
+            },
+            {
+              "id": "opt.minus",
+              "text": "-2, because red now lies to the left of blue"
+            },
+            {
+              "id": "opt.fourteen",
+              "text": "14, because the markers are further apart"
+            }
+          ],
+          "correctOptionId": "opt.minus",
+          "revealNote": "The gap is 2 and the sign says which way: red is now to the left, so the readout is -2. A number line does not just say how far apart two values are, it says which side of the other each one is on."
+        },
+        "observation": "Slide both markers up by the same amount and the readout never moves — the line reports the gap, not the positions. Drag one across the other and the sign flips at the moment they cross."
+      },
+      "formalTerm": {
+        "term": "Number line",
+        "definition": "A number line places every value at one position along a line, in order and evenly spaced: smaller to the left, larger to the right, with zero between the negatives and the positives. Because the spacing is even, the distance between two marks is meaningful — twice the gap really does mean twice the difference. Before counting marks, always check what one mark is worth."
+      },
+      "guidedQuestionIds": [
+        "q.r1-number-lines"
+      ],
+      "independentQuestionIds": [
+        "q.r1-number-lines-independent"
+      ],
+      "misconceptionQuestionIds": [
+        "q.r1-number-lines-misconception"
+      ],
+      "applicationQuestionIds": [
+        "q.r1-number-lines-application"
+      ],
+      "teachBackQuestionIds": [
+        "q.r1-number-lines-teachback"
+      ],
+      "masteryCheckQuestionIds": [
+        "q.r1-number-lines-mastery"
+      ]
     },
     {
       "id": "l.r1-coordinates",
       "moduleId": "m.r1-position",
       "title": "Coordinates",
-      "narrativeIntro": "Before the expedition can chart anything, coordinates must be second nature.",
+      "narrativeIntro": "One number fixes a place on a rule; it takes two to fix a place on a quay. Every scatterplot, every map reference and every chart with two axes is built on that pair — and on reading them in the right order.",
       "objectiveIds": [
         "obj.r1-coordinates"
       ],
@@ -1427,12 +1579,109 @@
         }
       ],
       "questionIds": [
-        "q.r1-coordinates"
+        "q.r1-coordinates",
+        "q.r1-coordinates-independent",
+        "q.r1-coordinates-misconception",
+        "q.r1-coordinates-application",
+        "q.r1-coordinates-teachback",
+        "q.r1-coordinates-mastery"
       ],
       "prerequisites": [
         "l.r1-number-lines"
       ],
-      "estimatedMinutes": 8
+      "estimatedMinutes": 22,
+      "demonstration": {
+        "id": "dem.r1-coordinates",
+        "title": "Walking the quay grid",
+        "experience": "The storage yard is laid out as a grid. To reach a crate you walk a number of berths along the quay, then climb a number of levels up the rack — always in that order.",
+        "accessibleDescription": "Two controls: how many berths you walk along the quay, and how many levels you climb up the rack. The readout gives the total number of steps in the walk, which is the two added together.",
+        "controls": [
+          {
+            "id": "ctl.along",
+            "label": "Berths walked along the quay",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "initial": 3
+          },
+          {
+            "id": "ctl.up",
+            "label": "Levels climbed up the rack",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "initial": 2
+          }
+        ],
+        "formula": "sum",
+        "readoutLabel": "Steps in the walk",
+        "readoutPrecision": 0,
+        "prediction": {
+          "prompt": "Walking 3 along then 2 up takes 5 steps. If you instead walk 2 along then 3 up, what happens to the number of steps?",
+          "options": [
+            {
+              "id": "opt.same",
+              "text": "It stays at 5"
+            },
+            {
+              "id": "opt.more",
+              "text": "It rises to 6"
+            },
+            {
+              "id": "opt.join",
+              "text": "It becomes 23"
+            }
+          ],
+          "correctOptionId": "opt.same",
+          "revealNote": "Five steps either way — and yet you end up at two completely different crates. That is precisely why a position needs two numbers kept in order: the total alone cannot tell one berth from the other."
+        },
+        "observation": "Set the walk to 3 along and 2 up, then swap the two controls over. The step count does not budge, but the crate you arrive at has changed. One number can never fix a place on a grid; the pair, in order, always can."
+      },
+      "formalTerm": {
+        "term": "Coordinate pair",
+        "definition": "A coordinate pair fixes a position using two number lines set at right angles. It is read in a fixed order: the first value moves you along the bottom axis, the second up the side axis. Because the order is part of the meaning, swapping the two values names a different place — (2, 5) and (5, 2) are not the same berth.",
+        "notation": "( a , b )",
+        "symbols": [
+          {
+            "symbol": "(",
+            "meaning": "opens the pair, showing that the two values belong together as one position"
+          },
+          {
+            "symbol": "a",
+            "meaning": "the first value: how far to move along the bottom axis — here, berths along the quay"
+          },
+          {
+            "symbol": ",",
+            "meaning": "separates the two values and holds them in their fixed order"
+          },
+          {
+            "symbol": "b",
+            "meaning": "the second value: how far to move up the side axis — here, levels up the rack"
+          },
+          {
+            "symbol": ")",
+            "meaning": "closes the pair"
+          }
+        ]
+      },
+      "guidedQuestionIds": [
+        "q.r1-coordinates"
+      ],
+      "independentQuestionIds": [
+        "q.r1-coordinates-independent"
+      ],
+      "misconceptionQuestionIds": [
+        "q.r1-coordinates-misconception"
+      ],
+      "applicationQuestionIds": [
+        "q.r1-coordinates-application"
+      ],
+      "teachBackQuestionIds": [
+        "q.r1-coordinates-teachback"
+      ],
+      "masteryCheckQuestionIds": [
+        "q.r1-coordinates-mastery"
+      ]
     },
     {
       "id": "l.r1-tables",

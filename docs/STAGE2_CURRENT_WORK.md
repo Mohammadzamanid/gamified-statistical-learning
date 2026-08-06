@@ -6,47 +6,41 @@ Exactly one Stage 2 unit is active at a time. Rewritten at the start and end of 
 
 ## Current unit
 
-**S2-08 — Region 1 lessons and interactions (cycle 2 of 4: Module 2, `m.r1-parts`)**
+**S2-08 — Region 1 lessons and interactions (cycle 3 of 4: Module 3, `m.r1-position`)**
 
-Entered from `934a6f18cb0014bd12b0ea1dcabb2051f06755d3` (remote-verified, clean tree).
+Entered from `ee03ecfc22563ec8e90e1c1ff31be3f2d1897dae` (remote-verified, clean tree).
 
 ## Objective
 
-Bring **Module 2 — Parts of a Whole** (fractions, decimals, percentages, ratios, proportions) up to all **18 structure
-requirements** in `STAGE2_RECONSTRUCTION_SCOPE.md` §5, under the guards cycle 1 established.
+Bring **Module 3 — Position** (negative numbers, number lines, coordinates) up to all **18 structure requirements** in
+`STAGE2_RECONSTRUCTION_SCOPE.md` §5.
 
 ## Result up front
 
-**S2-08 remains Partial.** **10 of the 17** Region 1 topic lessons are now Complete — Modules 1 and 2. **7 remain
-skeletons** and are named in "Remaining work". They are not claimed, not counted, and the skeleton guard still holds
-them to the seed shape S2-07 delivered.
+**S2-08 remains Partial.** **13 of the 17** Region 1 topic lessons are now Complete — Modules 1, 2 and 3. **4 remain
+skeletons**, all in `m.r1-data`, and are named in "Remaining work".
 
 ## Relevant files
 
 | File | Change |
 |---|---|
-| `src/shared/schemas/curriculum.ts` | New `place-value` demonstration formula + its arity |
-| `src/core/curriculum/demonstration.ts` | `place-value` case: tenths and hundredths weighted separately |
-| `src/content/worlds/curriculum.json` | Five lessons fully authored: narrative purpose, demonstration, formal term, six practice roles |
-| `src/content/questions/questions.json` | 72 → **103** questions; the five seed questions upgraded to guided practice |
-| `src/content/questions/misconceptions.json` | 15 → **19** |
-| `src/content/questions/remediations.json` | 14 → **18**, and two existing ones gained the follow-up question they never had |
-| `tests/helpers/complete-lessons.ts` | Five lessons added to the Complete list |
-| `tests/helpers/lesson-playthrough.ts` | **New.** Playthrough mechanics shared by the per-module integration tests |
-| `tests/integration/module2-lessons.test.ts` | **New.** 16 checks driving the module through the real session engine |
-| `tests/integration/module1-lessons.test.ts` | Refitted onto the shared helper; its Complete-list check generalised |
-| `tests/audit/region1-architecture.test.ts` | Skeleton count 12 → 7, **updated deliberately** |
-| `tests/audit/lesson-structure.test.ts` | Guard boundary documented — see Corrections |
-| `tests/unit/demonstration.test.ts` | `place-value` column weighting |
+| `src/content/worlds/curriculum.json` | Three lessons fully authored: narrative purpose, demonstration, formal term, six practice roles |
+| `src/content/questions/questions.json` | 103 → **121** questions; the three seed questions upgraded to guided practice |
+| `src/content/questions/misconceptions.json` | 19 → **21** |
+| `src/content/questions/remediations.json` | 18 → **20**, and `rem.axes-order` gained the follow-up it never had |
+| `tests/helpers/complete-lessons.ts` | Three lessons added to the Complete list |
+| `tests/integration/module3-lessons.test.ts` | **New.** 19 checks, including a keyboard walk to every shipped target |
+| `tests/integration/point-placement-flow.test.ts` | Reachability rule widened **deliberately** — see Corrections |
+| `tests/audit/region1-architecture.test.ts` | Skeleton count 7 → 4, **updated deliberately** |
 
 ## Acceptance criteria
 
 | # | Criterion | Met |
 |---|---|---|
-| 1 | Every Region 1 lesson satisfies all 18 structure requirements | **No — 10 of 17.** Modules 1 and 2 |
-| 2 | Lessons that do claim completeness genuinely satisfy all 18 | Yes — the 24 checks now cover 10 lessons |
+| 1 | Every Region 1 lesson satisfies all 18 structure requirements | **No — 13 of 17.** Modules 1, 2 and 3 |
+| 2 | Lessons that do claim completeness genuinely satisfy all 18 | Yes — the 24 checks now cover 13 lessons |
 | 3 | Demonstrations are interactive, not placeholders | Yes — the audit drives every control and fails an inert one |
-| 4 | Misconception challenges reach a real remediation | Yes — all 6 Module 2 slips driven through the session engine |
+| 4 | Misconception challenges reach a real remediation | Yes — all 3 Module 3 slips driven through the session engine |
 | 5 | Skeleton lessons cannot be mistaken for finished ones | Yes — guard updated, still fails in both directions |
 | 6 | Commit pushed and remote hash verified | Yes |
 
@@ -63,97 +57,91 @@ Measured (Node v22.22.2 / npm 10.9.7):
 |---|---|
 | `npm run typecheck` | Pass |
 | `npm run lint` | Pass — 0 errors, 0 warnings |
-| `npm test` | Pass — **318 tests / 29 files** (was 301 / 28) |
+| `npm test` | Pass — **337 tests / 30 files** (was 318 / 29) |
 | `npm run test:statistics` | Pass — 18 tests / 3 files |
 | `npm run test:content` | Pass — 5 tests / 1 file |
-| `npm run build` | Pass — 462.75 kB (126.18 kB gzip); was 411.48 kB / 114.21 kB |
+| `npm run build` | Pass — 493.11 kB (133.34 kB gzip); was 462.75 kB / 126.18 kB |
 
 `test:a11y` was **not** run and is **not** claimed; it arrives in S2-20.
 
 ## Work completed
 
-1. **Five lessons finished to the 18 requirements.** Fractions, decimals, percentages, ratios and proportions each
-   have a practical narrative purpose, a manipulable harbour demonstration, a prediction and observation, a formal term
-   with every symbol explained, and six questions — one per practice role.
+1. **Three lessons finished to the 18 requirements.** Negative numbers, number lines and coordinates each have a
+   practical narrative purpose, a manipulable harbour demonstration, a prediction and observation, a formal term with
+   every symbol explained, and six questions — one per practice role.
 
-2. **The demonstrations teach the thing the lesson is about, not just its arithmetic.** Fractions holds the numerator
-   still and raises the denominator, so the share visibly shrinks. Ratios shows that adding to both sides changes the
-   mix while multiplying does not. Proportions steps the crate count and watches the cost climb in equal steps from
-   zero. Percentages doubles the catch at a fixed rate and doubles the fee.
+2. **`negate` finally earns its place.** It has existed in the formula enum since cycle 1 without a single use; the
+   sounding-line demonstration is what it was for. Paying out line drives the height reading further below zero, which
+   is the lesson's whole point: digits measure distance from zero, the sign says which way.
 
-3. **One new formula, `place-value`, weighted per column** — a step on the tenths dial has to beat nine steps on the
-   hundredths dial, which is exactly the misconception the decimals lesson targets.
+3. **The number-line demonstration teaches direction, not just distance.** Two markers on a rule with the readout as
+   `red - blue`: slide both together and nothing moves, cross them over and the sign flips.
 
-4. **Four new misconceptions, and two existing ones put back to work.** Bigger-denominator-means-bigger, longer-decimal-
-   means-bigger, a ratio part read as a share of the whole, and scaling by adding instead of multiplying. Percentages
-   and fractions reuse Stage 1's `mc.decimal-vs-percent` and `mc.reversed-fraction` rather than minting duplicates that
-   would double-count one error in every report.
+4. **The coordinates demonstration argues for its own necessity.** The readout is the number of steps walked, so
+   (3, 2) and (2, 3) give the same 5 — and land on different crates. A single number provably cannot fix a place on a
+   grid, which is why the pair and its order exist.
 
-5. **Two remediations that explained but never re-tested now have follow-ups.** `rem.percent-decimal` and
-   `rem.fraction-order` had empty `followUpQuestionIds` since Stage 1 — the learner was told what went wrong and then
-   given nothing to try it on.
+5. **Every shipped position target is walked to by keyboard in a test.** Position is taught almost entirely through
+   `point-placement`, so "the learner can reach the answer" is a claim about a widget. The module test steps to each
+   target with the same operation the arrow keys perform and submits the result through the real engine.
 
-6. **Playthrough mechanics extracted to `tests/helpers/lesson-playthrough.ts`.** Each per-module test now carries only
-   what is genuinely module-specific: its misconceptions and the exact wrong answer that triggers each.
+6. **Two new misconceptions, and Stage 1's `mc.axes-swapped` reused.** Negatives ordered by their digits, and marks
+   counted as if each were worth one unit when the rule is scaled in twos. `rem.axes-order` — which had explained the
+   axis swap since Stage 1 without ever offering a retry — now has a follow-up question.
 
-7. **A cross-form consistency check.** Fractions, decimals, percentages and proportions describe one quantity in four
-   costumes; a test asserts the content agrees with itself about that, and that proportion answers stay inside 0 to 1
-   while percentage answers stay inside 0 to 100.
+7. **Two checks that stop misconception counts inflating.** A merely-wrong placement must not be reported as the named
+   error, and a coordinate misplaced to (2, 4) must not be reported as an axes swap.
 
 ## Corrections made during the unit
 
-- **A stricter notation guard was tried and withdrawn on evidence.** Adding `:` to the operators checked in prose
-  immediately flagged "Count on 5: 8, 9, 10, 11, 12" — a colon ending a clause, not a ratio. A guard that cannot tell
-  punctuation from notation is worse than none, so it was reverted and the boundary documented in the test alongside
-  the same reasoning for `=`. Requirement 10 still forces the ratios and proportions lessons to explain both symbols,
-  because they appear in those lessons' *notation*.
-- **A dead misconception mapping was caught by the S2-05 audit.** `q.r1-proportions-mastery` mapped a step to
-  `mc.additive-scaling` without declaring it on the question, so the engine — which walks `question.misconceptionIds` —
-  would never have surfaced it.
-- **The drag-and-drop mastery question shipped without drop zones** and failed content validation; zones added.
-- **Three stub prompts and explanations were rejected by the audit** and rewritten with real harbour context.
-- **The Module 1 test asserted its lesson list *equalled* the Complete list.** True while one module was done, wrong
-  the moment a second was. Generalised to a subset check rather than patched with a number.
+- **A guessed API was caught by the compiler and the test.** The keyboard walk was first written against
+  `movePoint(field, position, "right")`; the real signature is `(field, position, axis, steps)` and `PointPosition.y`
+  is `number | null`, not `number | undefined`. Six checks failed until it matched reality.
+- **The S2-03 reachability rule was widened deliberately, not deleted.** It required every point-placement question to
+  live in a lesson — true until this cycle added two remediation-only placements, which are legitimate and already
+  recorded as audit finding F-4. It now accepts "in a lesson **or** named as a remediation follow-up" and still fails
+  on anything reachable from neither; a probe confirms that.
+- **Three seed prompts were rejected by the audit as stubs** ("Which temperature is COLDER?") and rewritten with
+  harbour context.
 
 ## Verification that the guards have teeth
 
-Four deliberate probes, all reverted:
+Five deliberate probes, all reverted:
 
 | Probe | Result |
 |---|---|
-| Ratios stops explaining the colon it puts on screen | **1 check fails** |
-| Hundredths dial stops affecting the decimals readout | **1 check fails** |
-| Ratio misconception loses the value that identifies it | **1 check fails** |
-| Percentages uses `%` with no formal term explaining it | **1 check fails** |
+| Sounding-line control made inert | **1 check fails** |
+| Coordinates stops explaining the comma in its pair | **1 check fails** |
+| A placement target moved off the step grid | **2 checks fail** |
+| Tick-scale misconception loses its wrong placement | **1 check fails** |
+| A placement orphaned from every lesson and remediation | **3 checks fail** |
 
 ## Remaining work
 
-**7 Region 1 topic lessons are still skeletons** — one seed question each, no demonstration, no formal term, no
-practice roles:
+**4 Region 1 topic lessons are still skeletons** — one seed question each, no demonstration, no formal term, no
+practice roles, all in module `m.r1-data`:
 
-`l.r1-negatives` · `l.r1-number-lines` · `l.r1-coordinates` (module `m.r1-position`) ·
-`l.r1-tables` · `l.r1-variables` · `l.r1-cases` · `l.r1-variable-kinds` (module `m.r1-data`)
+`l.r1-tables` · `l.r1-variables` · `l.r1-cases` · `l.r1-variable-kinds`
 
-Two more cycles at this granularity. `m.r1-position` will need the `negate` formula, which exists but has never been
-used by content.
+One more cycle finishes S2-08. That module is the least numeric of the four, so its demonstrations will need more
+thought than the arithmetic ones: a table, a variable and a case are structures rather than quantities, and the
+current `DemonstrationFormula` set may not express them without a new member.
 
 Separately, and **not** part of this unit's criteria: scope §4 requires ≥100 validated interactions per Complete
-*topic*. Module 2 has **7–8 authored questions per topic** and no generators. No topic is Complete under §4; that is
+*topic*. Module 3 has **7 authored questions per topic** and no generators. No topic is Complete under §4; that is
 S2-09.
 
 ## Local commit
 
-`2f1ec31dee5d451b28fda8f85398b998d4a60217`
+`pending`
 
 ## Remote verification
 
 ```
-LOCAL_HEAD  = 2f1ec31dee5d451b28fda8f85398b998d4a60217
-REMOTE_HEAD = 2f1ec31dee5d451b28fda8f85398b998d4a60217
-VERIFIED: MATCH
+pending
 ```
 
 ## Next unit
 
-**S2-08 continued — Module 3 (`m.r1-position`): negative numbers, number lines, coordinates.** Not started in this
-cycle, per the one-unit-per-cycle rule.
+**S2-08 continued — Module 4 (`m.r1-data`): reading tables, variables, cases and observations, categorical versus
+numerical.** Not started in this cycle, per the one-unit-per-cycle rule.

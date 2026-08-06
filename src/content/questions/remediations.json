@@ -60,8 +60,8 @@
     "title": "Which number goes on which axis",
     "explanation": "You placed the two numbers the right way round for each other, but on the wrong axes. A coordinate is written (across, up): the FIRST number moves you along the bottom axis, the SECOND moves you up the side axis.",
     "microLesson": "Read (4, 6) as: go across to 4 on the bottom axis, then up to 6 on the side axis. Swapping them lands you at (6, 4), a different place entirely. A useful phrase: along the corridor, then up the stairs.",
-    "followUpQuestionIds": [],
-    "skillIds": ["skill.data-literacy"]
+    "followUpQuestionIds": ["q.remed-axes-order"],
+    "skillIds": ["skill.data-literacy", "skill.r1-coordinates"]
   },
   {
     "id": "rem.categorical-vs-numerical",
@@ -142,5 +142,21 @@
     "microLesson": "If 2 crates cost 6 coins, the rate is 3 coins per crate. For 4 crates, double both: 4 crates cost 12 coins, still 3 coins each. Adding 2 to each instead would give 4 crates for 8 coins, which is 2 coins each — a different price. The check that catches it every time: work out the rate at the end and see whether it matches the rate you started with.",
     "followUpQuestionIds": ["q.remed-scale-both-together"],
     "skillIds": ["skill.r1-proportions"]
+  },
+  {
+    "id": "rem.below-zero",
+    "title": "The minus sign says which way, the digits say how far",
+    "explanation": "A negative number's digits measure its distance from zero; the minus sign says it lies below zero. So the further a negative number is from zero, the SMALLER it is. -12 has fallen twelve steps below zero and -7 only seven, which makes -7 the larger of the two.",
+    "microLesson": "Draw the line and put zero in the middle. Positives run right and negatives run left, and the rule never changes: whatever is further left is smaller. That is why -1 is warmer than -20 on a thermometer, and why a debt of 50 leaves you worse off than a debt of 5. Comparing two negatives is the one place where the bigger-looking digits belong to the smaller number.",
+    "followUpQuestionIds": ["q.remed-below-zero"],
+    "skillIds": ["skill.r1-negatives"]
+  },
+  {
+    "id": "rem.read-the-scale",
+    "title": "Find out what one mark is worth before you count",
+    "explanation": "Marks on a rule are not always worth one unit. Counting them as if they were gives an answer that is a neat fraction of the right one — half of it when the marks are worth 2, a fifth when they are worth 5 — which is why the mistake is easy to miss.",
+    "microLesson": "Two labelled values are all you need. If the rule reads 0 at one label and 10 at the next, and there are five marks between them, then each mark is worth 2. Work that out first, then count in twos rather than ones. A quick sanity check: your answer should sit between the two labels you counted from, not somewhere below both of them.",
+    "followUpQuestionIds": ["q.remed-read-the-scale"],
+    "skillIds": ["skill.r1-number-lines"]
   }
 ]

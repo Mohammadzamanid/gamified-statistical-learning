@@ -82,3 +82,11 @@ Extending the beginner-safety scanner to treat `:` between numbers as notation w
 `=` are both left out of the prose scan and the reasoning is recorded in the test itself. Neither goes unchecked
 overall: requirement 10 still forces any lesson whose **notation** contains them — ratios, proportions — to explain
 them. A narrower guard that is always right beats a broader one that has to be argued with. (S2-08)
+
+**D-017 — Reachable means "from a lesson or from a remediation".**
+The S2-03 point-placement audit required every placement question to appear in some lesson's `questionIds`. That held
+until Module 3 added remediation-only placements — questions a learner meets *because* they got something wrong, never
+in the ordinary run of a lesson. That pattern is deliberate and already recorded as interaction-audit finding F-4, so
+the rule was widened rather than removed: a question is reachable if a lesson lists it **or** a remediation names it as
+a follow-up, and content reachable from neither still fails. Widening a rule to admit a legitimate case is not the same
+as weakening it — the orphan probe still fails three checks. (S2-08)
