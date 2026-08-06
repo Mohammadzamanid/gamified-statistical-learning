@@ -136,12 +136,14 @@ Carried forward, and **not** part of this unit:
 
 ## Local commit
 
-`pending`
+`615e7c4e5debc33d181a78f75cc25e0e8ffd1297`
 
 ## Remote verification
 
 ```
-pending
+LOCAL_HEAD  = 615e7c4e5debc33d181a78f75cc25e0e8ffd1297
+REMOTE_HEAD = 615e7c4e5debc33d181a78f75cc25e0e8ffd1297
+VERIFIED: MATCH
 ```
 
 ## Next unit

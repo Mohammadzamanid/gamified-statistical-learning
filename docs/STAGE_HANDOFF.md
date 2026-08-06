@@ -30,7 +30,7 @@ after Stage 1 was lost because commits were never pushed to a durable remote. Re
 | Default branch | `main` |
 | Pristine Stage 1 import | `7add4bc` — pushed and remote-verified |
 | Baseline docs + CI | `1b0a5dd` — pushed and remote-verified |
-| Last unit completed | **S2-08** — Region 1 lessons and interactions, all 17 topic lessons (4 cycles; see §5) |
+| Last unit completed | **S2-08** — Region 1 lessons and interactions, all 17 topic lessons (`629dd74`, `2f1ec31`, `def8b1d`, `615e7c4`; all remote-verified) |
 | Head of `main` | read it live: `git rev-parse HEAD` vs `git ls-remote origin refs/heads/main` — these must match |
 | Milestone snapshot commit | `d4e250434c465f85e4307a226a9af2cbc9788c17` — the commit the exports were built from |
 | Stage tag | `stage-1-baseline` — **created locally, NOT on GitHub** (unit R-00d, blocked; see §2.1) |
