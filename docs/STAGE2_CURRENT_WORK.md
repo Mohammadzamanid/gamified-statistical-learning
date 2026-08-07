@@ -145,11 +145,15 @@ one not. It is a Region 2 data-literacy question and fixing it means redesigning
 
 ## Local commit
 
-Recorded in the follow-up commit below.
+`10685dd01786f92261cafd1fbd951e60177528c2`
 
 ## Remote verification
 
-Recorded in the follow-up commit below.
+```
+LOCAL_HEAD  = 10685dd01786f92261cafd1fbd951e60177528c2
+REMOTE_HEAD = 10685dd01786f92261cafd1fbd951e60177528c2
+VERIFIED: MATCH
+```
 
 ## Next unit
 
