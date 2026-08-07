@@ -156,3 +156,24 @@ screen differed. It was found by reading a coverage report that claimed 25 exact
 generators emit no clones, not by a failing test; the fix recovered questions in every topic (counting 796 → 855,
 multiplication 688 → 768). The rule that follows: a fingerprint that omits a field the learner can see will silently
 throw away valid content, and silently is the problem. (S2-09)
+
+**D-025 — A misconception goes where its detector can fire, not where its subject fits.**
+`misconceptionIds` is not a topic tag. The engine walks that list, runs each misconception's named detector, and can
+only report one the detector actually recognises — so which questions may declare a misconception is decided by its
+**detector**, not by what it is about. `known-wrong-answer` reaches a learner through a tagged distractor, so it belongs
+on multiple-choice; `point-geometry` is classified from placement geometry by the evaluator, so it belongs on
+point-placement, as a `misconceptionPoints` entry or as `swappedAxesMisconceptionId`. The coordinates recognition family
+declares nothing at all for this reason: `mc.axes-swapped` on one of its choices would read perfectly and never fire.
+An inert declaration is worse than none — it inflates a mapping count while the learner gets a bare "incorrect" — and
+reading the tag back off the question could never catch it, so `tests/audit/content-coverage.test.ts` drives the real
+evaluator and the real classifier with the answer a holder of that misconception would give and requires the engine to
+name it. Four separate ways of getting this wrong were probed; each fails that one check. (S2-09)
+
+**D-026 — A rejection reason that cannot fire is decoration, and the report says which.**
+A generator declaring `invalidReason` for combinations it will not ask about is how §4's raw-versus-valid counts stay
+honest — but a reason no combination can trigger is not a guard, it is a comment that looks like one. The first
+`ratios.ts` reported `invalidCombinations: 0`, which reads like cleanliness and was actually four dead branches: the mix
+grid held no equal-parts mix and the range limits sat above anything the grid could reach. The fix is to make the grid
+reach them — equal-parts mixes added on purpose, limits tied to the range the lesson's own demonstration shows — or to
+delete the branch, as two guards in `position.ts` were deleted because no scale in the list steps by one. So a zero in
+that column is a question, not a result: either the grid is too narrow or the reason is ornamental. (S2-09)

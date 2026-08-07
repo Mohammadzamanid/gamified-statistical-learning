@@ -4,7 +4,7 @@
 
 Topics come from the **curriculum graph**, never from the set of generator modules (`STAGE2_RECONSTRUCTION_SCOPE.md` §4). A topic with no generators appears here as a failure rather than being omitted.
 
-**9 of 22 topics** meet §4: at least 100 validated available interactions spanning at least 4 reasoning families, with nothing unreachable.
+**13 of 22 topics** meet §4: at least 100 validated available interactions spanning at least 4 reasoning families, with nothing unreachable.
 
 ## The seven metrics, per topic
 
@@ -16,17 +16,17 @@ Topics come from the **curriculum graph**, never from the set of generator modul
 | Median (`skill.median`) | 5 | 0 | 0 | 0 | 0 | 0 | **5** | **No** |
 | Addition (`skill.r1-addition`) | 7 | 8 | 8 | 800 | 800 | 800 | **807** | Yes |
 | Cases and observations (`skill.r1-cases`) | 7 | 0 | 0 | 0 | 0 | 0 | **7** | **No** |
-| Coordinates (`skill.r1-coordinates`) | 7 | 0 | 0 | 0 | 0 | 0 | **7** | **No** |
+| Coordinates (`skill.r1-coordinates`) | 7 | 6 | 6 | 384 | 322 | 322 | **329** | Yes |
 | Counting (`skill.r1-counting`) | 7 | 8 | 8 | 1000 | 848 | 848 | **855** | Yes |
 | Decimals (`skill.r1-decimals`) | 7 | 6 | 6 | 324 | 264 | 264 | **271** | Yes |
 | Division (`skill.r1-division`) | 7 | 8 | 6 | 800 | 301 | 284 | **291** | Yes |
 | Fractions (`skill.r1-fractions`) | 8 | 6 | 6 | 324 | 263 | 263 | **271** | Yes |
 | Multiplication (`skill.r1-multiplication`) | 7 | 8 | 8 | 800 | 761 | 761 | **768** | Yes |
-| Negative numbers (`skill.r1-negatives`) | 7 | 0 | 0 | 0 | 0 | 0 | **7** | **No** |
-| Number lines (`skill.r1-number-lines`) | 7 | 0 | 0 | 0 | 0 | 0 | **7** | **No** |
+| Negative numbers (`skill.r1-negatives`) | 7 | 6 | 6 | 172 | 167 | 167 | **174** | Yes |
+| Number lines (`skill.r1-number-lines`) | 7 | 5 | 5 | 175 | 155 | 155 | **162** | Yes |
 | Percentages (`skill.r1-percentages`) | 7 | 6 | 6 | 324 | 264 | 264 | **271** | Yes |
 | Proportions (`skill.r1-proportions`) | 7 | 6 | 6 | 324 | 264 | 264 | **271** | Yes |
-| Ratios (`skill.r1-ratios`) | 7 | 0 | 0 | 0 | 0 | 0 | **7** | **No** |
+| Ratios (`skill.r1-ratios`) | 7 | 8 | 8 | 468 | 453 | 453 | **460** | Yes |
 | Subtraction (`skill.r1-subtraction`) | 7 | 8 | 8 | 800 | 797 | 797 | **804** | Yes |
 | Reading tables (`skill.r1-tables`) | 7 | 0 | 0 | 0 | 0 | 0 | **7** | **No** |
 | Kinds of variable (`skill.r1-variable-kinds`) | 7 | 0 | 0 | 0 | 0 | 0 | **7** | **No** |
@@ -43,17 +43,17 @@ Topics come from the **curriculum graph**, never from the set of generator modul
 | Median | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 20% |
 | Addition | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 10% |
 | Cases and observations | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 14% |
-| Coordinates | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 14% |
+| Coordinates | 62 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 17% |
 | Counting | 152 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 12% |
 | Decimals | 60 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 37% |
 | Division | 499 | 0 | 0 | 0 | 0 | 0 | 17 | 0 | 13% |
 | Fractions | 61 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 37% |
 | Multiplication | 39 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 10% |
-| Negative numbers | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 14% |
-| Number lines | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 14% |
+| Negative numbers | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 26% |
+| Number lines | 20 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 18% |
 | Percentages | 60 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 37% |
 | Proportions | 60 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 37% |
-| Ratios | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 14% |
+| Ratios | 15 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 22% |
 | Subtraction | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 10% |
 | Reading tables | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 14% |
 | Kinds of variable | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 14% |
@@ -61,6 +61,15 @@ Topics come from the **curriculum graph**, never from the set of generator modul
 | Range | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100% |
 
 ## Why combinations were rejected
+
+**Coordinates**
+
+- 22 x the move would run off the edge of the grid
+- 8 x the pair is symmetric, so placing it the wrong way round gives the same point
+- 8 x the pair is symmetric, so the swapped option is the same pair
+- 8 x the two stores share a berth, so there is nothing to compare
+- 8 x the pair is symmetric, so writing it the wrong way round changes nothing
+- 8 x the pair is symmetric, so the swapped option names the same seat
 
 **Counting**
 
@@ -87,6 +96,18 @@ Topics come from the **curriculum graph**, never from the set of generator modul
 
 - 39 x the product is larger than this topic's range
 
+**Negative numbers**
+
+- 4 x the account would not go below zero, so nothing negative is recorded
+- 1 x zero has no side of the waterline to describe
+
+**Number lines**
+
+- 6 x the reading lies beyond the end of this gauge
+- 6 x one of the two readings lies beyond the end of its line
+- 5 x the second mark lies beyond the end of this line
+- 3 x the value lies beyond the end of this line
+
 **Percentages**
 
 - 36 x the total does not divide into this many equal parts
@@ -96,6 +117,13 @@ Topics come from the **curriculum graph**, never from the set of generator modul
 
 - 36 x the total does not divide into this many equal parts
 - 24 x the share needs a fourth decimal place, which these topics do not ask for
+
+**Ratios**
+
+- 8 x adding the same amount to both leaves this mix unchanged, so the wrong option is not wrong
+- 3 x the whole batch is larger than the shed the lesson shows
+- 2 x the two parts are equal, so the misconception option is also correct
+- 2 x the scaled batch is larger than the shed the lesson shows
 
 **Subtraction**
 
@@ -109,17 +137,17 @@ Topics come from the **curriculum graph**, never from the set of generator modul
 - **Median** — 0: _none_
 - **Addition** — 8: Calculation · Comparison · Error identification · Irrelevant-information filtering · Multi-step reasoning · Ordering · Real-world application · Recognition
 - **Cases and observations** — 0: _none_
-- **Coordinates** — 0: _none_
+- **Coordinates** — 6: Comparison · Error identification · Multi-step reasoning · Recognition · Transfer to an unfamiliar context · Visual interpretation
 - **Counting** — 8: Calculation · Comparison · Error identification · Irrelevant-information filtering · Multi-step reasoning · Ordering · Real-world application · Recognition
 - **Decimals** — 6: Comparison · Error identification · Ordering · Real-world application · Representation conversion · Transfer to an unfamiliar context
 - **Division** — 6: Calculation · Error identification · Irrelevant-information filtering · Multi-step reasoning · Real-world application · Recognition
 - **Fractions** — 6: Comparison · Error identification · Ordering · Real-world application · Representation conversion · Transfer to an unfamiliar context
 - **Multiplication** — 8: Calculation · Comparison · Error identification · Irrelevant-information filtering · Multi-step reasoning · Ordering · Real-world application · Recognition
-- **Negative numbers** — 0: _none_
-- **Number lines** — 0: _none_
+- **Negative numbers** — 6: Calculation · Comparison · Error identification · Ordering · Representation conversion · Transfer to an unfamiliar context
+- **Number lines** — 5: Calculation · Comparison · Error identification · Real-world application · Visual interpretation
 - **Percentages** — 6: Comparison · Error identification · Ordering · Real-world application · Representation conversion · Transfer to an unfamiliar context
 - **Proportions** — 6: Comparison · Error identification · Ordering · Real-world application · Representation conversion · Transfer to an unfamiliar context
-- **Ratios** — 0: _none_
+- **Ratios** — 8: Calculation · Comparison · Error identification · Multi-step reasoning · Ordering · Real-world application · Representation conversion · Transfer to an unfamiliar context
 - **Subtraction** — 8: Calculation · Comparison · Error identification · Irrelevant-information filtering · Multi-step reasoning · Ordering · Real-world application · Recognition
 - **Reading tables** — 0: _none_
 - **Kinds of variable** — 0: _none_
@@ -145,22 +173,6 @@ Topics come from the **curriculum graph**, never from the set of generator modul
   - 5 available interactions, below the required 100
   - 0 reasoning families represented, below the required 4
 - **Cases and observations** (`skill.r1-cases`)
-  - no generator families produce for this topic
-  - 7 available interactions, below the required 100
-  - 0 reasoning families represented, below the required 4
-- **Coordinates** (`skill.r1-coordinates`)
-  - no generator families produce for this topic
-  - 7 available interactions, below the required 100
-  - 0 reasoning families represented, below the required 4
-- **Negative numbers** (`skill.r1-negatives`)
-  - no generator families produce for this topic
-  - 7 available interactions, below the required 100
-  - 0 reasoning families represented, below the required 4
-- **Number lines** (`skill.r1-number-lines`)
-  - no generator families produce for this topic
-  - 7 available interactions, below the required 100
-  - 0 reasoning families represented, below the required 4
-- **Ratios** (`skill.r1-ratios`)
   - no generator families produce for this topic
   - 7 available interactions, below the required 100
   - 0 reasoning families represented, below the required 4

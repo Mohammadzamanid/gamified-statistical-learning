@@ -95,6 +95,21 @@ using only the operations the keyboard controls perform. Other types rely on nat
 selects, textarea) which are keyboard-operable by construction. **None of this is automated accessibility testing** —
 no DOM is rendered, focus order is not measured, and no screen reader is involved. → **S2-20**.
 
+**F-6 — One authored question declares a misconception the engine can never report.**
+`q.error-id-causation` declares `mc.correlation-causation`, whose detector is `tagged-distractor`, but none of its three
+options carries that tag — in that question the misconception *is* the correct answer, so there is no distractor for it
+to sit on. The declaration therefore inflates a mapping count while a learner who gets it wrong receives a bare
+"incorrect" rather than the remediation.
+
+Measured rather than reasoned: the real evaluator and the real classifier were driven with every wrong choice, every
+detector's own declared trigger value, every single-item misplacement and every per-step wrong value, across all 46
+authored misconception declarations. 45 can be reported; this one cannot. Fixing it means redesigning the question's
+options, which is Region 2 data-literacy content. → **S2-17**.
+
+Generated questions are held to this rule by a check rather than by inspection —
+`tests/audit/content-coverage.test.ts` requires the engine to name each declared misconception when given the answer a
+holder of it would give (D-025).
+
 ## 4. Notices removed, and notices kept
 
 The "not yet available" notice was removed for `step-by-step-calculation` (S2-02), `point-placement` (S2-03) and

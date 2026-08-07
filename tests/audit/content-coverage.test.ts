@@ -12,10 +12,15 @@
  *    interactions;
  *  - counted-but-unreachable questions padding a total.
  */
-import { describe, expect, it } from "vitest";
+import { beforeAll, describe, expect, it } from "vitest";
 import { loadPlayableContent, loadShippedContent } from "../../src/content";
 import { generatedRun, resetGenerated } from "../../src/content/generated";
 import { PARTS_TOPICS, allGeneratorFamilies } from "../../src/content/generators";
+import { clearDetectors, registerBuiltInDetectors } from "../../src/core/misconceptions/detectors";
+import { buildLibrary, classifyMisconception } from "../../src/core/misconceptions/engine";
+import { evaluateResponse } from "../../src/core/questions/evaluators";
+import { normalizeResponse } from "../../src/core/questions/normalize";
+import type { RawResponse } from "../../src/core/questions/types";
 import { partsFamilies } from "../../src/content/generators/parts";
 import {
   MAX_SINGLE_SHAPE_SHARE,
@@ -26,7 +31,7 @@ import {
 } from "../../src/core/generation/report";
 import { REASONING_FAMILIES } from "../../src/core/generation/reasoning-families";
 import { pickQuestionForSkill } from "../../src/core/spaced-repetition/review-queue";
-import { createEmptySave } from "../../src/shared/schemas";
+import { createEmptySave, type Question } from "../../src/shared/schemas";
 import { COMPLETE_TOPICS } from "../helpers/complete-topics";
 
 const content = loadShippedContent();
@@ -41,6 +46,30 @@ const reports = buildCoverageReport({
   accepted: run.accepted
 });
 const byTopic = new Map(reports.map((r) => [r.skillId, r]));
+
+/**
+ * The answer a learner holding `id` would give, read from the question's own
+ * declaration of where that misconception lives.
+ *
+ * Reading it from the question is safe here because the question is not the
+ * thing under test — the *engine* is. The question says "this option means
+ * axes-swapped"; the check is whether the engine agrees when someone picks it.
+ * Returns null when the question gives a learner no way to express the
+ * misconception at all, which is itself the failure.
+ */
+function misconceptionResponseFor(question: Question, id: string): RawResponse | null {
+  const tagged = (question.choices ?? []).find((c) => c.misconceptionId === id);
+  if (tagged) return { kind: "choice", choiceIds: [tagged.id] };
+  if (question.answer.kind === "point") {
+    const spot = question.answer.misconceptionPoints.find((p) => p.misconceptionId === id);
+    if (spot) return spot.y === undefined ? { kind: "point", x: spot.x } : { kind: "point", x: spot.x, y: spot.y };
+    if (question.answer.swappedAxesMisconceptionId === id && question.answer.y !== undefined) {
+      return { kind: "point", x: question.answer.y, y: question.answer.x };
+    }
+  }
+  return null;
+}
+
 
 describe("the report is built from the curriculum, not from the generators", () => {
   it("has a row for every topic the curriculum graph defines", () => {
@@ -158,6 +187,50 @@ describe("a rejection is a design decision or a defect, and they are not the sam
       }
     });
   }
+});
+
+describe("a declared misconception is one the engine can actually report", () => {
+  // Declaring a misconception is cheap; making one *reachable* is not. A tag
+  // whose detector cannot fire for the question's answer kind inflates a mapping
+  // count and does nothing for the learner, and reading the tag back off the
+  // question would never catch it. So this drives the real evaluator and the real
+  // classifier with the response a learner holding that misconception would give,
+  // and requires the engine to name it.
+  //
+  // Scoped to generated questions on purpose. Several authored questions declare
+  // misconceptions detected from the *typed value* rather than from a tag, so a
+  // blanket "must be named inside the question" rule would be false for them —
+  // see the open finding in the backlog.
+  const library = buildLibrary([...content.misconceptions], [...content.remediations]);
+  const declaring = run.accepted.filter((q) => q.misconceptionIds.length > 0);
+
+  beforeAll(() => {
+    clearDetectors();
+    registerBuiltInDetectors();
+  });
+
+  it("generates questions that declare misconceptions at all", () => {
+    // Until this cycle every shipped generator declared an empty list, so the
+    // accepting side of the misconception gate had never been exercised.
+    expect(declaring.length, "no generated question declares a misconception").toBeGreaterThan(0);
+  });
+
+  it("names the misconception when a learner gives exactly that wrong answer", () => {
+    for (const question of declaring) {
+      for (const id of question.misconceptionIds) {
+        const wrong = misconceptionResponseFor(question, id);
+        expect(wrong, `${question.id} declares ${id} but offers a learner no way to express it`).not.toBeNull();
+        const evaluation = evaluateResponse(question, normalizeResponse(wrong!));
+        expect(evaluation.correct, `${question.id}: the ${id} response is being marked correct`).toBe(false);
+        const found = classifyMisconception(question, library, {
+          question,
+          response: normalizeResponse(wrong!),
+          evaluation
+        });
+        expect(found?.id, `${question.id}: the engine did not report ${id} for its own wrong answer`).toBe(id);
+      }
+    }
+  });
 });
 
 describe("the part/whole generators state a mistake that is actually a mistake", () => {

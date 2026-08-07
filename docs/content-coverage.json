@@ -206,15 +206,29 @@
       ],
       "regionId": "r.harbor-tallies",
       "authoredRecords": 7,
-      "generatorFamilies": 0,
-      "reasoningFamilies": [],
-      "rawCombinations": 0,
-      "validCombinations": 0,
-      "validatedGenerated": 0,
-      "totalAvailable": 7,
+      "generatorFamilies": 6,
+      "reasoningFamilies": [
+        "comparison",
+        "error-identification",
+        "multi-step-reasoning",
+        "recognition",
+        "transfer",
+        "visual-interpretation"
+      ],
+      "rawCombinations": 384,
+      "validCombinations": 322,
+      "validatedGenerated": 322,
+      "totalAvailable": 329,
       "rejections": {
-        "invalidCombinations": 0,
-        "invalidReasons": {},
+        "invalidCombinations": 62,
+        "invalidReasons": {
+          "the pair is symmetric, so placing it the wrong way round gives the same point": 8,
+          "the pair is symmetric, so the swapped option is the same pair": 8,
+          "the move would run off the edge of the grid": 22,
+          "the two stores share a berth, so there is nothing to compare": 8,
+          "the pair is symmetric, so writing it the wrong way round changes nothing": 8,
+          "the pair is symmetric, so the swapped option names the same seat": 8
+        },
         "schemaFailures": 0,
         "answerFailures": 0,
         "missingAccessibility": 0,
@@ -223,12 +237,8 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.14285714285714285,
-      "failures": [
-        "no generator families produce for this topic",
-        "7 available interactions, below the required 100",
-        "0 reasoning families represented, below the required 4"
-      ]
+      "largestShapeShare": 0.1702127659574468,
+      "failures": []
     },
     {
       "skillId": "skill.r1-counting",
@@ -432,15 +442,25 @@
       ],
       "regionId": "r.harbor-tallies",
       "authoredRecords": 7,
-      "generatorFamilies": 0,
-      "reasoningFamilies": [],
-      "rawCombinations": 0,
-      "validCombinations": 0,
-      "validatedGenerated": 0,
-      "totalAvailable": 7,
+      "generatorFamilies": 6,
+      "reasoningFamilies": [
+        "calculation",
+        "comparison",
+        "error-identification",
+        "ordering",
+        "representation-conversion",
+        "transfer"
+      ],
+      "rawCombinations": 172,
+      "validCombinations": 167,
+      "validatedGenerated": 167,
+      "totalAvailable": 174,
       "rejections": {
-        "invalidCombinations": 0,
-        "invalidReasons": {},
+        "invalidCombinations": 5,
+        "invalidReasons": {
+          "zero has no side of the waterline to describe": 1,
+          "the account would not go below zero, so nothing negative is recorded": 4
+        },
         "schemaFailures": 0,
         "answerFailures": 0,
         "missingAccessibility": 0,
@@ -449,12 +469,8 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.14285714285714285,
-      "failures": [
-        "no generator families produce for this topic",
-        "7 available interactions, below the required 100",
-        "0 reasoning families represented, below the required 4"
-      ]
+      "largestShapeShare": 0.25862068965517243,
+      "failures": []
     },
     {
       "skillId": "skill.r1-number-lines",
@@ -464,15 +480,26 @@
       ],
       "regionId": "r.harbor-tallies",
       "authoredRecords": 7,
-      "generatorFamilies": 0,
-      "reasoningFamilies": [],
-      "rawCombinations": 0,
-      "validCombinations": 0,
-      "validatedGenerated": 0,
-      "totalAvailable": 7,
+      "generatorFamilies": 5,
+      "reasoningFamilies": [
+        "calculation",
+        "comparison",
+        "error-identification",
+        "real-world-application",
+        "visual-interpretation"
+      ],
+      "rawCombinations": 175,
+      "validCombinations": 155,
+      "validatedGenerated": 155,
+      "totalAvailable": 162,
       "rejections": {
-        "invalidCombinations": 0,
-        "invalidReasons": {},
+        "invalidCombinations": 20,
+        "invalidReasons": {
+          "the value lies beyond the end of this line": 3,
+          "the second mark lies beyond the end of this line": 5,
+          "the reading lies beyond the end of this gauge": 6,
+          "one of the two readings lies beyond the end of its line": 6
+        },
         "schemaFailures": 0,
         "answerFailures": 0,
         "missingAccessibility": 0,
@@ -481,12 +508,8 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.14285714285714285,
-      "failures": [
-        "no generator families produce for this topic",
-        "7 available interactions, below the required 100",
-        "0 reasoning families represented, below the required 4"
-      ]
+      "largestShapeShare": 0.17901234567901234,
+      "failures": []
     },
     {
       "skillId": "skill.r1-percentages",
@@ -572,15 +595,29 @@
       ],
       "regionId": "r.harbor-tallies",
       "authoredRecords": 7,
-      "generatorFamilies": 0,
-      "reasoningFamilies": [],
-      "rawCombinations": 0,
-      "validCombinations": 0,
-      "validatedGenerated": 0,
-      "totalAvailable": 7,
+      "generatorFamilies": 8,
+      "reasoningFamilies": [
+        "calculation",
+        "comparison",
+        "error-identification",
+        "multi-step-reasoning",
+        "ordering",
+        "real-world-application",
+        "representation-conversion",
+        "transfer"
+      ],
+      "rawCombinations": 468,
+      "validCombinations": 453,
+      "validatedGenerated": 453,
+      "totalAvailable": 460,
       "rejections": {
-        "invalidCombinations": 0,
-        "invalidReasons": {},
+        "invalidCombinations": 15,
+        "invalidReasons": {
+          "the two parts are equal, so the misconception option is also correct": 2,
+          "the scaled batch is larger than the shed the lesson shows": 2,
+          "adding the same amount to both leaves this mix unchanged, so the wrong option is not wrong": 8,
+          "the whole batch is larger than the shed the lesson shows": 3
+        },
         "schemaFailures": 0,
         "answerFailures": 0,
         "missingAccessibility": 0,
@@ -589,12 +626,8 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.14285714285714285,
-      "failures": [
-        "no generator families produce for this topic",
-        "7 available interactions, below the required 100",
-        "0 reasoning families represented, below the required 4"
-      ]
+      "largestShapeShare": 0.2217391304347826,
+      "failures": []
     },
     {
       "skillId": "skill.r1-subtraction",

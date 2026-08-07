@@ -8,6 +8,8 @@
  */
 import { arithmeticFamilies, type OperationSpec } from "./arithmetic";
 import { fractionText, partsFamilies, type Form, type Part, type PartsTopic } from "./parts";
+import { positionFamilies } from "./position";
+import { ratioFamilies } from "./ratios";
 import type { GeneratorFamily } from "../../core/generation/types";
 
 const COUNTING: OperationSpec = {
@@ -279,6 +281,8 @@ export const PARTS_TOPICS: ReadonlyArray<[PartsTopic, Form]> = [
 export function allGeneratorFamilies(): GeneratorFamily[] {
   return [
     ...OPERATION_SPECS.flatMap(arithmeticFamilies),
-    ...PARTS_TOPICS.flatMap(([topic, form]) => partsFamilies(topic, form))
+    ...PARTS_TOPICS.flatMap(([topic, form]) => partsFamilies(topic, form)),
+    ...ratioFamilies(),
+    ...positionFamilies()
   ];
 }

@@ -26,5 +26,11 @@ export const COMPLETE_TOPICS: readonly string[] = [
   "skill.r1-fractions",
   "skill.r1-decimals",
   "skill.r1-percentages",
-  "skill.r1-proportions"
+  "skill.r1-proportions",
+  // Ratios, and the position group. Added on the measured report, and again
+  // only after the guard above had failed on them being undeclared.
+  "skill.r1-ratios",
+  "skill.r1-negatives",
+  "skill.r1-number-lines",
+  "skill.r1-coordinates"
 ];

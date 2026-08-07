@@ -4,7 +4,7 @@
 (`git show 7add4bc:docs/STAGE_HANDOFF.md`). Its still-binding contracts, traps, and priorities are carried forward
 below — nothing was discarded.
 
-**Last updated:** 2026-08-07, at the close of S2-09 cycle 2 (**Partial**).
+**Last updated:** 2026-08-07, at the close of S2-09 cycle 3 (**Partial**).
 
 ---
 
@@ -16,7 +16,7 @@ after Stage 1 was lost because commits were never pushed to a durable remote. Re
 
 - **Stage 1: surviving, verified, green.** Not re-created — the original commit `7add4bc` was carried forward from the
   archive's own `.git` directory, with authorship intact.
-- **Stage 2: in progress, and not recoverable.** Reconstruction began 2026-08-04; S2-01 through S2-08 are complete and S2-09 is **Partial** (cycle 2, `c7f99d5`, remote-verified). Nothing
+- **Stage 2: in progress, and not recoverable.** Reconstruction began 2026-08-04; S2-01 through S2-08 are complete and S2-09 is **Partial** (cycle 3; cycles 1-2 `0de5fff`, `c7f99d5`, remote-verified). Nothing
   in it is recovered source.
 - **Stages 3–6: not started, and not recoverable.** They must be **reconstructed** from the surviving Stage 1 source,
   the specifications, and the known defect history. They may never be described as recovered source, and no metric may
@@ -37,14 +37,14 @@ after Stage 1 was lost because commits were never pushed to a durable remote. Re
 | Milestone exports | `../gsl-exports/` — source ZIP + git bundle + manifest + SHA-256 checksums |
 | Working tree | clean |
 | Node / npm used | v22.22.2 / 10.9.7 |
-| Test suite | **411 tests / 33 files**, all passing (Stage 1 baseline was 73 / 14) |
+| Test suite | **413 tests / 33 files**, all passing (Stage 1 baseline was 73 / 14) |
 | Build | passing (**538.47 kB, 143.72 kB gzip**; baseline was 285.73 kB / 83.82 kB) |
 | Source modified since baseline | S2-01 … S2-08 — achievements + region completion, three new interactions, the enforced interaction audit, the review queue, the Region 1 topic architecture, and all 17 Region 1 lessons |
 | Curriculum | 2 regions · **6 modules** · **20 lessons** · **23 skills** · **145 questions** (baseline 2/2/3/6/14) |
 | Lessons Complete to scope §5 | **17 of 17** Region 1 topic lessons. No skeletons. Two inherited Stage 1 lessons are deliberately excluded — see §5 |
 | Misconceptions / remediations | **24 / 23** (baseline 8 / 7) |
-| Validated generated interactions | **4,545**, available to spaced review (baseline 0) |
-| Topics meeting scope §4 | **9 of 22** — see `docs/CONTENT_COVERAGE.md` |
+| Validated generated interactions | **5,642**, available to spaced review (baseline 0) |
+| Topics meeting scope §4 | **13 of 22** — see `docs/CONTENT_COVERAGE.md` |
 | Save schema version | **2** (baseline was 1) — migration `1 -> 2` adds `reviewSession` |
 | Interaction types implemented | **14 of 17** (baseline 11); still stubbed: `formula-construction`, `simulation-prediction`, `confidence-rating` |
 | Stage 2 | **in progress** — see `STAGE2_RECONSTRUCTION_SCOPE.md`, `STAGE2_RECONSTRUCTION_BACKLOG.md`, `STAGE2_CURRENT_WORK.md` |
@@ -105,21 +105,22 @@ branch/tag deletion) are forbidden without explicit owner permission. See `REMOT
 
 ## 5. Next unit
 
-**S2-09 continued — generators for ratios and the position group.**
+**S2-09 continued — generators for the data group.**
 
-Two cycles are done. Cycle 1 built the machinery scope §4 needs and took Module 1's five topics past the bar; cycle 2
-added `src/content/generators/parts.ts` and took the four part/whole topics past it. **9 of 22 topics meet §4**; the
-other 13 have zero generator families and are reported in `docs/CONTENT_COVERAGE.md` as failures with reasons — which
-is what the scope requires of them, and never omission.
+Three cycles are done: the machinery and Module 1 (`arithmetic.ts`), the part/whole topics (`parts.ts`), and ratios
+plus the position group (`ratios.ts`, `position.ts`). **13 of 22 topics meet §4** — every Region 1 topic except the
+data group; the other 9 have zero generator families and are reported in `docs/CONTENT_COVERAGE.md` as failures with
+reasons, which is what the scope requires of them and never omission.
 
-Remaining, all Region 1 unless noted: ratios · negatives · number lines · coordinates · tables · variables · cases ·
-categorical-versus-numerical. Five inherited Region 2 topics (mean, median, range, choosing measures, data literacy)
-belong to **S2-17**.
+Remaining Region 1: **tables · variables · cases · categorical-versus-numerical**. Five inherited Region 2 topics
+(mean, median, range, choosing measures, data literacy) belong to **S2-17**.
 
-**Ratios is closest to `parts.ts` and should be next.** After that, expect a new generator module per topic group: the
-position group (negatives, number lines, coordinates) needs a line and a grid to place things on, and the data group
-(tables, variables, cases, variable-kinds) needs a dataset to read from. Neither is a part of a whole, and neither is
-the two-number operation `arithmeticFamilies` is parameterised by.
+**The data group needs something none of the three existing modules needed: a dataset.** Every generator so far builds
+its question from a handful of numbers; a table question needs a grid with row and column labels to read from, a
+variables question needs columns to count, and a cases question needs rows. Expect the module to start by generating
+small datasets and only then questions about them — and expect `mc.wrong-column-read`,
+`mc.constant-counted-as-variable`, `mc.cases-counted-as-observations` and `mc.digits-mean-numerical` to be the four
+misconceptions it has to make answerable.
 
 **What `parts.ts` learned the hard way, and what it costs to ignore.** Its first version let only the conversion family
 use the topic's form, so four topics emitted *identical* questions and the near-duplicate gate collapsed three of them
@@ -133,6 +134,18 @@ Run `npm run report:coverage` to regenerate both report forms. A topic is Comple
 available interactions across ≥4 reasoning families, with no single reasoning *shape* above 50% and nothing
 unreachable. Declaring it means adding its skill id to `tests/helpers/complete-topics.ts`, which
 `tests/audit/content-coverage.test.ts` then enforces.
+
+**A misconception goes where its detector can fire, not where its subject fits (D-025).** `misconceptionIds` is not a
+topic tag — the engine runs each misconception's named detector, so a declaration the detector cannot recognise is
+inert: it inflates a mapping count and the learner still gets a bare "incorrect". `known-wrong-answer` needs a tagged
+distractor, so it belongs on multiple-choice; `point-geometry` is classified from placement geometry, so it belongs on
+point-placement via `misconceptionPoints` or `swappedAxesMisconceptionId`. Reading the tag back off the question could
+never catch a mistake here, so the audit drives the **real evaluator and classifier** with the answer a holder of that
+misconception would give and requires the engine to name it. When adding a generator that declares one, check the
+misconception's `detector` field first.
+
+**A zero in `invalidCombinations` is a question, not a result (D-026).** It means either the parameter grid never
+reaches the cases the guards describe, or the guards are ornamental. Both were true of the first `ratios.ts`.
 
 **Defect-class rejections must be zero (D-023).** `invalidCombinations` is a generator declaring a combination
 unaskable — design, reported with a reason. `schemaFailures`, `answerFailures`, `missingAccessibility`,
@@ -175,6 +188,7 @@ Recorded in `docs/INTERACTION_AUDIT.md` §3; each is owned by a later unit and n
 | F-3 three types remain genuine stubs; `simulation-prediction` waits on the laboratory | S2-15 / later |
 | F-4 `q.remed-mean-basic` is reachable only via remediation — by design | none |
 | F-5 keyboard operability is structural, not browser-verified | S2-20 |
+| F-6 `q.error-id-causation` declares `mc.correlation-causation`, which no option carries, so the engine can never report it. Measured against the real engine: 46 authored declarations, 45 reachable | S2-17 |
 
 ### Stage 1 known defects — current state
 
