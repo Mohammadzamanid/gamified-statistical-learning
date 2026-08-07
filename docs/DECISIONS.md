@@ -177,3 +177,14 @@ grid held no equal-parts mix and the range limits sat above anything the grid co
 reach them — equal-parts mixes added on purpose, limits tied to the range the lesson's own demonstration shows — or to
 delete the branch, as two guards in `position.ts` were deleted because no scale in the list steps by one. So a zero in
 that column is a question, not a result: either the grid is too narrow or the reason is ornamental. (S2-09)
+
+**D-027 — A generated dataset is written out, not computed.**
+The data-group generators are the first whose questions are *about a table*, so the table has to exist before the
+question does. The six ledgers in `src/content/generators/data.ts` are literal data rather than a formula over row and
+column indices, for two reasons that pull the same way. A formula makes every ledger a rescaling of one ledger, which
+the near-duplicate gate would rightly collapse — the numbers differ, the question does not. And a reader of the file
+cannot check an answer by eye against a formula, which matters more here than anywhere else, because a table question
+whose table is wrong is wrong in a way no schema can see. The corollary is the second half of the decision: where the
+question is about a table's *shape* rather than its contents — how many cases, how many observations, how many columns
+vary — the family enumerates over described shapes instead, because all six ledgers are five rows by three columns and
+asking the same arithmetic six times with the same numbers is the degenerate case §4 exists to stop. (S2-09)

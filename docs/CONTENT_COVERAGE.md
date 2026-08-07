@@ -4,7 +4,7 @@
 
 Topics come from the **curriculum graph**, never from the set of generator modules (`STAGE2_RECONSTRUCTION_SCOPE.md` §4). A topic with no generators appears here as a failure rather than being omitted.
 
-**13 of 22 topics** meet §4: at least 100 validated available interactions spanning at least 4 reasoning families, with nothing unreachable.
+**17 of 22 topics** meet §4: at least 100 validated available interactions spanning at least 4 reasoning families, with nothing unreachable.
 
 ## The seven metrics, per topic
 
@@ -15,7 +15,7 @@ Topics come from the **curriculum graph**, never from the set of generator modul
 | Mean (`skill.mean`) | 6 | 0 | 0 | 0 | 0 | 0 | **6** | **No** |
 | Median (`skill.median`) | 5 | 0 | 0 | 0 | 0 | 0 | **5** | **No** |
 | Addition (`skill.r1-addition`) | 7 | 8 | 8 | 800 | 800 | 800 | **807** | Yes |
-| Cases and observations (`skill.r1-cases`) | 7 | 0 | 0 | 0 | 0 | 0 | **7** | **No** |
+| Cases and observations (`skill.r1-cases`) | 7 | 4 | 4 | 392 | 392 | 304 | **311** | Yes |
 | Coordinates (`skill.r1-coordinates`) | 7 | 6 | 6 | 384 | 322 | 322 | **329** | Yes |
 | Counting (`skill.r1-counting`) | 7 | 8 | 8 | 1000 | 848 | 848 | **855** | Yes |
 | Decimals (`skill.r1-decimals`) | 7 | 6 | 6 | 324 | 264 | 264 | **271** | Yes |
@@ -28,9 +28,9 @@ Topics come from the **curriculum graph**, never from the set of generator modul
 | Proportions (`skill.r1-proportions`) | 7 | 6 | 6 | 324 | 264 | 264 | **271** | Yes |
 | Ratios (`skill.r1-ratios`) | 7 | 8 | 8 | 468 | 453 | 453 | **460** | Yes |
 | Subtraction (`skill.r1-subtraction`) | 7 | 8 | 8 | 800 | 797 | 797 | **804** | Yes |
-| Reading tables (`skill.r1-tables`) | 7 | 0 | 0 | 0 | 0 | 0 | **7** | **No** |
-| Kinds of variable (`skill.r1-variable-kinds`) | 7 | 0 | 0 | 0 | 0 | 0 | **7** | **No** |
-| Variables (`skill.r1-variables`) | 7 | 0 | 0 | 0 | 0 | 0 | **7** | **No** |
+| Reading tables (`skill.r1-tables`) | 7 | 5 | 5 | 228 | 228 | 225 | **232** | Yes |
+| Kinds of variable (`skill.r1-variable-kinds`) | 7 | 5 | 5 | 240 | 228 | 208 | **215** | Yes |
+| Variables (`skill.r1-variables`) | 7 | 5 | 5 | 272 | 232 | 228 | **235** | Yes |
 | Range (`skill.range`) | 1 | 0 | 0 | 0 | 0 | 0 | **1** | **No** |
 
 ## Rejections, per topic
@@ -42,7 +42,7 @@ Topics come from the **curriculum graph**, never from the set of generator modul
 | Mean | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 17% |
 | Median | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 20% |
 | Addition | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 10% |
-| Cases and observations | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 14% |
+| Cases and observations | 0 | 0 | 0 | 0 | 0 | 0 | 88 | 0 | 13% |
 | Coordinates | 62 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 17% |
 | Counting | 152 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 12% |
 | Decimals | 60 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 37% |
@@ -55,9 +55,9 @@ Topics come from the **curriculum graph**, never from the set of generator modul
 | Proportions | 60 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 37% |
 | Ratios | 15 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 22% |
 | Subtraction | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 10% |
-| Reading tables | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 14% |
-| Kinds of variable | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 14% |
-| Variables | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 14% |
+| Reading tables | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 0 | 13% |
+| Kinds of variable | 12 | 0 | 0 | 0 | 0 | 0 | 20 | 0 | 0% |
+| Variables | 40 | 0 | 0 | 0 | 0 | 0 | 4 | 0 | 14% |
 | Range | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100% |
 
 ## Why combinations were rejected
@@ -129,6 +129,15 @@ Topics come from the **curriculum graph**, never from the set of generator modul
 
 - 3 x the result would fall below zero, which this topic has not taught yet
 
+**Kinds of variable**
+
+- 12 x only two framings of this question are distinct; the rest repeat one of them
+
+**Variables**
+
+- 32 x with one varying column there is no counting step before the multiplication
+- 8 x too few columns for a constant and more than one variable
+
 ## Reasoning families represented
 
 - **Choosing measures** — 0: _none_
@@ -136,7 +145,7 @@ Topics come from the **curriculum graph**, never from the set of generator modul
 - **Mean** — 0: _none_
 - **Median** — 0: _none_
 - **Addition** — 8: Calculation · Comparison · Error identification · Irrelevant-information filtering · Multi-step reasoning · Ordering · Real-world application · Recognition
-- **Cases and observations** — 0: _none_
+- **Cases and observations** — 4: Calculation · Comparison · Multi-step reasoning · Recognition
 - **Coordinates** — 6: Comparison · Error identification · Multi-step reasoning · Recognition · Transfer to an unfamiliar context · Visual interpretation
 - **Counting** — 8: Calculation · Comparison · Error identification · Irrelevant-information filtering · Multi-step reasoning · Ordering · Real-world application · Recognition
 - **Decimals** — 6: Comparison · Error identification · Ordering · Real-world application · Representation conversion · Transfer to an unfamiliar context
@@ -149,9 +158,9 @@ Topics come from the **curriculum graph**, never from the set of generator modul
 - **Proportions** — 6: Comparison · Error identification · Ordering · Real-world application · Representation conversion · Transfer to an unfamiliar context
 - **Ratios** — 8: Calculation · Comparison · Error identification · Multi-step reasoning · Ordering · Real-world application · Representation conversion · Transfer to an unfamiliar context
 - **Subtraction** — 8: Calculation · Comparison · Error identification · Irrelevant-information filtering · Multi-step reasoning · Ordering · Real-world application · Recognition
-- **Reading tables** — 0: _none_
-- **Kinds of variable** — 0: _none_
-- **Variables** — 0: _none_
+- **Reading tables** — 5: Comparison · Error identification · Multi-step reasoning · Transfer to an unfamiliar context · Visual interpretation
+- **Kinds of variable** — 5: Comparison · Error identification · Recognition · Transfer to an unfamiliar context · Visual interpretation
+- **Variables** — 5: Comparison · Error identification · Multi-step reasoning · Recognition · Transfer to an unfamiliar context
 - **Range** — 0: _none_
 
 ## Topics that do not meet §4
@@ -171,22 +180,6 @@ Topics come from the **curriculum graph**, never from the set of generator modul
 - **Median** (`skill.median`)
   - no generator families produce for this topic
   - 5 available interactions, below the required 100
-  - 0 reasoning families represented, below the required 4
-- **Cases and observations** (`skill.r1-cases`)
-  - no generator families produce for this topic
-  - 7 available interactions, below the required 100
-  - 0 reasoning families represented, below the required 4
-- **Reading tables** (`skill.r1-tables`)
-  - no generator families produce for this topic
-  - 7 available interactions, below the required 100
-  - 0 reasoning families represented, below the required 4
-- **Kinds of variable** (`skill.r1-variable-kinds`)
-  - no generator families produce for this topic
-  - 7 available interactions, below the required 100
-  - 0 reasoning families represented, below the required 4
-- **Variables** (`skill.r1-variables`)
-  - no generator families produce for this topic
-  - 7 available interactions, below the required 100
   - 0 reasoning families represented, below the required 4
 - **Range** (`skill.range`)
   - no generator families produce for this topic

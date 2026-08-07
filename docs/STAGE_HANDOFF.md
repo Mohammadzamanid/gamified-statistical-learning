@@ -4,7 +4,7 @@
 (`git show 7add4bc:docs/STAGE_HANDOFF.md`). Its still-binding contracts, traps, and priorities are carried forward
 below — nothing was discarded.
 
-**Last updated:** 2026-08-07, at the close of S2-09 cycle 3 (**Partial**).
+**Last updated:** 2026-08-07, at the close of S2-09 cycle 4 (**Partial**).
 
 ---
 
@@ -16,7 +16,7 @@ after Stage 1 was lost because commits were never pushed to a durable remote. Re
 
 - **Stage 1: surviving, verified, green.** Not re-created — the original commit `7add4bc` was carried forward from the
   archive's own `.git` directory, with authorship intact.
-- **Stage 2: in progress, and not recoverable.** Reconstruction began 2026-08-04; S2-01 through S2-08 are complete and S2-09 is **Partial** (cycle 3, `10685dd`, remote-verified; cycles 1-2 `0de5fff`, `c7f99d5`). Nothing
+- **Stage 2: in progress, and not recoverable.** Reconstruction began 2026-08-04; S2-01 through S2-08 are complete and S2-09 is **Partial** (cycle 4; cycles 1-3 `0de5fff`, `c7f99d5`, `10685dd`, all remote-verified). Nothing
   in it is recovered source.
 - **Stages 3–6: not started, and not recoverable.** They must be **reconstructed** from the surviving Stage 1 source,
   the specifications, and the known defect history. They may never be described as recovered source, and no metric may
@@ -43,8 +43,8 @@ after Stage 1 was lost because commits were never pushed to a durable remote. Re
 | Curriculum | 2 regions · **6 modules** · **20 lessons** · **23 skills** · **145 questions** (baseline 2/2/3/6/14) |
 | Lessons Complete to scope §5 | **17 of 17** Region 1 topic lessons. No skeletons. Two inherited Stage 1 lessons are deliberately excluded — see §5 |
 | Misconceptions / remediations | **24 / 23** (baseline 8 / 7) |
-| Validated generated interactions | **5,642**, available to spaced review (baseline 0) |
-| Topics meeting scope §4 | **13 of 22** — see `docs/CONTENT_COVERAGE.md` |
+| Validated generated interactions | **6,607**, available to spaced review (baseline 0) |
+| Topics meeting scope §4 | **17 of 22** — every Region 1 topic; see `docs/CONTENT_COVERAGE.md` |
 | Save schema version | **2** (baseline was 1) — migration `1 -> 2` adds `reviewSession` |
 | Interaction types implemented | **14 of 17** (baseline 11); still stubbed: `formula-construction`, `simulation-prediction`, `confidence-rating` |
 | Stage 2 | **in progress** — see `STAGE2_RECONSTRUCTION_SCOPE.md`, `STAGE2_RECONSTRUCTION_BACKLOG.md`, `STAGE2_CURRENT_WORK.md` |
@@ -105,22 +105,22 @@ branch/tag deletion) are forbidden without explicit owner permission. See `REMOT
 
 ## 5. Next unit
 
-**S2-09 continued — generators for the data group.**
+**S2-10 — Region 1 boss investigation.**
 
-Three cycles are done: the machinery and Module 1 (`arithmetic.ts`), the part/whole topics (`parts.ts`), and ratios
-plus the position group (`ratios.ts`, `position.ts`). **13 of 22 topics meet §4** — every Region 1 topic except the
-data group; the other 9 have zero generator families and are reported in `docs/CONTENT_COVERAGE.md` as failures with
-reasons, which is what the scope requires of them and never omission.
+S2-09 is done with Region 1. Four cycles built the machinery and then four generator modules — `arithmetic.ts`,
+`parts.ts`, `ratios.ts` + `position.ts`, and `data.ts` — and **17 of 22 topics meet §4, every Region 1 topic among
+them**. The 5 that do not are the entire Region 2 inheritance (mean, median, range, choosing measures, data literacy);
+they have zero generator families, are reported in `docs/CONTENT_COVERAGE.md` as failures with reasons, and belong to
+**S2-17**. S2-09 stays **Partial** in the backlog because §4 is stated over all 22 curriculum topics, not because
+anything in Region 1 is outstanding.
 
-Remaining Region 1: **tables · variables · cases · categorical-versus-numerical**. Five inherited Region 2 topics
-(mean, median, range, choosing measures, data literacy) belong to **S2-17**.
+So the next unit is **S2-10, the Region 1 boss investigation** — a multi-step saveable investigation combining Region 1
+skills, awarding the region achievement and unlocking Region 2. The award path itself was repaired and tested back in
+S2-01.
 
-**The data group needs something none of the three existing modules needed: a dataset.** Every generator so far builds
-its question from a handful of numbers; a table question needs a grid with row and column labels to read from, a
-variables question needs columns to count, and a cases question needs rows. Expect the module to start by generating
-small datasets and only then questions about them — and expect `mc.wrong-column-read`,
-`mc.constant-counted-as-variable`, `mc.cases-counted-as-observations` and `mc.digits-mean-numerical` to be the four
-misconceptions it has to make answerable.
+**Before starting S2-10, re-read the acceptance criteria in this backlog row rather than assuming.** The boss is the
+first content that has to *combine* topics rather than teach one, and the generators are not the tool for it — this is
+authored content.
 
 **What `parts.ts` learned the hard way, and what it costs to ignore.** Its first version let only the conversion family
 use the topic's form, so four topics emitted *identical* questions and the near-duplicate gate collapsed three of them
@@ -135,7 +135,10 @@ available interactions across ≥4 reasoning families, with no single reasoning 
 unreachable. Declaring it means adding its skill id to `tests/helpers/complete-topics.ts`, which
 `tests/audit/content-coverage.test.ts` then enforces.
 
-**A misconception goes where its detector can fire, not where its subject fits (D-025).** `misconceptionIds` is not a
+**A misconception goes where its detector can fire, not where its subject fits (D-025).** This was written down at the
+end of cycle 3 and broken in the first module of cycle 4 — `mc.digits-mean-numerical` tagged on a multiple-choice
+distractor when its detector is `placement-mapping`. It read perfectly. Only the check caught it, which is the argument
+for the check. `misconceptionIds` is not a
 topic tag — the engine runs each misconception's named detector, so a declaration the detector cannot recognise is
 inert: it inflates a mapping count and the learner still gets a bare "incorrect". `known-wrong-answer` needs a tagged
 distractor, so it belongs on multiple-choice; `point-geometry` is classified from placement geometry, so it belongs on

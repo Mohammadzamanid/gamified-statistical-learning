@@ -174,12 +174,17 @@
       ],
       "regionId": "r.harbor-tallies",
       "authoredRecords": 7,
-      "generatorFamilies": 0,
-      "reasoningFamilies": [],
-      "rawCombinations": 0,
-      "validCombinations": 0,
-      "validatedGenerated": 0,
-      "totalAvailable": 7,
+      "generatorFamilies": 4,
+      "reasoningFamilies": [
+        "calculation",
+        "comparison",
+        "multi-step-reasoning",
+        "recognition"
+      ],
+      "rawCombinations": 392,
+      "validCombinations": 392,
+      "validatedGenerated": 304,
+      "totalAvailable": 311,
       "rejections": {
         "invalidCombinations": 0,
         "invalidReasons": {},
@@ -188,15 +193,11 @@
         "missingAccessibility": 0,
         "missingMisconceptionMapping": 0,
         "exactDuplicates": 0,
-        "nearDuplicates": 0
+        "nearDuplicates": 88
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.14285714285714285,
-      "failures": [
-        "no generator families produce for this topic",
-        "7 available interactions, below the required 100",
-        "0 reasoning families represented, below the required 4"
-      ]
+      "largestShapeShare": 0.12861736334405144,
+      "failures": []
     },
     {
       "skillId": "skill.r1-coordinates",
@@ -676,12 +677,18 @@
       ],
       "regionId": "r.harbor-tallies",
       "authoredRecords": 7,
-      "generatorFamilies": 0,
-      "reasoningFamilies": [],
-      "rawCombinations": 0,
-      "validCombinations": 0,
-      "validatedGenerated": 0,
-      "totalAvailable": 7,
+      "generatorFamilies": 5,
+      "reasoningFamilies": [
+        "comparison",
+        "error-identification",
+        "multi-step-reasoning",
+        "transfer",
+        "visual-interpretation"
+      ],
+      "rawCombinations": 228,
+      "validCombinations": 228,
+      "validatedGenerated": 225,
+      "totalAvailable": 232,
       "rejections": {
         "invalidCombinations": 0,
         "invalidReasons": {},
@@ -690,15 +697,11 @@
         "missingAccessibility": 0,
         "missingMisconceptionMapping": 0,
         "exactDuplicates": 0,
-        "nearDuplicates": 0
+        "nearDuplicates": 3
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.14285714285714285,
-      "failures": [
-        "no generator families produce for this topic",
-        "7 available interactions, below the required 100",
-        "0 reasoning families represented, below the required 4"
-      ]
+      "largestShapeShare": 0.12931034482758622,
+      "failures": []
     },
     {
       "skillId": "skill.r1-variable-kinds",
@@ -708,29 +711,33 @@
       ],
       "regionId": "r.harbor-tallies",
       "authoredRecords": 7,
-      "generatorFamilies": 0,
-      "reasoningFamilies": [],
-      "rawCombinations": 0,
-      "validCombinations": 0,
-      "validatedGenerated": 0,
-      "totalAvailable": 7,
+      "generatorFamilies": 5,
+      "reasoningFamilies": [
+        "comparison",
+        "error-identification",
+        "recognition",
+        "transfer",
+        "visual-interpretation"
+      ],
+      "rawCombinations": 240,
+      "validCombinations": 228,
+      "validatedGenerated": 208,
+      "totalAvailable": 215,
       "rejections": {
-        "invalidCombinations": 0,
-        "invalidReasons": {},
+        "invalidCombinations": 12,
+        "invalidReasons": {
+          "only two framings of this question are distinct; the rest repeat one of them": 12
+        },
         "schemaFailures": 0,
         "answerFailures": 0,
         "missingAccessibility": 0,
         "missingMisconceptionMapping": 0,
         "exactDuplicates": 0,
-        "nearDuplicates": 0
+        "nearDuplicates": 20
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.14285714285714285,
-      "failures": [
-        "no generator families produce for this topic",
-        "7 available interactions, below the required 100",
-        "0 reasoning families represented, below the required 4"
-      ]
+      "largestShapeShare": 0.004651162790697674,
+      "failures": []
     },
     {
       "skillId": "skill.r1-variables",
@@ -740,29 +747,34 @@
       ],
       "regionId": "r.harbor-tallies",
       "authoredRecords": 7,
-      "generatorFamilies": 0,
-      "reasoningFamilies": [],
-      "rawCombinations": 0,
-      "validCombinations": 0,
-      "validatedGenerated": 0,
-      "totalAvailable": 7,
+      "generatorFamilies": 5,
+      "reasoningFamilies": [
+        "comparison",
+        "error-identification",
+        "multi-step-reasoning",
+        "recognition",
+        "transfer"
+      ],
+      "rawCombinations": 272,
+      "validCombinations": 232,
+      "validatedGenerated": 228,
+      "totalAvailable": 235,
       "rejections": {
-        "invalidCombinations": 0,
-        "invalidReasons": {},
+        "invalidCombinations": 40,
+        "invalidReasons": {
+          "with one varying column there is no counting step before the multiplication": 32,
+          "too few columns for a constant and more than one variable": 8
+        },
         "schemaFailures": 0,
         "answerFailures": 0,
         "missingAccessibility": 0,
         "missingMisconceptionMapping": 0,
         "exactDuplicates": 0,
-        "nearDuplicates": 0
+        "nearDuplicates": 4
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.14285714285714285,
-      "failures": [
-        "no generator families produce for this topic",
-        "7 available interactions, below the required 100",
-        "0 reasoning families represented, below the required 4"
-      ]
+      "largestShapeShare": 0.13617021276595745,
+      "failures": []
     },
     {
       "skillId": "skill.range",

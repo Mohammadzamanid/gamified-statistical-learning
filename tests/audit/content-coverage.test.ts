@@ -55,11 +55,37 @@ const byTopic = new Map(reports.map((r) => [r.skillId, r]));
  * thing under test — the *engine* is. The question says "this option means
  * axes-swapped"; the check is whether the engine agrees when someone picks it.
  * Returns null when the question gives a learner no way to express the
- * misconception at all, which is itself the failure.
+ * misconception at all, which is itself the failure. Each declaration route —
+ * tagged choice, declared numeric `wrongValue`, wrong placement, misconception
+ * point, swapped axes — had to be added here the first time a generator used it,
+ * because until then the check reported that route as unreachable.
  */
 function misconceptionResponseFor(question: Question, id: string): RawResponse | null {
   const tagged = (question.choices ?? []).find((c) => c.misconceptionId === id);
   if (tagged) return { kind: "choice", choiceIds: [tagged.id] };
+  // A numeric question has no distractor to tag, so it declares the value the
+  // mistake produces under `parameters`. The helper missing this route was
+  // itself caught by this check, on the first generator to use it.
+  const declared = (question.parameters ?? {})[id];
+  if (declared && typeof declared === "object" && typeof (declared as { wrongValue?: unknown }).wrongValue === "number") {
+    return { kind: "numeric", text: String((declared as { wrongValue: number }).wrongValue) };
+  }
+  if (question.answer.kind === "placement") {
+    const slip = question.answer.misconceptionPlacements.find((m) => m.misconceptionId === id);
+    if (slip) {
+      // The declared item, dropped in the declared wrong zone; everything else
+      // left where it belongs.
+      return {
+        kind: "placement",
+        zones: question.answer.zones.map((z) => ({
+          zoneId: z.zoneId,
+          itemIds: z.itemIds
+            .filter((i) => i !== slip.itemId)
+            .concat(z.zoneId === slip.zoneId ? [slip.itemId] : [])
+        }))
+      };
+    }
+  }
   if (question.answer.kind === "point") {
     const spot = question.answer.misconceptionPoints.find((p) => p.misconceptionId === id);
     if (spot) return spot.y === undefined ? { kind: "point", x: spot.x } : { kind: "point", x: spot.x, y: spot.y };

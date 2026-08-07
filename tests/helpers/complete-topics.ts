@@ -32,5 +32,11 @@ export const COMPLETE_TOPICS: readonly string[] = [
   "skill.r1-ratios",
   "skill.r1-negatives",
   "skill.r1-number-lines",
-  "skill.r1-coordinates"
+  "skill.r1-coordinates",
+  // The data group. With these, every Region 1 topic meets §4; the six topics
+  // still failing are the Region 2 inheritance, which belongs to S2-17.
+  "skill.r1-tables",
+  "skill.r1-cases",
+  "skill.r1-variables",
+  "skill.r1-variable-kinds"
 ];
