@@ -131,11 +131,15 @@ curriculum topics. The next unit is **S2-10**, the Region 1 boss investigation.
 
 ## Local commit
 
-Recorded in the follow-up commit below.
+`01f29ad284a7641412447f898f85d328232cbbf0`
 
 ## Remote verification
 
-Recorded in the follow-up commit below.
+```
+LOCAL_HEAD  = 01f29ad284a7641412447f898f85d328232cbbf0
+REMOTE_HEAD = 01f29ad284a7641412447f898f85d328232cbbf0
+VERIFIED: MATCH
+```
 
 ## Next unit
 
