@@ -149,11 +149,15 @@ the data group (tables, variables, cases, variable-kinds) each need their own mo
 
 ## Local commit
 
-Recorded in the follow-up commit below.
+`c7f99d5d6c4352567a6d8bbbdc26b6de0addd9c4`
 
 ## Remote verification
 
-Recorded in the follow-up commit below.
+```
+LOCAL_HEAD  = c7f99d5d6c4352567a6d8bbbdc26b6de0addd9c4
+REMOTE_HEAD = c7f99d5d6c4352567a6d8bbbdc26b6de0addd9c4
+VERIFIED: MATCH
+```
 
 ## Next unit
 
