@@ -13,9 +13,9 @@ available.
 | | |
 |---|---|
 | Last completed unit | **S2-08** — Region 1 lessons and interactions (all 17 topic lessons, 4 cycles) |
-| Last unit attempted | **S2-09** — Region 1 validated content expansion — **Partial**, 5 of 22 topics meet §4 (`0de5fff`, remote-verified) |
+| Last unit attempted | **S2-09** — Region 1 validated content expansion — **Partial**, 9 of 22 topics meet §4 after cycle 2 (cycle 1 `0de5fff`, remote-verified) |
 | Commit | cycles `629dd74`, `2f1ec31`, `def8b1d`, `615e7c4` — each pushed and remote-verified |
-| Next unit | **S2-09 continued** — generators for Region 1's remaining 12 topics |
+| Next unit | **S2-09 continued** — generators for ratios and the position group (8 Region 1 topics left) |
 | Still open from Stage 0 | **R-00d** (push `stage-1-baseline` tag) and **R-00e** (set repository private) — both blocked, both need the owner's credentials |
 
 ---

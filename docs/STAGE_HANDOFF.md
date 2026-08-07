@@ -4,7 +4,7 @@
 (`git show 7add4bc:docs/STAGE_HANDOFF.md`). Its still-binding contracts, traps, and priorities are carried forward
 below — nothing was discarded.
 
-**Last updated:** 2026-08-06, at the close of S2-09 cycle 1 (**Partial**).
+**Last updated:** 2026-08-07, at the close of S2-09 cycle 2 (**Partial**).
 
 ---
 
@@ -37,14 +37,14 @@ after Stage 1 was lost because commits were never pushed to a durable remote. Re
 | Milestone exports | `../gsl-exports/` — source ZIP + git bundle + manifest + SHA-256 checksums |
 | Working tree | clean |
 | Node / npm used | v22.22.2 / 10.9.7 |
-| Test suite | **403 tests / 33 files**, all passing (Stage 1 baseline was 73 / 14) |
+| Test suite | **411 tests / 33 files**, all passing (Stage 1 baseline was 73 / 14) |
 | Build | passing (**538.47 kB, 143.72 kB gzip**; baseline was 285.73 kB / 83.82 kB) |
 | Source modified since baseline | S2-01 … S2-08 — achievements + region completion, three new interactions, the enforced interaction audit, the review queue, the Region 1 topic architecture, and all 17 Region 1 lessons |
 | Curriculum | 2 regions · **6 modules** · **20 lessons** · **23 skills** · **145 questions** (baseline 2/2/3/6/14) |
 | Lessons Complete to scope §5 | **17 of 17** Region 1 topic lessons. No skeletons. Two inherited Stage 1 lessons are deliberately excluded — see §5 |
 | Misconceptions / remediations | **24 / 23** (baseline 8 / 7) |
-| Validated generated interactions | **3,192**, available to spaced review (baseline 0) |
-| Topics meeting scope §4 | **5 of 22** — see `docs/CONTENT_COVERAGE.md` |
+| Validated generated interactions | **4,545**, available to spaced review (baseline 0) |
+| Topics meeting scope §4 | **9 of 22** — see `docs/CONTENT_COVERAGE.md` |
 | Save schema version | **2** (baseline was 1) — migration `1 -> 2` adds `reviewSession` |
 | Interaction types implemented | **14 of 17** (baseline 11); still stubbed: `formula-construction`, `simulation-prediction`, `confidence-rating` |
 | Stage 2 | **in progress** — see `STAGE2_RECONSTRUCTION_SCOPE.md`, `STAGE2_RECONSTRUCTION_BACKLOG.md`, `STAGE2_CURRENT_WORK.md` |
@@ -105,19 +105,27 @@ branch/tag deletion) are forbidden without explicit owner permission. See `REMOT
 
 ## 5. Next unit
 
-**S2-09 continued — generators for Region 1's remaining 12 topics.**
+**S2-09 continued — generators for ratios and the position group.**
 
-S2-09's first cycle built the machinery scope §4 needs and took Module 1's five topics past the bar. **5 of 22 topics
-meet §4**; the other 17 have zero generator families and are reported in `docs/CONTENT_COVERAGE.md` as failures with
-reasons — which is what the scope requires of them, and never omission.
+Two cycles are done. Cycle 1 built the machinery scope §4 needs and took Module 1's five topics past the bar; cycle 2
+added `src/content/generators/parts.ts` and took the four part/whole topics past it. **9 of 22 topics meet §4**; the
+other 13 have zero generator families and are reported in `docs/CONTENT_COVERAGE.md` as failures with reasons — which
+is what the scope requires of them, and never omission.
 
-Remaining, all Region 1 unless noted: fractions · decimals · percentages · ratios · proportions · negatives ·
-number lines · coordinates · tables · variables · cases · categorical-versus-numerical. Five inherited Region 2 topics
-(mean, median, range, choosing measures, data literacy) belong to **S2-17**.
+Remaining, all Region 1 unless noted: ratios · negatives · number lines · coordinates · tables · variables · cases ·
+categorical-versus-numerical. Five inherited Region 2 topics (mean, median, range, choosing measures, data literacy)
+belong to **S2-17**.
 
-**The arithmetic template will not carry over.** `arithmeticFamilies` is parameterised by a two-number operation, and
-most remaining topics are not one: fractions need equivalence and comparison of parts, coordinates need point geometry,
-tables need a grid to read from. Expect a new generator module per topic group.
+**Ratios is closest to `parts.ts` and should be next.** After that, expect a new generator module per topic group: the
+position group (negatives, number lines, coordinates) needs a line and a grid to place things on, and the data group
+(tables, variables, cases, variable-kinds) needs a dataset to read from. Neither is a part of a whole, and neither is
+the two-number operation `arithmeticFamilies` is parameterised by.
+
+**What `parts.ts` learned the hard way, and what it costs to ignore.** Its first version let only the conversion family
+use the topic's form, so four topics emitted *identical* questions and the near-duplicate gate collapsed three of them
+to almost nothing — correctly. A generator module shared across topics must make every family speak in its own topic's
+terms, or the topics are one topic. And keep an eye on the parameter grid: the application family had a seven-value
+totals list that pushed one reasoning shape to 49% of the topic, a whisker under the 50% ceiling.
 
 ### How the machinery works, and the one thing that will bite
 
@@ -125,6 +133,13 @@ Run `npm run report:coverage` to regenerate both report forms. A topic is Comple
 available interactions across ≥4 reasoning families, with no single reasoning *shape* above 50% and nothing
 unreachable. Declaring it means adding its skill id to `tests/helpers/complete-topics.ts`, which
 `tests/audit/content-coverage.test.ts` then enforces.
+
+**Defect-class rejections must be zero (D-023).** `invalidCombinations` is a generator declaring a combination
+unaskable — design, reported with a reason. `schemaFailures`, `answerFailures`, `missingAccessibility`,
+`missingMisconceptionMapping` and `exactDuplicates` are the pipeline catching a broken generator, and
+`tests/audit/content-coverage.test.ts` requires each to be 0. Fix the generator; do not relax the check. A probe showed
+a generator with 68 wrong answer keys clearing all three §4 bars before this existed, because the bad output was
+dropped quietly and the topic had interactions to spare.
 
 **`Candidate.expectedResponse` is mandatory and must be stated, never read back out of the question you built.** This
 is the trap: deriving the "correct" response from `question.answer` and evaluating it against `question.answer` cannot
@@ -135,7 +150,10 @@ sum out a different way, so a typo in either route makes them disagree.
 Three fingerprints do three different jobs, and merging them breaks everything:
 `exactFingerprint` (same question twice — a bug), `nearDuplicateFingerprint` (same numbers, renamed scenery —
 rejected), and `reasoningShape` (task with particulars stripped — *reported*, never rejected). Collapsing near-duplicate
-onto shape reduced 800 valid combinations to 9 on the first attempt.
+onto shape reduced 800 valid combinations to 9 on the first attempt. All three must cover **every field the learner
+reads** (D-024): `exactFingerprint` omitted `items`, so ordering families — one fixed prompt, six permutations of three
+items — collapsed onto six questions and the rest were thrown away as duplicates. Restoring it recovered questions in
+every topic.
 
 ### Region 1's two deliberate exceptions
 

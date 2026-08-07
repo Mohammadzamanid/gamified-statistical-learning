@@ -237,6 +237,33 @@ describe("the pipeline rejects, and says why", () => {
     expect(run.results.map((r) => r.outcome.status)).toEqual(["accepted", "accepted"]);
   });
 
+  it("accepts two ordering questions that differ only in the values being ordered", () => {
+    // Found by reading a coverage report, not by a failing test: an ordering
+    // family's prompt is fixed, and there are only six permutations of three
+    // items, so a duplicate check blind to items collapsed the whole family onto
+    // six questions and threw the rest away — while every value the learner
+    // actually reads was different.
+    const ordering = (id: string, texts: [string, string, string]): QuestionDraft =>
+      draft({
+        id,
+        interaction: "ordering",
+        prompt: "Three holds report how full they are. Put them in order, emptiest first.",
+        items: texts.map((text, k) => ({ id: `it.${k}`, text })),
+        answer: { kind: "ordering", correctOrder: ["it.0", "it.1", "it.2"] }
+      });
+    const order = (): RawResponse => ({ kind: "ordering", order: ["it.0", "it.1", "it.2"] });
+    const run = validateFamilies(
+      [
+        family([
+          candidate("a", () => ordering("q.gen.test.o1", ["1/8", "1/4", "1/2"]), null, order),
+          candidate("b", () => ordering("q.gen.test.o2", ["3/10", "3/5", "9/10"]), null, order)
+        ])
+      ],
+      library
+    );
+    expect(run.results.map((r) => r.outcome.status)).toEqual(["accepted", "accepted"]);
+  });
+
   it("will not let a generator re-emit an authored question", () => {
     const authored = [...content.questions.values()];
     const clone = authored.find(
@@ -297,5 +324,24 @@ describe("the three fingerprints answer three different questions", () => {
 
   it("reads 0.50 and 0.5 as the same number", () => {
     expect(normalizeKeepingNumbers("a share of 0.50")).toBe(normalizeKeepingNumbers("a share of 0.5"));
+  });
+
+  it("identifies an ordering question by its items, not by its prompt alone", () => {
+    const ordering = (id: string, texts: [string, string, string]) =>
+      QuestionSchema.parse(
+        draft({
+          id,
+          interaction: "ordering",
+          prompt: "Three holds report how full they are. Put them in order, emptiest first.",
+          items: texts.map((text, k) => ({ id: `it.${k}`, text })),
+          answer: { kind: "ordering", correctOrder: ["it.0", "it.1", "it.2"] }
+        })
+      );
+    const a = ordering("q.o1", ["1/8", "1/4", "1/2"]);
+    const b = ordering("q.o2", ["3/10", "3/5", "9/10"]);
+    expect(exactFingerprint(a)).not.toBe(exactFingerprint(b));
+    expect(nearDuplicateFingerprint(a)).not.toBe(nearDuplicateFingerprint(b));
+    // Still the same shape, which is the point: different practice, one pattern.
+    expect(reasoningShape(a)).toBe(reasoningShape(b));
   });
 });

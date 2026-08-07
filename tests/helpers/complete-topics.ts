@@ -14,9 +14,17 @@
  * it, which the scope calls out by name.
  */
 export const COMPLETE_TOPICS: readonly string[] = [
+  // Module 1 — the four operations and the counting that precedes them.
   "skill.r1-counting",
   "skill.r1-addition",
   "skill.r1-subtraction",
   "skill.r1-multiplication",
-  "skill.r1-division"
+  "skill.r1-division",
+  // Module 2 — parts of a whole. Added when the measured report said they met
+  // the bar, not before; the guard above had already failed on them being
+  // undeclared, which is the direction of that check nobody writes tests for.
+  "skill.r1-fractions",
+  "skill.r1-decimals",
+  "skill.r1-percentages",
+  "skill.r1-proportions"
 ];

@@ -144,13 +144,14 @@
         "error-identification",
         "irrelevant-information-filtering",
         "multi-step-reasoning",
+        "ordering",
         "real-world-application",
         "recognition"
       ],
       "rawCombinations": 800,
       "validCombinations": 800,
-      "validatedGenerated": 720,
-      "totalAvailable": 727,
+      "validatedGenerated": 800,
+      "totalAvailable": 807,
       "rejections": {
         "invalidCombinations": 0,
         "invalidReasons": {},
@@ -158,11 +159,11 @@
         "answerFailures": 0,
         "missingAccessibility": 0,
         "missingMisconceptionMapping": 0,
-        "exactDuplicates": 80,
+        "exactDuplicates": 0,
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.11004126547455295,
+      "largestShapeShare": 0.09913258983890955,
       "failures": []
     },
     {
@@ -250,8 +251,8 @@
       ],
       "rawCombinations": 1000,
       "validCombinations": 848,
-      "validatedGenerated": 789,
-      "totalAvailable": 796,
+      "validatedGenerated": 848,
+      "totalAvailable": 855,
       "rejections": {
         "invalidCombinations": 152,
         "invalidReasons": {
@@ -263,11 +264,11 @@
         "answerFailures": 0,
         "missingAccessibility": 0,
         "missingMisconceptionMapping": 0,
-        "exactDuplicates": 59,
+        "exactDuplicates": 0,
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.12562814070351758,
+      "largestShapeShare": 0.11695906432748537,
       "failures": []
     },
     {
@@ -278,15 +279,25 @@
       ],
       "regionId": "r.harbor-tallies",
       "authoredRecords": 7,
-      "generatorFamilies": 0,
-      "reasoningFamilies": [],
-      "rawCombinations": 0,
-      "validCombinations": 0,
-      "validatedGenerated": 0,
-      "totalAvailable": 7,
+      "generatorFamilies": 6,
+      "reasoningFamilies": [
+        "comparison",
+        "error-identification",
+        "ordering",
+        "real-world-application",
+        "representation-conversion",
+        "transfer"
+      ],
+      "rawCombinations": 324,
+      "validCombinations": 264,
+      "validatedGenerated": 264,
+      "totalAvailable": 271,
       "rejections": {
-        "invalidCombinations": 0,
-        "invalidReasons": {},
+        "invalidCombinations": 60,
+        "invalidReasons": {
+          "the share needs a fourth decimal place, which these topics do not ask for": 24,
+          "the total does not divide into this many equal parts": 36
+        },
         "schemaFailures": 0,
         "answerFailures": 0,
         "missingAccessibility": 0,
@@ -295,12 +306,8 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.14285714285714285,
-      "failures": [
-        "no generator families produce for this topic",
-        "7 available interactions, below the required 100",
-        "0 reasoning families represented, below the required 4"
-      ]
+      "largestShapeShare": 0.36900369003690037,
+      "failures": []
     },
     {
       "skillId": "skill.r1-division",
@@ -332,8 +339,8 @@
         "answerFailures": 0,
         "missingAccessibility": 0,
         "missingMisconceptionMapping": 0,
-        "exactDuplicates": 4,
-        "nearDuplicates": 13
+        "exactDuplicates": 0,
+        "nearDuplicates": 17
       },
       "unreachableQuestions": [],
       "largestShapeShare": 0.13402061855670103,
@@ -347,15 +354,26 @@
       ],
       "regionId": "r.harbor-tallies",
       "authoredRecords": 8,
-      "generatorFamilies": 0,
-      "reasoningFamilies": [],
-      "rawCombinations": 0,
-      "validCombinations": 0,
-      "validatedGenerated": 0,
-      "totalAvailable": 8,
+      "generatorFamilies": 6,
+      "reasoningFamilies": [
+        "comparison",
+        "error-identification",
+        "ordering",
+        "real-world-application",
+        "representation-conversion",
+        "transfer"
+      ],
+      "rawCombinations": 324,
+      "validCombinations": 263,
+      "validatedGenerated": 263,
+      "totalAvailable": 271,
       "rejections": {
-        "invalidCombinations": 0,
-        "invalidReasons": {},
+        "invalidCombinations": 61,
+        "invalidReasons": {
+          "the share needs a fourth decimal place, which these topics do not ask for": 24,
+          "the total does not divide into this many equal parts": 36,
+          "the mistake happens to give the right answer here": 1
+        },
         "schemaFailures": 0,
         "answerFailures": 0,
         "missingAccessibility": 0,
@@ -364,12 +382,8 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.125,
-      "failures": [
-        "no generator families produce for this topic",
-        "8 available interactions, below the required 100",
-        "0 reasoning families represented, below the required 4"
-      ]
+      "largestShapeShare": 0.36900369003690037,
+      "failures": []
     },
     {
       "skillId": "skill.r1-multiplication",
@@ -386,13 +400,14 @@
         "error-identification",
         "irrelevant-information-filtering",
         "multi-step-reasoning",
+        "ordering",
         "real-world-application",
         "recognition"
       ],
       "rawCombinations": 800,
       "validCombinations": 761,
-      "validatedGenerated": 681,
-      "totalAvailable": 688,
+      "validatedGenerated": 761,
+      "totalAvailable": 768,
       "rejections": {
         "invalidCombinations": 39,
         "invalidReasons": {
@@ -402,11 +417,11 @@
         "answerFailures": 0,
         "missingAccessibility": 0,
         "missingMisconceptionMapping": 0,
-        "exactDuplicates": 80,
+        "exactDuplicates": 0,
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.11627906976744186,
+      "largestShapeShare": 0.10416666666666667,
       "failures": []
     },
     {
@@ -481,15 +496,25 @@
       ],
       "regionId": "r.harbor-tallies",
       "authoredRecords": 7,
-      "generatorFamilies": 0,
-      "reasoningFamilies": [],
-      "rawCombinations": 0,
-      "validCombinations": 0,
-      "validatedGenerated": 0,
-      "totalAvailable": 7,
+      "generatorFamilies": 6,
+      "reasoningFamilies": [
+        "comparison",
+        "error-identification",
+        "ordering",
+        "real-world-application",
+        "representation-conversion",
+        "transfer"
+      ],
+      "rawCombinations": 324,
+      "validCombinations": 264,
+      "validatedGenerated": 264,
+      "totalAvailable": 271,
       "rejections": {
-        "invalidCombinations": 0,
-        "invalidReasons": {},
+        "invalidCombinations": 60,
+        "invalidReasons": {
+          "the share needs a fourth decimal place, which these topics do not ask for": 24,
+          "the total does not divide into this many equal parts": 36
+        },
         "schemaFailures": 0,
         "answerFailures": 0,
         "missingAccessibility": 0,
@@ -498,12 +523,8 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.14285714285714285,
-      "failures": [
-        "no generator families produce for this topic",
-        "7 available interactions, below the required 100",
-        "0 reasoning families represented, below the required 4"
-      ]
+      "largestShapeShare": 0.36900369003690037,
+      "failures": []
     },
     {
       "skillId": "skill.r1-proportions",
@@ -513,15 +534,25 @@
       ],
       "regionId": "r.harbor-tallies",
       "authoredRecords": 7,
-      "generatorFamilies": 0,
-      "reasoningFamilies": [],
-      "rawCombinations": 0,
-      "validCombinations": 0,
-      "validatedGenerated": 0,
-      "totalAvailable": 7,
+      "generatorFamilies": 6,
+      "reasoningFamilies": [
+        "comparison",
+        "error-identification",
+        "ordering",
+        "real-world-application",
+        "representation-conversion",
+        "transfer"
+      ],
+      "rawCombinations": 324,
+      "validCombinations": 264,
+      "validatedGenerated": 264,
+      "totalAvailable": 271,
       "rejections": {
-        "invalidCombinations": 0,
-        "invalidReasons": {},
+        "invalidCombinations": 60,
+        "invalidReasons": {
+          "the share needs a fourth decimal place, which these topics do not ask for": 24,
+          "the total does not divide into this many equal parts": 36
+        },
         "schemaFailures": 0,
         "answerFailures": 0,
         "missingAccessibility": 0,
@@ -530,12 +561,8 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.14285714285714285,
-      "failures": [
-        "no generator families produce for this topic",
-        "7 available interactions, below the required 100",
-        "0 reasoning families represented, below the required 4"
-      ]
+      "largestShapeShare": 0.36900369003690037,
+      "failures": []
     },
     {
       "skillId": "skill.r1-ratios",
@@ -590,8 +617,8 @@
       ],
       "rawCombinations": 800,
       "validCombinations": 797,
-      "validatedGenerated": 718,
-      "totalAvailable": 725,
+      "validatedGenerated": 797,
+      "totalAvailable": 804,
       "rejections": {
         "invalidCombinations": 3,
         "invalidReasons": {
@@ -601,11 +628,11 @@
         "answerFailures": 0,
         "missingAccessibility": 0,
         "missingMisconceptionMapping": 0,
-        "exactDuplicates": 79,
+        "exactDuplicates": 0,
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.1103448275862069,
+      "largestShapeShare": 0.09950248756218906,
       "failures": []
     },
     {

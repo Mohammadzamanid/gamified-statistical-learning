@@ -15,7 +15,8 @@
 import { describe, expect, it } from "vitest";
 import { loadPlayableContent, loadShippedContent } from "../../src/content";
 import { generatedRun, resetGenerated } from "../../src/content/generated";
-import { allGeneratorFamilies } from "../../src/content/generators";
+import { PARTS_TOPICS, allGeneratorFamilies } from "../../src/content/generators";
+import { partsFamilies } from "../../src/content/generators/parts";
 import {
   MAX_SINGLE_SHAPE_SHARE,
   REQUIRED_INTERACTIONS_PER_TOPIC,
@@ -123,6 +124,58 @@ describe("the seven metrics stay distinct", () => {
       expect(summed, `${r.skillId} counts invalid combinations without reasons`).toBe(
         r.rejections.invalidCombinations
       );
+    }
+  });
+});
+
+describe("a rejection is a design decision or a defect, and they are not the same", () => {
+  // `invalidCombinations` is a generator saying "that is not a question this
+  // topic should ask" — design, and reported with a reason. The rest are the
+  // pipeline saying "this generator is broken", and a shipped generator must
+  // produce none of them.
+  //
+  // Nothing said so until a probe made one form's independent working repeat the
+  // very mistake its own trap describes. Sixty-eight generated answers then
+  // disagreed with their own keys, every one was silently dropped, and the topic
+  // still reported **zero failures** — it had interactions to spare, so it
+  // cleared all three §4 bars while shipping a broken generator.
+  const DEFECTS = [
+    "schemaFailures",
+    "answerFailures",
+    "missingAccessibility",
+    "missingMisconceptionMapping",
+    // A generator enumerating the same question twice is a bug in its own
+    // enumeration. Near-duplicates are not on this list: different parameters
+    // can legitimately land on the same question, and rejecting one is the gate
+    // working.
+    "exactDuplicates"
+  ] as const;
+
+  for (const kind of DEFECTS) {
+    it(`no shipped generator produces ${kind}`, () => {
+      for (const r of reports) {
+        expect(r.rejections[kind], `${r.skillId} — fix the generator, not this check`).toBe(0);
+      }
+    });
+  }
+});
+
+describe("the part/whole generators state a mistake that is actually a mistake", () => {
+  it("never asks a learner to spot an error in a value that is correct", () => {
+    // Each form invites one characteristic slip, and for some parts that slip
+    // lands on the right answer anyway — a half is a half whichever side of the
+    // hold you count. Those parts must be excluded, or the question has no
+    // error in it and its stated answer is wrong.
+    for (const [topic, form] of PARTS_TOPICS) {
+      const errors = partsFamilies(topic, form).find((f) => f.reasoningFamily === "error-identification")!;
+      for (const candidate of errors.enumerate()) {
+        if (candidate.invalidReason !== null) continue;
+        const [part, whole] = candidate.key.split("-").map(Number) as [number, number];
+        expect(
+          Math.abs(form.trap.wrong({ part, whole }) - form.value({ part, whole })),
+          `${topic.slug}: the "mistake" shown for ${part} of ${whole} is the correct value`
+        ).toBeGreaterThan(1e-9);
+      }
     }
   });
 });

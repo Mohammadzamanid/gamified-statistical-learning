@@ -136,3 +136,23 @@ lesson structure, reachability, the interaction audit — keeps working from the
 can never quietly satisfy a check about authored content. Generated ids are prefixed `q.gen.`, a check fails if one ever
 appears in a lesson, and another proves the spaced-review queue can pick them — which is what makes "available" honest
 rather than a number in a report. (S2-09)
+
+**D-023 — A rejection is either a design decision or a defect, and the report must not blur them.**
+The generation pipeline discards candidates for six reasons, and they are not the same kind of fact. A generator saying
+"that combination is not a question this topic should ask" is design, and is reported with its reason. The pipeline
+saying "this question's answer disagrees with the family's own working", or "the schema refuses it", or "it has no text
+equivalent", or "it names a misconception nobody declared", or "this is a question already emitted" is a *defect in a
+shipped generator*, and must be zero. Written after a probe made one form's second, independent working repeat the very
+mistake its own trap describes: sixty-eight answers disagreed with their own keys, all sixty-eight were silently
+dropped, and the topic still cleared every §4 bar — 203 interactions, 4 reasoning families, a 49% largest shape — and
+reported no failures. Discarding bad output quietly is indistinguishable from producing good output unless something
+counts the discards. (S2-09)
+
+**D-024 — A question's fingerprint covers everything the learner reads.**
+`exactFingerprint` originally identified a question by its interaction, prompt, answer and choices. An ordering
+question carries its content in its *items*, and its family gives every question the same prompt, so identity reduced
+to the prompt plus one of six permutations — and whole families collapsed onto six questions while every value on
+screen differed. It was found by reading a coverage report that claimed 25 exact duplicates in a topic whose
+generators emit no clones, not by a failing test; the fix recovered questions in every topic (counting 796 → 855,
+multiplication 688 → 768). The rule that follows: a fingerprint that omits a field the learner can see will silently
+throw away valid content, and silently is the problem. (S2-09)

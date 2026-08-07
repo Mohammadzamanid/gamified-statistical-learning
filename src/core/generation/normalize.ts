@@ -91,7 +91,13 @@ export function exactFingerprint(question: Question): string {
     question.interaction,
     question.prompt.trim().replace(/\s+/g, " ").toLowerCase(),
     JSON.stringify(question.answer),
-    (question.choices ?? []).map((c) => c.text.trim().toLowerCase()).sort().join("|")
+    (question.choices ?? []).map((c) => c.text.trim().toLowerCase()).sort().join("|"),
+    // Items belong here for the same reason choices do. Leaving them out made an
+    // ordering question's identity its prompt plus its permutation — and there
+    // are only six permutations of three items, so a family with one fixed
+    // prompt collapsed onto six questions and the rest were thrown away as
+    // "duplicates" while differing in every value the learner sees.
+    (question.items ?? []).map((i) => i.text.trim().toLowerCase()).sort().join("|")
   ].join("::");
 }
 

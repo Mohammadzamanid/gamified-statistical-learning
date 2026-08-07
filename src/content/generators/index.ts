@@ -7,6 +7,7 @@
  * than quietly omitted.
  */
 import { arithmeticFamilies, type OperationSpec } from "./arithmetic";
+import { fractionText, partsFamilies, type Form, type Part, type PartsTopic } from "./parts";
 import type { GeneratorFamily } from "../../core/generation/types";
 
 const COUNTING: OperationSpec = {
@@ -170,6 +171,114 @@ const DIVISION: OperationSpec = {
 
 export const OPERATION_SPECS = [COUNTING, ADDITION, SUBTRACTION, MULTIPLICATION, DIVISION];
 
+// --------------------------------------------------------------------------
+// Module 2 — parts of a whole
+//
+// One part/whole pair, five different ways of writing it. The topic decides the
+// form; the reasoning families are shared, because comparing two shares is the
+// same act of thought whether they are written as fractions or as percentages.
+// --------------------------------------------------------------------------
+
+/** The share as a plain number, by division. Every form starts here. */
+const share = (p: Part): number => Number((p.part / p.whole).toFixed(6));
+
+/** The same share by repeated subtraction in thousandths — a different route. */
+function shareIndependently(p: Part): number {
+  let remaining = p.part * 1000;
+  let thousandths = 0;
+  while (remaining >= p.whole) {
+    remaining -= p.whole;
+    thousandths += 1;
+  }
+  return Number((thousandths / 1000).toFixed(6));
+}
+
+/** A terminating decimal printed with exactly the places it needs. */
+const decimalText = (v: number): string =>
+  v.toFixed(v === Math.round(v) ? 0 : (String(v).split(".")[1]?.length ?? 0));
+
+const asFraction: Form = {
+  value: share,
+  valueIndependently: shareIndependently,
+  interaction: "fraction-input",
+  ask: "What fraction of the crates is that? You may answer as a fraction or a decimal.",
+  render: fractionText,
+  noun: "fraction",
+  // Naming the part you were *not* asked about. The commonest fraction slip
+  // there is, and the reason "what fraction is shaded" is asked so carefully.
+  trap: {
+    wrong: (p) => Number((1 - share(p)).toFixed(6)),
+    option: "The empty bays were counted instead of the full ones",
+    explain: (p) => `${p.part} of the ${p.whole} bays are full, so the fraction has to be built from the full ones.`
+  },
+  tolerance: 0.0005
+};
+
+const asDecimal: Form = {
+  value: share,
+  valueIndependently: shareIndependently,
+  interaction: "numeric-input",
+  ask: "Write that share as a decimal.",
+  render: decimalText,
+  noun: "decimal",
+  // Place value, not arithmetic: the digits are right and the point is not.
+  trap: {
+    wrong: (p) => Number((share(p) / 10).toFixed(6)),
+    option: "The decimal point is one place too far to the left",
+    explain: () => "The digits are right but the value is ten times too small, so the point has slipped a place."
+  },
+  tolerance: 0.0005
+};
+
+const asPercentage: Form = {
+  value: (p) => Number((share(p) * 100).toFixed(4)),
+  valueIndependently: (p) => {
+    // Scale to a hundred by repeated addition rather than by multiplying.
+    let counted = 0;
+    for (let i = 0; i < p.part; i++) counted += 100 / p.whole;
+    return Number(counted.toFixed(4));
+  },
+  interaction: "percentage-input",
+  ask: "What percentage of the crates is that? Answer on the 0-100 scale.",
+  render: (v) => `${Number(v.toFixed(2))}%`,
+  noun: "percentage",
+  // Stopping one step early: the share is right, the scaling to a hundred never
+  // happened, and a % sign was written on it anyway.
+  trap: {
+    wrong: share,
+    option: "The share was left as a decimal and never scaled to a hundred",
+    explain: () => "A percentage counts parts per hundred, so the decimal share still has to be multiplied by 100."
+  },
+  unit: "%",
+  tolerance: 0.01
+};
+
+const asProportion: Form = {
+  value: share,
+  valueIndependently: shareIndependently,
+  interaction: "numeric-input",
+  ask: "What proportion of the crates is that? Answer between 0 and 1.",
+  render: (v) => decimalText(v),
+  noun: "proportion",
+  // The mirror image of the percentage trap, which is why both topics need it.
+  trap: {
+    wrong: (p) => Number((share(p) * 100).toFixed(4)),
+    option: "That is the percentage, not a proportion between 0 and 1",
+    explain: () => "A proportion sits between 0 and 1; scaling it to a hundred turns it into a percentage instead."
+  },
+  tolerance: 0.0005
+};
+
+export const PARTS_TOPICS: ReadonlyArray<[PartsTopic, Form]> = [
+  [{ slug: "r1-fractions", skillId: "skill.r1-fractions", topicId: "t.r1-fractions", objectiveId: "obj.r1-fractions" }, asFraction],
+  [{ slug: "r1-decimals", skillId: "skill.r1-decimals", topicId: "t.r1-decimals", objectiveId: "obj.r1-decimals" }, asDecimal],
+  [{ slug: "r1-percentages", skillId: "skill.r1-percentages", topicId: "t.r1-percentages", objectiveId: "obj.r1-percentages" }, asPercentage],
+  [{ slug: "r1-proportions", skillId: "skill.r1-proportions", topicId: "t.r1-proportions", objectiveId: "obj.r1-proportions" }, asProportion]
+];
+
 export function allGeneratorFamilies(): GeneratorFamily[] {
-  return OPERATION_SPECS.flatMap(arithmeticFamilies);
+  return [
+    ...OPERATION_SPECS.flatMap(arithmeticFamilies),
+    ...PARTS_TOPICS.flatMap(([topic, form]) => partsFamilies(topic, form))
+  ];
 }
