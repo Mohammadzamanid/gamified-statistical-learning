@@ -13,7 +13,7 @@ available.
 | | |
 |---|---|
 | Last completed unit | **S2-08** — Region 1 lessons and interactions (all 17 topic lessons, 4 cycles) |
-| Last completed unit | **S2-11** — Region 2 world and curriculum architecture — **Complete**. 22 topic lessons across 6 modules |
+| Last completed unit | **S2-11** — Region 2 world and curriculum architecture — **Complete**. 22 topic lessons across 6 modules (`dfb8e4f`, remote-verified) |
 | Previous unit | **S2-10** — Region 1 boss investigation — **Complete** (`dc87d8b`, remote-verified) |
 | Previous unit | **S2-09** — Region 1 validated content expansion — **Partial**, 17 of 22 topics meet §4; the 5 remaining are Region 2, owned by S2-17 (`01f29ad`, remote-verified) |
 | Commit | cycles `629dd74`, `2f1ec31`, `def8b1d`, `615e7c4` — each pushed and remote-verified |

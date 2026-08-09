@@ -144,11 +144,15 @@ in those units. Region 2's boss is specified here and built by **S2-18**.
 
 ## Local commit
 
-Recorded in the follow-up commit below.
+`dfb8e4f7c4c7b78d2ec612c4bb433e68d8f448c3`
 
 ## Remote verification
 
-Recorded in the follow-up commit below.
+```
+LOCAL_HEAD  = dfb8e4f7c4c7b78d2ec612c4bb433e68d8f448c3
+REMOTE_HEAD = dfb8e4f7c4c7b78d2ec612c4bb433e68d8f448c3
+VERIFIED: MATCH
+```
 
 ## Next unit
 
