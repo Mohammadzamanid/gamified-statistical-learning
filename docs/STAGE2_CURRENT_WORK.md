@@ -122,11 +122,15 @@ first task.
 
 ## Local commit
 
-Recorded in the follow-up commit below.
+`34a63f97a570d9c6c6f3a65f9be6ed9969162715`
 
 ## Remote verification
 
-Recorded in the follow-up commit below.
+```
+LOCAL_HEAD  = 34a63f97a570d9c6c6f3a65f9be6ed9969162715
+REMOTE_HEAD = 34a63f97a570d9c6c6f3a65f9be6ed9969162715
+VERIFIED: MATCH
+```
 
 ## Next unit
 

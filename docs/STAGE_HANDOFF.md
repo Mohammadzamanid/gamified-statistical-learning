@@ -4,7 +4,7 @@
 (`git show 7add4bc:docs/STAGE_HANDOFF.md`). Its still-binding contracts, traps, and priorities are carried forward
 below — nothing was discarded.
 
-**Last updated:** 2026-08-07, at the close of S2-12 cycle 1 (**Partial**).
+**Last updated:** 2026-08-07, at the close of S2-12 cycle 2 (**Partial**).
 
 ---
 
@@ -16,7 +16,7 @@ after Stage 1 was lost because commits were never pushed to a durable remote. Re
 
 - **Stage 1: surviving, verified, green.** Not re-created — the original commit `7add4bc` was carried forward from the
   archive's own `.git` directory, with authorship intact.
-- **Stage 2: in progress, and not recoverable.** Reconstruction began 2026-08-04; S2-01 through S2-08, S2-10 and S2-11 are complete and S2-12 is **Partial** (cycle 1, `8065791`, remote-verified); S2-09 is **Partial**, and only because §4 is stated over all 22 topics — every Region 1 topic meets it. Nothing
+- **Stage 2: in progress, and not recoverable.** Reconstruction began 2026-08-04; S2-01 through S2-08, S2-10 and S2-11 are complete and S2-12 is **Partial** (cycle 2, `34a63f9`, remote-verified); S2-09 is **Partial**, and only because §4 is stated over all 22 topics — every Region 1 topic meets it. Nothing
   in it is recovered source.
 - **Stages 3–6: not started, and not recoverable.** They must be **reconstructed** from the surviving Stage 1 source,
   the specifications, and the known defect history. They may never be described as recovered source, and no metric may
@@ -105,15 +105,22 @@ branch/tag deletion) are forbidden without explicit owner permission. See `REMOT
 
 ## 5. Next unit
 
-**S2-12 continued — `m.r2-centre`.**
+**S2-12 continued — redistribute the inherited questions, then re-cut mean and median.**
 
-Cycle 1 finished `m.r2-counts`: frequency, proportion and percentage are Complete under §5. **6 of S2-12's 9 lessons
-remain** — mean, median, mode and choosing a measure in `m.r2-centre`, then outlier and skew effects in
-`m.r2-variation`.
+**5 of 9 lessons are Complete**: all of `m.r2-counts`, plus mode and choosing a measure. What remains is the mean and
+median re-cuts, then outlier and skew effects in `m.r2-variation`.
 
-**Two of the four in `m.r2-centre` are Stage 1 lessons, not seeds.** `l.reading-tallies` (mean) and `l.middle-harbor`
-(median) carry real content and several questions already, so they are re-cut to §5 rather than written from scratch —
-the skeleton shape does not apply to them and the architecture audit exempts them by name.
+**Start with the redistribution, not the re-cut.** `l.reading-tallies` and `l.middle-harbor` carry 13 and 10 inherited
+Stage 1 questions, and a Complete lesson must account for every question it asks — role, skill, explanation, text
+equivalent. Several of those questions do not teach centre at all:
+
+- `q.pct-rainy-days`, `q.fraction-quarter`, `q.step-percent-rainy`, `q.point-quarter-line` → `l.r2-percentage`
+- `q.graph-tallest-bar`, `q.dd-build-bar-chart` → `l.r2-bar-charts`
+- `q.multiselect-categorical`, `q.ordering-data-cycle`, `q.dd-variable-kinds`, `q.point-thursday-catch`,
+  `q.error-id-causation` → the data-literacy lessons
+
+Move them first; the re-cut becomes straightforward afterwards. Attempting it the other way round orphans them, which
+the reachability audit catches immediately.
 
 **Draggable/editable datasets are still not built.** The three finished demonstrations are control-driven, which meets
 requirement 4 but is not the same thing. Editable datasets belong with the laboratory work in S2-15; if S2-12 is to
