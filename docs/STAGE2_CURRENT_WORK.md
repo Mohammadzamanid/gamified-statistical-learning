@@ -133,11 +133,15 @@ cannot be built before the Region 2 lessons it draws on exist (S2-11 … S2-17).
 
 ## Local commit
 
-Recorded in the follow-up commit below.
+`dc87d8b87c88b8d8b4db0d8cb1c6f20759aec8f4`
 
 ## Remote verification
 
-Recorded in the follow-up commit below.
+```
+LOCAL_HEAD  = dc87d8b87c88b8d8b4db0d8cb1c6f20759aec8f4
+REMOTE_HEAD = dc87d8b87c88b8d8b4db0d8cb1c6f20759aec8f4
+VERIFIED: MATCH
+```
 
 ## Next unit
 
