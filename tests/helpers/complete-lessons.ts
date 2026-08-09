@@ -29,5 +29,9 @@ export const COMPLETE_LESSONS: readonly string[] = [
   "l.r1-tables",
   "l.r1-variables",
   "l.r1-cases",
-  "l.r1-variable-kinds"
+  "l.r1-variable-kinds",
+  // Region 2, m.r2-counts — the first Region 2 module written to scope §5 (S2-12).
+  "l.r2-frequency",
+  "l.r2-proportion",
+  "l.r2-percentage"
 ];

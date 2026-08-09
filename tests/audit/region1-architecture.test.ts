@@ -204,11 +204,24 @@ describe("skeleton honesty", () => {
   it("lessons declared Complete have genuinely outgrown the skeleton", () => {
     // The mirror image: a lesson cannot be listed as Complete while still
     // carrying the single seed question S2-07 gave it.
+    //
+    // Scoped to Region 1 since S2-12: COMPLETE_LESSONS is one list across the
+    // whole curriculum, and Region 2 has its own architecture audit making the
+    // same assertion about its own lessons. Every id in the list is checked by
+    // one of the two, and `lesson-structure.test.ts` checks all of them.
     for (const id of COMPLETE_LESSONS) {
       const lesson = region1Lessons.find((l) => l.id === id);
-      expect(lesson, `${id} is declared Complete but is not a Region 1 lesson`).toBeDefined();
-      expect(lesson!.questionIds.length, `${id} is declared Complete but still has one seed question`).toBeGreaterThan(1);
+      if (!lesson) continue;
+      expect(lesson.questionIds.length, `${id} is declared Complete but still has one seed question`).toBeGreaterThan(1);
     }
+  });
+
+  it("declares every Region 1 lesson, and nothing outside it, from this region's list", () => {
+    // The check the `continue` above would otherwise weaken: skipping ids that
+    // are not Region 1 lessons is only safe while every Region 1 lesson is
+    // accounted for here.
+    const region1Declared = COMPLETE_LESSONS.filter((id) => region1Lessons.some((l) => l.id === id));
+    expect([...region1Declared].sort()).toEqual(region1Lessons.map((l) => l.id).sort());
   });
 
   it("holds no un-Complete lesson at all", () => {

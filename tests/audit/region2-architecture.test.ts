@@ -26,6 +26,19 @@ const region2Modules = curriculum.modules.filter((m) => m.regionId === REGION_2)
 const region2LessonIds = region2Modules.flatMap((m) => m.lessonIds);
 const region2Lessons = region2LessonIds.map((id) => curriculum.lessons.find((l) => l.id === id)!);
 
+/** Every Region 1 lesson marked complete, which is what opens the atoll. */
+function withRegion1Complete(save: SaveFile): SaveFile {
+  const region1 = curriculum.regions.find((r) => r.id === REGION_1)!;
+  const lessonIds = curriculum.modules
+    .filter((m) => region1.moduleIds.includes(m.id))
+    .flatMap((m) => m.lessonIds);
+  const lessonProgress = { ...save.lessonProgress };
+  for (const lessonId of lessonIds) {
+    lessonProgress[lessonId] = { lessonId, status: "completed", bestAccuracy: 1, completedAt: new Date().toISOString() };
+  }
+  return { ...save, lessonProgress };
+}
+
 function freshSave(): SaveFile {
   return createEmptySave({
     id: "p.r2",
@@ -118,10 +131,23 @@ describe("the region is ordered and reachable", () => {
     for (const mod of region2Modules) walk(mod.id, []);
   });
 
-  it("makes exactly one lesson available the moment the region opens", () => {
-    // A learner arriving at the atoll must find one door, not twenty-two and not
-    // none. Computed through the real unlock rule, not by reading the JSON.
+  it("opens nothing at all until Region 1 is charted", () => {
+    // The region prerequisite gates the *region*, but every lesson-level rule in
+    // this repository walks lesson prerequisites — unlocking, and the
+    // beginner-safety notation check among them. So the region's entry lesson
+    // has to depend on Region 1's lessons in that currency too, or a learner
+    // would inherit nothing from Region 1 as far as any check can tell. The
+    // notation guard caught exactly that on the first Region 2 lesson written.
     const save = freshSave();
+    const open = region2Lessons.filter((l) => isLessonUnlocked(curriculum, save, l.id));
+    expect(open.map((l) => l.id), "a Region 2 lesson is reachable before Region 1 is done").toEqual([]);
+  });
+
+  it("makes exactly one lesson available the moment the region opens", () => {
+    // A learner arriving at the atoll must find one door, not twenty-two. "The
+    // moment the region opens" means Region 1 complete, so that is the save this
+    // is computed against — through the real unlock rule, not by reading JSON.
+    const save = withRegion1Complete(freshSave());
     const available = region2Lessons.filter((l) => isLessonUnlocked(curriculum, save, l.id));
     expect(available.map((l) => l.id)).toEqual(["l.r2-frequency"]);
   });
@@ -138,7 +164,15 @@ describe("the region is ordered and reachable", () => {
       mod.lessonIds.forEach((lessonId, i) => {
         const lesson = curriculum.lessons.find((l) => l.id === lessonId)!;
         const expected =
-          i === 0 ? mod.prerequisites.map((p) => byId.get(p)!.lessonIds.at(-1)!) : [mod.lessonIds[i - 1]];
+          i === 0
+            ? mod.prerequisites.length > 0
+              ? mod.prerequisites.map((p) => byId.get(p)!.lessonIds.at(-1)!)
+              : // The region's entry module: its first lesson reaches back to the
+                // last lesson of every module of the region this one follows.
+                curriculum.modules
+                  .filter((m) => region2.prerequisites.includes(m.regionId))
+                  .map((m) => m.lessonIds.at(-1)!)
+            : [mod.lessonIds[i - 1]];
         expect([...lesson.prerequisites].sort(), `${lessonId} is out of sequence in ${mod.id}`).toEqual(
           [...expected].sort()
         );
@@ -206,22 +240,32 @@ describe("skeleton honesty", () => {
   // from Stage 1 or a skeleton this unit seeded, and none is Complete — filling
   // them in is S2-12 through S2-14. The moment one is declared Complete it must
   // survive all 18 checks in tests/audit/lesson-structure.test.ts.
-  it("declares no Region 2 lesson Complete yet", () => {
-    for (const lesson of region2Lessons) {
-      expect(COMPLETE_LESSONS.includes(lesson.id), `${lesson.id} is declared Complete but Region 2 lessons are not written yet`).toBe(false);
-    }
-  });
-
-  it("leaves every seeded lesson looking like a skeleton", () => {
-    // One seed question and no demonstration. A lesson that has grown past this
-    // without being declared Complete is a lesson the structure audit never
-    // checks, which is the failure mode this guard exists for.
+  it("accounts for all 19 seeded lessons", () => {
     const seeded = region2Lessons.filter((l) => l.id.startsWith("l.r2-"));
     expect(seeded.length, "the seeded lessons and the topic list have diverged").toBe(19);
+  });
+
+  it("leaves every lesson not declared Complete looking like a skeleton", () => {
+    // S2-11 delivered architecture only; S2-12 onward fills the lessons in, a
+    // module at a time. So the guard is no longer "every Region 2 lesson is a
+    // skeleton" but "every one not declared Complete still is" — updated
+    // deliberately as part of S2-12, not deleted to make the suite pass.
+    // Anything in COMPLETE_LESSONS is held to all 18 checks in
+    // tests/audit/lesson-structure.test.ts instead.
+    const seeded = region2Lessons.filter((l) => l.id.startsWith("l.r2-") && !COMPLETE_LESSONS.includes(l.id));
     for (const lesson of seeded) {
       expect(lesson.questionIds.length, `${lesson.id} has grown beyond its seed question — declare it Complete`).toBe(1);
       expect(lesson.demonstration, `${lesson.id} has a demonstration but is not declared Complete`).toBeUndefined();
       expect(lesson.concepts.length, `${lesson.id} has no concept`).toBeGreaterThan(0);
+    }
+  });
+
+  it("lessons declared Complete have genuinely outgrown the skeleton", () => {
+    // The mirror image, and the reason the list is worth having: a lesson cannot
+    // be declared Complete while still carrying its single seed question.
+    for (const lesson of region2Lessons.filter((l) => COMPLETE_LESSONS.includes(l.id))) {
+      expect(lesson.questionIds.length, `${lesson.id} is declared Complete but still has one seed question`).toBeGreaterThan(1);
+      expect(lesson.demonstration, `${lesson.id} is declared Complete but has no demonstration`).toBeDefined();
     }
   });
 

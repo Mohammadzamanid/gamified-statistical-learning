@@ -6880,68 +6880,6 @@
   "estimatedSeconds": 120
  },
  {
-  "id": "q.seed.r2-frequency",
-  "topicId": "t.r2-frequency",
-  "objectiveId": "obj.r2-frequency",
-  "skillIds": [
-   "skill.r2-frequency"
-  ],
-  "difficulty": 2,
-  "interaction": "numeric-input",
-  "prompt": "Of 20 mornings, 8 were calm, 7 choppy and 5 rough. What is the FREQUENCY of calm mornings?",
-  "answer": {
-   "kind": "numeric",
-   "value": 8,
-   "tolerance": 0,
-   "unit": "mornings"
-  },
-  "explanation": "The answer is 8 mornings. This lesson is a seed: its full teaching arrives with the Region 2 lesson units.",
-  "accessibilityDescription": "A numeric seed question for a Region 2 lesson that has not been written yet. Enter the answer as a number.",
-  "misconceptionIds": [],
-  "estimatedSeconds": 45
- },
- {
-  "id": "q.seed.r2-proportion",
-  "topicId": "t.r2-proportion",
-  "objectiveId": "obj.r2-proportion",
-  "skillIds": [
-   "skill.r2-proportion"
-  ],
-  "difficulty": 2,
-  "interaction": "numeric-input",
-  "prompt": "Of 20 mornings, 8 were calm. What PROPORTION of the mornings were calm? Answer between 0 and 1.",
-  "answer": {
-   "kind": "numeric",
-   "value": 0.4,
-   "tolerance": 0
-  },
-  "explanation": "The answer is 0.4. This lesson is a seed: its full teaching arrives with the Region 2 lesson units.",
-  "accessibilityDescription": "A numeric seed question for a Region 2 lesson that has not been written yet. Enter the answer as a number.",
-  "misconceptionIds": [],
-  "estimatedSeconds": 45
- },
- {
-  "id": "q.seed.r2-percentage",
-  "topicId": "t.r2-percentage",
-  "objectiveId": "obj.r2-percentage",
-  "skillIds": [
-   "skill.r2-percentage"
-  ],
-  "difficulty": 2,
-  "interaction": "percentage-input",
-  "prompt": "Of 20 mornings, 8 were calm. What PERCENTAGE of the mornings were calm? Answer on the 0-100 scale.",
-  "answer": {
-   "kind": "numeric",
-   "value": 40,
-   "tolerance": 0,
-   "unit": "%"
-  },
-  "explanation": "The answer is 40%. This lesson is a seed: its full teaching arrives with the Region 2 lesson units.",
-  "accessibilityDescription": "A numeric seed question for a Region 2 lesson that has not been written yet. Enter the answer as a number.",
-  "misconceptionIds": [],
-  "estimatedSeconds": 45
- },
- {
   "id": "q.seed.r2-mode",
   "topicId": "t.r2-mode",
   "objectiveId": "obj.r2-mode",
@@ -7332,5 +7270,460 @@
   "accessibilityDescription": "A multiple-choice seed question for a Region 2 lesson that has not been written yet. Choose one option.",
   "misconceptionIds": [],
   "estimatedSeconds": 45
+ },
+ {
+  "id": "q.r2-frequency",
+  "topicId": "t.r2-frequency",
+  "objectiveId": "obj.r2-frequency",
+  "skillIds": [
+   "skill.r2-frequency"
+  ],
+  "difficulty": 1,
+  "interaction": "numeric-input",
+  "prompt": "Twenty mornings were logged as calm, choppy or rough: calm, choppy, calm, rough, calm, choppy, calm, calm, rough, choppy, calm, calm, choppy, rough, calm, calm, choppy, calm, rough, calm. How many mornings were CHOPPY?",
+  "answer": {
+   "kind": "numeric",
+   "value": 5,
+   "tolerance": 0,
+   "unit": "mornings"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Go through the list once, marking only the choppy mornings."
+   },
+   {
+    "level": 2,
+    "text": "Ignore calm and rough entirely; you are counting one category."
+   }
+  ],
+  "explanation": "Counting the choppy entries one at a time gives 5. A frequency is a count of the cases in one category — not a count of the categories, and not the size of the dataset.",
+  "solutionSteps": [
+   "Read the list from the start.",
+   "Mark each entry that says choppy.",
+   "Count the marks: 5."
+  ],
+  "misconceptionIds": [],
+  "accessibilityDescription": "A word problem listing twenty logged morning conditions. Count the choppy mornings and enter the number.",
+  "estimatedSeconds": 60
+ },
+ {
+  "id": "q.r2-frequency-independent",
+  "topicId": "t.r2-frequency",
+  "objectiveId": "obj.r2-frequency",
+  "skillIds": [
+   "skill.r2-frequency"
+  ],
+  "difficulty": 2,
+  "interaction": "numeric-input",
+  "prompt": "Twenty mornings were logged as calm, choppy or rough: calm, choppy, calm, rough, calm, choppy, calm, calm, rough, choppy, calm, calm, choppy, rough, calm, calm, choppy, calm, rough, calm. How many mornings were CALM?",
+  "answer": {
+   "kind": "numeric",
+   "value": 11,
+   "tolerance": 0,
+   "unit": "mornings"
+  },
+  "explanation": "There are 11 calm mornings. The three frequencies — 11, 5 and 4 — add to 20, which is the number of mornings logged.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "A word problem listing twenty logged morning conditions. Count the calm mornings and enter the number.",
+  "estimatedSeconds": 60
+ },
+ {
+  "id": "q.r2-frequency-misconception",
+  "topicId": "t.r2-frequency",
+  "objectiveId": "obj.r2-frequency",
+  "skillIds": [
+   "skill.r2-frequency"
+  ],
+  "difficulty": 2,
+  "interaction": "numeric-input",
+  "prompt": "Twenty mornings were logged as calm, choppy or rough: calm, choppy, calm, rough, calm, choppy, calm, calm, rough, choppy, calm, calm, choppy, rough, calm, calm, choppy, calm, rough, calm. How many mornings were ROUGH?",
+  "answer": {
+   "kind": "numeric",
+   "value": 4,
+   "tolerance": 0,
+   "unit": "mornings"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "You are counting mornings, not the number of different words that appear."
+   }
+  ],
+  "explanation": "4 mornings were rough. Answering 3 counts the *kinds* of weather in the log — calm, choppy and rough — rather than the mornings in one of them. A frequency always counts cases.",
+  "misconceptionIds": [
+   "mc.frequency-counts-categories"
+  ],
+  "parameters": {
+   "mc.frequency-counts-categories": {
+    "wrongValue": 3
+   }
+  },
+  "accessibilityDescription": "A word problem listing twenty logged morning conditions. Count the rough mornings and enter the number.",
+  "estimatedSeconds": 65
+ },
+ {
+  "id": "q.r2-frequency-application",
+  "topicId": "t.r2-frequency",
+  "objectiveId": "obj.r2-frequency",
+  "skillIds": [
+   "skill.r2-frequency"
+  ],
+  "difficulty": 3,
+  "interaction": "numeric-input",
+  "prompt": "A harbourmaster tallies which of five boats landed the most days this month. Boat tallies: Kittiwake 6, Gannet 9, Fulmar 6, Petrel 9, Skua 4. What is the frequency of the MOST COMMON tally value?",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "tolerance": 0,
+   "unit": "boats"
+  },
+  "explanation": "Two boats landed on 6 days and two landed on 9, so the most common tally value occurs with a frequency of 2 boats. A frequency can be counted over any category, including a repeated number.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "A word problem giving five boats' landing-day counts, asking the frequency of the most common count.",
+  "estimatedSeconds": 75
+ },
+ {
+  "id": "q.r2-frequency-teachback",
+  "topicId": "t.r2-frequency",
+  "objectiveId": "obj.r2-frequency",
+  "skillIds": [
+   "skill.r2-frequency"
+  ],
+  "difficulty": 3,
+  "interaction": "short-explanation",
+  "prompt": "A new clerk writes '3' when asked how many mornings were rough, because the log uses three words. Explain in your own words what a frequency actually counts. Use the words 'category' and 'count'.",
+  "answer": {
+   "kind": "text",
+   "requiredKeywords": [
+    "category",
+    "count"
+   ],
+   "forbiddenKeywords": []
+  },
+  "explanation": "A frequency is a count of the cases that fall in one category. The log uses three words, but that is the number of categories available — not how many mornings landed in any one of them.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "An open-response question asking the learner to explain what a frequency counts, using the words category and count.",
+  "estimatedSeconds": 120
+ },
+ {
+  "id": "q.r2-frequency-mastery",
+  "topicId": "t.r2-frequency",
+  "objectiveId": "obj.r2-frequency",
+  "skillIds": [
+   "skill.r2-frequency"
+  ],
+  "difficulty": 3,
+  "interaction": "numeric-input",
+  "prompt": "Twenty mornings were logged as calm, choppy or rough: calm, choppy, calm, rough, calm, choppy, calm, calm, rough, choppy, calm, calm, choppy, rough, calm, calm, choppy, calm, rough, calm. A visiting inspector asks how many mornings were NOT calm. What is that frequency?",
+  "answer": {
+   "kind": "numeric",
+   "value": 9,
+   "tolerance": 0,
+   "unit": "mornings"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Every morning is calm, choppy or rough. Not calm means one of the other two."
+   }
+  ],
+  "explanation": "Choppy and rough together are 5 + 4 = 9 mornings. A category can be built by combining others, and its frequency is still a count of mornings.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "A word problem listing twenty logged morning conditions, asking how many were not calm.",
+  "estimatedSeconds": 90
+ },
+ {
+  "id": "q.r2-proportion",
+  "topicId": "t.r2-proportion",
+  "objectiveId": "obj.r2-proportion",
+  "skillIds": [
+   "skill.r2-proportion"
+  ],
+  "difficulty": 1,
+  "interaction": "numeric-input",
+  "prompt": "Twenty mornings were logged as calm, choppy or rough: calm, choppy, calm, rough, calm, choppy, calm, calm, rough, choppy, calm, calm, choppy, rough, calm, calm, choppy, calm, rough, calm. What PROPORTION of the mornings were choppy? Answer between 0 and 1.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.25,
+   "tolerance": 0.0005
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Start from the frequency: how many mornings were choppy?"
+   },
+   {
+    "level": 2,
+    "text": "Divide that count by the twenty mornings logged."
+   }
+  ],
+  "explanation": "5 choppy mornings out of 20 is 5/20 = 0.25. A proportion is a frequency divided by the size of the whole dataset, so it always lands between 0 and 1.",
+  "solutionSteps": [
+   "The frequency of choppy mornings is 5.",
+   "The dataset holds 20 mornings.",
+   "5 divided by 20 is 0.25."
+  ],
+  "misconceptionIds": [],
+  "accessibilityDescription": "A word problem listing twenty logged morning conditions. Give the proportion that were choppy, as a value between 0 and 1.",
+  "estimatedSeconds": 70
+ },
+ {
+  "id": "q.r2-proportion-independent",
+  "topicId": "t.r2-proportion",
+  "objectiveId": "obj.r2-proportion",
+  "skillIds": [
+   "skill.r2-proportion"
+  ],
+  "difficulty": 2,
+  "interaction": "numeric-input",
+  "prompt": "Twenty mornings were logged as calm, choppy or rough: calm, choppy, calm, rough, calm, choppy, calm, calm, rough, choppy, calm, calm, choppy, rough, calm, calm, choppy, calm, rough, calm. What PROPORTION of the mornings were rough? Answer between 0 and 1.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.2,
+   "tolerance": 0.0005
+  },
+  "explanation": "4 out of 20 is 0.2. Every proportion in a dataset lies between 0 and 1, and the proportions of all its categories add to exactly 1.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "A word problem listing twenty logged morning conditions. Give the proportion that were rough, as a value between 0 and 1.",
+  "estimatedSeconds": 70
+ },
+ {
+  "id": "q.r2-proportion-misconception",
+  "topicId": "t.r2-proportion",
+  "objectiveId": "obj.r2-proportion",
+  "skillIds": [
+   "skill.r2-proportion"
+  ],
+  "difficulty": 3,
+  "interaction": "numeric-input",
+  "prompt": "Twenty mornings were logged as calm, choppy or rough: calm, choppy, calm, rough, calm, choppy, calm, calm, rough, choppy, calm, calm, choppy, rough, calm, calm, choppy, calm, rough, calm. What PROPORTION of the mornings were calm? Answer between 0 and 1, not as a percentage.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.55,
+   "tolerance": 0.0005
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "A proportion of a dataset can never be larger than 1."
+   }
+  ],
+  "explanation": "11 out of 20 is 0.55. Answering 55 gives the percentage — the same share counted per hundred instead of per one. The question asked for a proportion, so the answer sits between 0 and 1.",
+  "misconceptionIds": [
+   "mc.percent-vs-decimal"
+  ],
+  "accessibilityDescription": "A word problem listing twenty logged morning conditions. Give the proportion that were calm as a value between 0 and 1, not a percentage.",
+  "estimatedSeconds": 75
+ },
+ {
+  "id": "q.r2-proportion-application",
+  "topicId": "t.r2-proportion",
+  "objectiveId": "obj.r2-proportion",
+  "skillIds": [
+   "skill.r2-proportion"
+  ],
+  "difficulty": 3,
+  "interaction": "numeric-input",
+  "prompt": "A second harbour logs 50 mornings and 30 of them are calm. What proportion of that harbour's mornings were calm? Answer between 0 and 1.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.6,
+   "tolerance": 0.0005
+  },
+  "explanation": "30 out of 50 is 0.6. Because a proportion divides by the size of its own dataset, two harbours with different numbers of mornings can still be compared directly.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "A word problem about a second harbour with 50 logged mornings, 30 of them calm. Give the proportion as a value between 0 and 1.",
+  "estimatedSeconds": 80
+ },
+ {
+  "id": "q.r2-proportion-teachback",
+  "topicId": "t.r2-proportion",
+  "objectiveId": "obj.r2-proportion",
+  "skillIds": [
+   "skill.r2-proportion"
+  ],
+  "difficulty": 3,
+  "interaction": "short-explanation",
+  "prompt": "One harbour logged 11 calm mornings out of 20; another logged 30 out of 50. Explain in your own words why a proportion lets you compare them when the raw counts do not. Use the words 'whole' and 'compare'.",
+  "answer": {
+   "kind": "text",
+   "requiredKeywords": [
+    "whole",
+    "compare"
+   ],
+   "forbiddenKeywords": []
+  },
+  "explanation": "30 is a bigger count than 11, but the second harbour logged more mornings. Dividing each count by its own whole gives 0.55 and 0.6, which are on the same scale and can be compared directly.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "An open-response question asking why proportions allow comparison across datasets of different sizes, using the words whole and compare.",
+  "estimatedSeconds": 120
+ },
+ {
+  "id": "q.r2-proportion-mastery",
+  "topicId": "t.r2-proportion",
+  "objectiveId": "obj.r2-proportion",
+  "skillIds": [
+   "skill.r2-proportion"
+  ],
+  "difficulty": 3,
+  "interaction": "numeric-input",
+  "prompt": "Twenty mornings were logged as calm, choppy or rough: calm, choppy, calm, rough, calm, choppy, calm, calm, rough, choppy, calm, calm, choppy, rough, calm, calm, choppy, calm, rough, calm. What proportion of the mornings were NOT calm? Answer between 0 and 1.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.45,
+   "tolerance": 0.0005
+  },
+  "explanation": "9 of the 20 mornings were not calm, which is 0.45. It is also 1 - 0.55: the proportions of a dataset's categories always add to 1, so the rest is whatever is left of the whole.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "A word problem listing twenty logged morning conditions, asking the proportion that were not calm.",
+  "estimatedSeconds": 95
+ },
+ {
+  "id": "q.r2-percentage",
+  "topicId": "t.r2-percentage",
+  "objectiveId": "obj.r2-percentage",
+  "skillIds": [
+   "skill.r2-percentage"
+  ],
+  "difficulty": 1,
+  "interaction": "percentage-input",
+  "prompt": "Twenty mornings were logged as calm, choppy or rough: calm, choppy, calm, rough, calm, choppy, calm, calm, rough, choppy, calm, calm, choppy, rough, calm, calm, choppy, calm, rough, calm. What PERCENTAGE of the mornings were choppy? Answer on the 0-100 scale.",
+  "answer": {
+   "kind": "numeric",
+   "value": 25,
+   "tolerance": 0.01,
+   "unit": "%"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Find the proportion first, then scale it to a hundred."
+   }
+  ],
+  "explanation": "5 out of 20 is the proportion 0.25, and a percentage counts the same share per hundred: 0.25 x 100 = 25%.",
+  "solutionSteps": [
+   "The proportion of choppy mornings is 5/20 = 0.25.",
+   "A percentage counts per hundred, so multiply by 100.",
+   "0.25 x 100 = 25%."
+  ],
+  "misconceptionIds": [],
+  "accessibilityDescription": "A word problem listing twenty logged morning conditions. Give the percentage that were choppy on the 0 to 100 scale.",
+  "estimatedSeconds": 70
+ },
+ {
+  "id": "q.r2-percentage-independent",
+  "topicId": "t.r2-percentage",
+  "objectiveId": "obj.r2-percentage",
+  "skillIds": [
+   "skill.r2-percentage"
+  ],
+  "difficulty": 2,
+  "interaction": "percentage-input",
+  "prompt": "Twenty mornings were logged as calm, choppy or rough: calm, choppy, calm, rough, calm, choppy, calm, calm, rough, choppy, calm, calm, choppy, rough, calm, calm, choppy, calm, rough, calm. What PERCENTAGE of the mornings were calm? Answer on the 0-100 scale.",
+  "answer": {
+   "kind": "numeric",
+   "value": 55,
+   "tolerance": 0.01,
+   "unit": "%"
+  },
+  "explanation": "11 out of 20 is 0.55, which is 55%. The percentages of every category in a dataset add to 100.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "A word problem listing twenty logged morning conditions. Give the percentage that were calm on the 0 to 100 scale.",
+  "estimatedSeconds": 70
+ },
+ {
+  "id": "q.r2-percentage-misconception",
+  "topicId": "t.r2-percentage",
+  "objectiveId": "obj.r2-percentage",
+  "skillIds": [
+   "skill.r2-percentage"
+  ],
+  "difficulty": 3,
+  "interaction": "percentage-input",
+  "prompt": "Twenty mornings were logged as calm, choppy or rough: calm, choppy, calm, rough, calm, choppy, calm, calm, rough, choppy, calm, calm, choppy, rough, calm, calm, choppy, calm, rough, calm. What PERCENTAGE of the mornings were rough? Answer on the 0-100 scale, not as a proportion.",
+  "answer": {
+   "kind": "numeric",
+   "value": 20,
+   "tolerance": 0.01,
+   "unit": "%"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "A percentage is parts per hundred, so it is a hundred times the proportion."
+   }
+  ],
+  "explanation": "4 out of 20 is the proportion 0.2, and the percentage is 20. Answering 0.2 stops one step early: the share is right but it has not been scaled to a hundred.",
+  "misconceptionIds": [
+   "mc.decimal-vs-percent"
+  ],
+  "accessibilityDescription": "A word problem listing twenty logged morning conditions. Give the percentage that were rough on the 0 to 100 scale, not as a proportion.",
+  "estimatedSeconds": 75
+ },
+ {
+  "id": "q.r2-percentage-application",
+  "topicId": "t.r2-percentage",
+  "objectiveId": "obj.r2-percentage",
+  "skillIds": [
+   "skill.r2-percentage"
+  ],
+  "difficulty": 3,
+  "interaction": "percentage-input",
+  "prompt": "A pamphlet claims '40% of our mornings are rough'. The harbour logged 50 mornings, 8 of them rough. What percentage were actually rough? Answer on the 0-100 scale.",
+  "answer": {
+   "kind": "numeric",
+   "value": 16,
+   "tolerance": 0.01,
+   "unit": "%"
+  },
+  "explanation": "8 out of 50 is 0.16, which is 16% — not 40%. The pamphlet's figure would need 20 rough mornings out of the 50. A percentage is only as good as the whole it was taken of.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "A word problem checking a pamphlet's claim against a log of 50 mornings with 8 rough. Give the true percentage.",
+  "estimatedSeconds": 85
+ },
+ {
+  "id": "q.r2-percentage-teachback",
+  "topicId": "t.r2-percentage",
+  "objectiveId": "obj.r2-percentage",
+  "skillIds": [
+   "skill.r2-percentage"
+  ],
+  "difficulty": 3,
+  "interaction": "short-explanation",
+  "prompt": "A clerk reports the rough-morning share as '0.2%'. Explain in your own words what has gone wrong and what the right figure is. Use the words 'proportion' and 'hundred'.",
+  "answer": {
+   "kind": "text",
+   "requiredKeywords": [
+    "proportion",
+    "hundred"
+   ],
+   "forbiddenKeywords": []
+  },
+  "explanation": "0.2 is the proportion, not the percentage. A percentage counts the share per hundred, so the proportion has to be multiplied by 100 first: 0.2 becomes 20%. Writing 0.2% claims a share five hundred times smaller than the real one.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "An open-response question asking the learner to explain a proportion reported as a percentage, using the words proportion and hundred.",
+  "estimatedSeconds": 120
+ },
+ {
+  "id": "q.r2-percentage-mastery",
+  "topicId": "t.r2-percentage",
+  "objectiveId": "obj.r2-percentage",
+  "skillIds": [
+   "skill.r2-percentage"
+  ],
+  "difficulty": 3,
+  "interaction": "percentage-input",
+  "prompt": "Twenty mornings were logged as calm, choppy or rough: calm, choppy, calm, rough, calm, choppy, calm, calm, rough, choppy, calm, calm, choppy, rough, calm, calm, choppy, calm, rough, calm. What percentage of the mornings were NOT calm? Answer on the 0-100 scale.",
+  "answer": {
+   "kind": "numeric",
+   "value": 45,
+   "tolerance": 0.01,
+   "unit": "%"
+  },
+  "explanation": "9 of 20 mornings is 0.45, which is 45%. It is also 100 - 55: the percentages of a dataset's categories add to 100, so the rest is what is left of the hundred.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "A word problem listing twenty logged morning conditions, asking the percentage that were not calm.",
+  "estimatedSeconds": 95
  }
 ]

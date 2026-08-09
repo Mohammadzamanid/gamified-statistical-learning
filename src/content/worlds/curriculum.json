@@ -2303,16 +2303,96 @@
    "concepts": [
     {
      "id": "c.r2-frequency",
-     "title": "How Many of Each",
-     "summary": "A frequency is a count of cases in a category — the first summary any dataset admits.",
-     "body": "The tide-watchers record the weather every morning. Counting how many mornings were calm is a frequency."
+     "title": "A frequency is a count of cases in one category",
+     "summary": "How many of the things you measured fell into this group.",
+     "body": "Take one category — say, calm mornings — and count how many cases fall in it. That count is its frequency. Two things it is not: it is not the number of categories the variable offers, and it is not the size of the dataset. The frequencies of all the categories add up to the number of cases, which is a check you can run every time."
     }
    ],
    "questionIds": [
-    "q.seed.r2-frequency"
+    "q.r2-frequency",
+    "q.r2-frequency-independent",
+    "q.r2-frequency-misconception",
+    "q.r2-frequency-application",
+    "q.r2-frequency-teachback",
+    "q.r2-frequency-mastery"
    ],
-   "prerequisites": [],
-   "estimatedMinutes": 15
+   "prerequisites": [
+    "l.r1-division",
+    "l.r1-proportions",
+    "l.r1-coordinates",
+    "l.r1-variable-kinds"
+   ],
+   "estimatedMinutes": 20,
+   "narrativeIntro": "Before anything can be averaged, compared or drawn, somebody has to count. The tide-watchers' log is twenty words in a column, and the first honest thing you can say about it is how many of each word there are — which is also the first thing a pamphlet can get wrong.",
+   "demonstration": {
+    "id": "dem.r2-frequency",
+    "title": "Marking the log",
+    "experience": "A clerk goes down the morning log with a pencil, striking a mark for every morning that matches the weather being counted. The marks are struck in groups of five, the way a tally always is.",
+    "accessibleDescription": "Two controls. The first sets how many complete struck groups of five the clerk has marked. The second sets how many loose marks are left over. The readout gives the frequency those marks record, as a whole number.",
+    "controls": [
+     {
+      "id": "ctl.groups",
+      "label": "Complete struck groups of five",
+      "min": 0,
+      "max": 8,
+      "step": 1,
+      "initial": 2
+     },
+     {
+      "id": "ctl.loose",
+      "label": "Loose marks left over",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "initial": 1
+     }
+    ],
+    "formula": "tally",
+    "readoutLabel": "Frequency this tally records",
+    "readoutPrecision": 0,
+    "prediction": {
+     "prompt": "The clerk has marked 2 struck groups and 1 loose mark, a frequency of 11. If they strike one more complete group and rub out the loose mark, what happens to the frequency?",
+     "options": [
+      {
+       "id": "opt.up",
+       "text": "It goes up"
+      },
+      {
+       "id": "opt.down",
+       "text": "It goes down"
+      },
+      {
+       "id": "opt.same",
+       "text": "It stays at 11 — one mark added, one taken away"
+      }
+     ],
+     "correctOptionId": "opt.up",
+     "revealNote": "A struck group is worth five marks, not one. Adding a group and removing a single mark is adding five and taking one, so the frequency rises from 11 to 15. The shape of a tally is what makes it quick to read, and it is also what makes it easy to misread."
+    },
+    "observation": "Set the loose marks to 0 and raise the groups one at a time: the frequency climbs in fives, not ones. Now hold the groups still and raise the loose marks: it climbs in ones. The same control moves the readout by a different amount depending on which column it is in, which is the whole point of striking groups."
+   },
+   "formalTerm": {
+    "term": "Frequency",
+    "definition": "The frequency of a category is the number of cases that fall into it. It is a count of things you measured, so it is always a whole number, never negative, and never larger than the number of cases in the dataset."
+   },
+   "guidedQuestionIds": [
+    "q.r2-frequency"
+   ],
+   "independentQuestionIds": [
+    "q.r2-frequency-independent"
+   ],
+   "misconceptionQuestionIds": [
+    "q.r2-frequency-misconception"
+   ],
+   "applicationQuestionIds": [
+    "q.r2-frequency-application"
+   ],
+   "teachBackQuestionIds": [
+    "q.r2-frequency-teachback"
+   ],
+   "masteryCheckQuestionIds": [
+    "q.r2-frequency-mastery"
+   ]
   },
   {
    "id": "l.r2-proportion",
@@ -2324,18 +2404,108 @@
    "concepts": [
     {
      "id": "c.r2-proportion",
-     "title": "The Share of the Whole",
-     "summary": "A proportion turns a frequency into a share of the dataset, between 0 and 1.",
-     "body": "Eight calm mornings out of twenty is a count. Divided by the twenty it becomes a share."
+     "title": "A proportion is a frequency over its whole",
+     "summary": "The count in a category, divided by the number of cases.",
+     "body": "Take the frequency of a category and divide it by the total number of cases. The result always lies between 0 and 1: 0 when nothing falls in the category, 1 when everything does. Because every proportion is measured against its own dataset, two datasets of different sizes can be put side by side. The proportions of all the categories add to exactly 1."
     }
    ],
    "questionIds": [
-    "q.seed.r2-proportion"
+    "q.r2-proportion",
+    "q.r2-proportion-independent",
+    "q.r2-proportion-misconception",
+    "q.r2-proportion-application",
+    "q.r2-proportion-teachback",
+    "q.r2-proportion-mastery"
    ],
    "prerequisites": [
     "l.r2-frequency"
    ],
-   "estimatedMinutes": 15
+   "estimatedMinutes": 20,
+   "narrativeIntro": "Eleven calm mornings sounds like a lot until you learn it was out of twenty, and nothing at all until you learn what it was out of. A count on its own cannot be compared with a count from anywhere else. Dividing it by its own whole is what makes two harbours arguable.",
+   "demonstration": {
+    "id": "dem.r2-proportion",
+    "title": "Weighing one category against the log",
+    "experience": "The clerk holds the count of one kind of morning against the number of mornings logged, and reads off how much of the log that kind takes up.",
+    "accessibleDescription": "Two controls. The first sets how many mornings fell in the category being weighed. The second sets how many mornings were logged altogether. The readout gives the proportion of the log that category takes up, to two decimal places.",
+    "controls": [
+     {
+      "id": "ctl.inCategory",
+      "label": "Mornings in this category",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "initial": 5
+     },
+     {
+      "id": "ctl.logged",
+      "label": "Mornings logged altogether",
+      "min": 1,
+      "max": 40,
+      "step": 1,
+      "initial": 20
+     }
+    ],
+    "formula": "quotient",
+    "readoutLabel": "Proportion of the log",
+    "readoutPrecision": 2,
+    "prediction": {
+     "prompt": "5 choppy mornings out of 20 logged is a proportion of 0.25. A second harbour also logged 5 choppy mornings, but out of 40. Will its proportion be larger, smaller, or the same?",
+     "options": [
+      {
+       "id": "opt.same",
+       "text": "The same — both counted 5 choppy mornings"
+      },
+      {
+       "id": "opt.smaller",
+       "text": "Smaller"
+      },
+      {
+       "id": "opt.larger",
+       "text": "Larger"
+      }
+     ],
+     "correctOptionId": "opt.smaller",
+     "revealNote": "The count did not change but the whole it is measured against doubled, so the share halves: 5 out of 40 is 0.125. This is exactly why a raw count cannot be compared across datasets, and why a proportion can."
+    },
+    "observation": "Hold the category at 5 and raise the total: the proportion falls, though nothing about the 5 changed. Now set both controls to the same number and watch the readout sit at 1.00 — every case in the category means the category is the whole log. The readout never leaves the range from 0 to 1, whatever you do."
+   },
+   "formalTerm": {
+    "term": "Proportion",
+    "definition": "A proportion is the frequency of a category divided by the total number of cases. It always lies between 0 and 1 inclusive, and the proportions of all a variable's categories add to 1.",
+    "notation": "count / total",
+    "symbols": [
+     {
+      "symbol": "count",
+      "meaning": "the frequency: how many cases fell in this category"
+     },
+     {
+      "symbol": "/",
+      "meaning": "read as 'divided by': the count shared out over the whole dataset"
+     },
+     {
+      "symbol": "total",
+      "meaning": "the number of cases in the dataset — the whole the share is measured against"
+     }
+    ]
+   },
+   "guidedQuestionIds": [
+    "q.r2-proportion"
+   ],
+   "independentQuestionIds": [
+    "q.r2-proportion-independent"
+   ],
+   "misconceptionQuestionIds": [
+    "q.r2-proportion-misconception"
+   ],
+   "applicationQuestionIds": [
+    "q.r2-proportion-application"
+   ],
+   "teachBackQuestionIds": [
+    "q.r2-proportion-teachback"
+   ],
+   "masteryCheckQuestionIds": [
+    "q.r2-proportion-mastery"
+   ]
   },
   {
    "id": "l.r2-percentage",
@@ -2347,18 +2517,112 @@
    "concepts": [
     {
      "id": "c.r2-percentage",
-     "title": "The Share Per Hundred",
-     "summary": "A percentage is the same share, counted per hundred instead of per one.",
-     "body": "The same eight mornings in twenty, scaled so that the whole is a hundred."
+     "title": "A percentage is a proportion counted per hundred",
+     "summary": "The same share, scaled so the whole is 100 instead of 1.",
+     "body": "Work out the proportion, then multiply by 100. Nothing about the share changes; only the scale it is reported on. A proportion of 0.25 and a percentage of 25% describe exactly the same eleven-in-twenty morning. The two are easy to swap by accident, and swapping them is off by a factor of a hundred, which is why the units are always written down."
     }
    ],
    "questionIds": [
-    "q.seed.r2-percentage"
+    "q.r2-percentage",
+    "q.r2-percentage-independent",
+    "q.r2-percentage-misconception",
+    "q.r2-percentage-application",
+    "q.r2-percentage-teachback",
+    "q.r2-percentage-mastery"
    ],
    "prerequisites": [
     "l.r2-proportion"
    ],
-   "estimatedMinutes": 15
+   "estimatedMinutes": 20,
+   "narrativeIntro": "Every notice nailed to the harbour wall reports shares per hundred, because a hundred is a number people can picture. It is the same share you already know how to work out, counted against a different whole — and the commonest error in the harbour's paperwork is forgetting which of the two you are holding.",
+   "demonstration": {
+    "id": "dem.r2-percentage",
+    "title": "Reporting the share on a notice",
+    "experience": "The clerk writes a notice for the harbour wall. The share is worked out from the log, then rewritten as parts per hundred so a reader can picture it.",
+    "accessibleDescription": "Two controls. The first sets the share of the log as a percentage, from 0 to 100. The second sets how many mornings the notice is about. The readout gives how many of those mornings the percentage stands for, to two decimal places.",
+    "controls": [
+     {
+      "id": "ctl.percent",
+      "label": "Share reported on the notice, per hundred",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "initial": 25
+     },
+     {
+      "id": "ctl.mornings",
+      "label": "Mornings the notice is about",
+      "min": 1,
+      "max": 80,
+      "step": 1,
+      "initial": 20
+     }
+    ],
+    "formula": "percent-of",
+    "readoutLabel": "Mornings this percentage stands for",
+    "readoutPrecision": 2,
+    "prediction": {
+     "prompt": "A notice reads '25% of mornings were choppy' and is about 20 mornings, which is 5 of them. If the notice is reprinted for a harbour with 80 mornings and the 25% is left unchanged, how many mornings does it now stand for?",
+     "options": [
+      {
+       "id": "opt.five",
+       "text": "Still 5 — the percentage did not change"
+      },
+      {
+       "id": "opt.twenty",
+       "text": "20"
+      },
+      {
+       "id": "opt.hundred",
+       "text": "100"
+      }
+     ],
+     "correctOptionId": "opt.twenty",
+     "revealNote": "A percentage is a share, not a count. Twenty-five per cent of 80 mornings is 20 mornings, four times what it stood for before, because the whole it is taken of is four times larger. The same figure on a notice can mean very different numbers of mornings."
+    },
+    "observation": "Hold the percentage at 25 and raise the mornings: the readout climbs, though the notice would read exactly the same. Now set the percentage to 100 and the readout matches the mornings control exactly — a hundred per cent is the whole of whatever it is taken of. Set it to 0 and the readout sits at 0 whatever the second control says."
+   },
+   "formalTerm": {
+    "term": "Percentage",
+    "definition": "A percentage is a proportion counted per hundred rather than per one. To turn a proportion into a percentage, multiply by 100; to go back, divide by 100. The percentages of all a variable's categories add to 100.",
+    "notation": "proportion x 100 %",
+    "symbols": [
+     {
+      "symbol": "proportion",
+      "meaning": "the share as a value between 0 and 1 — the count divided by the total"
+     },
+     {
+      "symbol": "x",
+      "meaning": "read as 'multiplied by': the share is scaled up"
+     },
+     {
+      "symbol": "100",
+      "meaning": "the new whole: a percentage measures against a hundred instead of against one"
+     },
+     {
+      "symbol": "%",
+      "meaning": "read as 'per cent', meaning 'out of every hundred' — the mark that says which scale the number is on"
+     }
+    ]
+   },
+   "guidedQuestionIds": [
+    "q.r2-percentage"
+   ],
+   "independentQuestionIds": [
+    "q.r2-percentage-independent"
+   ],
+   "misconceptionQuestionIds": [
+    "q.r2-percentage-misconception"
+   ],
+   "applicationQuestionIds": [
+    "q.r2-percentage-application"
+   ],
+   "teachBackQuestionIds": [
+    "q.r2-percentage-teachback"
+   ],
+   "masteryCheckQuestionIds": [
+    "q.r2-percentage-mastery"
+   ]
   },
   {
    "id": "l.r2-mode",
