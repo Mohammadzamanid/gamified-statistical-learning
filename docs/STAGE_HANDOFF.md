@@ -4,7 +4,7 @@
 (`git show 7add4bc:docs/STAGE_HANDOFF.md`). Its still-binding contracts, traps, and priorities are carried forward
 below — nothing was discarded.
 
-**Last updated:** 2026-08-07, at the close of S2-11 (**Complete**).
+**Last updated:** 2026-08-07, at the close of S2-12 cycle 1 (**Partial**).
 
 ---
 
@@ -16,7 +16,7 @@ after Stage 1 was lost because commits were never pushed to a durable remote. Re
 
 - **Stage 1: surviving, verified, green.** Not re-created — the original commit `7add4bc` was carried forward from the
   archive's own `.git` directory, with authorship intact.
-- **Stage 2: in progress, and not recoverable.** Reconstruction began 2026-08-04; S2-01 through S2-08, S2-10 and S2-11 (`dfb8e4f`, remote-verified) are complete; S2-09 is **Partial**, and only because §4 is stated over all 22 topics — every Region 1 topic meets it. Nothing
+- **Stage 2: in progress, and not recoverable.** Reconstruction began 2026-08-04; S2-01 through S2-08, S2-10 and S2-11 are complete and S2-12 is **Partial** (cycle 1, `8065791`, remote-verified); S2-09 is **Partial**, and only because §4 is stated over all 22 topics — every Region 1 topic meets it. Nothing
   in it is recovered source.
 - **Stages 3–6: not started, and not recoverable.** They must be **reconstructed** from the surviving Stage 1 source,
   the specifications, and the known defect history. They may never be described as recovered source, and no metric may
@@ -37,7 +37,7 @@ after Stage 1 was lost because commits were never pushed to a durable remote. Re
 | Milestone exports | `../gsl-exports/` — source ZIP + git bundle + manifest + SHA-256 checksums |
 | Working tree | clean |
 | Node / npm used | v22.22.2 / 10.9.7 |
-| Test suite | **463 tests / 36 files**, all passing (Stage 1 baseline was 73 / 14) |
+| Test suite | **466 tests / 36 files**, all passing (Stage 1 baseline was 73 / 14) |
 | Build | passing (**538.47 kB, 143.72 kB gzip**; baseline was 285.73 kB / 83.82 kB) |
 | Source modified since baseline | S2-01 … S2-08 — achievements + region completion, three new interactions, the enforced interaction audit, the review queue, the Region 1 topic architecture, and all 17 Region 1 lessons |
 | Curriculum | 2 regions · **6 modules** · **20 lessons** · **23 skills** · **145 questions** (baseline 2/2/3/6/14) |
@@ -105,11 +105,19 @@ branch/tag deletion) are forbidden without explicit owner permission. See `REMOT
 
 ## 5. Next unit
 
-**S2-12 — Central tendency lessons.**
+**S2-12 continued — `m.r2-centre`.**
 
-Region 1 is finished and Region 2's architecture is in place. What remains is writing Region 2's lessons, and S2-12
-takes the first module group: frequency, proportion, percentage, mean, median, mode, measure selection, outlier effects
-and skew effects, with draggable/editable datasets.
+Cycle 1 finished `m.r2-counts`: frequency, proportion and percentage are Complete under §5. **6 of S2-12's 9 lessons
+remain** — mean, median, mode and choosing a measure in `m.r2-centre`, then outlier and skew effects in
+`m.r2-variation`.
+
+**Two of the four in `m.r2-centre` are Stage 1 lessons, not seeds.** `l.reading-tallies` (mean) and `l.middle-harbor`
+(median) carry real content and several questions already, so they are re-cut to §5 rather than written from scratch —
+the skeleton shape does not apply to them and the architecture audit exempts them by name.
+
+**Draggable/editable datasets are still not built.** The three finished demonstrations are control-driven, which meets
+requirement 4 but is not the same thing. Editable datasets belong with the laboratory work in S2-15; if S2-12 is to
+claim them, that is the cycle to do it in.
 
 **The lessons already exist as skeletons — you are filling them in, not creating them.** `m.r2-counts` and
 `m.r2-centre` hold seven of them, and `tests/audit/region2-architecture.test.ts` asserts every seeded lesson still has

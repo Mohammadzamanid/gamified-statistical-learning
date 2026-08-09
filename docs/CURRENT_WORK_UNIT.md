@@ -13,11 +13,12 @@ available.
 | | |
 |---|---|
 | Last completed unit | **S2-08** — Region 1 lessons and interactions (all 17 topic lessons, 4 cycles) |
-| Last completed unit | **S2-11** — Region 2 world and curriculum architecture — **Complete**. 22 topic lessons across 6 modules (`dfb8e4f`, remote-verified) |
+| Last unit attempted | **S2-12** — Central tendency lessons — **Partial**, 3 of 9 lessons Complete (`8065791`, remote-verified) |
+| Previous unit | **S2-11** — Region 2 world and curriculum architecture — **Complete** (`dfb8e4f`, remote-verified) |
 | Previous unit | **S2-10** — Region 1 boss investigation — **Complete** (`dc87d8b`, remote-verified) |
 | Previous unit | **S2-09** — Region 1 validated content expansion — **Partial**, 17 of 22 topics meet §4; the 5 remaining are Region 2, owned by S2-17 (`01f29ad`, remote-verified) |
 | Commit | cycles `629dd74`, `2f1ec31`, `def8b1d`, `615e7c4` — each pushed and remote-verified |
-| Next unit | **S2-12** — Central tendency lessons |
+| Next unit | **S2-12 continued** — `m.r2-centre` (mean, median, mode, choosing a measure) |
 | Still open from Stage 0 | **R-00d** (push `stage-1-baseline` tag) and **R-00e** (set repository private) — both blocked, both need the owner's credentials |
 
 ---

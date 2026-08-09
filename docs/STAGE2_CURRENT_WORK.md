@@ -120,11 +120,15 @@ Outlier effects and skew effects live in `m.r2-variation` and can be written any
 
 ## Local commit
 
-Recorded in the follow-up commit below.
+`80657919a356d2370965f9bcd8cdd0c069fc3b2d`
 
 ## Remote verification
 
-Recorded in the follow-up commit below.
+```
+LOCAL_HEAD  = 80657919a356d2370965f9bcd8cdd0c069fc3b2d
+REMOTE_HEAD = 80657919a356d2370965f9bcd8cdd0c069fc3b2d
+VERIFIED: MATCH
+```
 
 ## Next unit
 
