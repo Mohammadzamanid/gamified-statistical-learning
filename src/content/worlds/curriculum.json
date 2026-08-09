@@ -248,12 +248,22 @@
     "q.point-thursday-catch",
     "q.point-approx-mean",
     "q.dd-variable-kinds",
-    "q.dd-build-bar-chart"
+    "q.dd-build-bar-chart",
+    "q.r2-mean-independent",
+    "q.r2-mean-application",
+    "q.r2-mean-teachback",
+    "q.r2-mean-mastery"
    ],
    "prerequisites": [
     "l.r2-percentage"
    ],
-   "estimatedMinutes": 12
+   "estimatedMinutes": 12,
+   "guidedQuestionIds": [],
+   "independentQuestionIds": [],
+   "misconceptionQuestionIds": [],
+   "applicationQuestionIds": [],
+   "teachBackQuestionIds": [],
+   "masteryCheckQuestionIds": []
   },
   {
    "id": "l.middle-harbor",
@@ -282,12 +292,22 @@
     "q.step-median-market",
     "q.point-median-line",
     "q.dd-sort-prices",
-    "q.dd-above-below-mean"
+    "q.dd-above-below-mean",
+    "q.r2-median-independent",
+    "q.r2-median-application",
+    "q.r2-median-teachback",
+    "q.r2-median-mastery"
    ],
    "prerequisites": [
     "l.reading-tallies"
    ],
-   "estimatedMinutes": 14
+   "estimatedMinutes": 14,
+   "guidedQuestionIds": [],
+   "independentQuestionIds": [],
+   "misconceptionQuestionIds": [],
+   "applicationQuestionIds": [],
+   "teachBackQuestionIds": [],
+   "masteryCheckQuestionIds": []
   },
   {
    "id": "l.spread-1",
@@ -2634,18 +2654,93 @@
    "concepts": [
     {
      "id": "c.r2-mode",
-     "title": "The Value That Repeats",
-     "summary": "The mode is the value that occurs most often, and a dataset may have more than one.",
-     "body": "Where the mean and median describe a middle, the mode describes a peak — and it is the only measure of centre a categorical variable admits."
+     "title": "The mode is the value that appears most often",
+     "summary": "Count each value's appearances; the mode is the most frequent.",
+     "body": "Count how many times each distinct value occurs and take the one that occurs most. Unlike the mean it is always a value that genuinely appeared, and unlike the median it needs no sorting. It is also the only measure of centre defined for a categorical variable, whose values cannot be added or ordered. A set may have one mode, two or more when they tie, or none when every value appears once."
     }
    ],
    "questionIds": [
-    "q.seed.r2-mode"
+    "q.r2-mode",
+    "q.r2-mode-independent",
+    "q.r2-mode-misconception",
+    "q.r2-mode-application",
+    "q.r2-mode-teachback",
+    "q.r2-mode-mastery"
    ],
    "prerequisites": [
     "l.middle-harbor"
    ],
-   "estimatedMinutes": 15
+   "estimatedMinutes": 20,
+   "narrativeIntro": "Ask what the weather was like this month and no total will help you: you cannot add calm to rough. The mode is the measure of centre that survives when the values are words instead of numbers - and the one that can honestly answer 'there are two'.",
+   "demonstration": {
+    "id": "dem.r2-mode",
+    "title": "Stacking the repeats",
+    "experience": "Every morning's log entry is dropped onto a pile for its own weather. The tallest pile names the mode, and two piles of equal height mean two modes.",
+    "accessibleDescription": "Two controls. The first sets how many mornings were logged as calm. The second sets how many were logged as choppy. The readout gives how many more calm mornings there are than choppy ones; zero means the two are tied.",
+    "controls": [
+     {
+      "id": "ctl.calm",
+      "label": "Mornings logged as calm",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "initial": 11
+     },
+     {
+      "id": "ctl.choppy",
+      "label": "Mornings logged as choppy",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "initial": 5
+     }
+    ],
+    "formula": "difference",
+    "readoutLabel": "Calm mornings minus choppy mornings",
+    "readoutPrecision": 0,
+    "prediction": {
+     "prompt": "There are 11 calm mornings and 5 choppy, so calm leads by 6 and is the mode. If six more choppy mornings are logged, what does the readout show?",
+     "options": [
+      {
+       "id": "opt.zero",
+       "text": "0 - the two are tied, so there are two modes"
+      },
+      {
+       "id": "opt.six",
+       "text": "6 - calm still leads"
+      },
+      {
+       "id": "opt.minus",
+       "text": "-6 - choppy now leads"
+      }
+     ],
+     "correctOptionId": "opt.zero",
+     "revealNote": "Six more choppy mornings brings that pile to 11, level with calm. The readout reads 0, and the dataset now has two modes rather than one. A tie is not a failure of the data or a rounding problem: it is a shape data genuinely takes, and reporting only one of the tied values hides half the answer."
+    },
+    "observation": "Raise the calm control and the readout climbs; raise the choppy control and it falls, passing through 0 on the way. Zero is the interesting reading - it is where the mode stops being a single value. Set both controls to the same number anywhere in the range and the readout sits at 0 every time."
+   },
+   "formalTerm": {
+    "term": "Mode",
+    "definition": "The mode is the value that occurs most frequently in a set. A set may have one mode, several when values tie, or none when every value occurs exactly once. It is the only measure of centre available for a categorical variable, because its values can be counted but not added or ordered."
+   },
+   "guidedQuestionIds": [
+    "q.r2-mode"
+   ],
+   "independentQuestionIds": [
+    "q.r2-mode-independent"
+   ],
+   "misconceptionQuestionIds": [
+    "q.r2-mode-misconception"
+   ],
+   "applicationQuestionIds": [
+    "q.r2-mode-application"
+   ],
+   "teachBackQuestionIds": [
+    "q.r2-mode-teachback"
+   ],
+   "masteryCheckQuestionIds": [
+    "q.r2-mode-mastery"
+   ]
   },
   {
    "id": "l.r2-choosing-measures",
@@ -2657,18 +2752,93 @@
    "concepts": [
     {
      "id": "c.r2-choosing-measures",
-     "title": "Which Middle to Use",
-     "summary": "Mean, median and mode answer different questions, and the data decides which is honest.",
-     "body": "A single extreme value moves the mean and leaves the median where it was. Which measure to report is a judgement about the data, not a preference."
+     "title": "The data and the question decide the measure",
+     "summary": "Mean for totals, median against outliers, mode for categories.",
+     "body": "Use the mean when the total matters, because the mean times the count is the total. Use the median when a rare extreme value would otherwise drag the summary away from what is typical. Use the mode when the values are categories that cannot be added or ordered, or when you genuinely want the most common value. When mean and median disagree sharply, that disagreement is itself worth reporting: it says the values are stretched out on one side."
     }
    ],
    "questionIds": [
-    "q.seed.r2-choosing-measures"
+    "q.r2-choosing-measures",
+    "q.r2-choosing-measures-independent",
+    "q.r2-choosing-measures-misconception",
+    "q.r2-choosing-measures-application",
+    "q.r2-choosing-measures-teachback",
+    "q.r2-choosing-measures-mastery"
    ],
    "prerequisites": [
     "l.r2-mode"
    ],
-   "estimatedMinutes": 15
+   "estimatedMinutes": 20,
+   "narrativeIntro": "Three measures, three different answers, and all of them arithmetically correct. Which one you report is not a matter of taste: it is a claim about your data, and the wrong choice can be honest in every digit and still mislead every reader.",
+   "demonstration": {
+    "id": "dem.r2-choosing-measures",
+    "title": "One extreme value, two summaries",
+    "experience": "A row of ten cottages is valued. Nine are ordinary and one is a merchant's house. The clerk watches what the mean does as the merchant's house grows more valuable, while the median stays where the cottages are.",
+    "accessibleDescription": "Two controls. The first sets what each of the nine ordinary cottages is worth in coins. The second sets what the merchant's house is worth. The readout gives the mean value across all ten buildings, to two decimal places.",
+    "controls": [
+     {
+      "id": "ctl.ordinary",
+      "label": "Value of each ordinary cottage, in coins",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "initial": 40
+     },
+     {
+      "id": "ctl.house",
+      "label": "Value of the merchant's house, in coins",
+      "min": 0,
+      "max": 8000,
+      "step": 100,
+      "initial": 4000
+     }
+    ],
+    "formula": "percent-of",
+    "readoutLabel": "Mean value across all ten buildings",
+    "readoutPrecision": 2,
+    "prediction": {
+     "prompt": "Nine cottages at 40 coins and a house at 4000 give a mean of 436 coins. The median is 40. If the merchant's house doubles in value to 8000, what happens to the median?",
+     "options": [
+      {
+       "id": "opt.same",
+       "text": "It stays at 40 - the middle building has not changed"
+      },
+      {
+       "id": "opt.double",
+       "text": "It doubles too"
+      },
+      {
+       "id": "opt.rise",
+       "text": "It rises to about 836"
+      }
+     ],
+     "correctOptionId": "opt.same",
+     "revealNote": "The median is the middle of the sorted list, and the sorted list still has cottages in the middle whatever the house is worth. The mean would climb to 836; the median does not move at all. That is what 'resistant to outliers' means, stated as a fact you can check rather than a slogan."
+    },
+    "observation": "Hold the cottages at 40 and raise the house: the mean climbs steeply, though nine of the ten buildings have not changed by a coin. Now hold the house and raise the cottages: the mean climbs too, but far more slowly - nine values pulling together move it less than one value pulling alone from far away."
+   },
+   "formalTerm": {
+    "term": "Measure of centre",
+    "definition": "A measure of centre is a single value chosen to stand for a whole set. The mean, median and mode are three of them, and they answer different questions: the mean shares the total, the median takes the middle of the sorted values, and the mode takes the most frequent. Choosing between them is a judgement about the data, not a preference."
+   },
+   "guidedQuestionIds": [
+    "q.r2-choosing-measures"
+   ],
+   "independentQuestionIds": [
+    "q.r2-choosing-measures-independent"
+   ],
+   "misconceptionQuestionIds": [
+    "q.r2-choosing-measures-misconception"
+   ],
+   "applicationQuestionIds": [
+    "q.r2-choosing-measures-application"
+   ],
+   "teachBackQuestionIds": [
+    "q.r2-choosing-measures-teachback"
+   ],
+   "masteryCheckQuestionIds": [
+    "q.r2-choosing-measures-mastery"
+   ]
   },
   {
    "id": "l.r2-quartiles",

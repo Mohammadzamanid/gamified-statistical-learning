@@ -287,5 +287,17 @@
   "skillIds": [
    "skill.r2-frequency"
   ]
+ },
+ {
+  "id": "rem.count-every-value",
+  "title": "Count every value before naming a mode",
+  "explanation": "The mode is the value that appears most often, which you cannot know until you have counted them all. Stopping at the first repeat finds a value that repeats, not the one that repeats most - and it hides the case where two values tie, which is a real and common shape for data to have.",
+  "microLesson": "Take 3, 6, 3, 9, 6, 4, 3, 6. Reading left to right, 3 repeats first. But finish the count: 3 appears three times and 6 appears three times too. Both are modes; the set is bimodal. A dataset can have one mode, two, several, or none at all when every value appears exactly once.",
+  "followUpQuestionIds": [
+   "q.r2-mode"
+  ],
+  "skillIds": [
+   "skill.r2-mode"
+  ]
  }
 ]

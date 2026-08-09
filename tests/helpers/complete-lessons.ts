@@ -33,5 +33,15 @@ export const COMPLETE_LESSONS: readonly string[] = [
   // Region 2, m.r2-counts — the first Region 2 module written to scope §5 (S2-12).
   "l.r2-frequency",
   "l.r2-proportion",
-  "l.r2-percentage"
+  "l.r2-percentage",
+  // Region 2, m.r2-centre — written from their seeds (S2-12 cycle 2).
+  //
+  // `l.reading-tallies` (mean) and `l.middle-harbor` (median) are deliberately
+  // absent. They are Stage 1 lessons carrying 13 and 10 inherited questions, and
+  // several of those questions teach percentages, bar charts and data literacy
+  // rather than centre — so declaring them Complete means first redistributing
+  // that content to the Region 2 lessons whose topics it actually serves. That
+  // is design work, not a formatting pass, and it is the next cycle's job.
+  "l.r2-mode",
+  "l.r2-choosing-measures"
 ];

@@ -26,9 +26,81 @@ import {
 import { demonstrationReadout, describeDemonstration, initialValues, setControlValue } from "../../src/core/curriculum/demonstration";
 import { pickQuestionForSkill } from "../../src/core/spaced-repetition/review-queue";
 import { getDetector, registerBuiltInDetectors, listDetectorNames } from "../../src/core/misconceptions/detectors";
+import { buildLibrary, classifyMisconception } from "../../src/core/misconceptions/engine";
+import { evaluateResponse } from "../../src/core/questions/evaluators";
+import { normalizeResponse } from "../../src/core/questions/normalize";
+import type { RawResponse } from "../../src/core/questions/types";
 import { COMPLETE_LESSONS } from "../helpers/complete-lessons";
 
 const content = loadShippedContent();
+
+const misconceptionLibrary = buildLibrary([...content.misconceptions], [...content.remediations]);
+
+/**
+ * The answer a learner holding `id` would give, read from the question's own
+ * declaration of where that misconception lives — a tagged choice, a declared
+ * numeric `wrongValue`, a wrong placement, a misconception point, or swapped
+ * axes. Null means the question offers no way to express it at all, which is
+ * itself the failure.
+ */
+function misconceptionResponseFor(question: Question, id: string): RawResponse | null {
+  // Some detectors read the *typed value* rather than any tag: they recognise a
+  // proportion where a percentage was wanted, or a fraction inverted. For those
+  // the question declares nothing, so the response is derived from what the
+  // detector looks for. This route was missing on the first run and the check
+  // reported a perfectly good authored question as unreachable — the helper
+  // being incomplete looks exactly like the content being broken.
+  const mc = content.misconceptions.find((m) => m.id === id);
+  if (question.answer.kind === "numeric" && mc) {
+    const v = question.answer.value;
+    const derived: Record<string, number | null> = {
+      "decimal-instead-of-percentage": v / 100,
+      "percentage-instead-of-decimal": v * 100,
+      "reversed-fraction": v === 0 ? null : 1 / v,
+      "sign-error": -v
+    };
+    const value = derived[mc.detector];
+    if (value !== undefined && value !== null) return { kind: "numeric", text: String(value) };
+  }
+  const tagged = (question.choices ?? []).find((ch) => ch.misconceptionId === id);
+  if (tagged) return { kind: "choice", choiceIds: [tagged.id] };
+  const declared = (question.parameters ?? {})[id];
+  if (declared && typeof declared === "object" && typeof (declared as { wrongValue?: unknown }).wrongValue === "number") {
+    return { kind: "numeric", text: String((declared as { wrongValue: number }).wrongValue) };
+  }
+  if (question.answer.kind === "placement") {
+    const slip = question.answer.misconceptionPlacements.find((m) => m.misconceptionId === id);
+    if (slip) {
+      return {
+        kind: "placement",
+        zones: question.answer.zones.map((z) => ({
+          zoneId: z.zoneId,
+          itemIds: z.itemIds.filter((i) => i !== slip.itemId).concat(z.zoneId === slip.zoneId ? [slip.itemId] : [])
+        }))
+      };
+    }
+  }
+  if (question.answer.kind === "point") {
+    const spot = question.answer.misconceptionPoints.find((pt) => pt.misconceptionId === id);
+    if (spot) return spot.y === undefined ? { kind: "point", x: spot.x } : { kind: "point", x: spot.x, y: spot.y };
+    if (question.answer.swappedAxesMisconceptionId === id && question.answer.y !== undefined) {
+      return { kind: "point", x: question.answer.y, y: question.answer.x };
+    }
+  }
+  if (question.answer.kind === "steps") {
+    for (const st of question.answer.steps) {
+      const mv = (st.misconceptionValues ?? []).find((m) => m.misconceptionId === id);
+      if (mv) {
+        return {
+          kind: "steps",
+          steps: question.answer.steps.map((t) => ({ stepId: t.id, text: String(t.id === st.id ? mv.value : t.value) }))
+        };
+      }
+    }
+  }
+  return null;
+}
+
 
 if (listDetectorNames().length === 0) registerBuiltInDetectors();
 
@@ -381,6 +453,24 @@ describe("requirements 11-16 — the practice a lesson has to offer", () => {
           for (const fid of rem!.followUpQuestionIds) {
             expect(content.questions.get(fid), `${rem!.id} follows up with missing question ${fid}`).toBeDefined();
           }
+
+          // Declared and detectable is not the same as *reachable*. A tag whose
+          // detector cannot fire for this question's answer kind inflates a
+          // mapping count and leaves the learner with a bare "incorrect"
+          // (D-025). Generated questions have been held to this since S2-09; a
+          // probe showed authored ones were not, so the same engine-driven
+          // check runs here — the real evaluator and the real classifier, given
+          // the answer a learner holding that misconception would give.
+          const wrong = misconceptionResponseFor(q, mcId);
+          expect(wrong, `${qid} declares ${mcId} but offers a learner no way to express it`).not.toBeNull();
+          const evaluation = evaluateResponse(q, normalizeResponse(wrong!));
+          expect(evaluation.correct, `${qid}: the ${mcId} response is marked correct`).toBe(false);
+          const found = classifyMisconception(q, misconceptionLibrary, {
+            question: q,
+            response: normalizeResponse(wrong!),
+            evaluation
+          });
+          expect(found?.id, `${qid}: the engine did not report ${mcId} for its own wrong answer`).toBe(mcId);
         }
       }
     }

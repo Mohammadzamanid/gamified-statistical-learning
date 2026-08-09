@@ -108,7 +108,8 @@
    "mc.sum-not-mean": {
     "wrongValue": 25
    }
-  }
+  },
+  "accessibilityDescription": "A word problem giving a week of daily fish catches and asking for the mean. Enter the mean as a number."
  },
  {
   "id": "q.pct-rainy-days",
@@ -326,7 +327,8 @@
    "mc.mean-median-confusion": {
     "wrongValue": 9
    }
-  }
+  },
+  "accessibilityDescription": "A word problem giving a list of market prices and asking for the median. Enter the median as a number."
  },
  {
   "id": "q.mc-which-average",
@@ -6880,62 +6882,6 @@
   "estimatedSeconds": 120
  },
  {
-  "id": "q.seed.r2-mode",
-  "topicId": "t.r2-mode",
-  "objectiveId": "obj.r2-mode",
-  "skillIds": [
-   "skill.r2-mode"
-  ],
-  "difficulty": 2,
-  "interaction": "numeric-input",
-  "prompt": "A week's catches, in crates: 4, 7, 4, 9, 4, 7, 2. What is the MODE?",
-  "answer": {
-   "kind": "numeric",
-   "value": 4,
-   "tolerance": 0,
-   "unit": "crates"
-  },
-  "explanation": "The answer is 4 crates. This lesson is a seed: its full teaching arrives with the Region 2 lesson units.",
-  "accessibilityDescription": "A numeric seed question for a Region 2 lesson that has not been written yet. Enter the answer as a number.",
-  "misconceptionIds": [],
-  "estimatedSeconds": 45
- },
- {
-  "id": "q.seed.r2-choosing-measures",
-  "topicId": "t.r2-choosing-measures",
-  "objectiveId": "obj.r2-choosing-measures",
-  "skillIds": [
-   "skill.choose-measure"
-  ],
-  "difficulty": 2,
-  "interaction": "multiple-choice",
-  "prompt": "Nine cottages are worth 40 coins each and one is worth 4000. Which measure of centre best describes what a typical cottage is worth?",
-  "choices": [
-   {
-    "id": "ch.median",
-    "text": "The median"
-   },
-   {
-    "id": "ch.mean",
-    "text": "The mean"
-   },
-   {
-    "id": "ch.mode",
-    "text": "The mode"
-   }
-  ],
-  "answer": {
-   "kind": "choice",
-   "correctChoiceIds": [
-    "ch.median"
-   ]
-  },
-  "explanation": "Nine cottages at 40 and one at 4000 gives a mean near 436, which describes no cottage in the row. The median stays at 40, where the cottages actually are.",
-  "accessibilityDescription": "A multiple-choice seed question for a Region 2 lesson that has not been written yet. Choose one option.",
-  "misconceptionIds": [],
-  "estimatedSeconds": 45
- },
- {
   "id": "q.seed.r2-quartiles",
   "topicId": "t.r2-quartiles",
   "objectiveId": "obj.r2-quartiles",
@@ -7725,5 +7671,575 @@
   "misconceptionIds": [],
   "accessibilityDescription": "A word problem listing twenty logged morning conditions, asking the percentage that were not calm.",
   "estimatedSeconds": 95
+ },
+ {
+  "id": "q.r2-mean-independent",
+  "topicId": "t.r2-mean",
+  "objectiveId": "obj.compute-mean",
+  "skillIds": [
+   "skill.mean"
+  ],
+  "difficulty": 2,
+  "interaction": "numeric-input",
+  "prompt": "A week's catches, in crates: 4, 7, 4, 9, 4, 7, 2. What is the MEAN catch? Round to two decimal places.",
+  "answer": {
+   "kind": "numeric",
+   "value": 5.29,
+   "tolerance": 0.01,
+   "unit": "crates"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Total the seven catches first."
+   },
+   {
+    "level": 2,
+    "text": "Then share that total equally across the seven days."
+   }
+  ],
+  "explanation": "The seven catches total 37 crates. Shared equally across the seven days that is 37 divided by 7, which is 5.29 to two decimal places — a figure no single day recorded, and that is normal for a mean.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "A word problem listing seven daily catches. Compute the mean and enter it to two decimal places.",
+  "estimatedSeconds": 75
+ },
+ {
+  "id": "q.r2-mean-application",
+  "topicId": "t.r2-mean",
+  "objectiveId": "obj.compute-mean",
+  "skillIds": [
+   "skill.mean"
+  ],
+  "difficulty": 3,
+  "interaction": "numeric-input",
+  "prompt": "Two boats fished the same season. The Kittiwake landed 120 crates over 30 trips, the Gannet 90 crates over 30 trips. Taking all 60 trips together, what is the MEAN crates per trip?",
+  "answer": {
+   "kind": "numeric",
+   "value": 3.5,
+   "tolerance": 0.005,
+   "unit": "crates"
+  },
+  "explanation": "210 crates over 60 trips is 3.5 crates a trip. That also sits halfway between the boats' separate means of 4 and 3 — but only because both made the same number of trips. Had one made twice as many, the combined mean would sit nearer that boat's figure.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "A word problem about two boats' seasons, asking the mean crates per trip across all 60 trips.",
+  "estimatedSeconds": 85
+ },
+ {
+  "id": "q.r2-mean-teachback",
+  "topicId": "t.r2-mean",
+  "objectiveId": "obj.compute-mean",
+  "skillIds": [
+   "skill.mean"
+  ],
+  "difficulty": 3,
+  "interaction": "short-explanation",
+  "prompt": "A skipper says: 'the mean catch was 5.29 crates, but we never once landed 5.29 crates, so the number is useless.' Explain in your own words what the mean is actually telling them. Use the words 'total' and 'share'.",
+  "answer": {
+   "kind": "text",
+   "requiredKeywords": [
+    "total",
+    "share"
+   ],
+   "forbiddenKeywords": []
+  },
+  "explanation": "The mean is not a claim that any day looked like it. It takes the total and shares it equally across the days, answering 'if every day had been identical, what would each have been?' — which is exactly why it can land between the values actually recorded.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "An open-response question asking the learner to explain what a mean represents, using the words total and share.",
+  "estimatedSeconds": 120
+ },
+ {
+  "id": "q.r2-mean-mastery",
+  "topicId": "t.r2-mean",
+  "objectiveId": "obj.compute-mean",
+  "skillIds": [
+   "skill.mean"
+  ],
+  "difficulty": 3,
+  "interaction": "numeric-input",
+  "prompt": "The week's catches were 4, 7, 4, 9, 4, 7, 2. A record-breaking eighth day lands 200 crates. What is the MEAN of all eight days? Round to two decimal places.",
+  "answer": {
+   "kind": "numeric",
+   "value": 29.63,
+   "tolerance": 0.01,
+   "unit": "crates"
+  },
+  "explanation": "The new total is 37 + 200 = 237 over 8 days, giving 29.63. One day has dragged the mean from 5.29 to nearly 30 — above every catch but its own. Every value has a say in the mean, and an extreme one has a very loud say.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "A word problem adding a 200-crate day to a week of seven, asking the new mean to two decimal places.",
+  "estimatedSeconds": 95
+ },
+ {
+  "id": "q.r2-median-independent",
+  "topicId": "t.r2-median",
+  "objectiveId": "obj.compute-median",
+  "skillIds": [
+   "skill.median"
+  ],
+  "difficulty": 2,
+  "interaction": "numeric-input",
+  "prompt": "A week's catches, in crates: 4, 7, 4, 9, 4, 7, 2. Sorted, they read 2, 4, 4, 4, 7, 7, 9. What is the MEDIAN catch?",
+  "answer": {
+   "kind": "numeric",
+   "value": 4,
+   "tolerance": 0,
+   "unit": "crates"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Count in from both ends of the sorted list until you meet in the middle."
+   }
+  ],
+  "explanation": "Seven values sorted put the fourth in the middle, three below and three above. That fourth value is 4 crates. The median is a position in the sorted list, not a calculation over every value.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "A word problem listing seven daily catches, sorted, asking for the median.",
+  "estimatedSeconds": 70
+ },
+ {
+  "id": "q.r2-median-application",
+  "topicId": "t.r2-median",
+  "objectiveId": "obj.compute-median",
+  "skillIds": [
+   "skill.median"
+  ],
+  "difficulty": 3,
+  "interaction": "numeric-input",
+  "prompt": "Six boats report crew sizes: 4, 5, 6, 6, 8, 9. With an even number of boats there is no single middle value. What is the MEDIAN crew size?",
+  "answer": {
+   "kind": "numeric",
+   "value": 6,
+   "tolerance": 0,
+   "unit": "crew"
+  },
+  "explanation": "With six values the middle two are the third and fourth: 6 and 6. The median is the mean of those two, which is 6. When the middle two differ, the median falls between them and need not be a value anyone recorded.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "A word problem listing six crew sizes and asking the median of an even-sized dataset.",
+  "estimatedSeconds": 85
+ },
+ {
+  "id": "q.r2-median-teachback",
+  "topicId": "t.r2-median",
+  "objectiveId": "obj.compute-median",
+  "skillIds": [
+   "skill.median"
+  ],
+  "difficulty": 3,
+  "interaction": "short-explanation",
+  "prompt": "A clerk sorts a list of catches and reports the value in the middle as 'the average'. Explain in your own words how the median differs from the mean, and why sorting is what it needs. Use the words 'middle' and 'sorted'.",
+  "answer": {
+   "kind": "text",
+   "requiredKeywords": [
+    "middle",
+    "sorted"
+   ],
+   "forbiddenKeywords": []
+  },
+  "explanation": "The median is a position: sort the values and take the middle one. The mean is a calculation over all of them. Because the median only cares about order, one enormous value barely moves it, while it drags the mean towards itself.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "An open-response question asking the learner to distinguish median from mean, using the words middle and sorted.",
+  "estimatedSeconds": 120
+ },
+ {
+  "id": "q.r2-median-mastery",
+  "topicId": "t.r2-median",
+  "objectiveId": "obj.compute-median",
+  "skillIds": [
+   "skill.median"
+  ],
+  "difficulty": 3,
+  "interaction": "numeric-input",
+  "prompt": "The week's catches were 4, 7, 4, 9, 4, 7, 2, a median of 4. A record-breaking eighth day lands 200 crates. What is the MEDIAN of all eight days?",
+  "answer": {
+   "kind": "numeric",
+   "value": 5.5,
+   "tolerance": 0.005,
+   "unit": "crates"
+  },
+  "explanation": "Sorted, the eight values are 2, 4, 4, 4, 7, 7, 9, 200. The middle two are the fourth and fifth — 4 and 7 — so the median is 5.5. The 200 moved it by one and a half crates; it moved the mean from 5.29 to 29.63. That difference is the reason both measures exist.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "A word problem adding a 200-crate day to a week of seven, asking the new median.",
+  "estimatedSeconds": 95
+ },
+ {
+  "id": "q.r2-mode",
+  "topicId": "t.r2-mode",
+  "objectiveId": "obj.r2-mode",
+  "skillIds": [
+   "skill.r2-mode"
+  ],
+  "difficulty": 1,
+  "interaction": "numeric-input",
+  "prompt": "A week's catches, in crates: 4, 7, 4, 9, 4, 7, 2. What is the MODE?",
+  "answer": {
+   "kind": "numeric",
+   "value": 4,
+   "tolerance": 0,
+   "unit": "crates"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Count how many times each different value appears."
+   }
+  ],
+  "explanation": "4 appears three times, 7 appears twice, 9 and 2 once each. The mode is the value that appears most often, so it is 4 crates.",
+  "solutionSteps": [
+   "Count each value: 4 appears three times.",
+   "7 appears twice; 9 and 2 appear once.",
+   "The most frequent value is 4."
+  ],
+  "misconceptionIds": [],
+  "accessibilityDescription": "A word problem listing seven daily catches and asking which value appears most often.",
+  "estimatedSeconds": 55
+ },
+ {
+  "id": "q.r2-mode-independent",
+  "topicId": "t.r2-mode",
+  "objectiveId": "obj.r2-mode",
+  "skillIds": [
+   "skill.r2-mode"
+  ],
+  "difficulty": 2,
+  "interaction": "numeric-input",
+  "prompt": "Nine boats report crew sizes: 5, 8, 5, 6, 8, 5, 9, 6, 5. What is the MODE crew size?",
+  "answer": {
+   "kind": "numeric",
+   "value": 5,
+   "tolerance": 0,
+   "unit": "crew"
+  },
+  "explanation": "5 appears four times, more than any other value, so the mode is 5. Unlike the mean it is always a value that actually occurred, and unlike the median it does not need the list sorted.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "A word problem listing nine crew sizes and asking the mode.",
+  "estimatedSeconds": 60
+ },
+ {
+  "id": "q.r2-mode-misconception",
+  "topicId": "t.r2-mode",
+  "objectiveId": "obj.r2-mode",
+  "skillIds": [
+   "skill.r2-mode"
+  ],
+  "difficulty": 3,
+  "interaction": "numeric-input",
+  "prompt": "Eight mornings are logged: 3, 6, 3, 9, 6, 4, 3, 6 crates. A clerk reports the mode as 3 because 3 was the first value to repeat. How many values are TIED for the mode here?",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "tolerance": 0,
+   "unit": "values"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Count every value's appearances before deciding which is most frequent."
+   }
+  ],
+  "explanation": "3 appears three times and so does 6. Two values are tied, so the dataset is bimodal and both are modes. Reporting only the first one you noticed hides half the answer — a dataset can have more than one mode, or none at all.",
+  "misconceptionIds": [
+   "mc.first-repeat-is-mode"
+  ],
+  "parameters": {
+   "mc.first-repeat-is-mode": {
+    "wrongValue": 1
+   }
+  },
+  "accessibilityDescription": "A word problem listing eight catches where two values tie for most frequent, asking how many values are tied.",
+  "estimatedSeconds": 80
+ },
+ {
+  "id": "q.r2-mode-application",
+  "topicId": "t.r2-mode",
+  "objectiveId": "obj.r2-mode",
+  "skillIds": [
+   "skill.r2-mode"
+  ],
+  "difficulty": 3,
+  "interaction": "multiple-choice",
+  "prompt": "A harbour records the weather every morning as calm, choppy or rough. The harbourmaster wants to report a single 'typical' morning. Which measure of centre can be used at all here?",
+  "choices": [
+   {
+    "id": "ch.mode",
+    "text": "The mode"
+   },
+   {
+    "id": "ch.mean",
+    "text": "The mean"
+   },
+   {
+    "id": "ch.median",
+    "text": "The median"
+   }
+  ],
+  "answer": {
+   "kind": "choice",
+   "correctChoiceIds": [
+    "ch.mode"
+   ]
+  },
+  "explanation": "Weather is a categorical variable: its values are groups, not quantities. You cannot add them, so no mean; you cannot order them into a meaningful middle, so no median. The mode — the most frequent category — is the only measure of centre a categorical variable admits.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "A multiple-choice question asking which measure of centre applies to a categorical weather variable.",
+  "estimatedSeconds": 75
+ },
+ {
+  "id": "q.r2-mode-teachback",
+  "topicId": "t.r2-mode",
+  "objectiveId": "obj.r2-mode",
+  "skillIds": [
+   "skill.r2-mode"
+  ],
+  "difficulty": 3,
+  "interaction": "short-explanation",
+  "prompt": "Explain in your own words why the mode is the only measure of centre available for a variable like weather, and give one dataset where the mode would be a poor summary. Use the words 'category' and 'frequent'.",
+  "answer": {
+   "kind": "text",
+   "requiredKeywords": [
+    "category",
+    "frequent"
+   ],
+   "forbiddenKeywords": []
+  },
+  "explanation": "Weather sorts mornings into categories that cannot be added or ordered, so only the most frequent category can be reported. The mode is a poor summary when every value appears once — then there is no mode at all — or when a rare value happens to repeat twice in a large, spread-out set.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "An open-response question about why the mode suits categorical variables and where it fails, using the words category and frequent.",
+  "estimatedSeconds": 120
+ },
+ {
+  "id": "q.r2-mode-mastery",
+  "topicId": "t.r2-mode",
+  "objectiveId": "obj.r2-mode",
+  "skillIds": [
+   "skill.r2-mode"
+  ],
+  "difficulty": 3,
+  "interaction": "numeric-input",
+  "prompt": "A ledger records these crate counts: 12, 15, 12, 18, 15, 21, 12, 18. How many times does the MODE appear?",
+  "answer": {
+   "kind": "numeric",
+   "value": 3,
+   "tolerance": 0,
+   "unit": "times"
+  },
+  "explanation": "12 appears three times; 15 and 18 appear twice each; 21 once. The mode is 12 and it appears 3 times. Note the question asked for the frequency of the mode, not the mode itself — 12 is the value, 3 is how often it occurs.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "A word problem listing eight crate counts and asking how many times the most frequent value appears.",
+  "estimatedSeconds": 90
+ },
+ {
+  "id": "q.r2-choosing-measures",
+  "topicId": "t.r2-choosing-measures",
+  "objectiveId": "obj.r2-choosing-measures",
+  "skillIds": [
+   "skill.choose-measure"
+  ],
+  "difficulty": 1,
+  "interaction": "multiple-choice",
+  "prompt": "Nine cottages on the quay are worth 40 coins each. The tenth, a merchant's house, is worth 4000. Which measure best describes what a typical cottage is worth?",
+  "choices": [
+   {
+    "id": "ch.median",
+    "text": "The median"
+   },
+   {
+    "id": "ch.mean",
+    "text": "The mean",
+    "misconceptionId": "mc.outlier-mean"
+   },
+   {
+    "id": "ch.neither",
+    "text": "Neither — no single number can describe them"
+   }
+  ],
+  "answer": {
+   "kind": "choice",
+   "correctChoiceIds": [
+    "ch.median"
+   ]
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Work out roughly what the mean would be, then ask whether any cottage is worth that."
+   }
+  ],
+  "explanation": "The mean is 436 coins, which describes no building on the row: it sits above every cottage and far below the house. The median is 40, which is what nine of the ten are actually worth. One extreme value moves the mean and leaves the median where the data is.",
+  "misconceptionIds": [
+   "mc.outlier-mean"
+  ],
+  "accessibilityDescription": "A multiple-choice question about ten property values, nine identical and one extreme, asking which measure of centre best describes a typical one.",
+  "estimatedSeconds": 75,
+  "solutionSteps": [
+   "Add the ten values: nine cottages at 40 is 360 coins, plus the house at 4000, giving 4360.",
+   "The mean is 4360 shared across 10 buildings, which is 436 coins.",
+   "Sort the ten values: nine 40s then 4000. The middle two are both 40, so the median is 40.",
+   "Nine of the ten buildings are worth exactly 40, so the median describes a typical cottage and the mean does not."
+  ]
+ },
+ {
+  "id": "q.r2-choosing-measures-independent",
+  "topicId": "t.r2-choosing-measures",
+  "objectiveId": "obj.r2-choosing-measures",
+  "skillIds": [
+   "skill.choose-measure"
+  ],
+  "difficulty": 2,
+  "interaction": "multiple-choice",
+  "prompt": "A harbourmaster wants the total pay bill for the season and has each crew member's pay. Which measure of centre is most useful for working the bill out?",
+  "choices": [
+   {
+    "id": "ch.mean",
+    "text": "The mean"
+   },
+   {
+    "id": "ch.median",
+    "text": "The median"
+   },
+   {
+    "id": "ch.mode",
+    "text": "The mode"
+   }
+  ],
+  "answer": {
+   "kind": "choice",
+   "correctChoiceIds": [
+    "ch.mean"
+   ]
+  },
+  "explanation": "The mean multiplied by the number of crew gives the total exactly, because the mean is the total shared out. The median has no such relationship with the total — knowing the middle wage tells you nothing about the sum.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "A multiple-choice question asking which measure of centre helps compute a total pay bill.",
+  "estimatedSeconds": 70
+ },
+ {
+  "id": "q.r2-choosing-measures-misconception",
+  "topicId": "t.r2-choosing-measures",
+  "objectiveId": "obj.r2-choosing-measures",
+  "skillIds": [
+   "skill.choose-measure"
+  ],
+  "difficulty": 3,
+  "interaction": "multiple-choice",
+  "prompt": "Ten deliveries take 20, 21, 22, 20, 23, 21, 22, 20, 21, and 400 minutes — the last stuck behind a closed bridge. A clerk reports the mean of 59 minutes as the typical delivery time. What is wrong with that?",
+  "choices": [
+   {
+    "id": "ch.outlier",
+    "text": "One extreme value has dragged the mean away from every ordinary delivery"
+   },
+   {
+    "id": "ch.fine",
+    "text": "Nothing — the mean is the proper average, so 59 minutes is the typical time",
+    "misconceptionId": "mc.outlier-mean"
+   },
+   {
+    "id": "ch.small",
+    "text": "Ten deliveries is too few to compute a mean at all"
+   }
+  ],
+  "answer": {
+   "kind": "choice",
+   "correctChoiceIds": [
+    "ch.outlier"
+   ]
+  },
+  "explanation": "Nine of the ten deliveries took between 20 and 23 minutes. One exceptional value has pulled the mean to 59, above every ordinary delivery. The median of 21 describes the typical delivery honestly. The mean is not wrong arithmetically — it is the wrong summary for this question, and calling it 'the proper average' is what lets an outlier speak for the whole set.",
+  "misconceptionIds": [
+   "mc.outlier-mean"
+  ],
+  "accessibilityDescription": "A multiple-choice question about ten delivery times with one extreme value, asking what is wrong with reporting the mean.",
+  "estimatedSeconds": 85
+ },
+ {
+  "id": "q.r2-choosing-measures-application",
+  "topicId": "t.r2-choosing-measures",
+  "objectiveId": "obj.r2-choosing-measures",
+  "skillIds": [
+   "skill.choose-measure"
+  ],
+  "difficulty": 3,
+  "interaction": "method-selection",
+  "prompt": "A shipping notice must report the 'typical' home port of the boats using the harbour. Ports are places, not quantities. Which measure should the notice use?",
+  "choices": [
+   {
+    "id": "ch.mode",
+    "text": "The mode — the most frequent port"
+   },
+   {
+    "id": "ch.mean",
+    "text": "The mean port"
+   },
+   {
+    "id": "ch.median",
+    "text": "The median port"
+   }
+  ],
+  "answer": {
+   "kind": "choice",
+   "correctChoiceIds": [
+    "ch.mode"
+   ]
+  },
+  "explanation": "Home port is a categorical variable, so neither the mean nor the median is defined for it. The mode — the port most boats come from — is the only honest summary available.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "A method-selection question asking which measure of centre applies to a categorical home-port variable.",
+  "estimatedSeconds": 70
+ },
+ {
+  "id": "q.r2-choosing-measures-teachback",
+  "topicId": "t.r2-choosing-measures",
+  "objectiveId": "obj.r2-choosing-measures",
+  "skillIds": [
+   "skill.choose-measure"
+  ],
+  "difficulty": 3,
+  "interaction": "short-explanation",
+  "prompt": "A merchant insists 'the mean is the proper average and the median is a shortcut'. Explain in your own words when each is the honest choice. Use the words 'outlier' and 'typical'.",
+  "answer": {
+   "kind": "text",
+   "requiredKeywords": [
+    "outlier",
+    "typical"
+   ],
+   "forbiddenKeywords": []
+  },
+  "explanation": "Neither is a shortcut; they answer different questions. The mean shares the total out and is what you need when the total matters. The median is the middle of the sorted values and is what you need when a rare outlier would otherwise drag the summary away from what is typical.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "An open-response question asking when mean or median is the honest choice, using the words outlier and typical.",
+  "estimatedSeconds": 130
+ },
+ {
+  "id": "q.r2-choosing-measures-mastery",
+  "topicId": "t.r2-choosing-measures",
+  "objectiveId": "obj.r2-choosing-measures",
+  "skillIds": [
+   "skill.choose-measure"
+  ],
+  "difficulty": 4,
+  "interaction": "multiple-choice",
+  "prompt": "A harbour reports its season two ways: 'mean catch 29.63 crates' and 'median catch 5.5 crates'. Both are correct arithmetic on the same eight days. What does the gap between them tell you about the data?",
+  "choices": [
+   {
+    "id": "ch.extreme",
+    "text": "At least one value is far above the rest, pulling the mean up"
+   },
+   {
+    "id": "ch.error",
+    "text": "One of the two figures must have been computed wrongly"
+   },
+   {
+    "id": "ch.even",
+    "text": "The catches were unusually even across the season"
+   }
+  ],
+  "answer": {
+   "kind": "choice",
+   "correctChoiceIds": [
+    "ch.extreme"
+   ]
+  },
+  "explanation": "A mean far above the median means values are stretched out on the high side — here a single 200-crate day. The two figures disagreeing is itself information: when they are close the data is fairly even, and when they are far apart something extreme is pulling the mean.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "A multiple-choice question asking what a large gap between a mean and a median reveals about a dataset.",
+  "estimatedSeconds": 100
  }
 ]

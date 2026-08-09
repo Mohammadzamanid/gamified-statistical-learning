@@ -95,7 +95,14 @@ describe("end-to-end lesson session (headless)", () => {
           { zoneId: "z.bar6", itemIds: ["it.b-thu"] },
           { zoneId: "z.bar9", itemIds: ["it.b-fri"] }
         ]
-      }
+      },
+      // Added by S2-12: the mean questions this lesson gained while it waits for
+      // its §5 re-cut. The check below is why they had to be added here rather
+      // than being silently skipped.
+      "q.r2-mean-independent": { kind: "numeric", text: "5.29" },
+      "q.r2-mean-application": { kind: "numeric", text: "3.5" },
+      "q.r2-mean-teachback": { kind: "text", text: "the total shared across the days" },
+      "q.r2-mean-mastery": { kind: "numeric", text: "29.63" }
     };
     let t = 1000;
     while (!session.finished) {

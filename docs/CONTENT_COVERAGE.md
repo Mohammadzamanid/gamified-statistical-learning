@@ -10,10 +10,10 @@ Topics come from the **curriculum graph**, never from the set of generator modul
 
 | Topic | Authored records | Generator families | Reasoning families | Raw combinations | Valid combinations | Validated generated | **Total available** | Meets §4 |
 |---|---:|---:|---:|---:|---:|---:|---:|---|
-| Choosing measures (`skill.choose-measure`) | 5 | 0 | 0 | 0 | 0 | 0 | **5** | **No** |
+| Choosing measures (`skill.choose-measure`) | 10 | 0 | 0 | 0 | 0 | 0 | **10** | **No** |
 | Data literacy (`skill.data-literacy`) | 7 | 0 | 0 | 0 | 0 | 0 | **7** | **No** |
-| Mean (`skill.mean`) | 6 | 0 | 0 | 0 | 0 | 0 | **6** | **No** |
-| Median (`skill.median`) | 5 | 0 | 0 | 0 | 0 | 0 | **5** | **No** |
+| Mean (`skill.mean`) | 10 | 0 | 0 | 0 | 0 | 0 | **10** | **No** |
+| Median (`skill.median`) | 9 | 0 | 0 | 0 | 0 | 0 | **9** | **No** |
 | Addition (`skill.r1-addition`) | 9 | 8 | 8 | 800 | 800 | 800 | **809** | Yes |
 | Cases and observations (`skill.r1-cases`) | 9 | 4 | 4 | 392 | 392 | 304 | **313** | Yes |
 | Coordinates (`skill.r1-coordinates`) | 7 | 6 | 6 | 384 | 322 | 322 | **329** | Yes |
@@ -39,7 +39,7 @@ Topics come from the **curriculum graph**, never from the set of generator modul
 | Histograms (`skill.r2-histograms`) | 1 | 0 | 0 | 0 | 0 | 0 | **1** | **No** |
 | Interquartile range (`skill.r2-iqr`) | 1 | 0 | 0 | 0 | 0 | 0 | **1** | **No** |
 | Misleading graphs (`skill.r2-misleading-graphs`) | 1 | 0 | 0 | 0 | 0 | 0 | **1** | **No** |
-| Mode (`skill.r2-mode`) | 1 | 0 | 0 | 0 | 0 | 0 | **1** | **No** |
+| Mode (`skill.r2-mode`) | 6 | 0 | 0 | 0 | 0 | 0 | **6** | **No** |
 | Outliers (`skill.r2-outliers`) | 1 | 0 | 0 | 0 | 0 | 0 | **1** | **No** |
 | Percentage of a dataset (`skill.r2-percentage`) | 6 | 0 | 0 | 0 | 0 | 0 | **6** | **No** |
 | Percentiles (`skill.r2-percentiles`) | 1 | 0 | 0 | 0 | 0 | 0 | **1** | **No** |
@@ -55,10 +55,10 @@ Topics come from the **curriculum graph**, never from the set of generator modul
 
 | Topic | Invalid combinations | Schema failures | Correct-answer failures | Missing a11y | Missing misconception mapping | Exact duplicates | Near duplicates | Unreachable |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
-| Choosing measures | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 20% |
+| Choosing measures | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 10% |
 | Data literacy | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 14% |
-| Mean | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 17% |
-| Median | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 20% |
+| Mean | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 10% |
+| Median | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 11% |
 | Addition | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 10% |
 | Cases and observations | 0 | 0 | 0 | 0 | 0 | 0 | 88 | 0 | 13% |
 | Coordinates | 62 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 17% |
@@ -84,7 +84,7 @@ Topics come from the **curriculum graph**, never from the set of generator modul
 | Histograms | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100% |
 | Interquartile range | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100% |
 | Misleading graphs | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100% |
-| Mode | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100% |
+| Mode | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 17% |
 | Outliers | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100% |
 | Percentage of a dataset | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 17% |
 | Percentiles | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100% |
@@ -221,7 +221,7 @@ Topics come from the **curriculum graph**, never from the set of generator modul
 
 - **Choosing measures** (`skill.choose-measure`)
   - no generator families produce for this topic
-  - 5 available interactions, below the required 100
+  - 10 available interactions, below the required 100
   - 0 reasoning families represented, below the required 4
 - **Data literacy** (`skill.data-literacy`)
   - no generator families produce for this topic
@@ -229,11 +229,11 @@ Topics come from the **curriculum graph**, never from the set of generator modul
   - 0 reasoning families represented, below the required 4
 - **Mean** (`skill.mean`)
   - no generator families produce for this topic
-  - 6 available interactions, below the required 100
+  - 10 available interactions, below the required 100
   - 0 reasoning families represented, below the required 4
 - **Median** (`skill.median`)
   - no generator families produce for this topic
-  - 5 available interactions, below the required 100
+  - 9 available interactions, below the required 100
   - 0 reasoning families represented, below the required 4
 - **Bar charts** (`skill.r2-bar-charts`)
   - no generator families produce for this topic
@@ -276,9 +276,8 @@ Topics come from the **curriculum graph**, never from the set of generator modul
   - 100% of interactions share one reasoning shape, above the 50% ceiling — this is the "numeric variants of one pattern" case
 - **Mode** (`skill.r2-mode`)
   - no generator families produce for this topic
-  - 1 available interactions, below the required 100
+  - 6 available interactions, below the required 100
   - 0 reasoning families represented, below the required 4
-  - 100% of interactions share one reasoning shape, above the 50% ceiling — this is the "numeric variants of one pattern" case
 - **Outliers** (`skill.r2-outliers`)
   - no generator families produce for this topic
   - 1 available interactions, below the required 100

@@ -190,5 +190,13 @@
   "detector": "known-wrong-answer",
   "detectorParams": {},
   "remediationId": "rem.count-the-cases"
+ },
+ {
+  "id": "mc.first-repeat-is-mode",
+  "title": "The first repeat taken as the only mode",
+  "description": "The learner stops at the first value seen to repeat and reports it as the mode, missing a second value that repeats as often or more.",
+  "detector": "known-wrong-answer",
+  "detectorParams": {},
+  "remediationId": "rem.count-every-value"
  }
 ]
