@@ -23,7 +23,6 @@
    "tagline": "Counting, categories, and the first charts",
    "description": "The fishing harbor keeps a ledger of every catch. Learn to read data, tell categories from quantities, and find the center of a dataset.",
    "moduleIds": [
-    "m.harbor-1",
     "m.r1-counting",
     "m.r1-parts",
     "m.r1-position",
@@ -37,10 +36,15 @@
    "id": "r.averages-atoll",
    "worldId": "w.counting-shores",
    "title": "Averages Atoll",
-   "tagline": "Spread, range, and resistant measures",
-   "description": "A ring of islands where the tides teach spread and variation. Unlocks when the Harbor of Tallies is charted.",
+   "tagline": "Where the tide is never the same twice",
+   "description": "A ring of low islands whose channels fill and empty on their own schedule. Nothing here is counted once and done with: every reading is one of many, and the work is describing what a whole set of readings is like — its middle, its reach, its shape — and drawing it so that a reader is helped rather than steered. Unlocks when the Harbor of Tallies is charted.",
    "moduleIds": [
-    "m.atoll-1"
+    "m.r2-counts",
+    "m.r2-centre",
+    "m.r2-spread",
+    "m.r2-variation",
+    "m.r2-pictures",
+    "m.r2-judgement"
    ],
    "prerequisites": [
     "r.harbor-tallies"
@@ -50,31 +54,6 @@
   }
  ],
  "modules": [
-  {
-   "id": "m.harbor-1",
-   "regionId": "r.harbor-tallies",
-   "title": "The Harbor Ledger",
-   "description": "Read the catch ledger, classify variables, and summarize with mean, median, and mode.",
-   "lessonIds": [
-    "l.reading-tallies",
-    "l.middle-harbor"
-   ],
-   "prerequisites": [],
-   "difficulty": 1
-  },
-  {
-   "id": "m.atoll-1",
-   "regionId": "r.averages-atoll",
-   "title": "Tides of Spread",
-   "description": "Range and why the middle is not the whole story.",
-   "lessonIds": [
-    "l.spread-1"
-   ],
-   "prerequisites": [
-    "m.harbor-1"
-   ],
-   "difficulty": 2
-  },
   {
    "id": "m.r1-counting",
    "regionId": "r.harbor-tallies",
@@ -137,12 +116,105 @@
     "m.r1-counting"
    ],
    "difficulty": 2
+  },
+  {
+   "id": "m.r2-counts",
+   "regionId": "r.averages-atoll",
+   "title": "Counting What Is There",
+   "description": "Frequencies, and the two ways of turning one into a share.",
+   "lessonIds": [
+    "l.r2-frequency",
+    "l.r2-proportion",
+    "l.r2-percentage"
+   ],
+   "prerequisites": [],
+   "difficulty": 2
+  },
+  {
+   "id": "m.r2-centre",
+   "regionId": "r.averages-atoll",
+   "title": "The Middle of the Data",
+   "description": "Three measures of centre, and the judgement of which to report.",
+   "lessonIds": [
+    "l.reading-tallies",
+    "l.middle-harbor",
+    "l.r2-mode",
+    "l.r2-choosing-measures"
+   ],
+   "prerequisites": [
+    "m.r2-counts"
+   ],
+   "difficulty": 2
+  },
+  {
+   "id": "m.r2-spread",
+   "regionId": "r.averages-atoll",
+   "title": "How Far It Reaches",
+   "description": "From the plain reach of the data to the spread of its middle half.",
+   "lessonIds": [
+    "l.spread-1",
+    "l.r2-quartiles",
+    "l.r2-percentiles",
+    "l.r2-iqr"
+   ],
+   "prerequisites": [
+    "m.r2-centre"
+   ],
+   "difficulty": 3
+  },
+  {
+   "id": "m.r2-variation",
+   "regionId": "r.averages-atoll",
+   "title": "How Much It Varies",
+   "description": "Distance from the middle, and the values and shapes that distort it.",
+   "lessonIds": [
+    "l.r2-variance",
+    "l.r2-standard-deviation",
+    "l.r2-outliers",
+    "l.r2-skew"
+   ],
+   "prerequisites": [
+    "m.r2-spread"
+   ],
+   "difficulty": 4
+  },
+  {
+   "id": "m.r2-pictures",
+   "regionId": "r.averages-atoll",
+   "title": "Pictures of Data",
+   "description": "Five graphs, and what each one shows that the numbers alone do not.",
+   "lessonIds": [
+    "l.r2-bar-charts",
+    "l.r2-histograms",
+    "l.r2-dot-plots",
+    "l.r2-box-plots",
+    "l.r2-scatterplots"
+   ],
+   "prerequisites": [
+    "m.r2-centre"
+   ],
+   "difficulty": 3
+  },
+  {
+   "id": "m.r2-judgement",
+   "regionId": "r.averages-atoll",
+   "title": "Reading Honestly",
+   "description": "Choosing the picture the question calls for, and catching one that misleads.",
+   "lessonIds": [
+    "l.r2-choosing-graphs",
+    "l.r2-misleading-graphs"
+   ],
+   "prerequisites": [
+    "m.r2-pictures",
+    "m.r2-variation"
+   ],
+   "difficulty": 5
   }
  ],
  "lessons": [
   {
    "id": "l.reading-tallies",
-   "moduleId": "m.harbor-1",
+   "moduleId": "m.r2-centre",
    "title": "Reading the Tide Tallies",
    "narrativeIntro": "The harbormaster hands you the week's catch ledger. Before any voyage, an explorer must read the numbers as fluently as the stars.",
    "objectiveIds": [
@@ -178,12 +250,14 @@
     "q.dd-variable-kinds",
     "q.dd-build-bar-chart"
    ],
-   "prerequisites": [],
+   "prerequisites": [
+    "l.r2-percentage"
+   ],
    "estimatedMinutes": 12
   },
   {
    "id": "l.middle-harbor",
-   "moduleId": "m.harbor-1",
+   "moduleId": "m.r2-centre",
    "title": "The Middle of the Harbor",
    "narrativeIntro": "One enormous catch can drag the mean off course. The median holds steady in rough seas.",
    "objectiveIds": [
@@ -217,7 +291,7 @@
   },
   {
    "id": "l.spread-1",
-   "moduleId": "m.atoll-1",
+   "moduleId": "m.r2-spread",
    "title": "The Reach of the Tide",
    "narrativeIntro": "Two harbors can share a mean and still live different lives. Range tells you how far the tide reaches.",
    "objectiveIds": [
@@ -235,7 +309,7 @@
     "q.range-tides"
    ],
    "prerequisites": [
-    "l.middle-harbor"
+    "l.r2-choosing-measures"
    ],
    "estimatedMinutes": 8
   },
@@ -2218,6 +2292,442 @@
    "masteryCheckQuestionIds": [
     "q.r1-variable-kinds-mastery"
    ]
+  },
+  {
+   "id": "l.r2-frequency",
+   "moduleId": "m.r2-counts",
+   "title": "How Many of Each",
+   "objectiveIds": [
+    "obj.r2-frequency"
+   ],
+   "concepts": [
+    {
+     "id": "c.r2-frequency",
+     "title": "How Many of Each",
+     "summary": "A frequency is a count of cases in a category — the first summary any dataset admits.",
+     "body": "The tide-watchers record the weather every morning. Counting how many mornings were calm is a frequency."
+    }
+   ],
+   "questionIds": [
+    "q.seed.r2-frequency"
+   ],
+   "prerequisites": [],
+   "estimatedMinutes": 15
+  },
+  {
+   "id": "l.r2-proportion",
+   "moduleId": "m.r2-counts",
+   "title": "The Share of the Whole",
+   "objectiveIds": [
+    "obj.r2-proportion"
+   ],
+   "concepts": [
+    {
+     "id": "c.r2-proportion",
+     "title": "The Share of the Whole",
+     "summary": "A proportion turns a frequency into a share of the dataset, between 0 and 1.",
+     "body": "Eight calm mornings out of twenty is a count. Divided by the twenty it becomes a share."
+    }
+   ],
+   "questionIds": [
+    "q.seed.r2-proportion"
+   ],
+   "prerequisites": [
+    "l.r2-frequency"
+   ],
+   "estimatedMinutes": 15
+  },
+  {
+   "id": "l.r2-percentage",
+   "moduleId": "m.r2-counts",
+   "title": "The Share Per Hundred",
+   "objectiveIds": [
+    "obj.r2-percentage"
+   ],
+   "concepts": [
+    {
+     "id": "c.r2-percentage",
+     "title": "The Share Per Hundred",
+     "summary": "A percentage is the same share, counted per hundred instead of per one.",
+     "body": "The same eight mornings in twenty, scaled so that the whole is a hundred."
+    }
+   ],
+   "questionIds": [
+    "q.seed.r2-percentage"
+   ],
+   "prerequisites": [
+    "l.r2-proportion"
+   ],
+   "estimatedMinutes": 15
+  },
+  {
+   "id": "l.r2-mode",
+   "moduleId": "m.r2-centre",
+   "title": "The Value That Repeats",
+   "objectiveIds": [
+    "obj.r2-mode"
+   ],
+   "concepts": [
+    {
+     "id": "c.r2-mode",
+     "title": "The Value That Repeats",
+     "summary": "The mode is the value that occurs most often, and a dataset may have more than one.",
+     "body": "Where the mean and median describe a middle, the mode describes a peak — and it is the only measure of centre a categorical variable admits."
+    }
+   ],
+   "questionIds": [
+    "q.seed.r2-mode"
+   ],
+   "prerequisites": [
+    "l.middle-harbor"
+   ],
+   "estimatedMinutes": 15
+  },
+  {
+   "id": "l.r2-choosing-measures",
+   "moduleId": "m.r2-centre",
+   "title": "Which Middle to Use",
+   "objectiveIds": [
+    "obj.r2-choosing-measures"
+   ],
+   "concepts": [
+    {
+     "id": "c.r2-choosing-measures",
+     "title": "Which Middle to Use",
+     "summary": "Mean, median and mode answer different questions, and the data decides which is honest.",
+     "body": "A single extreme value moves the mean and leaves the median where it was. Which measure to report is a judgement about the data, not a preference."
+    }
+   ],
+   "questionIds": [
+    "q.seed.r2-choosing-measures"
+   ],
+   "prerequisites": [
+    "l.r2-mode"
+   ],
+   "estimatedMinutes": 15
+  },
+  {
+   "id": "l.r2-quartiles",
+   "moduleId": "m.r2-spread",
+   "title": "Cutting the Data in Four",
+   "objectiveIds": [
+    "obj.r2-quartiles"
+   ],
+   "concepts": [
+    {
+     "id": "c.r2-quartiles",
+     "title": "Cutting the Data in Four",
+     "summary": "Quartiles are the three values that cut an ordered dataset into four equal parts.",
+     "body": "The median cuts the data in half; the quartiles cut each half in half again, and between them they say where the middle bulk sits."
+    }
+   ],
+   "questionIds": [
+    "q.seed.r2-quartiles"
+   ],
+   "prerequisites": [
+    "l.spread-1"
+   ],
+   "estimatedMinutes": 15
+  },
+  {
+   "id": "l.r2-percentiles",
+   "moduleId": "m.r2-spread",
+   "title": "Where a Value Stands",
+   "objectiveIds": [
+    "obj.r2-percentiles"
+   ],
+   "concepts": [
+    {
+     "id": "c.r2-percentiles",
+     "title": "Where a Value Stands",
+     "summary": "A percentile is the value below which a given percentage of the cases fall.",
+     "body": "Saying a catch is at the 90th percentile says nothing about its size and everything about its rank."
+    }
+   ],
+   "questionIds": [
+    "q.seed.r2-percentiles"
+   ],
+   "prerequisites": [
+    "l.r2-quartiles"
+   ],
+   "estimatedMinutes": 15
+  },
+  {
+   "id": "l.r2-iqr",
+   "moduleId": "m.r2-spread",
+   "title": "The Middle Half",
+   "objectiveIds": [
+    "obj.r2-iqr"
+   ],
+   "concepts": [
+    {
+     "id": "c.r2-iqr",
+     "title": "The Middle Half",
+     "summary": "The interquartile range is the distance between the first and third quartiles: the spread of the middle half.",
+     "body": "Because it ignores the top and bottom quarters, one extreme value cannot move it — which is exactly why it is reported alongside the median."
+    }
+   ],
+   "questionIds": [
+    "q.seed.r2-iqr"
+   ],
+   "prerequisites": [
+    "l.r2-percentiles"
+   ],
+   "estimatedMinutes": 15
+  },
+  {
+   "id": "l.r2-variance",
+   "moduleId": "m.r2-variation",
+   "title": "How Far From the Middle",
+   "objectiveIds": [
+    "obj.r2-variance"
+   ],
+   "concepts": [
+    {
+     "id": "c.r2-variance",
+     "title": "How Far From the Middle",
+     "summary": "Variance measures how far the values sit from their mean, on average, after squaring.",
+     "body": "Squaring stops distances above and below the mean cancelling out. It also changes the units, which is why the standard deviation follows."
+    }
+   ],
+   "questionIds": [
+    "q.seed.r2-variance"
+   ],
+   "prerequisites": [
+    "l.r2-iqr"
+   ],
+   "estimatedMinutes": 15
+  },
+  {
+   "id": "l.r2-standard-deviation",
+   "moduleId": "m.r2-variation",
+   "title": "Spread on the Scale of the Data",
+   "objectiveIds": [
+    "obj.r2-standard-deviation"
+   ],
+   "concepts": [
+    {
+     "id": "c.r2-standard-deviation",
+     "title": "Spread on the Scale of the Data",
+     "summary": "The standard deviation is the square root of the variance, which puts spread back in the data's own units.",
+     "body": "A variance in squared crates means nothing to a harbourmaster. A standard deviation of three crates does."
+    }
+   ],
+   "questionIds": [
+    "q.seed.r2-standard-deviation"
+   ],
+   "prerequisites": [
+    "l.r2-variance"
+   ],
+   "estimatedMinutes": 15
+  },
+  {
+   "id": "l.r2-outliers",
+   "moduleId": "m.r2-variation",
+   "title": "The Value That Does Not Belong",
+   "objectiveIds": [
+    "obj.r2-outliers"
+   ],
+   "concepts": [
+    {
+     "id": "c.r2-outliers",
+     "title": "The Value That Does Not Belong",
+     "summary": "An outlier sits far from the rest of the data, and it does not affect every summary equally.",
+     "body": "One enormous catch pulls the mean towards it and leaves the median almost untouched. Noticing that is the whole of this lesson."
+    }
+   ],
+   "questionIds": [
+    "q.seed.r2-outliers"
+   ],
+   "prerequisites": [
+    "l.r2-standard-deviation"
+   ],
+   "estimatedMinutes": 15
+  },
+  {
+   "id": "l.r2-skew",
+   "moduleId": "m.r2-variation",
+   "title": "The Long Tail",
+   "objectiveIds": [
+    "obj.r2-skew"
+   ],
+   "concepts": [
+    {
+     "id": "c.r2-skew",
+     "title": "The Long Tail",
+     "summary": "A skewed distribution has a longer tail on one side, and that tail pulls the mean away from the median.",
+     "body": "When the mean sits well above the median, the tail is on the high side — the shape can be read from the two numbers alone."
+    }
+   ],
+   "questionIds": [
+    "q.seed.r2-skew"
+   ],
+   "prerequisites": [
+    "l.r2-outliers"
+   ],
+   "estimatedMinutes": 15
+  },
+  {
+   "id": "l.r2-bar-charts",
+   "moduleId": "m.r2-pictures",
+   "title": "Bars for Categories",
+   "objectiveIds": [
+    "obj.r2-bar-charts"
+   ],
+   "concepts": [
+    {
+     "id": "c.r2-bar-charts",
+     "title": "Bars for Categories",
+     "summary": "A bar chart compares counts across categories, with a gap between the bars because the categories are separate.",
+     "body": "The gaps matter: they say the categories do not run into one another, which is what separates a bar chart from a histogram."
+    }
+   ],
+   "questionIds": [
+    "q.seed.r2-bar-charts"
+   ],
+   "prerequisites": [
+    "l.r2-choosing-measures"
+   ],
+   "estimatedMinutes": 15
+  },
+  {
+   "id": "l.r2-histograms",
+   "moduleId": "m.r2-pictures",
+   "title": "The Shape of a Spread",
+   "objectiveIds": [
+    "obj.r2-histograms"
+   ],
+   "concepts": [
+    {
+     "id": "c.r2-histograms",
+     "title": "The Shape of a Spread",
+     "summary": "A histogram bins a numerical variable and shows the shape of its distribution.",
+     "body": "Change the bin width and the same data can look smooth, spiky, or bimodal. The shape you see is partly a choice you made."
+    }
+   ],
+   "questionIds": [
+    "q.seed.r2-histograms"
+   ],
+   "prerequisites": [
+    "l.r2-bar-charts"
+   ],
+   "estimatedMinutes": 15
+  },
+  {
+   "id": "l.r2-dot-plots",
+   "moduleId": "m.r2-pictures",
+   "title": "Every Case Shown",
+   "objectiveIds": [
+    "obj.r2-dot-plots"
+   ],
+   "concepts": [
+    {
+     "id": "c.r2-dot-plots",
+     "title": "Every Case Shown",
+     "summary": "A dot plot puts one dot per case above its value, so nothing is summarised away.",
+     "body": "For a small dataset it beats every summary, because the reader can see the individual cases and count them."
+    }
+   ],
+   "questionIds": [
+    "q.seed.r2-dot-plots"
+   ],
+   "prerequisites": [
+    "l.r2-histograms"
+   ],
+   "estimatedMinutes": 15
+  },
+  {
+   "id": "l.r2-box-plots",
+   "moduleId": "m.r2-pictures",
+   "title": "Five Numbers as a Picture",
+   "objectiveIds": [
+    "obj.r2-box-plots"
+   ],
+   "concepts": [
+    {
+     "id": "c.r2-box-plots",
+     "title": "Five Numbers as a Picture",
+     "summary": "A box plot draws the minimum, first quartile, median, third quartile and maximum.",
+     "body": "It shows the middle half as a box and the reach as whiskers — and it hides how many cases there are, and whether the data has two peaks."
+    }
+   ],
+   "questionIds": [
+    "q.seed.r2-box-plots"
+   ],
+   "prerequisites": [
+    "l.r2-dot-plots"
+   ],
+   "estimatedMinutes": 15
+  },
+  {
+   "id": "l.r2-scatterplots",
+   "moduleId": "m.r2-pictures",
+   "title": "Two Variables at Once",
+   "objectiveIds": [
+    "obj.r2-scatterplots"
+   ],
+   "concepts": [
+    {
+     "id": "c.r2-scatterplots",
+     "title": "Two Variables at Once",
+     "summary": "A scatterplot puts one point per case using two variables, and shows how they move together.",
+     "body": "It is the coordinate grid from Region 1 with data on it, and the association it shows is never by itself a cause."
+    }
+   ],
+   "questionIds": [
+    "q.seed.r2-scatterplots"
+   ],
+   "prerequisites": [
+    "l.r2-box-plots"
+   ],
+   "estimatedMinutes": 15
+  },
+  {
+   "id": "l.r2-choosing-graphs",
+   "moduleId": "m.r2-judgement",
+   "title": "Picking the Right Picture",
+   "objectiveIds": [
+    "obj.r2-choosing-graphs"
+   ],
+   "concepts": [
+    {
+     "id": "c.r2-choosing-graphs",
+     "title": "Picking the Right Picture",
+     "summary": "The graph to use follows from the question asked and the kind of variable in hand.",
+     "body": "Categorical counts want bars; one numerical variable's shape wants a histogram; two numerical variables want a scatterplot."
+    }
+   ],
+   "questionIds": [
+    "q.seed.r2-choosing-graphs"
+   ],
+   "prerequisites": [
+    "l.r2-scatterplots",
+    "l.r2-skew"
+   ],
+   "estimatedMinutes": 15
+  },
+  {
+   "id": "l.r2-misleading-graphs",
+   "moduleId": "m.r2-judgement",
+   "title": "True and Still Misleading",
+   "objectiveIds": [
+    "obj.r2-misleading-graphs"
+   ],
+   "concepts": [
+    {
+     "id": "c.r2-misleading-graphs",
+     "title": "True and Still Misleading",
+     "summary": "A graph can be accurate in every value and still lead a reader to a false conclusion.",
+     "body": "A vertical axis that starts at 90 rather than 0 turns a 2% difference into a cliff, without misprinting a single number."
+    }
+   ],
+   "questionIds": [
+    "q.seed.r2-misleading-graphs"
+   ],
+   "prerequisites": [
+    "l.r2-choosing-graphs"
+   ],
+   "estimatedMinutes": 15
   }
  ],
  "objectives": [
@@ -2381,6 +2891,139 @@
    "skillIds": [
     "skill.r1-variable-kinds"
    ]
+  },
+  {
+   "id": "obj.r2-frequency",
+   "text": "Count how many cases fall into each category.",
+   "skillIds": [
+    "skill.r2-frequency"
+   ]
+  },
+  {
+   "id": "obj.r2-proportion",
+   "text": "Express a category's share of a dataset as a proportion.",
+   "skillIds": [
+    "skill.r2-proportion"
+   ]
+  },
+  {
+   "id": "obj.r2-percentage",
+   "text": "Express a category's share of a dataset as a percentage.",
+   "skillIds": [
+    "skill.r2-percentage"
+   ]
+  },
+  {
+   "id": "obj.r2-mode",
+   "text": "Find the mode, including when a dataset has more than one.",
+   "skillIds": [
+    "skill.r2-mode"
+   ]
+  },
+  {
+   "id": "obj.r2-choosing-measures",
+   "text": "Choose the measure of centre a dataset and question call for.",
+   "skillIds": [
+    "skill.choose-measure"
+   ]
+  },
+  {
+   "id": "obj.r2-quartiles",
+   "text": "Find the quartiles of an ordered dataset.",
+   "skillIds": [
+    "skill.r2-quartiles"
+   ]
+  },
+  {
+   "id": "obj.r2-percentiles",
+   "text": "Read and interpret a percentile.",
+   "skillIds": [
+    "skill.r2-percentiles"
+   ]
+  },
+  {
+   "id": "obj.r2-iqr",
+   "text": "Compute the interquartile range and say what it resists.",
+   "skillIds": [
+    "skill.r2-iqr"
+   ]
+  },
+  {
+   "id": "obj.r2-variance",
+   "text": "Reason about variance as average squared distance from the mean.",
+   "skillIds": [
+    "skill.r2-variance"
+   ]
+  },
+  {
+   "id": "obj.r2-standard-deviation",
+   "text": "Interpret a standard deviation on the scale of the data.",
+   "skillIds": [
+    "skill.r2-standard-deviation"
+   ]
+  },
+  {
+   "id": "obj.r2-outliers",
+   "text": "Identify outliers and say what they do to each summary.",
+   "skillIds": [
+    "skill.r2-outliers"
+   ]
+  },
+  {
+   "id": "obj.r2-skew",
+   "text": "Recognise skew and predict how it separates mean from median.",
+   "skillIds": [
+    "skill.r2-skew"
+   ]
+  },
+  {
+   "id": "obj.r2-bar-charts",
+   "text": "Read and build a bar chart of category counts.",
+   "skillIds": [
+    "skill.r2-bar-charts"
+   ]
+  },
+  {
+   "id": "obj.r2-histograms",
+   "text": "Read a histogram and judge the effect of bin width.",
+   "skillIds": [
+    "skill.r2-histograms"
+   ]
+  },
+  {
+   "id": "obj.r2-dot-plots",
+   "text": "Read a dot plot and say when it beats a summary.",
+   "skillIds": [
+    "skill.r2-dot-plots"
+   ]
+  },
+  {
+   "id": "obj.r2-box-plots",
+   "text": "Read a box plot and name what it hides.",
+   "skillIds": [
+    "skill.r2-box-plots"
+   ]
+  },
+  {
+   "id": "obj.r2-scatterplots",
+   "text": "Read a scatterplot and describe the association.",
+   "skillIds": [
+    "skill.r2-scatterplots"
+   ]
+  },
+  {
+   "id": "obj.r2-choosing-graphs",
+   "text": "Choose the graph the question and the variables call for.",
+   "skillIds": [
+    "skill.r2-choosing-graphs"
+   ]
+  },
+  {
+   "id": "obj.r2-misleading-graphs",
+   "text": "Detect a graph that misleads without stating a falsehood.",
+   "skillIds": [
+    "skill.r2-misleading-graphs"
+   ]
   }
  ],
  "skills": [
@@ -2388,7 +3031,8 @@
    "id": "skill.data-literacy",
    "title": "Data literacy",
    "description": "Reading datasets, charts, and variable types.",
-   "prerequisites": []
+   "prerequisites": [],
+   "stage": 1
   },
   {
    "id": "skill.mean",
@@ -2396,7 +3040,8 @@
    "description": "Computing and interpreting the arithmetic mean.",
    "prerequisites": [
     "skill.data-literacy"
-   ]
+   ],
+   "stage": 1
   },
   {
    "id": "skill.median",
@@ -2404,7 +3049,8 @@
    "description": "Computing and interpreting the median.",
    "prerequisites": [
     "skill.data-literacy"
-   ]
+   ],
+   "stage": 1
   },
   {
    "id": "skill.choose-measure",
@@ -2413,7 +3059,8 @@
    "prerequisites": [
     "skill.mean",
     "skill.median"
-   ]
+   ],
+   "stage": 1
   },
   {
    "id": "skill.range",
@@ -2421,115 +3068,260 @@
    "description": "Computing the range of a dataset.",
    "prerequisites": [
     "skill.data-literacy"
-   ]
+   ],
+   "stage": 1
   },
   {
    "id": "skill.percent-fraction",
    "title": "Percents and fractions",
    "description": "Moving between fractions, decimals, and percentages.",
-   "prerequisites": []
+   "prerequisites": [],
+   "stage": 1
   },
   {
    "id": "skill.r1-counting",
    "title": "Counting",
    "description": "Region 1 foundation: counting.",
-   "prerequisites": []
+   "prerequisites": [],
+   "stage": 2
   },
   {
    "id": "skill.r1-addition",
    "title": "Addition",
    "description": "Region 1 foundation: addition.",
-   "prerequisites": []
+   "prerequisites": [],
+   "stage": 2
   },
   {
    "id": "skill.r1-subtraction",
    "title": "Subtraction",
    "description": "Region 1 foundation: subtraction.",
-   "prerequisites": []
+   "prerequisites": [],
+   "stage": 2
   },
   {
    "id": "skill.r1-multiplication",
    "title": "Multiplication",
    "description": "Region 1 foundation: multiplication.",
-   "prerequisites": []
+   "prerequisites": [],
+   "stage": 2
   },
   {
    "id": "skill.r1-division",
    "title": "Division",
    "description": "Region 1 foundation: division.",
-   "prerequisites": []
+   "prerequisites": [],
+   "stage": 2
   },
   {
    "id": "skill.r1-fractions",
    "title": "Fractions",
    "description": "Region 1 foundation: fractions.",
-   "prerequisites": []
+   "prerequisites": [],
+   "stage": 2
   },
   {
    "id": "skill.r1-decimals",
    "title": "Decimals",
    "description": "Region 1 foundation: decimals.",
-   "prerequisites": []
+   "prerequisites": [],
+   "stage": 2
   },
   {
    "id": "skill.r1-percentages",
    "title": "Percentages",
    "description": "Region 1 foundation: percentages.",
-   "prerequisites": []
+   "prerequisites": [],
+   "stage": 2
   },
   {
    "id": "skill.r1-ratios",
    "title": "Ratios",
    "description": "Region 1 foundation: ratios.",
-   "prerequisites": []
+   "prerequisites": [],
+   "stage": 2
   },
   {
    "id": "skill.r1-proportions",
    "title": "Proportions",
    "description": "Region 1 foundation: proportions.",
-   "prerequisites": []
+   "prerequisites": [],
+   "stage": 2
   },
   {
    "id": "skill.r1-negatives",
    "title": "Negative numbers",
    "description": "Region 1 foundation: negative numbers.",
-   "prerequisites": []
+   "prerequisites": [],
+   "stage": 2
   },
   {
    "id": "skill.r1-number-lines",
    "title": "Number lines",
    "description": "Region 1 foundation: number lines.",
-   "prerequisites": []
+   "prerequisites": [],
+   "stage": 2
   },
   {
    "id": "skill.r1-coordinates",
    "title": "Coordinates",
    "description": "Region 1 foundation: coordinates.",
-   "prerequisites": []
+   "prerequisites": [],
+   "stage": 2
   },
   {
    "id": "skill.r1-tables",
    "title": "Reading tables",
    "description": "Region 1 foundation: reading tables.",
-   "prerequisites": []
+   "prerequisites": [],
+   "stage": 2
   },
   {
    "id": "skill.r1-variables",
    "title": "Variables",
    "description": "Region 1 foundation: variables.",
-   "prerequisites": []
+   "prerequisites": [],
+   "stage": 2
   },
   {
    "id": "skill.r1-cases",
    "title": "Cases and observations",
    "description": "Region 1 foundation: data, cases and observations.",
-   "prerequisites": []
+   "prerequisites": [],
+   "stage": 2
   },
   {
    "id": "skill.r1-variable-kinds",
    "title": "Kinds of variable",
    "description": "Region 1 foundation: categorical and numerical variables.",
-   "prerequisites": []
+   "prerequisites": [],
+   "stage": 2
+  },
+  {
+   "id": "skill.r2-frequency",
+   "title": "Frequency",
+   "description": "Counting how many cases fall into each category.",
+   "prerequisites": [],
+   "stage": 2
+  },
+  {
+   "id": "skill.r2-proportion",
+   "title": "Proportion of a dataset",
+   "description": "The share of the cases in a category, between 0 and 1.",
+   "prerequisites": [],
+   "stage": 2
+  },
+  {
+   "id": "skill.r2-percentage",
+   "title": "Percentage of a dataset",
+   "description": "The share of the cases in a category, per hundred.",
+   "prerequisites": [],
+   "stage": 2
+  },
+  {
+   "id": "skill.r2-mode",
+   "title": "Mode",
+   "description": "The most frequent value, and when there is more than one.",
+   "prerequisites": [],
+   "stage": 2
+  },
+  {
+   "id": "skill.r2-quartiles",
+   "title": "Quartiles",
+   "description": "The values that cut an ordered dataset into four.",
+   "prerequisites": [],
+   "stage": 2
+  },
+  {
+   "id": "skill.r2-percentiles",
+   "title": "Percentiles",
+   "description": "The value below which a given percentage of cases fall.",
+   "prerequisites": [],
+   "stage": 2
+  },
+  {
+   "id": "skill.r2-iqr",
+   "title": "Interquartile range",
+   "description": "The spread of the middle half, and why it resists outliers.",
+   "prerequisites": [],
+   "stage": 2
+  },
+  {
+   "id": "skill.r2-variance",
+   "title": "Variance intuition",
+   "description": "How far values sit from the mean, on average, squared.",
+   "prerequisites": [],
+   "stage": 2
+  },
+  {
+   "id": "skill.r2-standard-deviation",
+   "title": "Standard-deviation intuition",
+   "description": "Spread back on the scale of the data itself.",
+   "prerequisites": [],
+   "stage": 2
+  },
+  {
+   "id": "skill.r2-outliers",
+   "title": "Outliers",
+   "description": "Values far from the rest, and what they do to a summary.",
+   "prerequisites": [],
+   "stage": 2
+  },
+  {
+   "id": "skill.r2-skew",
+   "title": "Skew",
+   "description": "A distribution with a long tail on one side, and what it does to the centre.",
+   "prerequisites": [],
+   "stage": 2
+  },
+  {
+   "id": "skill.r2-bar-charts",
+   "title": "Bar charts",
+   "description": "Comparing counts across categories.",
+   "prerequisites": [],
+   "stage": 2
+  },
+  {
+   "id": "skill.r2-histograms",
+   "title": "Histograms",
+   "description": "The shape of a numerical distribution, and what bin width hides.",
+   "prerequisites": [],
+   "stage": 2
+  },
+  {
+   "id": "skill.r2-dot-plots",
+   "title": "Dot plots",
+   "description": "Every case shown as itself, for small datasets.",
+   "prerequisites": [],
+   "stage": 2
+  },
+  {
+   "id": "skill.r2-box-plots",
+   "title": "Box plots",
+   "description": "Five numbers as a picture, and what it does not show.",
+   "prerequisites": [],
+   "stage": 2
+  },
+  {
+   "id": "skill.r2-scatterplots",
+   "title": "Scatterplots",
+   "description": "Two variables at once, and the association between them.",
+   "prerequisites": [],
+   "stage": 2
+  },
+  {
+   "id": "skill.r2-choosing-graphs",
+   "title": "Choosing a graph",
+   "description": "Matching the picture to the question and the kind of variable.",
+   "prerequisites": [],
+   "stage": 2
+  },
+  {
+   "id": "skill.r2-misleading-graphs",
+   "title": "Misleading graphs",
+   "description": "Truncated axes, bin choices and framing that mislead without lying.",
+   "prerequisites": [],
+   "stage": 2
   }
  ],
  "masteryRule": {
@@ -2628,5 +3420,9 @@
     }
    ]
   }
- ]
+ ],
+ "laboratoryUnlock": {
+  "lessonId": "l.reading-tallies",
+  "sealedNote": "The Descriptive Bench opens once you have charted The Middle of the Data's first lesson. A bench with no summary to compute against is a blank table."
+ }
 }

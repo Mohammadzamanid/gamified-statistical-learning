@@ -5,16 +5,17 @@
       "skillId": "skill.choose-measure",
       "title": "Choosing measures",
       "lessonIds": [
-        "l.middle-harbor"
+        "l.middle-harbor",
+        "l.r2-choosing-measures"
       ],
-      "regionId": "r.harbor-tallies",
-      "authoredRecords": 4,
+      "regionId": "r.averages-atoll",
+      "authoredRecords": 5,
       "generatorFamilies": 0,
       "reasoningFamilies": [],
       "rawCombinations": 0,
       "validCombinations": 0,
       "validatedGenerated": 0,
-      "totalAvailable": 4,
+      "totalAvailable": 5,
       "rejections": {
         "invalidCombinations": 0,
         "invalidReasons": {},
@@ -26,10 +27,10 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.25,
+      "largestShapeShare": 0.2,
       "failures": [
         "no generator families produce for this topic",
-        "4 available interactions, below the required 100",
+        "5 available interactions, below the required 100",
         "0 reasoning families represented, below the required 4"
       ]
     },
@@ -39,7 +40,7 @@
       "lessonIds": [
         "l.reading-tallies"
       ],
-      "regionId": "r.harbor-tallies",
+      "regionId": "r.averages-atoll",
       "authoredRecords": 7,
       "generatorFamilies": 0,
       "reasoningFamilies": [],
@@ -71,7 +72,7 @@
       "lessonIds": [
         "l.reading-tallies"
       ],
-      "regionId": "r.harbor-tallies",
+      "regionId": "r.averages-atoll",
       "authoredRecords": 6,
       "generatorFamilies": 0,
       "reasoningFamilies": [],
@@ -103,7 +104,7 @@
       "lessonIds": [
         "l.middle-harbor"
       ],
-      "regionId": "r.harbor-tallies",
+      "regionId": "r.averages-atoll",
       "authoredRecords": 5,
       "generatorFamilies": 0,
       "reasoningFamilies": [],
@@ -775,6 +776,600 @@
       "unreachableQuestions": [],
       "largestShapeShare": 0.13559322033898305,
       "failures": []
+    },
+    {
+      "skillId": "skill.r2-bar-charts",
+      "title": "Bar charts",
+      "lessonIds": [
+        "l.r2-bar-charts"
+      ],
+      "regionId": "r.averages-atoll",
+      "authoredRecords": 1,
+      "generatorFamilies": 0,
+      "reasoningFamilies": [],
+      "rawCombinations": 0,
+      "validCombinations": 0,
+      "validatedGenerated": 0,
+      "totalAvailable": 1,
+      "rejections": {
+        "invalidCombinations": 0,
+        "invalidReasons": {},
+        "schemaFailures": 0,
+        "answerFailures": 0,
+        "missingAccessibility": 0,
+        "missingMisconceptionMapping": 0,
+        "exactDuplicates": 0,
+        "nearDuplicates": 0
+      },
+      "unreachableQuestions": [],
+      "largestShapeShare": 1,
+      "failures": [
+        "no generator families produce for this topic",
+        "1 available interactions, below the required 100",
+        "0 reasoning families represented, below the required 4",
+        "100% of interactions share one reasoning shape, above the 50% ceiling — this is the \"numeric variants of one pattern\" case"
+      ]
+    },
+    {
+      "skillId": "skill.r2-box-plots",
+      "title": "Box plots",
+      "lessonIds": [
+        "l.r2-box-plots"
+      ],
+      "regionId": "r.averages-atoll",
+      "authoredRecords": 1,
+      "generatorFamilies": 0,
+      "reasoningFamilies": [],
+      "rawCombinations": 0,
+      "validCombinations": 0,
+      "validatedGenerated": 0,
+      "totalAvailable": 1,
+      "rejections": {
+        "invalidCombinations": 0,
+        "invalidReasons": {},
+        "schemaFailures": 0,
+        "answerFailures": 0,
+        "missingAccessibility": 0,
+        "missingMisconceptionMapping": 0,
+        "exactDuplicates": 0,
+        "nearDuplicates": 0
+      },
+      "unreachableQuestions": [],
+      "largestShapeShare": 1,
+      "failures": [
+        "no generator families produce for this topic",
+        "1 available interactions, below the required 100",
+        "0 reasoning families represented, below the required 4",
+        "100% of interactions share one reasoning shape, above the 50% ceiling — this is the \"numeric variants of one pattern\" case"
+      ]
+    },
+    {
+      "skillId": "skill.r2-choosing-graphs",
+      "title": "Choosing a graph",
+      "lessonIds": [
+        "l.r2-choosing-graphs"
+      ],
+      "regionId": "r.averages-atoll",
+      "authoredRecords": 1,
+      "generatorFamilies": 0,
+      "reasoningFamilies": [],
+      "rawCombinations": 0,
+      "validCombinations": 0,
+      "validatedGenerated": 0,
+      "totalAvailable": 1,
+      "rejections": {
+        "invalidCombinations": 0,
+        "invalidReasons": {},
+        "schemaFailures": 0,
+        "answerFailures": 0,
+        "missingAccessibility": 0,
+        "missingMisconceptionMapping": 0,
+        "exactDuplicates": 0,
+        "nearDuplicates": 0
+      },
+      "unreachableQuestions": [],
+      "largestShapeShare": 1,
+      "failures": [
+        "no generator families produce for this topic",
+        "1 available interactions, below the required 100",
+        "0 reasoning families represented, below the required 4",
+        "100% of interactions share one reasoning shape, above the 50% ceiling — this is the \"numeric variants of one pattern\" case"
+      ]
+    },
+    {
+      "skillId": "skill.r2-dot-plots",
+      "title": "Dot plots",
+      "lessonIds": [
+        "l.r2-dot-plots"
+      ],
+      "regionId": "r.averages-atoll",
+      "authoredRecords": 1,
+      "generatorFamilies": 0,
+      "reasoningFamilies": [],
+      "rawCombinations": 0,
+      "validCombinations": 0,
+      "validatedGenerated": 0,
+      "totalAvailable": 1,
+      "rejections": {
+        "invalidCombinations": 0,
+        "invalidReasons": {},
+        "schemaFailures": 0,
+        "answerFailures": 0,
+        "missingAccessibility": 0,
+        "missingMisconceptionMapping": 0,
+        "exactDuplicates": 0,
+        "nearDuplicates": 0
+      },
+      "unreachableQuestions": [],
+      "largestShapeShare": 1,
+      "failures": [
+        "no generator families produce for this topic",
+        "1 available interactions, below the required 100",
+        "0 reasoning families represented, below the required 4",
+        "100% of interactions share one reasoning shape, above the 50% ceiling — this is the \"numeric variants of one pattern\" case"
+      ]
+    },
+    {
+      "skillId": "skill.r2-frequency",
+      "title": "Frequency",
+      "lessonIds": [
+        "l.r2-frequency"
+      ],
+      "regionId": "r.averages-atoll",
+      "authoredRecords": 1,
+      "generatorFamilies": 0,
+      "reasoningFamilies": [],
+      "rawCombinations": 0,
+      "validCombinations": 0,
+      "validatedGenerated": 0,
+      "totalAvailable": 1,
+      "rejections": {
+        "invalidCombinations": 0,
+        "invalidReasons": {},
+        "schemaFailures": 0,
+        "answerFailures": 0,
+        "missingAccessibility": 0,
+        "missingMisconceptionMapping": 0,
+        "exactDuplicates": 0,
+        "nearDuplicates": 0
+      },
+      "unreachableQuestions": [],
+      "largestShapeShare": 1,
+      "failures": [
+        "no generator families produce for this topic",
+        "1 available interactions, below the required 100",
+        "0 reasoning families represented, below the required 4",
+        "100% of interactions share one reasoning shape, above the 50% ceiling — this is the \"numeric variants of one pattern\" case"
+      ]
+    },
+    {
+      "skillId": "skill.r2-histograms",
+      "title": "Histograms",
+      "lessonIds": [
+        "l.r2-histograms"
+      ],
+      "regionId": "r.averages-atoll",
+      "authoredRecords": 1,
+      "generatorFamilies": 0,
+      "reasoningFamilies": [],
+      "rawCombinations": 0,
+      "validCombinations": 0,
+      "validatedGenerated": 0,
+      "totalAvailable": 1,
+      "rejections": {
+        "invalidCombinations": 0,
+        "invalidReasons": {},
+        "schemaFailures": 0,
+        "answerFailures": 0,
+        "missingAccessibility": 0,
+        "missingMisconceptionMapping": 0,
+        "exactDuplicates": 0,
+        "nearDuplicates": 0
+      },
+      "unreachableQuestions": [],
+      "largestShapeShare": 1,
+      "failures": [
+        "no generator families produce for this topic",
+        "1 available interactions, below the required 100",
+        "0 reasoning families represented, below the required 4",
+        "100% of interactions share one reasoning shape, above the 50% ceiling — this is the \"numeric variants of one pattern\" case"
+      ]
+    },
+    {
+      "skillId": "skill.r2-iqr",
+      "title": "Interquartile range",
+      "lessonIds": [
+        "l.r2-iqr"
+      ],
+      "regionId": "r.averages-atoll",
+      "authoredRecords": 1,
+      "generatorFamilies": 0,
+      "reasoningFamilies": [],
+      "rawCombinations": 0,
+      "validCombinations": 0,
+      "validatedGenerated": 0,
+      "totalAvailable": 1,
+      "rejections": {
+        "invalidCombinations": 0,
+        "invalidReasons": {},
+        "schemaFailures": 0,
+        "answerFailures": 0,
+        "missingAccessibility": 0,
+        "missingMisconceptionMapping": 0,
+        "exactDuplicates": 0,
+        "nearDuplicates": 0
+      },
+      "unreachableQuestions": [],
+      "largestShapeShare": 1,
+      "failures": [
+        "no generator families produce for this topic",
+        "1 available interactions, below the required 100",
+        "0 reasoning families represented, below the required 4",
+        "100% of interactions share one reasoning shape, above the 50% ceiling — this is the \"numeric variants of one pattern\" case"
+      ]
+    },
+    {
+      "skillId": "skill.r2-misleading-graphs",
+      "title": "Misleading graphs",
+      "lessonIds": [
+        "l.r2-misleading-graphs"
+      ],
+      "regionId": "r.averages-atoll",
+      "authoredRecords": 1,
+      "generatorFamilies": 0,
+      "reasoningFamilies": [],
+      "rawCombinations": 0,
+      "validCombinations": 0,
+      "validatedGenerated": 0,
+      "totalAvailable": 1,
+      "rejections": {
+        "invalidCombinations": 0,
+        "invalidReasons": {},
+        "schemaFailures": 0,
+        "answerFailures": 0,
+        "missingAccessibility": 0,
+        "missingMisconceptionMapping": 0,
+        "exactDuplicates": 0,
+        "nearDuplicates": 0
+      },
+      "unreachableQuestions": [],
+      "largestShapeShare": 1,
+      "failures": [
+        "no generator families produce for this topic",
+        "1 available interactions, below the required 100",
+        "0 reasoning families represented, below the required 4",
+        "100% of interactions share one reasoning shape, above the 50% ceiling — this is the \"numeric variants of one pattern\" case"
+      ]
+    },
+    {
+      "skillId": "skill.r2-mode",
+      "title": "Mode",
+      "lessonIds": [
+        "l.r2-mode"
+      ],
+      "regionId": "r.averages-atoll",
+      "authoredRecords": 1,
+      "generatorFamilies": 0,
+      "reasoningFamilies": [],
+      "rawCombinations": 0,
+      "validCombinations": 0,
+      "validatedGenerated": 0,
+      "totalAvailable": 1,
+      "rejections": {
+        "invalidCombinations": 0,
+        "invalidReasons": {},
+        "schemaFailures": 0,
+        "answerFailures": 0,
+        "missingAccessibility": 0,
+        "missingMisconceptionMapping": 0,
+        "exactDuplicates": 0,
+        "nearDuplicates": 0
+      },
+      "unreachableQuestions": [],
+      "largestShapeShare": 1,
+      "failures": [
+        "no generator families produce for this topic",
+        "1 available interactions, below the required 100",
+        "0 reasoning families represented, below the required 4",
+        "100% of interactions share one reasoning shape, above the 50% ceiling — this is the \"numeric variants of one pattern\" case"
+      ]
+    },
+    {
+      "skillId": "skill.r2-outliers",
+      "title": "Outliers",
+      "lessonIds": [
+        "l.r2-outliers"
+      ],
+      "regionId": "r.averages-atoll",
+      "authoredRecords": 1,
+      "generatorFamilies": 0,
+      "reasoningFamilies": [],
+      "rawCombinations": 0,
+      "validCombinations": 0,
+      "validatedGenerated": 0,
+      "totalAvailable": 1,
+      "rejections": {
+        "invalidCombinations": 0,
+        "invalidReasons": {},
+        "schemaFailures": 0,
+        "answerFailures": 0,
+        "missingAccessibility": 0,
+        "missingMisconceptionMapping": 0,
+        "exactDuplicates": 0,
+        "nearDuplicates": 0
+      },
+      "unreachableQuestions": [],
+      "largestShapeShare": 1,
+      "failures": [
+        "no generator families produce for this topic",
+        "1 available interactions, below the required 100",
+        "0 reasoning families represented, below the required 4",
+        "100% of interactions share one reasoning shape, above the 50% ceiling — this is the \"numeric variants of one pattern\" case"
+      ]
+    },
+    {
+      "skillId": "skill.r2-percentage",
+      "title": "Percentage of a dataset",
+      "lessonIds": [
+        "l.r2-percentage"
+      ],
+      "regionId": "r.averages-atoll",
+      "authoredRecords": 1,
+      "generatorFamilies": 0,
+      "reasoningFamilies": [],
+      "rawCombinations": 0,
+      "validCombinations": 0,
+      "validatedGenerated": 0,
+      "totalAvailable": 1,
+      "rejections": {
+        "invalidCombinations": 0,
+        "invalidReasons": {},
+        "schemaFailures": 0,
+        "answerFailures": 0,
+        "missingAccessibility": 0,
+        "missingMisconceptionMapping": 0,
+        "exactDuplicates": 0,
+        "nearDuplicates": 0
+      },
+      "unreachableQuestions": [],
+      "largestShapeShare": 1,
+      "failures": [
+        "no generator families produce for this topic",
+        "1 available interactions, below the required 100",
+        "0 reasoning families represented, below the required 4",
+        "100% of interactions share one reasoning shape, above the 50% ceiling — this is the \"numeric variants of one pattern\" case"
+      ]
+    },
+    {
+      "skillId": "skill.r2-percentiles",
+      "title": "Percentiles",
+      "lessonIds": [
+        "l.r2-percentiles"
+      ],
+      "regionId": "r.averages-atoll",
+      "authoredRecords": 1,
+      "generatorFamilies": 0,
+      "reasoningFamilies": [],
+      "rawCombinations": 0,
+      "validCombinations": 0,
+      "validatedGenerated": 0,
+      "totalAvailable": 1,
+      "rejections": {
+        "invalidCombinations": 0,
+        "invalidReasons": {},
+        "schemaFailures": 0,
+        "answerFailures": 0,
+        "missingAccessibility": 0,
+        "missingMisconceptionMapping": 0,
+        "exactDuplicates": 0,
+        "nearDuplicates": 0
+      },
+      "unreachableQuestions": [],
+      "largestShapeShare": 1,
+      "failures": [
+        "no generator families produce for this topic",
+        "1 available interactions, below the required 100",
+        "0 reasoning families represented, below the required 4",
+        "100% of interactions share one reasoning shape, above the 50% ceiling — this is the \"numeric variants of one pattern\" case"
+      ]
+    },
+    {
+      "skillId": "skill.r2-proportion",
+      "title": "Proportion of a dataset",
+      "lessonIds": [
+        "l.r2-proportion"
+      ],
+      "regionId": "r.averages-atoll",
+      "authoredRecords": 1,
+      "generatorFamilies": 0,
+      "reasoningFamilies": [],
+      "rawCombinations": 0,
+      "validCombinations": 0,
+      "validatedGenerated": 0,
+      "totalAvailable": 1,
+      "rejections": {
+        "invalidCombinations": 0,
+        "invalidReasons": {},
+        "schemaFailures": 0,
+        "answerFailures": 0,
+        "missingAccessibility": 0,
+        "missingMisconceptionMapping": 0,
+        "exactDuplicates": 0,
+        "nearDuplicates": 0
+      },
+      "unreachableQuestions": [],
+      "largestShapeShare": 1,
+      "failures": [
+        "no generator families produce for this topic",
+        "1 available interactions, below the required 100",
+        "0 reasoning families represented, below the required 4",
+        "100% of interactions share one reasoning shape, above the 50% ceiling — this is the \"numeric variants of one pattern\" case"
+      ]
+    },
+    {
+      "skillId": "skill.r2-quartiles",
+      "title": "Quartiles",
+      "lessonIds": [
+        "l.r2-quartiles"
+      ],
+      "regionId": "r.averages-atoll",
+      "authoredRecords": 1,
+      "generatorFamilies": 0,
+      "reasoningFamilies": [],
+      "rawCombinations": 0,
+      "validCombinations": 0,
+      "validatedGenerated": 0,
+      "totalAvailable": 1,
+      "rejections": {
+        "invalidCombinations": 0,
+        "invalidReasons": {},
+        "schemaFailures": 0,
+        "answerFailures": 0,
+        "missingAccessibility": 0,
+        "missingMisconceptionMapping": 0,
+        "exactDuplicates": 0,
+        "nearDuplicates": 0
+      },
+      "unreachableQuestions": [],
+      "largestShapeShare": 1,
+      "failures": [
+        "no generator families produce for this topic",
+        "1 available interactions, below the required 100",
+        "0 reasoning families represented, below the required 4",
+        "100% of interactions share one reasoning shape, above the 50% ceiling — this is the \"numeric variants of one pattern\" case"
+      ]
+    },
+    {
+      "skillId": "skill.r2-scatterplots",
+      "title": "Scatterplots",
+      "lessonIds": [
+        "l.r2-scatterplots"
+      ],
+      "regionId": "r.averages-atoll",
+      "authoredRecords": 1,
+      "generatorFamilies": 0,
+      "reasoningFamilies": [],
+      "rawCombinations": 0,
+      "validCombinations": 0,
+      "validatedGenerated": 0,
+      "totalAvailable": 1,
+      "rejections": {
+        "invalidCombinations": 0,
+        "invalidReasons": {},
+        "schemaFailures": 0,
+        "answerFailures": 0,
+        "missingAccessibility": 0,
+        "missingMisconceptionMapping": 0,
+        "exactDuplicates": 0,
+        "nearDuplicates": 0
+      },
+      "unreachableQuestions": [],
+      "largestShapeShare": 1,
+      "failures": [
+        "no generator families produce for this topic",
+        "1 available interactions, below the required 100",
+        "0 reasoning families represented, below the required 4",
+        "100% of interactions share one reasoning shape, above the 50% ceiling — this is the \"numeric variants of one pattern\" case"
+      ]
+    },
+    {
+      "skillId": "skill.r2-skew",
+      "title": "Skew",
+      "lessonIds": [
+        "l.r2-skew"
+      ],
+      "regionId": "r.averages-atoll",
+      "authoredRecords": 1,
+      "generatorFamilies": 0,
+      "reasoningFamilies": [],
+      "rawCombinations": 0,
+      "validCombinations": 0,
+      "validatedGenerated": 0,
+      "totalAvailable": 1,
+      "rejections": {
+        "invalidCombinations": 0,
+        "invalidReasons": {},
+        "schemaFailures": 0,
+        "answerFailures": 0,
+        "missingAccessibility": 0,
+        "missingMisconceptionMapping": 0,
+        "exactDuplicates": 0,
+        "nearDuplicates": 0
+      },
+      "unreachableQuestions": [],
+      "largestShapeShare": 1,
+      "failures": [
+        "no generator families produce for this topic",
+        "1 available interactions, below the required 100",
+        "0 reasoning families represented, below the required 4",
+        "100% of interactions share one reasoning shape, above the 50% ceiling — this is the \"numeric variants of one pattern\" case"
+      ]
+    },
+    {
+      "skillId": "skill.r2-standard-deviation",
+      "title": "Standard-deviation intuition",
+      "lessonIds": [
+        "l.r2-standard-deviation"
+      ],
+      "regionId": "r.averages-atoll",
+      "authoredRecords": 1,
+      "generatorFamilies": 0,
+      "reasoningFamilies": [],
+      "rawCombinations": 0,
+      "validCombinations": 0,
+      "validatedGenerated": 0,
+      "totalAvailable": 1,
+      "rejections": {
+        "invalidCombinations": 0,
+        "invalidReasons": {},
+        "schemaFailures": 0,
+        "answerFailures": 0,
+        "missingAccessibility": 0,
+        "missingMisconceptionMapping": 0,
+        "exactDuplicates": 0,
+        "nearDuplicates": 0
+      },
+      "unreachableQuestions": [],
+      "largestShapeShare": 1,
+      "failures": [
+        "no generator families produce for this topic",
+        "1 available interactions, below the required 100",
+        "0 reasoning families represented, below the required 4",
+        "100% of interactions share one reasoning shape, above the 50% ceiling — this is the \"numeric variants of one pattern\" case"
+      ]
+    },
+    {
+      "skillId": "skill.r2-variance",
+      "title": "Variance intuition",
+      "lessonIds": [
+        "l.r2-variance"
+      ],
+      "regionId": "r.averages-atoll",
+      "authoredRecords": 1,
+      "generatorFamilies": 0,
+      "reasoningFamilies": [],
+      "rawCombinations": 0,
+      "validCombinations": 0,
+      "validatedGenerated": 0,
+      "totalAvailable": 1,
+      "rejections": {
+        "invalidCombinations": 0,
+        "invalidReasons": {},
+        "schemaFailures": 0,
+        "answerFailures": 0,
+        "missingAccessibility": 0,
+        "missingMisconceptionMapping": 0,
+        "exactDuplicates": 0,
+        "nearDuplicates": 0
+      },
+      "unreachableQuestions": [],
+      "largestShapeShare": 1,
+      "failures": [
+        "no generator families produce for this topic",
+        "1 available interactions, below the required 100",
+        "0 reasoning families represented, below the required 4",
+        "100% of interactions share one reasoning shape, above the 50% ceiling — this is the \"numeric variants of one pattern\" case"
+      ]
     },
     {
       "skillId": "skill.range",

@@ -6878,5 +6878,459 @@
   "misconceptionIds": [],
   "accessibilityDescription": "An open-response question asking the learner to explain, using the words ratio and evidence, why a shed's own record is the evidence against it.",
   "estimatedSeconds": 120
+ },
+ {
+  "id": "q.seed.r2-frequency",
+  "topicId": "t.r2-frequency",
+  "objectiveId": "obj.r2-frequency",
+  "skillIds": [
+   "skill.r2-frequency"
+  ],
+  "difficulty": 2,
+  "interaction": "numeric-input",
+  "prompt": "Of 20 mornings, 8 were calm, 7 choppy and 5 rough. What is the FREQUENCY of calm mornings?",
+  "answer": {
+   "kind": "numeric",
+   "value": 8,
+   "tolerance": 0,
+   "unit": "mornings"
+  },
+  "explanation": "The answer is 8 mornings. This lesson is a seed: its full teaching arrives with the Region 2 lesson units.",
+  "accessibilityDescription": "A numeric seed question for a Region 2 lesson that has not been written yet. Enter the answer as a number.",
+  "misconceptionIds": [],
+  "estimatedSeconds": 45
+ },
+ {
+  "id": "q.seed.r2-proportion",
+  "topicId": "t.r2-proportion",
+  "objectiveId": "obj.r2-proportion",
+  "skillIds": [
+   "skill.r2-proportion"
+  ],
+  "difficulty": 2,
+  "interaction": "numeric-input",
+  "prompt": "Of 20 mornings, 8 were calm. What PROPORTION of the mornings were calm? Answer between 0 and 1.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.4,
+   "tolerance": 0
+  },
+  "explanation": "The answer is 0.4. This lesson is a seed: its full teaching arrives with the Region 2 lesson units.",
+  "accessibilityDescription": "A numeric seed question for a Region 2 lesson that has not been written yet. Enter the answer as a number.",
+  "misconceptionIds": [],
+  "estimatedSeconds": 45
+ },
+ {
+  "id": "q.seed.r2-percentage",
+  "topicId": "t.r2-percentage",
+  "objectiveId": "obj.r2-percentage",
+  "skillIds": [
+   "skill.r2-percentage"
+  ],
+  "difficulty": 2,
+  "interaction": "percentage-input",
+  "prompt": "Of 20 mornings, 8 were calm. What PERCENTAGE of the mornings were calm? Answer on the 0-100 scale.",
+  "answer": {
+   "kind": "numeric",
+   "value": 40,
+   "tolerance": 0,
+   "unit": "%"
+  },
+  "explanation": "The answer is 40%. This lesson is a seed: its full teaching arrives with the Region 2 lesson units.",
+  "accessibilityDescription": "A numeric seed question for a Region 2 lesson that has not been written yet. Enter the answer as a number.",
+  "misconceptionIds": [],
+  "estimatedSeconds": 45
+ },
+ {
+  "id": "q.seed.r2-mode",
+  "topicId": "t.r2-mode",
+  "objectiveId": "obj.r2-mode",
+  "skillIds": [
+   "skill.r2-mode"
+  ],
+  "difficulty": 2,
+  "interaction": "numeric-input",
+  "prompt": "A week's catches, in crates: 4, 7, 4, 9, 4, 7, 2. What is the MODE?",
+  "answer": {
+   "kind": "numeric",
+   "value": 4,
+   "tolerance": 0,
+   "unit": "crates"
+  },
+  "explanation": "The answer is 4 crates. This lesson is a seed: its full teaching arrives with the Region 2 lesson units.",
+  "accessibilityDescription": "A numeric seed question for a Region 2 lesson that has not been written yet. Enter the answer as a number.",
+  "misconceptionIds": [],
+  "estimatedSeconds": 45
+ },
+ {
+  "id": "q.seed.r2-choosing-measures",
+  "topicId": "t.r2-choosing-measures",
+  "objectiveId": "obj.r2-choosing-measures",
+  "skillIds": [
+   "skill.choose-measure"
+  ],
+  "difficulty": 2,
+  "interaction": "multiple-choice",
+  "prompt": "Nine cottages are worth 40 coins each and one is worth 4000. Which measure of centre best describes what a typical cottage is worth?",
+  "choices": [
+   {
+    "id": "ch.median",
+    "text": "The median"
+   },
+   {
+    "id": "ch.mean",
+    "text": "The mean"
+   },
+   {
+    "id": "ch.mode",
+    "text": "The mode"
+   }
+  ],
+  "answer": {
+   "kind": "choice",
+   "correctChoiceIds": [
+    "ch.median"
+   ]
+  },
+  "explanation": "Nine cottages at 40 and one at 4000 gives a mean near 436, which describes no cottage in the row. The median stays at 40, where the cottages actually are.",
+  "accessibilityDescription": "A multiple-choice seed question for a Region 2 lesson that has not been written yet. Choose one option.",
+  "misconceptionIds": [],
+  "estimatedSeconds": 45
+ },
+ {
+  "id": "q.seed.r2-quartiles",
+  "topicId": "t.r2-quartiles",
+  "objectiveId": "obj.r2-quartiles",
+  "skillIds": [
+   "skill.r2-quartiles"
+  ],
+  "difficulty": 2,
+  "interaction": "numeric-input",
+  "prompt": "Ordered catches: 2, 4, 6, 8, 10, 12, 14. What is the MEDIAN, the second quartile?",
+  "answer": {
+   "kind": "numeric",
+   "value": 8,
+   "tolerance": 0,
+   "unit": "crates"
+  },
+  "explanation": "The answer is 8 crates. This lesson is a seed: its full teaching arrives with the Region 2 lesson units.",
+  "accessibilityDescription": "A numeric seed question for a Region 2 lesson that has not been written yet. Enter the answer as a number.",
+  "misconceptionIds": [],
+  "estimatedSeconds": 45
+ },
+ {
+  "id": "q.seed.r2-percentiles",
+  "topicId": "t.r2-percentiles",
+  "objectiveId": "obj.r2-percentiles",
+  "skillIds": [
+   "skill.r2-percentiles"
+  ],
+  "difficulty": 2,
+  "interaction": "percentage-input",
+  "prompt": "A catch sits at the 90th percentile of the season. What percentage of the season's catches were SMALLER than it?",
+  "answer": {
+   "kind": "numeric",
+   "value": 90,
+   "tolerance": 0,
+   "unit": "%"
+  },
+  "explanation": "The answer is 90%. This lesson is a seed: its full teaching arrives with the Region 2 lesson units.",
+  "accessibilityDescription": "A numeric seed question for a Region 2 lesson that has not been written yet. Enter the answer as a number.",
+  "misconceptionIds": [],
+  "estimatedSeconds": 45
+ },
+ {
+  "id": "q.seed.r2-iqr",
+  "topicId": "t.r2-iqr",
+  "objectiveId": "obj.r2-iqr",
+  "skillIds": [
+   "skill.r2-iqr"
+  ],
+  "difficulty": 2,
+  "interaction": "numeric-input",
+  "prompt": "A dataset has a first quartile of 4 and a third quartile of 12. What is the INTERQUARTILE RANGE?",
+  "answer": {
+   "kind": "numeric",
+   "value": 8,
+   "tolerance": 0,
+   "unit": "crates"
+  },
+  "explanation": "The answer is 8 crates. This lesson is a seed: its full teaching arrives with the Region 2 lesson units.",
+  "accessibilityDescription": "A numeric seed question for a Region 2 lesson that has not been written yet. Enter the answer as a number.",
+  "misconceptionIds": [],
+  "estimatedSeconds": 45
+ },
+ {
+  "id": "q.seed.r2-variance",
+  "topicId": "t.r2-variance",
+  "objectiveId": "obj.r2-variance",
+  "skillIds": [
+   "skill.r2-variance"
+  ],
+  "difficulty": 2,
+  "interaction": "numeric-input",
+  "prompt": "Two catches: 4 and 8 crates, with a mean of 6. How far is EACH value from the mean?",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "tolerance": 0,
+   "unit": "crates"
+  },
+  "explanation": "The answer is 2 crates. This lesson is a seed: its full teaching arrives with the Region 2 lesson units.",
+  "accessibilityDescription": "A numeric seed question for a Region 2 lesson that has not been written yet. Enter the answer as a number.",
+  "misconceptionIds": [],
+  "estimatedSeconds": 45
+ },
+ {
+  "id": "q.seed.r2-standard-deviation",
+  "topicId": "t.r2-standard-deviation",
+  "objectiveId": "obj.r2-standard-deviation",
+  "skillIds": [
+   "skill.r2-standard-deviation"
+  ],
+  "difficulty": 2,
+  "interaction": "numeric-input",
+  "prompt": "A dataset of crate counts has a variance of 9 squared crates. What is its STANDARD DEVIATION, in crates?",
+  "answer": {
+   "kind": "numeric",
+   "value": 3,
+   "tolerance": 0,
+   "unit": "crates"
+  },
+  "explanation": "The answer is 3 crates. This lesson is a seed: its full teaching arrives with the Region 2 lesson units.",
+  "accessibilityDescription": "A numeric seed question for a Region 2 lesson that has not been written yet. Enter the answer as a number.",
+  "misconceptionIds": [],
+  "estimatedSeconds": 45
+ },
+ {
+  "id": "q.seed.r2-outliers",
+  "topicId": "t.r2-outliers",
+  "objectiveId": "obj.r2-outliers",
+  "skillIds": [
+   "skill.r2-outliers"
+  ],
+  "difficulty": 2,
+  "interaction": "numeric-input",
+  "prompt": "Catches: 4, 5, 6, 5, 60. Which single value is the OUTLIER?",
+  "answer": {
+   "kind": "numeric",
+   "value": 60,
+   "tolerance": 0,
+   "unit": "crates"
+  },
+  "explanation": "The answer is 60 crates. This lesson is a seed: its full teaching arrives with the Region 2 lesson units.",
+  "accessibilityDescription": "A numeric seed question for a Region 2 lesson that has not been written yet. Enter the answer as a number.",
+  "misconceptionIds": [],
+  "estimatedSeconds": 45
+ },
+ {
+  "id": "q.seed.r2-skew",
+  "topicId": "t.r2-skew",
+  "objectiveId": "obj.r2-skew",
+  "skillIds": [
+   "skill.r2-skew"
+  ],
+  "difficulty": 2,
+  "interaction": "multiple-choice",
+  "prompt": "In a dataset the mean is 30 and the median is 12. Which side is the long tail on?",
+  "choices": [
+   {
+    "id": "ch.high",
+    "text": "On the high side — the distribution is right-skewed"
+   },
+   {
+    "id": "ch.low",
+    "text": "On the low side — the distribution is left-skewed"
+   },
+   {
+    "id": "ch.none",
+    "text": "There is no tail; the distribution is symmetric"
+   }
+  ],
+  "answer": {
+   "kind": "choice",
+   "correctChoiceIds": [
+    "ch.high"
+   ]
+  },
+  "explanation": "The mean is dragged towards the tail. A mean of 30 well above a median of 12 means a few large values are pulling it up, so the tail is on the high side.",
+  "accessibilityDescription": "A multiple-choice seed question for a Region 2 lesson that has not been written yet. Choose one option.",
+  "misconceptionIds": [],
+  "estimatedSeconds": 45
+ },
+ {
+  "id": "q.seed.r2-bar-charts",
+  "topicId": "t.r2-bar-charts",
+  "objectiveId": "obj.r2-bar-charts",
+  "skillIds": [
+   "skill.r2-bar-charts"
+  ],
+  "difficulty": 2,
+  "interaction": "numeric-input",
+  "prompt": "A bar chart shows calm 8, choppy 7, rough 5. How many mornings does the TALLEST bar represent?",
+  "answer": {
+   "kind": "numeric",
+   "value": 8,
+   "tolerance": 0,
+   "unit": "mornings"
+  },
+  "explanation": "The answer is 8 mornings. This lesson is a seed: its full teaching arrives with the Region 2 lesson units.",
+  "accessibilityDescription": "A numeric seed question for a Region 2 lesson that has not been written yet. Enter the answer as a number.",
+  "misconceptionIds": [],
+  "estimatedSeconds": 45
+ },
+ {
+  "id": "q.seed.r2-histograms",
+  "topicId": "t.r2-histograms",
+  "objectiveId": "obj.r2-histograms",
+  "skillIds": [
+   "skill.r2-histograms"
+  ],
+  "difficulty": 2,
+  "interaction": "numeric-input",
+  "prompt": "A histogram bins catches 0-9, 10-19 and 20-29, with 4, 9 and 2 days. How many days had a catch of 10 to 19?",
+  "answer": {
+   "kind": "numeric",
+   "value": 9,
+   "tolerance": 0,
+   "unit": "days"
+  },
+  "explanation": "The answer is 9 days. This lesson is a seed: its full teaching arrives with the Region 2 lesson units.",
+  "accessibilityDescription": "A numeric seed question for a Region 2 lesson that has not been written yet. Enter the answer as a number.",
+  "misconceptionIds": [],
+  "estimatedSeconds": 45
+ },
+ {
+  "id": "q.seed.r2-dot-plots",
+  "topicId": "t.r2-dot-plots",
+  "objectiveId": "obj.r2-dot-plots",
+  "skillIds": [
+   "skill.r2-dot-plots"
+  ],
+  "difficulty": 2,
+  "interaction": "numeric-input",
+  "prompt": "A dot plot shows three dots above 4 and two above 7. How many cases does it show ALTOGETHER?",
+  "answer": {
+   "kind": "numeric",
+   "value": 5,
+   "tolerance": 0,
+   "unit": "cases"
+  },
+  "explanation": "The answer is 5 cases. This lesson is a seed: its full teaching arrives with the Region 2 lesson units.",
+  "accessibilityDescription": "A numeric seed question for a Region 2 lesson that has not been written yet. Enter the answer as a number.",
+  "misconceptionIds": [],
+  "estimatedSeconds": 45
+ },
+ {
+  "id": "q.seed.r2-box-plots",
+  "topicId": "t.r2-box-plots",
+  "objectiveId": "obj.r2-box-plots",
+  "skillIds": [
+   "skill.r2-box-plots"
+  ],
+  "difficulty": 2,
+  "interaction": "numeric-input",
+  "prompt": "A box plot has a box from 4 to 12 with a line at 8. What is the MEDIAN?",
+  "answer": {
+   "kind": "numeric",
+   "value": 8,
+   "tolerance": 0,
+   "unit": "crates"
+  },
+  "explanation": "The answer is 8 crates. This lesson is a seed: its full teaching arrives with the Region 2 lesson units.",
+  "accessibilityDescription": "A numeric seed question for a Region 2 lesson that has not been written yet. Enter the answer as a number.",
+  "misconceptionIds": [],
+  "estimatedSeconds": 45
+ },
+ {
+  "id": "q.seed.r2-scatterplots",
+  "topicId": "t.r2-scatterplots",
+  "objectiveId": "obj.r2-scatterplots",
+  "skillIds": [
+   "skill.r2-scatterplots"
+  ],
+  "difficulty": 2,
+  "interaction": "numeric-input",
+  "prompt": "On a scatterplot of boats out against crates landed, one point sits at (5, 20). How many CRATES does that case record?",
+  "answer": {
+   "kind": "numeric",
+   "value": 20,
+   "tolerance": 0,
+   "unit": "crates"
+  },
+  "explanation": "The answer is 20 crates. This lesson is a seed: its full teaching arrives with the Region 2 lesson units.",
+  "accessibilityDescription": "A numeric seed question for a Region 2 lesson that has not been written yet. Enter the answer as a number.",
+  "misconceptionIds": [],
+  "estimatedSeconds": 45
+ },
+ {
+  "id": "q.seed.r2-choosing-graphs",
+  "topicId": "t.r2-choosing-graphs",
+  "objectiveId": "obj.r2-choosing-graphs",
+  "skillIds": [
+   "skill.r2-choosing-graphs"
+  ],
+  "difficulty": 2,
+  "interaction": "multiple-choice",
+  "prompt": "You want to compare how many mornings were calm, choppy and rough. Which graph fits?",
+  "choices": [
+   {
+    "id": "ch.bar",
+    "text": "A bar chart"
+   },
+   {
+    "id": "ch.hist",
+    "text": "A histogram"
+   },
+   {
+    "id": "ch.scatter",
+    "text": "A scatterplot"
+   }
+  ],
+  "answer": {
+   "kind": "choice",
+   "correctChoiceIds": [
+    "ch.bar"
+   ]
+  },
+  "explanation": "Weather is a categorical variable and the question is about counts per category, which is what a bar chart is for. A histogram bins a numerical variable; a scatterplot needs two.",
+  "accessibilityDescription": "A multiple-choice seed question for a Region 2 lesson that has not been written yet. Choose one option.",
+  "misconceptionIds": [],
+  "estimatedSeconds": 45
+ },
+ {
+  "id": "q.seed.r2-misleading-graphs",
+  "topicId": "t.r2-misleading-graphs",
+  "objectiveId": "obj.r2-misleading-graphs",
+  "skillIds": [
+   "skill.r2-misleading-graphs"
+  ],
+  "difficulty": 2,
+  "interaction": "multiple-choice",
+  "prompt": "A bar chart's vertical axis starts at 90 instead of 0, making a small difference look enormous. What is wrong with it?",
+  "choices": [
+   {
+    "id": "ch.axis",
+    "text": "The axis does not start at zero, so the bars misrepresent the sizes"
+   },
+   {
+    "id": "ch.colour",
+    "text": "The bars are the wrong colour"
+   },
+   {
+    "id": "ch.order",
+    "text": "The categories are in the wrong order"
+   }
+  ],
+  "answer": {
+   "kind": "choice",
+   "correctChoiceIds": [
+    "ch.axis"
+   ]
+  },
+  "explanation": "Every printed number can be correct while the picture lies: a bar's height only means what it appears to mean when the axis starts at zero.",
+  "accessibilityDescription": "A multiple-choice seed question for a Region 2 lesson that has not been written yet. Choose one option.",
+  "misconceptionIds": [],
+  "estimatedSeconds": 45
  }
 ]

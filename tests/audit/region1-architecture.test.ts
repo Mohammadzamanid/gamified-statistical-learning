@@ -211,19 +211,18 @@ describe("skeleton honesty", () => {
     }
   });
 
-  it("names the only Region 1 lessons that are not Complete, and why", () => {
-    // S2-08 finished all 17 scope §2 topic lessons. Two lessons inherited from
-    // Stage 1 still sit inside the Region 1 container and are NOT Complete: they
-    // teach centre and tallies, which the Stage 2 scope places in Region 2, so
-    // re-cutting them is S2-11's job rather than something S2-08 skipped.
+  it("holds no un-Complete lesson at all", () => {
+    // This check used to name two exceptions. `l.reading-tallies` and
+    // `l.middle-harbor` were Stage 1 lessons sitting inside the Region 1
+    // container while teaching centre and tallies — topics the Stage 2 scope
+    // places in Region 2 — and S2-11 moved them into Region 2's own modules,
+    // which is what "re-cut in S2-11" meant. Region 1 now holds only its 17
+    // topic lessons, and every one of them is Complete.
     //
-    // This is asserted rather than written in a doc so the exception cannot grow
-    // quietly: a third un-Complete lesson appearing in Region 1 fails here.
-    const INHERITED_FROM_STAGE_1 = ["l.reading-tallies", "l.middle-harbor"];
+    // Kept as a check rather than deleted with the exception it guarded: an
+    // un-Complete lesson appearing in Region 1 from here on is a regression, and
+    // this is where it surfaces.
     const notComplete = region1Lessons.filter((l) => !COMPLETE_LESSONS.includes(l.id)).map((l) => l.id).sort();
-    expect(
-      notComplete,
-      "Region 1 holds an un-Complete lesson that is not one of the two known Stage 1 inheritances"
-    ).toEqual([...INHERITED_FROM_STAGE_1].sort());
+    expect(notComplete, "Region 1 holds an un-Complete lesson").toEqual([]);
   });
 });

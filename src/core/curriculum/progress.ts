@@ -73,3 +73,21 @@ export function isRegionUnlocked(curriculum: Curriculum, save: SaveFile, regionI
   if (region.prerequisites.length === 0) return true;
   return region.prerequisites.every((p) => isRegionCompleted(curriculum, save, p));
 }
+
+/**
+ * Whether the descriptive-statistics laboratory is open.
+ *
+ * The bench is a free tool rather than a lesson, so it sits outside the module
+ * graph — but a curriculum may still say when it opens, and the Region 2
+ * architecture does: an empty bench handed to a learner who has not yet met a
+ * summary is not freedom, it is a blank table. A curriculum that declares no
+ * gate leaves it open, so this can never seal the bench by accident.
+ */
+export function isLaboratoryUnlocked(
+  curriculum: Pick<Curriculum, "laboratoryUnlock">,
+  save: SaveFile
+): boolean {
+  const gate = curriculum.laboratoryUnlock;
+  if (!gate) return true;
+  return lessonStatus(save, gate.lessonId) === "completed";
+}

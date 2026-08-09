@@ -4,13 +4,13 @@
 
 Topics come from the **curriculum graph**, never from the set of generator modules (`STAGE2_RECONSTRUCTION_SCOPE.md` §4). A topic with no generators appears here as a failure rather than being omitted.
 
-**17 of 22 topics** meet §4: at least 100 validated available interactions spanning at least 4 reasoning families, with nothing unreachable.
+**17 of 40 topics** meet §4: at least 100 validated available interactions spanning at least 4 reasoning families, with nothing unreachable.
 
 ## The seven metrics, per topic
 
 | Topic | Authored records | Generator families | Reasoning families | Raw combinations | Valid combinations | Validated generated | **Total available** | Meets §4 |
 |---|---:|---:|---:|---:|---:|---:|---:|---|
-| Choosing measures (`skill.choose-measure`) | 4 | 0 | 0 | 0 | 0 | 0 | **4** | **No** |
+| Choosing measures (`skill.choose-measure`) | 5 | 0 | 0 | 0 | 0 | 0 | **5** | **No** |
 | Data literacy (`skill.data-literacy`) | 7 | 0 | 0 | 0 | 0 | 0 | **7** | **No** |
 | Mean (`skill.mean`) | 6 | 0 | 0 | 0 | 0 | 0 | **6** | **No** |
 | Median (`skill.median`) | 5 | 0 | 0 | 0 | 0 | 0 | **5** | **No** |
@@ -31,13 +31,31 @@ Topics come from the **curriculum graph**, never from the set of generator modul
 | Reading tables (`skill.r1-tables`) | 13 | 5 | 5 | 228 | 228 | 225 | **238** | Yes |
 | Kinds of variable (`skill.r1-variable-kinds`) | 8 | 5 | 5 | 240 | 228 | 208 | **216** | Yes |
 | Variables (`skill.r1-variables`) | 8 | 5 | 5 | 272 | 232 | 228 | **236** | Yes |
+| Bar charts (`skill.r2-bar-charts`) | 1 | 0 | 0 | 0 | 0 | 0 | **1** | **No** |
+| Box plots (`skill.r2-box-plots`) | 1 | 0 | 0 | 0 | 0 | 0 | **1** | **No** |
+| Choosing a graph (`skill.r2-choosing-graphs`) | 1 | 0 | 0 | 0 | 0 | 0 | **1** | **No** |
+| Dot plots (`skill.r2-dot-plots`) | 1 | 0 | 0 | 0 | 0 | 0 | **1** | **No** |
+| Frequency (`skill.r2-frequency`) | 1 | 0 | 0 | 0 | 0 | 0 | **1** | **No** |
+| Histograms (`skill.r2-histograms`) | 1 | 0 | 0 | 0 | 0 | 0 | **1** | **No** |
+| Interquartile range (`skill.r2-iqr`) | 1 | 0 | 0 | 0 | 0 | 0 | **1** | **No** |
+| Misleading graphs (`skill.r2-misleading-graphs`) | 1 | 0 | 0 | 0 | 0 | 0 | **1** | **No** |
+| Mode (`skill.r2-mode`) | 1 | 0 | 0 | 0 | 0 | 0 | **1** | **No** |
+| Outliers (`skill.r2-outliers`) | 1 | 0 | 0 | 0 | 0 | 0 | **1** | **No** |
+| Percentage of a dataset (`skill.r2-percentage`) | 1 | 0 | 0 | 0 | 0 | 0 | **1** | **No** |
+| Percentiles (`skill.r2-percentiles`) | 1 | 0 | 0 | 0 | 0 | 0 | **1** | **No** |
+| Proportion of a dataset (`skill.r2-proportion`) | 1 | 0 | 0 | 0 | 0 | 0 | **1** | **No** |
+| Quartiles (`skill.r2-quartiles`) | 1 | 0 | 0 | 0 | 0 | 0 | **1** | **No** |
+| Scatterplots (`skill.r2-scatterplots`) | 1 | 0 | 0 | 0 | 0 | 0 | **1** | **No** |
+| Skew (`skill.r2-skew`) | 1 | 0 | 0 | 0 | 0 | 0 | **1** | **No** |
+| Standard-deviation intuition (`skill.r2-standard-deviation`) | 1 | 0 | 0 | 0 | 0 | 0 | **1** | **No** |
+| Variance intuition (`skill.r2-variance`) | 1 | 0 | 0 | 0 | 0 | 0 | **1** | **No** |
 | Range (`skill.range`) | 1 | 0 | 0 | 0 | 0 | 0 | **1** | **No** |
 
 ## Rejections, per topic
 
 | Topic | Invalid combinations | Schema failures | Correct-answer failures | Missing a11y | Missing misconception mapping | Exact duplicates | Near duplicates | Unreachable |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
-| Choosing measures | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 25% |
+| Choosing measures | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 20% |
 | Data literacy | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 14% |
 | Mean | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 17% |
 | Median | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 20% |
@@ -58,6 +76,24 @@ Topics come from the **curriculum graph**, never from the set of generator modul
 | Reading tables | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 0 | 13% |
 | Kinds of variable | 12 | 0 | 0 | 0 | 0 | 0 | 20 | 0 | 0% |
 | Variables | 40 | 0 | 0 | 0 | 0 | 0 | 4 | 0 | 14% |
+| Bar charts | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100% |
+| Box plots | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100% |
+| Choosing a graph | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100% |
+| Dot plots | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100% |
+| Frequency | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100% |
+| Histograms | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100% |
+| Interquartile range | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100% |
+| Misleading graphs | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100% |
+| Mode | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100% |
+| Outliers | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100% |
+| Percentage of a dataset | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100% |
+| Percentiles | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100% |
+| Proportion of a dataset | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100% |
+| Quartiles | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100% |
+| Scatterplots | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100% |
+| Skew | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100% |
+| Standard-deviation intuition | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100% |
+| Variance intuition | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100% |
 | Range | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100% |
 
 ## Why combinations were rejected
@@ -161,13 +197,31 @@ Topics come from the **curriculum graph**, never from the set of generator modul
 - **Reading tables** — 5: Comparison · Error identification · Multi-step reasoning · Transfer to an unfamiliar context · Visual interpretation
 - **Kinds of variable** — 5: Comparison · Error identification · Recognition · Transfer to an unfamiliar context · Visual interpretation
 - **Variables** — 5: Comparison · Error identification · Multi-step reasoning · Recognition · Transfer to an unfamiliar context
+- **Bar charts** — 0: _none_
+- **Box plots** — 0: _none_
+- **Choosing a graph** — 0: _none_
+- **Dot plots** — 0: _none_
+- **Frequency** — 0: _none_
+- **Histograms** — 0: _none_
+- **Interquartile range** — 0: _none_
+- **Misleading graphs** — 0: _none_
+- **Mode** — 0: _none_
+- **Outliers** — 0: _none_
+- **Percentage of a dataset** — 0: _none_
+- **Percentiles** — 0: _none_
+- **Proportion of a dataset** — 0: _none_
+- **Quartiles** — 0: _none_
+- **Scatterplots** — 0: _none_
+- **Skew** — 0: _none_
+- **Standard-deviation intuition** — 0: _none_
+- **Variance intuition** — 0: _none_
 - **Range** — 0: _none_
 
 ## Topics that do not meet §4
 
 - **Choosing measures** (`skill.choose-measure`)
   - no generator families produce for this topic
-  - 4 available interactions, below the required 100
+  - 5 available interactions, below the required 100
   - 0 reasoning families represented, below the required 4
 - **Data literacy** (`skill.data-literacy`)
   - no generator families produce for this topic
@@ -181,6 +235,96 @@ Topics come from the **curriculum graph**, never from the set of generator modul
   - no generator families produce for this topic
   - 5 available interactions, below the required 100
   - 0 reasoning families represented, below the required 4
+- **Bar charts** (`skill.r2-bar-charts`)
+  - no generator families produce for this topic
+  - 1 available interactions, below the required 100
+  - 0 reasoning families represented, below the required 4
+  - 100% of interactions share one reasoning shape, above the 50% ceiling — this is the "numeric variants of one pattern" case
+- **Box plots** (`skill.r2-box-plots`)
+  - no generator families produce for this topic
+  - 1 available interactions, below the required 100
+  - 0 reasoning families represented, below the required 4
+  - 100% of interactions share one reasoning shape, above the 50% ceiling — this is the "numeric variants of one pattern" case
+- **Choosing a graph** (`skill.r2-choosing-graphs`)
+  - no generator families produce for this topic
+  - 1 available interactions, below the required 100
+  - 0 reasoning families represented, below the required 4
+  - 100% of interactions share one reasoning shape, above the 50% ceiling — this is the "numeric variants of one pattern" case
+- **Dot plots** (`skill.r2-dot-plots`)
+  - no generator families produce for this topic
+  - 1 available interactions, below the required 100
+  - 0 reasoning families represented, below the required 4
+  - 100% of interactions share one reasoning shape, above the 50% ceiling — this is the "numeric variants of one pattern" case
+- **Frequency** (`skill.r2-frequency`)
+  - no generator families produce for this topic
+  - 1 available interactions, below the required 100
+  - 0 reasoning families represented, below the required 4
+  - 100% of interactions share one reasoning shape, above the 50% ceiling — this is the "numeric variants of one pattern" case
+- **Histograms** (`skill.r2-histograms`)
+  - no generator families produce for this topic
+  - 1 available interactions, below the required 100
+  - 0 reasoning families represented, below the required 4
+  - 100% of interactions share one reasoning shape, above the 50% ceiling — this is the "numeric variants of one pattern" case
+- **Interquartile range** (`skill.r2-iqr`)
+  - no generator families produce for this topic
+  - 1 available interactions, below the required 100
+  - 0 reasoning families represented, below the required 4
+  - 100% of interactions share one reasoning shape, above the 50% ceiling — this is the "numeric variants of one pattern" case
+- **Misleading graphs** (`skill.r2-misleading-graphs`)
+  - no generator families produce for this topic
+  - 1 available interactions, below the required 100
+  - 0 reasoning families represented, below the required 4
+  - 100% of interactions share one reasoning shape, above the 50% ceiling — this is the "numeric variants of one pattern" case
+- **Mode** (`skill.r2-mode`)
+  - no generator families produce for this topic
+  - 1 available interactions, below the required 100
+  - 0 reasoning families represented, below the required 4
+  - 100% of interactions share one reasoning shape, above the 50% ceiling — this is the "numeric variants of one pattern" case
+- **Outliers** (`skill.r2-outliers`)
+  - no generator families produce for this topic
+  - 1 available interactions, below the required 100
+  - 0 reasoning families represented, below the required 4
+  - 100% of interactions share one reasoning shape, above the 50% ceiling — this is the "numeric variants of one pattern" case
+- **Percentage of a dataset** (`skill.r2-percentage`)
+  - no generator families produce for this topic
+  - 1 available interactions, below the required 100
+  - 0 reasoning families represented, below the required 4
+  - 100% of interactions share one reasoning shape, above the 50% ceiling — this is the "numeric variants of one pattern" case
+- **Percentiles** (`skill.r2-percentiles`)
+  - no generator families produce for this topic
+  - 1 available interactions, below the required 100
+  - 0 reasoning families represented, below the required 4
+  - 100% of interactions share one reasoning shape, above the 50% ceiling — this is the "numeric variants of one pattern" case
+- **Proportion of a dataset** (`skill.r2-proportion`)
+  - no generator families produce for this topic
+  - 1 available interactions, below the required 100
+  - 0 reasoning families represented, below the required 4
+  - 100% of interactions share one reasoning shape, above the 50% ceiling — this is the "numeric variants of one pattern" case
+- **Quartiles** (`skill.r2-quartiles`)
+  - no generator families produce for this topic
+  - 1 available interactions, below the required 100
+  - 0 reasoning families represented, below the required 4
+  - 100% of interactions share one reasoning shape, above the 50% ceiling — this is the "numeric variants of one pattern" case
+- **Scatterplots** (`skill.r2-scatterplots`)
+  - no generator families produce for this topic
+  - 1 available interactions, below the required 100
+  - 0 reasoning families represented, below the required 4
+  - 100% of interactions share one reasoning shape, above the 50% ceiling — this is the "numeric variants of one pattern" case
+- **Skew** (`skill.r2-skew`)
+  - no generator families produce for this topic
+  - 1 available interactions, below the required 100
+  - 0 reasoning families represented, below the required 4
+  - 100% of interactions share one reasoning shape, above the 50% ceiling — this is the "numeric variants of one pattern" case
+- **Standard-deviation intuition** (`skill.r2-standard-deviation`)
+  - no generator families produce for this topic
+  - 1 available interactions, below the required 100
+  - 0 reasoning families represented, below the required 4
+  - 100% of interactions share one reasoning shape, above the 50% ceiling — this is the "numeric variants of one pattern" case
+- **Variance intuition** (`skill.r2-variance`)
+  - no generator families produce for this topic
+  - 1 available interactions, below the required 100
+  - 0 reasoning families represented, below the required 4
+  - 100% of interactions share one reasoning shape, above the 50% ceiling — this is the "numeric variants of one pattern" case
 - **Range** (`skill.range`)
   - no generator families produce for this topic
   - 1 available interactions, below the required 100

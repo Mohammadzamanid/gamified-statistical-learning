@@ -4,7 +4,7 @@
 (`git show 7add4bc:docs/STAGE_HANDOFF.md`). Its still-binding contracts, traps, and priorities are carried forward
 below — nothing was discarded.
 
-**Last updated:** 2026-08-07, at the close of S2-10 (**Complete**).
+**Last updated:** 2026-08-07, at the close of S2-11 (**Complete**).
 
 ---
 
@@ -16,7 +16,7 @@ after Stage 1 was lost because commits were never pushed to a durable remote. Re
 
 - **Stage 1: surviving, verified, green.** Not re-created — the original commit `7add4bc` was carried forward from the
   archive's own `.git` directory, with authorship intact.
-- **Stage 2: in progress, and not recoverable.** Reconstruction began 2026-08-04; S2-01 through S2-08 and S2-10 (`dc87d8b`, remote-verified) are complete; S2-09 is **Partial**, and only because §4 is stated over all 22 topics — every Region 1 topic meets it. Nothing
+- **Stage 2: in progress, and not recoverable.** Reconstruction began 2026-08-04; S2-01 through S2-08, S2-10 and S2-11 are complete; S2-09 is **Partial**, and only because §4 is stated over all 22 topics — every Region 1 topic meets it. Nothing
   in it is recovered source.
 - **Stages 3–6: not started, and not recoverable.** They must be **reconstructed** from the surviving Stage 1 source,
   the specifications, and the known defect history. They may never be described as recovered source, and no metric may
@@ -37,14 +37,14 @@ after Stage 1 was lost because commits were never pushed to a durable remote. Re
 | Milestone exports | `../gsl-exports/` — source ZIP + git bundle + manifest + SHA-256 checksums |
 | Working tree | clean |
 | Node / npm used | v22.22.2 / 10.9.7 |
-| Test suite | **443 tests / 35 files**, all passing (Stage 1 baseline was 73 / 14) |
+| Test suite | **463 tests / 36 files**, all passing (Stage 1 baseline was 73 / 14) |
 | Build | passing (**538.47 kB, 143.72 kB gzip**; baseline was 285.73 kB / 83.82 kB) |
 | Source modified since baseline | S2-01 … S2-08 — achievements + region completion, three new interactions, the enforced interaction audit, the review queue, the Region 1 topic architecture, and all 17 Region 1 lessons |
 | Curriculum | 2 regions · **6 modules** · **20 lessons** · **23 skills** · **145 questions** (baseline 2/2/3/6/14) |
 | Lessons Complete to scope §5 | **17 of 17** Region 1 topic lessons. No skeletons. Two inherited Stage 1 lessons are deliberately excluded — see §5 |
 | Misconceptions / remediations | **24 / 23** (baseline 8 / 7) |
 | Validated generated interactions | **6,607**, available to spaced review (baseline 0) |
-| Topics meeting scope §4 | **17 of 22** — every Region 1 topic; see `docs/CONTENT_COVERAGE.md` |
+| Topics meeting scope §4 | **17 of 40** — every Region 1 topic. The denominator grew at S2-11 when Region 2's 18 topics were declared; their generators are S2-17 |
 | Save schema version | **2** (baseline was 1) — migration `1 -> 2` adds `reviewSession` |
 | Interaction types implemented | **14 of 17** (baseline 11); still stubbed: `formula-construction`, `simulation-prediction`, `confidence-rating` |
 | Stage 2 | **in progress** — see `STAGE2_RECONSTRUCTION_SCOPE.md`, `STAGE2_RECONSTRUCTION_BACKLOG.md`, `STAGE2_CURRENT_WORK.md` |
@@ -105,25 +105,36 @@ branch/tag deletion) are forbidden without explicit owner permission. See `REMOT
 
 ## 5. Next unit
 
-**S2-11 — Region 2 world and curriculum architecture.**
+**S2-12 — Central tendency lessons.**
 
-**Region 1 is finished.** All 17 lessons meet §5, all 17 topics meet §4, and its boss investigation — *The
-Harbourmaster's Audit*, 5 stages, 14 skills — is built and gates the region achievement (S2-10). S2-09 stays
-**Partial** in the backlog because §4 is stated over all 22 curriculum topics, not because anything in Region 1 is
-outstanding: the 5 topics that do not meet it are the entire Region 2 inheritance, owned by **S2-17**.
+Region 1 is finished and Region 2's architecture is in place. What remains is writing Region 2's lessons, and S2-12
+takes the first module group: frequency, proportion, percentage, mean, median, mode, measure selection, outlier effects
+and skew effects, with draggable/editable datasets.
 
-What remains in Stage 2 is Region 2, and it starts with its architecture: a distinct world and narrative, the module
-sequence, the prerequisite graph, objectives, laboratory unlocks, and the boss specification.
+**The lessons already exist as skeletons — you are filling them in, not creating them.** `m.r2-counts` and
+`m.r2-centre` hold seven of them, and `tests/audit/region2-architecture.test.ts` asserts every seeded lesson still has
+exactly one question and no demonstration. The moment you grow one past that, it must go into
+`tests/helpers/complete-lessons.ts`, and `tests/audit/lesson-structure.test.ts` will then hold it to all 18 of scope
+§5's requirements. That is the same contract S2-08 worked under for Region 1, and the same guard.
 
-Three things already in the tree are waiting for S2-11 specifically:
+Three of Region 2's lessons are **inherited from Stage 1** — `l.reading-tallies` (mean), `l.middle-harbor` (median) and
+`l.spread-1` (range). They carry real content and more than one question, so the skeleton shape does not apply to them,
+but none of them meets §5 either. S2-12 owns the first two; S2-13 owns the third.
 
-- **`l.reading-tallies` and `l.middle-harbor`** are Stage 1 lessons sitting inside the Region 1 container that teach
-  Region 2 topics. They are deliberately *not* Complete, and `tests/audit/region1-architecture.test.ts` asserts they
-  are the only two — so the exception cannot grow while they wait to be re-cut here.
-- **Five topics** (mean, median, range, choosing measures, data literacy) have zero generator families and are reported
-  as §4 failures. Their lessons are S2-12 … S2-14; their generators are **S2-17**.
-- **`r.averages-atoll` owes a boss**, declared in `tests/helpers/complete-bosses.ts` and enforced in both directions.
-  Building it is **S2-18**; S2-11 only has to specify it.
+`docs/REGION2_BOSS_SPEC.md` maps the boss's five stages onto this module sequence. It is worth reading before writing
+lessons, because the case is what the lessons have to make answerable.
+
+### Region 2's architecture, and two rules it added
+
+Every skill now declares a `stage`, required with no default (D-030) — Stage 1 for the six inherited from the baseline,
+Stage 2 for everything this stage wrote. A default would have satisfied the closure rule while defeating it.
+
+A module prerequisite graph gates nothing on its own: `isLessonUnlocked` reads **lesson** prerequisites, so a module's
+first lesson must depend on the last lesson of every module that module depends on (D-031). Region 2 opened six doors
+at once until an audit computed availability through the real unlock rule instead of reading the JSON.
+
+The laboratory's gate is declared in the curriculum, not in `LabScreen` (D-032). A curriculum with no gate leaves the
+bench open, so the mechanism cannot seal it by accident.
 
 ### Boss investigations, if you are adding or changing one
 

@@ -345,7 +345,19 @@ export const SkillSchema = z.object({
   id: IdSchema,
   title: NonEmptyString,
   description: z.string().optional(),
-  prerequisites: z.array(IdSchema).default([])
+  prerequisites: z.array(IdSchema).default([]),
+  /**
+   * Which reconstruction stage owns this skill.
+   *
+   * Required, with no default, because `STAGE2_RECONSTRUCTION_SCOPE.md` §10 makes
+   * "a new skill has no stage classification" a closure failure — and a default
+   * would satisfy the letter of that while defeating it: every new skill would
+   * silently classify itself. `1` marks a skill inherited from the Stage 1
+   * baseline; `2` marks one this stage introduced. A Stage 3 topic appearing
+   * before Stage 3 begins is a separate closure guard, and this field is what
+   * makes it checkable.
+   */
+  stage: z.number().int().min(1).max(6)
 });
 export type Skill = z.infer<typeof SkillSchema>;
 
@@ -424,6 +436,24 @@ export const CurriculumSchema = z.object({
    * are defended by an audit against a declared list, not by the schema (D-014).
    */
   investigations: z.array(InvestigationSchema).default([]),
+  /**
+   * When the descriptive-statistics laboratory opens.
+   *
+   * The laboratory is a free tool, not a lesson, so it has no place in the
+   * module graph — but handing a learner an empty bench before they have met a
+   * mean is not freedom, it is a blank screen. Declaring the gate in the
+   * curriculum keeps that decision with the content rather than hard-coded in a
+   * screen, and makes it checkable. Optional: a curriculum that has not yet
+   * decided leaves the bench open rather than sealed by accident.
+   */
+  laboratoryUnlock: z
+    .object({
+      /** The lesson whose completion opens the bench. */
+      lessonId: IdSchema,
+      /** Shown while it is still sealed, so the learner knows what opens it. */
+      sealedNote: NonEmptyString
+    })
+    .optional(),
   masteryRule: MasteryRuleSchema.default({ streakToMaster: 3, minAccuracy: 0.8, minAttempts: 4 })
 });
 export type Curriculum = z.infer<typeof CurriculumSchema>;

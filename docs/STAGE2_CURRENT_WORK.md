@@ -6,61 +6,58 @@ Exactly one Stage 2 unit is active at a time. Rewritten at the start and end of 
 
 ## Current unit
 
-**S2-10 — Region 1 boss investigation**
+**S2-11 — Region 2 world and curriculum architecture**
 
-Entered from `6e7e524baca968bdf7f3b38b947c4862544d67c8` (remote-verified, clean tree).
+Entered from `8cc4e545935e6fd824d46f19691e9c0ad61285fd` (remote-verified, clean tree).
 
 ## Objective
 
-Build the Region 1 boss: a multi-step, saveable investigation that combines the region's skills, gates its completion
-achievement, and unlocks Region 2. `STAGE2_RECONSTRUCTION_SCOPE.md` §10 makes a region that ends without a boss a
-closure failure, so this is the first unit where a *region* rather than a topic is the thing being completed.
+Give Region 2 the architecture Region 1 got from S2-07: a distinct identity and narrative, a module sequence, a
+prerequisite graph, objectives and skills for every topic the scope requires, a declared laboratory unlock, and a
+specification for the boss S2-18 will build. Lessons themselves are S2-12 … S2-14 and are **not** part of this unit.
 
 ## Result up front
 
-**S2-10 is Complete.** `inv.r1-harbour-audit` — **The Harbourmaster's Audit** — runs in **5 stages over 15 authored
-questions**, drawing on **14 of Region 1's 17 skills** across all four of its modules. It is resumable a stage at a
-time, and Region 1's achievement is no longer awarded until the case is closed.
+**S2-11 is Complete.** Region 2 now holds **22 topic lessons across 6 modules**, covering all 21 topics
+`STAGE2_RECONSTRUCTION_SCOPE.md` §2 names for the region plus choosing a measure of centre. **19 are skeletons** seeded
+by this unit; **3 are Stage 1 lessons re-cut into the region** — which is what "re-cut in S2-11" meant for
+`l.reading-tallies`, `l.middle-harbor` and `l.spread-1`.
 
-| Stage | Draws on |
-|---|---|
-| 1 · What the record is | cases, tables, multiplication |
-| 2 · Reconciling the count | addition, counting, subtraction, tables |
-| 3 · The share that was cod | fractions, percentages, proportions, division, multiplication |
-| 4 · The brine that spoiled | ratios, multiplication, division |
-| 5 · The verdict | negatives, number lines, variables, variable kinds, tables |
+| Module | Lessons | Teaches |
+|---|---:|---|
+| `m.r2-counts` — Counting What Is There | 3 | frequency · proportion · percentage |
+| `m.r2-centre` — The Middle of the Data | 4 | mean · median · mode · choosing a measure |
+| `m.r2-spread` — How Far It Reaches | 4 | range · quartiles · percentiles · IQR |
+| `m.r2-variation` — How Much It Varies | 4 | variance · standard deviation · outliers · skew |
+| `m.r2-pictures` — Pictures of Data | 5 | bar charts · histograms · dot plots · box plots · scatterplots |
+| `m.r2-judgement` — Reading Honestly | 2 | choosing graphs · misleading graphs |
+
+**Region 1 now holds no un-Complete lesson at all.** Moving the two Stage 1 inheritances out is what closed that.
 
 ## Relevant files
 
 | File | Change |
 |---|---|
-| `src/shared/schemas/curriculum.ts` | **New** `InvestigationSchema` / `InvestigationStepSchema`; `curriculum.investigations` |
-| `src/shared/schemas/profile.ts` | **New** `InvestigationProgressSchema`; `save.investigationProgress` |
-| `src/shared/constants/app.ts` | Save schema version **2 → 3** |
-| `src/core/persistence/migrations.ts` | Migration 2 → 3 |
-| `src/core/investigations/engine.ts` | **New.** Unlock, status, resume and step recording — pure |
-| `src/core/curriculum/progress.ts` | A region is not complete until its boss is closed |
-| `src/core/curriculum/loader.ts` | Investigation references validated |
-| `src/renderer/state/session.ts` | `startInvestigationStep`; a finished step records a step result, not a lesson |
-| `src/renderer/state/store.ts`, `app/App.tsx`, `screens/RegionScreen.tsx` | Entry point and routing |
-| `src/renderer/screens/InvestigationScreen.tsx` | **New.** The case, its stages, and where the learner had got to |
-| `src/content/worlds/curriculum.json` | The investigation |
-| `src/content/questions/questions.json` | 145 → **160** authored questions |
-| `tests/helpers/complete-bosses.ts` | **New.** Which regions have a boss and which owe one |
-| `tests/helpers/investigation-playthrough.ts` | **New.** Plays a case through the real engine |
-| `tests/unit/investigations.test.ts` | **New.** 17 checks |
-| `tests/audit/investigation-structure.test.ts` | **New.** 12 checks |
+| `src/shared/schemas/curriculum.ts` | `SkillSchema.stage` (required); `curriculum.laboratoryUnlock` |
+| `src/core/curriculum/progress.ts` | **New** `isLaboratoryUnlocked` |
+| `src/renderer/screens/LabScreen.tsx` | The bench is sealed until the curriculum's gate opens |
+| `src/content/worlds/curriculum.json` | Region 2 architecture; both placeholder modules retired |
+| `src/content/questions/questions.json` | 160 → **179** authored questions (19 seeds) |
+| `tests/helpers/region2-topics.ts` | **New.** The 22 required topics, with their lesson and skill |
+| `tests/audit/region2-architecture.test.ts` | **New.** 20 checks |
+| `tests/audit/region1-architecture.test.ts` | The two-inheritance exception is gone; Region 1 must now hold none |
+| `docs/REGION2_BOSS_SPEC.md` | **New.** The boss specification S2-18 builds from |
 
 ## Acceptance criteria
 
 | # | Criterion | Met |
 |---|---|---|
-| 1 | Multi-step investigation | Yes — 5 stages, minimum of 3 enforced by the schema |
-| 2 | Saveable | Yes — `investigationProgress` records the stage reached and every stage's accuracy; migration 2 → 3 |
-| 3 | Combines Region 1 skills | Yes — 14 skills across all four modules, and an audit fails a boss confined to one module |
-| 4 | Awards the region achievement | Yes — and only once the case is closed |
-| 5 | Unlocks Region 2 | Yes — through the existing `isRegionUnlocked`, which now depends on the boss |
-| 6 | Playable through the real session engine | Yes — the same `submitAnswer`/`advance` path as a lesson; mastery, review, misconceptions and achievements all move |
+| 1 | Distinct world and narrative | Yes — Region 2 re-identified around variation rather than "averages"; see the note below on the shared world |
+| 2 | Module sequence | Yes — 6 modules, one entry point, no cycles |
+| 3 | Prerequisite graph | Yes — and expressed in *lesson* prerequisites, which is what the unlock rule actually reads |
+| 4 | Objectives | Yes — 19 new, each routing its lesson to its topic's skill |
+| 5 | Laboratory unlocks | Yes — declared in the curriculum, enforced by `isLaboratoryUnlocked`, honoured by the screen |
+| 6 | Boss specification | Yes — `docs/REGION2_BOSS_SPEC.md`, five stages mapped onto the module sequence |
 | 7 | Commit pushed and remote hash verified | Yes — see below |
 
 ## Required tests
@@ -71,45 +68,50 @@ Measured (Node v22.22.2 / npm 10.9.7):
 |---|---|
 | `npm run typecheck` | Pass |
 | `npm run lint` | Pass — 0 errors, 0 warnings |
-| `npm test` | Pass — **443 tests / 35 files** (was 413 / 33) |
+| `npm test` | Pass — **463 tests / 36 files** (was 443 / 35) |
 | `npm run test:statistics` | Pass — 18 tests / 3 files |
 | `npm run test:content` | Pass — 5 tests / 1 file |
-| `npm run build` | Pass — 562.92 kB (149.12 kB gzip) |
-| `npm run report:coverage` | Ran — 17 of 22 topics meet §4, unchanged |
+| `npm run build` | Pass — 592.32 kB (155.26 kB gzip) |
+| `npm run report:coverage` | Ran — **17 of 40** topics meet §4 |
 
 `test:a11y` was **not** run and is **not** claimed; it arrives in S2-20.
 
+## The coverage denominator grew, and nothing regressed
+
+`report:coverage` now says **17 of 40** where it said 17 of 22. That is not a regression: the 18 Region 2 skills this
+unit declares are topics the curriculum did not previously contain, and the scope requires a topic with zero generators
+to **appear in the report as a failure rather than vanish from it**. All 23 failing topics are Region 2's, each with
+its reason. Their generators are **S2-17**. The 17 that pass are unchanged, and every Region 1 topic is still among
+them.
+
 ## Work completed
 
-1. **The boss runs through the real session engine, not beside it.** A step is an ordinary `LessonSession` over that
-   step's questions, so mastery, spaced review, misconception detection and achievement evaluation behave identically
-   inside a case and inside a lesson. Only the record written on completion differs — a step result rather than a lesson
-   completion. Two engines would have drifted, and the second one would have been the one nobody tested.
+1. **Every skill now says which stage owns it.** Scope §10 makes an unclassified skill a closure failure, and this unit
+   adds 18 skills — retrofitting the field later across 41 would have been the wrong order. `stage` is required with no
+   default, deliberately: a default would satisfy the letter of that rule while defeating it, since every new skill
+   would classify itself. It also makes "a Stage 3 topic appears before Stage 3 begins" checkable, which is a separate
+   closure guard.
 
-2. **A region is not complete until its case is closed.** This changed existing behaviour deliberately: finishing every
-   Region 1 lesson used to award `ach.harbor-charted`, and now does not. Four existing tests failed on that change,
-   which is the guard working, and they were updated to play the boss rather than relaxed.
+2. **The two placeholder modules are retired, not left standing.** `m.harbor-1` and `m.atoll-1` existed to hold Stage 1
+   lessons whose topics belong to Region 2. Their three lessons moved into the Region 2 modules that teach those
+   topics, keeping their ids so nothing that references them broke, and the empty shells were removed.
 
-3. **Resume means resume.** `beginInvestigation` is idempotent, so reopening the briefing cannot rewind a case;
-   `recordStepResult` takes the maximum of the stage reached, so re-arguing stage one out of curiosity cannot push a
-   learner backwards through a case they had nearly closed.
-
-4. **The debt for Region 2's boss is declared, not implied.** `complete-bosses.ts` splits every region into "has one"
-   and "owes one", and the audit checks both directions — every region appears in exactly one list, a region claiming a
-   boss has it, and a region owing one does not yet have it. A boss cannot be quietly added for a region still listed
-   as owing one without the list being updated to say so.
+3. **The laboratory gate lives in the curriculum, not in the screen.** When a learner is ready for a bare instrument is
+   a content decision; hard-coding it in `LabScreen` would have put it where no audit looks. A curriculum that declares
+   no gate leaves the bench open, so this can never seal it by accident.
 
 ## Corrections made during the unit
 
-1. **A stage claimed fewer skills than its questions exercise.** `step.r1-shares` declared fractions, percentages,
-   proportions and division; one of its questions also needs multiplication. The audit holds a step's `skillIds` to its
-   questions in *both* directions — nothing claimed that is not exercised, nothing exercised that is not declared — and
-   it failed on the second. The declaration was corrected rather than the check loosened.
+1. **The module prerequisite graph did not actually gate anything.** Modules declared prerequisites, but
+   `isLessonUnlocked` reads *lesson* prerequisites — so a learner arriving at Region 2 would have found six modules
+   open at once instead of one. The audit caught it on its first run, by computing availability through the real unlock
+   rule rather than reading the JSON. Fixed by adopting Region 1's convention: a module's first lesson depends on the
+   last lesson of every module that module depends on. The check was then tightened to assert exactly that, rather than
+   to assert the empty prerequisite list that had let the bug through.
 
-2. **The orphan-reachability rule needed a third route, and got it deliberately.** A boss question belongs to no lesson
-   by design: filing it under one would misreport which topic it practises. So "reachable from a lesson or a
-   remediation follow-up" became "…or an investigation step" — the third deliberate widening of that rule (D-017), each
-   recorded where it happened.
+2. **Region 1's "two known exceptions" check had nothing left to guard.** With the inheritances moved out, Region 1
+   holds only its 17 topic lessons and all are Complete. The check was rewritten to require *no* un-Complete Region 1
+   lesson rather than deleted along with the exception, so a regression still surfaces there.
 
 ## Verification that the guards have teeth
 
@@ -117,32 +119,37 @@ Eight deliberate probes, all reverted. All eight bit on the first run:
 
 | Probe | Result |
 |---|---|
-| The boss stops gating its region | **2 checks fail** |
-| Reopening a case rewinds it | **1 check fails** |
-| The first stage closes the whole case | **2 checks fail** |
-| A boss step recorded as a lesson completion | **7 checks fail** |
-| The case unlocks before the region's lessons are done | **2 checks fail** |
-| A region vanishes from the boss declaration | **1 check fails** |
-| A stage claims a skill it never exercises | **1 check fails** |
-| The case re-uses a lesson's question | **4 checks fail** |
+| A module opens without its prerequisite | **2 checks fail** |
+| A skeleton grows without being declared Complete | **1 check fails** |
+| A lesson stops reaching its own topic's skill | **1 check fails** |
+| A required topic vanishes from the declared list | **2 checks fail** |
+| A skill ships with no stage classification | **5 checks fail** |
+| A Stage 3 skill appears before Stage 3 begins | **2 checks fail** |
+| The laboratory gate stops being honoured | **1 check fails** |
+| A skeleton is declared Complete | **4 checks fail** |
+
+## A judgement call, recorded
+
+The criterion says "distinct world", and the backlog note says regions "must feel related but not visually
+interchangeable". Both regions remain inside `w.counting-shores` rather than Region 2 getting its own `World` record —
+one coastline, two places on it — and the distinctness was put into the region's identity instead: Region 2 is now
+about readings that are never the same twice, where Region 1 is about counting things once. If a later unit decides a
+separate world record is wanted, nothing here blocks it.
 
 ## Remaining work
 
-None for this unit. Region 2's boss investigation is **S2-18** and is declared as owed in `complete-bosses.ts`; it
-cannot be built before the Region 2 lessons it draws on exist (S2-11 … S2-17).
+None for this unit. The 19 seeded lessons are skeletons by design; writing them is **S2-12** (central tendency),
+**S2-13** (spread and position) and **S2-14** (visualization). The three inherited lessons need the same §5 treatment
+in those units. Region 2's boss is specified here and built by **S2-18**.
 
 ## Local commit
 
-`dc87d8b87c88b8d8b4db0d8cb1c6f20759aec8f4`
+Recorded in the follow-up commit below.
 
 ## Remote verification
 
-```
-LOCAL_HEAD  = dc87d8b87c88b8d8b4db0d8cb1c6f20759aec8f4
-REMOTE_HEAD = dc87d8b87c88b8d8b4db0d8cb1c6f20759aec8f4
-VERIFIED: MATCH
-```
+Recorded in the follow-up commit below.
 
 ## Next unit
 
-**S2-11 — Region 2 world and curriculum architecture.** Not started in this cycle, per the one-unit-per-cycle rule.
+**S2-12 — Central tendency lessons.** Not started in this cycle, per the one-unit-per-cycle rule.

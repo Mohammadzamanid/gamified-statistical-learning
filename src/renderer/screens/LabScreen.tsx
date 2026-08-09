@@ -1,5 +1,7 @@
 import { useMemo, useState } from "react";
 import * as stats from "../../core/statistics";
+import { isLaboratoryUnlocked } from "../../core/curriculum/progress";
+import { useStore } from "../state/store";
 import { parseUserNumber, roundTo } from "../../shared/utilities/numeric";
 
 /**
@@ -7,6 +9,9 @@ import { parseUserNumber, roundTo } from "../../shared/utilities/numeric";
  * Descriptive Bench — and honestly labels the simulations planned for later.
  */
 export function LabScreen(): JSX.Element {
+  const content = useStore((s) => s.content);
+  const save = useStore((s) => s.save);
+  const navigate = useStore((s) => s.navigate);
   const [raw, setRaw] = useState("2, 4, 4, 6, 9");
   const data = useMemo(
     () => raw.split(/[\s,;]+/).map((t) => parseUserNumber(t)).filter((n): n is number => n !== null),
@@ -41,6 +46,26 @@ export function LabScreen(): JSX.Element {
     }
   } catch (e) {
     note = (e as Error).message;
+  }
+
+  // The gate is declared by the curriculum (S2-11), not hard-coded here, so the
+  // decision about when a learner is ready for a bare instrument stays with the
+  // content. A curriculum that declares no gate leaves the bench open.
+  if (save && !isLaboratoryUnlocked(content.curriculum, save)) {
+    return (
+      <div className="stack" style={{ maxWidth: 720, margin: "0 auto" }}>
+        <div>
+          <p className="eyebrow">Statistics laboratory</p>
+          <h2>The Descriptive Bench</h2>
+        </div>
+        <div className="card stack">
+          <p className="muted">{content.curriculum.laboratoryUnlock?.sealedNote}</p>
+          <button className="btn primary" onClick={() => navigate({ name: "world-map" })}>
+            Back to the chart
+          </button>
+        </div>
+      </div>
+    );
   }
 
   return (

@@ -210,3 +210,26 @@ because a new legitimate route existed, and each is recorded at the point it hap
 list of routes rather than a list of exceptions. The complementary check is that a boss may never re-use a question a
 lesson already asks: sharing one would make the case a review round in costume and would double-count its practice.
 (S2-10)
+
+**D-030 — Every skill declares its stage, and the field has no default.**
+`STAGE2_RECONSTRUCTION_SCOPE.md` §10 makes "a new skill has no stage classification" a closure failure, and S2-11 adds
+eighteen skills at once — so the field arrives with them rather than being retrofitted across forty-one later. It is
+required with **no default**, which is the whole decision: a default would satisfy the rule's letter and defeat its
+purpose, because every new skill would then classify itself correctly-looking and silently. Stage 1 marks the six
+skills inherited from the baseline; Stage 2 marks everything this stage wrote. The field also makes a second closure
+guard checkable — "a Stage 3 topic appears before Stage 3 begins" is now a comparison rather than a judgement. (S2-11)
+
+**D-031 — A prerequisite graph is only real where the unlock rule reads it.**
+Region 2's modules declared prerequisites and the region still opened six doors at once, because `isLessonUnlocked`
+reads *lesson* prerequisites and nothing else. A module-level graph that no rule consults is documentation with the
+shape of a constraint. The fix is the convention Region 1 already used: a module's first lesson depends on the last
+lesson of every module that module depends on, so the module graph is expressed in the currency the engine spends. What
+found it was an audit that computed availability **through the real unlock rule** instead of reading the JSON it had
+just been given — a check that asserted the declared prerequisites matched the file would have passed on the bug. (S2-11)
+
+**D-032 — The laboratory's gate belongs to the curriculum.**
+The descriptive bench is a free tool, not a lesson, so it has no place in the module graph — but "free" is not the same
+as "always". Handing a learner a bare instrument before they have met a summary is a blank table, not freedom. The gate
+is therefore declared in the curriculum (`laboratoryUnlock`) and enforced by a pure predicate, rather than hard-coded
+in `LabScreen` where no audit looks. A curriculum that declares no gate leaves the bench open, so the mechanism can
+never seal it by accident — the failure mode of a gate is a locked door nobody meant to lock. (S2-11)
