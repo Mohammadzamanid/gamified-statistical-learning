@@ -356,6 +356,56 @@ export const MasteryRuleSchema = z.object({
   minAttempts: z.number().int().min(1).default(4)
 });
 
+/**
+ * One stage of a boss investigation.
+ *
+ * A step is deliberately not a lesson: it teaches nothing new and introduces no
+ * concept. It poses one part of a single case and draws on skills the region has
+ * already taught, which is what makes the boss a *combination* rather than a
+ * nineteenth lesson. `skillIds` is what the step claims to exercise, and an audit
+ * holds the step's questions to that claim rather than trusting it.
+ */
+export const InvestigationStepSchema = z.object({
+  id: IdSchema,
+  title: NonEmptyString,
+  /** What the investigator has been asked to settle at this stage. */
+  brief: NonEmptyString,
+  questionIds: z.array(IdSchema).min(1),
+  /** The skills this step draws on. Checked against its questions, not trusted. */
+  skillIds: z.array(IdSchema).min(1)
+});
+export type InvestigationStep = z.infer<typeof InvestigationStepSchema>;
+
+/**
+ * A region's boss: a multi-step case that has to be argued from evidence.
+ *
+ * Held apart from `lessons` because it behaves differently in three ways that
+ * matter. It gates its region rather than sitting inside a module; it is resumed
+ * a step at a time rather than restarted; and it may only ask about skills its
+ * region has already taught. `STAGE2_RECONSTRUCTION_SCOPE.md` §10 makes a region
+ * that ends without one a closure failure.
+ */
+export const InvestigationSchema = z.object({
+  id: IdSchema,
+  regionId: IdSchema,
+  title: NonEmptyString,
+  /** Read before the first step: the case, and who is asking. */
+  briefing: NonEmptyString,
+  /** Read after the last step: what the evidence actually showed. */
+  debrief: NonEmptyString,
+  steps: z.array(InvestigationStepSchema).min(3),
+  estimatedMinutes: z.number().int().positive().default(20)
+}).superRefine((inv, ctx) => {
+  const ids = new Set<string>();
+  for (const step of inv.steps) {
+    if (ids.has(step.id)) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, message: `duplicate step id ${step.id}` });
+    }
+    ids.add(step.id);
+  }
+});
+export type Investigation = z.infer<typeof InvestigationSchema>;
+
 export const CurriculumSchema = z.object({
   id: IdSchema,
   title: NonEmptyString,
@@ -366,6 +416,14 @@ export const CurriculumSchema = z.object({
   lessons: z.array(LessonSchema).min(1),
   objectives: z.array(LearningObjectiveSchema).min(1),
   skills: z.array(SkillSchema).min(1),
+  /**
+   * Boss investigations, at most one per region.
+   *
+   * Defaulted rather than required so a curriculum without one still parses —
+   * which region *must* have one is a completeness claim, and completeness claims
+   * are defended by an audit against a declared list, not by the schema (D-014).
+   */
+  investigations: z.array(InvestigationSchema).default([]),
   masteryRule: MasteryRuleSchema.default({ streakToMaster: 3, minAccuracy: 0.8, minAttempts: 4 })
 });
 export type Curriculum = z.infer<typeof CurriculumSchema>;

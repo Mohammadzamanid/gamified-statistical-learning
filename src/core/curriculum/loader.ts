@@ -171,5 +171,30 @@ function checkReferences(
     }
   }
 
+  // A boss investigation that names a missing region, question or skill is a
+  // dangling reference of exactly the kind scope §10 makes a closure failure —
+  // and one that would surface as an empty screen rather than an error.
+  const seenInvestigationIds = new Set<string>();
+  const regionsWithBoss = new Set<string>();
+  for (const inv of curriculum.investigations) {
+    if (seenInvestigationIds.has(inv.id)) problems.push(`duplicate investigation id ${inv.id}`);
+    seenInvestigationIds.add(inv.id);
+    if (!regionIds.has(inv.regionId)) {
+      problems.push(`investigation ${inv.id} references missing region ${inv.regionId}`);
+    }
+    if (regionsWithBoss.has(inv.regionId)) {
+      problems.push(`region ${inv.regionId} has more than one boss investigation`);
+    }
+    regionsWithBoss.add(inv.regionId);
+    for (const step of inv.steps) {
+      for (const qid of step.questionIds) {
+        if (!questionIds.has(qid)) problems.push(`investigation ${inv.id} step ${step.id} references missing question ${qid}`);
+      }
+      for (const sid of step.skillIds) {
+        if (!skillIds.has(sid)) problems.push(`investigation ${inv.id} step ${step.id} references missing skill ${sid}`);
+      }
+    }
+  }
+
   return problems.length === 0 ? ok(null) : err(problems.slice(0, 10).join("; "));
 }

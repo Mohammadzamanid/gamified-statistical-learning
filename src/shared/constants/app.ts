@@ -1,5 +1,5 @@
 export const APP_NAME = "Statlas";
-export const SAVE_SCHEMA_VERSION = 2;
+export const SAVE_SCHEMA_VERSION = 3;
 export const SAVE_FILE_PREFIX = "profile-";
 export const SETTINGS_FILE_NAME = "statlas-settings.json";
 export const PROFILES_INDEX_FILE = "profiles-index.json";

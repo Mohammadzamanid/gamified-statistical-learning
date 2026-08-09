@@ -18,6 +18,8 @@ import { NodeStorageAdapter } from "../../src/core/persistence/node-adapter";
 import { SaveManager } from "../../src/core/persistence/save-manager";
 import { createEmptySave, type SaveFile } from "../../src/shared/schemas";
 import { correctResponseFor } from "../helpers/responses";
+import { playInvestigation } from "../helpers/investigation-playthrough";
+import { investigationForRegion } from "../../src/core/investigations/engine";
 
 const REGION_1 = "r.harbor-tallies";
 const REGION_1_ACHIEVEMENT = "ach.harbor-charted";
@@ -61,6 +63,24 @@ function lessonIdsOfRegion(regionId: string): string[] {
     .flatMap((m) => m.lessonIds);
 }
 
+/**
+ * Everything Region 1 asks of a learner: every lesson, then the case.
+ *
+ * Since S2-10 the region is not complete until its boss investigation is closed,
+ * so a helper that stopped at the lessons would be testing the old rule.
+ */
+function completeRegion1(startMs = 0): SaveFile {
+  let save = freshSave();
+  let clock = startMs;
+  for (const lessonId of lessonIdsOfRegion(REGION_1)) {
+    save = playLesson(save, lessonId, clock);
+    clock += 100_000;
+  }
+  const boss = investigationForRegion(content.curriculum, REGION_1);
+  expect(boss, "Region 1 must have a boss investigation").not.toBeNull();
+  return playInvestigation(content, save, boss!.id, clock);
+}
+
 function freshSave(): SaveFile {
   return createEmptySave({
     id: "p.region",
@@ -94,25 +114,30 @@ describe("region-completion achievement through the real progression system", ()
     expect(save.achievements).not.toContain(REGION_1_ACHIEVEMENT);
   });
 
-  it("awards the region achievement once every lesson in the region is finished", () => {
+  it("does not award the region achievement while the boss investigation is unclosed", () => {
+    // The boss gates the region (S2-10). Every lesson finished used to be the
+    // whole requirement; a region whose case is still open is not charted.
     let save = freshSave();
     let clock = 0;
     for (const lessonId of lessonIdsOfRegion(REGION_1)) {
       save = playLesson(save, lessonId, clock);
       clock += 100_000;
     }
+
+    expect(isRegionCompleted(content.curriculum, save, REGION_1)).toBe(false);
+    expect(save.achievements).not.toContain(REGION_1_ACHIEVEMENT);
+  });
+
+  it("awards the region achievement once every lesson is finished and the case is closed", () => {
+    const save = completeRegion1();
 
     expect(isRegionCompleted(content.curriculum, save, REGION_1)).toBe(true);
     expect(save.achievements).toContain(REGION_1_ACHIEVEMENT);
   });
 
   it("does not award the achievement a second time once it is held", () => {
-    let save = freshSave();
-    let clock = 0;
-    for (const lessonId of lessonIdsOfRegion(REGION_1)) {
-      save = playLesson(save, lessonId, clock);
-      clock += 100_000;
-    }
+    const save = completeRegion1();
+    const clock = 5_000_000;
 
     const occurrences = save.achievements.filter((id) => id === REGION_1_ACHIEVEMENT).length;
     expect(occurrences).toBe(1);
@@ -126,14 +151,9 @@ describe("region-completion achievement through the real progression system", ()
   });
 
   it("completing Region 1 unlocks Region 2, which stays unawarded", () => {
-    let save = freshSave();
-    let clock = 0;
-    expect(isRegionUnlocked(content.curriculum, save, REGION_2)).toBe(false);
+    expect(isRegionUnlocked(content.curriculum, freshSave(), REGION_2)).toBe(false);
 
-    for (const lessonId of lessonIdsOfRegion(REGION_1)) {
-      save = playLesson(save, lessonId, clock);
-      clock += 100_000;
-    }
+    const save = completeRegion1();
 
     expect(isRegionUnlocked(content.curriculum, save, REGION_2)).toBe(true);
     expect(isRegionCompleted(content.curriculum, save, REGION_2)).toBe(false);
@@ -166,6 +186,8 @@ describe("region achievement survives save and reload", () => {
       save = playLesson(save, lessonId, clock);
       clock += 100_000;
     }
+    const boss = investigationForRegion(content.curriculum, REGION_1)!;
+    save = playInvestigation(content, save, boss.id, clock);
     expect(save.achievements).toContain(REGION_1_ACHIEVEMENT);
 
     expect((await mgr.saveGame(save)).ok).toBe(true);

@@ -13,9 +13,10 @@ available.
 | | |
 |---|---|
 | Last completed unit | **S2-08** — Region 1 lessons and interactions (all 17 topic lessons, 4 cycles) |
-| Last unit attempted | **S2-09** — Region 1 validated content expansion — **Partial**, 17 of 22 topics meet §4 after cycle 4; every Region 1 topic passes and the 5 remaining are Region 2, owned by S2-17 (`01f29ad`, remote-verified) |
+| Last completed unit | **S2-10** — Region 1 boss investigation — **Complete**. `inv.r1-harbour-audit`, 5 stages, 15 questions, 14 skills |
+| Previous unit | **S2-09** — Region 1 validated content expansion — **Partial**, 17 of 22 topics meet §4; the 5 remaining are Region 2, owned by S2-17 (`01f29ad`, remote-verified) |
 | Commit | cycles `629dd74`, `2f1ec31`, `def8b1d`, `615e7c4` — each pushed and remote-verified |
-| Next unit | **S2-10** — Region 1 boss investigation |
+| Next unit | **S2-11** — Region 2 world and curriculum architecture |
 | Still open from Stage 0 | **R-00d** (push `stage-1-baseline` tag) and **R-00e** (set repository private) — both blocked, both need the owner's credentials |
 
 ---

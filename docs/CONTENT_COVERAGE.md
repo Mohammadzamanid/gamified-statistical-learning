@@ -14,23 +14,23 @@ Topics come from the **curriculum graph**, never from the set of generator modul
 | Data literacy (`skill.data-literacy`) | 7 | 0 | 0 | 0 | 0 | 0 | **7** | **No** |
 | Mean (`skill.mean`) | 6 | 0 | 0 | 0 | 0 | 0 | **6** | **No** |
 | Median (`skill.median`) | 5 | 0 | 0 | 0 | 0 | 0 | **5** | **No** |
-| Addition (`skill.r1-addition`) | 7 | 8 | 8 | 800 | 800 | 800 | **807** | Yes |
-| Cases and observations (`skill.r1-cases`) | 7 | 4 | 4 | 392 | 392 | 304 | **311** | Yes |
+| Addition (`skill.r1-addition`) | 9 | 8 | 8 | 800 | 800 | 800 | **809** | Yes |
+| Cases and observations (`skill.r1-cases`) | 9 | 4 | 4 | 392 | 392 | 304 | **313** | Yes |
 | Coordinates (`skill.r1-coordinates`) | 7 | 6 | 6 | 384 | 322 | 322 | **329** | Yes |
-| Counting (`skill.r1-counting`) | 7 | 8 | 8 | 1000 | 848 | 848 | **855** | Yes |
+| Counting (`skill.r1-counting`) | 8 | 8 | 8 | 1000 | 848 | 848 | **856** | Yes |
 | Decimals (`skill.r1-decimals`) | 7 | 6 | 6 | 324 | 264 | 264 | **271** | Yes |
-| Division (`skill.r1-division`) | 7 | 8 | 6 | 800 | 301 | 284 | **291** | Yes |
-| Fractions (`skill.r1-fractions`) | 8 | 6 | 6 | 324 | 263 | 263 | **271** | Yes |
-| Multiplication (`skill.r1-multiplication`) | 7 | 8 | 8 | 800 | 761 | 761 | **768** | Yes |
-| Negative numbers (`skill.r1-negatives`) | 7 | 6 | 6 | 172 | 167 | 167 | **174** | Yes |
-| Number lines (`skill.r1-number-lines`) | 7 | 5 | 5 | 175 | 155 | 155 | **162** | Yes |
-| Percentages (`skill.r1-percentages`) | 7 | 6 | 6 | 324 | 264 | 264 | **271** | Yes |
-| Proportions (`skill.r1-proportions`) | 7 | 6 | 6 | 324 | 264 | 264 | **271** | Yes |
-| Ratios (`skill.r1-ratios`) | 7 | 8 | 8 | 468 | 453 | 453 | **460** | Yes |
-| Subtraction (`skill.r1-subtraction`) | 7 | 8 | 8 | 800 | 797 | 797 | **804** | Yes |
-| Reading tables (`skill.r1-tables`) | 7 | 5 | 5 | 228 | 228 | 225 | **232** | Yes |
-| Kinds of variable (`skill.r1-variable-kinds`) | 7 | 5 | 5 | 240 | 228 | 208 | **215** | Yes |
-| Variables (`skill.r1-variables`) | 7 | 5 | 5 | 272 | 232 | 228 | **235** | Yes |
+| Division (`skill.r1-division`) | 9 | 8 | 6 | 800 | 301 | 284 | **293** | Yes |
+| Fractions (`skill.r1-fractions`) | 10 | 6 | 6 | 324 | 263 | 263 | **273** | Yes |
+| Multiplication (`skill.r1-multiplication`) | 10 | 8 | 8 | 800 | 761 | 761 | **771** | Yes |
+| Negative numbers (`skill.r1-negatives`) | 8 | 6 | 6 | 172 | 167 | 167 | **175** | Yes |
+| Number lines (`skill.r1-number-lines`) | 8 | 5 | 5 | 175 | 155 | 155 | **163** | Yes |
+| Percentages (`skill.r1-percentages`) | 8 | 6 | 6 | 324 | 264 | 264 | **272** | Yes |
+| Proportions (`skill.r1-proportions`) | 8 | 6 | 6 | 324 | 264 | 264 | **272** | Yes |
+| Ratios (`skill.r1-ratios`) | 10 | 8 | 8 | 468 | 453 | 453 | **463** | Yes |
+| Subtraction (`skill.r1-subtraction`) | 8 | 8 | 8 | 800 | 797 | 797 | **805** | Yes |
+| Reading tables (`skill.r1-tables`) | 13 | 5 | 5 | 228 | 228 | 225 | **238** | Yes |
+| Kinds of variable (`skill.r1-variable-kinds`) | 8 | 5 | 5 | 240 | 228 | 208 | **216** | Yes |
+| Variables (`skill.r1-variables`) | 8 | 5 | 5 | 272 | 232 | 228 | **236** | Yes |
 | Range (`skill.range`) | 1 | 0 | 0 | 0 | 0 | 0 | **1** | **No** |
 
 ## Rejections, per topic

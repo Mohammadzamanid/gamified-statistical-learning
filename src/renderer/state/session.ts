@@ -8,10 +8,21 @@ import type { RawResponse } from "../../core/questions/types";
 import { applyAttempt, createSkillState } from "../../core/mastery/engine";
 import { createReviewItem, updateReviewItem } from "../../core/spaced-repetition/scheduler";
 import { evaluateAchievements } from "../../core/achievements/engine";
+import { recordStepResult } from "../../core/investigations/engine";
 import type { Question, SaveFile } from "../../shared/schemas";
 
 export interface LessonSession {
+  /** The lesson, or the investigation step's owning investigation id. */
   lessonId: string;
+  /**
+   * Set when this session is one step of a boss investigation.
+   *
+   * The boss deliberately runs through *this* engine rather than a parallel one:
+   * mastery, spaced review, misconception detection and achievement evaluation
+   * must behave identically inside a case and inside a lesson, and two code paths
+   * would drift. Only the record written on completion differs — see `advance`.
+   */
+  investigation: { investigationId: string; stepIndex: number } | null;
   questionQueue: string[];
   currentIndex: number;
   hintsUsedThisQuestion: number;
@@ -32,7 +43,41 @@ export function startLesson(content: ContentBundle, lessonId: string, nowMs: num
   if (!lesson) return null;
   return {
     lessonId,
+    investigation: null,
     questionQueue: [...lesson.questionIds],
+    currentIndex: 0,
+    hintsUsedThisQuestion: 0,
+    correctCount: 0,
+    attemptedCount: 0,
+    startedAtMs: nowMs,
+    questionShownAtMs: nowMs,
+    pendingFollowUps: [],
+    lastFeedback: null,
+    answeredCurrent: false,
+    finished: false,
+    newAchievements: []
+  };
+}
+
+/**
+ * One step of a boss investigation, as a session of the ordinary kind.
+ *
+ * Everything downstream — answering, hints, remediation follow-ups, mastery,
+ * review scheduling — is the lesson path unchanged. That is the point.
+ */
+export function startInvestigationStep(
+  content: ContentBundle,
+  investigationId: string,
+  stepIndex: number,
+  nowMs: number
+): LessonSession | null {
+  const investigation = content.curriculum.investigations.find((i) => i.id === investigationId);
+  const step = investigation?.steps[stepIndex];
+  if (!investigation || !step) return null;
+  return {
+    lessonId: investigation.id,
+    investigation: { investigationId: investigation.id, stepIndex },
+    questionQueue: [...step.questionIds],
     currentIndex: 0,
     hintsUsedThisQuestion: 0,
     correctCount: 0,
@@ -166,19 +211,32 @@ export function advance(content: ContentBundle, save: SaveFile, session: LessonS
   const nextIndex = session.currentIndex + 1;
   if (nextIndex >= queue.length) {
     const accuracy = session.attemptedCount > 0 ? session.correctCount / session.attemptedCount : 0;
-    const prevProgress = save.lessonProgress[session.lessonId];
-    let nextSave: SaveFile = {
-      ...save,
-      lessonProgress: {
-        ...save.lessonProgress,
-        [session.lessonId]: {
-          lessonId: session.lessonId,
-          status: "completed",
-          bestAccuracy: Math.max(prevProgress?.bestAccuracy ?? 0, accuracy),
-          completedAt: new Date(nowMs).toISOString()
+    // A finished investigation step records a step result, not a lesson
+    // completion. Writing lessonProgress here would mark the whole case complete
+    // after its first step and hand over the region achievement for it.
+    let nextSave: SaveFile;
+    if (session.investigation) {
+      const investigation = content.curriculum.investigations.find(
+        (i) => i.id === session.investigation!.investigationId
+      );
+      nextSave = investigation
+        ? recordStepResult(save, investigation, session.investigation.stepIndex, accuracy, new Date(nowMs))
+        : save;
+    } else {
+      const prevProgress = save.lessonProgress[session.lessonId];
+      nextSave = {
+        ...save,
+        lessonProgress: {
+          ...save.lessonProgress,
+          [session.lessonId]: {
+            lessonId: session.lessonId,
+            status: "completed",
+            bestAccuracy: Math.max(prevProgress?.bestAccuracy ?? 0, accuracy),
+            completedAt: new Date(nowMs).toISOString()
+          }
         }
-      }
-    };
+      };
+    }
     const earnedOnCompletion = evaluateAchievements(nextSave, content.achievements, content.curriculum);
     if (earnedOnCompletion.length > 0) {
       nextSave = { ...nextSave, achievements: [...nextSave.achievements, ...earnedOnCompletion] };

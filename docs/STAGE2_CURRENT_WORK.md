@@ -6,53 +6,62 @@ Exactly one Stage 2 unit is active at a time. Rewritten at the start and end of 
 
 ## Current unit
 
-**S2-09 — Region 1 validated content expansion (cycle 4: the data group, and Region 1 closed under §4)**
+**S2-10 — Region 1 boss investigation**
 
-Entered from `bad823a7c433e17fb9c6101a4b6a372ae933689f` (remote-verified, clean tree).
+Entered from `6e7e524baca968bdf7f3b38b947c4862544d67c8` (remote-verified, clean tree).
 
 ## Objective
 
-Take the data group — tables, variables, cases, categorical/numerical — past the `STAGE2_RECONSTRUCTION_SCOPE.md` §4
-bar. These four are the first topics whose questions are *about a table*, so the generator has to build a dataset before
-it can build a question.
+Build the Region 1 boss: a multi-step, saveable investigation that combines the region's skills, gates its completion
+achievement, and unlocks Region 2. `STAGE2_RECONSTRUCTION_SCOPE.md` §10 makes a region that ends without a boss a
+closure failure, so this is the first unit where a *region* rather than a topic is the thing being completed.
 
 ## Result up front
 
-**S2-09 remains Partial**, and the reason it is Partial has changed. **17 of the 22 curriculum topics** now meet §4, up
-from 13. **Every Region 1 topic passes.** The 5 still failing are the entire Region 2 inheritance — mean, median,
-range, choosing measures, data literacy — which **belongs to S2-17**, not here.
+**S2-10 is Complete.** `inv.r1-harbour-audit` — **The Harbourmaster's Audit** — runs in **5 stages over 15 authored
+questions**, drawing on **14 of Region 1's 17 skills** across all four of its modules. It is resumable a stage at a
+time, and Region 1's achievement is no longer awarded until the case is closed.
 
-| New this cycle | Total available | Reasoning families | Largest single shape |
-|---|---:|---:|---:|
-| Cases and observations | 311 | 4 | 13% |
-| Variables | 235 | 5 | 14% |
-| Reading tables | 232 | 5 | 13% |
-| Kinds of variable | 215 | 5 | <1% |
-
-**6,607 validated generated interactions** (was 5,642).
+| Stage | Draws on |
+|---|---|
+| 1 · What the record is | cases, tables, multiplication |
+| 2 · Reconciling the count | addition, counting, subtraction, tables |
+| 3 · The share that was cod | fractions, percentages, proportions, division, multiplication |
+| 4 · The brine that spoiled | ratios, multiplication, division |
+| 5 · The verdict | negatives, number lines, variables, variable kinds, tables |
 
 ## Relevant files
 
 | File | Change |
 |---|---|
-| `src/content/generators/data.ts` | **New.** Six ledgers and eighteen families across the four data topics |
-| `src/content/generators/index.ts` | Wired in |
-| `tests/helpers/complete-topics.ts` | The four data topics declared Complete under §4 |
-| `tests/audit/content-coverage.test.ts` | Two more misconception routes taught to the audit's helper |
-| `docs/CONTENT_COVERAGE.md`, `docs/content-coverage.json` | Regenerated |
+| `src/shared/schemas/curriculum.ts` | **New** `InvestigationSchema` / `InvestigationStepSchema`; `curriculum.investigations` |
+| `src/shared/schemas/profile.ts` | **New** `InvestigationProgressSchema`; `save.investigationProgress` |
+| `src/shared/constants/app.ts` | Save schema version **2 → 3** |
+| `src/core/persistence/migrations.ts` | Migration 2 → 3 |
+| `src/core/investigations/engine.ts` | **New.** Unlock, status, resume and step recording — pure |
+| `src/core/curriculum/progress.ts` | A region is not complete until its boss is closed |
+| `src/core/curriculum/loader.ts` | Investigation references validated |
+| `src/renderer/state/session.ts` | `startInvestigationStep`; a finished step records a step result, not a lesson |
+| `src/renderer/state/store.ts`, `app/App.tsx`, `screens/RegionScreen.tsx` | Entry point and routing |
+| `src/renderer/screens/InvestigationScreen.tsx` | **New.** The case, its stages, and where the learner had got to |
+| `src/content/worlds/curriculum.json` | The investigation |
+| `src/content/questions/questions.json` | 145 → **160** authored questions |
+| `tests/helpers/complete-bosses.ts` | **New.** Which regions have a boss and which owe one |
+| `tests/helpers/investigation-playthrough.ts` | **New.** Plays a case through the real engine |
+| `tests/unit/investigations.test.ts` | **New.** 17 checks |
+| `tests/audit/investigation-structure.test.ts` | **New.** 12 checks |
 
 ## Acceptance criteria
 
 | # | Criterion | Met |
 |---|---|---|
-| 1 | ≥100 validated interactions per completed topic | **No — 17 of 22 topics.** The 5 remaining are Region 2, owned by S2-17 |
-| 2 | Multiple reasoning families per completed topic | Yes — 4 to 8 each, against a required 4 |
-| 3 | Duplicate and near-duplicate gates | Yes |
-| 4 | Misconception mappings validated | Yes, on both sides, and now across all five declaration routes |
-| 5 | Accessibility descriptions validated | Yes |
-| 6 | Machine- and human-readable reports | Yes — regenerated this cycle |
-| 7 | Topic list from the curriculum, zero-generator topics reported as failures | Yes |
-| 8 | Commit pushed and remote hash verified | Yes — see below |
+| 1 | Multi-step investigation | Yes — 5 stages, minimum of 3 enforced by the schema |
+| 2 | Saveable | Yes — `investigationProgress` records the stage reached and every stage's accuracy; migration 2 → 3 |
+| 3 | Combines Region 1 skills | Yes — 14 skills across all four modules, and an audit fails a boss confined to one module |
+| 4 | Awards the region achievement | Yes — and only once the case is closed |
+| 5 | Unlocks Region 2 | Yes — through the existing `isRegionUnlocked`, which now depends on the boss |
+| 6 | Playable through the real session engine | Yes — the same `submitAnswer`/`advance` path as a lesson; mastery, review, misconceptions and achievements all move |
+| 7 | Commit pushed and remote hash verified | Yes — see below |
 
 ## Required tests
 
@@ -62,85 +71,74 @@ Measured (Node v22.22.2 / npm 10.9.7):
 |---|---|
 | `npm run typecheck` | Pass |
 | `npm run lint` | Pass — 0 errors, 0 warnings |
-| `npm test` | Pass — **413 tests / 33 files** |
+| `npm test` | Pass — **443 tests / 35 files** (was 413 / 33) |
 | `npm run test:statistics` | Pass — 18 tests / 3 files |
 | `npm run test:content` | Pass — 5 tests / 1 file |
-| `npm run build` | Pass — 538.47 kB (143.72 kB gzip) |
-| `npm run report:coverage` | Ran — 17 of 22 topics meet §4 |
+| `npm run build` | Pass — 562.92 kB (149.12 kB gzip) |
+| `npm run report:coverage` | Ran — 17 of 22 topics meet §4, unchanged |
 
 `test:a11y` was **not** run and is **not** claimed; it arrives in S2-20.
 
 ## Work completed
 
-1. **Six ledgers, written out rather than computed.** A table question is only honest if the table is real, and a
-   formula would have made every ledger a rescaling of one ledger — indistinguishable to the near-duplicate gate and
-   uncheckable by eye for whoever reads the file next. They render into the prompt as prose, which is the convention the
-   authored questions in these lessons already use.
+1. **The boss runs through the real session engine, not beside it.** A step is an ordinary `LessonSession` over that
+   step's questions, so mastery, spaced review, misconception detection and achievement evaluation behave identically
+   inside a case and inside a lesson. Only the record written on completion differs — a step result rather than a lesson
+   completion. Two engines would have drifted, and the second one would have been the one nobody tested.
 
-2. **Where a described shape beats a real ledger, the shape is used.** Every ledger here has three columns and five
-   rows, so the cases and variable-observation families enumerate over described shapes — 8 row counts by 5 column
-   counts — instead. Running them over the six ledgers would have asked the same arithmetic six times with the same
-   numbers, and the near-duplicate gate would have thrown five away, correctly.
+2. **A region is not complete until its case is closed.** This changed existing behaviour deliberately: finishing every
+   Region 1 lesson used to award `ach.harbor-charted`, and now does not. Four existing tests failed on that change,
+   which is the guard working, and they were updated to play the boss rather than relaxed.
 
-3. **Every one of the four topics' misconceptions is now answerable.** Three are declared as a `wrongValue` under
-   `question.parameters`, which is how `known-wrong-answer` reaches a learner on a numeric question where there is no
-   distractor to tag. The fourth is a wrong *placement* — see correction 1.
+3. **Resume means resume.** `beginInvestigation` is idempotent, so reopening the briefing cannot rewind a case;
+   `recordStepResult` takes the maximum of the stage reached, so re-arguing stage one out of curiosity cannot push a
+   learner backwards through a case they had nearly closed.
 
-4. **A `visual-interpretation` sorting family**, because that is the only interaction from which
-   `mc.digits-mean-numerical` can be reported.
+4. **The debt for Region 2's boss is declared, not implied.** `complete-bosses.ts` splits every region into "has one"
+   and "owes one", and the audit checks both directions — every region appears in exactly one list, a region claiming a
+   boss has it, and a region owing one does not yet have it. A boss cannot be quietly added for a region still listed
+   as owing one without the list being updated to say so.
 
 ## Corrections made during the unit
 
-1. **`mc.digits-mean-numerical` was tagged on a multiple-choice distractor, and could never have fired.** Its detector
-   is `placement-mapping`, which reads the evaluator's placement signals — not `known-wrong-answer`, which the module
-   header asserted for all four. The tag read perfectly. This is precisely the defect D-025 names, made in the first
-   module written *after* D-025 was written down, and it was caught by the check rather than by care. The declaration
-   moved to a new sorting family where it is a declared wrong placement, and the recognition family now declares
-   nothing, with the reason recorded in place.
+1. **A stage claimed fewer skills than its questions exercise.** `step.r1-shares` declared fractions, percentages,
+   proportions and division; one of its questions also needs multiplication. The audit holds a step's `skillIds` to its
+   questions in *both* directions — nothing claimed that is not exercised, nothing exercised that is not declared — and
+   it failed on the second. The declaration was corrected rather than the check loosened.
 
-2. **The audit's own helper knew only three of the five ways a misconception can be declared.** It covered tagged
-   choices, misconception points and swapped axes; the first generator to declare a numeric `wrongValue` was reported
-   as offering the learner no way to express the misconception, and so was the first to declare a wrong placement. Both
-   were the check telling the truth about itself — an unknown route is indistinguishable from an unreachable one — and
-   both routes were added.
-
-3. **Two lint warnings**, from an unused index and a loop variable kept only to count. The count now walks the columns
-   the constant is excluded from, which is what it always claimed to do.
+2. **The orphan-reachability rule needed a third route, and got it deliberately.** A boss question belongs to no lesson
+   by design: filing it under one would misreport which topic it practises. So "reachable from a lesson or a
+   remediation follow-up" became "…or an investigation step" — the third deliberate widening of that rule (D-017), each
+   recorded where it happened.
 
 ## Verification that the guards have teeth
 
-Six deliberate probes, all reverted. All six bit on the first run:
+Eight deliberate probes, all reverted. All eight bit on the first run:
 
 | Probe | Result |
 |---|---|
-| The placement misconception tagged on a choice instead | **1 check fails** |
-| The declared wrong value set to the right answer | **1 check fails** |
-| The case count answered with the observation count | **3 checks fail** |
-| The cell reader walking the wrong axis | **1 check fails** |
-| The constant column counted among the variables | **1 check fails** |
-| A topic with no generators declared Complete | **3 checks fail** |
+| The boss stops gating its region | **2 checks fail** |
+| Reopening a case rewinds it | **1 check fails** |
+| The first stage closes the whole case | **2 checks fail** |
+| A boss step recorded as a lesson completion | **7 checks fail** |
+| The case unlocks before the region's lessons are done | **2 checks fail** |
+| A region vanishes from the boss declaration | **1 check fails** |
+| A stage claims a skill it never exercises | **1 check fails** |
+| The case re-uses a lesson's question | **4 checks fail** |
 
 ## Remaining work
 
-**5 of 22 topics do not meet §4**, and for the first time none of them is a Region 1 topic. Mean, median, range,
-choosing measures and data literacy are the Region 2 inheritance, and generators for them are **S2-17**'s work, not a
-continuation of this unit.
-
-That makes S2-09's Region 1 objective **met**, and the unit stays Partial only because §4 is stated over all 22
-curriculum topics. The next unit is **S2-10**, the Region 1 boss investigation.
+None for this unit. Region 2's boss investigation is **S2-18** and is declared as owed in `complete-bosses.ts`; it
+cannot be built before the Region 2 lessons it draws on exist (S2-11 … S2-17).
 
 ## Local commit
 
-`01f29ad284a7641412447f898f85d328232cbbf0`
+Recorded in the follow-up commit below.
 
 ## Remote verification
 
-```
-LOCAL_HEAD  = 01f29ad284a7641412447f898f85d328232cbbf0
-REMOTE_HEAD = 01f29ad284a7641412447f898f85d328232cbbf0
-VERIFIED: MATCH
-```
+Recorded in the follow-up commit below.
 
 ## Next unit
 
-**S2-10 — Region 1 boss investigation.** Not started in this cycle, per the one-unit-per-cycle rule.
+**S2-11 — Region 2 world and curriculum architecture.** Not started in this cycle, per the one-unit-per-cycle rule.

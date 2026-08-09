@@ -27,10 +27,23 @@ export function isLessonUnlocked(curriculum: Curriculum, save: SaveFile, lessonI
 export interface RegionGraph {
   regions: readonly { id: string; moduleIds: readonly string[] }[];
   modules: readonly { id: string; lessonIds: readonly string[] }[];
+  /**
+   * Boss investigations. Optional so the small graphs in tests stay small, and
+   * because a region with no boss declared is a curriculum question rather than
+   * a completion question — `STAGE2_RECONSTRUCTION_SCOPE.md` §10 makes that a
+   * closure failure, and an audit against a declared list enforces it.
+   */
+  investigations?: readonly { id: string; regionId: string }[];
 }
 
 /**
- * A region is completed when every lesson of every one of its modules is completed.
+ * A region is completed when every lesson of every one of its modules is completed
+ * **and** its boss investigation, if it has one, is closed.
+ *
+ * The boss clause is what makes a boss a boss rather than an optional epilogue: a
+ * region's achievement is the reward for arguing its case, not for finishing its
+ * last lesson. A region with no investigation declared is unaffected, which is
+ * how the Region 2 inheritance keeps working while its own boss is owed to S2-18.
  *
  * Deliberately conservative: it returns false rather than true whenever the graph
  * cannot be fully resolved, because a false positive here awards an achievement the
@@ -47,8 +60,11 @@ export function isRegionCompleted(graph: RegionGraph, save: SaveFile, regionId: 
     if (!mod) return false; // dangling module reference — never award on incomplete data
     lessonIds.push(...mod.lessonIds);
   }
+  if (lessonIds.length === 0 || !lessonIds.every((l) => lessonStatus(save, l) === "completed")) return false;
 
-  return lessonIds.length > 0 && lessonIds.every((l) => lessonStatus(save, l) === "completed");
+  const boss = (graph.investigations ?? []).find((i) => i.regionId === regionId);
+  if (!boss) return true;
+  return save.investigationProgress[boss.id]?.status === "completed";
 }
 
 export function isRegionUnlocked(curriculum: Curriculum, save: SaveFile, regionId: string): boolean {

@@ -60,6 +60,27 @@ export const LessonProgressSchema = z.object({
   completedAt: IsoDateTime.nullable().default(null)
 });
 
+/**
+ * How far through a boss investigation a learner has got.
+ *
+ * The whole point of recording `currentStepIndex` is that a boss is long enough
+ * to be interrupted. Resuming rebuilds the step from the curriculum and drops the
+ * learner back at the step they had reached, with the accuracies of the steps
+ * they already argued kept — restarting the case from the top would be the same
+ * defect the frozen review queue exists to avoid.
+ */
+export const InvestigationProgressSchema = z.object({
+  investigationId: IdSchema,
+  status: z.enum(["locked", "available", "in-progress", "completed"]),
+  /** The step the learner is on. Equals steps.length once the case is closed. */
+  currentStepIndex: z.number().int().min(0).default(0),
+  /** Accuracy of each step already argued, in step order. */
+  stepAccuracy: z.array(z.number().min(0).max(1)).default([]),
+  startedAt: IsoDateTime.nullable().default(null),
+  completedAt: IsoDateTime.nullable().default(null)
+});
+export type InvestigationProgress = z.infer<typeof InvestigationProgressSchema>;
+
 export const AttemptRecordSchema = z.object({
   questionId: IdSchema,
   at: IsoDateTime,
@@ -94,6 +115,7 @@ export const SaveFileSchema = z.object({
   skillStates: z.record(SkillStateSchema).default({}),
   reviewQueue: z.array(ReviewItemSchema).default([]),
   lessonProgress: z.record(LessonProgressSchema).default({}),
+  investigationProgress: z.record(InvestigationProgressSchema).default({}),
   attemptLog: z.array(AttemptRecordSchema).default([]),
   achievements: z.array(IdSchema).default([]),
   /** Null when no review session is in flight. */

@@ -142,13 +142,22 @@ describe("accessibility coverage", () => {
 });
 
 describe("no question is orphaned", () => {
-  it("every shipped question is reachable from a lesson or as a remediation follow-up", () => {
+  it("every shipped question is reachable from a lesson, an investigation step, or a remediation follow-up", () => {
+    // Three routes, widened deliberately each time rather than loosened to make
+    // a failure go away (D-017). A lesson asks it; a remediation injects it after
+    // a misconception; and — since S2-10 — a boss investigation step poses it.
+    // A boss question belongs to no lesson by design: the case combines skills
+    // the lessons taught separately, and filing its questions under one lesson
+    // would misreport which topic they practise.
     const viaRemediation = new Set([
       ...content.remediations.flatMap((r) => r.followUpQuestionIds),
       ...[...content.questions.values()].flatMap((q) => (q.followUpQuestionId ? [q.followUpQuestionId] : []))
     ]);
+    const viaInvestigation = new Set(
+      content.curriculum.investigations.flatMap((i) => i.steps.flatMap((s) => s.questionIds))
+    );
     const orphans = [...content.questions.values()]
-      .filter((q) => !lessonQuestionIds.has(q.id) && !viaRemediation.has(q.id))
+      .filter((q) => !lessonQuestionIds.has(q.id) && !viaRemediation.has(q.id) && !viaInvestigation.has(q.id))
       .map((q) => q.id);
     expect(orphans, `questions no learner can ever reach: ${orphans.join(", ")}`).toEqual([]);
   });

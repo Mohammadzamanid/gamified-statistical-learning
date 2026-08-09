@@ -188,3 +188,25 @@ whose table is wrong is wrong in a way no schema can see. The corollary is the s
 question is about a table's *shape* rather than its contents — how many cases, how many observations, how many columns
 vary — the family enumerates over described shapes instead, because all six ledgers are five rows by three columns and
 asking the same arithmetic six times with the same numbers is the degenerate case §4 exists to stop. (S2-09)
+
+**D-028 — A boss investigation is a first-class thing, and it gates its region.**
+It would have been cheaper to make the Region 1 boss a nineteenth lesson at the end of a module, and it would have been
+wrong in three ways that all matter. A boss **gates** its region — the region achievement is the reward for arguing the
+case, not for finishing the last lesson — so `isRegionCompleted` requires it, and completing every Region 1 lesson no
+longer awards `ach.harbor-charted`. A boss is **resumed a stage at a time**, because it is long enough to be
+interrupted, so the save carries `investigationProgress` (schema 2 → 3) and `beginInvestigation` is idempotent; a
+version that rewrote the record whenever the briefing was opened would look like working code and cost a learner every
+stage they had argued. And a boss **may only ask about skills its region has already taught**, which is checkable and
+is checked. What it is *not* is a second engine: a step is an ordinary `LessonSession` over that step's questions, so
+mastery, spaced review, misconception detection and achievements behave identically inside a case and inside a lesson.
+Only the record written on completion differs. (S2-10)
+
+**D-029 — A boss question belongs to no lesson, and the reachability rule says so.**
+The questions in an investigation are not filed under any lesson, because a case combines skills the lessons taught
+separately and filing its questions under one lesson would misreport which topic they practise. That made all fifteen
+of them orphans under the S2-03 rule, which is the third time that rule has had to be widened — lesson, then "lesson or
+remediation follow-up" (D-017), now "lesson, investigation step, or remediation follow-up". Each widening was made
+because a new legitimate route existed, and each is recorded at the point it happened, so the rule's history reads as a
+list of routes rather than a list of exceptions. The complementary check is that a boss may never re-use a question a
+lesson already asks: sharing one would make the case a review round in costume and would double-count its practice.
+(S2-10)

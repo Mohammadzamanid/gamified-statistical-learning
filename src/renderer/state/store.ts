@@ -16,11 +16,13 @@ import { applyToRoot } from "../../core/accessibility/apply";
 import { createPersistenceClient, type PersistenceClient } from "./persistence-client";
 import {
   advance,
+  startInvestigationStep,
   startLesson,
   submitAnswer,
   useHint,
   type LessonSession
 } from "./session";
+import { beginInvestigation } from "../../core/investigations/engine";
 import type { RawResponse } from "../../core/questions/types";
 
 registerBuiltInDetectors();
@@ -32,6 +34,7 @@ export type Screen =
   | { name: "world-map" }
   | { name: "region"; regionId: string }
   | { name: "lesson"; lessonId: string }
+  | { name: "investigation"; investigationId: string }
   | { name: "question" }
   | { name: "lab" }
   | { name: "progress" }
@@ -65,6 +68,10 @@ interface StoreState {
   resetProgress(): Promise<void>;
 
   startLesson(lessonId: string): void;
+  /** Opens a boss investigation, marking the case in progress without rewinding it. */
+  openInvestigation(investigationId: string): void;
+  /** Plays one step of a boss investigation through the ordinary session engine. */
+  startInvestigationStep(investigationId: string, stepIndex: number): void;
   /** Review actions. `now` is passed in so tests and the UI share one clock source. */
   beginReview(): void;
   submitReview(raw: RawResponse): void;
@@ -169,6 +176,23 @@ export const useStore = create<StoreState>((set, get) => ({
     if (session) set({ session, screen: { name: "question" } });
   },
 
+  openInvestigation(investigationId) {
+    const { content, save, client } = get();
+    const investigation = content.curriculum.investigations.find((i) => i.id === investigationId);
+    if (!investigation || !save) return;
+    // Marking the case open is persisted immediately: a learner who reads the
+    // briefing and closes the app has started it, and should come back to a case
+    // in progress rather than to one that never opened.
+    const next = beginInvestigation(save, investigation, new Date());
+    if (next !== save) persistSave(client, next);
+    set({ save: next, screen: { name: "investigation", investigationId } });
+  },
+
+  startInvestigationStep(investigationId, stepIndex) {
+    const session = startInvestigationStep(get().content, investigationId, stepIndex, Date.now());
+    if (session) set({ session, screen: { name: "question" } });
+  },
+
   submit(raw) {
     const { content, save, session, client } = get();
     if (!save || !session) return;
@@ -189,7 +213,13 @@ export const useStore = create<StoreState>((set, get) => ({
     const result = advance(content, save, session, Date.now());
     if (result.session.finished) persistSave(client, result.save);
     set({ save: result.save, session: result.session });
-    if (result.session.finished) set({ screen: { name: "lesson", lessonId: session.lessonId } });
+    if (result.session.finished) {
+      set({
+        screen: session.investigation
+          ? { name: "investigation", investigationId: session.investigation.investigationId }
+          : { name: "lesson", lessonId: session.lessonId }
+      });
+    }
   },
 
   exitLesson() {

@@ -13,7 +13,17 @@ export const MIGRATIONS: Record<number, Migration> = {
    * explicit null rather than relying on the schema default — a migration that
    * leans on defaults silently stops working the moment the default changes.
    */
-  1: (data) => ({ ...data, reviewSession: null })
+  1: (data) => ({ ...data, reviewSession: null }),
+
+  /**
+   * 2 -> 3 (S2-10): adds `investigationProgress`, the per-boss resume record.
+   *
+   * A version-2 save predates boss investigations entirely, so the correct lift
+   * is an empty record — not "available", which would claim the learner had
+   * unlocked something the save has no evidence for. Written explicitly rather
+   * than left to the schema default, for the reason the 1 -> 2 note gives.
+   */
+  2: (data) => ({ ...data, investigationProgress: {} })
 };
 
 export function migrateToVersion(

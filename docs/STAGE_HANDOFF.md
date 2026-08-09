@@ -4,7 +4,7 @@
 (`git show 7add4bc:docs/STAGE_HANDOFF.md`). Its still-binding contracts, traps, and priorities are carried forward
 below — nothing was discarded.
 
-**Last updated:** 2026-08-07, at the close of S2-09 cycle 4 (**Partial**).
+**Last updated:** 2026-08-07, at the close of S2-10 (**Complete**).
 
 ---
 
@@ -16,7 +16,7 @@ after Stage 1 was lost because commits were never pushed to a durable remote. Re
 
 - **Stage 1: surviving, verified, green.** Not re-created — the original commit `7add4bc` was carried forward from the
   archive's own `.git` directory, with authorship intact.
-- **Stage 2: in progress, and not recoverable.** Reconstruction began 2026-08-04; S2-01 through S2-08 are complete and S2-09 is **Partial** (cycle 4, `01f29ad`, remote-verified; cycles 1-3 `0de5fff`, `c7f99d5`, `10685dd`). Nothing
+- **Stage 2: in progress, and not recoverable.** Reconstruction began 2026-08-04; S2-01 through S2-08 and S2-10 are complete; S2-09 is **Partial**, and only because §4 is stated over all 22 topics — every Region 1 topic meets it. Nothing
   in it is recovered source.
 - **Stages 3–6: not started, and not recoverable.** They must be **reconstructed** from the surviving Stage 1 source,
   the specifications, and the known defect history. They may never be described as recovered source, and no metric may
@@ -37,7 +37,7 @@ after Stage 1 was lost because commits were never pushed to a durable remote. Re
 | Milestone exports | `../gsl-exports/` — source ZIP + git bundle + manifest + SHA-256 checksums |
 | Working tree | clean |
 | Node / npm used | v22.22.2 / 10.9.7 |
-| Test suite | **413 tests / 33 files**, all passing (Stage 1 baseline was 73 / 14) |
+| Test suite | **443 tests / 35 files**, all passing (Stage 1 baseline was 73 / 14) |
 | Build | passing (**538.47 kB, 143.72 kB gzip**; baseline was 285.73 kB / 83.82 kB) |
 | Source modified since baseline | S2-01 … S2-08 — achievements + region completion, three new interactions, the enforced interaction audit, the review queue, the Region 1 topic architecture, and all 17 Region 1 lessons |
 | Curriculum | 2 regions · **6 modules** · **20 lessons** · **23 skills** · **145 questions** (baseline 2/2/3/6/14) |
@@ -105,22 +105,38 @@ branch/tag deletion) are forbidden without explicit owner permission. See `REMOT
 
 ## 5. Next unit
 
-**S2-10 — Region 1 boss investigation.**
+**S2-11 — Region 2 world and curriculum architecture.**
 
-S2-09 is done with Region 1. Four cycles built the machinery and then four generator modules — `arithmetic.ts`,
-`parts.ts`, `ratios.ts` + `position.ts`, and `data.ts` — and **17 of 22 topics meet §4, every Region 1 topic among
-them**. The 5 that do not are the entire Region 2 inheritance (mean, median, range, choosing measures, data literacy);
-they have zero generator families, are reported in `docs/CONTENT_COVERAGE.md` as failures with reasons, and belong to
-**S2-17**. S2-09 stays **Partial** in the backlog because §4 is stated over all 22 curriculum topics, not because
-anything in Region 1 is outstanding.
+**Region 1 is finished.** All 17 lessons meet §5, all 17 topics meet §4, and its boss investigation — *The
+Harbourmaster's Audit*, 5 stages, 14 skills — is built and gates the region achievement (S2-10). S2-09 stays
+**Partial** in the backlog because §4 is stated over all 22 curriculum topics, not because anything in Region 1 is
+outstanding: the 5 topics that do not meet it are the entire Region 2 inheritance, owned by **S2-17**.
 
-So the next unit is **S2-10, the Region 1 boss investigation** — a multi-step saveable investigation combining Region 1
-skills, awarding the region achievement and unlocking Region 2. The award path itself was repaired and tested back in
-S2-01.
+What remains in Stage 2 is Region 2, and it starts with its architecture: a distinct world and narrative, the module
+sequence, the prerequisite graph, objectives, laboratory unlocks, and the boss specification.
 
-**Before starting S2-10, re-read the acceptance criteria in this backlog row rather than assuming.** The boss is the
-first content that has to *combine* topics rather than teach one, and the generators are not the tool for it — this is
-authored content.
+Three things already in the tree are waiting for S2-11 specifically:
+
+- **`l.reading-tallies` and `l.middle-harbor`** are Stage 1 lessons sitting inside the Region 1 container that teach
+  Region 2 topics. They are deliberately *not* Complete, and `tests/audit/region1-architecture.test.ts` asserts they
+  are the only two — so the exception cannot grow while they wait to be re-cut here.
+- **Five topics** (mean, median, range, choosing measures, data literacy) have zero generator families and are reported
+  as §4 failures. Their lessons are S2-12 … S2-14; their generators are **S2-17**.
+- **`r.averages-atoll` owes a boss**, declared in `tests/helpers/complete-bosses.ts` and enforced in both directions.
+  Building it is **S2-18**; S2-11 only has to specify it.
+
+### Boss investigations, if you are adding or changing one
+
+A boss is not a lesson (D-028). It gates its region — `isRegionCompleted` requires it, so a region achievement is not
+awarded until the case is closed — it is resumed a stage at a time from `save.investigationProgress`, and it may only
+ask about skills its own region teaches. It is **not** a second engine: a step is an ordinary `LessonSession` over that
+step's questions, and only the record written on completion differs. Two engines would drift, and the untested one
+would be the second.
+
+Its questions belong to no lesson, which is why the orphan-reachability rule has a third route (D-029), and a boss may
+never re-use a lesson's question. `tests/helpers/complete-bosses.ts` splits every region into "has one" and "owes one",
+and the audit fails if a region is missing from both, appears in both, claims a boss it lacks, or quietly acquires one
+while still listed as owing it.
 
 **What `parts.ts` learned the hard way, and what it costs to ignore.** Its first version let only the conversion family
 use the topic's form, so four topics emitted *identical* questions and the near-duplicate gate collapsed three of them

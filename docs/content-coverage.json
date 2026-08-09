@@ -136,7 +136,7 @@
         "l.r1-addition"
       ],
       "regionId": "r.harbor-tallies",
-      "authoredRecords": 7,
+      "authoredRecords": 9,
       "generatorFamilies": 8,
       "reasoningFamilies": [
         "calculation",
@@ -151,7 +151,7 @@
       "rawCombinations": 800,
       "validCombinations": 800,
       "validatedGenerated": 800,
-      "totalAvailable": 807,
+      "totalAvailable": 809,
       "rejections": {
         "invalidCombinations": 0,
         "invalidReasons": {},
@@ -163,7 +163,7 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.09913258983890955,
+      "largestShapeShare": 0.09888751545117429,
       "failures": []
     },
     {
@@ -173,7 +173,7 @@
         "l.r1-cases"
       ],
       "regionId": "r.harbor-tallies",
-      "authoredRecords": 7,
+      "authoredRecords": 9,
       "generatorFamilies": 4,
       "reasoningFamilies": [
         "calculation",
@@ -184,7 +184,7 @@
       "rawCombinations": 392,
       "validCombinations": 392,
       "validatedGenerated": 304,
-      "totalAvailable": 311,
+      "totalAvailable": 313,
       "rejections": {
         "invalidCombinations": 0,
         "invalidReasons": {},
@@ -196,7 +196,7 @@
         "nearDuplicates": 88
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.12861736334405144,
+      "largestShapeShare": 0.12779552715654952,
       "failures": []
     },
     {
@@ -248,7 +248,7 @@
         "l.r1-counting"
       ],
       "regionId": "r.harbor-tallies",
-      "authoredRecords": 7,
+      "authoredRecords": 8,
       "generatorFamilies": 8,
       "reasoningFamilies": [
         "calculation",
@@ -263,7 +263,7 @@
       "rawCombinations": 1000,
       "validCombinations": 848,
       "validatedGenerated": 848,
-      "totalAvailable": 855,
+      "totalAvailable": 856,
       "rejections": {
         "invalidCombinations": 152,
         "invalidReasons": {
@@ -279,7 +279,7 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.11695906432748537,
+      "largestShapeShare": 0.11682242990654206,
       "failures": []
     },
     {
@@ -327,7 +327,7 @@
         "l.r1-division"
       ],
       "regionId": "r.harbor-tallies",
-      "authoredRecords": 7,
+      "authoredRecords": 9,
       "generatorFamilies": 8,
       "reasoningFamilies": [
         "calculation",
@@ -340,7 +340,7 @@
       "rawCombinations": 800,
       "validCombinations": 301,
       "validatedGenerated": 284,
-      "totalAvailable": 291,
+      "totalAvailable": 293,
       "rejections": {
         "invalidCombinations": 499,
         "invalidReasons": {
@@ -354,7 +354,7 @@
         "nearDuplicates": 17
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.13402061855670103,
+      "largestShapeShare": 0.13310580204778158,
       "failures": []
     },
     {
@@ -364,7 +364,7 @@
         "l.r1-fractions"
       ],
       "regionId": "r.harbor-tallies",
-      "authoredRecords": 8,
+      "authoredRecords": 10,
       "generatorFamilies": 6,
       "reasoningFamilies": [
         "comparison",
@@ -377,7 +377,7 @@
       "rawCombinations": 324,
       "validCombinations": 263,
       "validatedGenerated": 263,
-      "totalAvailable": 271,
+      "totalAvailable": 273,
       "rejections": {
         "invalidCombinations": 61,
         "invalidReasons": {
@@ -393,7 +393,7 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.36900369003690037,
+      "largestShapeShare": 0.3663003663003663,
       "failures": []
     },
     {
@@ -403,7 +403,7 @@
         "l.r1-multiplication"
       ],
       "regionId": "r.harbor-tallies",
-      "authoredRecords": 7,
+      "authoredRecords": 10,
       "generatorFamilies": 8,
       "reasoningFamilies": [
         "calculation",
@@ -418,7 +418,7 @@
       "rawCombinations": 800,
       "validCombinations": 761,
       "validatedGenerated": 761,
-      "totalAvailable": 768,
+      "totalAvailable": 771,
       "rejections": {
         "invalidCombinations": 39,
         "invalidReasons": {
@@ -432,7 +432,7 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.10416666666666667,
+      "largestShapeShare": 0.10376134889753567,
       "failures": []
     },
     {
@@ -442,7 +442,7 @@
         "l.r1-negatives"
       ],
       "regionId": "r.harbor-tallies",
-      "authoredRecords": 7,
+      "authoredRecords": 8,
       "generatorFamilies": 6,
       "reasoningFamilies": [
         "calculation",
@@ -455,7 +455,7 @@
       "rawCombinations": 172,
       "validCombinations": 167,
       "validatedGenerated": 167,
-      "totalAvailable": 174,
+      "totalAvailable": 175,
       "rejections": {
         "invalidCombinations": 5,
         "invalidReasons": {
@@ -470,7 +470,7 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.25862068965517243,
+      "largestShapeShare": 0.2571428571428571,
       "failures": []
     },
     {
@@ -480,7 +480,7 @@
         "l.r1-number-lines"
       ],
       "regionId": "r.harbor-tallies",
-      "authoredRecords": 7,
+      "authoredRecords": 8,
       "generatorFamilies": 5,
       "reasoningFamilies": [
         "calculation",
@@ -492,7 +492,7 @@
       "rawCombinations": 175,
       "validCombinations": 155,
       "validatedGenerated": 155,
-      "totalAvailable": 162,
+      "totalAvailable": 163,
       "rejections": {
         "invalidCombinations": 20,
         "invalidReasons": {
@@ -509,7 +509,7 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.17901234567901234,
+      "largestShapeShare": 0.17791411042944785,
       "failures": []
     },
     {
@@ -519,7 +519,7 @@
         "l.r1-percentages"
       ],
       "regionId": "r.harbor-tallies",
-      "authoredRecords": 7,
+      "authoredRecords": 8,
       "generatorFamilies": 6,
       "reasoningFamilies": [
         "comparison",
@@ -532,7 +532,7 @@
       "rawCombinations": 324,
       "validCombinations": 264,
       "validatedGenerated": 264,
-      "totalAvailable": 271,
+      "totalAvailable": 272,
       "rejections": {
         "invalidCombinations": 60,
         "invalidReasons": {
@@ -547,7 +547,7 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.36900369003690037,
+      "largestShapeShare": 0.36764705882352944,
       "failures": []
     },
     {
@@ -557,7 +557,7 @@
         "l.r1-proportions"
       ],
       "regionId": "r.harbor-tallies",
-      "authoredRecords": 7,
+      "authoredRecords": 8,
       "generatorFamilies": 6,
       "reasoningFamilies": [
         "comparison",
@@ -570,7 +570,7 @@
       "rawCombinations": 324,
       "validCombinations": 264,
       "validatedGenerated": 264,
-      "totalAvailable": 271,
+      "totalAvailable": 272,
       "rejections": {
         "invalidCombinations": 60,
         "invalidReasons": {
@@ -585,7 +585,7 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.36900369003690037,
+      "largestShapeShare": 0.36764705882352944,
       "failures": []
     },
     {
@@ -595,7 +595,7 @@
         "l.r1-ratios"
       ],
       "regionId": "r.harbor-tallies",
-      "authoredRecords": 7,
+      "authoredRecords": 10,
       "generatorFamilies": 8,
       "reasoningFamilies": [
         "calculation",
@@ -610,7 +610,7 @@
       "rawCombinations": 468,
       "validCombinations": 453,
       "validatedGenerated": 453,
-      "totalAvailable": 460,
+      "totalAvailable": 463,
       "rejections": {
         "invalidCombinations": 15,
         "invalidReasons": {
@@ -627,7 +627,7 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.2217391304347826,
+      "largestShapeShare": 0.2203023758099352,
       "failures": []
     },
     {
@@ -637,7 +637,7 @@
         "l.r1-subtraction"
       ],
       "regionId": "r.harbor-tallies",
-      "authoredRecords": 7,
+      "authoredRecords": 8,
       "generatorFamilies": 8,
       "reasoningFamilies": [
         "calculation",
@@ -652,7 +652,7 @@
       "rawCombinations": 800,
       "validCombinations": 797,
       "validatedGenerated": 797,
-      "totalAvailable": 804,
+      "totalAvailable": 805,
       "rejections": {
         "invalidCombinations": 3,
         "invalidReasons": {
@@ -666,7 +666,7 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.09950248756218906,
+      "largestShapeShare": 0.09937888198757763,
       "failures": []
     },
     {
@@ -676,7 +676,7 @@
         "l.r1-tables"
       ],
       "regionId": "r.harbor-tallies",
-      "authoredRecords": 7,
+      "authoredRecords": 13,
       "generatorFamilies": 5,
       "reasoningFamilies": [
         "comparison",
@@ -688,7 +688,7 @@
       "rawCombinations": 228,
       "validCombinations": 228,
       "validatedGenerated": 225,
-      "totalAvailable": 232,
+      "totalAvailable": 238,
       "rejections": {
         "invalidCombinations": 0,
         "invalidReasons": {},
@@ -700,7 +700,7 @@
         "nearDuplicates": 3
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.12931034482758622,
+      "largestShapeShare": 0.12605042016806722,
       "failures": []
     },
     {
@@ -710,7 +710,7 @@
         "l.r1-variable-kinds"
       ],
       "regionId": "r.harbor-tallies",
-      "authoredRecords": 7,
+      "authoredRecords": 8,
       "generatorFamilies": 5,
       "reasoningFamilies": [
         "comparison",
@@ -722,7 +722,7 @@
       "rawCombinations": 240,
       "validCombinations": 228,
       "validatedGenerated": 208,
-      "totalAvailable": 215,
+      "totalAvailable": 216,
       "rejections": {
         "invalidCombinations": 12,
         "invalidReasons": {
@@ -736,7 +736,7 @@
         "nearDuplicates": 20
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.004651162790697674,
+      "largestShapeShare": 0.004629629629629629,
       "failures": []
     },
     {
@@ -746,7 +746,7 @@
         "l.r1-variables"
       ],
       "regionId": "r.harbor-tallies",
-      "authoredRecords": 7,
+      "authoredRecords": 8,
       "generatorFamilies": 5,
       "reasoningFamilies": [
         "comparison",
@@ -758,7 +758,7 @@
       "rawCombinations": 272,
       "validCombinations": 232,
       "validatedGenerated": 228,
-      "totalAvailable": 235,
+      "totalAvailable": 236,
       "rejections": {
         "invalidCombinations": 40,
         "invalidReasons": {
@@ -773,7 +773,7 @@
         "nearDuplicates": 4
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.13617021276595745,
+      "largestShapeShare": 0.13559322033898305,
       "failures": []
     },
     {
