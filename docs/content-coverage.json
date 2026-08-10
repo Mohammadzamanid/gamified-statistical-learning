@@ -881,6 +881,39 @@
       ]
     },
     {
+      "skillId": "skill.r2-comparing-distributions",
+      "title": "Comparing distributions",
+      "lessonIds": [
+        "l.r2-comparing-distributions"
+      ],
+      "regionId": "r.averages-atoll",
+      "authoredRecords": 1,
+      "generatorFamilies": 0,
+      "reasoningFamilies": [],
+      "rawCombinations": 0,
+      "validCombinations": 0,
+      "validatedGenerated": 0,
+      "totalAvailable": 1,
+      "rejections": {
+        "invalidCombinations": 0,
+        "invalidReasons": {},
+        "schemaFailures": 0,
+        "answerFailures": 0,
+        "missingAccessibility": 0,
+        "missingMisconceptionMapping": 0,
+        "exactDuplicates": 0,
+        "nearDuplicates": 0
+      },
+      "unreachableQuestions": [],
+      "largestShapeShare": 1,
+      "failures": [
+        "no generator families produce for this topic",
+        "1 available interactions, below the required 100",
+        "0 reasoning families represented, below the required 4",
+        "100% of interactions share one reasoning shape, above the 50% ceiling — this is the \"numeric variants of one pattern\" case"
+      ]
+    },
+    {
       "skillId": "skill.r2-dot-plots",
       "title": "Dot plots",
       "lessonIds": [
@@ -985,13 +1018,13 @@
         "l.r2-iqr"
       ],
       "regionId": "r.averages-atoll",
-      "authoredRecords": 1,
+      "authoredRecords": 6,
       "generatorFamilies": 0,
       "reasoningFamilies": [],
       "rawCombinations": 0,
       "validCombinations": 0,
       "validatedGenerated": 0,
-      "totalAvailable": 1,
+      "totalAvailable": 6,
       "rejections": {
         "invalidCombinations": 0,
         "invalidReasons": {},
@@ -1003,12 +1036,11 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 1,
+      "largestShapeShare": 0.16666666666666666,
       "failures": [
         "no generator families produce for this topic",
-        "1 available interactions, below the required 100",
-        "0 reasoning families represented, below the required 4",
-        "100% of interactions share one reasoning shape, above the 50% ceiling — this is the \"numeric variants of one pattern\" case"
+        "6 available interactions, below the required 100",
+        "0 reasoning families represented, below the required 4"
       ]
     },
     {
@@ -1147,13 +1179,13 @@
         "l.r2-percentiles"
       ],
       "regionId": "r.averages-atoll",
-      "authoredRecords": 1,
+      "authoredRecords": 6,
       "generatorFamilies": 0,
       "reasoningFamilies": [],
       "rawCombinations": 0,
       "validCombinations": 0,
       "validatedGenerated": 0,
-      "totalAvailable": 1,
+      "totalAvailable": 6,
       "rejections": {
         "invalidCombinations": 0,
         "invalidReasons": {},
@@ -1165,12 +1197,11 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 1,
+      "largestShapeShare": 0.16666666666666666,
       "failures": [
         "no generator families produce for this topic",
-        "1 available interactions, below the required 100",
-        "0 reasoning families represented, below the required 4",
-        "100% of interactions share one reasoning shape, above the 50% ceiling — this is the \"numeric variants of one pattern\" case"
+        "6 available interactions, below the required 100",
+        "0 reasoning families represented, below the required 4"
       ]
     },
     {
@@ -1209,16 +1240,17 @@
       "skillId": "skill.r2-quartiles",
       "title": "Quartiles",
       "lessonIds": [
-        "l.r2-quartiles"
+        "l.r2-quartiles",
+        "l.r2-iqr"
       ],
       "regionId": "r.averages-atoll",
-      "authoredRecords": 6,
+      "authoredRecords": 10,
       "generatorFamilies": 0,
       "reasoningFamilies": [],
       "rawCombinations": 0,
       "validCombinations": 0,
       "validatedGenerated": 0,
-      "totalAvailable": 6,
+      "totalAvailable": 10,
       "rejections": {
         "invalidCombinations": 0,
         "invalidReasons": {},
@@ -1230,10 +1262,10 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.16666666666666666,
+      "largestShapeShare": 0.1,
       "failures": [
         "no generator families produce for this topic",
-        "6 available interactions, below the required 100",
+        "10 available interactions, below the required 100",
         "0 reasoning families represented, below the required 4"
       ]
     },
@@ -1372,16 +1404,17 @@
       "skillId": "skill.range",
       "title": "Range",
       "lessonIds": [
-        "l.spread-1"
+        "l.spread-1",
+        "l.r2-iqr"
       ],
       "regionId": "r.averages-atoll",
-      "authoredRecords": 6,
+      "authoredRecords": 7,
       "generatorFamilies": 0,
       "reasoningFamilies": [],
       "rawCombinations": 0,
       "validCombinations": 0,
       "validatedGenerated": 0,
-      "totalAvailable": 6,
+      "totalAvailable": 7,
       "rejections": {
         "invalidCombinations": 0,
         "invalidReasons": {},
@@ -1393,10 +1426,10 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.16666666666666666,
+      "largestShapeShare": 0.14285714285714285,
       "failures": [
         "no generator families produce for this topic",
-        "6 available interactions, below the required 100",
+        "7 available interactions, below the required 100",
         "0 reasoning families represented, below the required 4"
       ]
     }

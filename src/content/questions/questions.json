@@ -6900,48 +6900,6 @@
   "estimatedSeconds": 120
  },
  {
-  "id": "q.seed.r2-percentiles",
-  "topicId": "t.r2-percentiles",
-  "objectiveId": "obj.r2-percentiles",
-  "skillIds": [
-   "skill.r2-percentiles"
-  ],
-  "difficulty": 2,
-  "interaction": "percentage-input",
-  "prompt": "A catch sits at the 90th percentile of the season. What percentage of the season's catches were SMALLER than it?",
-  "answer": {
-   "kind": "numeric",
-   "value": 90,
-   "tolerance": 0,
-   "unit": "%"
-  },
-  "explanation": "The answer is 90%. This lesson is a seed: its full teaching arrives with the Region 2 lesson units.",
-  "accessibilityDescription": "A numeric seed question for a Region 2 lesson that has not been written yet. Enter the answer as a number.",
-  "misconceptionIds": [],
-  "estimatedSeconds": 45
- },
- {
-  "id": "q.seed.r2-iqr",
-  "topicId": "t.r2-iqr",
-  "objectiveId": "obj.r2-iqr",
-  "skillIds": [
-   "skill.r2-iqr"
-  ],
-  "difficulty": 2,
-  "interaction": "numeric-input",
-  "prompt": "A dataset has a first quartile of 4 and a third quartile of 12. What is the INTERQUARTILE RANGE?",
-  "answer": {
-   "kind": "numeric",
-   "value": 8,
-   "tolerance": 0,
-   "unit": "crates"
-  },
-  "explanation": "The answer is 8 crates. This lesson is a seed: its full teaching arrives with the Region 2 lesson units.",
-  "accessibilityDescription": "A numeric seed question for a Region 2 lesson that has not been written yet. Enter the answer as a number.",
-  "misconceptionIds": [],
-  "estimatedSeconds": 45
- },
- {
   "id": "q.seed.r2-variance",
   "topicId": "t.r2-variance",
   "objectiveId": "obj.r2-variance",
@@ -8923,5 +8881,418 @@
   "misconceptionIds": [],
   "accessibilityDescription": "Twelve sorted catch figures; enter the third quartile in crates as a number.",
   "estimatedSeconds": 110
+ },
+ {
+  "id": "q.seed.r2-comparing-distributions",
+  "topicId": "t.r2-comparing-distributions",
+  "objectiveId": "obj.r2-comparing-distributions",
+  "skillIds": [
+   "skill.r2-comparing-distributions"
+  ],
+  "difficulty": 3,
+  "interaction": "multiple-choice",
+  "prompt": "Two channels have the same median depth. Channel A has an interquartile range of 0.3 metres and Channel B one of 2.6. Which is the more predictable channel?",
+  "choices": [
+   {
+    "id": "ch.a",
+    "text": "Channel A - its middle half sits within a much narrower band"
+   },
+   {
+    "id": "ch.b",
+    "text": "Channel B - a larger interquartile range means more readings"
+   },
+   {
+    "id": "ch.same",
+    "text": "Neither - they share a median, so they behave the same way"
+   }
+  ],
+  "answer": {
+   "kind": "choice",
+   "correctChoiceIds": [
+    "ch.a"
+   ]
+  },
+  "explanation": "A shared median says only that the two channels have the same centre. Channel A's middle half spans 0.3 metres and Channel B's spans 2.6, so A's depths cluster far more tightly. This lesson is a seed: its full teaching arrives with the Region 2 lesson units.",
+  "accessibilityDescription": "A seed question for a Region 2 lesson that has not been written yet; choose which of two channels is more predictable.",
+  "misconceptionIds": [],
+  "estimatedSeconds": 60
+ },
+ {
+  "id": "q.r2-percentiles",
+  "topicId": "t.r2-percentiles",
+  "objectiveId": "obj.r2-percentiles",
+  "skillIds": [
+   "skill.r2-percentiles"
+  ],
+  "difficulty": 1,
+  "interaction": "numeric-input",
+  "prompt": "A channel is sounded 80 times. Twenty of the readings are 3 metres or less. What percentile is a depth of 3 metres?",
+  "answer": {
+   "kind": "numeric",
+   "value": 25,
+   "tolerance": 0.01,
+   "unit": "th percentile"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "A percentile is the share of readings at or below the mark, out of the whole log."
+   },
+   {
+    "level": 2,
+    "text": "Twenty readings out of eighty is what share of the log?"
+   }
+  ],
+  "explanation": "Twenty of the eighty readings are at or below 3 metres, which is a quarter of the log. A depth of 3 metres therefore stands at the 25th percentile, which is also the first quartile of this channel.",
+  "solutionSteps": [
+   "Count the readings at or below the mark: 20.",
+   "Count the readings altogether: 80.",
+   "Twenty out of eighty is a quarter of the log, or 25 percent.",
+   "So 3 metres stands at the 25th percentile."
+  ],
+  "misconceptionIds": [],
+  "accessibilityDescription": "A log of eighty depth soundings with twenty at or below a mark; enter the mark's percentile as a number.",
+  "estimatedSeconds": 70
+ },
+ {
+  "id": "q.r2-percentiles-independent",
+  "topicId": "t.r2-percentiles",
+  "objectiveId": "obj.r2-percentiles",
+  "skillIds": [
+   "skill.r2-percentiles"
+  ],
+  "difficulty": 2,
+  "interaction": "numeric-input",
+  "prompt": "Of 40 recorded catches, 30 are 18 crates or fewer. What percentile is a catch of 18 crates?",
+  "answer": {
+   "kind": "numeric",
+   "value": 75,
+   "tolerance": 0.01,
+   "unit": "th percentile"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Express the count at or below the mark as a share of all 40 catches."
+   }
+  ],
+  "explanation": "Thirty of the forty catches are at or below 18 crates, which is three quarters of the log, so 18 crates stands at the 75th percentile. That is the third quartile of this data under its other name.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "Forty catches with thirty at or below a mark; enter the mark's percentile as a number.",
+  "estimatedSeconds": 70
+ },
+ {
+  "id": "q.r2-percentiles-misconception",
+  "topicId": "t.r2-percentiles",
+  "objectiveId": "obj.r2-percentiles",
+  "skillIds": [
+   "skill.r2-percentiles"
+  ],
+  "difficulty": 3,
+  "interaction": "numeric-input",
+  "prompt": "Fifty waits for a berth are logged. Forty of them are 12 minutes or less, and ten are longer. What percentile is a wait of 12 minutes?",
+  "answer": {
+   "kind": "numeric",
+   "value": 80,
+   "tolerance": 0.01,
+   "unit": "th percentile"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "A percentile counts the readings at or below the mark, not the ones above it."
+   },
+   {
+    "level": 2,
+    "text": "Twelve minutes is a long-ish wait here, so its percentile should be high."
+   }
+  ],
+  "explanation": "Forty of the fifty waits are at or below 12 minutes, so it stands at the 80th percentile. Counting the ten longer waits instead gives 20, which is the complement — and it would claim that a wait longer than four fifths of the log is one of the shortest in it.",
+  "misconceptionIds": [
+   "mc.percentile-counts-above"
+  ],
+  "parameters": {
+   "mc.percentile-counts-above": {
+    "wrongValue": 20
+   }
+  },
+  "accessibilityDescription": "Fifty waits split at a mark; enter the mark's percentile as a number, counting from the correct side.",
+  "estimatedSeconds": 90
+ },
+ {
+  "id": "q.r2-percentiles-application",
+  "topicId": "t.r2-percentiles",
+  "objectiveId": "obj.r2-percentiles",
+  "skillIds": [
+   "skill.r2-percentiles"
+  ],
+  "difficulty": 3,
+  "interaction": "multiple-choice",
+  "prompt": "A harbour reports that the 90th percentile of its berth fees is 40 coins. What does that tell a skipper?",
+  "choices": [
+   {
+    "id": "ch.at-or-below",
+    "text": "Ninety percent of the berths cost 40 coins or less"
+   },
+   {
+    "id": "ch.ninety-percent",
+    "text": "The typical berth costs ninety percent of 40 coins, so 36"
+   },
+   {
+    "id": "ch.ninety-berths",
+    "text": "Ninety of the berths cost exactly 40 coins"
+   }
+  ],
+  "answer": {
+   "kind": "choice",
+   "correctChoiceIds": [
+    "ch.at-or-below"
+   ]
+  },
+  "explanation": "The 90th percentile is the fee with ninety percent of the berths at or below it, so nine berths in ten cost 40 coins or less and the dearest tenth cost more. It is not ninety percent of any price, and it says nothing about how many berths cost exactly 40: the percentile is the label, and 40 coins is the value wearing it.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "Three readings of what it means for the ninetieth percentile of berth fees to be forty coins.",
+  "estimatedSeconds": 90
+ },
+ {
+  "id": "q.r2-percentiles-teachback",
+  "topicId": "t.r2-percentiles",
+  "objectiveId": "obj.r2-percentiles",
+  "skillIds": [
+   "skill.r2-percentiles"
+  ],
+  "difficulty": 3,
+  "interaction": "short-explanation",
+  "prompt": "Explain in your own words why a depth of 4 metres can stand at the 10th percentile in one channel and the 95th in another. Use the words 'percentile' and 'below'.",
+  "answer": {
+   "kind": "text",
+   "requiredKeywords": [
+    "percentile",
+    "below"
+   ],
+   "forbiddenKeywords": []
+  },
+  "explanation": "A percentile is worked out from the readings around a value, never from the value itself. In a deep channel almost every sounding is greater than 4 metres, so very little of the log sits below it and its percentile is low. In a shallow one nearly the whole log sits below it and its percentile is high. The depth is the same; the company it keeps is not.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "An open-response question about why the same reading has different percentiles in different datasets.",
+  "estimatedSeconds": 120
+ },
+ {
+  "id": "q.r2-percentiles-mastery",
+  "topicId": "t.r2-percentiles",
+  "objectiveId": "obj.r2-percentiles",
+  "skillIds": [
+   "skill.r2-percentiles"
+  ],
+  "difficulty": 3,
+  "interaction": "numeric-input",
+  "prompt": "A reading stands at the 60th percentile of a log holding 45 readings. How many readings are at or below it?",
+  "answer": {
+   "kind": "numeric",
+   "value": 27,
+   "tolerance": 0.01,
+   "unit": "readings"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "The percentile is a share of the whole log. What is 60 percent of 45?"
+   }
+  ],
+  "explanation": "The 60th percentile has sixty percent of the log at or below it, and sixty percent of 45 readings is 27. Running the definition backwards like this is the same statement read the other way: a percentile and a count are two views of one position in the sorted row.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "A percentile and a log size; enter how many readings sit at or below the value, as a number.",
+  "estimatedSeconds": 110
+ },
+ {
+  "id": "q.r2-iqr",
+  "topicId": "t.r2-iqr",
+  "objectiveId": "obj.r2-iqr",
+  "skillIds": [
+   "skill.r2-iqr",
+   "skill.r2-quartiles"
+  ],
+  "difficulty": 1,
+  "interaction": "numeric-input",
+  "prompt": "A log of catches has a first quartile of 4.5 crates and a third quartile of 11.5 crates. What is the interquartile range?",
+  "answer": {
+   "kind": "numeric",
+   "value": 7,
+   "tolerance": 0.01,
+   "unit": "crates"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "The interquartile range is the third quartile minus the first."
+   },
+   {
+    "level": 2,
+    "text": "Subtract 4.5 from 11.5."
+   }
+  ],
+  "explanation": "The interquartile range is Q3 minus Q1, so 11.5 - 4.5 = 7 crates. That is the width of the middle half of the log: the quarter below Q1 and the quarter above Q3 are both outside it.",
+  "solutionSteps": [
+   "Identify the third quartile: 11.5 crates.",
+   "Identify the first quartile: 4.5 crates.",
+   "Subtract the first from the third: 11.5 - 4.5 = 7 crates."
+  ],
+  "misconceptionIds": [],
+  "accessibilityDescription": "A first and third quartile in crates; enter the interquartile range as a number.",
+  "estimatedSeconds": 60
+ },
+ {
+  "id": "q.r2-iqr-independent",
+  "topicId": "t.r2-iqr",
+  "objectiveId": "obj.r2-iqr",
+  "skillIds": [
+   "skill.r2-iqr",
+   "skill.r2-quartiles"
+  ],
+  "difficulty": 2,
+  "interaction": "numeric-input",
+  "prompt": "Sorted catches, in crates: 6, 8, 9, 12, 14, 17, 19, 25. What is the interquartile range?",
+  "answer": {
+   "kind": "numeric",
+   "value": 9.5,
+   "tolerance": 0.01,
+   "unit": "crates"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Split the eight readings into halves of four, then take the median of each half."
+   }
+  ],
+  "explanation": "The lower half is 6, 8, 9, 12, so Q1 is halfway between 8 and 9, which is 8.5. The upper half is 14, 17, 19, 25, so Q3 is halfway between 17 and 19, which is 18. The interquartile range is 18 - 8.5 = 9.5 crates.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "Eight sorted catch figures; enter the interquartile range in crates as a number.",
+  "estimatedSeconds": 100
+ },
+ {
+  "id": "q.r2-iqr-misconception",
+  "topicId": "t.r2-iqr",
+  "objectiveId": "obj.r2-iqr",
+  "skillIds": [
+   "skill.r2-iqr",
+   "skill.r2-quartiles"
+  ],
+  "difficulty": 3,
+  "interaction": "numeric-input",
+  "prompt": "Sorted catches, in crates: 3, 5, 6, 8, 9, 11, 14, 16, 18, 21, 24, 30. What is the interquartile range?",
+  "answer": {
+   "kind": "numeric",
+   "value": 12.5,
+   "tolerance": 0.01,
+   "unit": "crates"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "The two extreme readings play no part in this measure at all."
+   },
+   {
+    "level": 2,
+    "text": "Twelve readings split into halves of six. Q1 is the median of the lower six, Q3 of the upper six."
+   }
+  ],
+  "explanation": "Q1 is the median of 3, 5, 6, 8, 9, 11, which is 7. Q3 is the median of 14, 16, 18, 21, 24, 30, which is 19.5. The interquartile range is 19.5 - 7 = 12.5 crates. Answering 27 subtracts the smallest reading from the largest, which is the range — the measure the interquartile range exists to improve on.",
+  "misconceptionIds": [
+   "mc.iqr-uses-the-extremes"
+  ],
+  "parameters": {
+   "mc.iqr-uses-the-extremes": {
+    "wrongValue": 27
+   }
+  },
+  "accessibilityDescription": "Twelve sorted catch figures; enter the interquartile range in crates, which is not the largest minus the smallest.",
+  "estimatedSeconds": 110
+ },
+ {
+  "id": "q.r2-iqr-application",
+  "topicId": "t.r2-iqr",
+  "objectiveId": "obj.r2-iqr",
+  "skillIds": [
+   "skill.r2-iqr",
+   "skill.range"
+  ],
+  "difficulty": 3,
+  "interaction": "multiple-choice",
+  "prompt": "A harbour's dearest berth is re-priced from 60 coins to 600, and it stays the dearest. What happens to the range and the interquartile range of the fees?",
+  "choices": [
+   {
+    "id": "ch.both",
+    "text": "Both jump, because the fees now cover far more ground"
+   },
+   {
+    "id": "ch.range-only",
+    "text": "The range jumps by 540 coins; the interquartile range does not move"
+   },
+   {
+    "id": "ch.iqr-only",
+    "text": "The interquartile range jumps; the range is unaffected because it uses quartiles"
+   }
+  ],
+  "answer": {
+   "kind": "choice",
+   "correctChoiceIds": [
+    "ch.range-only"
+   ]
+  },
+  "explanation": "The range is largest minus smallest, so re-pricing the largest moves it by exactly the amount of the change. The interquartile range is Q3 minus Q1, and Q3 is whichever berth sits three quarters of the way along the sorted list — a different berth, which has not changed price. One extreme value decides the first measure outright and cannot touch the second.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "Three accounts of what one re-priced extreme berth does to the range and to the interquartile range.",
+  "estimatedSeconds": 90
+ },
+ {
+  "id": "q.r2-iqr-teachback",
+  "topicId": "t.r2-iqr",
+  "objectiveId": "obj.r2-iqr",
+  "skillIds": [
+   "skill.r2-iqr"
+  ],
+  "difficulty": 3,
+  "interaction": "short-explanation",
+  "prompt": "Explain in your own words why reporting the interquartile range alone can hide something a reader needs, and what to report beside it. Use the words 'middle' and 'quarter'.",
+  "answer": {
+   "kind": "text",
+   "requiredKeywords": [
+    "middle",
+    "quarter"
+   ],
+   "forbiddenKeywords": []
+  },
+  "explanation": "The interquartile range describes the middle half and is deaf to everything in the outer quarters, so a harbour with a handful of wildly expensive berths and one with none can report the same figure. That steadiness is the point of the measure and also its blind spot. Reporting the range beside it restores what was discarded: one says how tightly the bulk sits, the other how far the data reaches.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "An open-response question about what the interquartile range hides and what should be reported alongside it.",
+  "estimatedSeconds": 130
+ },
+ {
+  "id": "q.r2-iqr-mastery",
+  "topicId": "t.r2-iqr",
+  "objectiveId": "obj.r2-iqr",
+  "skillIds": [
+   "skill.r2-iqr",
+   "skill.r2-quartiles"
+  ],
+  "difficulty": 3,
+  "interaction": "numeric-input",
+  "prompt": "Sorted waits, in minutes: 5, 7, 8, 9, 11, 14, 15, 40. What is the interquartile range?",
+  "answer": {
+   "kind": "numeric",
+   "value": 7,
+   "tolerance": 0.01,
+   "unit": "minutes"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Eight readings, so each half holds four. The 40 is in the upper half but does not sit in the middle of it."
+   }
+  ],
+  "explanation": "The lower half is 5, 7, 8, 9, giving Q1 of 7.5. The upper half is 11, 14, 15, 40, giving Q3 of 14.5. The interquartile range is 14.5 - 7.5 = 7 minutes, while the range of the same log is 35. The wait of 40 minutes sets the range on its own and moves the interquartile range not at all.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "Eight sorted wait times including one very long one; enter the interquartile range in minutes as a number.",
+  "estimatedSeconds": 120
  }
 ]

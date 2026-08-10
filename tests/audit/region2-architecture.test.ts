@@ -51,8 +51,8 @@ function freshSave(): SaveFile {
 }
 
 describe("every required Region 2 topic has exactly one lesson", () => {
-  it("covers all 22 topics", () => {
-    expect(REGION_2_TOPICS.length).toBe(22);
+  it("covers all 23 topics", () => {
+    expect(REGION_2_TOPICS.length).toBe(23);
   });
 
   it("gives each topic a lesson that exists inside Region 2", () => {
@@ -241,9 +241,9 @@ describe("skeleton honesty", () => {
   // from Stage 1 or a skeleton this unit seeded, and none is Complete — filling
   // them in is S2-12 through S2-14. The moment one is declared Complete it must
   // survive all 18 checks in tests/audit/lesson-structure.test.ts.
-  it("accounts for all 19 seeded lessons", () => {
+  it("accounts for all 20 seeded lessons", () => {
     const seeded = region2Lessons.filter((l) => l.id.startsWith("l.r2-"));
-    expect(seeded.length, "the seeded lessons and the topic list have diverged").toBe(19);
+    expect(seeded.length, "the seeded lessons and the topic list have diverged").toBe(20);
   });
 
   it("leaves every lesson not declared Complete looking like a skeleton", () => {

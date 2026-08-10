@@ -44,5 +44,11 @@ export const REGION_2_TOPICS: readonly Region2Topic[] = [
   { topic: "Box plots", skillId: "skill.r2-box-plots", lessonId: "l.r2-box-plots" },
   { topic: "Scatterplots", skillId: "skill.r2-scatterplots", lessonId: "l.r2-scatterplots" },
   { topic: "Choosing graphs", skillId: "skill.r2-choosing-graphs", lessonId: "l.r2-choosing-graphs" },
-  { topic: "Misleading graphs", skillId: "skill.r2-misleading-graphs", lessonId: "l.r2-misleading-graphs" }
+  { topic: "Misleading graphs", skillId: "skill.r2-misleading-graphs", lessonId: "l.r2-misleading-graphs" },
+  // Added by S2-13. Distribution comparison is named in S2-13's scope and in the
+  // boss's stage 5, and had no lesson, topic or skill anywhere in the region — so
+  // the criterion could not be met and the boss stage D-028 permits could not be
+  // built. Seeded at the end of m.r2-judgement, behind the graph and shape lessons
+  // it draws on; writing it is S2-14's.
+  { topic: "Comparing distributions", skillId: "skill.r2-comparing-distributions", lessonId: "l.r2-comparing-distributions" }
 ];

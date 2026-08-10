@@ -335,5 +335,29 @@
   "skillIds": [
    "skill.r2-quartiles"
   ]
+ },
+ {
+  "id": "rem.count-from-below",
+  "title": "A percentile counts what is at or below",
+  "explanation": "The definition fixes the direction: the kth percentile has k percent of the readings at or below it. Counting the readings above the mark answers a real question, but a different one, and it gives the complement - 80 becomes 20, 95 becomes 5. The check that catches it: a value near the top of a log must have a high percentile, so if your answer is small for a large reading you have counted the wrong side.",
+  "microLesson": "Fifty waits are logged, and 40 of them are 12 minutes or less. Twelve minutes is a long-ish wait, so it should stand high. Counting at or below: 40 of 50 is 80 percent, so 12 minutes is the 80th percentile. Counting above gives 10 of 50, which is 20 - and would claim that a wait longer than four fifths of the log is one of the shortest.",
+  "followUpQuestionIds": [
+   "q.r2-percentiles"
+  ],
+  "skillIds": [
+   "skill.r2-percentiles"
+  ]
+ },
+ {
+  "id": "rem.quartiles-not-ends",
+  "title": "The middle half, not the whole reach",
+  "explanation": "Largest minus smallest is the range, and it is the measure the interquartile range exists to improve on. The interquartile range subtracts the first quartile from the third, so both of the extreme readings are outside it by construction. If your answer used the biggest and smallest numbers in the list, you computed the range under the other name - and the two disagree most in exactly the datasets where the difference matters.",
+  "microLesson": "Sorted catches: 3, 5, 6, 8, 9, 11, 14, 16, 18, 21, 24, 30. Largest minus smallest is 30 - 3 = 27, and that is the range. For the interquartile range, take Q1 = 7 and Q3 = 19.5, which gives 19.5 - 7 = 12.5. The single reading of 30 sets the first answer and has no say at all in the second.",
+  "followUpQuestionIds": [
+   "q.r2-iqr"
+  ],
+  "skillIds": [
+   "skill.r2-iqr"
+  ]
  }
 ]

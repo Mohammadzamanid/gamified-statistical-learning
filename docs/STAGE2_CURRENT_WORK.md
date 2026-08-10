@@ -6,46 +6,47 @@ Exactly one Stage 2 unit is active at a time. Rewritten at the start and end of 
 
 ## Current unit
 
-**S2-13 — Spread and position lessons (cycle 1: range and quartiles)**
+**S2-13 — Spread and position lessons (cycle 2: percentiles, IQR, and a criterion with nowhere to live)**
 
-Entered from `dc4969ff4ec8c89fd4d3339d50fd5ee7a21f68e9` (remote-verified, clean tree).
+Entered from `ddebf441fe47e338e0ffc5e78cfbfede21feac3c` (remote-verified, clean tree).
 
 ## Objective
 
-Open `m.r2-spread` in module order: re-cut `l.spread-1` (range) — the third and last inherited Stage 1 lesson in
-Region 2 — and write `l.r2-quartiles` from its seed, both to all 18 of scope §5's requirements.
+Write `l.r2-percentiles` and `l.r2-iqr` to all 18 of scope §5's requirements, completing `m.r2-spread`.
 
 ## Result up front
 
-**S2-13 is Partial: 2 of its 6 lessons are Complete.** Percentiles, IQR, variance and standard deviation remain.
+**S2-13 is Partial: 4 of its 6 lessons are Complete, and `m.r2-spread` is finished entire.** Variance and standard
+deviation remain.
 
-**The order was changed from the one the last handoff prescribed, because that handoff rested on a false claim.** It
-said to write variance and standard deviation first, so the region would not have "a finished module a learner cannot
-enter". Driving a save through the real unlock rule shows the whole chain unlocking today — a seeded lesson holds a
-real, answerable question, so it can be completed, so it opens the next. Nothing was ever closed. The accurate statement
-is that `l.r2-outliers` and `l.r2-skew` sit behind six stub lessons, and the way to fix that is module order from the
-module's entry lesson. (D-040)
+**One criterion had no home in the curriculum at all, and now has one.** "Distribution comparison" is named in S2-13's
+scope and again in the boss's stage 5, and Region 2 had no lesson, no topic and no skill for it — so the criterion could
+not have been met by finishing existing work, and the boss stage the spec promises could not legally have been built
+(D-028 forbids a boss asking about a skill no lesson in its region teaches). This cycle adds the skill, objective,
+declared topic and a **seeded** lesson at the end of `m.r2-judgement`. **The criterion is still unmet**; what changed is
+that it is now possible to meet, and S2-14 is named as owner. (D-041)
 
 ## Relevant files
 
 | File | Change |
 |---|---|
-| `src/content/worlds/curriculum.json` | `l.spread-1` re-cut, `l.r2-quartiles` written in full |
-| `src/content/questions/questions.json` | 222 → **232** authored questions (11 written, 1 seed replaced) |
-| `src/content/questions/misconceptions.json` | 27 → **29** |
-| `src/content/questions/remediations.json` | 26 → **28** |
-| `tests/audit/lesson-structure.test.ts` | Operator class widened to the Unicode lookalikes |
-| `tests/helpers/complete-lessons.ts` | 26 → **28** lessons declared Complete |
+| `src/content/worlds/curriculum.json` | `l.r2-percentiles` and `l.r2-iqr` written in full; `l.r2-comparing-distributions` seeded |
+| `src/content/questions/questions.json` | 232 → **243** authored questions (12 written, 2 seeds replaced, 1 seed added) |
+| `src/content/questions/misconceptions.json` | 29 → **31** |
+| `src/content/questions/remediations.json` | 28 → **30** |
+| `tests/helpers/region2-topics.ts` | 22 → **23** declared topics |
+| `tests/audit/region2-architecture.test.ts` | Both declared counts updated deliberately |
+| `tests/helpers/complete-lessons.ts` | 28 → **30** lessons declared Complete |
 
 ## Acceptance criteria
 
 | # | Criterion | Met |
 |---|---|---|
-| 1 | Min/max, range | **Yes** — `l.spread-1` |
-| 2 | Quartiles | **Yes** — `l.r2-quartiles` |
-| 3 | Percentiles, IQR | No — next cycle |
-| 4 | Variance intuition, standard deviation | No — a later cycle; SD must be built as distances → squared distances → their average → square root |
-| 5 | Distribution comparison | No — no lesson owns it yet; see below |
+| 1 | Min/max, range | **Yes** (cycle 1) |
+| 2 | Quartiles | **Yes** (cycle 1) |
+| 3 | Percentiles, IQR | **Yes** |
+| 4 | Variance intuition, standard deviation | No — next cycle; SD must be built as distances → squared distances → their average → square root |
+| 5 | Distribution comparison | **No** — the lesson now exists as a seed; writing it is S2-14's (D-041) |
 | 6 | Commit pushed and remote hash verified | Yes — see below |
 
 ## Required tests
@@ -56,42 +57,39 @@ Measured (Node v22.22.2 / npm 10.9.7):
 |---|---|
 | `npm run typecheck` | Pass |
 | `npm run lint` | Pass — 0 errors, 0 warnings |
-| `npm test` | Pass — **511 tests / 37 files** |
+| `npm test` | Pass — **517 tests / 37 files** |
 | `npm run test:statistics` | Pass — 18 tests / 3 files |
 | `npm run test:content` | Pass — 5 tests / 1 file |
 | `npm run build` | Pass |
-| `npm run report:coverage` | Ran — 17 of 40 topics meet §4, unchanged |
+| `npm run report:coverage` | Ran — **17 of 41** topics meet §4; the denominator grew by the new skill, so the ratio fell without any topic losing coverage |
 
 `test:a11y` was **not** run and is **not** claimed; it arrives in S2-20.
 
 ## Work completed
 
-1. **Range is taught through what it refuses to look at.** The demonstration is the definition — highest minus lowest —
-   and the prediction adds three new readings between the ends. The readout does not move. A learner who has watched
-   that has a reason for quartiles to exist before quartiles are introduced.
+1. **Percentiles are taught as a statement about company, not size.** The demonstration chalks a mark and reports what
+   share of the log sits at or below it; the prediction then logs twenty more readings, all above the mark, and the
+   mark falls from the 77.5th percentile to the 62nd without moving a centimetre. The formal notation introduces P25,
+   P50 and P75 beside the Q1/Q2/Q3 the previous lesson explained, so the two namings meet.
 
-2. **`l.spread-1` was the third inherited Stage 1 lesson, and needed no redistribution.** It carried one question,
-   `q.range-tides`, which teaches range — so unlike the two centre lessons it stayed exactly where it was. The re-cut
-   was five new questions around it, not a redistribution.
+2. **The IQR is built as the answer to the range's complaint.** `l.spread-1` ended on the range being decided by the
+   two readings most likely to be strange. This demonstration covers both outer quarters and measures what is left,
+   then re-prices the harbour's dearest berth from 60 coins to 600: the range would jump by 540 and the readout does
+   not move. Its teach-back asks what the measure hides, because a lesson that only sells its measure is advocacy.
 
-3. **Quartiles are taught as cutting, not as three separate recipes.** The demonstration deals a sorted row into equal
-   groups and reports how many land in each; four groups is the quartile case, and running the control to ten is the
-   percentile lesson arriving early. The formal notation introduces Q1, Q2 and Q3 as explained symbols.
-
-4. **Two new misconceptions, both engine-reportable from a numeric answer.** `mc.range-is-the-largest` — reporting the
-   maximum, which is a real reading from the set and therefore hard to spot. `mc.quartile-position-as-value` — doing
-   the position arithmetic correctly and reporting the index instead of the value at it.
+3. **Two new misconceptions, both engine-reportable from a numeric answer.** `mc.percentile-counts-above` — counting
+   from the wrong side, which yields the complement and looks plausible near the middle. `mc.iqr-uses-the-extremes` —
+   computing the range and calling it the IQR, which is the same shape of arithmetic on the wrong pair of numbers.
 
 ## Corrections made during the unit
 
-1. **The beginner-safety guard could not see the Unicode minus sign, and Stage 1 content had been using it since the
-   baseline.** `q.range-tides` wrote "3.4 − 1.2 = 2.2" with U+2212 while every lesson in its chain explains ASCII `-`.
-   The operator class listed `-` and not `−`, so the check passed on notation no lesson had introduced. Class widened,
-   content normalised. (D-039)
+1. **The curriculum has no `topics` array.** The first draft of the authoring script appended one, on the assumption
+   that a declared topic must exist as data. Topics are derived from the curriculum graph — skill, objective, lesson —
+   and `tests/helpers/region2-topics.ts` is the declared list. Caught before it was written to disk.
 
-2. **Last cycle's report and handoff both claimed `l.r2-outliers` and `l.r2-skew` were "not yet reachable", and told
-   this unit to reorder its work around that.** They are reachable, and were the whole time. See D-040 and the note
-   above; the ordering instruction has been removed from the handoff rather than left to mislead again.
+2. **The coverage denominator moved.** Adding a skill takes §4's topic count from 40 to 41, so the report now reads
+   17 of 41. No topic lost coverage; the ratio fell because the population grew. Recorded because the number is
+   reported every cycle and an unexplained drop would read as a regression.
 
 ## Verification that the guards have teeth
 
@@ -99,34 +97,29 @@ Eight deliberate probes, all reverted:
 
 | Probe | Result |
 |---|---|
-| Content uses the Unicode minus in place of the explained one | **1 check fails** |
-| …the same content, with the operator class narrowed back | **0 checks fail** — the paired probe, proving the widening does the work |
-| The range demonstration's stated readout drifts from its formula | **1 check fails** |
-| The quartile misconception loses its declared wrong value | **1 check fails** |
-| The range misconception is declared where the engine cannot report it | **1 check fails** |
-| A control on the quartile demonstration goes inert | **5 checks fail** |
-| The quartile notation shows a symbol it does not explain | **1 check fails** |
-| A teach-back is no longer a written explanation | **2 checks fail** |
+| The new topic vanishes from the declared list | **2 checks fail** |
+| The comparing-distributions seed grows without being declared Complete | **1 check fails** |
+| The new skill ships with no stage classification | **5 checks fail** (rejected at load) |
+| The new lesson stops reaching its own topic's skill | **1 check fails** |
+| The percentile misconception loses its declared wrong value | **1 check fails** |
+| The IQR demonstration's stated readout drifts from its formula | **1 check fails** |
+| The percentile notation shows a symbol it does not explain | **1 check fails** |
+| A control on the percentile demonstration goes inert | **5 checks fail** |
 
 ## Remaining work
 
-**4 of S2-13's 6 lessons**: percentiles, IQR, variance, standard deviation. Plus criterion 5 — **distribution
-comparison has no lesson in Region 2's declared topic list at all**, so meeting it needs either a new lesson and topic
-or a decision that the boss investigation carries it. That is a scope question for the next cycle, recorded here rather
-than quietly dropped.
+**2 of S2-13's 6 lessons**: variance and standard deviation, which are `m.r2-variation`'s first two and the last stubs
+standing between a learner and the outlier and skew lessons S2-12 wrote. Plus criterion 5, now a seeded lesson owned by
+S2-14.
 
 ## Local commit
 
-`cf88cd3bb8dace8b5ec1049b9a296ffdc2f7622d`
+`PENDING`
 
 ## Remote verification
 
-```
-LOCAL_HEAD  = cf88cd3bb8dace8b5ec1049b9a296ffdc2f7622d
-REMOTE_HEAD = cf88cd3bb8dace8b5ec1049b9a296ffdc2f7622d
-VERIFIED: MATCH
-```
+`PENDING`
 
 ## Next unit
 
-**S2-13 continued — percentiles and IQR.** Not started in this cycle.
+**S2-13 continued — variance and standard deviation.** Not started in this cycle.

@@ -58,5 +58,7 @@ export const COMPLETE_LESSONS: readonly string[] = [
   // is the third Stage 1 lesson to be re-cut; it carried one inherited
   // question, which stayed where it was because range is what it teaches.
   "l.spread-1",
-  "l.r2-quartiles"
+  "l.r2-quartiles",
+  "l.r2-percentiles",
+  "l.r2-iqr"
 ];

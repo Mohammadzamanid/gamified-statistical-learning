@@ -324,3 +324,15 @@ The correction changes the work: S2-13's job is not to unblock a gate but to rep
 for a learner is plain module order from the module's entry lesson, not the order that finishes a module soonest.
 The lesson for the next unit is the general one: reachability is computed by a rule in `src/core`, so a claim about it
 is checkable in about fifteen lines, and asserting it from the shape of the graph is guessing. (S2-13)
+
+**D-041 — A scope criterion with nowhere in the curriculum to live is a structural gap, and gets a seed before it gets a lesson.**
+"Distribution comparison" is named in S2-13's acceptance criteria and again in the boss's stage 5, and Region 2 had no
+lesson, no topic and no skill for it. That is worse than an unwritten lesson: the criterion could never be met by
+finishing existing work, and D-028 forbids the boss from asking about a skill no Region 2 lesson teaches, so the stage
+the boss spec already promises could not legally have been built. S2-13 therefore adds the skill, the objective, the
+declared topic and a seeded lesson — and **does not write it**, because it belongs at the end of `m.r2-judgement`,
+behind the graph and shape lessons it draws on, and writing it ahead of them would repeat exactly the ordering mistake
+D-040 records. The criterion is reported **unmet**, with the lesson now existing to be written and S2-14 named as its
+owner. The general rule: when a criterion has no home, create the home in the declared lists — where the audits can see
+it in both directions — rather than either writing the lesson out of order or letting the criterion lapse by going
+unmentioned. (S2-13)

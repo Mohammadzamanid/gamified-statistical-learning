@@ -222,5 +222,21 @@
   "detector": "known-wrong-answer",
   "detectorParams": {},
   "remediationId": "rem.read-the-value-at-the-cut"
+ },
+ {
+  "id": "mc.percentile-counts-above",
+  "title": "A percentile counted from the wrong side",
+  "description": "The learner counts the readings above the mark instead of those at or below it, and reports that share as the percentile. The arithmetic is sound and the answer is the complement of the right one, so it looks entirely plausible on a value near the middle.",
+  "detector": "known-wrong-answer",
+  "detectorParams": {},
+  "remediationId": "rem.count-from-below"
+ },
+ {
+  "id": "mc.iqr-uses-the-extremes",
+  "title": "The interquartile range computed from the extremes",
+  "description": "The learner subtracts the smallest reading from the largest — the range — while calling it the interquartile range. The two are the same shape of calculation on different pairs of numbers, which is what makes the substitution easy to miss.",
+  "detector": "known-wrong-answer",
+  "detectorParams": {},
+  "remediationId": "rem.quartiles-not-ends"
  }
 ]

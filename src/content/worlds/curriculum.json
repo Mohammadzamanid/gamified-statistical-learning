@@ -202,7 +202,8 @@
    "description": "Choosing the picture the question calls for, and catching one that misleads.",
    "lessonIds": [
     "l.r2-choosing-graphs",
-    "l.r2-misleading-graphs"
+    "l.r2-misleading-graphs",
+    "l.r2-comparing-distributions"
    ],
    "prerequisites": [
     "m.r2-pictures",
@@ -3236,41 +3237,247 @@
    "concepts": [
     {
      "id": "c.r2-percentiles",
-     "title": "Where a Value Stands",
-     "summary": "A percentile is the value below which a given percentage of the cases fall.",
-     "body": "Saying a catch is at the 90th percentile says nothing about its size and everything about its rank."
+     "title": "The share standing at or below",
+     "summary": "A value's percentile is the share of the readings that sit at or below it.",
+     "body": "To place a value, count how many readings are at or below it and express that count as a share of the whole log. A depth with 62 of 80 readings at or below it stands at the 77.5th percentile. Quartiles are the special cases of this: Q1 is the 25th percentile, Q2 the 50th, Q3 the 75th. Percentiles are the same cutting done with a finer comb, which is why they need no new machinery."
+    },
+    {
+     "id": "c.r2-percentiles-relative",
+     "title": "A percentile belongs to the log, not to the value",
+     "summary": "The same reading can stand at very different percentiles in two different logs.",
+     "body": "Nothing about a value decides its percentile; the rest of the data does. Four metres might be the 10th percentile in a deep channel and the 95th in a shallow one, without the reading itself changing at all. That makes a percentile a statement about company rather than about size — the same shift of view the outlier lesson needs, and the reason a percentile travels badly between datasets."
+    },
+    {
+     "id": "c.r2-percentiles-not-percent",
+     "title": "A percentile is not a percentage of the value",
+     "summary": "The 90th percentile is a reading, not ninety percent of anything.",
+     "body": "The word invites a wrong reading. The 90th percentile of berth fees is a fee in coins, the one with ninety percent of the berths at or below it — it is not ninety percent of the dearest berth, and not ninety percent of anything else. The percentile is the label; the value at it is what you report. Keeping the two apart is the same discipline the quartile lesson asked for when it separated a cut's position from the value sitting there."
     }
    ],
    "questionIds": [
-    "q.seed.r2-percentiles"
+    "q.r2-percentiles",
+    "q.r2-percentiles-independent",
+    "q.r2-percentiles-misconception",
+    "q.r2-percentiles-application",
+    "q.r2-percentiles-teachback",
+    "q.r2-percentiles-mastery"
    ],
    "prerequisites": [
     "l.r2-quartiles"
    ],
-   "estimatedMinutes": 15
+   "estimatedMinutes": 14,
+   "narrativeIntro": "A skipper is told the channel is four metres deep and wants to know whether that is reassuring. It depends entirely on the rest of the log: four metres could be the shallowest reading of the season or the deepest. A percentile answers exactly that question — not how big a reading is, but how much of the data it stands above.",
+   "demonstration": {
+    "id": "dem.r2-percentiles",
+    "title": "How much of the log a mark stands above",
+    "experience": "A mark is chalked on the depth board, and the readings are sorted into those at or below it and those above. The readout gives what share of the whole log sits at or below the mark — which is the mark's percentile, without anything being measured twice.",
+    "accessibleDescription": "Two controls. The first sets how many readings sit at or below the chalked mark. The second sets how many readings the log holds altogether. The readout gives the mark's percentile to one decimal place, and starts at 77.5 with 62 readings at or below the mark out of 80.",
+    "controls": [
+     {
+      "id": "ctl.at-or-below",
+      "label": "Readings at or below the mark",
+      "min": 0,
+      "max": 120,
+      "step": 1,
+      "initial": 62
+     },
+     {
+      "id": "ctl.total",
+      "label": "Readings in the log",
+      "min": 1,
+      "max": 120,
+      "step": 1,
+      "initial": 80
+     }
+    ],
+    "formula": "share-of",
+    "readoutLabel": "Percentile of the mark",
+    "readoutPrecision": 1,
+    "prediction": {
+     "prompt": "Sixty-two of the eighty readings sit at or below the mark, so the readout shows 77.5. A further twenty readings are logged and every one of them is above the mark. Where does the mark stand now?",
+     "options": [
+      {
+       "id": "opt.same",
+       "text": "77.5 - the mark is chalked at the same depth, so its standing cannot change"
+      },
+      {
+       "id": "opt.lower",
+       "text": "62.0 - the same 62 readings, now out of a hundred"
+      },
+      {
+       "id": "opt.higher",
+       "text": "Higher - a longer log always pushes a mark up"
+      }
+     ],
+     "correctOptionId": "opt.lower",
+     "revealNote": "The chalk has not moved a centimetre and the mark has fallen from the 77.5th percentile to the 62nd. Nothing about the depth changed; the log around it did. A percentile is a statement about where a value stands among its neighbours, so it is only ever as stable as the set it is measured against."
+    },
+    "observation": "Raise the count at or below the mark and the readout climbs towards 100; lengthen the log without adding readings below the mark and it falls. Fifty is where the mark is the median. Set more readings at or below the mark than there are readings altogether and the readout passes 100, which is the panel saying the two controls have stopped describing the same log."
+   },
+   "formalTerm": {
+    "term": "Percentile",
+    "definition": "The kth percentile of a set is the value with k percent of the readings at or below it. Percentiles place a reading within its own data rather than measuring it, so the same value can stand at different percentiles in different sets. The quartiles are the 25th, 50th and 75th percentiles.",
+    "notation": "P25 P50 P75",
+    "symbols": [
+     {
+      "symbol": "P25",
+      "meaning": "The 25th percentile: a quarter of the readings sit at or below it, so it is Q1."
+     },
+     {
+      "symbol": "P50",
+      "meaning": "The 50th percentile: half the readings sit at or below it, so it is the median."
+     },
+     {
+      "symbol": "P75",
+      "meaning": "The 75th percentile: three quarters of the readings sit at or below it, so it is Q3."
+     }
+    ]
+   },
+   "guidedQuestionIds": [
+    "q.r2-percentiles"
+   ],
+   "independentQuestionIds": [
+    "q.r2-percentiles-independent"
+   ],
+   "misconceptionQuestionIds": [
+    "q.r2-percentiles-misconception"
+   ],
+   "applicationQuestionIds": [
+    "q.r2-percentiles-application"
+   ],
+   "teachBackQuestionIds": [
+    "q.r2-percentiles-teachback"
+   ],
+   "masteryCheckQuestionIds": [
+    "q.r2-percentiles-mastery"
+   ]
   },
   {
    "id": "l.r2-iqr",
    "moduleId": "m.r2-spread",
    "title": "The Middle Half",
    "objectiveIds": [
-    "obj.r2-iqr"
+    "obj.r2-iqr",
+    "obj.r2-quartiles",
+    "obj.compute-range"
    ],
    "concepts": [
     {
      "id": "c.r2-iqr",
-     "title": "The Middle Half",
-     "summary": "The interquartile range is the distance between the first and third quartiles: the spread of the middle half.",
-     "body": "Because it ignores the top and bottom quarters, one extreme value cannot move it — which is exactly why it is reported alongside the median."
+     "title": "The middle half",
+     "summary": "The interquartile range is Q3 minus Q1: the width of the middle fifty percent.",
+     "body": "Cut away the bottom quarter of the sorted readings and the top quarter, and what is left is the middle half. Its width is the interquartile range, found by subtracting Q1 from Q3. Like the range it is a distance reported in the data's own units, and unlike the range it says how tightly the bulk of the readings sit rather than how far the two most extreme ones reach."
+    },
+    {
+     "id": "c.r2-iqr-resistant",
+     "title": "The extremes cannot reach it",
+     "summary": "Changing the largest reading moves the range and leaves the IQR where it was.",
+     "body": "Q1 and Q3 are decided by position in the sorted row, so a value at the top can grow without limit and the reading sitting three quarters of the way along does not change. Re-price the dearest berth in a harbour from 60 coins to 600 and the range jumps by 540 while the interquartile range does not move at all. That resistance is the same property the median has, for the same reason, and it is why the two are usually reported together."
+    },
+    {
+     "id": "c.r2-iqr-tradeoff",
+     "title": "What it gives up",
+     "summary": "Ignoring half the data is exactly what makes it steady, and exactly what it costs.",
+     "body": "The interquartile range is deaf to everything outside the middle half. A harbour with a handful of wildly expensive berths and one with none can report identical figures, because the difference lives entirely in the quarter the measure discards. Neither the range nor the IQR is the honest one on its own: the range says how far the data reaches, the IQR says how tightly its bulk sits, and a reader who sees only one has been told half the story."
     }
    ],
    "questionIds": [
-    "q.seed.r2-iqr"
+    "q.r2-iqr",
+    "q.r2-iqr-independent",
+    "q.r2-iqr-misconception",
+    "q.r2-iqr-application",
+    "q.r2-iqr-teachback",
+    "q.r2-iqr-mastery"
    ],
    "prerequisites": [
     "l.r2-percentiles"
    ],
-   "estimatedMinutes": 15
+   "estimatedMinutes": 15,
+   "narrativeIntro": "The range had one flaw the whole lesson turned on: it is built from the two readings most likely to be strange, so a single knocked gauge decides it. The interquartile range answers that directly by throwing both ends away and measuring only the middle half of the data — the part a harbour actually runs on.",
+   "demonstration": {
+    "id": "dem.r2-iqr",
+    "title": "Measuring only the middle half",
+    "experience": "The cheapest quarter of the berths and the dearest quarter are covered over, leaving the middle half of the price list showing. The readout gives the width of what is left, from the first quartile to the third.",
+    "accessibleDescription": "Two controls. The first sets the third quartile of the berth fees in coins, the second sets the first quartile. The readout gives the interquartile range, the third quartile minus the first. It starts at 36 with a third quartile of 40 coins and a first quartile of 4.",
+    "controls": [
+     {
+      "id": "ctl.q3",
+      "label": "The third quartile of the fees, in coins",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "initial": 40
+     },
+     {
+      "id": "ctl.q1",
+      "label": "The first quartile of the fees, in coins",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "initial": 4
+     }
+    ],
+    "formula": "difference",
+    "readoutLabel": "Interquartile range of the fees, in coins",
+    "readoutPrecision": 0,
+    "prediction": {
+     "prompt": "The first quartile is 4 coins and the third is 40, so the readout shows 36. The single dearest berth in the harbour is now re-priced from 60 coins to 600, and it stays the dearest. What does the readout show?",
+     "options": [
+      {
+       "id": "opt.same",
+       "text": "36 - the re-priced berth is in the top quarter, which the measure has already set aside"
+      },
+      {
+       "id": "opt.bigger",
+       "text": "Much larger - the fees now reach ten times further"
+      },
+      {
+       "id": "opt.q3",
+       "text": "596 - the top of the middle half follows the dearest berth"
+      }
+     ],
+     "correctOptionId": "opt.same",
+     "revealNote": "The range would have jumped by 540 coins on the strength of one berth. The interquartile range did not move, because Q3 is decided by which berth sits three quarters of the way along the sorted list, and that is a different berth entirely. A measure built from positions cannot be reached by a value that only changes size."
+    },
+    "observation": "Raise the third quartile and the middle half widens; raise the first and it narrows. Bring the two together and the readout sits at 0, which is a price list where half the berths cost the same. Push the first quartile above the third and it turns negative, which says the two quartiles have been read the wrong way round rather than that the data is strange."
+   },
+   "formalTerm": {
+    "term": "Interquartile range",
+    "definition": "The interquartile range is the third quartile minus the first: the width of the middle half of a sorted set, in the units of the data. Because both quartiles are decided by position rather than by size, values in the outer quarters can change without moving it.",
+    "notation": "Q3 - Q1",
+    "symbols": [
+     {
+      "symbol": "Q3",
+      "meaning": "The third quartile, with three quarters of the readings at or below it."
+     },
+     {
+      "symbol": "-",
+      "meaning": "Minus: take the amount on the right away from the amount on the left."
+     },
+     {
+      "symbol": "Q1",
+      "meaning": "The first quartile, with a quarter of the readings at or below it."
+     }
+    ]
+   },
+   "guidedQuestionIds": [
+    "q.r2-iqr"
+   ],
+   "independentQuestionIds": [
+    "q.r2-iqr-independent"
+   ],
+   "misconceptionQuestionIds": [
+    "q.r2-iqr-misconception"
+   ],
+   "applicationQuestionIds": [
+    "q.r2-iqr-application"
+   ],
+   "teachBackQuestionIds": [
+    "q.r2-iqr-teachback"
+   ],
+   "masteryCheckQuestionIds": [
+    "q.r2-iqr-mastery"
+   ]
   },
   {
    "id": "l.r2-variance",
@@ -3709,6 +3916,29 @@
     "l.r2-choosing-graphs"
    ],
    "estimatedMinutes": 15
+  },
+  {
+   "id": "l.r2-comparing-distributions",
+   "moduleId": "m.r2-judgement",
+   "title": "Two Accounts of One Season",
+   "objectiveIds": [
+    "obj.r2-comparing-distributions"
+   ],
+   "concepts": [
+    {
+     "id": "c.r2-comparing-distributions",
+     "title": "Two Accounts of One Season",
+     "summary": "Comparing two sets means comparing their centre, their spread and their shape, not one number each.",
+     "body": "Two channels can share a median and behave nothing alike. A comparison that reports one summary apiece has not compared the distributions at all."
+    }
+   ],
+   "questionIds": [
+    "q.seed.r2-comparing-distributions"
+   ],
+   "prerequisites": [
+    "l.r2-misleading-graphs"
+   ],
+   "estimatedMinutes": 16
   }
  ],
  "objectives": [
@@ -4004,6 +4234,13 @@
    "text": "Detect a graph that misleads without stating a falsehood.",
    "skillIds": [
     "skill.r2-misleading-graphs"
+   ]
+  },
+  {
+   "id": "obj.r2-comparing-distributions",
+   "text": "Compare two distributions on centre, spread and shape, and say which claim the data supports.",
+   "skillIds": [
+    "skill.r2-comparing-distributions"
    ]
   }
  ],
@@ -4302,6 +4539,17 @@
    "title": "Misleading graphs",
    "description": "Truncated axes, bin choices and framing that mislead without lying.",
    "prerequisites": [],
+   "stage": 2
+  },
+  {
+   "id": "skill.r2-comparing-distributions",
+   "title": "Comparing distributions",
+   "description": "Setting two datasets side by side on centre, spread and shape, and saying what the difference supports.",
+   "prerequisites": [
+    "skill.r2-skew",
+    "skill.r2-iqr",
+    "skill.r2-choosing-graphs"
+   ],
    "stage": 2
   }
  ],

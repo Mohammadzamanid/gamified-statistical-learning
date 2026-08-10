@@ -4,7 +4,7 @@
 
 Topics come from the **curriculum graph**, never from the set of generator modules (`STAGE2_RECONSTRUCTION_SCOPE.md` §4). A topic with no generators appears here as a failure rather than being omitted.
 
-**17 of 40 topics** meet §4: at least 100 validated available interactions spanning at least 4 reasoning families, with nothing unreachable.
+**17 of 41 topics** meet §4: at least 100 validated available interactions spanning at least 4 reasoning families, with nothing unreachable.
 
 ## The seven metrics, per topic
 
@@ -34,22 +34,23 @@ Topics come from the **curriculum graph**, never from the set of generator modul
 | Bar charts (`skill.r2-bar-charts`) | 1 | 0 | 0 | 0 | 0 | 0 | **1** | **No** |
 | Box plots (`skill.r2-box-plots`) | 1 | 0 | 0 | 0 | 0 | 0 | **1** | **No** |
 | Choosing a graph (`skill.r2-choosing-graphs`) | 1 | 0 | 0 | 0 | 0 | 0 | **1** | **No** |
+| Comparing distributions (`skill.r2-comparing-distributions`) | 1 | 0 | 0 | 0 | 0 | 0 | **1** | **No** |
 | Dot plots (`skill.r2-dot-plots`) | 1 | 0 | 0 | 0 | 0 | 0 | **1** | **No** |
 | Frequency (`skill.r2-frequency`) | 8 | 0 | 0 | 0 | 0 | 0 | **8** | **No** |
 | Histograms (`skill.r2-histograms`) | 1 | 0 | 0 | 0 | 0 | 0 | **1** | **No** |
-| Interquartile range (`skill.r2-iqr`) | 1 | 0 | 0 | 0 | 0 | 0 | **1** | **No** |
+| Interquartile range (`skill.r2-iqr`) | 6 | 0 | 0 | 0 | 0 | 0 | **6** | **No** |
 | Misleading graphs (`skill.r2-misleading-graphs`) | 1 | 0 | 0 | 0 | 0 | 0 | **1** | **No** |
 | Mode (`skill.r2-mode`) | 6 | 0 | 0 | 0 | 0 | 0 | **6** | **No** |
 | Outliers (`skill.r2-outliers`) | 6 | 0 | 0 | 0 | 0 | 0 | **6** | **No** |
 | Percentage of a dataset (`skill.r2-percentage`) | 8 | 0 | 0 | 0 | 0 | 0 | **8** | **No** |
-| Percentiles (`skill.r2-percentiles`) | 1 | 0 | 0 | 0 | 0 | 0 | **1** | **No** |
+| Percentiles (`skill.r2-percentiles`) | 6 | 0 | 0 | 0 | 0 | 0 | **6** | **No** |
 | Proportion of a dataset (`skill.r2-proportion`) | 8 | 0 | 0 | 0 | 0 | 0 | **8** | **No** |
-| Quartiles (`skill.r2-quartiles`) | 6 | 0 | 0 | 0 | 0 | 0 | **6** | **No** |
+| Quartiles (`skill.r2-quartiles`) | 10 | 0 | 0 | 0 | 0 | 0 | **10** | **No** |
 | Scatterplots (`skill.r2-scatterplots`) | 1 | 0 | 0 | 0 | 0 | 0 | **1** | **No** |
 | Skew (`skill.r2-skew`) | 6 | 0 | 0 | 0 | 0 | 0 | **6** | **No** |
 | Standard-deviation intuition (`skill.r2-standard-deviation`) | 1 | 0 | 0 | 0 | 0 | 0 | **1** | **No** |
 | Variance intuition (`skill.r2-variance`) | 1 | 0 | 0 | 0 | 0 | 0 | **1** | **No** |
-| Range (`skill.range`) | 6 | 0 | 0 | 0 | 0 | 0 | **6** | **No** |
+| Range (`skill.range`) | 7 | 0 | 0 | 0 | 0 | 0 | **7** | **No** |
 
 ## Rejections, per topic
 
@@ -79,22 +80,23 @@ Topics come from the **curriculum graph**, never from the set of generator modul
 | Bar charts | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100% |
 | Box plots | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100% |
 | Choosing a graph | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100% |
+| Comparing distributions | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100% |
 | Dot plots | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100% |
 | Frequency | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 13% |
 | Histograms | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100% |
-| Interquartile range | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100% |
+| Interquartile range | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 17% |
 | Misleading graphs | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100% |
 | Mode | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 17% |
 | Outliers | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 17% |
 | Percentage of a dataset | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 13% |
-| Percentiles | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100% |
+| Percentiles | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 17% |
 | Proportion of a dataset | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 13% |
-| Quartiles | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 17% |
+| Quartiles | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 10% |
 | Scatterplots | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100% |
 | Skew | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 17% |
 | Standard-deviation intuition | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100% |
 | Variance intuition | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100% |
-| Range | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 17% |
+| Range | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 14% |
 
 ## Why combinations were rejected
 
@@ -200,6 +202,7 @@ Topics come from the **curriculum graph**, never from the set of generator modul
 - **Bar charts** — 0: _none_
 - **Box plots** — 0: _none_
 - **Choosing a graph** — 0: _none_
+- **Comparing distributions** — 0: _none_
 - **Dot plots** — 0: _none_
 - **Frequency** — 0: _none_
 - **Histograms** — 0: _none_
@@ -250,6 +253,11 @@ Topics come from the **curriculum graph**, never from the set of generator modul
   - 1 available interactions, below the required 100
   - 0 reasoning families represented, below the required 4
   - 100% of interactions share one reasoning shape, above the 50% ceiling — this is the "numeric variants of one pattern" case
+- **Comparing distributions** (`skill.r2-comparing-distributions`)
+  - no generator families produce for this topic
+  - 1 available interactions, below the required 100
+  - 0 reasoning families represented, below the required 4
+  - 100% of interactions share one reasoning shape, above the 50% ceiling — this is the "numeric variants of one pattern" case
 - **Dot plots** (`skill.r2-dot-plots`)
   - no generator families produce for this topic
   - 1 available interactions, below the required 100
@@ -266,9 +274,8 @@ Topics come from the **curriculum graph**, never from the set of generator modul
   - 100% of interactions share one reasoning shape, above the 50% ceiling — this is the "numeric variants of one pattern" case
 - **Interquartile range** (`skill.r2-iqr`)
   - no generator families produce for this topic
-  - 1 available interactions, below the required 100
+  - 6 available interactions, below the required 100
   - 0 reasoning families represented, below the required 4
-  - 100% of interactions share one reasoning shape, above the 50% ceiling — this is the "numeric variants of one pattern" case
 - **Misleading graphs** (`skill.r2-misleading-graphs`)
   - no generator families produce for this topic
   - 1 available interactions, below the required 100
@@ -288,16 +295,15 @@ Topics come from the **curriculum graph**, never from the set of generator modul
   - 0 reasoning families represented, below the required 4
 - **Percentiles** (`skill.r2-percentiles`)
   - no generator families produce for this topic
-  - 1 available interactions, below the required 100
+  - 6 available interactions, below the required 100
   - 0 reasoning families represented, below the required 4
-  - 100% of interactions share one reasoning shape, above the 50% ceiling — this is the "numeric variants of one pattern" case
 - **Proportion of a dataset** (`skill.r2-proportion`)
   - no generator families produce for this topic
   - 8 available interactions, below the required 100
   - 0 reasoning families represented, below the required 4
 - **Quartiles** (`skill.r2-quartiles`)
   - no generator families produce for this topic
-  - 6 available interactions, below the required 100
+  - 10 available interactions, below the required 100
   - 0 reasoning families represented, below the required 4
 - **Scatterplots** (`skill.r2-scatterplots`)
   - no generator families produce for this topic
@@ -320,5 +326,5 @@ Topics come from the **curriculum graph**, never from the set of generator modul
   - 100% of interactions share one reasoning shape, above the 50% ceiling — this is the "numeric variants of one pattern" case
 - **Range** (`skill.range`)
   - no generator families produce for this topic
-  - 6 available interactions, below the required 100
+  - 7 available interactions, below the required 100
   - 0 reasoning families represented, below the required 4
