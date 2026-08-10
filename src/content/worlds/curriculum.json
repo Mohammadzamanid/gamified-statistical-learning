@@ -3935,48 +3935,226 @@
    "moduleId": "m.r2-pictures",
    "title": "Bars for Categories",
    "objectiveIds": [
-    "obj.r2-bar-charts"
+    "obj.r2-bar-charts",
+    "obj.read-data"
    ],
    "concepts": [
     {
      "id": "c.r2-bar-charts",
-     "title": "Bars for Categories",
-     "summary": "A bar chart compares counts across categories, with a gap between the bars because the categories are separate.",
-     "body": "The gaps matter: they say the categories do not run into one another, which is what separates a bar chart from a histogram."
+     "title": "Height stands for amount",
+     "summary": "Each bar's height is the count for one category, so comparing bars compares counts.",
+     "body": "A bar chart puts one bar over each category and makes its height the amount recorded for that category. Nothing else in the picture carries meaning: the bars' width, their colour and their order are choices about presentation. Because height is the only channel doing work, a reader compares two categories by comparing two lengths, and that comparison is only honest when the axis starts at zero — a bar twice as tall must mean twice as much."
+    },
+    {
+     "id": "c.r2-bar-charts-gaps",
+     "title": "The gaps are on purpose",
+     "summary": "Bars stand apart because categories are separate things, not neighbouring amounts.",
+     "body": "Monday and Tuesday are two named groups, not two ends of a scale, and nothing sits between them. The gaps between bars say exactly that: the horizontal axis is a list of categories rather than a measurement, so there is no space between them to fill. A gap is not a day with no catch, and a day with no catch is drawn as a bar of zero height standing in its own place on the axis."
+    },
+    {
+     "id": "c.r2-bar-charts-categorical",
+     "title": "What a bar chart is for",
+     "summary": "It shows counts across categories, which is the one job it does well.",
+     "body": "Bar charts suit a categorical variable: type of boat, home port, day of the week. They do not suit a numeric one, because sorting numbers into named groups throws away the fact that the groups are ordered and evenly spaced. Data measured on a scale wants a picture whose axis is a scale — which is the histogram, and the reason the next lesson exists."
     }
    ],
    "questionIds": [
-    "q.seed.r2-bar-charts",
+    "q.r2-bar-charts",
+    "q.r2-bar-charts-independent",
+    "q.r2-bar-charts-misconception",
     "q.graph-tallest-bar",
-    "q.dd-build-bar-chart"
+    "q.dd-build-bar-chart",
+    "q.r2-bar-charts-teachback",
+    "q.r2-bar-charts-mastery"
    ],
    "prerequisites": [
     "l.r2-choosing-measures"
    ],
-   "estimatedMinutes": 15
+   "estimatedMinutes": 13,
+   "narrativeIntro": "The harbourmaster's ledger is a column of numbers, and nobody reading it can tell at a glance which day was busiest. Drawn as bars, the same numbers answer that in a second — because a bar chart turns a quantity into a length, and comparing lengths is something the eye does without being asked.",
+   "demonstration": {
+    "id": "dem.r2-bar-charts",
+    "title": "Reading one bar against another",
+    "experience": "Two days of the week are drawn side by side, and the readout gives how many times taller the first bar is than the second. Change either day's catch and watch the comparison a reader would make by eye change with it.",
+    "accessibleDescription": "Two controls. The first sets the fish landed on Friday, the second the fish landed on Monday. The readout gives how many times taller Friday's bar is than Monday's, to two decimal places, and starts at 3.00 with 9 fish on Friday and 3 on Monday.",
+    "controls": [
+     {
+      "id": "ctl.tall",
+      "label": "Fish landed on Friday",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "initial": 9
+     },
+     {
+      "id": "ctl.short",
+      "label": "Fish landed on Monday",
+      "min": 1,
+      "max": 20,
+      "step": 1,
+      "initial": 3
+     }
+    ],
+    "formula": "quotient",
+    "readoutLabel": "How many times taller Friday's bar is than Monday's",
+    "readoutPrecision": 2,
+    "prediction": {
+     "prompt": "Friday landed 9 fish and Monday 3, so Friday's bar stands 3.00 times as tall as Monday's. Monday now has a better week and lands 6. What does the readout show?",
+     "options": [
+      {
+       "id": "opt.half",
+       "text": "1.50 - Monday has caught up, so the gap between the bars halves"
+      },
+      {
+       "id": "opt.same",
+       "text": "3.00 - Friday's bar has not changed, so the comparison cannot either"
+      },
+      {
+       "id": "opt.six",
+       "text": "6.00 - the readout follows Monday's new catch"
+      }
+     ],
+     "correctOptionId": "opt.half",
+     "revealNote": "Friday's bar has not moved and the comparison has changed all the same, because a comparison is about both bars. Nine against six is one and a half times, not three. This is why a bar chart is read as a set of lengths rather than a list of numbers: what the eye takes from it is always a relation between bars, and that relation depends on every bar in the picture."
+    },
+    "observation": "Raise Friday and the readout climbs; raise Monday and it falls. Set the two equal and it reads 1.00, which is a week where those two days are indistinguishable on the chart. Take Friday to 0 and it reads 0.00 — a day with no catch is a bar of no height, still standing in its own place on the axis."
+   },
+   "formalTerm": {
+    "term": "Bar chart",
+    "definition": "A bar chart shows a count or amount for each category as the height of a separate bar. The categories sit apart on the axis because nothing lies between them, and height is the only feature carrying meaning, so a reader compares categories by comparing lengths.",
+    "symbols": []
+   },
+   "guidedQuestionIds": [
+    "q.r2-bar-charts"
+   ],
+   "independentQuestionIds": [
+    "q.r2-bar-charts-independent"
+   ],
+   "misconceptionQuestionIds": [
+    "q.r2-bar-charts-misconception"
+   ],
+   "applicationQuestionIds": [
+    "q.graph-tallest-bar",
+    "q.dd-build-bar-chart"
+   ],
+   "teachBackQuestionIds": [
+    "q.r2-bar-charts-teachback"
+   ],
+   "masteryCheckQuestionIds": [
+    "q.r2-bar-charts-mastery"
+   ]
   },
   {
    "id": "l.r2-histograms",
    "moduleId": "m.r2-pictures",
    "title": "The Shape of a Spread",
    "objectiveIds": [
-    "obj.r2-histograms"
+    "obj.r2-histograms",
+    "obj.r2-bar-charts"
    ],
    "concepts": [
     {
      "id": "c.r2-histograms",
-     "title": "The Shape of a Spread",
-     "summary": "A histogram bins a numerical variable and shows the shape of its distribution.",
-     "body": "Change the bin width and the same data can look smooth, spiky, or bimodal. The shape you see is partly a choice you made."
+     "title": "Bars over intervals, touching",
+     "summary": "Each bar covers a stretch of the scale, and adjacent stretches share an edge.",
+     "body": "A histogram cuts the range of a numeric variable into intervals of equal width and draws a bar over each one, whose height is how many readings fall inside it. The bars touch because the intervals do: the depth just below 10 metres and the depth just above it are neighbours on a scale, with nothing between them to leave a space for. A bar therefore stands for a stretch of the axis, never for a single value."
+    },
+    {
+     "id": "c.r2-histograms-binwidth",
+     "title": "The bin width is a choice",
+     "summary": "The same readings drawn with different bin widths make different-looking pictures.",
+     "body": "Nothing in the data decides how wide the intervals should be. Wide bins pool readings together and give a smooth, simple shape that can hide a gap or a cluster; narrow bins show detail and can turn ordinary variation into a row of spikes. Both charts are honest drawings of the same soundings. That the picture can change while the data does not is worth holding on to, because it is the hinge the misleading-graphs lesson turns on later."
+    },
+    {
+     "id": "c.r2-histograms-shape",
+     "title": "What the shape is for",
+     "summary": "A histogram shows where readings pile up, which no summary on its own can.",
+     "body": "A mean and a standard deviation compress a whole season into two numbers, and two very different channels can produce the same pair. The histogram shows what those numbers discard: whether the readings cluster in one place or two, whether one tail runs long, whether anything sits far out on its own. Reading the shape is how skew and outliers stop being definitions and become things you can see."
     }
    ],
    "questionIds": [
-    "q.seed.r2-histograms"
+    "q.r2-histograms",
+    "q.r2-histograms-independent",
+    "q.r2-histograms-misconception",
+    "q.r2-histograms-application",
+    "q.r2-histograms-teachback",
+    "q.r2-histograms-mastery"
    ],
    "prerequisites": [
     "l.r2-bar-charts"
    ],
-   "estimatedMinutes": 15
+   "estimatedMinutes": 15,
+   "narrativeIntro": "Twenty soundings of the channel are not twenty categories. They are twenty points on a scale that runs continuously from the shallowest to the deepest, and drawing them as separate bars would claim gaps in the water that are not there. A histogram is the picture for data measured rather than sorted.",
+   "demonstration": {
+    "id": "dem.r2-histograms",
+    "title": "Choosing how wide the bins are",
+    "experience": "The season's soundings are laid along a scale and cut into equal intervals. The readout gives how many bars the chart will end up with. Widen the intervals and watch the count fall, without a single sounding being added or removed.",
+    "accessibleDescription": "Two controls. The first sets the span of the readings, from shallowest to deepest, in metres. The second sets how wide each bin is, in metres. The readout gives how many bars the histogram will have, to two decimal places, and starts at 8.00 with a span of 40 metres cut into bins 5 metres wide.",
+    "controls": [
+     {
+      "id": "ctl.span",
+      "label": "Span of the readings, in metres",
+      "min": 1,
+      "max": 60,
+      "step": 1,
+      "initial": 40
+     },
+     {
+      "id": "ctl.binwidth",
+      "label": "Width of each bin, in metres",
+      "min": 1,
+      "max": 20,
+      "step": 1,
+      "initial": 5
+     }
+    ],
+    "formula": "quotient",
+    "readoutLabel": "Bars the histogram will have",
+    "readoutPrecision": 2,
+    "prediction": {
+     "prompt": "The soundings span 40 metres and each bin is 5 metres wide, so the chart has 8.00 bars. The surveyor decides to use bins 10 metres wide instead. How many bars will the chart have?",
+     "options": [
+      {
+       "id": "opt.four",
+       "text": "4.00 - the same soundings, pooled into half as many intervals"
+      },
+      {
+       "id": "opt.sixteen",
+       "text": "16.00 - wider bins mean more of them"
+      },
+      {
+       "id": "opt.same",
+       "text": "8.00 - the number of bars is fixed by the data"
+      }
+     ],
+     "correctOptionId": "opt.four",
+     "revealNote": "Not one sounding was taken or thrown away, and the chart now has half as many bars. Each is twice as wide and holds roughly twice as many readings, so the shape looks smoother and any narrow gap in the data disappears into a bin. Both pictures are honest. Which one a reader is shown is a decision somebody made, and that decision is not visible in the chart."
+    },
+    "observation": "Widen the bins and the bar count falls; widen the span of the readings and it climbs. At a bin width equal to the whole span the readout is 1.00 — one bar covering everything, which is a picture that tells you only that the readings exist."
+   },
+   "formalTerm": {
+    "term": "Histogram",
+    "definition": "A histogram shows how many readings of a numeric variable fall into each of a series of equal-width intervals, drawn as touching bars over a continuous axis. Its bars stand for stretches of the scale rather than for categories, and the width of those stretches is chosen rather than given.",
+    "symbols": []
+   },
+   "guidedQuestionIds": [
+    "q.r2-histograms"
+   ],
+   "independentQuestionIds": [
+    "q.r2-histograms-independent"
+   ],
+   "misconceptionQuestionIds": [
+    "q.r2-histograms-misconception"
+   ],
+   "applicationQuestionIds": [
+    "q.r2-histograms-application"
+   ],
+   "teachBackQuestionIds": [
+    "q.r2-histograms-teachback"
+   ],
+   "masteryCheckQuestionIds": [
+    "q.r2-histograms-mastery"
+   ]
   },
   {
    "id": "l.r2-dot-plots",

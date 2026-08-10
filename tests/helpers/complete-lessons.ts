@@ -65,5 +65,9 @@ export const COMPLETE_LESSONS: readonly string[] = [
   // (S2-13 cycle 3). With these, m.r2-variation is Complete entire and no stub
   // stands between a learner and the outlier and skew lessons.
   "l.r2-variance",
-  "l.r2-standard-deviation"
+  "l.r2-standard-deviation",
+  // Region 2, m.r2-pictures — the first two graph lessons (S2-14 cycle 1).
+  // l.r2-bar-charts also absorbed the two questions staged in it since S2-12.
+  "l.r2-bar-charts",
+  "l.r2-histograms"
 ];

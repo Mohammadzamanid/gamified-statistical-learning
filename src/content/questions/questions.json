@@ -249,7 +249,8 @@
   "topicId": "t.data-literacy",
   "objectiveId": "obj.read-data",
   "skillIds": [
-   "skill.data-literacy"
+   "skill.data-literacy",
+   "skill.r2-bar-charts"
   ],
   "difficulty": 1,
   "interaction": "graph-interpretation",
@@ -1363,7 +1364,8 @@
   "topicId": "t.read-data",
   "objectiveId": "obj.read-data",
   "skillIds": [
-   "skill.data-literacy"
+   "skill.data-literacy",
+   "skill.r2-bar-charts"
   ],
   "difficulty": 2,
   "interaction": "drag-and-drop",
@@ -6900,48 +6902,6 @@
   "estimatedSeconds": 120
  },
  {
-  "id": "q.seed.r2-bar-charts",
-  "topicId": "t.r2-bar-charts",
-  "objectiveId": "obj.r2-bar-charts",
-  "skillIds": [
-   "skill.r2-bar-charts"
-  ],
-  "difficulty": 2,
-  "interaction": "numeric-input",
-  "prompt": "A bar chart shows calm 8, choppy 7, rough 5. How many mornings does the TALLEST bar represent?",
-  "answer": {
-   "kind": "numeric",
-   "value": 8,
-   "tolerance": 0,
-   "unit": "mornings"
-  },
-  "explanation": "The answer is 8 mornings. This lesson is a seed: its full teaching arrives with the Region 2 lesson units.",
-  "accessibilityDescription": "A numeric seed question for a Region 2 lesson that has not been written yet. Enter the answer as a number.",
-  "misconceptionIds": [],
-  "estimatedSeconds": 45
- },
- {
-  "id": "q.seed.r2-histograms",
-  "topicId": "t.r2-histograms",
-  "objectiveId": "obj.r2-histograms",
-  "skillIds": [
-   "skill.r2-histograms"
-  ],
-  "difficulty": 2,
-  "interaction": "numeric-input",
-  "prompt": "A histogram bins catches 0-9, 10-19 and 20-29, with 4, 9 and 2 days. How many days had a catch of 10 to 19?",
-  "answer": {
-   "kind": "numeric",
-   "value": 9,
-   "tolerance": 0,
-   "unit": "days"
-  },
-  "explanation": "The answer is 9 days. This lesson is a seed: its full teaching arrives with the Region 2 lesson units.",
-  "accessibilityDescription": "A numeric seed question for a Region 2 lesson that has not been written yet. Enter the answer as a number.",
-  "misconceptionIds": [],
-  "estimatedSeconds": 45
- },
- {
   "id": "q.seed.r2-dot-plots",
   "topicId": "t.r2-dot-plots",
   "objectiveId": "obj.r2-dot-plots",
@@ -9631,5 +9591,403 @@
   "misconceptionIds": [],
   "accessibilityDescription": "Four catch figures; work through mean, variance and root, and enter the standard deviation in crates.",
   "estimatedSeconds": 150
+ },
+ {
+  "id": "q.r2-bar-charts",
+  "topicId": "t.r2-bar-charts",
+  "objectiveId": "obj.r2-bar-charts",
+  "skillIds": [
+   "skill.r2-bar-charts"
+  ],
+  "difficulty": 1,
+  "interaction": "numeric-input",
+  "prompt": "Using the catch chart, how many more fish were landed on Friday than on Monday?",
+  "visual": {
+   "kind": "bar-chart",
+   "datasetId": "ds.harbor-catch",
+   "caption": "Fish landed per day",
+   "accessibleDescription": "Bar chart of fish landed per day: Monday 2, Tuesday 4, Wednesday 4, Thursday 6, Friday 9."
+  },
+  "answer": {
+   "kind": "numeric",
+   "value": 7,
+   "tolerance": 0,
+   "unit": "fish"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Read the height of each bar against the scale on the left."
+   },
+   {
+    "level": 2,
+    "text": "Friday's bar reaches 9 and Monday's reaches 2."
+   }
+  ],
+  "explanation": "Friday's bar reaches 9 fish and Monday's reaches 2, so Friday landed 7 more. Comparing two categories on a bar chart is comparing two heights, which is the whole reason the picture is easier to read than the ledger it came from.",
+  "solutionSteps": [
+   "Find Friday's bar and read its height against the scale: 9 fish.",
+   "Find Monday's bar and read its height: 2 fish.",
+   "Subtract: 9 - 2 = 7 more fish on Friday."
+  ],
+  "misconceptionIds": [],
+  "accessibilityDescription": "A bar chart of the week's catch; enter how many more fish Friday landed than Monday, as a number.",
+  "estimatedSeconds": 60
+ },
+ {
+  "id": "q.r2-bar-charts-independent",
+  "topicId": "t.r2-bar-charts",
+  "objectiveId": "obj.r2-bar-charts",
+  "skillIds": [
+   "skill.r2-bar-charts"
+  ],
+  "difficulty": 2,
+  "interaction": "numeric-input",
+  "prompt": "Using the catch chart, how many fish did the harbour land across the whole week?",
+  "visual": {
+   "kind": "bar-chart",
+   "datasetId": "ds.harbor-catch",
+   "caption": "Fish landed per day",
+   "accessibleDescription": "Bar chart of fish landed per day: Monday 2, Tuesday 4, Wednesday 4, Thursday 6, Friday 9."
+  },
+  "answer": {
+   "kind": "numeric",
+   "value": 25,
+   "tolerance": 0,
+   "unit": "fish"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Read each of the five bars in turn and keep a running total."
+   }
+  ],
+  "explanation": "The five bars read 2, 4, 4, 6 and 9 fish, which total 25 for the week. A bar chart is built for comparing categories, and a total like this has to be assembled bar by bar — the picture shows each day plainly and shows the week not at all.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "A bar chart of the week's catch; enter the total fish landed across all five days, as a number.",
+  "estimatedSeconds": 80
+ },
+ {
+  "id": "q.r2-bar-charts-misconception",
+  "topicId": "t.r2-bar-charts",
+  "objectiveId": "obj.r2-bar-charts",
+  "skillIds": [
+   "skill.r2-bar-charts"
+  ],
+  "difficulty": 3,
+  "interaction": "multiple-choice",
+  "prompt": "On the catch chart there is a space between every pair of bars. What do those spaces mean?",
+  "visual": {
+   "kind": "bar-chart",
+   "datasetId": "ds.harbor-catch",
+   "caption": "Fish landed per day",
+   "accessibleDescription": "Bar chart of fish landed per day: Monday 2, Tuesday 4, Wednesday 4, Thursday 6, Friday 9."
+  },
+  "choices": [
+   {
+    "id": "ch.separate",
+    "text": "Nothing is missing - the spaces show that the days are separate categories"
+   },
+   {
+    "id": "ch.nocatch",
+    "text": "They are times when no fish were landed and nothing was recorded",
+    "misconceptionId": "mc.bar-gap-means-missing"
+   },
+   {
+    "id": "ch.style",
+    "text": "They are a drawing mistake; the bars ought to touch"
+   }
+  ],
+  "answer": {
+   "kind": "choice",
+   "correctChoiceIds": [
+    "ch.separate"
+   ]
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Ask what lies on the axis between 'Monday' and 'Tuesday'."
+   }
+  ],
+  "explanation": "The horizontal axis of a bar chart is a list of names, so there is nothing between Monday and Tuesday for anything to be missing from — the spaces simply show the categories are separate. A day with no catch would not appear as a gap either: it would be a bar of zero height standing in its own place.",
+  "misconceptionIds": [
+   "mc.bar-gap-means-missing"
+  ],
+  "accessibilityDescription": "A bar chart of the week's catch; three readings of what the spaces between the bars mean.",
+  "estimatedSeconds": 90
+ },
+ {
+  "id": "q.r2-bar-charts-teachback",
+  "topicId": "t.r2-bar-charts",
+  "objectiveId": "obj.r2-bar-charts",
+  "skillIds": [
+   "skill.r2-bar-charts"
+  ],
+  "difficulty": 3,
+  "interaction": "short-explanation",
+  "prompt": "Explain in your own words why a bar chart suits the type of boat in a harbour but not the depth of its channel. Use the words 'category' and 'height'.",
+  "answer": {
+   "kind": "text",
+   "requiredKeywords": [
+    "category",
+    "height"
+   ],
+   "forbiddenKeywords": []
+  },
+  "explanation": "Boat type sorts vessels into named groups with nothing between them, which is exactly what a bar chart draws: one bar per category, its height the count. Depth is measured on a continuous scale, so chopping it into named groups would throw away the fact that the groups are ordered and evenly spaced — and the gaps between bars would claim depths that no boat could ever sit at.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "An open-response question about which kinds of variable a bar chart suits and why.",
+  "estimatedSeconds": 130
+ },
+ {
+  "id": "q.r2-bar-charts-mastery",
+  "topicId": "t.r2-bar-charts",
+  "objectiveId": "obj.r2-bar-charts",
+  "skillIds": [
+   "skill.r2-bar-charts"
+  ],
+  "difficulty": 3,
+  "interaction": "numeric-input",
+  "prompt": "Using the catch chart, how many times as tall is Friday's bar as Wednesday's? Give your answer to two decimal places.",
+  "visual": {
+   "kind": "bar-chart",
+   "datasetId": "ds.harbor-catch",
+   "caption": "Fish landed per day",
+   "accessibleDescription": "Bar chart of fish landed per day: Monday 2, Tuesday 4, Wednesday 4, Thursday 6, Friday 9."
+  },
+  "answer": {
+   "kind": "numeric",
+   "value": 2.25,
+   "tolerance": 0.01,
+   "unit": "times"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Read both heights, then divide the taller by the shorter."
+   }
+  ],
+  "explanation": "Friday's bar reaches 9 fish and Wednesday's reaches 4, so Friday's is 2.25 times as tall. That comparison only means what it appears to mean because the scale starts at zero — on an axis beginning at 3, the same two bars would look nearly six times apart.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "A bar chart of the week's catch; enter how many times as tall Friday's bar is as Wednesday's.",
+  "estimatedSeconds": 110
+ },
+ {
+  "id": "q.r2-histograms",
+  "topicId": "t.r2-histograms",
+  "objectiveId": "obj.r2-histograms",
+  "skillIds": [
+   "skill.r2-histograms"
+  ],
+  "difficulty": 1,
+  "interaction": "numeric-input",
+  "prompt": "Using the histogram of channel soundings, how many soundings fall in the bin covering 6 up to 10 metres?",
+  "visual": {
+   "kind": "histogram",
+   "datasetId": "ds.channel-depths",
+   "caption": "Channel soundings, bins 4 metres wide",
+   "accessibleDescription": "Histogram of twenty channel soundings in bins 4 metres wide: 2 up to 6 metres holds 3 soundings, 6 up to 10 holds 6, 10 up to 14 holds 5, 14 up to 18 holds 4, and 18 up to 22 holds 2."
+  },
+  "answer": {
+   "kind": "numeric",
+   "value": 6,
+   "tolerance": 0,
+   "unit": "soundings"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Find the bar whose left edge is at 6 metres and read its height."
+   },
+   {
+    "level": 2,
+    "text": "It is the tallest bar on the chart."
+   }
+  ],
+  "explanation": "The bar covering 6 up to 10 metres reaches a height of 6, so six soundings fall somewhere in that stretch. The chart does not say where inside it they sit — pooling readings into an interval is exactly the detail a histogram gives up in exchange for showing a shape.",
+  "solutionSteps": [
+   "Find the bin whose left edge is 6 metres; it runs up to 10.",
+   "Read the height of that bar against the scale on the left.",
+   "It reaches 6, so six soundings fall in that interval."
+  ],
+  "misconceptionIds": [],
+  "accessibilityDescription": "A histogram of twenty channel soundings; enter how many fall in the six-to-ten-metre bin, as a number.",
+  "estimatedSeconds": 70
+ },
+ {
+  "id": "q.r2-histograms-independent",
+  "topicId": "t.r2-histograms",
+  "objectiveId": "obj.r2-histograms",
+  "skillIds": [
+   "skill.r2-histograms"
+  ],
+  "difficulty": 2,
+  "interaction": "numeric-input",
+  "prompt": "Using the histogram of channel soundings, how many soundings are 14 metres or deeper?",
+  "visual": {
+   "kind": "histogram",
+   "datasetId": "ds.channel-depths",
+   "caption": "Channel soundings, bins 4 metres wide",
+   "accessibleDescription": "Histogram of twenty channel soundings in bins 4 metres wide: 2 up to 6 metres holds 3 soundings, 6 up to 10 holds 6, 10 up to 14 holds 5, 14 up to 18 holds 4, and 18 up to 22 holds 2."
+  },
+  "answer": {
+   "kind": "numeric",
+   "value": 6,
+   "tolerance": 0,
+   "unit": "soundings"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Two bins cover everything from 14 metres upwards. Add their heights."
+   }
+  ],
+  "explanation": "The bin from 14 up to 18 metres holds 4 soundings and the bin from 18 to 22 holds 2, so 6 soundings are 14 metres or deeper. Adding adjacent bars works precisely because the intervals touch: every sounding in the range lands in exactly one of them, with none counted twice and none missed.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "A histogram of twenty channel soundings; enter how many are fourteen metres or deeper, as a number.",
+  "estimatedSeconds": 90
+ },
+ {
+  "id": "q.r2-histograms-misconception",
+  "topicId": "t.r2-histograms",
+  "objectiveId": "obj.r2-histograms",
+  "skillIds": [
+   "skill.r2-histograms"
+  ],
+  "difficulty": 3,
+  "interaction": "multiple-choice",
+  "prompt": "On the histogram, the bar starting at 6 metres has a height of 6. What does that bar tell you?",
+  "visual": {
+   "kind": "histogram",
+   "datasetId": "ds.channel-depths",
+   "caption": "Channel soundings, bins 4 metres wide",
+   "accessibleDescription": "Histogram of twenty channel soundings in bins 4 metres wide: 2 up to 6 metres holds 3 soundings, 6 up to 10 holds 6, 10 up to 14 holds 5, 14 up to 18 holds 4, and 18 up to 22 holds 2."
+  },
+  "choices": [
+   {
+    "id": "ch.interval",
+    "text": "Six soundings measured somewhere between 6 and 10 metres"
+   },
+   {
+    "id": "ch.exact",
+    "text": "Six soundings measured exactly 6 metres",
+    "misconceptionId": "mc.histogram-bar-is-one-value"
+   },
+   {
+    "id": "ch.sixth",
+    "text": "The sixth sounding of the season was 6 metres deep"
+   }
+  ],
+  "answer": {
+   "kind": "choice",
+   "correctChoiceIds": [
+    "ch.interval"
+   ]
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Ask what the width of the bar is doing. A bar chart's bars have no width that means anything."
+   }
+  ],
+  "explanation": "A histogram bar sits over a stretch of the scale, so its height counts every reading in that stretch: six soundings somewhere between 6 and 10 metres. Reading it as six soundings of exactly 6 metres treats the picture as a bar chart, and loses the readings sitting in the rest of the interval.",
+  "misconceptionIds": [
+   "mc.histogram-bar-is-one-value"
+  ],
+  "accessibilityDescription": "A histogram of channel soundings; three readings of what one bar's height reports.",
+  "estimatedSeconds": 100
+ },
+ {
+  "id": "q.r2-histograms-application",
+  "topicId": "t.r2-histograms",
+  "objectiveId": "obj.r2-histograms",
+  "skillIds": [
+   "skill.r2-histograms"
+  ],
+  "difficulty": 3,
+  "interaction": "multiple-choice",
+  "prompt": "A surveyor redraws the same twenty soundings with bins 8 metres wide instead of 4. What has changed?",
+  "choices": [
+   {
+    "id": "ch.picture",
+    "text": "The picture, but not the data - fewer, wider bars pool the same soundings"
+   },
+   {
+    "id": "ch.data",
+    "text": "The data, because wider bins take in soundings that were left out before"
+   },
+   {
+    "id": "ch.nothing",
+    "text": "Nothing at all - bin width is a drawing detail with no effect on the chart"
+   }
+  ],
+  "answer": {
+   "kind": "choice",
+   "correctChoiceIds": [
+    "ch.picture"
+   ]
+  },
+  "explanation": "Not one sounding is added or removed by changing the bin width; every reading simply lands in a wider interval. The chart looks different — fewer bars, a smoother shape, any narrow gap absorbed — while the season it describes is identical. That a picture can change this much without the data changing is why a reader is owed the bin width along with the chart.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "Three accounts of what changes when the same soundings are redrawn with wider bins.",
+  "estimatedSeconds": 100
+ },
+ {
+  "id": "q.r2-histograms-teachback",
+  "topicId": "t.r2-histograms",
+  "objectiveId": "obj.r2-histograms",
+  "skillIds": [
+   "skill.r2-histograms",
+   "skill.r2-bar-charts"
+  ],
+  "difficulty": 3,
+  "interaction": "short-explanation",
+  "prompt": "Explain in your own words why the bars of a histogram touch when the bars of a bar chart do not. Use the words 'interval' and 'gaps'.",
+  "answer": {
+   "kind": "text",
+   "requiredKeywords": [
+    "interval",
+    "gaps"
+   ],
+   "forbiddenKeywords": []
+  },
+  "explanation": "A histogram's horizontal axis is a measurement, and its bars sit over adjacent intervals of it — the depth just below 10 metres and the depth just above are neighbours, so there is nothing between them to leave a space for. A bar chart's axis is a list of names, and the gaps are drawn precisely to show that the categories are separate things with no scale running between them.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "An open-response question about why histogram bars touch and bar-chart bars do not.",
+  "estimatedSeconds": 130
+ },
+ {
+  "id": "q.r2-histograms-mastery",
+  "topicId": "t.r2-histograms",
+  "objectiveId": "obj.r2-histograms",
+  "skillIds": [
+   "skill.r2-histograms"
+  ],
+  "difficulty": 3,
+  "interaction": "numeric-input",
+  "prompt": "Using the histogram of channel soundings, how many soundings are shallower than 10 metres?",
+  "visual": {
+   "kind": "histogram",
+   "datasetId": "ds.channel-depths",
+   "caption": "Channel soundings, bins 4 metres wide",
+   "accessibleDescription": "Histogram of twenty channel soundings in bins 4 metres wide: 2 up to 6 metres holds 3 soundings, 6 up to 10 holds 6, 10 up to 14 holds 5, 14 up to 18 holds 4, and 18 up to 22 holds 2."
+  },
+  "answer": {
+   "kind": "numeric",
+   "value": 9,
+   "tolerance": 0,
+   "unit": "soundings"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Two bins lie entirely below 10 metres. Add their heights."
+   }
+  ],
+  "explanation": "The bin from 2 up to 6 metres holds 3 soundings and the bin from 6 up to 10 holds 6, so 9 soundings are shallower than 10 metres — a little under half the season. The question is answerable exactly because 10 is a bin edge; asking how many are shallower than 9 could not be answered from this chart at all, since that reading falls inside a bin rather than between two.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "A histogram of twenty channel soundings; enter how many are shallower than ten metres, as a number.",
+  "estimatedSeconds": 110
  }
 ]

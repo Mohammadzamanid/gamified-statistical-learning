@@ -3,6 +3,7 @@ import { useStore } from "../state/store";
 import { QuestionInteraction } from "../components/QuestionRenderers";
 import { FeedbackPanel } from "../components/FeedbackPanel";
 import { BarChart } from "../components/BarChart";
+import { Histogram } from "../components/Histogram";
 import { DifficultyPips } from "../components/MasteryBadge";
 
 export function QuestionScreen(): JSX.Element {
@@ -45,6 +46,24 @@ export function QuestionScreen(): JSX.Element {
 
         {dataset && question.visual.kind === "bar-chart" && (
           <BarChart dataset={dataset} caption={question.visual.caption} accessibleDescription={question.visual.accessibleDescription} />
+        )}
+
+        {dataset && question.visual.kind === "histogram" && (
+          <Histogram dataset={dataset} caption={question.visual.caption} accessibleDescription={question.visual.accessibleDescription} />
+        )}
+
+        {/*
+          A question may only declare a visual kind this screen can draw —
+          RENDERED_VISUAL_KINDS says which, and the interaction audit fails if
+          shipped content names one that is not there. The notice below is for
+          the case the audit cannot reach: a dataset that failed to load. Silence
+          would leave a prompt referring to a chart nobody can see.
+        */}
+        {question.visual.kind !== "none" && !dataset && (
+          <p className="muted" role="note">
+            This question's chart could not be loaded, so its description is given instead:{" "}
+            {question.visual.accessibleDescription}
+          </p>
         )}
 
         {revealedHints.length > 0 && (

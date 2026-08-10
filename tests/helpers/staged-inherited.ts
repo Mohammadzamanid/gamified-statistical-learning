@@ -26,7 +26,10 @@
  * added, removed or re-homed without this list changing to say so.
  */
 export const STAGED_INHERITED: Readonly<Record<string, readonly string[]>> = {
-  "l.r2-bar-charts": ["q.graph-tallest-bar", "q.dd-build-bar-chart"],
+  // `l.r2-bar-charts` was cleared by S2-14 cycle 1: both of its staged questions
+  // were given roles when the lesson was written, which is the whole shape of
+  // paying this debt off — the entry goes at the same moment the questions stop
+  // being parked, and the audit fails on either half done alone.
   "l.r2-scatterplots": ["q.point-thursday-catch"],
   "l.r2-misleading-graphs": ["q.error-id-causation"]
 };

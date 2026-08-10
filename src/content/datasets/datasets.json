@@ -1,18 +1,114 @@
 [
-  {
-    "id": "ds.harbor-catch",
-    "title": "Harbor catch ledger, one week",
-    "description": "Fish landed per day at the Harbor of Tallies.",
-    "columns": [
-      { "name": "Day", "kind": "categorical" },
-      { "name": "Fish landed", "kind": "numeric", "unit": "fish" }
-    ],
-    "rows": [
-      ["Mon", 2],
-      ["Tue", 4],
-      ["Wed", 4],
-      ["Thu", 6],
-      ["Fri", 9]
-    ]
-  }
+ {
+  "id": "ds.harbor-catch",
+  "title": "Harbor catch ledger, one week",
+  "description": "Fish landed per day at the Harbor of Tallies.",
+  "columns": [
+   {
+    "name": "Day",
+    "kind": "categorical"
+   },
+   {
+    "name": "Fish landed",
+    "kind": "numeric",
+    "unit": "fish"
+   }
+  ],
+  "rows": [
+   [
+    "Mon",
+    2
+   ],
+   [
+    "Tue",
+    4
+   ],
+   [
+    "Wed",
+    4
+   ],
+   [
+    "Thu",
+    6
+   ],
+   [
+    "Fri",
+    9
+   ]
+  ]
+ },
+ {
+  "id": "ds.channel-depths",
+  "title": "Channel soundings, one season",
+  "description": "Twenty depth soundings taken across the season in the main channel of the atoll.",
+  "columns": [
+   {
+    "name": "Depth",
+    "kind": "numeric",
+    "unit": "m"
+   }
+  ],
+  "rows": [
+   [
+    2
+   ],
+   [
+    3
+   ],
+   [
+    5
+   ],
+   [
+    6
+   ],
+   [
+    7
+   ],
+   [
+    7
+   ],
+   [
+    8
+   ],
+   [
+    9
+   ],
+   [
+    9
+   ],
+   [
+    10
+   ],
+   [
+    11
+   ],
+   [
+    12
+   ],
+   [
+    12
+   ],
+   [
+    13
+   ],
+   [
+    14
+   ],
+   [
+    15
+   ],
+   [
+    16
+   ],
+   [
+    17
+   ],
+   [
+    20
+   ],
+   [
+    22
+   ]
+  ]
+ }
 ]

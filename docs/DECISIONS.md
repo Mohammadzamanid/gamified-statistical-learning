@@ -348,3 +348,24 @@ already had a precedent for constraining a control's range to a formula's domain
 root got the matching one: a control feeding a square root may not reach below zero, because a setting with no answer
 is a defect in the content rather than something the panel should discover at run time and render as NaN. Growing a
 closed enum is the expensive-looking option that turned out to cost four lines and a guard. (S2-13)
+
+**D-043 — A schema that accepts more than the renderer draws is a promise the build does not keep.**
+`VisualSpecSchema` accepted eight visual kinds and `QuestionScreen` drew exactly one. A question declaring `histogram`
+or `box-plot` would have passed every check in the repository and then rendered **nothing** — no chart, and no text
+either, because the accessible description is carried by the chart component, so a screen-reader user would not even
+have been told a picture was missing. The learner would have met a prompt referring to a graph that was not there.
+Nothing had shipped in that state only because no content had used those kinds yet, and S2-14's graph lessons are the
+first work that walks straight into it. The fix is the device `rendered-interactions.ts` already used for interactions
+(D-005): a declared list of what the screen can actually draw, consulted by the screen and defended by an audit that
+fails when shipped content names a kind that is not on it. So a lesson cannot outrun the renderer silently — it fails
+loudly, and the fix is to write the renderer. `histogram` joined the list this cycle by being built; `dot-plot`,
+`box-plot`, `scatter`, `table` and `image` are still only schema. (S2-14)
+
+**D-044 — Binning is arithmetic behind a taught picture, so it is tested directly.**
+`l.r2-histograms` states exact bin contents in its questions and again in the chart's accessible description — six
+soundings between 6 and 10 metres, and so on. Those claims are true only if the renderer bins the way the content says
+it does, and nothing about an SVG makes that checkable. `buildBins` is therefore exported and tested against the
+shipped dataset, in the same spirit as D-001 keeping the demonstration readout out of React: a number a learner reads
+is content, and content is checked. The test earns its place immediately — a probe adding one sounding to the dataset
+fails it by name, which is exactly the drift that would otherwise leave a lesson confidently wrong about its own
+picture. (S2-14)

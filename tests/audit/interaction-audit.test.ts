@@ -19,6 +19,8 @@ import {
 } from "../../src/core/misconceptions/detectors";
 import { listInteractions, registerDefaultInteractions } from "../../src/core/questions/registry";
 import { RENDERED_INTERACTION_TYPES } from "../../src/renderer/components/rendered-interactions";
+import { RENDERED_VISUAL_KINDS } from "../../src/renderer/components/rendered-visuals";
+import { VisualSpecSchema } from "../../src/shared/schemas";
 import { evaluateResponse } from "../../src/core/questions/evaluators";
 import { normalizeResponse } from "../../src/core/questions/normalize";
 import { InteractionTypeSchema, type InteractionType, type Question } from "../../src/shared/schemas";
@@ -238,6 +240,52 @@ describe("misconception coverage", () => {
     const known = new Set(listDetectorNames());
     for (const mc of content.misconceptions) {
       expect(known.has(mc.detector), `${mc.id} names unregistered detector ${mc.detector}`).toBe(true);
+    }
+  });
+});
+
+/**
+ * S2-14: the same drift guard, applied to charts.
+ *
+ * `VisualSpecSchema` accepts eight kinds and `QuestionScreen` drew one. A
+ * question declaring `histogram` or `box-plot` passed every check here and then
+ * rendered nothing at all — no chart, and no text either, because the accessible
+ * description is carried by the chart component. That is the exact failure mode
+ * D-005 rules out for interactions, and charts had no equivalent guard.
+ */
+describe("every visual a question declares can actually be drawn", () => {
+  it("declares fewer kinds than the schema allows, and says so", () => {
+    // Not a redundant check: if the two ever coincide, this file should stop
+    // claiming there is a gap, and the schema is where new kinds appear first.
+    const schemaKinds = VisualSpecSchema._def.schema.shape.kind.options as readonly string[];
+    const drawable = [...RENDERED_VISUAL_KINDS];
+    expect(schemaKinds).toContain("none");
+    expect(drawable.every((k) => schemaKinds.includes(k)), "a rendered kind the schema does not allow").toBe(true);
+    expect(drawable.length, "RENDERED_VISUAL_KINDS is empty").toBeGreaterThan(0);
+  });
+
+  it("ships no question whose visual kind has no renderer", () => {
+    for (const q of reachableQuestions) {
+      if (q.visual.kind === "none") continue;
+      expect(
+        RENDERED_VISUAL_KINDS.has(q.visual.kind),
+        `${q.id} declares a ${q.visual.kind}, which no renderer draws — the learner would see a prompt about a chart that is not there`
+      ).toBe(true);
+    }
+  });
+
+  it("gives every shown visual a dataset to draw and words to read", () => {
+    for (const q of reachableQuestions) {
+      if (q.visual.kind === "none") continue;
+      expect(q.visual.datasetId, `${q.id} shows a ${q.visual.kind} but names no dataset`).toBeDefined();
+      expect(
+        content.datasets.get(q.visual.datasetId!),
+        `${q.id} names dataset ${q.visual.datasetId}, which does not exist`
+      ).toBeDefined();
+      expect(
+        (q.visual.accessibleDescription ?? "").trim().length,
+        `${q.id} shows a ${q.visual.kind} with no accessible description`
+      ).toBeGreaterThan(20);
     }
   });
 });

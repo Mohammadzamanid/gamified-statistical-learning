@@ -383,5 +383,29 @@
   "skillIds": [
    "skill.r2-standard-deviation"
   ]
+ },
+ {
+  "id": "rem.gaps-separate-categories",
+  "title": "A gap is a boundary, not a blank",
+  "explanation": "On a bar chart the horizontal axis is a list of names, not a measurement, so there is no space between Monday and Tuesday for anything to be missing from. The gaps are drawn to show the categories are separate things. A category with nothing recorded is not a gap either - it is a bar of zero height, standing in its own place with its own label underneath.",
+  "microLesson": "Draw the harbour week with Wednesday's catch removed entirely. The chart does not grow a wider gap: Wednesday keeps its place on the axis and its bar drops to nothing. That is how a bar chart says 'none recorded', and it is visibly different from the ordinary spacing between every pair of bars.",
+  "followUpQuestionIds": [
+   "q.r2-bar-charts"
+  ],
+  "skillIds": [
+   "skill.r2-bar-charts"
+  ]
+ },
+ {
+  "id": "rem.a-bar-is-an-interval",
+  "title": "A histogram bar covers a stretch, not a point",
+  "explanation": "The bars of a histogram sit over intervals of a scale, so a bar of height six means six readings somewhere inside that stretch - not six readings of the number printed at its edge. That is why the bars touch: the intervals are adjacent, and every reading in the range lands in exactly one of them. Reading a bar as a single value both overstates what the chart says and loses the fourteen readings sitting in the rest of the interval.",
+  "microLesson": "Take a bar covering 6 up to 10 metres with a height of 6. It does not say six soundings were exactly 6 metres. It says six soundings were somewhere between 6 and 10 - and the chart deliberately does not tell you where, because that is the detail pooling into bins gives up in exchange for a shape.",
+  "followUpQuestionIds": [
+   "q.r2-histograms"
+  ],
+  "skillIds": [
+   "skill.r2-histograms"
+  ]
  }
 ]

@@ -31,13 +31,13 @@ Topics come from the **curriculum graph**, never from the set of generator modul
 | Reading tables (`skill.r1-tables`) | 13 | 5 | 5 | 228 | 228 | 225 | **238** | Yes |
 | Kinds of variable (`skill.r1-variable-kinds`) | 8 | 5 | 5 | 240 | 228 | 208 | **216** | Yes |
 | Variables (`skill.r1-variables`) | 8 | 5 | 5 | 272 | 232 | 228 | **236** | Yes |
-| Bar charts (`skill.r2-bar-charts`) | 1 | 0 | 0 | 0 | 0 | 0 | **1** | **No** |
+| Bar charts (`skill.r2-bar-charts`) | 8 | 0 | 0 | 0 | 0 | 0 | **8** | **No** |
 | Box plots (`skill.r2-box-plots`) | 1 | 0 | 0 | 0 | 0 | 0 | **1** | **No** |
 | Choosing a graph (`skill.r2-choosing-graphs`) | 1 | 0 | 0 | 0 | 0 | 0 | **1** | **No** |
 | Comparing distributions (`skill.r2-comparing-distributions`) | 1 | 0 | 0 | 0 | 0 | 0 | **1** | **No** |
 | Dot plots (`skill.r2-dot-plots`) | 1 | 0 | 0 | 0 | 0 | 0 | **1** | **No** |
 | Frequency (`skill.r2-frequency`) | 8 | 0 | 0 | 0 | 0 | 0 | **8** | **No** |
-| Histograms (`skill.r2-histograms`) | 1 | 0 | 0 | 0 | 0 | 0 | **1** | **No** |
+| Histograms (`skill.r2-histograms`) | 6 | 0 | 0 | 0 | 0 | 0 | **6** | **No** |
 | Interquartile range (`skill.r2-iqr`) | 6 | 0 | 0 | 0 | 0 | 0 | **6** | **No** |
 | Misleading graphs (`skill.r2-misleading-graphs`) | 1 | 0 | 0 | 0 | 0 | 0 | **1** | **No** |
 | Mode (`skill.r2-mode`) | 6 | 0 | 0 | 0 | 0 | 0 | **6** | **No** |
@@ -77,13 +77,13 @@ Topics come from the **curriculum graph**, never from the set of generator modul
 | Reading tables | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 0 | 13% |
 | Kinds of variable | 12 | 0 | 0 | 0 | 0 | 0 | 20 | 0 | 0% |
 | Variables | 40 | 0 | 0 | 0 | 0 | 0 | 4 | 0 | 14% |
-| Bar charts | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100% |
+| Bar charts | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 13% |
 | Box plots | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100% |
 | Choosing a graph | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100% |
 | Comparing distributions | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100% |
 | Dot plots | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100% |
 | Frequency | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 13% |
-| Histograms | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100% |
+| Histograms | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 17% |
 | Interquartile range | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 17% |
 | Misleading graphs | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100% |
 | Mode | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 17% |
@@ -240,9 +240,8 @@ Topics come from the **curriculum graph**, never from the set of generator modul
   - 0 reasoning families represented, below the required 4
 - **Bar charts** (`skill.r2-bar-charts`)
   - no generator families produce for this topic
-  - 1 available interactions, below the required 100
+  - 8 available interactions, below the required 100
   - 0 reasoning families represented, below the required 4
-  - 100% of interactions share one reasoning shape, above the 50% ceiling — this is the "numeric variants of one pattern" case
 - **Box plots** (`skill.r2-box-plots`)
   - no generator families produce for this topic
   - 1 available interactions, below the required 100
@@ -269,9 +268,8 @@ Topics come from the **curriculum graph**, never from the set of generator modul
   - 0 reasoning families represented, below the required 4
 - **Histograms** (`skill.r2-histograms`)
   - no generator families produce for this topic
-  - 1 available interactions, below the required 100
+  - 6 available interactions, below the required 100
   - 0 reasoning families represented, below the required 4
-  - 100% of interactions share one reasoning shape, above the 50% ceiling — this is the "numeric variants of one pattern" case
 - **Interquartile range** (`skill.r2-iqr`)
   - no generator families produce for this topic
   - 6 available interactions, below the required 100

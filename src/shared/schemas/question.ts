@@ -179,6 +179,7 @@ export const VisualSpecSchema = z.object({
     ctx.addIssue({ code: z.ZodIssueCode.custom, message: "visuals require accessibleDescription" });
   }
 });
+export type VisualSpec = z.infer<typeof VisualSpecSchema>;
 
 /**
  * The axis or plane a point is placed on.

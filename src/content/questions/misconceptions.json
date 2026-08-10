@@ -254,5 +254,21 @@
   "detector": "known-wrong-answer",
   "detectorParams": {},
   "remediationId": "rem.take-the-root"
+ },
+ {
+  "id": "mc.bar-gap-means-missing",
+  "title": "The gaps between bars read as missing data",
+  "description": "The learner takes the space between two bars to mean something absent — a day with no catch, a category nobody recorded — rather than the separation between two named groups. The reading is a reasonable one for a picture with a continuous axis, and wrong for a categorical one.",
+  "detector": "tagged-distractor",
+  "detectorParams": {},
+  "remediationId": "rem.gaps-separate-categories"
+ },
+ {
+  "id": "mc.histogram-bar-is-one-value",
+  "title": "A histogram bar read as a single value",
+  "description": "The learner reads a histogram as though it were a bar chart, taking each bar to report the count of one exact reading rather than of every reading in an interval. The number is read off correctly and attached to the wrong thing.",
+  "detector": "tagged-distractor",
+  "detectorParams": {},
+  "remediationId": "rem.a-bar-is-an-interval"
  }
 ]
