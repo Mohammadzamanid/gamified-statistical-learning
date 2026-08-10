@@ -110,11 +110,15 @@ None inside S2-13 except criterion 5, which is a seeded lesson owned by S2-14. T
 
 ## Local commit
 
-`PENDING`
+`968bc5865d145e2cbecc082ae0e20ffd55586da7`
 
 ## Remote verification
 
-`PENDING`
+```
+LOCAL_HEAD  = 968bc5865d145e2cbecc082ae0e20ffd55586da7
+REMOTE_HEAD = 968bc5865d145e2cbecc082ae0e20ffd55586da7
+VERIFIED: MATCH
+```
 
 ## Next unit
 
