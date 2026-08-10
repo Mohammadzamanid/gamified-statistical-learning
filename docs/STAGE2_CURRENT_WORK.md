@@ -119,11 +119,15 @@ None inside S2-12 except criterion 4, which is S2-15's. The next unit is **S2-13
 
 ## Local commit
 
-`PENDING`
+`08f1c371038650f51bb4b48d19bd194122e11dbf`
 
 ## Remote verification
 
-`PENDING`
+```
+LOCAL_HEAD  = 08f1c371038650f51bb4b48d19bd194122e11dbf
+REMOTE_HEAD = 08f1c371038650f51bb4b48d19bd194122e11dbf
+VERIFIED: MATCH
+```
 
 ## Next unit
 

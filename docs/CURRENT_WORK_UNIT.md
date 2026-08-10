@@ -13,7 +13,7 @@ available.
 | | |
 |---|---|
 | Last completed unit | **S2-08** — Region 1 lessons and interactions (all 17 topic lessons, 4 cycles) |
-| Last unit attempted | **S2-12** — Central tendency lessons — **Partial**, 9 of 9 lessons Complete; criterion 4 unmet (`PENDING`, remote-verified) |
+| Last unit attempted | **S2-12** — Central tendency lessons — **Partial**, 9 of 9 lessons Complete; criterion 4 unmet (`08f1c37`, remote-verified) |
 | Previous unit | **S2-11** — Region 2 world and curriculum architecture — **Complete** (`dfb8e4f`, remote-verified) |
 | Previous unit | **S2-10** — Region 1 boss investigation — **Complete** (`dc87d8b`, remote-verified) |
 | Previous unit | **S2-09** — Region 1 validated content expansion — **Partial**, 17 of 22 topics meet §4; the 5 remaining are Region 2, owned by S2-17 (`01f29ad`, remote-verified) |
