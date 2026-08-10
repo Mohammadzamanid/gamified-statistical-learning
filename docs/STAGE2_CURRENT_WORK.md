@@ -121,11 +121,15 @@ then `l.r2-comparing-distributions` last, which is what meets S2-13's criterion 
 
 ## Local commit
 
-`PENDING`
+`c1b949a7978e08e8ba87f065514c5e99b01f1ffb`
 
 ## Remote verification
 
-`PENDING`
+```
+LOCAL_HEAD  = c1b949a7978e08e8ba87f065514c5e99b01f1ffb
+REMOTE_HEAD = c1b949a7978e08e8ba87f065514c5e99b01f1ffb
+VERIFIED: MATCH
+```
 
 ## Next unit
 
