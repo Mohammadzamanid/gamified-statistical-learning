@@ -110,5 +110,49 @@
     22
    ]
   ]
+ },
+ {
+  "id": "ds.crew-sizes",
+  "title": "Crew aboard ten boats",
+  "description": "How many hands each of ten boats sailed with on the morning tide.",
+  "columns": [
+   {
+    "name": "Crew",
+    "kind": "numeric",
+    "unit": "hands"
+   }
+  ],
+  "rows": [
+   [
+    4
+   ],
+   [
+    5
+   ],
+   [
+    5
+   ],
+   [
+    6
+   ],
+   [
+    6
+   ],
+   [
+    6
+   ],
+   [
+    7
+   ],
+   [
+    7
+   ],
+   [
+    8
+   ],
+   [
+    12
+   ]
+  ]
  }
 ]

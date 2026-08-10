@@ -4,6 +4,8 @@ import { QuestionInteraction } from "../components/QuestionRenderers";
 import { FeedbackPanel } from "../components/FeedbackPanel";
 import { BarChart } from "../components/BarChart";
 import { Histogram } from "../components/Histogram";
+import { DotPlot } from "../components/DotPlot";
+import { BoxPlot } from "../components/BoxPlot";
 import { DifficultyPips } from "../components/MasteryBadge";
 
 export function QuestionScreen(): JSX.Element {
@@ -50,6 +52,14 @@ export function QuestionScreen(): JSX.Element {
 
         {dataset && question.visual.kind === "histogram" && (
           <Histogram dataset={dataset} caption={question.visual.caption} accessibleDescription={question.visual.accessibleDescription} />
+        )}
+
+        {dataset && question.visual.kind === "dot-plot" && (
+          <DotPlot dataset={dataset} caption={question.visual.caption} accessibleDescription={question.visual.accessibleDescription} />
+        )}
+
+        {dataset && question.visual.kind === "box-plot" && (
+          <BoxPlot dataset={dataset} caption={question.visual.caption} accessibleDescription={question.visual.accessibleDescription} />
         )}
 
         {/*

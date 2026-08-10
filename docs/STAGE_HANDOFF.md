@@ -16,7 +16,7 @@ after Stage 1 was lost because commits were never pushed to a durable remote. Re
 
 - **Stage 1: surviving, verified, green.** Not re-created — the original commit `7add4bc` was carried forward from the
   archive's own `.git` directory, with authorship intact.
-- **Stage 2: in progress, and not recoverable.** Reconstruction began 2026-08-04; S2-01 through S2-08, S2-10 and S2-11 are complete and S2-12 is **Partial** (all 9 lessons Complete, editable datasets deferred to S2-15) and S2-13 is **Partial** (all 6 lessons Complete, distribution comparison deferred to S2-14) and S2-14 is **Partial** (cycle 1, `c1b949a`, remote-verified); S2-09 is **Partial**, and only because §4 is stated over all 22 topics — every Region 1 topic meets it. Nothing
+- **Stage 2: in progress, and not recoverable.** Reconstruction began 2026-08-04; S2-01 through S2-08, S2-10 and S2-11 are complete and S2-12 is **Partial** (all 9 lessons Complete, editable datasets deferred to S2-15) and S2-13 is **Partial** (all 6 lessons Complete, distribution comparison deferred to S2-14) and S2-14 is **Partial** (cycle 2, `PENDING`, remote-verified); S2-09 is **Partial**, and only because §4 is stated over all 22 topics — every Region 1 topic meets it. Nothing
   in it is recovered source.
 - **Stages 3–6: not started, and not recoverable.** They must be **reconstructed** from the surviving Stage 1 source,
   the specifications, and the known defect history. They may never be described as recovered source, and no metric may
@@ -37,7 +37,7 @@ after Stage 1 was lost because commits were never pushed to a durable remote. Re
 | Milestone exports | `../gsl-exports/` — source ZIP + git bundle + manifest + SHA-256 checksums |
 | Working tree | clean |
 | Node / npm used | v22.22.2 / 10.9.7 |
-| Test suite | **538 tests / 38 files**, all passing (Stage 1 baseline was 73 / 14) |
+| Test suite | **557 tests / 40 files**, all passing (Stage 1 baseline was 73 / 14) |
 | Build | passing (**538.47 kB, 143.72 kB gzip**; baseline was 285.73 kB / 83.82 kB) |
 | Source modified since baseline | S2-01 … S2-08 — achievements + region completion, three new interactions, the enforced interaction audit, the review queue, the Region 1 topic architecture, and all 17 Region 1 lessons |
 | Curriculum | 2 regions · **6 modules** · **20 lessons** · **23 skills** · **145 questions** (baseline 2/2/3/6/14) |
@@ -105,34 +105,40 @@ branch/tag deletion) are forbidden without explicit owner permission. See `REMOT
 
 ## 5. Next unit
 
-**S2-14 continued — dot plots and box plots, each with the renderer it needs.**
+**S2-14 continued — scatterplots, with the renderer they need**, then choosing graphs and misleading graphs, and
+`l.r2-comparing-distributions` last.
 
-**2 of S2-14's 9 lessons are Complete**: bar charts and histograms. What remains is dot plots, box plots,
-scatterplots, choosing graphs, misleading graphs, and `l.r2-comparing-distributions` inherited from S2-13.
+**4 of S2-14's 9 lessons are Complete**: bar charts, histograms, dot plots, box plots. `scatter` is the last chart kind
+the graph lessons need and it is still only in the schema — check
+`src/renderer/components/rendered-visuals.ts` before writing a question that names it, because content naming an
+undrawable kind fails the interaction audit by design (D-043). `Histogram.tsx`, `DotPlot.tsx` and `BoxPlot.tsx` are the
+worked examples: about a hundred lines of SVG, its kind added to the list, and a branch in `QuestionScreen`.
 
-**Read `src/renderer/components/rendered-visuals.ts` before writing a graph lesson.** `VisualSpecSchema` accepts eight
-visual kinds and the screen draws two. A question naming a kind that is not on the drawable list now fails the
-interaction audit by name — which is the point, because before S2-14 it passed every check and rendered nothing at all,
-chart *and* accessible description (D-043). **So each remaining graph lesson costs a renderer before it costs
-content.** `Histogram.tsx` is the worked example: about a hundred lines of SVG, plus its kind added to the list, plus
-the branch in `QuestionScreen`.
+**A scatterplot needs a two-column dataset**, unlike the three built so far. `DatasetSchema` already supports it —
+`ds.harbor-catch` has a categorical and a numeric column — but every existing chart component reads *the first* numeric
+column and ignores the rest. A scatter component has to read two, so give it the pair explicitly rather than by
+position, or it will silently plot a column against itself.
 
-**Test the arithmetic behind any picture you build (D-044).** `buildBins` is exported and unit-tested against the
-shipped dataset because `l.r2-histograms` asserts exact bin counts in its questions *and* in the chart's accessible
-description. A box plot has the same exposure: its whiskers and hinges are quartiles, and a lesson that states them is
-wrong the moment the computation drifts.
+**Test the arithmetic behind any picture you build (D-044), and use one convention for one taught number (D-045).**
+`buildBins`, `stackDots` and `fiveNumberSummary` are all exported and tested against shipped datasets because the
+lessons state their outputs in questions *and* in accessible descriptions. Quartiles now exist in two named
+conventions: `quartilesByHalves` is what the curriculum teaches and what the laboratory and box plot use;
+`quartiles` interpolates and matches spreadsheets. `tests/unit/quartile-conventions.test.ts` asserts they differ, so
+do not "fix" one into the other.
 
 **Two staged inherited questions remain**, and their entries in `tests/helpers/staged-inherited.ts` come out at the
 same moment the questions get roles: `q.point-thursday-catch` in `l.r2-scatterplots`, `q.error-id-causation` in
-`l.r2-misleading-graphs`. The audit ceiling is now 2, so the list can only shrink further.
+`l.r2-misleading-graphs`. The audit ceiling is 2, so the list can only shrink.
 
-**`l.r2-comparing-distributions` belongs last.** It draws on centre, spread, shape and graphs, so it wants every other
-Region 2 lesson written first. Writing it is what meets S2-13's criterion 5 and what makes the boss's stage 5 legal
-under D-028.
+**`l.r2-comparing-distributions` belongs last** — it draws on centre, spread, shape and graphs. Writing it is what
+meets S2-13's criterion 5 and makes the boss's stage 5 legal under D-028.
 
-**Delete a seed when you replace it, not just its reference.** `q.seed.r2-bar-charts` was dropped from its lesson and
-left in `questions.json`, reachable by nobody; the reachability audit named it immediately. That is the second time the
-second half of that pattern has been the easy one to forget.
+**Delete a seed when you replace it, not just its reference.** Twice now a seed has been dropped from its lesson and
+left in `questions.json`, reachable by nobody; the reachability audit catches it immediately, but it is avoidable.
+
+**Check the misconception role carries a misconception.** This cycle put a question there with no tag at all — the
+role promised a challenge the engine could not diagnose, and requirement 13 named it on the first run. If a lesson's
+natural misconception is not obvious, look at what its own explanations keep warning against.
 
 **A lesson is not finished until something has played it (D-037).** `tests/integration/region2-lessons.test.ts`
 iterates `COMPLETE_LESSONS`, so a lesson you declare is played automatically. Read that file's header before trusting
@@ -150,9 +156,9 @@ what `STAGED_INHERITED` declares, and no demonstration. The moment you grow one 
 `tests/helpers/complete-lessons.ts`, and `tests/audit/lesson-structure.test.ts` will then hold it to all 18 of scope
 §5's requirements. That is the same contract S2-08 worked under for Region 1, and the same guard.
 
-`docs/REGION2_BOSS_SPEC.md` maps the boss's five stages onto this module sequence. Stages 4 and 5 are S2-14's territory
-— histograms, box plots, bin width, truncated axes, then the verdict — so it is worth reading before writing lessons:
-the case is what the lessons have to make answerable.
+`docs/REGION2_BOSS_SPEC.md` maps the boss's five stages onto this module sequence. Stage 4 draws on histograms, box
+plots, bin width and truncated axes — all but the last now written — so it is worth reading before writing the
+remaining lessons: the case is what they have to make answerable.
 
 ### Region 2's architecture, and two rules it added
 

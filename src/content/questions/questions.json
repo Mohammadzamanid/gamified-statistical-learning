@@ -6902,48 +6902,6 @@
   "estimatedSeconds": 120
  },
  {
-  "id": "q.seed.r2-dot-plots",
-  "topicId": "t.r2-dot-plots",
-  "objectiveId": "obj.r2-dot-plots",
-  "skillIds": [
-   "skill.r2-dot-plots"
-  ],
-  "difficulty": 2,
-  "interaction": "numeric-input",
-  "prompt": "A dot plot shows three dots above 4 and two above 7. How many cases does it show ALTOGETHER?",
-  "answer": {
-   "kind": "numeric",
-   "value": 5,
-   "tolerance": 0,
-   "unit": "cases"
-  },
-  "explanation": "The answer is 5 cases. This lesson is a seed: its full teaching arrives with the Region 2 lesson units.",
-  "accessibilityDescription": "A numeric seed question for a Region 2 lesson that has not been written yet. Enter the answer as a number.",
-  "misconceptionIds": [],
-  "estimatedSeconds": 45
- },
- {
-  "id": "q.seed.r2-box-plots",
-  "topicId": "t.r2-box-plots",
-  "objectiveId": "obj.r2-box-plots",
-  "skillIds": [
-   "skill.r2-box-plots"
-  ],
-  "difficulty": 2,
-  "interaction": "numeric-input",
-  "prompt": "A box plot has a box from 4 to 12 with a line at 8. What is the MEDIAN?",
-  "answer": {
-   "kind": "numeric",
-   "value": 8,
-   "tolerance": 0,
-   "unit": "crates"
-  },
-  "explanation": "The answer is 8 crates. This lesson is a seed: its full teaching arrives with the Region 2 lesson units.",
-  "accessibilityDescription": "A numeric seed question for a Region 2 lesson that has not been written yet. Enter the answer as a number.",
-  "misconceptionIds": [],
-  "estimatedSeconds": 45
- },
- {
   "id": "q.seed.r2-scatterplots",
   "topicId": "t.r2-scatterplots",
   "objectiveId": "obj.r2-scatterplots",
@@ -9988,6 +9946,444 @@
   "explanation": "The bin from 2 up to 6 metres holds 3 soundings and the bin from 6 up to 10 holds 6, so 9 soundings are shallower than 10 metres — a little under half the season. The question is answerable exactly because 10 is a bin edge; asking how many are shallower than 9 could not be answered from this chart at all, since that reading falls inside a bin rather than between two.",
   "misconceptionIds": [],
   "accessibilityDescription": "A histogram of twenty channel soundings; enter how many are shallower than ten metres, as a number.",
+  "estimatedSeconds": 110
+ },
+ {
+  "id": "q.r2-dot-plots",
+  "topicId": "t.r2-dot-plots",
+  "objectiveId": "obj.r2-dot-plots",
+  "skillIds": [
+   "skill.r2-dot-plots"
+  ],
+  "difficulty": 1,
+  "interaction": "numeric-input",
+  "prompt": "Using the dot plot of crew sizes, how many boats sailed with six hands?",
+  "visual": {
+   "kind": "dot-plot",
+   "datasetId": "ds.crew-sizes",
+   "caption": "Crew aboard ten boats",
+   "accessibleDescription": "Dot plot of the crew aboard ten boats: one boat sailed with 4 hands, two with 5, three with 6, two with 7, one with 8, and one with 12."
+  },
+  "answer": {
+   "kind": "numeric",
+   "value": 3,
+   "tolerance": 0,
+   "unit": "boats"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Find 6 on the number line and count the dots stacked above it."
+   },
+   {
+    "level": 2,
+    "text": "It is the tallest column on the plot."
+   }
+  ],
+  "explanation": "Three dots are stacked above 6, so three boats sailed with six hands. Each dot is one boat, so counting a column is counting boats — nothing has been pooled or summarised on the way.",
+  "solutionSteps": [
+   "Find 6 on the number line along the bottom.",
+   "Count the dots stacked above it.",
+   "There are three, so three boats sailed with six hands."
+  ],
+  "misconceptionIds": [],
+  "accessibilityDescription": "A dot plot of crew sizes on ten boats; enter how many boats sailed with six hands, as a number.",
+  "estimatedSeconds": 55
+ },
+ {
+  "id": "q.r2-dot-plots-independent",
+  "topicId": "t.r2-dot-plots",
+  "objectiveId": "obj.r2-dot-plots",
+  "skillIds": [
+   "skill.r2-dot-plots"
+  ],
+  "difficulty": 2,
+  "interaction": "numeric-input",
+  "prompt": "Using the dot plot of crew sizes, how many boats sailed with six hands or fewer?",
+  "visual": {
+   "kind": "dot-plot",
+   "datasetId": "ds.crew-sizes",
+   "caption": "Crew aboard ten boats",
+   "accessibleDescription": "Dot plot of the crew aboard ten boats: one boat sailed with 4 hands, two with 5, three with 6, two with 7, one with 8, and one with 12."
+  },
+  "answer": {
+   "kind": "numeric",
+   "value": 6,
+   "tolerance": 0,
+   "unit": "boats"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Count every dot from the left-hand end of the line up to and including the column at 6."
+   }
+  ],
+  "explanation": "The columns at 4, 5 and 6 hold 1, 2 and 3 dots, which is 6 boats in all. Counting across a dot plot works because every reading is still on the picture as its own mark — a question like this cannot be answered from a histogram unless the cut falls exactly on a bin edge.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "A dot plot of crew sizes; enter how many boats sailed with six hands or fewer, as a number.",
+  "estimatedSeconds": 80
+ },
+ {
+  "id": "q.r2-dot-plots-misconception",
+  "topicId": "t.r2-dot-plots",
+  "objectiveId": "obj.r2-dot-plots",
+  "skillIds": [
+   "skill.r2-dot-plots",
+   "skill.r2-mode"
+  ],
+  "difficulty": 3,
+  "interaction": "multiple-choice",
+  "prompt": "The tallest column on the dot plot has three dots and stands above 6. What is the mode of these crew sizes?",
+  "visual": {
+   "kind": "dot-plot",
+   "datasetId": "ds.crew-sizes",
+   "caption": "Crew aboard ten boats",
+   "accessibleDescription": "Dot plot of the crew aboard ten boats: one boat sailed with 4 hands, two with 5, three with 6, two with 7, one with 8, and one with 12."
+  },
+  "choices": [
+   {
+    "id": "ch.six",
+    "text": "6 hands - the value the tallest stack stands over"
+   },
+   {
+    "id": "ch.three",
+    "text": "3 - the height of the tallest stack",
+    "misconceptionId": "mc.dot-height-read-as-value"
+   },
+   {
+    "id": "ch.ten",
+    "text": "10 - every boat on the plot is part of the mode"
+   }
+  ],
+  "answer": {
+   "kind": "choice",
+   "correctChoiceIds": [
+    "ch.six"
+   ]
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "A column carries two numbers: where it sits, and how tall it is. Which one is a crew size?"
+   }
+  ],
+  "explanation": "The mode is the most common value, so it is read along the number line: 6 hands. The 3 is how many boats sailed with that crew, which answers a different question — and the units give it away, since a crew size is measured in hands and a count of boats is not.",
+  "misconceptionIds": [
+   "mc.dot-height-read-as-value"
+  ],
+  "accessibilityDescription": "A dot plot of crew sizes; three candidate answers for the mode, one of which is the stack height.",
+  "estimatedSeconds": 90
+ },
+ {
+  "id": "q.r2-dot-plots-application",
+  "topicId": "t.r2-dot-plots",
+  "objectiveId": "obj.r2-dot-plots",
+  "skillIds": [
+   "skill.r2-dot-plots",
+   "skill.r2-histograms"
+  ],
+  "difficulty": 3,
+  "interaction": "multiple-choice",
+  "prompt": "A surveyor has 900 depth readings, almost none of them exactly equal. Why would a dot plot serve them badly?",
+  "choices": [
+   {
+    "id": "ch.crowded",
+    "text": "Nearly every column would be one dot high, so the picture would show no shape at all"
+   },
+   {
+    "id": "ch.large",
+    "text": "Dot plots cannot be drawn for more than a hundred readings"
+   },
+   {
+    "id": "ch.precise",
+    "text": "Dot plots only work for whole numbers, and depths are measured to decimals"
+   }
+  ],
+  "answer": {
+   "kind": "choice",
+   "correctChoiceIds": [
+    "ch.crowded"
+   ]
+  },
+  "explanation": "A dot plot earns its keep by stacking readings that share a value. When values almost never repeat, nothing stacks: 900 columns one dot high is a smear rather than a shape. That is exactly the point at which pooling into intervals stops losing information worth keeping, which is what a histogram does.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "Three explanations of why a dot plot suits small datasets and fails on large ones.",
+  "estimatedSeconds": 90
+ },
+ {
+  "id": "q.r2-dot-plots-teachback",
+  "topicId": "t.r2-dot-plots",
+  "objectiveId": "obj.r2-dot-plots",
+  "skillIds": [
+   "skill.r2-dot-plots"
+  ],
+  "difficulty": 3,
+  "interaction": "short-explanation",
+  "prompt": "Explain in your own words what a dot plot keeps that a histogram gives up, and what it costs. Use the words 'reading' and 'stack'.",
+  "answer": {
+   "kind": "text",
+   "requiredKeywords": [
+    "reading",
+    "stack"
+   ],
+   "forbiddenKeywords": []
+  },
+  "explanation": "A dot plot marks every reading separately and lets dots that share a value stack, so no individual is lost and any count can be taken straight off the picture. A histogram pools readings into intervals and cannot answer questions inside a bin. What the dot plot costs is legibility: once there are many readings, or once values stop repeating, the stacks vanish and the picture stops saying anything.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "An open-response question about what a dot plot keeps that a histogram discards, and its cost.",
+  "estimatedSeconds": 130
+ },
+ {
+  "id": "q.r2-dot-plots-mastery",
+  "topicId": "t.r2-dot-plots",
+  "objectiveId": "obj.r2-dot-plots",
+  "skillIds": [
+   "skill.r2-dot-plots",
+   "skill.r2-mode"
+  ],
+  "difficulty": 3,
+  "interaction": "numeric-input",
+  "prompt": "Using the dot plot of crew sizes, how many boats sailed with more hands than the most common crew size?",
+  "visual": {
+   "kind": "dot-plot",
+   "datasetId": "ds.crew-sizes",
+   "caption": "Crew aboard ten boats",
+   "accessibleDescription": "Dot plot of the crew aboard ten boats: one boat sailed with 4 hands, two with 5, three with 6, two with 7, one with 8, and one with 12."
+  },
+  "answer": {
+   "kind": "numeric",
+   "value": 4,
+   "tolerance": 0,
+   "unit": "boats"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Find the most common crew size first, then count every dot to the right of it."
+   }
+  ],
+  "explanation": "The most common crew size is 6 hands. To the right of it sit two boats at 7, one at 8 and one at 12, which is 4 boats in all. Answering this needs both readings a dot plot offers at once: the value under the tallest stack, and then a count taken straight off the individual dots.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "A dot plot of crew sizes; enter how many boats sailed with more hands than the most common crew size.",
+  "estimatedSeconds": 100
+ },
+ {
+  "id": "q.r2-box-plots",
+  "topicId": "t.r2-box-plots",
+  "objectiveId": "obj.r2-box-plots",
+  "skillIds": [
+   "skill.r2-box-plots",
+   "skill.r2-iqr"
+  ],
+  "difficulty": 1,
+  "interaction": "numeric-input",
+  "prompt": "Using the box plot of channel soundings, how wide is the box, in metres?",
+  "visual": {
+   "kind": "box-plot",
+   "datasetId": "ds.channel-depths",
+   "caption": "Channel soundings, five-number summary",
+   "accessibleDescription": "Box plot of twenty channel soundings: the smallest is 2 metres, the first quartile 7, the median 10.5, the third quartile 14.5 and the largest 22. The box spans 7 to 14.5 metres."
+  },
+  "answer": {
+   "kind": "numeric",
+   "value": 7.5,
+   "tolerance": 0.01,
+   "unit": "m"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "The box runs from the first quartile to the third."
+   },
+   {
+    "level": 2,
+    "text": "The first quartile is 7 metres and the third is 14.5."
+   }
+  ],
+  "explanation": "The box runs from the first quartile at 7 metres to the third at 14.5, so it is 7.5 metres wide. That width is the interquartile range, and the box holds the middle half of the season's soundings.",
+  "solutionSteps": [
+   "Read the left edge of the box: the first quartile, 7 metres.",
+   "Read the right edge: the third quartile, 14.5 metres.",
+   "Subtract: 14.5 - 7 = 7.5 metres, which is the interquartile range."
+  ],
+  "misconceptionIds": [],
+  "accessibilityDescription": "A box plot of channel soundings; enter the width of the box in metres, as a number.",
+  "estimatedSeconds": 70
+ },
+ {
+  "id": "q.r2-box-plots-independent",
+  "topicId": "t.r2-box-plots",
+  "objectiveId": "obj.r2-box-plots",
+  "skillIds": [
+   "skill.r2-box-plots",
+   "skill.range"
+  ],
+  "difficulty": 2,
+  "interaction": "numeric-input",
+  "prompt": "Using the box plot of channel soundings, how far does the whole plot reach from the tip of one whisker to the tip of the other, in metres?",
+  "visual": {
+   "kind": "box-plot",
+   "datasetId": "ds.channel-depths",
+   "caption": "Channel soundings, five-number summary",
+   "accessibleDescription": "Box plot of twenty channel soundings: the smallest is 2 metres, the first quartile 7, the median 10.5, the third quartile 14.5 and the largest 22. The box spans 7 to 14.5 metres."
+  },
+  "answer": {
+   "kind": "numeric",
+   "value": 20,
+   "tolerance": 0.01,
+   "unit": "m"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "The whisker tips are the smallest and largest readings, so this is the range."
+   }
+  ],
+  "explanation": "The whiskers reach out to the smallest sounding at 2 metres and the largest at 22, so tip to tip is 20 metres — which is the range. A box plot shows the range and the interquartile range in one picture, which is what makes the difference between them visible rather than something to be told about.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "A box plot of channel soundings; enter the distance from one whisker tip to the other, in metres.",
+  "estimatedSeconds": 85
+ },
+ {
+  "id": "q.r2-box-plots-misconception",
+  "topicId": "t.r2-box-plots",
+  "objectiveId": "obj.r2-box-plots",
+  "skillIds": [
+   "skill.r2-box-plots"
+  ],
+  "difficulty": 3,
+  "interaction": "multiple-choice",
+  "prompt": "On the box plot the upper whisker covers 7.5 metres and the lower covers 5. What does the longer upper whisker tell you?",
+  "visual": {
+   "kind": "box-plot",
+   "datasetId": "ds.channel-depths",
+   "caption": "Channel soundings, five-number summary",
+   "accessibleDescription": "Box plot of twenty channel soundings: the smallest is 2 metres, the first quartile 7, the median 10.5, the third quartile 14.5 and the largest 22. The box spans 7 to 14.5 metres."
+  },
+  "choices": [
+   {
+    "id": "ch.spread",
+    "text": "The deepest quarter of the soundings is spread over more ground than the shallowest quarter"
+   },
+   {
+    "id": "ch.more",
+    "text": "More soundings were taken in the deep end than in the shallow end",
+    "misconceptionId": "mc.box-width-means-count"
+   },
+   {
+    "id": "ch.deeper",
+    "text": "The channel is getting deeper over the course of the season"
+   }
+  ],
+  "answer": {
+   "kind": "choice",
+   "correctChoiceIds": [
+    "ch.spread"
+   ]
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Ask how many readings each whisker covers. The quartiles decide that, and they cut the data into equal parts."
+   }
+  ],
+  "explanation": "Both whiskers cover a quarter of the soundings — five each — because the quartiles cut the sorted data into four equal-sized parts. The upper one is longer because those five readings are spread over more metres, not because there are more of them. A box plot encodes counts in its cuts and distances in its lengths, and reading one as the other is the mistake it invites.",
+  "misconceptionIds": [
+   "mc.box-width-means-count"
+  ],
+  "accessibilityDescription": "A box plot of channel soundings; three readings of what a longer upper whisker means.",
+  "estimatedSeconds": 100
+ },
+ {
+  "id": "q.r2-box-plots-application",
+  "topicId": "t.r2-box-plots",
+  "objectiveId": "obj.r2-box-plots",
+  "skillIds": [
+   "skill.r2-box-plots",
+   "skill.r2-dot-plots"
+  ],
+  "difficulty": 3,
+  "interaction": "multiple-choice",
+  "prompt": "A surveyor must show whether four channels differ in depth, using one page. Why is a box plot each a better choice than a dot plot each?",
+  "choices": [
+   {
+    "id": "ch.compare",
+    "text": "Each channel reduces to the same five marks, so four of them can be read against one another at a glance"
+   },
+   {
+    "id": "ch.accurate",
+    "text": "Box plots are more accurate, because they use every reading rather than a sample"
+   },
+   {
+    "id": "ch.simple",
+    "text": "Box plots are easier to draw, so there is less chance of a mistake"
+   }
+  ],
+  "answer": {
+   "kind": "choice",
+   "correctChoiceIds": [
+    "ch.compare"
+   ]
+  },
+  "explanation": "A box plot is a much poorer picture of one dataset than a dot plot — it shows five numbers where the dot plot shows every reading. What it buys is comparability: four boxes on one scale put four medians, four middle halves and four reaches side by side, which four clouds of dots would not. Choosing a graph is choosing what to give up.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "Three reasons offered for preferring box plots to dot plots when comparing four datasets.",
+  "estimatedSeconds": 100
+ },
+ {
+  "id": "q.r2-box-plots-teachback",
+  "topicId": "t.r2-box-plots",
+  "objectiveId": "obj.r2-box-plots",
+  "skillIds": [
+   "skill.r2-box-plots"
+  ],
+  "difficulty": 3,
+  "interaction": "short-explanation",
+  "prompt": "Explain in your own words why a long whisker on a box plot does not mean more readings lie out there. Use the words 'quarter' and 'spread'.",
+  "answer": {
+   "kind": "text",
+   "requiredKeywords": [
+    "quarter",
+    "spread"
+   ],
+   "forbiddenKeywords": []
+  },
+  "explanation": "The whiskers are drawn from the quartiles, and the quartiles cut the sorted data into four parts holding equal numbers of readings. Each whisker therefore covers exactly a quarter of the data however long it is. A long whisker means that quarter is spread over more ground — the readings out there are further apart, not more numerous.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "An open-response question about why whisker length shows spread rather than quantity.",
+  "estimatedSeconds": 130
+ },
+ {
+  "id": "q.r2-box-plots-mastery",
+  "topicId": "t.r2-box-plots",
+  "objectiveId": "obj.r2-box-plots",
+  "skillIds": [
+   "skill.r2-box-plots"
+  ],
+  "difficulty": 3,
+  "interaction": "numeric-input",
+  "prompt": "The box plot summarises twenty soundings. How many of them lie between the left edge of the box and the line inside it?",
+  "visual": {
+   "kind": "box-plot",
+   "datasetId": "ds.channel-depths",
+   "caption": "Channel soundings, five-number summary",
+   "accessibleDescription": "Box plot of twenty channel soundings: the smallest is 2 metres, the first quartile 7, the median 10.5, the third quartile 14.5 and the largest 22. The box spans 7 to 14.5 metres."
+  },
+  "answer": {
+   "kind": "numeric",
+   "value": 5,
+   "tolerance": 0,
+   "unit": "soundings"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "That section runs from the first quartile to the median. What share of the data does it hold?"
+   }
+  ],
+  "explanation": "From the first quartile to the median is one of the four equal parts the quartiles cut, so it holds a quarter of the twenty soundings: five. The answer comes from the cuts rather than from the picture's measurements, which is the discipline this chart asks for — count with the quartiles, and read distances with the axis.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "A box plot of twenty channel soundings; enter how many lie between the box's left edge and its median line.",
   "estimatedSeconds": 110
  }
 ]

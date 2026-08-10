@@ -24,7 +24,9 @@ export function LabScreen(): JSX.Element {
     if (data.length === 0) {
       note = "Enter at least one number to run the instruments.";
     } else {
-      const q = stats.quartiles(data);
+      // The taught convention, not the interpolated one: a learner who has just
+      // finished l.r2-quartiles must be able to check their own working here (D-045).
+      const q = stats.quartilesByHalves(data);
       summary = [
         ["Count", String(data.length)],
         ["Sum", String(roundTo(stats.sum(data), 4))],
@@ -33,7 +35,7 @@ export function LabScreen(): JSX.Element {
         ["Mode", stats.mode(data).join(", ")],
         ["Range", String(roundTo(stats.range(data), 4))],
         ["Q1 / Q2 / Q3", `${roundTo(q.q1, 4)} / ${roundTo(q.q2, 4)} / ${roundTo(q.q3, 4)}`],
-        ["IQR", String(roundTo(stats.interquartileRange(data), 4))]
+        ["IQR", String(roundTo(stats.interquartileRangeByHalves(data), 4))]
       ];
       if (data.length >= 2) {
         summary.push(

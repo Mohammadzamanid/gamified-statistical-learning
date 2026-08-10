@@ -270,5 +270,21 @@
   "detector": "tagged-distractor",
   "detectorParams": {},
   "remediationId": "rem.a-bar-is-an-interval"
+ },
+ {
+  "id": "mc.box-width-means-count",
+  "title": "A box plot's widths read as quantities",
+  "description": "The learner reads a long whisker or a wide box as holding more readings than a short one, rather than the same quarter spread over more ground. The reading is natural for anyone arriving from bar charts and histograms, where width or height does mean amount.",
+  "detector": "tagged-distractor",
+  "detectorParams": {},
+  "remediationId": "rem.each-part-is-a-quarter"
+ },
+ {
+  "id": "mc.dot-height-read-as-value",
+  "title": "A dot plot's stack height read as the value",
+  "description": "The learner reads how many dots are in the tallest column and reports that count as the mode, rather than the value the column stands over. Both numbers are on the picture and only one answers the question.",
+  "detector": "tagged-distractor",
+  "detectorParams": {},
+  "remediationId": "rem.read-along-not-up"
  }
 ]

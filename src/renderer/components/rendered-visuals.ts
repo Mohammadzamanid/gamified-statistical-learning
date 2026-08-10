@@ -25,7 +25,9 @@ export type VisualKind = VisualSpec["kind"];
 
 export const RENDERED_VISUAL_KINDS: ReadonlySet<VisualKind> = new Set<VisualKind>([
   "bar-chart",
-  "histogram"
+  "histogram",
+  "dot-plot",
+  "box-plot"
 ]);
 
 export function hasVisualRenderer(kind: VisualKind): boolean {

@@ -369,3 +369,21 @@ shipped dataset, in the same spirit as D-001 keeping the demonstration readout o
 is content, and content is checked. The test earns its place immediately — a probe adding one sounding to the dataset
 fails it by name, which is exactly the drift that would otherwise leave a lesson confidently wrong about its own
 picture. (S2-14)
+
+**D-045 — One taught number, one convention, and the bench must agree with the lesson.**
+`src/core/statistics` computed quartiles by R-7 linear interpolation, matching NumPy and spreadsheets.
+`l.r2-quartiles` teaches the median-of-halves rule. They disagree on **every dataset the shipped lessons use** — for
+the eight readings the guided question works through, the lesson computes Q1 = 4.5 and the core returns 4.75; the IQR
+lesson's twelve readings give 12.5 against 11.25. That was not latent: `LabScreen` reported the interpolated figures,
+so a learner who had just been taught to compute Q1 by hand could type the same data into the descriptive bench and be
+told a different answer, with nothing on screen to say why. A bench that contradicts the lesson a learner has just
+finished is worse than no bench.
+
+Neither convention is a bug and both are worth having, so the fix is to name them and choose per surface.
+`quartilesByHalves`, `interquartileRangeByHalves` and `fiveNumberSummary` implement the taught rule and are what the
+laboratory reports and the box plot draws; `quartiles` keeps the interpolated rule for agreement with the tools a
+learner meets outside. `tests/unit/quartile-conventions.test.ts` pins both, including an assertion that they **differ**
+on the lessons' own data — so neither can be quietly "fixed" into the other, which is exactly how one surface would
+drift back into contradicting another. The box plot then takes all five of its numbers from one call rather than
+computing the pieces separately, because a chart drawing its median from one rule and its hinges from another is the
+same defect one component further down. (S2-14)

@@ -407,5 +407,29 @@
   "skillIds": [
    "skill.r2-histograms"
   ]
+ },
+ {
+  "id": "rem.each-part-is-a-quarter",
+  "title": "Every section of a box plot holds a quarter",
+  "explanation": "A box plot is drawn from the quartiles, and the quartiles cut the sorted data into four parts of equal size. So the lower whisker, the two halves of the box and the upper whisker each hold a quarter of the readings no matter how long or short they look. A long whisker means that quarter is spread thinly over a lot of ground - it never means there are more readings out there.",
+  "microLesson": "Take a channel whose soundings run 2, 7, 10.5, 14.5, 22 as its five numbers. The lower whisker covers 5 metres and the upper covers 7.5, so the upper looks bigger. Both hold exactly five of the twenty soundings. What differs is how tightly those five sit, which is what the picture is telling you.",
+  "followUpQuestionIds": [
+   "q.r2-box-plots"
+  ],
+  "skillIds": [
+   "skill.r2-box-plots"
+  ]
+ },
+ {
+  "id": "rem.read-along-not-up",
+  "title": "Read the mode along the line, not up the stack",
+  "explanation": "A dot plot carries two numbers at every column and they answer different questions. How far along the line the column sits is the value the readings took; how many dots are stacked there is how many readings took it. The mode is the most common value, so it is read along the line - the height only tells you which column to look under.",
+  "microLesson": "Ten boats, with three of them sailing at six hands. The tallest column has 3 dots and stands over 6. The mode is 6 hands, because that is the crew size that came up most; 3 is how often it came up. Checking the units settles it every time - a mode of crew sizes is measured in hands.",
+  "followUpQuestionIds": [
+   "q.r2-dot-plots"
+  ],
+  "skillIds": [
+   "skill.r2-dot-plots"
+  ]
  }
 ]

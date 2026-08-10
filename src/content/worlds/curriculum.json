@@ -4161,46 +4161,227 @@
    "moduleId": "m.r2-pictures",
    "title": "Every Case Shown",
    "objectiveIds": [
-    "obj.r2-dot-plots"
+    "obj.r2-dot-plots",
+    "obj.r2-histograms",
+    "obj.r2-mode"
    ],
    "concepts": [
     {
      "id": "c.r2-dot-plots",
-     "title": "Every Case Shown",
-     "summary": "A dot plot puts one dot per case above its value, so nothing is summarised away.",
-     "body": "For a small dataset it beats every summary, because the reader can see the individual cases and count them."
+     "title": "One dot, one reading",
+     "summary": "Every reading gets its own mark, stacked over the value it took.",
+     "body": "A dot plot puts a number line along the bottom and drops one dot above the value each reading took, stacking dots that share a value. Nothing is pooled and nothing is summarised, so the count of dots is the count of readings and any single one can be picked out again. That is the whole trade: a dot plot keeps the individuals a histogram gives up, which is worth having while the dataset is small enough to count."
+    },
+    {
+     "id": "c.r2-dot-plots-shape",
+     "title": "The shape arrives for free",
+     "summary": "Where the dots pile up is the same shape a histogram would draw.",
+     "body": "Because dots stack, the tallest column is the most frequent value — the mode, read straight off the picture without counting. The spread, any cluster, and any reading standing alone out on the line are equally visible. A dot plot is therefore both a list and a shape at once, which is why it is the picture to reach for first when there are few enough readings for it to work."
+    },
+    {
+     "id": "c.r2-dot-plots-limit",
+     "title": "It stops working when the data grows",
+     "summary": "Hundreds of readings make columns too tall and values too crowded to read.",
+     "body": "Ten readings make a legible dot plot; a thousand make a wall. Once values stop repeating exactly — measured depths rather than counted crew — almost every column is one dot high and the picture says nothing at all. That is the point at which pooling into intervals stops being a loss and becomes the only way to see anything, which is what the histogram is for."
     }
    ],
    "questionIds": [
-    "q.seed.r2-dot-plots"
+    "q.r2-dot-plots",
+    "q.r2-dot-plots-independent",
+    "q.r2-dot-plots-misconception",
+    "q.r2-dot-plots-application",
+    "q.r2-dot-plots-teachback",
+    "q.r2-dot-plots-mastery"
    ],
    "prerequisites": [
     "l.r2-histograms"
    ],
-   "estimatedMinutes": 15
+   "estimatedMinutes": 12,
+   "narrativeIntro": "Ten boats sail on the morning tide and the harbourmaster wants to see the crews at a glance, not summarised. With only ten readings there is no need to pool anything: a dot for each boat, stacked over the number it sailed with, shows the whole morning at once and hides nothing.",
+   "demonstration": {
+    "id": "dem.r2-dot-plots",
+    "title": "Stacking the repeats",
+    "experience": "Boats reporting the same crew size are stacked into one column above that number on the line. The readout gives how many boats end up in the tallest column — which is how many share the most common crew size.",
+    "accessibleDescription": "Two controls. The first sets how many boats sailed with six hands, the second how many sailed with seven. The readout gives how many more boats are in the six-hand column than the seven-hand one, and starts at 1 with 3 boats at six hands and 2 at seven.",
+    "controls": [
+     {
+      "id": "ctl.six",
+      "label": "Boats that sailed with six hands",
+      "min": 0,
+      "max": 12,
+      "step": 1,
+      "initial": 3
+     },
+     {
+      "id": "ctl.seven",
+      "label": "Boats that sailed with seven hands",
+      "min": 0,
+      "max": 12,
+      "step": 1,
+      "initial": 2
+     }
+    ],
+    "formula": "difference",
+    "readoutLabel": "How many more boats stack at six hands than at seven",
+    "readoutPrecision": 0,
+    "prediction": {
+     "prompt": "Three boats sailed with six hands and two with seven, so the six-hand column stands 1 dot taller and the readout shows 1. Two more boats come in, both with seven hands. Which column is tallest then?",
+     "options": [
+      {
+       "id": "opt.seven",
+       "text": "Seven hands - the readout falls to -1, so seven is now the most common crew"
+      },
+      {
+       "id": "opt.six",
+       "text": "Six hands - it was tallest to begin with, so it stays tallest"
+      },
+      {
+       "id": "opt.tie",
+       "text": "Neither - adding boats cannot change which column is tallest"
+      }
+     ],
+     "correctOptionId": "opt.seven",
+     "revealNote": "Four boats now sail with seven hands against three with six, so the seven-hand column is taller and the readout turns negative. The mode is whichever column stands highest, and on a dot plot that is a fact you can see rather than one you have to count for — which is the reason to draw the picture at all."
+    },
+    "observation": "Raise either control and its column grows. Set the two equal and the readout sits at 0, which is a morning with two equally common crew sizes and therefore two modes. The readout going negative is not an error: it says the taller column is the other one."
+   },
+   "formalTerm": {
+    "term": "Dot plot",
+    "definition": "A dot plot marks each reading with its own dot above its value on a number line, stacking dots that share a value. It shows every individual reading and the shape of the data at the same time, which makes it the picture for small sets and unreadable for large ones.",
+    "symbols": []
+   },
+   "guidedQuestionIds": [
+    "q.r2-dot-plots"
+   ],
+   "independentQuestionIds": [
+    "q.r2-dot-plots-independent"
+   ],
+   "misconceptionQuestionIds": [
+    "q.r2-dot-plots-misconception"
+   ],
+   "applicationQuestionIds": [
+    "q.r2-dot-plots-application"
+   ],
+   "teachBackQuestionIds": [
+    "q.r2-dot-plots-teachback"
+   ],
+   "masteryCheckQuestionIds": [
+    "q.r2-dot-plots-mastery"
+   ]
   },
   {
    "id": "l.r2-box-plots",
    "moduleId": "m.r2-pictures",
    "title": "Five Numbers as a Picture",
    "objectiveIds": [
-    "obj.r2-box-plots"
+    "obj.r2-box-plots",
+    "obj.r2-iqr",
+    "obj.compute-range",
+    "obj.r2-dot-plots"
    ],
    "concepts": [
     {
      "id": "c.r2-box-plots",
-     "title": "Five Numbers as a Picture",
-     "summary": "A box plot draws the minimum, first quartile, median, third quartile and maximum.",
-     "body": "It shows the middle half as a box and the reach as whiskers — and it hides how many cases there are, and whether the data has two peaks."
+     "title": "The five numbers",
+     "summary": "Minimum, first quartile, median, third quartile and maximum, drawn on one line.",
+     "body": "A box plot draws exactly five values. The box runs from the first quartile to the third, so its width is the interquartile range and it holds the middle half of the readings. A line inside the box marks the median. Whiskers run out to the smallest and largest readings, so the whole line from tip to tip is the range. Every measure of spread this region has taught is somewhere in that picture."
+    },
+    {
+     "id": "c.r2-box-plots-quarters",
+     "title": "Each part holds a quarter",
+     "summary": "The two whiskers and the two halves of the box each cover a quarter of the readings.",
+     "body": "The quartiles cut the sorted data into four equal-sized parts, and the box plot draws those cuts, so each of the four sections holds a quarter of the readings however wide or narrow it looks. A long whisker beside a short one does not mean more readings out there — it means the same quarter of them is spread over more ground. Reading width as quantity is the mistake this picture invites and the one worth guarding against."
+    },
+    {
+     "id": "c.r2-box-plots-comparing",
+     "title": "Built for comparison",
+     "summary": "Two box plots side by side compare centre and spread at a glance.",
+     "body": "One box plot is a summary; several drawn on the same scale are an argument. Because each reduces a whole dataset to the same five marks, two channels can be set beside one another and their medians, their middle halves and their reaches compared directly. That is what a box plot is for, and it is why it survives being a much poorer picture of a single dataset than a dot plot or a histogram."
     }
    ],
    "questionIds": [
-    "q.seed.r2-box-plots"
+    "q.r2-box-plots",
+    "q.r2-box-plots-independent",
+    "q.r2-box-plots-misconception",
+    "q.r2-box-plots-application",
+    "q.r2-box-plots-teachback",
+    "q.r2-box-plots-mastery"
    ],
    "prerequisites": [
     "l.r2-dot-plots"
    ],
-   "estimatedMinutes": 15
+   "estimatedMinutes": 15,
+   "narrativeIntro": "The season's soundings run to twenty readings, and a chart of all of them tells a skipper more than they asked for. A box plot answers the question they did ask — where does the middle of this channel sit, and how far do the extremes reach — in five numbers and one line.",
+   "demonstration": {
+    "id": "dem.r2-box-plots",
+    "title": "The box and the whiskers",
+    "experience": "The middle half of the soundings is drawn as a box, and the readout gives its width — the distance from the first quartile to the third. Move either quartile and watch the box grow or shrink while the whiskers out to the extremes stay exactly where they are.",
+    "accessibleDescription": "Two controls. The first sets the third quartile of the soundings in metres, the second the first quartile. The readout gives the width of the box, which is the interquartile range. It starts at 7.5 with a third quartile of 14.5 metres and a first quartile of 7.",
+    "controls": [
+     {
+      "id": "ctl.q3",
+      "label": "Third quartile of the soundings, in metres",
+      "min": 0,
+      "max": 24,
+      "step": 0.5,
+      "initial": 14.5
+     },
+     {
+      "id": "ctl.q1",
+      "label": "First quartile of the soundings, in metres",
+      "min": 0,
+      "max": 24,
+      "step": 0.5,
+      "initial": 7
+     }
+    ],
+    "formula": "difference",
+    "readoutLabel": "Width of the box, in metres",
+    "readoutPrecision": 1,
+    "prediction": {
+     "prompt": "The first quartile is 7 metres and the third is 14.5, so the box is 7.5 metres wide. A survey of a second channel finds the same deepest and shallowest soundings but a first quartile of 10. What happens to the picture?",
+     "options": [
+      {
+       "id": "opt.narrow",
+       "text": "The box narrows to 4.5 metres while both whiskers reach exactly as far as before"
+      },
+      {
+       "id": "opt.all",
+       "text": "The whole plot narrows, whiskers included, because the readings are closer together"
+      },
+      {
+       "id": "opt.none",
+       "text": "Nothing changes - the quartiles are inside the box and do not affect its width"
+      }
+     ],
+     "correctOptionId": "opt.narrow",
+     "revealNote": "The box is drawn from the two quartiles, so raising the first narrows it to 4.5 metres. The whiskers are drawn from the smallest and largest readings, which have not changed, so they reach as far as ever. Two channels with an identical range can hold their middle halves in very different amounts of space, and that difference is the whole reason to draw the box rather than report the range alone."
+    },
+    "observation": "Raise the third quartile and the box widens to the right; raise the first and it narrows from the left. Bring the two together and the readout sits at 0 — a channel where half the soundings agree exactly, drawn as a box with no width at all."
+   },
+   "formalTerm": {
+    "term": "Box plot",
+    "definition": "A box plot draws a dataset's five-number summary on one line: whiskers out to the smallest and largest readings, a box from the first quartile to the third, and a line at the median. Each of the four sections holds a quarter of the readings, whatever width it is drawn at.",
+    "symbols": []
+   },
+   "guidedQuestionIds": [
+    "q.r2-box-plots"
+   ],
+   "independentQuestionIds": [
+    "q.r2-box-plots-independent"
+   ],
+   "misconceptionQuestionIds": [
+    "q.r2-box-plots-misconception"
+   ],
+   "applicationQuestionIds": [
+    "q.r2-box-plots-application"
+   ],
+   "teachBackQuestionIds": [
+    "q.r2-box-plots-teachback"
+   ],
+   "masteryCheckQuestionIds": [
+    "q.r2-box-plots-mastery"
+   ]
   },
   {
    "id": "l.r2-scatterplots",

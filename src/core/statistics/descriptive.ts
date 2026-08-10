@@ -93,13 +93,71 @@ export function percentile(data: readonly number[], p: number): number {
   return sorted[lo]! + (sorted[hi]! - sorted[lo]!) * frac;
 }
 
+/**
+ * Quartiles by linear interpolation (R-7), matching NumPy and spreadsheets.
+ *
+ * **This is not the method the curriculum teaches.** `l.r2-quartiles` teaches
+ * the median-of-halves rule, and the two disagree on ordinary data — for the
+ * eight readings that lesson uses, this returns Q1 = 4.75 where the lesson
+ * computes 4.5. Use `quartilesByHalves` for anything a learner will check by
+ * hand; keep this for agreement with the tools they will meet outside.
+ */
 export function quartiles(data: readonly number[]): { q1: number; q2: number; q3: number } {
   return { q1: percentile(data, 25), q2: percentile(data, 50), q3: percentile(data, 75) };
+}
+
+/**
+ * Quartiles by the median-of-halves rule, which is what the curriculum teaches.
+ *
+ * Sort, split at the median, and take the median of each half; with an odd
+ * count the median itself belongs to neither half. This is the school method
+ * `l.r2-quartiles` explains and `l.r2-iqr` builds on, so it is what the
+ * laboratory reports and what the box plot draws — a bench that contradicts the
+ * lesson a learner has just finished is worse than no bench.
+ *
+ * Both conventions are defensible and neither is a bug. What was a defect is
+ * shipping one in the lessons and the other on the instrument panel (D-045).
+ */
+export function quartilesByHalves(data: readonly number[]): { q1: number; q2: number; q3: number } {
+  requireNonEmpty(data, "quartilesByHalves");
+  const sorted = [...data].sort((a, b) => a - b);
+  const half = Math.floor(sorted.length / 2);
+  const lower = sorted.slice(0, half);
+  const upper = sorted.length % 2 === 1 ? sorted.slice(half + 1) : sorted.slice(half);
+  return {
+    q1: lower.length > 0 ? median(lower) : sorted[0]!,
+    q2: median(sorted),
+    q3: upper.length > 0 ? median(upper) : sorted[sorted.length - 1]!
+  };
 }
 
 export function interquartileRange(data: readonly number[]): number {
   const { q1, q3 } = quartiles(data);
   return q3 - q1;
+}
+
+/** The interquartile range under the taught convention. See `quartilesByHalves`. */
+export function interquartileRangeByHalves(data: readonly number[]): number {
+  const { q1, q3 } = quartilesByHalves(data);
+  return q3 - q1;
+}
+
+/**
+ * The five numbers a box plot draws, all under the taught convention.
+ *
+ * Returned together because a box plot is one picture of one summary: computing
+ * the pieces separately is how a chart ends up drawing a median from one rule
+ * and hinges from another.
+ */
+export function fiveNumberSummary(data: readonly number[]): {
+  min: number;
+  q1: number;
+  median: number;
+  q3: number;
+  max: number;
+} {
+  const { q1, q2, q3 } = quartilesByHalves(data);
+  return { min: min(data), q1, median: q2, q3, max: max(data) };
 }
 
 /** Variance. sample=true (default) divides by n-1; population divides by n. */
