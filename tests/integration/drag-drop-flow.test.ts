@@ -151,7 +151,7 @@ describe("wrong arrangements are diagnosed", () => {
     const result = submitAnswer(
       content,
       freshSave(),
-      sessionOn("l.reading-tallies", "q.dd-variable-kinds"),
+      sessionOn("l.r2-frequency", "q.dd-variable-kinds"),
       response,
       5000
     )!;
@@ -172,7 +172,7 @@ describe("wrong arrangements are diagnosed", () => {
     const result = submitAnswer(
       content,
       freshSave(),
-      sessionOn("l.middle-harbor", "q.dd-above-below-mean"),
+      sessionOn("l.reading-tallies", "q.dd-above-below-mean"),
       response,
       5000
     )!;
@@ -196,7 +196,7 @@ describe("wrong arrangements are diagnosed", () => {
     const result = submitAnswer(
       content,
       freshSave(),
-      sessionOn("l.reading-tallies", q.id),
+      sessionOn("l.r2-bar-charts", q.id),
       buildByKeyboard(q),
       5000
     )!;

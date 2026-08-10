@@ -15,6 +15,7 @@ import { isLaboratoryUnlocked, isLessonUnlocked, isRegionUnlocked } from "../../
 import { createEmptySave, type SaveFile } from "../../src/shared/schemas";
 import { COMPLETE_LESSONS } from "../helpers/complete-lessons";
 import { REGION_2_TOPICS } from "../helpers/region2-topics";
+import { STAGED_INHERITED, STAGED_QUESTION_IDS, STAGING_OWNER } from "../helpers/staged-inherited";
 
 const content = loadShippedContent();
 const curriculum = content.curriculum;
@@ -252,9 +253,17 @@ describe("skeleton honesty", () => {
     // deliberately as part of S2-12, not deleted to make the suite pass.
     // Anything in COMPLETE_LESSONS is held to all 18 checks in
     // tests/audit/lesson-structure.test.ts instead.
+    //
+    // The one thing a skeleton may hold beyond its seed is inherited Stage 1
+    // content staged for it, and only what STAGED_INHERITED declares — see the
+    // block below, which is what stops "staged" becoming a hiding place.
     const seeded = region2Lessons.filter((l) => l.id.startsWith("l.r2-") && !COMPLETE_LESSONS.includes(l.id));
     for (const lesson of seeded) {
-      expect(lesson.questionIds.length, `${lesson.id} has grown beyond its seed question — declare it Complete`).toBe(1);
+      const staged = STAGED_INHERITED[lesson.id] ?? [];
+      expect(
+        lesson.questionIds.length,
+        `${lesson.id} has grown beyond its seed question and what STAGED_INHERITED declares — declare it Complete`
+      ).toBe(1 + staged.length);
       expect(lesson.demonstration, `${lesson.id} has a demonstration but is not declared Complete`).toBeUndefined();
       expect(lesson.concepts.length, `${lesson.id} has no concept`).toBeGreaterThan(0);
     }
@@ -280,5 +289,97 @@ describe("skeleton honesty", () => {
       expect(lesson.id.startsWith("l.r2-"), `${lessonId} is not an inherited id`).toBe(false);
       expect(region2LessonIds, `${lessonId} was not moved into Region 2`).toContain(lessonId);
     }
+  });
+});
+
+/**
+ * S2-12: staged inheritance.
+ *
+ * Re-cutting the two Stage 1 centre lessons left four inherited questions whose
+ * topics belong to modules nobody has written yet. They are parked in the
+ * lessons that will teach them and declared in `STAGED_INHERITED`. The checks
+ * below are the price of that exemption: a staged question is visible, singly
+ * homed, still playable, and cannot be joined by an undeclared one.
+ */
+describe("staged inheritance is declared, bounded and temporary", () => {
+  const lessonsById = new Map(curriculum.lessons.map((l) => [l.id, l]));
+
+  it("stages only into Region 2 skeletons that are not declared Complete", () => {
+    for (const lessonId of Object.keys(STAGED_INHERITED)) {
+      const lesson = lessonsById.get(lessonId);
+      expect(lesson, `${lessonId} is staged into but does not exist`).toBeDefined();
+      expect(region2LessonIds, `${lessonId} is staged into but is not a Region 2 lesson`).toContain(lessonId);
+      expect(lesson!.id.startsWith("l.r2-"), `${lessonId} is not a seeded lesson`).toBe(true);
+      expect(
+        COMPLETE_LESSONS.includes(lessonId),
+        `${lessonId} is declared Complete, so its staged questions must be given roles and removed from STAGED_INHERITED`
+      ).toBe(false);
+    }
+  });
+
+  it("puts exactly the declared questions in each staging lesson, after its seed", () => {
+    // Both directions. An undeclared question appearing in a skeleton is the
+    // silent accumulation this whole mechanism exists to prevent; a declared one
+    // that is not actually there is a list describing a repository that no
+    // longer exists.
+    for (const [lessonId, staged] of Object.entries(STAGED_INHERITED)) {
+      const lesson = lessonsById.get(lessonId)!;
+      expect(lesson.questionIds[0], `${lessonId} no longer leads with its seed question`).toBe(
+        `q.seed.${lessonId.slice("l.".length)}`
+      );
+      expect([...lesson.questionIds.slice(1)].sort(), `${lessonId} staged questions`).toEqual([...staged].sort());
+    }
+  });
+
+  it("stages inherited questions only, never newly authored ones", () => {
+    // Staging is a holding pattern for content Stage 1 already had. Something
+    // written this stage has a lesson to be written into, so allowing new
+    // authorship here would turn the exemption into a way of shipping
+    // unstructured content.
+    for (const qid of STAGED_QUESTION_IDS) {
+      const q = content.questions.get(qid);
+      expect(q, `staged question ${qid} does not exist`).toBeDefined();
+      expect(qid.startsWith("q.r2-") || qid.startsWith("q.seed."), `${qid} is not inherited Stage 1 content`).toBe(false);
+      const stages = new Set(
+        q!.skillIds.map((sid) => curriculum.skills.find((s) => s.id === sid)?.stage)
+      );
+      expect([...stages], `${qid} carries a skill this stage introduced`).toEqual([1]);
+    }
+  });
+
+  it("gives every staged question exactly one home", () => {
+    for (const qid of STAGED_QUESTION_IDS) {
+      const homes = curriculum.lessons.filter((l) => l.questionIds.includes(qid)).map((l) => l.id);
+      expect(homes.length, `${qid} is asked by ${homes.length} lessons: ${homes.join(", ")}`).toBe(1);
+      expect(Object.keys(STAGED_INHERITED)).toContain(homes[0]);
+    }
+  });
+
+  it("holds staged questions to the presentation half of scope §5", () => {
+    // A learner meets these today, so what is deferred is the lesson structure
+    // around them — a role, a demonstration, a narrative — not whether they can
+    // be read or understood. Requirements 12, 14 and 18, applied question by
+    // question.
+    for (const qid of STAGED_QUESTION_IDS) {
+      const q = content.questions.get(qid)!;
+      expect(q.prompt.trim().length, `${qid} prompt is a stub`).toBeGreaterThan(30);
+      expect(q.explanation.trim().length, `${qid} explains nothing`).toBeGreaterThan(40);
+      expect(
+        (q.accessibilityDescription ?? "").trim().length,
+        `${qid} is staged but has no accessibility description`
+      ).toBeGreaterThan(20);
+      if (q.visual.kind !== "none") {
+        expect((q.visual.accessibleDescription ?? "").trim().length, `${qid} visual`).toBeGreaterThan(0);
+      }
+    }
+  });
+
+  it("records the unit that owes the work", () => {
+    expect(STAGING_OWNER).toBe("S2-14");
+    // Staging is meant to shrink. If the map is ever empty the mechanism has
+    // done its job and this whole block should be deleted rather than kept as
+    // scaffolding nothing uses.
+    expect(STAGED_QUESTION_IDS.length, "STAGED_INHERITED is empty — delete the staging mechanism").toBeGreaterThan(0);
+    expect(STAGED_QUESTION_IDS.length, "staging is growing rather than shrinking").toBeLessThanOrEqual(4);
   });
 });

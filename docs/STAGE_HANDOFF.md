@@ -16,7 +16,7 @@ after Stage 1 was lost because commits were never pushed to a durable remote. Re
 
 - **Stage 1: surviving, verified, green.** Not re-created — the original commit `7add4bc` was carried forward from the
   archive's own `.git` directory, with authorship intact.
-- **Stage 2: in progress, and not recoverable.** Reconstruction began 2026-08-04; S2-01 through S2-08, S2-10 and S2-11 are complete and S2-12 is **Partial** (cycle 2, `34a63f9`, remote-verified); S2-09 is **Partial**, and only because §4 is stated over all 22 topics — every Region 1 topic meets it. Nothing
+- **Stage 2: in progress, and not recoverable.** Reconstruction began 2026-08-04; S2-01 through S2-08, S2-10 and S2-11 are complete and S2-12 is **Partial** (cycle 3, `PENDING`, remote-verified); S2-09 is **Partial**, and only because §4 is stated over all 22 topics — every Region 1 topic meets it. Nothing
   in it is recovered source.
 - **Stages 3–6: not started, and not recoverable.** They must be **reconstructed** from the surviving Stage 1 source,
   the specifications, and the known defect history. They may never be described as recovered source, and no metric may
@@ -37,7 +37,7 @@ after Stage 1 was lost because commits were never pushed to a durable remote. Re
 | Milestone exports | `../gsl-exports/` — source ZIP + git bundle + manifest + SHA-256 checksums |
 | Working tree | clean |
 | Node / npm used | v22.22.2 / 10.9.7 |
-| Test suite | **466 tests / 36 files**, all passing (Stage 1 baseline was 73 / 14) |
+| Test suite | **474 tests / 36 files**, all passing (Stage 1 baseline was 73 / 14) |
 | Build | passing (**538.47 kB, 143.72 kB gzip**; baseline was 285.73 kB / 83.82 kB) |
 | Source modified since baseline | S2-01 … S2-08 — achievements + region completion, three new interactions, the enforced interaction audit, the review queue, the Region 1 topic architecture, and all 17 Region 1 lessons |
 | Curriculum | 2 regions · **6 modules** · **20 lessons** · **23 skills** · **145 questions** (baseline 2/2/3/6/14) |
@@ -105,36 +105,47 @@ branch/tag deletion) are forbidden without explicit owner permission. See `REMOT
 
 ## 5. Next unit
 
-**S2-12 continued — redistribute the inherited questions, then re-cut mean and median.**
+**S2-12 continued — `m.r2-variation`: outlier effects and skew effects.**
 
-**5 of 9 lessons are Complete**: all of `m.r2-counts`, plus mode and choosing a measure. What remains is the mean and
-median re-cuts, then outlier and skew effects in `m.r2-variation`.
+**7 of 9 lessons are Complete**: all of `m.r2-counts`, and all of `m.r2-centre` — mode, choosing a measure, and the two
+Stage 1 lessons re-cut in cycle 3. What remains of S2-12 is the two `m.r2-variation` lessons. Both are seeded skeletons
+with no inherited content, so this is straight authoring: no redistribution comes first.
 
-**Start with the redistribution, not the re-cut.** `l.reading-tallies` and `l.middle-harbor` carry 13 and 10 inherited
-Stage 1 questions, and a Complete lesson must account for every question it asks — role, skill, explanation, text
-equivalent. Several of those questions do not teach centre at all:
+**Four inherited questions are staged, and S2-14 owes their removal.** Cycle 3 re-homed fourteen inherited Stage 1
+questions out of the two centre lessons. Ten had a written Region 2 lesson to move to; four did not, because their
+topics belong to `m.r2-pictures` and `m.r2-judgement`. They sit in those modules' skeletons, declared in
+`tests/helpers/staged-inherited.ts` and bounded by six checks in `tests/audit/region2-architecture.test.ts` (D-034):
 
-- `q.pct-rainy-days`, `q.fraction-quarter`, `q.step-percent-rainy`, `q.point-quarter-line` → `l.r2-percentage`
 - `q.graph-tallest-bar`, `q.dd-build-bar-chart` → `l.r2-bar-charts`
-- `q.multiselect-categorical`, `q.ordering-data-cycle`, `q.dd-variable-kinds`, `q.point-thursday-catch`,
-  `q.error-id-causation` → the data-literacy lessons
+- `q.point-thursday-catch` → `l.r2-scatterplots`
+- `q.error-id-causation` → `l.r2-misleading-graphs`
 
-Move them first; the re-cut becomes straightforward afterwards. Attempting it the other way round orphans them, which
-the reachability audit catches immediately.
+When S2-14 writes those three lessons it must give each staged question a role and delete its entry. The audit fails if
+the lesson is declared Complete with the entry still there, and fails if the entry is removed without the question
+being given a home — so neither half can be forgotten.
 
-**Draggable/editable datasets are still not built.** The three finished demonstrations are control-driven, which meets
+**A moved question needs the receiving lesson's skill.** Requirement 17 both ways: a question must carry a skill its
+lesson teaches, or answering it schedules no review, and — since cycle 3 — a lesson may not claim an objective none of
+its own questions practises (D-036). When a question moves, check both directions.
+
+**Run the demonstration before writing about it.** `dem.r2-choosing-measures` shipped Complete describing a readout its
+formula never computed, and every check passed (D-035). The prose must now state the readout at the initial control
+settings, which is what forces the arithmetic to be checked rather than assumed.
+
+**Draggable/editable datasets are still not built.** The finished demonstrations are control-driven, which meets
 requirement 4 but is not the same thing. Editable datasets belong with the laboratory work in S2-15; if S2-12 is to
 claim them, that is the cycle to do it in.
 
-**The lessons already exist as skeletons — you are filling them in, not creating them.** `m.r2-counts` and
-`m.r2-centre` hold seven of them, and `tests/audit/region2-architecture.test.ts` asserts every seeded lesson still has
-exactly one question and no demonstration. The moment you grow one past that, it must go into
+**The lessons already exist as skeletons — you are filling them in, not creating them.**
+`tests/audit/region2-architecture.test.ts` asserts every seeded lesson still holds exactly its seed question, plus only
+what `STAGED_INHERITED` declares, and no demonstration. The moment you grow one past that, it must go into
 `tests/helpers/complete-lessons.ts`, and `tests/audit/lesson-structure.test.ts` will then hold it to all 18 of scope
 §5's requirements. That is the same contract S2-08 worked under for Region 1, and the same guard.
 
-Three of Region 2's lessons are **inherited from Stage 1** — `l.reading-tallies` (mean), `l.middle-harbor` (median) and
-`l.spread-1` (range). They carry real content and more than one question, so the skeleton shape does not apply to them,
-but none of them meets §5 either. S2-12 owns the first two; S2-13 owns the third.
+One Region 2 lesson is still **inherited from Stage 1**: `l.spread-1` (range). It carries real content and more than one
+question, so the skeleton shape does not apply to it, and it does not meet §5 either. **S2-13 owns it**, and it will
+need the same redistribution-first treatment the two centre lessons needed — check what its questions actually teach
+before attempting the re-cut.
 
 `docs/REGION2_BOSS_SPEC.md` maps the boss's five stages onto this module sequence. It is worth reading before writing
 lessons, because the case is what the lessons have to make answerable.

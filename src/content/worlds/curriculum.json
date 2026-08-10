@@ -216,40 +216,30 @@
    "id": "l.reading-tallies",
    "moduleId": "m.r2-centre",
    "title": "Reading the Tide Tallies",
-   "narrativeIntro": "The harbormaster hands you the week's catch ledger. Before any voyage, an explorer must read the numbers as fluently as the stars.",
+   "narrativeIntro": "The harbormaster hands you the week's catch ledger and asks a question no single day can answer: what does a normal day look like here? Answering it means finding one number that stands for the whole week, and that number is the first summary an explorer learns to trust.",
    "objectiveIds": [
-    "obj.read-data",
     "obj.compute-mean"
    ],
    "concepts": [
     {
-     "id": "c.data-vs-category",
-     "title": "Quantities and categories",
-     "summary": "Numbers you can average versus labels you can only count.",
-     "body": "A quantitative variable is measured with numbers that have magnitude, like fish caught per day. A categorical variable sorts things into groups, like the type of boat. You can compute a mean of fish counts; you can only tally boat types."
-    },
-    {
      "id": "c.mean",
      "title": "The mean",
-     "summary": "Add everything, divide by how many.",
-     "body": "The mean shares the total out equally: add all the values, then divide by the number of values. If five days brought 2, 4, 4, 6, and 9 fish, the total is 25 and the mean is 25 / 5 = 5 fish per day."
+     "summary": "Add everything up, then share the total out equally.",
+     "body": "The mean shares the total out equally among the values that made it: add every value, then divide by how many values there were. If five days brought 2, 4, 4, 6 and 9 fish, the total is 25 and the mean is 25 / 5 = 5 fish per day. No day actually landed 5 fish, and that is the point — the mean is the catch each day would have had if the week had been even, not a reading taken from the ledger."
+    },
+    {
+     "id": "c.mean-uses-everything",
+     "title": "Every value has a say",
+     "summary": "The mean is the only measure of centre that uses all the data.",
+     "body": "Change any single value and the mean moves. That is its strength: nothing in the set is ignored, so the mean carries information from every reading. It is also its weakness, because one value far from the rest pulls the mean towards itself and keeps pulling however many ordinary values are there to hold it back. A ledger with one enormous haul reports a mean no ordinary day resembles."
     }
    ],
    "questionIds": [
-    "q.multiselect-categorical",
-    "q.mean-fish-catch",
-    "q.pct-rainy-days",
-    "q.fraction-quarter",
-    "q.ordering-data-cycle",
-    "q.graph-tallest-bar",
     "q.step-mean-catch",
-    "q.step-percent-rainy",
-    "q.point-quarter-line",
-    "q.point-thursday-catch",
-    "q.point-approx-mean",
-    "q.dd-variable-kinds",
-    "q.dd-build-bar-chart",
     "q.r2-mean-independent",
+    "q.mean-fish-catch",
+    "q.point-approx-mean",
+    "q.dd-above-below-mean",
     "q.r2-mean-application",
     "q.r2-mean-teachback",
     "q.r2-mean-mastery"
@@ -258,42 +248,121 @@
     "l.r2-percentage"
    ],
    "estimatedMinutes": 12,
-   "guidedQuestionIds": [],
-   "independentQuestionIds": [],
-   "misconceptionQuestionIds": [],
-   "applicationQuestionIds": [],
-   "teachBackQuestionIds": [],
-   "masteryCheckQuestionIds": []
+   "guidedQuestionIds": [
+    "q.step-mean-catch"
+   ],
+   "independentQuestionIds": [
+    "q.r2-mean-independent"
+   ],
+   "misconceptionQuestionIds": [
+    "q.mean-fish-catch"
+   ],
+   "applicationQuestionIds": [
+    "q.point-approx-mean",
+    "q.dd-above-below-mean",
+    "q.r2-mean-application"
+   ],
+   "teachBackQuestionIds": [
+    "q.r2-mean-teachback"
+   ],
+   "masteryCheckQuestionIds": [
+    "q.r2-mean-mastery"
+   ],
+   "demonstration": {
+    "id": "dem.r2-mean",
+    "title": "Sharing the week's catch out evenly",
+    "experience": "The whole week's catch is tipped into one pile, then shared back out a fish at a time into a basket for each day. The readout gives what ends up in each basket once the pile is empty: the catch every day would have landed if the week had been even.",
+    "accessibleDescription": "Two controls. The first sets the total number of fish landed across the whole week. The second sets how many days the ledger covers. The readout gives the mean catch per day to two decimal places, and starts at 5.00 with 25 fish across 5 days.",
+    "controls": [
+     {
+      "id": "ctl.total",
+      "label": "Total fish landed across the week",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "initial": 25
+     },
+     {
+      "id": "ctl.days",
+      "label": "Days the ledger covers",
+      "min": 1,
+      "max": 20,
+      "step": 1,
+      "initial": 5
+     }
+    ],
+    "formula": "quotient",
+    "readoutLabel": "Mean fish per day",
+    "readoutPrecision": 2,
+    "prediction": {
+     "prompt": "Twenty-five fish across five days gives a mean of 5.00 fish per day. A sixth day is added to the ledger, and the harbour landed nothing at all that day, so the total is still 25. What does the readout show?",
+     "options": [
+      {
+       "id": "opt.same",
+       "text": "5.00 - no fish were taken away, so the mean cannot change"
+      },
+      {
+       "id": "opt.lower",
+       "text": "About 4.17 - the same total is now shared out further"
+      },
+      {
+       "id": "opt.zero",
+       "text": "0 - the newest day landed nothing"
+      }
+     ],
+     "correctOptionId": "opt.lower",
+     "revealNote": "The total has not changed, but it is now shared among six days rather than five, so the mean falls to about 4.17. A day with no catch is still a day the mean has to account for, which is why adding an empty day lowers the average even though nothing was taken away."
+    },
+    "observation": "Raise the total and the readout climbs; raise the number of days and it falls. The two controls pull against each other, and the readout only holds still when they move together: double the total and double the days, and the mean lands exactly where it started."
+   },
+   "formalTerm": {
+    "term": "Mean",
+    "definition": "The mean is the total of a set shared out equally among its values: add every value, then divide by how many there are. It is the only measure of centre that uses all the data, which is why every value can move it and why one extreme value can move it a long way.",
+    "notation": "total / count",
+    "symbols": [
+     {
+      "symbol": "total",
+      "meaning": "The sum of every value in the set, added together."
+     },
+     {
+      "symbol": "/",
+      "meaning": "Divided by: share the amount on the left into the number of equal parts on the right."
+     },
+     {
+      "symbol": "count",
+      "meaning": "How many values the set contains, including any that are zero."
+     }
+    ]
+   }
   },
   {
    "id": "l.middle-harbor",
    "moduleId": "m.r2-centre",
    "title": "The Middle of the Harbor",
-   "narrativeIntro": "One enormous catch can drag the mean off course. The median holds steady in rough seas.",
+   "narrativeIntro": "One enormous catch can drag the mean off course, and the harbour's ledger has several. The median asks a different question — not what the total shares out to, but which value sits in the middle once everything is put in order — and rough seas move it far less.",
    "objectiveIds": [
-    "obj.compute-median",
-    "obj.choose-measure"
+    "obj.compute-median"
    ],
    "concepts": [
     {
      "id": "c.median",
      "title": "The median",
-     "summary": "Sort the values; the median is the middle one.",
-     "body": "Sort the data from smallest to largest. With an odd count, the median is the middle value; with an even count, it is the mean of the two middle values. The median ignores how extreme the ends are, so outliers barely move it."
+     "summary": "Put the values in order; the median is the one in the middle.",
+     "body": "Sort the data from smallest to largest. With an odd count the median is the single middle value. With an even count there is no single middle, so the median is the mean of the two middle values — which can be a number that appears nowhere in the data. Sorting is not a tidying step that can be skipped: the median is defined by position, so an unsorted list has no median to read."
+    },
+    {
+     "id": "c.median-position",
+     "title": "Position, not size",
+     "summary": "The median counts places in the row, not how far apart the values are.",
+     "body": "Replace the largest value in a sorted row with one ten times larger and the median does not move: the value has changed but its position has not, and the middle of the row is still the same entry. That is what makes the median resistant to outliers. It is also what it gives up — the median cannot tell you that the largest value grew at all, because it never looked at it."
     }
    ],
    "questionIds": [
-    "q.median-market",
-    "q.mc-which-average",
-    "q.matching-measures",
-    "q.method-select",
-    "q.error-id-causation",
-    "q.short-why-median",
     "q.step-median-market",
+    "q.r2-median-independent",
+    "q.median-market",
     "q.point-median-line",
     "q.dd-sort-prices",
-    "q.dd-above-below-mean",
-    "q.r2-median-independent",
     "q.r2-median-application",
     "q.r2-median-teachback",
     "q.r2-median-mastery"
@@ -302,12 +371,78 @@
     "l.reading-tallies"
    ],
    "estimatedMinutes": 14,
-   "guidedQuestionIds": [],
-   "independentQuestionIds": [],
-   "misconceptionQuestionIds": [],
-   "applicationQuestionIds": [],
-   "teachBackQuestionIds": [],
-   "masteryCheckQuestionIds": []
+   "guidedQuestionIds": [
+    "q.step-median-market"
+   ],
+   "independentQuestionIds": [
+    "q.r2-median-independent"
+   ],
+   "misconceptionQuestionIds": [
+    "q.median-market"
+   ],
+   "applicationQuestionIds": [
+    "q.point-median-line",
+    "q.dd-sort-prices",
+    "q.r2-median-application"
+   ],
+   "teachBackQuestionIds": [
+    "q.r2-median-teachback"
+   ],
+   "masteryCheckQuestionIds": [
+    "q.r2-median-mastery"
+   ],
+   "demonstration": {
+    "id": "dem.r2-median",
+    "title": "The gap between the two middles",
+    "experience": "Ten market prices are laid out in a sorted row. The fifth and sixth are the two in the middle, and the readout gives the gap between them. Slide either one and watch what the middle of the row becomes.",
+    "accessibleDescription": "Two controls. The first sets the sixth price in a sorted row of ten, and the second sets the fifth. The readout gives the sixth price minus the fifth, in coins. It starts at 0, because both middle prices begin at 12 coins.",
+    "controls": [
+     {
+      "id": "ctl.sixth",
+      "label": "The sixth price in the sorted row, in coins",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "initial": 12
+     },
+     {
+      "id": "ctl.fifth",
+      "label": "The fifth price in the sorted row, in coins",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "initial": 12
+     }
+    ],
+    "formula": "difference",
+    "readoutLabel": "Sixth price minus fifth price",
+    "readoutPrecision": 0,
+    "prediction": {
+     "prompt": "Both middle prices are 12 coins, so the gap reads 0 and the median is 12. The sixth price now rises to 18 while the fifth stays where it is. What is the median?",
+     "options": [
+      {
+       "id": "opt.eighteen",
+       "text": "18 - the median follows the price that moved"
+      },
+      {
+       "id": "opt.fifteen",
+       "text": "15 - halfway between the two middle prices"
+      },
+      {
+       "id": "opt.twelve",
+       "text": "12 - the median never moves"
+      }
+     ],
+     "correctOptionId": "opt.fifteen",
+     "revealNote": "With an even count there is no single middle value, so the median is the mean of the two in the middle: halfway between 12 and 18 is 15. No trader in the row charged 15 coins, and that is not a fault in the answer — a median can be a number the data never contains."
+    },
+    "observation": "Raise the sixth price and the gap grows, while the median climbs by half as much as the price did. Lower the sixth below the fifth and the readout turns negative: that reading says the row is no longer sorted, and sorting is the step the median is defined by."
+   },
+   "formalTerm": {
+    "term": "Median",
+    "definition": "The median is the value in the middle of a set once the values are sorted. With an odd count it is the single middle value; with an even count it is the mean of the two middle values. Because it is defined by position rather than size, values at the ends can change a great deal without moving it.",
+    "symbols": []
+   }
   },
   {
    "id": "l.spread-1",
@@ -484,7 +619,7 @@
     "readoutLabel": "Crates on the quay",
     "readoutPrecision": 0,
     "prediction": {
-     "prompt": "There are 7 crates north and 5 south. If the piles are swapped — 5 north and 7 south — what happens to the total?",
+     "prompt": "There are 7 crates north and 5 south, so the readout shows 12. If the piles are swapped — 5 north and 7 south — what happens to the total?",
      "options": [
       {
        "id": "opt.same",
@@ -936,7 +1071,7 @@
     "readoutLabel": "Share of the whole load",
     "readoutPrecision": 2,
     "prediction": {
-     "prompt": "One share of a load cut into 2 is half the load. If the same load is cut into 4 shares instead, and the buyer still takes just one, what happens to their share?",
+     "prompt": "One share of a load cut into 2 is half the load, and the readout shows 0.50. If the same load is cut into 4 shares instead, and the buyer still takes just one, what happens to their share?",
      "options": [
       {
        "id": "opt.bigger",
@@ -2318,7 +2453,8 @@
    "moduleId": "m.r2-counts",
    "title": "How Many of Each",
    "objectiveIds": [
-    "obj.r2-frequency"
+    "obj.r2-frequency",
+    "obj.read-data"
    ],
    "concepts": [
     {
@@ -2334,7 +2470,10 @@
     "q.r2-frequency-misconception",
     "q.r2-frequency-application",
     "q.r2-frequency-teachback",
-    "q.r2-frequency-mastery"
+    "q.r2-frequency-mastery",
+    "q.multiselect-categorical",
+    "q.ordering-data-cycle",
+    "q.dd-variable-kinds"
    ],
    "prerequisites": [
     "l.r1-division",
@@ -2399,13 +2538,16 @@
     "q.r2-frequency"
    ],
    "independentQuestionIds": [
-    "q.r2-frequency-independent"
+    "q.r2-frequency-independent",
+    "q.multiselect-categorical"
    ],
    "misconceptionQuestionIds": [
     "q.r2-frequency-misconception"
    ],
    "applicationQuestionIds": [
-    "q.r2-frequency-application"
+    "q.r2-frequency-application",
+    "q.ordering-data-cycle",
+    "q.dd-variable-kinds"
    ],
    "teachBackQuestionIds": [
     "q.r2-frequency-teachback"
@@ -2435,7 +2577,9 @@
     "q.r2-proportion-misconception",
     "q.r2-proportion-application",
     "q.r2-proportion-teachback",
-    "q.r2-proportion-mastery"
+    "q.r2-proportion-mastery",
+    "q.fraction-quarter",
+    "q.point-quarter-line"
    ],
    "prerequisites": [
     "l.r2-frequency"
@@ -2512,13 +2656,15 @@
     "q.r2-proportion"
    ],
    "independentQuestionIds": [
-    "q.r2-proportion-independent"
+    "q.r2-proportion-independent",
+    "q.fraction-quarter"
    ],
    "misconceptionQuestionIds": [
     "q.r2-proportion-misconception"
    ],
    "applicationQuestionIds": [
-    "q.r2-proportion-application"
+    "q.r2-proportion-application",
+    "q.point-quarter-line"
    ],
    "teachBackQuestionIds": [
     "q.r2-proportion-teachback"
@@ -2548,7 +2694,9 @@
     "q.r2-percentage-misconception",
     "q.r2-percentage-application",
     "q.r2-percentage-teachback",
-    "q.r2-percentage-mastery"
+    "q.r2-percentage-mastery",
+    "q.pct-rainy-days",
+    "q.step-percent-rainy"
    ],
    "prerequisites": [
     "l.r2-proportion"
@@ -2629,7 +2777,9 @@
     "q.r2-percentage"
    ],
    "independentQuestionIds": [
-    "q.r2-percentage-independent"
+    "q.r2-percentage-independent",
+    "q.pct-rainy-days",
+    "q.step-percent-rainy"
    ],
    "misconceptionQuestionIds": [
     "q.r2-percentage-misconception"
@@ -2747,7 +2897,8 @@
    "moduleId": "m.r2-centre",
    "title": "Which Middle to Use",
    "objectiveIds": [
-    "obj.r2-choosing-measures"
+    "obj.r2-choosing-measures",
+    "obj.choose-measure"
    ],
    "concepts": [
     {
@@ -2763,7 +2914,11 @@
     "q.r2-choosing-measures-misconception",
     "q.r2-choosing-measures-application",
     "q.r2-choosing-measures-teachback",
-    "q.r2-choosing-measures-mastery"
+    "q.r2-choosing-measures-mastery",
+    "q.mc-which-average",
+    "q.matching-measures",
+    "q.method-select",
+    "q.short-why-median"
    ],
    "prerequisites": [
     "l.r2-mode"
@@ -2773,49 +2928,49 @@
    "demonstration": {
     "id": "dem.r2-choosing-measures",
     "title": "One extreme value, two summaries",
-    "experience": "A row of ten cottages is valued. Nine are ordinary and one is a merchant's house. The clerk watches what the mean does as the merchant's house grows more valuable, while the median stays where the cottages are.",
-    "accessibleDescription": "Two controls. The first sets what each of the nine ordinary cottages is worth in coins. The second sets what the merchant's house is worth. The readout gives the mean value across all ten buildings, to two decimal places.",
+    "experience": "A row of ten buildings is valued. Nine are ordinary cottages and the tenth plot belongs to a merchant. The clerk adds the row up and divides by ten, then watches that answer as the merchant builds — while the cottage in the middle of the row stays exactly where it was.",
+    "accessibleDescription": "Two controls. The first sets the total value of every building on the row, in coins. The second sets how many buildings the row holds. The readout gives the mean value per building to two decimal places, and starts at 36.00 with 360 coins across 10 buildings.",
     "controls": [
      {
-      "id": "ctl.ordinary",
-      "label": "Value of each ordinary cottage, in coins",
+      "id": "ctl.total",
+      "label": "Total value of every building on the row, in coins",
       "min": 0,
-      "max": 200,
-      "step": 10,
-      "initial": 40
+      "max": 8400,
+      "step": 40,
+      "initial": 360
      },
      {
-      "id": "ctl.house",
-      "label": "Value of the merchant's house, in coins",
-      "min": 0,
-      "max": 8000,
-      "step": 100,
-      "initial": 4000
+      "id": "ctl.buildings",
+      "label": "Number of buildings on the row",
+      "min": 1,
+      "max": 20,
+      "step": 1,
+      "initial": 10
      }
     ],
-    "formula": "percent-of",
-    "readoutLabel": "Mean value across all ten buildings",
+    "formula": "quotient",
+    "readoutLabel": "Mean value per building",
     "readoutPrecision": 2,
     "prediction": {
-     "prompt": "Nine cottages at 40 coins and a house at 4000 give a mean of 436 coins. The median is 40. If the merchant's house doubles in value to 8000, what happens to the median?",
+     "prompt": "Nine cottages worth 40 coins each and one empty plot come to 360 coins across ten buildings, so the readout shows 36.00 and the median is 40. The merchant now builds a house worth 4000 coins on the empty plot, taking the total to 4360 across the same ten buildings. What happens to the median?",
      "options": [
       {
        "id": "opt.same",
-       "text": "It stays at 40 - the middle building has not changed"
+       "text": "It stays at 40 - the building in the middle of the row has not changed"
+      },
+      {
+       "id": "opt.mean",
+       "text": "It rises to 436, alongside the mean"
       },
       {
        "id": "opt.double",
-       "text": "It doubles too"
-      },
-      {
-       "id": "opt.rise",
-       "text": "It rises to about 836"
+       "text": "It doubles, because one value grew"
       }
      ],
      "correctOptionId": "opt.same",
-     "revealNote": "The median is the middle of the sorted list, and the sorted list still has cottages in the middle whatever the house is worth. The mean would climb to 836; the median does not move at all. That is what 'resistant to outliers' means, stated as a fact you can check rather than a slogan."
+     "revealNote": "The readout climbs from 36 to 436, because the mean shares one enormous value out across every building on the row. The median is the middle of the sorted row, and the middle is still a cottage worth 40 coins whatever the merchant builds. That is what 'resistant to outliers' means, stated as a fact you can check rather than a slogan."
     },
-    "observation": "Hold the cottages at 40 and raise the house: the mean climbs steeply, though nine of the ten buildings have not changed by a coin. Now hold the house and raise the cottages: the mean climbs too, but far more slowly - nine values pulling together move it less than one value pulling alone from far away."
+    "observation": "Raise the total and the readout climbs; raise the number of buildings and it falls. A single large addition to the total moves the readout exactly as far as the same amount spread thinly over the whole row — the mean cannot tell those two rows apart, and that is why one extreme value can carry it."
    },
    "formalTerm": {
     "term": "Measure of centre",
@@ -2825,16 +2980,20 @@
     "q.r2-choosing-measures"
    ],
    "independentQuestionIds": [
-    "q.r2-choosing-measures-independent"
+    "q.r2-choosing-measures-independent",
+    "q.mc-which-average"
    ],
    "misconceptionQuestionIds": [
     "q.r2-choosing-measures-misconception"
    ],
    "applicationQuestionIds": [
-    "q.r2-choosing-measures-application"
+    "q.r2-choosing-measures-application",
+    "q.matching-measures",
+    "q.method-select"
    ],
    "teachBackQuestionIds": [
-    "q.r2-choosing-measures-teachback"
+    "q.r2-choosing-measures-teachback",
+    "q.short-why-median"
    ],
    "masteryCheckQuestionIds": [
     "q.r2-choosing-measures-mastery"
@@ -3017,7 +3176,9 @@
     }
    ],
    "questionIds": [
-    "q.seed.r2-bar-charts"
+    "q.seed.r2-bar-charts",
+    "q.graph-tallest-bar",
+    "q.dd-build-bar-chart"
    ],
    "prerequisites": [
     "l.r2-choosing-measures"
@@ -3109,7 +3270,8 @@
     }
    ],
    "questionIds": [
-    "q.seed.r2-scatterplots"
+    "q.seed.r2-scatterplots",
+    "q.point-thursday-catch"
    ],
    "prerequisites": [
     "l.r2-box-plots"
@@ -3156,7 +3318,8 @@
     }
    ],
    "questionIds": [
-    "q.seed.r2-misleading-graphs"
+    "q.seed.r2-misleading-graphs",
+    "q.error-id-causation"
    ],
    "prerequisites": [
     "l.r2-choosing-graphs"

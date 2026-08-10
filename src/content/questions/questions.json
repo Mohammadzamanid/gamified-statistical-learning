@@ -4,7 +4,8 @@
   "topicId": "t.data-literacy",
   "objectiveId": "obj.read-data",
   "skillIds": [
-   "skill.data-literacy"
+   "skill.data-literacy",
+   "skill.r2-frequency"
   ],
   "difficulty": 1,
   "interaction": "multiple-selection",
@@ -51,7 +52,8 @@
    "Fish count and length are numeric amounts → quantitative."
   ],
   "misconceptionIds": [],
-  "estimatedSeconds": 45
+  "estimatedSeconds": 45,
+  "accessibilityDescription": "Select every variable in the harbour ledger that sorts boats into named groups rather than measuring an amount."
  },
  {
   "id": "q.mean-fish-catch",
@@ -116,7 +118,8 @@
   "topicId": "t.percent",
   "objectiveId": "obj.percent-fraction",
   "skillIds": [
-   "skill.percent-fraction"
+   "skill.percent-fraction",
+   "skill.r2-percentage"
   ],
   "difficulty": 1,
   "interaction": "percentage-input",
@@ -140,19 +143,21 @@
   "explanation": "12 / 40 = 0.30, and 0.30 expressed per hundred is 30%.",
   "solutionSteps": [
    "Write the proportion: 12 / 40 = 0.30.",
-   "Convert to percent: 0.30 × 100 = 30%."
+   "Convert to percent: 0.30 x 100 = 30%."
   ],
   "misconceptionIds": [
    "mc.decimal-vs-percent"
   ],
-  "estimatedSeconds": 60
+  "estimatedSeconds": 60,
+  "accessibilityDescription": "Convert a count of rainy days out of a total into a percentage on the zero to one hundred scale."
  },
  {
   "id": "q.fraction-quarter",
   "topicId": "t.percent",
   "objectiveId": "obj.percent-fraction",
   "skillIds": [
-   "skill.percent-fraction"
+   "skill.percent-fraction",
+   "skill.r2-proportion"
   ],
   "difficulty": 1,
   "interaction": "fraction-input",
@@ -173,7 +178,7 @@
     "text": "3/12 simplifies — divide top and bottom by 3."
    }
   ],
-  "explanation": "3 of 12 is 3/12 = 1/4 = 0.25.",
+  "explanation": "3 of 12 is the fraction 3/12, which reduces to 1/4 and is 0.25 as a decimal. All three write the same share of the harbour: one boat in every four.",
   "solutionSteps": [
    "Write part/whole: 3/12.",
    "Simplify: 1/4 = 0.25."
@@ -181,14 +186,16 @@
   "misconceptionIds": [
    "mc.reversed-fraction"
   ],
-  "estimatedSeconds": 50
+  "estimatedSeconds": 50,
+  "accessibilityDescription": "Give the fraction of the harbour's boats that are sailboats, as a fraction or as a decimal."
  },
  {
   "id": "q.ordering-data-cycle",
   "topicId": "t.data-literacy",
   "objectiveId": "obj.read-data",
   "skillIds": [
-   "skill.data-literacy"
+   "skill.data-literacy",
+   "skill.r2-frequency"
   ],
   "difficulty": 1,
   "interaction": "ordering",
@@ -234,7 +241,8 @@
   "explanation": "Every investigation runs question → data → organization → summary → interpretation. Skipping the question step is how datasets end up answering nothing.",
   "solutionSteps": [],
   "misconceptionIds": [],
-  "estimatedSeconds": 45
+  "estimatedSeconds": 45,
+  "accessibilityDescription": "Put five stages of a data investigation into the order they happen in."
  },
  {
   "id": "q.graph-tallest-bar",
@@ -285,7 +293,8 @@
   "misconceptionIds": [
    "mc.axis-misread"
   ],
-  "estimatedSeconds": 30
+  "estimatedSeconds": 30,
+  "accessibilityDescription": "Read a bar chart of the week's catch and name the day with the tallest bar."
  },
  {
   "id": "q.median-market",
@@ -372,7 +381,8 @@
   "misconceptionIds": [
    "mc.outlier-mean"
   ],
-  "estimatedSeconds": 45
+  "estimatedSeconds": 45,
+  "accessibilityDescription": "Choose which measure of centre best summarises a set of house prices containing one very large value."
  },
  {
   "id": "q.matching-measures",
@@ -452,7 +462,8 @@
   "explanation": "Mean balances the total, median marks the middle, mode is the most frequent value, and range measures the reach from smallest to largest.",
   "solutionSteps": [],
   "misconceptionIds": [],
-  "estimatedSeconds": 60
+  "estimatedSeconds": 60,
+  "accessibilityDescription": "Match three measures of centre to the descriptions of what each one reports."
  },
  {
   "id": "q.method-select",
@@ -496,7 +507,8 @@
   "misconceptionIds": [
    "mc.outlier-mean"
   ],
-  "estimatedSeconds": 45
+  "estimatedSeconds": 45,
+  "accessibilityDescription": "Choose the method that answers a question about typical pay when one salary is far above the rest."
  },
  {
   "id": "q.error-id-causation",
@@ -511,7 +523,8 @@
   "choices": [
    {
     "id": "ch.sample",
-    "text": "The sample of harbors is too small to compute anything"
+    "text": "The sample of harbors is too small to compute anything",
+    "misconceptionId": "mc.correlation-causation"
    },
    {
     "id": "ch.cause",
@@ -539,7 +552,8 @@
   "misconceptionIds": [
    "mc.correlation-causation"
   ],
-  "estimatedSeconds": 50
+  "estimatedSeconds": 50,
+  "accessibilityDescription": "Identify the flaw in an argument that moves from two things rising together to one causing the other."
  },
  {
   "id": "q.short-why-median",
@@ -567,7 +581,8 @@
   "explanation": "An outlier drags the mean toward itself because the mean uses every value's size. The median depends only on the middle position, so it resists outliers.",
   "solutionSteps": [],
   "misconceptionIds": [],
-  "estimatedSeconds": 90
+  "estimatedSeconds": 90,
+  "accessibilityDescription": "Write, in your own words, why the median is preferred to the mean for a set containing an outlier."
  },
  {
   "id": "q.remed-mean-basic",
@@ -728,7 +743,8 @@
   "topicId": "t.percent",
   "objectiveId": "obj.percent-fraction",
   "skillIds": [
-   "skill.percent-fraction"
+   "skill.percent-fraction",
+   "skill.r2-percentage"
   ],
   "difficulty": 2,
   "interaction": "step-by-step-calculation",
@@ -874,7 +890,8 @@
   "topicId": "t.percent",
   "objectiveId": "obj.percent-fraction",
   "skillIds": [
-   "skill.percent-fraction"
+   "skill.percent-fraction",
+   "skill.r2-proportion"
   ],
   "difficulty": 1,
   "interaction": "point-placement",

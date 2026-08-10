@@ -179,7 +179,7 @@ describe("wrong placements are diagnosed", () => {
     const result = submitAnswer(
       content,
       freshSave(),
-      sessionOn("l.reading-tallies", "q.point-thursday-catch"),
+      sessionOn("l.r2-scatterplots", "q.point-thursday-catch"),
       { kind: "point", x: 6, y: 4 },
       5000
     )!;

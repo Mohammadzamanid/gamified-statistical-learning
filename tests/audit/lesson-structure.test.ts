@@ -316,6 +316,32 @@ describe("requirements 3-6 — a demonstration the learner drives", () => {
     }
   });
 
+  it("requirement 5: the prose says what the readout begins at", () => {
+    // A prediction is answerable only from a starting state the learner knows,
+    // and for a screen-reader user that state is the words — not the panel. So
+    // the readout at the initial control settings has to appear somewhere a
+    // learner reads before predicting.
+    //
+    // The check has a second effect, which is why it is here rather than in the
+    // accessibility unit: it makes the author state the number the model
+    // actually produces. dem.r2-choosing-measures described "the mean value
+    // across all ten buildings" while its formula computed something else
+    // entirely, and every check in this file passed — the controls moved the
+    // readout, the prediction had a correct option, the prose read well. The
+    // divergence was only visible by running the demonstration and comparing.
+    for (const lesson of lessons) {
+      const demo = lesson.demonstration!;
+      const readout = demonstrationReadout(demo, initialValues(demo));
+      const exact = readout.toFixed(demo.readoutPrecision);
+      const trimmed = exact.includes(".") ? exact.replace(/\.?0+$/, "") : exact;
+      const spoken = [demo.prediction.prompt, demo.accessibleDescription, demo.observation].join(" ");
+      expect(
+        spoken.includes(exact) || spoken.includes(trimmed),
+        `${demo.id} never states its starting readout (${exact}) in words, so the prediction cannot be answered without the panel`
+      ).toBe(true);
+    }
+  });
+
   it("requirement 6: an observation of what changed", () => {
     for (const lesson of lessons) {
       expect(lesson.demonstration!.observation.trim().length, `${lesson.id} observation is a stub`).toBeGreaterThan(60);
@@ -443,6 +469,17 @@ describe("requirements 11-16 — the practice a lesson has to offer", () => {
       for (const qid of lesson.misconceptionQuestionIds) {
         const q = content.questions.get(qid)!;
         expect(q.misconceptionIds.length, `${qid} targets no misconception`).toBeGreaterThan(0);
+      }
+
+      // Scoped to every question the lesson asks, not just the one filling the
+      // misconception role. A misconception tag is a promise that the engine
+      // will name the belief instead of saying "incorrect", and the role a
+      // question happens to play does not change what the learner is owed when
+      // they answer it wrongly. Measured before it was widened: every Complete
+      // lesson already passed, so this costs no content debt and closes the gap
+      // an application or mastery question could otherwise sit in.
+      for (const qid of lesson.questionIds) {
+        const q = content.questions.get(qid)!;
         for (const mcId of q.misconceptionIds) {
           const mc = content.misconceptions.find((m) => m.id === mcId);
           expect(mc, `${qid} names undeclared misconception ${mcId}`).toBeDefined();
@@ -528,6 +565,28 @@ describe("requirement 17 — spaced-review scheduling", () => {
           overlap.length,
           `${q.id} is asked by ${lesson.id} but carries none of its skills, so answering it schedules nothing`
         ).toBeGreaterThan(0);
+      }
+    }
+  });
+
+  it("every skill a lesson teaches is practised by a question that lesson asks", () => {
+    // The other direction, and the one the redistribution nearly slipped
+    // through. `l.reading-tallies` declared obj.read-data because it used to ask
+    // the data-literacy questions; once those moved, the objective was a claim
+    // nothing in the lesson supported, and every other check still passed —
+    // requirement 17 below only asks whether *some* question in the repository
+    // practises the skill, which stays true however the lessons are shuffled.
+    //
+    // A learner reading "you will learn to read data" and then meeting eight
+    // questions about the mean has been told something untrue about the lesson,
+    // and their mastery of the promised skill never moves.
+    for (const lesson of lessons) {
+      const asked = new Set(questionsOf(lesson).flatMap((q) => q.skillIds));
+      for (const skillId of skillsOf(lesson)) {
+        expect(
+          asked.has(skillId),
+          `${lesson.id} claims to teach ${skillId} but asks no question that carries it`
+        ).toBe(true);
       }
     }
   });

@@ -143,7 +143,7 @@ describe("a completed run flows through the session engine", () => {
 
   it("classifies a decimal left unscaled on the percentage question", () => {
     const save = freshSave();
-    const session = sessionOn("l.reading-tallies", "q.step-percent-rainy");
+    const session = sessionOn("l.r2-percentage", "q.step-percent-rainy");
 
     const response: RawResponse = {
       kind: "steps",
@@ -180,7 +180,7 @@ describe("a completed run flows through the session engine", () => {
 
   it("accepts a fraction typed for the proportion step", () => {
     const save = freshSave();
-    const session = sessionOn("l.reading-tallies", "q.step-percent-rainy");
+    const session = sessionOn("l.r2-percentage", "q.step-percent-rainy");
 
     const response: RawResponse = {
       kind: "steps",

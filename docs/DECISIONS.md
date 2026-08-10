@@ -233,3 +233,51 @@ as "always". Handing a learner a bare instrument before they have met a summary 
 is therefore declared in the curriculum (`laboratoryUnlock`) and enforced by a pure predicate, rather than hard-coded
 in `LabScreen` where no audit looks. A curriculum that declares no gate leaves the bench open, so the mechanism can
 never seal it by accident — the failure mode of a gate is a locked door nobody meant to lock. (S2-11)
+
+**D-033 — A question outlives the lesson it was written for; a lesson does not outlive its questions.**
+Re-cutting the two Stage 1 centre lessons to scope §5 meant accounting for every question they asked, and most of what
+they asked taught percentages, bar charts or data literacy rather than the mean and the median. Three options existed.
+Delete the strays: that removes playable content to make a cycle close. Keep them and declare the lessons Complete
+anyway: that files a scatterplot question under a lesson about the mean, and §5's "every question has a role" becomes a
+formality satisfied by lying about the role. Or move each question to the lesson whose topic it actually serves, which
+is what happened — ten of the fourteen had such a lesson already written. The rule this settles: **a lesson's question
+list is decided by what the lesson teaches, never by which lesson happened to hold the question first.** Its corollary
+is that redistribution is design work with consequences for the receiving lessons — a moved question has to carry a
+skill the new lesson teaches, or answering it schedules nothing — and it is why the two re-cuts were deferred a cycle
+rather than done as a formatting pass. (S2-12)
+
+**D-034 — Content with no lesson to live in yet is staged, declared and audited, never parked.**
+Four inherited questions had no Region 2 lesson to move to: their topics belong to modules S2-14 will write. Parking
+them in those modules' seeded skeletons is the obvious thing to do and was, on the first attempt, done silently — which
+broke the skeleton-honesty guard, correctly, because a skeleton that accumulates content is a lesson no structure audit
+inspects. The resolution is not to weaken that guard but to make the exemption **declared**:
+`tests/helpers/staged-inherited.ts` names every staged question and the lesson holding it, and
+`tests/audit/region2-architecture.test.ts` checks both directions — an undeclared question in a skeleton fails, and a
+declaration naming a question the lesson does not ask fails. Staging cannot be used to hide new authorship (a staged
+question must carry only Stage 1 skills), cannot double-home a question, cannot grow, and cannot survive its lesson
+being declared Complete. What it does **not** buy is a quality exemption: a staged question is still held to an
+accessible description and a real explanation, because a learner meets it today. Only the lesson-level structure around
+it is deferred. (S2-12)
+
+**D-035 — A demonstration has to state the number its own formula produces.**
+`dem.r2-choosing-measures` shipped Complete in the previous cycle describing "the mean value across all ten buildings",
+with a prediction that opened "nine cottages at 40 coins and a house at 4000 give a mean of 436 coins". Its formula
+computed `(40 / 100) x 4000`, so the panel read 1600.00. Every existing check passed: the controls moved the readout,
+the prediction had a correct option, the prose was well written and internally consistent. The divergence was invisible
+because nothing compared the author's arithmetic to the model's. The new check is small and mechanical — the readout at
+the initial control settings must appear in the prediction prompt, the accessible description or the observation — and
+it does two jobs at once. It forces the author to run the demonstration, and it means a learner who cannot see the panel
+is still told the starting state the prediction asks them to reason from. Applying it found the one defect and improved
+two Region 1 demonstrations that had never said what their readout began at. The demonstration itself was rebuilt on
+`quotient`, which computes the mean the lesson is about; the previous formula was the closest available, and prose was
+written to describe what was wanted rather than what was there. (S2-12)
+
+**D-036 — An objective is a promise the lesson's own questions have to keep.**
+Requirement 17 checked that every question a lesson asks carries a skill the lesson teaches. The reverse — that every
+skill the lesson *claims* is practised by a question the lesson asks — was checked only against the whole repository, so
+it stayed true however the lessons were shuffled. That gap is exactly what the redistribution walked into:
+`l.reading-tallies` declared `obj.read-data` because it used to ask the data-literacy questions, and after they moved
+the objective was a claim nothing in the lesson supported. A probe leaving a stale objective behind failed nothing. It
+now fails one check. The learner-facing cost is what makes it worth a guard rather than a convention: a lesson that
+promises "you will learn to read data" and then asks eight questions about the mean has told them something untrue, and
+their mastery of the promised skill never moves. (S2-12)
