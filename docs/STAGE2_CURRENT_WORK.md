@@ -119,11 +119,15 @@ Seven deliberate probes, all reverted:
 
 ## Local commit
 
-`PENDING`
+`996d8a3a45b3a83443b9bacabb09d547b522e30f`
 
 ## Remote verification
 
-`PENDING`
+```
+LOCAL_HEAD  = 996d8a3a45b3a83443b9bacabb09d547b522e30f
+REMOTE_HEAD = 996d8a3a45b3a83443b9bacabb09d547b522e30f
+VERIFIED: MATCH
+```
 
 ## Next unit
 
