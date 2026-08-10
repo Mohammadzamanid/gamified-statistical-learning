@@ -160,9 +160,21 @@ function freshSave(): SaveFile {
  *
  * Neither is unchecked overall: requirement 10 below still forces any lesson
  * whose *notation* contains them (ratios, proportions) to explain them.
+ *
+ * The operator class also catches the Unicode operators that look like the ASCII
+ * ones a lesson explains. `q.range-tides` shipped from Stage 1 writing
+ * "3.4 − 1.2 = 2.2" with U+2212, and the guard could not see it: the lesson
+ * explains `-`, the content used a different character, and beginner safety was
+ * bypassed by a keystroke. Both are listed so the mismatch fails rather than
+ * reads correctly — no lesson declares U+2212, so content using it is reported
+ * as unexplained and has to be normalised to the form the curriculum teaches.
+ *
+ * En and em dashes are deliberately excluded on the same reasoning as `=` and
+ * `:` above: in this curriculum they are punctuation ("0–100 scale", a clause
+ * break) far more often than they are operators, and 278 of them are prose.
  */
 const ALWAYS_NOTATION = ["×", "÷", "√", "∑", "σ", "μ", "π", "≥", "≤", "≠", "≈", "^", "%"];
-const OPERATOR_BETWEEN_NUMBERS = /\d\s*([+\-x×÷/*])\s*\d/g;
+const OPERATOR_BETWEEN_NUMBERS = /\d\s*([+\-x×÷/*−∕⁄])\s*\d/g;
 
 /** Every operator and symbol a stretch of learner-facing text actually uses. */
 function notationUsedIn(text: string): Set<string> {

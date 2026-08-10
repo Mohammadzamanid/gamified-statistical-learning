@@ -448,25 +448,127 @@
    "id": "l.spread-1",
    "moduleId": "m.r2-spread",
    "title": "The Reach of the Tide",
-   "narrativeIntro": "Two harbors can share a mean and still live different lives. Range tells you how far the tide reaches.",
+   "narrativeIntro": "Two harbours report the same mean tide and the same median tide, and a skipper who trusts either one runs aground in exactly one of them. One harbour's water barely moves all week; the other swings between a trickle and a flood. No measure of centre can tell them apart, because the difference is not where the middle is but how far the readings reach on each side of it.",
    "objectiveIds": [
-    "obj.compute-range"
+    "obj.compute-range",
+    "obj.compute-mean"
    ],
    "concepts": [
     {
      "id": "c.range",
      "title": "The range",
-     "summary": "Largest minus smallest.",
-     "body": "The range is the simplest measure of spread: subtract the smallest value from the largest. A large range warns you that the mean alone hides a lot of variation."
+     "summary": "The largest reading minus the smallest, and nothing else.",
+     "body": "The range is the simplest measure of spread: subtract the smallest value from the largest. It answers one question exactly — how much ground does this data cover from end to end — and it answers it in the data's own units, so a range of 2.2 metres is 2.2 metres of tide. Reported beside a mean it warns a reader how much the single summary is hiding, which is why the two belong together on a page."
+    },
+    {
+     "id": "c.range-uses-two",
+     "title": "Two readings decide it",
+     "summary": "Everything between the extremes could move without changing the range at all.",
+     "body": "Whatever the size of the log, the range consults exactly two of its readings and ignores every other one. Shift a middle value from one end of the interval to the other and the range does not budge; log a hundred more readings inside the existing spread and it still does not budge. That blindness is the price of how little work it takes, and it is the reason the next lessons cut the data into parts instead: they ask where the readings actually sit, not merely how far apart the two extremes are."
+    },
+    {
+     "id": "c.range-and-outliers",
+     "title": "One odd reading sets it",
+     "summary": "Because the range is built from the extremes, a single outlier decides it outright.",
+     "body": "The two values the range depends on are exactly the two most likely to be unusual. A gauge knocked once in a week can double the reported reach of a tide that never moved that far, and no amount of ordinary data will pull the figure back, because the ordinary data is not consulted. A range should therefore be read together with the question of whether either end is trustworthy — which is the outlier work, arriving later in the region."
     }
    ],
    "questionIds": [
-    "q.range-tides"
+    "q.range-tides",
+    "q.r2-range-independent",
+    "q.r2-range-misconception",
+    "q.r2-range-application",
+    "q.r2-range-teachback",
+    "q.r2-range-mastery"
    ],
    "prerequisites": [
     "l.r2-choosing-measures"
    ],
-   "estimatedMinutes": 8
+   "estimatedMinutes": 12,
+   "demonstration": {
+    "id": "dem.r2-range",
+    "title": "The reach from one end to the other",
+    "experience": "The week's highest tide and its lowest are marked on the harbour wall, and the readout gives the distance between the two marks. Move either mark and the reach changes; everything the tide did in between is not part of the measurement at all.",
+    "accessibleDescription": "Two controls. The first sets the highest tide of the week in metres, the second sets the lowest. The readout gives the range, the highest minus the lowest, to one decimal place. It starts at 2.2 with a highest tide of 3.4 metres and a lowest of 1.2.",
+    "controls": [
+     {
+      "id": "ctl.highest",
+      "label": "Highest tide this week, in metres",
+      "min": 0,
+      "max": 10,
+      "step": 0.1,
+      "initial": 3.4
+     },
+     {
+      "id": "ctl.lowest",
+      "label": "Lowest tide this week, in metres",
+      "min": 0,
+      "max": 10,
+      "step": 0.1,
+      "initial": 1.2
+     }
+    ],
+    "formula": "difference",
+    "readoutLabel": "Range of the week's tides, in metres",
+    "readoutPrecision": 1,
+    "prediction": {
+     "prompt": "The week ran from a lowest tide of 1.2 metres to a highest of 3.4, so the readout shows 2.2. Three more gauges are found and report tides of 2.0, 2.1 and 2.2 metres. What does the readout show now?",
+     "options": [
+      {
+       "id": "opt.same",
+       "text": "2.2 - the new readings sit between the ends, so neither end moved"
+      },
+      {
+       "id": "opt.bigger",
+       "text": "Larger - there is more data, so the spread must have grown"
+      },
+      {
+       "id": "opt.smaller",
+       "text": "Smaller - the new readings are clustered, so they tighten the spread"
+      }
+     ],
+     "correctOptionId": "opt.same",
+     "revealNote": "The log has nearly doubled in size and the range has not changed by a millimetre, because none of the new readings is an end. The range consults two values and ignores every other one, however many there are. That is worth knowing before trusting it: a range says how far the data reaches, and says nothing whatever about how the readings are arranged inside that reach."
+    },
+    "observation": "Raise the highest tide and the readout grows; raise the lowest and it shrinks. Set the two marks to the same height and the readout sits at 0, which is the reading for a week where the tide never moved. Push the lowest above the highest and it turns negative, which says the two marks have been read the wrong way round."
+   },
+   "formalTerm": {
+    "term": "Range",
+    "definition": "The range is the largest value in a set minus the smallest, reported in the units of the data. It measures how far the readings reach from end to end, using only those two values, so it says nothing about how the rest of the data is arranged between them.",
+    "notation": "largest - smallest",
+    "symbols": [
+     {
+      "symbol": "largest",
+      "meaning": "The biggest value anywhere in the set."
+     },
+     {
+      "symbol": "-",
+      "meaning": "Minus: take the amount on the right away from the amount on the left."
+     },
+     {
+      "symbol": "smallest",
+      "meaning": "The smallest value anywhere in the set."
+     }
+    ]
+   },
+   "guidedQuestionIds": [
+    "q.range-tides"
+   ],
+   "independentQuestionIds": [
+    "q.r2-range-independent"
+   ],
+   "misconceptionQuestionIds": [
+    "q.r2-range-misconception"
+   ],
+   "applicationQuestionIds": [
+    "q.r2-range-application"
+   ],
+   "teachBackQuestionIds": [
+    "q.r2-range-teachback"
+   ],
+   "masteryCheckQuestionIds": [
+    "q.r2-range-mastery"
+   ]
   },
   {
    "id": "l.r1-counting",
@@ -3009,18 +3111,120 @@
    "concepts": [
     {
      "id": "c.r2-quartiles",
-     "title": "Cutting the Data in Four",
-     "summary": "Quartiles are the three values that cut an ordered dataset into four equal parts.",
-     "body": "The median cuts the data in half; the quartiles cut each half in half again, and between them they say where the middle bulk sits."
+     "title": "Three cuts, four parts",
+     "summary": "Quartiles are the three values that split a sorted set into four equal-sized parts.",
+     "body": "Sort the data, then make three cuts so that each of the four parts holds a quarter of the readings. The cuts are the quartiles: Q1 with a quarter of the data at or below it, Q2 with half — which is the median under another name — and Q3 with three quarters. Three values, four parts: the count that confuses people is that there are not four quartiles, because a cut is a boundary rather than a piece."
+    },
+    {
+     "id": "c.r2-quartiles-position",
+     "title": "A quartile is a value, not a place in the row",
+     "summary": "Q1 is the reading found a quarter of the way along, not the number one quarter.",
+     "body": "Finding a quartile has two steps and they produce different kinds of number. First you work out how far along the sorted row the cut falls, which is a position: in a set of twelve, Q1 lands a shade past the third reading. Then you read off the value sitting there, which is a measurement in the data's own units. Reporting the position instead of the value is the commonest error in this topic, and it gives an answer that looks like data and is really an index."
+    },
+    {
+     "id": "c.r2-quartiles-uneven",
+     "title": "The parts are equal in count, not in width",
+     "summary": "Each quarter holds the same number of readings and can cover very different ground.",
+     "body": "Quartiles divide the data by how many readings fall in each part, never by how much numeric ground each part covers. In a log where most tides cluster low and a few run very high, the bottom quarter may span a few centimetres while the top quarter spans metres — both still hold exactly a quarter of the readings. A wide quarter is not an error; it is the data telling you where it is thin."
     }
    ],
    "questionIds": [
-    "q.seed.r2-quartiles"
+    "q.r2-quartiles",
+    "q.r2-quartiles-independent",
+    "q.r2-quartiles-misconception",
+    "q.r2-quartiles-application",
+    "q.r2-quartiles-teachback",
+    "q.r2-quartiles-mastery"
    ],
    "prerequisites": [
     "l.spread-1"
    ],
-   "estimatedMinutes": 15
+   "estimatedMinutes": 14,
+   "narrativeIntro": "The range told you how far the week's tides reached and refused to say anything about the days in between. Cutting the sorted readings into four equal parts asks that second question directly: not how wide the data is, but whereabouts in that width the readings actually sit, and how much of the log lies below any point you care to name.",
+   "demonstration": {
+    "id": "dem.r2-quartiles",
+    "title": "Dealing a sorted row into equal parts",
+    "experience": "The sorted log is dealt out into equal piles, and the readout gives how many readings land in each one. Set the number of piles to four and you are making quartiles; the same cutting works for any number of parts, which is where the next lesson starts.",
+    "accessibleDescription": "Two controls. The first sets how many readings the log holds. The second sets how many equal groups the sorted row is cut into. The readout gives how many readings fall in each group, to two decimal places, and starts at 5.00 with 20 readings cut into 4 groups.",
+    "controls": [
+     {
+      "id": "ctl.readings",
+      "label": "Readings in the log",
+      "min": 4,
+      "max": 40,
+      "step": 4,
+      "initial": 20
+     },
+     {
+      "id": "ctl.groups",
+      "label": "Equal groups to cut the sorted row into",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "initial": 4
+     }
+    ],
+    "formula": "quotient",
+    "readoutLabel": "Readings in each group",
+    "readoutPrecision": 2,
+    "prediction": {
+     "prompt": "Twenty readings cut into four groups puts five in each, so the readout shows 5.00 and the three cuts between those groups are the quartiles. Four more readings are logged, making twenty-four. What does the readout show?",
+     "options": [
+      {
+       "id": "opt.six",
+       "text": "6.00 - the same four groups, each holding one more reading"
+      },
+      {
+       "id": "opt.five",
+       "text": "5.00 - quartiles always put five readings in a quarter"
+      },
+      {
+       "id": "opt.four",
+       "text": "4.00 - the extra readings make an extra group"
+      }
+     ],
+     "correctOptionId": "opt.six",
+     "revealNote": "Twenty-four readings in four groups is six each. The number of cuts never changes — three cuts always make four parts — but the amount of data behind each cut grows with the log. That is what makes a quartile a statement about proportion rather than about count: Q1 means a quarter of the readings sit at or below it, whether that quarter is five readings or five thousand."
+    },
+    "observation": "Raise the number of readings and the groups fill up; raise the number of groups and each one thins out. Take the group control to 10 and the readout gives what lands in each tenth of the data, which is the same cutting under a different name. Take it to 1 and the readout is the whole log, because a single part with no cuts in it is the data itself."
+   },
+   "formalTerm": {
+    "term": "Quartile",
+    "definition": "The quartiles are the three values that cut a sorted set into four parts of equal size. Q1 has a quarter of the readings at or below it, Q2 has half and is the median, and Q3 has three quarters. Each is a value read off the data, not a position in the row.",
+    "notation": "Q1 Q2 Q3",
+    "symbols": [
+     {
+      "symbol": "Q1",
+      "meaning": "The first quartile: a quarter of the sorted readings sit at or below it."
+     },
+     {
+      "symbol": "Q2",
+      "meaning": "The second quartile: half the readings sit at or below it, so it is the median."
+     },
+     {
+      "symbol": "Q3",
+      "meaning": "The third quartile: three quarters of the readings sit at or below it."
+     }
+    ]
+   },
+   "guidedQuestionIds": [
+    "q.r2-quartiles"
+   ],
+   "independentQuestionIds": [
+    "q.r2-quartiles-independent"
+   ],
+   "misconceptionQuestionIds": [
+    "q.r2-quartiles-misconception"
+   ],
+   "applicationQuestionIds": [
+    "q.r2-quartiles-application"
+   ],
+   "teachBackQuestionIds": [
+    "q.r2-quartiles-teachback"
+   ],
+   "masteryCheckQuestionIds": [
+    "q.r2-quartiles-mastery"
+   ]
   },
   {
    "id": "l.r2-percentiles",

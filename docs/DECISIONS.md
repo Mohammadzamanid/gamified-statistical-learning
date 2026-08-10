@@ -301,3 +301,26 @@ see is an answer that is simply wrong about the mathematics. Authored questions 
 against; that is precisely what D-020's family-stated `expectedResponse` buys generated ones, and the asymmetry is now
 recorded in the test's own header rather than left for the next author to discover by trusting it too far. The first
 draft of that header claimed the stronger guarantee, and the probe is the only reason it does not ship. (S2-12)
+
+**D-039 — A guard that names its characters must name their lookalikes too.**
+`q.range-tides` shipped from the Stage 1 baseline writing "3.4 − 1.2 = 2.2" with U+2212, the Unicode minus sign. Every
+lesson in its chain explains ASCII `-`; no lesson explains U+2212; and the beginner-safety check saw nothing, because
+its operator class listed `-` and not `−`. A guard written as a character list is only as good as the list, and a
+learner-facing string can bypass it with a keystroke that looks identical on screen. The class now includes U+2212 and
+the two division slashes, and the content was normalised to the form the curriculum teaches — the same resolution as
+`×` versus `x` in S2-12, and for the same reason: two characters for one operation is worse teaching than either alone.
+En and em dashes are deliberately still excluded, on the reasoning already recorded for `=` and `:` — 278 of them in
+this repository are prose. The paired probe is what proves the widening does the work: identical content fails one check
+with the wider class and none with the old one. (S2-13)
+
+**D-040 — "Unreachable" is a claim about the unlock rule, and has to be checked against it.**
+S2-12 cycle 4 reported that `l.r2-outliers` and `l.r2-skew` were "finished but not yet reachable by a learner", and the
+handoff told the next unit to write variance and standard deviation first so that the region would not have "a finished
+module a learner cannot enter". **Both statements were wrong.** Driving a save through `isLessonUnlocked` shows the whole
+chain from `l.spread-1` to `l.r2-outliers` unlocking today: a seeded lesson holds a real, answerable question, so it can
+be completed, so it opens the next one. Nothing was ever closed. What is true is narrower and less dramatic — those two
+lessons sit behind six lessons that are still stubs, so a learner reaches them through six rounds of one question each.
+The correction changes the work: S2-13's job is not to unblock a gate but to replace stubs, and the order that does most
+for a learner is plain module order from the module's entry lesson, not the order that finishes a module soonest.
+The lesson for the next unit is the general one: reachability is computed by a rule in `src/core`, so a claim about it
+is checkable in about fifteen lines, and asserting it from the shape of the graph is guessing. (S2-13)

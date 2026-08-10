@@ -206,5 +206,21 @@
   "detector": "tagged-distractor",
   "detectorParams": {},
   "remediationId": "rem.name-the-tail"
+ },
+ {
+  "id": "mc.range-is-the-largest",
+  "title": "The range reported as the largest value",
+  "description": "The learner reads 'how far the data reaches' as 'how high it goes' and reports the maximum instead of the difference between the two ends. The answer is a real reading from the set, which is what makes it hard to spot.",
+  "detector": "known-wrong-answer",
+  "detectorParams": {},
+  "remediationId": "rem.reach-not-height"
+ },
+ {
+  "id": "mc.quartile-position-as-value",
+  "title": "A quartile's position reported instead of its value",
+  "description": "The learner works out correctly how far along the sorted row the cut falls and then reports that position as the answer, rather than reading off the value sitting there. The arithmetic is right and the answer is an index rather than a measurement.",
+  "detector": "known-wrong-answer",
+  "detectorParams": {},
+  "remediationId": "rem.read-the-value-at-the-cut"
  }
 ]

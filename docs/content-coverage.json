@@ -70,17 +70,18 @@
       "title": "Mean",
       "lessonIds": [
         "l.reading-tallies",
+        "l.spread-1",
         "l.r2-outliers",
         "l.r2-skew"
       ],
       "regionId": "r.averages-atoll",
-      "authoredRecords": 13,
+      "authoredRecords": 14,
       "generatorFamilies": 0,
       "reasoningFamilies": [],
       "rawCombinations": 0,
       "validCombinations": 0,
       "validatedGenerated": 0,
-      "totalAvailable": 13,
+      "totalAvailable": 14,
       "rejections": {
         "invalidCombinations": 0,
         "invalidReasons": {},
@@ -92,10 +93,10 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.07692307692307693,
+      "largestShapeShare": 0.07142857142857142,
       "failures": [
         "no generator families produce for this topic",
-        "13 available interactions, below the required 100",
+        "14 available interactions, below the required 100",
         "0 reasoning families represented, below the required 4"
       ]
     },
@@ -1211,13 +1212,13 @@
         "l.r2-quartiles"
       ],
       "regionId": "r.averages-atoll",
-      "authoredRecords": 1,
+      "authoredRecords": 6,
       "generatorFamilies": 0,
       "reasoningFamilies": [],
       "rawCombinations": 0,
       "validCombinations": 0,
       "validatedGenerated": 0,
-      "totalAvailable": 1,
+      "totalAvailable": 6,
       "rejections": {
         "invalidCombinations": 0,
         "invalidReasons": {},
@@ -1229,12 +1230,11 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 1,
+      "largestShapeShare": 0.16666666666666666,
       "failures": [
         "no generator families produce for this topic",
-        "1 available interactions, below the required 100",
-        "0 reasoning families represented, below the required 4",
-        "100% of interactions share one reasoning shape, above the 50% ceiling — this is the \"numeric variants of one pattern\" case"
+        "6 available interactions, below the required 100",
+        "0 reasoning families represented, below the required 4"
       ]
     },
     {
@@ -1375,13 +1375,13 @@
         "l.spread-1"
       ],
       "regionId": "r.averages-atoll",
-      "authoredRecords": 1,
+      "authoredRecords": 6,
       "generatorFamilies": 0,
       "reasoningFamilies": [],
       "rawCombinations": 0,
       "validCombinations": 0,
       "validatedGenerated": 0,
-      "totalAvailable": 1,
+      "totalAvailable": 6,
       "rejections": {
         "invalidCombinations": 0,
         "invalidReasons": {},
@@ -1393,12 +1393,11 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 1,
+      "largestShapeShare": 0.16666666666666666,
       "failures": [
         "no generator families produce for this topic",
-        "1 available interactions, below the required 100",
-        "0 reasoning families represented, below the required 4",
-        "100% of interactions share one reasoning shape, above the 50% ceiling — this is the \"numeric variants of one pattern\" case"
+        "6 available interactions, below the required 100",
+        "0 reasoning families represented, below the required 4"
       ]
     }
   ]

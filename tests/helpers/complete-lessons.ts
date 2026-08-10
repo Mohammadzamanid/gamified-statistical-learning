@@ -53,5 +53,10 @@ export const COMPLETE_LESSONS: readonly string[] = [
   // half-written: spread before shape is the region's design, and the unit
   // boundary cuts across it.
   "l.r2-outliers",
-  "l.r2-skew"
+  "l.r2-skew",
+  // Region 2, m.r2-spread — written in module order (S2-13 cycle 1). l.spread-1
+  // is the third Stage 1 lesson to be re-cut; it carried one inherited
+  // question, which stayed where it was because range is what it teaches.
+  "l.spread-1",
+  "l.r2-quartiles"
 ];

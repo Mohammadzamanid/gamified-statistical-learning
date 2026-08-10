@@ -16,7 +16,7 @@ after Stage 1 was lost because commits were never pushed to a durable remote. Re
 
 - **Stage 1: surviving, verified, green.** Not re-created — the original commit `7add4bc` was carried forward from the
   archive's own `.git` directory, with authorship intact.
-- **Stage 2: in progress, and not recoverable.** Reconstruction began 2026-08-04; S2-01 through S2-08, S2-10 and S2-11 are complete and S2-12 is **Partial** (cycle 4, `08f1c37`, remote-verified; all 9 lessons Complete, editable datasets deferred to S2-15); S2-09 is **Partial**, and only because §4 is stated over all 22 topics — every Region 1 topic meets it. Nothing
+- **Stage 2: in progress, and not recoverable.** Reconstruction began 2026-08-04; S2-01 through S2-08, S2-10 and S2-11 are complete and S2-12 is **Partial** (all 9 lessons Complete, editable datasets deferred to S2-15) and S2-13 is **Partial** (cycle 1, `PENDING`, remote-verified); S2-09 is **Partial**, and only because §4 is stated over all 22 topics — every Region 1 topic meets it. Nothing
   in it is recovered source.
 - **Stages 3–6: not started, and not recoverable.** They must be **reconstructed** from the surviving Stage 1 source,
   the specifications, and the known defect history. They may never be described as recovered source, and no metric may
@@ -37,7 +37,7 @@ after Stage 1 was lost because commits were never pushed to a durable remote. Re
 | Milestone exports | `../gsl-exports/` — source ZIP + git bundle + manifest + SHA-256 checksums |
 | Working tree | clean |
 | Node / npm used | v22.22.2 / 10.9.7 |
-| Test suite | **505 tests / 37 files**, all passing (Stage 1 baseline was 73 / 14) |
+| Test suite | **511 tests / 37 files**, all passing (Stage 1 baseline was 73 / 14) |
 | Build | passing (**538.47 kB, 143.72 kB gzip**; baseline was 285.73 kB / 83.82 kB) |
 | Source modified since baseline | S2-01 … S2-08 — achievements + region completion, three new interactions, the enforced interaction audit, the review queue, the Region 1 topic architecture, and all 17 Region 1 lessons |
 | Curriculum | 2 regions · **6 modules** · **20 lessons** · **23 skills** · **145 questions** (baseline 2/2/3/6/14) |
@@ -105,39 +105,49 @@ branch/tag deletion) are forbidden without explicit owner permission. See `REMOT
 
 ## 5. Next unit
 
-**S2-13 — spread and position lessons.** Min/max, range, quartiles, percentiles, IQR, variance intuition, standard
-deviation, distribution comparison.
+**S2-13 continued — percentiles and IQR**, then variance and standard deviation.
 
-**S2-12 is finished apart from one criterion it never claimed.** All nine of its lessons are Complete; draggable and
-editable datasets are not built, and belong to S2-15. That is why the unit reads Partial rather than Complete.
+**2 of S2-13's 6 lessons are Complete**: `l.spread-1` (range) and `l.r2-quartiles`. Continue in module order —
+`l.r2-percentiles`, then `l.r2-iqr`, then `l.r2-variance` and `l.r2-standard-deviation`.
 
-**S2-13 inherits a half-written module.** `m.r2-variation` holds four lessons. S2-12 wrote `l.r2-outliers` and
-`l.r2-skew`; `l.r2-variance` and `l.r2-standard-deviation` sit *ahead* of them in the prerequisite chain and are still
-seeded skeletons. So two Complete lessons are currently unreachable, and writing those two is what opens them. Do that
-before the rest of `m.r2-spread`, or the region has a finished module a learner cannot enter.
-
-**One Region 2 lesson is still inherited from Stage 1**: `l.spread-1` (range). It carries real content and more than
-one question, so the skeleton shape does not apply to it and it does not meet §5 either. **S2-13 owns it, and it needs
-the redistribution-first treatment the two centre lessons needed** — read what its questions actually teach before
-attempting the re-cut, because a Complete lesson must account for every question it asks (D-033). Expect some of them
-to belong to lessons S2-13 or S2-14 has not written; `tests/helpers/staged-inherited.ts` is the declared mechanism for
-that case (D-034), and it is bounded so it cannot become a dumping ground.
+**Ignore the previous handoff's ordering instruction; it rested on a false claim.** It said to write variance and
+standard deviation first so the region would not have "a finished module a learner cannot enter". Driving a save
+through `isLessonUnlocked` shows the whole chain from `l.spread-1` to `l.r2-outliers` unlocking today: a seeded lesson
+holds a real answerable question, so it completes, so it opens the next one. Nothing was ever closed. What is true is
+that `l.r2-outliers` and `l.r2-skew` sit behind stub lessons, and module order is what replaces those stubs soonest.
+(D-040. The general point: reachability is decided by a rule in `src/core`, so a claim about it is checkable in about
+fifteen lines rather than inferred from the shape of the graph.)
 
 **Standard deviation must be visualised as distances → squared distances → their average → square root.** That is the
-original handoff's own instruction for this unit, preserved because the sequence is the teaching.
+original handoff's own instruction for this unit, preserved because the sequence is the teaching. Note the demonstration
+formula list has no square root, so either the readout stops at the variance and the root is taken in prose, or the
+formula list grows — decide deliberately and record it.
+
+**`l.r2-quartiles` set up percentiles on purpose.** Its demonstration cuts a sorted row into any number of equal groups
+and reports how many land in each; the quartile case is four, and the observation already points at ten. Percentiles is
+the same cutting with a finer comb, so the lesson should extend that demonstration's idea rather than start over.
+
+**Criterion 5 — distribution comparison — has no lesson.** It is in S2-13's scope and there is no topic for it in
+`tests/helpers/region2-topics.ts`, whose 22 entries are audited in both directions. Meeting it therefore means adding a
+lesson, a topic and a skill, or deciding explicitly that the boss investigation carries it and recording that the
+criterion is met there. Do not let it lapse by not being mentioned.
+
+**All three inherited Stage 1 lessons in Region 2 are now re-cut** — `l.reading-tallies`, `l.middle-harbor` and
+`l.spread-1`. There is no more inherited content to redistribute in this region.
 
 **Four inherited questions are staged, and S2-14 owes their removal**: `q.graph-tallest-bar` and `q.dd-build-bar-chart`
 in `l.r2-bar-charts`, `q.point-thursday-catch` in `l.r2-scatterplots`, `q.error-id-causation` in
-`l.r2-misleading-graphs`. Each needs a role when its lesson is written, and its entry deleted.
+`l.r2-misleading-graphs`. Each needs a role when its lesson is written, and its entry in
+`tests/helpers/staged-inherited.ts` deleted.
 
 **A lesson is not finished until something has played it (D-037).** `tests/integration/region2-lessons.test.ts`
-iterates `COMPLETE_LESSONS`, so a lesson S2-13 declares is played automatically. Read that file's header before
-trusting it: it proves the content round-trips through the real evaluator, session and save, and it does **not** prove
-a declared answer is arithmetically right (D-038).
+iterates `COMPLETE_LESSONS`, so a lesson you declare is played automatically. Read that file's header before trusting
+it: it proves the content round-trips through the real evaluator, session and save, and it does **not** prove a
+declared answer is arithmetically right (D-038).
 
-**Run the demonstration before writing about it.** `dem.r2-choosing-measures` shipped Complete describing a readout its
-formula never computed, and every check passed (D-035). The prose must now state the readout at the initial control
-settings, which forces the arithmetic to be checked rather than assumed.
+**Run the demonstration before writing about it (D-035), and use the characters the curriculum explains (D-039).** The
+prose must state the readout at the initial control settings, and the operator class now catches Unicode lookalikes —
+write `-`, not `−`.
 
 **The lessons already exist as skeletons — you are filling them in, not creating them.**
 `tests/audit/region2-architecture.test.ts` asserts every seeded lesson still holds exactly its seed question, plus only

@@ -311,5 +311,29 @@
   "skillIds": [
    "skill.r2-skew"
   ]
+ },
+ {
+  "id": "rem.reach-not-height",
+  "title": "The range is a distance, not a height",
+  "explanation": "The largest value says how high the data goes. The range says how far it reaches, which needs both ends: a week running from 1.2 to 3.4 metres and a week running from 0.0 to 3.4 have the same maximum and very different tides. Subtracting is what turns two readings into one distance, and the units give it away - a range is always measured in the same units as the gap it describes.",
+  "microLesson": "Take tides of 1.2, 2.8, 1.9, 3.4 and 2.1 metres. The largest is 3.4, and that is not the range: it is one end of it. The smallest is 1.2, the other end. The range is 3.4 - 1.2 = 2.2 metres, which is the distance between the marks rather than the height of the higher one.",
+  "followUpQuestionIds": [
+   "q.range-tides"
+  ],
+  "skillIds": [
+   "skill.range"
+  ]
+ },
+ {
+  "id": "rem.read-the-value-at-the-cut",
+  "title": "Find the cut, then read what is there",
+  "explanation": "Working out where the cut falls is the first half of the job and it produces a position - third along, seventh along - which is a count of places rather than a measurement. The quartile is whatever value is sitting at that place. The check that catches it every time is units: a quartile of a tide log is in metres, so an answer with no units is a position that has not been cashed in yet.",
+  "microLesson": "Sorted catches: 3, 5, 6, 8, 9, 11, 14, 16, 18, 21, 24, 30. Twelve readings, so the lower half is the first six: 3, 5, 6, 8, 9, 11. Q1 is the middle of those, halfway between 6 and 8, which is 7 crates. The cut falls a little past the third reading - but 3 is where you looked, and 7 is what you found.",
+  "followUpQuestionIds": [
+   "q.r2-quartiles"
+  ],
+  "skillIds": [
+   "skill.r2-quartiles"
+  ]
  }
 ]

@@ -640,21 +640,22 @@
   "hints": [
    {
     "level": 1,
-    "text": "Range = largest value minus smallest value."
+    "text": "The range is the largest value minus the smallest value."
    },
    {
     "level": 2,
-    "text": "Largest is 3.4, smallest is 1.2."
+    "text": "The largest reading is 3.4 metres and the smallest is 1.2 metres."
    }
   ],
-  "explanation": "Range = 3.4 − 1.2 = 2.2 meters.",
+  "explanation": "Range is largest minus smallest: 3.4 - 1.2 = 2.2 metres. Only the two ends of the week were used.",
   "solutionSteps": [
-   "Find the largest: 3.4.",
-   "Find the smallest: 1.2.",
-   "Subtract: 3.4 − 1.2 = 2.2."
+   "Find the largest reading: 3.4 metres.",
+   "Find the smallest reading: 1.2 metres.",
+   "Subtract the smallest from the largest: 3.4 - 1.2 = 2.2 metres."
   ],
   "misconceptionIds": [],
-  "estimatedSeconds": 45
+  "estimatedSeconds": 45,
+  "accessibilityDescription": "Five tide heights in metres; enter the range, the largest minus the smallest, as a number."
  },
  {
   "id": "q.step-mean-catch",
@@ -6899,27 +6900,6 @@
   "estimatedSeconds": 120
  },
  {
-  "id": "q.seed.r2-quartiles",
-  "topicId": "t.r2-quartiles",
-  "objectiveId": "obj.r2-quartiles",
-  "skillIds": [
-   "skill.r2-quartiles"
-  ],
-  "difficulty": 2,
-  "interaction": "numeric-input",
-  "prompt": "Ordered catches: 2, 4, 6, 8, 10, 12, 14. What is the MEDIAN, the second quartile?",
-  "answer": {
-   "kind": "numeric",
-   "value": 8,
-   "tolerance": 0,
-   "unit": "crates"
-  },
-  "explanation": "The answer is 8 crates. This lesson is a seed: its full teaching arrives with the Region 2 lesson units.",
-  "accessibilityDescription": "A numeric seed question for a Region 2 lesson that has not been written yet. Enter the answer as a number.",
-  "misconceptionIds": [],
-  "estimatedSeconds": 45
- },
- {
   "id": "q.seed.r2-percentiles",
   "topicId": "t.r2-percentiles",
   "objectiveId": "obj.r2-percentiles",
@@ -8605,5 +8585,343 @@
   "misconceptionIds": [],
   "accessibilityDescription": "Three pairs of mean and median values; enter how many of the three logs are right-skewed as a number.",
   "estimatedSeconds": 120
+ },
+ {
+  "id": "q.r2-range-independent",
+  "topicId": "t.spread",
+  "objectiveId": "obj.compute-range",
+  "skillIds": [
+   "skill.range"
+  ],
+  "difficulty": 2,
+  "interaction": "numeric-input",
+  "prompt": "A gauge logs depths of 4.6, 3.1, 5.8, 3.9 and 4.2 metres. What is the range of the depths?",
+  "answer": {
+   "kind": "numeric",
+   "value": 2.7,
+   "tolerance": 0.01,
+   "unit": "m"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Pick out the two ends of the data before doing any arithmetic."
+   }
+  ],
+  "explanation": "The deepest reading is 5.8 metres and the shallowest is 3.1, so the range is 5.8 - 3.1 = 2.7 metres. The three readings in between played no part in the answer.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "Five depth readings in metres; enter the range, the largest minus the smallest, as a number.",
+  "estimatedSeconds": 60
+ },
+ {
+  "id": "q.r2-range-misconception",
+  "topicId": "t.spread",
+  "objectiveId": "obj.compute-range",
+  "skillIds": [
+   "skill.range"
+  ],
+  "difficulty": 3,
+  "interaction": "numeric-input",
+  "prompt": "Wind speeds recorded at the harbour mouth: 12, 31, 19, 24 and 17 knots. What is the range of the wind speeds?",
+  "answer": {
+   "kind": "numeric",
+   "value": 19,
+   "tolerance": 0,
+   "unit": "knots"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "The range is a distance between two readings, not one of the readings."
+   },
+   {
+    "level": 2,
+    "text": "The fastest was 31 knots and the slowest 12. What separates them?"
+   }
+  ],
+  "explanation": "The fastest reading is 31 knots and the slowest is 12, so the range is 31 - 12 = 19 knots. Answering 31 reports how hard the wind blew at its worst, which is a different question: that is the maximum, and it is one end of the range rather than the range itself.",
+  "misconceptionIds": [
+   "mc.range-is-the-largest"
+  ],
+  "parameters": {
+   "mc.range-is-the-largest": {
+    "wrongValue": 31
+   }
+  },
+  "accessibilityDescription": "Five wind speeds in knots; enter the range as a number, which is not the same as the fastest reading.",
+  "estimatedSeconds": 80
+ },
+ {
+  "id": "q.r2-range-application",
+  "topicId": "t.spread",
+  "objectiveId": "obj.compute-range",
+  "skillIds": [
+   "skill.range",
+   "skill.mean"
+  ],
+  "difficulty": 3,
+  "interaction": "multiple-choice",
+  "prompt": "Two harbours both report a mean tide of 2.5 metres. Harbour A has a range of 0.4 metres and Harbour B a range of 3.6. What does that tell a skipper?",
+  "choices": [
+   {
+    "id": "ch.same",
+    "text": "Nothing useful - they have the same mean, so the tides behave the same way"
+   },
+   {
+    "id": "ch.b-varies",
+    "text": "Harbour B's water swings far more, so its mean describes a typical day much less well"
+   },
+   {
+    "id": "ch.b-deeper",
+    "text": "Harbour B is deeper on average, because a bigger range means bigger tides"
+   }
+  ],
+  "answer": {
+   "kind": "choice",
+   "correctChoiceIds": [
+    "ch.b-varies"
+   ]
+  },
+  "explanation": "A shared mean says the two harbours have the same centre and nothing more. Harbour A's readings all sit within 0.4 metres of each other, so 2.5 metres describes almost any day there. Harbour B covers 3.6 metres of ground, so the mean is a point that many of its days are nowhere near. The range is not about depth: it measures how far the readings reach, not how high they are.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "Three readings of what it means for two harbours to share a mean tide but differ widely in range.",
+  "estimatedSeconds": 90
+ },
+ {
+  "id": "q.r2-range-teachback",
+  "topicId": "t.spread",
+  "objectiveId": "obj.compute-range",
+  "skillIds": [
+   "skill.range"
+  ],
+  "difficulty": 3,
+  "interaction": "short-explanation",
+  "prompt": "Explain in your own words why adding fifty new readings to a log can leave its range completely unchanged. Use the words 'largest' and 'between'.",
+  "answer": {
+   "kind": "text",
+   "requiredKeywords": [
+    "largest",
+    "between"
+   ],
+   "forbiddenKeywords": []
+  },
+  "explanation": "The range is built from exactly two readings, the largest and the smallest. Any new reading that lands between those two ends changes the data without changing either end, so the range stays where it was. Fifty such readings change it no more than one does, which is both the range's convenience and its blind spot.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "An open-response question about why new readings inside the existing spread leave the range untouched.",
+  "estimatedSeconds": 120
+ },
+ {
+  "id": "q.r2-range-mastery",
+  "topicId": "t.spread",
+  "objectiveId": "obj.compute-range",
+  "skillIds": [
+   "skill.range"
+  ],
+  "difficulty": 3,
+  "interaction": "numeric-input",
+  "prompt": "A log reads 8, 11, 9, 12 and 10 metres. One more reading of 26 metres is added after a gauge was struck. By how much does the range grow?",
+  "answer": {
+   "kind": "numeric",
+   "value": 14,
+   "tolerance": 0,
+   "unit": "m"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Work out the range twice: before the new reading, then after it."
+   }
+  ],
+  "explanation": "The first five readings run from 8 to 12 metres, a range of 4. Adding 26 makes the ends 8 and 26, a range of 18. The range grows by 14 metres on the strength of a single reading, because it is built from the two most extreme values in the set and those are the ones most likely to be unusual.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "A five-reading log gaining one extreme value; enter how much the range grows, in metres.",
+  "estimatedSeconds": 120
+ },
+ {
+  "id": "q.r2-quartiles",
+  "topicId": "t.r2-quartiles",
+  "objectiveId": "obj.r2-quartiles",
+  "skillIds": [
+   "skill.r2-quartiles"
+  ],
+  "difficulty": 1,
+  "interaction": "numeric-input",
+  "prompt": "Sorted catches, in crates: 2, 4, 5, 7, 9, 11, 12, 15. What is Q1, the first quartile?",
+  "answer": {
+   "kind": "numeric",
+   "value": 4.5,
+   "tolerance": 0.01,
+   "unit": "crates"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Split the eight readings into a lower half and an upper half of four each."
+   },
+   {
+    "level": 2,
+    "text": "Q1 is the median of the lower half: 2, 4, 5, 7."
+   }
+  ],
+  "explanation": "Eight readings split into a lower half of 2, 4, 5, 7 and an upper half of 9, 11, 12, 15. Q1 is the median of the lower half, which is halfway between 4 and 5, so Q1 is 4.5 crates. A quarter of the log sits at or below that.",
+  "solutionSteps": [
+   "The readings are already sorted, and there are eight of them.",
+   "Take the lower half: 2, 4, 5, 7.",
+   "Q1 is the median of that half. With four values it is halfway between the middle two, 4 and 5.",
+   "Q1 is 4.5 crates."
+  ],
+  "misconceptionIds": [],
+  "accessibilityDescription": "Eight sorted catch figures; enter the first quartile in crates as a number.",
+  "estimatedSeconds": 75
+ },
+ {
+  "id": "q.r2-quartiles-independent",
+  "topicId": "t.r2-quartiles",
+  "objectiveId": "obj.r2-quartiles",
+  "skillIds": [
+   "skill.r2-quartiles"
+  ],
+  "difficulty": 2,
+  "interaction": "numeric-input",
+  "prompt": "Sorted catches, in crates: 2, 4, 5, 7, 9, 11, 12, 15. What is Q3, the third quartile?",
+  "answer": {
+   "kind": "numeric",
+   "value": 11.5,
+   "tolerance": 0.01,
+   "unit": "crates"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Q3 is the median of the upper half, the four largest readings."
+   }
+  ],
+  "explanation": "The upper half is 9, 11, 12, 15, and its median is halfway between 11 and 12, so Q3 is 11.5 crates. Three quarters of the log sits at or below that, and the top quarter lies above it.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "Eight sorted catch figures; enter the third quartile in crates as a number.",
+  "estimatedSeconds": 75
+ },
+ {
+  "id": "q.r2-quartiles-misconception",
+  "topicId": "t.r2-quartiles",
+  "objectiveId": "obj.r2-quartiles",
+  "skillIds": [
+   "skill.r2-quartiles"
+  ],
+  "difficulty": 3,
+  "interaction": "numeric-input",
+  "prompt": "Sorted catches, in crates: 3, 5, 6, 8, 9, 11, 14, 16, 18, 21, 24, 30. What is Q1? Give the value in crates, not its place in the row.",
+  "answer": {
+   "kind": "numeric",
+   "value": 7,
+   "tolerance": 0.01,
+   "unit": "crates"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Twelve readings split into a lower half of six: 3, 5, 6, 8, 9, 11."
+   },
+   {
+    "level": 2,
+    "text": "Q1 is the median of that half. Which two readings is it between?"
+   }
+  ],
+  "explanation": "The lower half is 3, 5, 6, 8, 9, 11, and its median is halfway between 6 and 8, so Q1 is 7 crates. The cut itself falls a little past the third reading, and 3.25 is where the cut is rather than what is there — a position in the row, not a number of crates.",
+  "misconceptionIds": [
+   "mc.quartile-position-as-value"
+  ],
+  "parameters": {
+   "mc.quartile-position-as-value": {
+    "wrongValue": 3.25
+   }
+  },
+  "accessibilityDescription": "Twelve sorted catch figures; enter the first quartile as a number of crates rather than a position.",
+  "estimatedSeconds": 100
+ },
+ {
+  "id": "q.r2-quartiles-application",
+  "topicId": "t.r2-quartiles",
+  "objectiveId": "obj.r2-quartiles",
+  "skillIds": [
+   "skill.r2-quartiles"
+  ],
+  "difficulty": 3,
+  "interaction": "multiple-choice",
+  "prompt": "A harbour's berth-fee log has Q1 at 4 coins and Q3 at 40 coins. What does that pair of numbers tell you?",
+  "choices": [
+   {
+    "id": "ch.half",
+    "text": "Half the berths cost between 4 and 40 coins, and the top and bottom quarters lie outside that"
+   },
+   {
+    "id": "ch.all",
+    "text": "Every berth costs between 4 and 40 coins, because those are the quartiles"
+   },
+   {
+    "id": "ch.mean",
+    "text": "The average berth costs 22 coins, halfway between the two quartiles"
+   }
+  ],
+  "answer": {
+   "kind": "choice",
+   "correctChoiceIds": [
+    "ch.half"
+   ]
+  },
+  "explanation": "A quarter of the berths sit at or below Q1 and a quarter sit above Q3, so the stretch from 4 to 40 coins holds the middle half of the log. It says nothing about how far the cheapest or dearest berths go, and nothing about the mean: quartiles report where readings sit, not what they average to.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "Three readings of what a first quartile of 4 coins and a third quartile of 40 coins tell you.",
+  "estimatedSeconds": 90
+ },
+ {
+  "id": "q.r2-quartiles-teachback",
+  "topicId": "t.r2-quartiles",
+  "objectiveId": "obj.r2-quartiles",
+  "skillIds": [
+   "skill.r2-quartiles"
+  ],
+  "difficulty": 3,
+  "interaction": "short-explanation",
+  "prompt": "Explain in your own words why three quartiles produce four parts, and why the bottom quarter of a log can cover far less ground than the top quarter. Use the words 'cut' and 'quarter'.",
+  "answer": {
+   "kind": "text",
+   "requiredKeywords": [
+    "cut",
+    "quarter"
+   ],
+   "forbiddenKeywords": []
+  },
+  "explanation": "Each quartile is a boundary rather than a piece, and three boundaries divide a row into four sections — the same reason two cuts across a plank give three lengths. The parts are matched by how many readings they hold, not by how much numeric ground they cover, so a quarter packed with similar readings spans very little and a quarter holding scattered ones spans a great deal.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "An open-response question about why three quartiles make four parts and why those parts vary in width.",
+  "estimatedSeconds": 130
+ },
+ {
+  "id": "q.r2-quartiles-mastery",
+  "topicId": "t.r2-quartiles",
+  "objectiveId": "obj.r2-quartiles",
+  "skillIds": [
+   "skill.r2-quartiles"
+  ],
+  "difficulty": 3,
+  "interaction": "numeric-input",
+  "prompt": "Sorted catches, in crates: 3, 5, 6, 8, 9, 11, 14, 16, 18, 21, 24, 30. What is Q3, the third quartile?",
+  "answer": {
+   "kind": "numeric",
+   "value": 19.5,
+   "tolerance": 0.01,
+   "unit": "crates"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "The upper half is the six largest readings: 14, 16, 18, 21, 24, 30."
+   }
+  ],
+  "explanation": "The upper half is 14, 16, 18, 21, 24, 30, and its median is halfway between 18 and 21, so Q3 is 19.5 crates. Notice how much more ground the top quarter covers than the bottom one: Q1 is 7 and the smallest reading is 3, while Q3 is 19.5 and the largest is 30.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "Twelve sorted catch figures; enter the third quartile in crates as a number.",
+  "estimatedSeconds": 110
  }
 ]
