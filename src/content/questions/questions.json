@@ -7004,62 +7004,6 @@
   "estimatedSeconds": 45
  },
  {
-  "id": "q.seed.r2-outliers",
-  "topicId": "t.r2-outliers",
-  "objectiveId": "obj.r2-outliers",
-  "skillIds": [
-   "skill.r2-outliers"
-  ],
-  "difficulty": 2,
-  "interaction": "numeric-input",
-  "prompt": "Catches: 4, 5, 6, 5, 60. Which single value is the OUTLIER?",
-  "answer": {
-   "kind": "numeric",
-   "value": 60,
-   "tolerance": 0,
-   "unit": "crates"
-  },
-  "explanation": "The answer is 60 crates. This lesson is a seed: its full teaching arrives with the Region 2 lesson units.",
-  "accessibilityDescription": "A numeric seed question for a Region 2 lesson that has not been written yet. Enter the answer as a number.",
-  "misconceptionIds": [],
-  "estimatedSeconds": 45
- },
- {
-  "id": "q.seed.r2-skew",
-  "topicId": "t.r2-skew",
-  "objectiveId": "obj.r2-skew",
-  "skillIds": [
-   "skill.r2-skew"
-  ],
-  "difficulty": 2,
-  "interaction": "multiple-choice",
-  "prompt": "In a dataset the mean is 30 and the median is 12. Which side is the long tail on?",
-  "choices": [
-   {
-    "id": "ch.high",
-    "text": "On the high side — the distribution is right-skewed"
-   },
-   {
-    "id": "ch.low",
-    "text": "On the low side — the distribution is left-skewed"
-   },
-   {
-    "id": "ch.none",
-    "text": "There is no tail; the distribution is symmetric"
-   }
-  ],
-  "answer": {
-   "kind": "choice",
-   "correctChoiceIds": [
-    "ch.high"
-   ]
-  },
-  "explanation": "The mean is dragged towards the tail. A mean of 30 well above a median of 12 means a few large values are pulling it up, so the tail is on the high side.",
-  "accessibilityDescription": "A multiple-choice seed question for a Region 2 lesson that has not been written yet. Choose one option.",
-  "misconceptionIds": [],
-  "estimatedSeconds": 45
- },
- {
   "id": "q.seed.r2-bar-charts",
   "topicId": "t.r2-bar-charts",
   "objectiveId": "obj.r2-bar-charts",
@@ -8258,5 +8202,408 @@
   "misconceptionIds": [],
   "accessibilityDescription": "A multiple-choice question asking what a large gap between a mean and a median reveals about a dataset.",
   "estimatedSeconds": 100
+ },
+ {
+  "id": "q.r2-outliers",
+  "topicId": "t.r2-outliers",
+  "objectiveId": "obj.r2-outliers",
+  "skillIds": [
+   "skill.r2-outliers"
+  ],
+  "difficulty": 1,
+  "interaction": "numeric-input",
+  "prompt": "A berth log records waits of 6, 7, 5, 8 and 41 minutes. Which single value is the outlier?",
+  "answer": {
+   "kind": "numeric",
+   "value": 41,
+   "tolerance": 0,
+   "unit": "minutes"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Put the readings in order and look for the largest empty stretch between two of them."
+   },
+   {
+    "level": 2,
+    "text": "Four readings sit between 5 and 8. How far is the fifth from that group?"
+   }
+  ],
+  "explanation": "Four of the waits sit inside a range of three minutes, from 5 to 8. The fifth is 41, which leaves 33 minutes of empty range with nothing in it. That gap is what marks it out, not the fact that 41 is a big number.",
+  "solutionSteps": [
+   "Sort the readings: 5, 6, 7, 8, 41.",
+   "Look at the spacing. The first four are one minute apart from each other.",
+   "The step from 8 to 41 is 33 minutes, far larger than any other step, so 41 is the outlier."
+  ],
+  "misconceptionIds": [],
+  "accessibilityDescription": "A list of five wait times where one sits far above the others; enter the outlier as a number.",
+  "estimatedSeconds": 60
+ },
+ {
+  "id": "q.r2-outliers-independent",
+  "topicId": "t.r2-outliers",
+  "objectiveId": "obj.r2-outliers",
+  "skillIds": [
+   "skill.r2-outliers"
+  ],
+  "difficulty": 2,
+  "interaction": "numeric-input",
+  "prompt": "Six boats land 28, 31, 30, 29, 33 and 92 crates. How many crates separate the outlier from the next highest reading?",
+  "answer": {
+   "kind": "numeric",
+   "value": 59,
+   "tolerance": 0,
+   "unit": "crates"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Find the outlier first, then find the largest of the readings that are left."
+   }
+  ],
+  "explanation": "The outlier is 92 crates, and the highest of the remaining readings is 33. The gap between them is 59 crates of empty range, which is nearly twice the size of the entire group it stands apart from.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "Six catch figures with one far above the rest; enter the size of the gap in crates as a number.",
+  "estimatedSeconds": 75
+ },
+ {
+  "id": "q.r2-outliers-misconception",
+  "topicId": "t.r2-outliers",
+  "objectiveId": "obj.r2-outliers",
+  "skillIds": [
+   "skill.r2-outliers",
+   "skill.mean",
+   "skill.median"
+  ],
+  "difficulty": 3,
+  "interaction": "multiple-choice",
+  "prompt": "A harbour logs nine days of 4 crates and one day of 94 crates. Which statement about the two summaries is correct?",
+  "choices": [
+   {
+    "id": "ch.both",
+    "text": "Both the mean and the median are pulled up by the 94",
+    "misconceptionId": "mc.outlier-mean"
+   },
+   {
+    "id": "ch.mean-only",
+    "text": "The mean rises to 13; the median stays at 4"
+   },
+   {
+    "id": "ch.neither",
+    "text": "Neither summary is affected, because one day out of ten is too few to matter"
+   }
+  ],
+  "answer": {
+   "kind": "choice",
+   "correctChoiceIds": [
+    "ch.mean-only"
+   ]
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Write the ten values out in order and find the entry sitting in the middle."
+   }
+  ],
+  "explanation": "The mean shares the whole total across all ten days, so the 94 lifts it from 4 to 13 — a figure no day actually recorded. The median is the middle of the sorted row, and nine of the ten entries are 4, so it stays at 4. An outlier moves the two summaries by very different amounts, which is what makes the gap between them worth reading.",
+  "misconceptionIds": [
+   "mc.outlier-mean"
+  ],
+  "accessibilityDescription": "Three statements about what one very large day does to the mean and the median of a ten-day log.",
+  "estimatedSeconds": 90
+ },
+ {
+  "id": "q.r2-outliers-application",
+  "topicId": "t.r2-outliers",
+  "objectiveId": "obj.r2-outliers",
+  "skillIds": [
+   "skill.r2-outliers"
+  ],
+  "difficulty": 3,
+  "interaction": "multiple-choice",
+  "prompt": "A tide gauge logs 2.1, 2.3, 2.2, 2.4 and 27.0 metres. The 27.0 was recorded on the day a boat struck the gauge. What should the analyst do?",
+  "choices": [
+   {
+    "id": "ch.keep",
+    "text": "Keep the 27.0 in every summary, because removing data is never allowed"
+   },
+   {
+    "id": "ch.remove-noted",
+    "text": "Remove the 27.0 and record why, because it measures the collision rather than the tide"
+   },
+   {
+    "id": "ch.remove-silent",
+    "text": "Remove the 27.0 without comment, because the summaries look more sensible afterwards"
+   }
+  ],
+  "answer": {
+   "kind": "choice",
+   "correctChoiceIds": [
+    "ch.remove-noted"
+   ]
+  },
+  "explanation": "There is a reason from outside the data for setting the 27.0 aside: the gauge was hit, so the reading is not a measurement of the tide at all. That justifies removing it, and the justification is what has to be written down. Removing it silently produces a tidier answer nobody else can check, and keeping it reports a collision as a tide.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "Three courses of action for a tide reading known to have been caused by a collision rather than the tide.",
+  "estimatedSeconds": 90
+ },
+ {
+  "id": "q.r2-outliers-teachback",
+  "topicId": "t.r2-outliers",
+  "objectiveId": "obj.r2-outliers",
+  "skillIds": [
+   "skill.r2-outliers"
+  ],
+  "difficulty": 3,
+  "interaction": "short-explanation",
+  "prompt": "Explain in your own words how a reading of 46 crates can be an outlier in one week's log and an ordinary figure in another. Use the words 'gap' and 'rest'.",
+  "answer": {
+   "kind": "text",
+   "requiredKeywords": [
+    "gap",
+    "rest"
+   ],
+   "forbiddenKeywords": []
+  },
+  "explanation": "Being an outlier is about position among the other readings, not about size. In a week where nothing else passes 12 crates there is a wide gap between 46 and the rest of the log, and in a week where boats routinely land in the forties there is no gap at all. The number is identical; the company it keeps is what changed.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "An open-response question asking why the same value can be an outlier in one dataset and not in another.",
+  "estimatedSeconds": 120
+ },
+ {
+  "id": "q.r2-outliers-mastery",
+  "topicId": "t.r2-outliers",
+  "objectiveId": "obj.r2-outliers",
+  "skillIds": [
+   "skill.r2-outliers",
+   "skill.mean"
+  ],
+  "difficulty": 3,
+  "interaction": "numeric-input",
+  "prompt": "A log holds twelve readings: eleven of 5 crates and one of 71. By how many crates does the mean fall if the 71 is removed?",
+  "answer": {
+   "kind": "numeric",
+   "value": 5.5,
+   "tolerance": 0.01,
+   "unit": "crates"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Work out the mean twice: once with all twelve readings, then once with the eleven that are left."
+   }
+  ],
+  "explanation": "With all twelve readings the total is 126 crates across 12 days, giving a mean of 10.5. Removing the 71 leaves 55 crates across 11 days, a mean of 5. The single reading was moving the summary by 5.5 crates — more than the value of a typical day itself.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "A twelve-reading log with one extreme value; enter how far the mean moves when it is removed, in crates.",
+  "estimatedSeconds": 120
+ },
+ {
+  "id": "q.r2-skew",
+  "topicId": "t.r2-skew",
+  "objectiveId": "obj.r2-skew",
+  "skillIds": [
+   "skill.r2-skew"
+  ],
+  "difficulty": 1,
+  "interaction": "multiple-choice",
+  "prompt": "In a berth log the mean wait is 14 minutes and the median wait is 9 minutes. Which way does the long tail run?",
+  "choices": [
+   {
+    "id": "ch.right",
+    "text": "To the high side - a few long waits have pulled the mean above the median"
+   },
+   {
+    "id": "ch.left",
+    "text": "To the low side - a few very short waits have pulled the mean down"
+   },
+   {
+    "id": "ch.none",
+    "text": "Neither - the log is symmetric"
+   }
+  ],
+  "answer": {
+   "kind": "choice",
+   "correctChoiceIds": [
+    "ch.right"
+   ]
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "The tail pulls the mean towards it and leaves the median with the bulk of the data."
+   },
+   {
+    "level": 2,
+    "text": "Here the mean is the larger of the two. Which side must be pulling it?"
+   }
+  ],
+  "explanation": "The median splits the log in half and stays with the crowd; the mean is dragged towards whichever side stretches furthest. A mean of 14 sitting above a median of 9 means the stretch is on the high side, so the tail runs to the high values and the log is right-skewed.",
+  "solutionSteps": [
+   "Compare the two summaries: the mean, 14, is above the median, 9.",
+   "The median stays where most of the data is; the mean is pulled towards the long tail.",
+   "The mean was pulled upwards, so the tail runs to the high side."
+  ],
+  "misconceptionIds": [],
+  "accessibilityDescription": "Three statements about the direction of the tail given a mean of 14 minutes and a median of 9.",
+  "estimatedSeconds": 60
+ },
+ {
+  "id": "q.r2-skew-independent",
+  "topicId": "t.r2-skew",
+  "objectiveId": "obj.r2-skew",
+  "skillIds": [
+   "skill.r2-skew",
+   "skill.mean",
+   "skill.median"
+  ],
+  "difficulty": 2,
+  "interaction": "numeric-input",
+  "prompt": "Waits in minutes: 4, 5, 5, 6, 6, 7, 8, 39. Subtract the median from the mean. What is the result?",
+  "answer": {
+   "kind": "numeric",
+   "value": 4,
+   "tolerance": 0.01,
+   "unit": "minutes"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "There are eight readings, so the median is the mean of the fourth and fifth once they are sorted."
+   }
+  ],
+  "explanation": "The eight waits total 80 minutes, so the mean is 10. Sorted, the fourth and fifth are both 6, so the median is 6. The mean sits 4 minutes above the median, and that positive gap is the signature of a long tail on the high side — here, the single wait of 39.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "Eight wait times with one much longer than the rest; enter the mean minus the median as a number of minutes.",
+  "estimatedSeconds": 90
+ },
+ {
+  "id": "q.r2-skew-misconception",
+  "topicId": "t.r2-skew",
+  "objectiveId": "obj.r2-skew",
+  "skillIds": [
+   "skill.r2-skew"
+  ],
+  "difficulty": 3,
+  "interaction": "multiple-choice",
+  "prompt": "Almost every wait in a log is short, and a handful stretch to several hours. Which way is this distribution skewed?",
+  "choices": [
+   {
+    "id": "ch.right",
+    "text": "Right-skewed - the long tail runs towards the high values"
+   },
+   {
+    "id": "ch.left",
+    "text": "Left-skewed - almost all of the data sits at the low end",
+    "misconceptionId": "mc.skew-named-by-the-bulk"
+   },
+   {
+    "id": "ch.neither",
+    "text": "Not skewed - a handful of readings cannot change the shape of a whole log"
+   }
+  ],
+  "answer": {
+   "kind": "choice",
+   "correctChoiceIds": [
+    "ch.right"
+   ]
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "The name points at the thin stretched end, not at the crowd."
+   }
+  ],
+  "explanation": "Skew is named after the tail, which is the thin end that stretches, and here it stretches towards the long waits. So the log is right-skewed, even though nearly every reading in it sits at the low end. The crowd and the name are always on opposite sides, which is what makes this the easiest label in statistics to invert.",
+  "misconceptionIds": [
+   "mc.skew-named-by-the-bulk"
+  ],
+  "accessibilityDescription": "Three labels for the shape of a log where most waits are short and a few are very long.",
+  "estimatedSeconds": 90
+ },
+ {
+  "id": "q.r2-skew-application",
+  "topicId": "t.r2-skew",
+  "objectiveId": "obj.r2-skew",
+  "skillIds": [
+   "skill.r2-skew"
+  ],
+  "difficulty": 3,
+  "interaction": "multiple-choice",
+  "prompt": "A harbour's queue times are right-skewed, and the harbourmaster posts the mean as 'the typical wait'. What will most arriving skippers experience?",
+  "choices": [
+   {
+    "id": "ch.shorter",
+    "text": "A wait shorter than the posted figure, because most of the log sits below the mean"
+   },
+   {
+    "id": "ch.about",
+    "text": "A wait close to the posted figure, because that is what an average is for"
+   },
+   {
+    "id": "ch.longer",
+    "text": "A wait longer than the posted figure, because the mean is always an underestimate"
+   }
+  ],
+  "answer": {
+   "kind": "choice",
+   "correctChoiceIds": [
+    "ch.shorter"
+   ]
+  },
+  "explanation": "A right tail pulls the mean up past the bulk of the readings, so in a right-skewed log well over half the waits fall below the mean. The posted figure is arithmetically correct and still describes almost nobody's afternoon; the median would have been the honest thing to put on the board.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "Three predictions about what most people experience when a right-skewed set is summarised by its mean.",
+  "estimatedSeconds": 90
+ },
+ {
+  "id": "q.r2-skew-teachback",
+  "topicId": "t.r2-skew",
+  "objectiveId": "obj.r2-skew",
+  "skillIds": [
+   "skill.r2-skew"
+  ],
+  "difficulty": 3,
+  "interaction": "short-explanation",
+  "prompt": "Explain in your own words how to tell which way a set is skewed using only its mean and its median, and say why the answer is not where most of the data sits. Use the words 'tail' and 'median'.",
+  "answer": {
+   "kind": "text",
+   "requiredKeywords": [
+    "tail",
+    "median"
+   ],
+   "forbiddenKeywords": []
+  },
+  "explanation": "The median stays with the bulk of the data and the mean is dragged towards the long tail, so whichever of the two is larger tells you which side stretches. A mean above the median means a tail on the high side. The crowd is no guide, because the crowd always sits at the end opposite the tail the shape is named after.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "An open-response question about reading the direction of skew from the mean and the median alone.",
+  "estimatedSeconds": 120
+ },
+ {
+  "id": "q.r2-skew-mastery",
+  "topicId": "t.r2-skew",
+  "objectiveId": "obj.r2-skew",
+  "skillIds": [
+   "skill.r2-skew"
+  ],
+  "difficulty": 3,
+  "interaction": "numeric-input",
+  "prompt": "Three logs are summarised. Log A: mean 30, median 30. Log B: mean 42, median 31. Log C: mean 18, median 25. How many of the three are right-skewed?",
+  "answer": {
+   "kind": "numeric",
+   "value": 1,
+   "tolerance": 0,
+   "unit": "logs"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "A right tail pulls the mean above the median. Check each log for that pattern."
+   }
+  ],
+  "explanation": "Log A has its mean and median together, so it is roughly symmetric. Log B has a mean well above its median, which is a tail on the high side — right-skewed. Log C has a mean below its median, so its tail runs the other way and it is left-skewed. Exactly one of the three is right-skewed.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "Three pairs of mean and median values; enter how many of the three logs are right-skewed as a number.",
+  "estimatedSeconds": 120
  }
 ]

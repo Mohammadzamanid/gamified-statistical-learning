@@ -46,5 +46,12 @@ export const COMPLETE_LESSONS: readonly string[] = [
   // staged in the skeletons that will teach them — see
   // `tests/helpers/staged-inherited.ts`.
   "l.reading-tallies",
-  "l.middle-harbor"
+  "l.middle-harbor",
+  // Region 2, m.r2-variation — the two lessons S2-12 owns in this module
+  // (S2-12 cycle 4). Variance and standard deviation sit ahead of them in the
+  // prerequisite chain and belong to S2-13, so this module is deliberately
+  // half-written: spread before shape is the region's design, and the unit
+  // boundary cuts across it.
+  "l.r2-outliers",
+  "l.r2-skew"
 ];

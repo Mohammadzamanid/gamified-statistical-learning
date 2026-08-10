@@ -299,5 +299,17 @@
   "skillIds": [
    "skill.r2-mode"
   ]
+ },
+ {
+  "id": "rem.name-the-tail",
+  "title": "Skew is named after the tail, not the crowd",
+  "explanation": "Looking at where most of the data sits is the natural thing to do, and it gives the wrong name every time, because the convention points at the thin end rather than the thick one. A distribution is right-skewed when its long tail stretches to the right, which is also when most of its values are packed to the left. The crowd and the name always sit on opposite sides.",
+  "microLesson": "Take a berth log: waits of 5, 6, 6, 7, 8, 9 and one of 90 minutes. Six readings are packed low and one stretches far to the high side. The tail runs right, so the set is right-skewed - even though every value but one sits on the left. Check it against the summaries: the mean is 18.71 and the median is 7, and a mean above the median is the signature of a right tail.",
+  "followUpQuestionIds": [
+   "q.r2-skew"
+  ],
+  "skillIds": [
+   "skill.r2-skew"
+  ]
  }
 ]

@@ -198,5 +198,13 @@
   "detector": "known-wrong-answer",
   "detectorParams": {},
   "remediationId": "rem.count-every-value"
+ },
+ {
+  "id": "mc.skew-named-by-the-bulk",
+  "title": "Skew named after the bulk rather than the tail",
+  "description": "The learner names the direction of skew from the side holding most of the data, so a set with a long high tail and a crowd of small values is called left-skewed. The reasoning is consistent and the answer is the exact opposite of the convention.",
+  "detector": "tagged-distractor",
+  "detectorParams": {},
+  "remediationId": "rem.name-the-tail"
  }
 ]

@@ -6,43 +6,46 @@ Exactly one Stage 2 unit is active at a time. Rewritten at the start and end of 
 
 ## Current unit
 
-**S2-12 — Central tendency lessons (cycle 3: the redistribution, and the two Stage 1 re-cuts)**
+**S2-12 — Central tendency lessons (cycle 4: outlier effects and skew effects)**
 
-Entered from `ee06f7586de19d9af758a14e18f9978a76eb0235` (remote-verified, clean tree).
+Entered from `960e192a06cf3d3934fae7714b093690e421d605` (remote-verified, clean tree).
 
 ## Objective
 
-Redistribute the inherited Stage 1 questions to the Region 2 lessons whose topics they serve, then re-cut
-`l.reading-tallies` (mean) and `l.middle-harbor` (median) to all 18 of scope §5's requirements.
+Write `l.r2-outliers` and `l.r2-skew` — the last two lessons S2-12 owns — to all 18 of scope §5's requirements.
 
 ## Result up front
 
-**S2-12 remains Partial.** **7 of its 9 lessons are Complete**, up from 5. The two lessons deferred in the previous
-cycle are now Complete, and the redistribution that blocked them is done.
+**S2-12 is Complete.** All **9 of its 9 lessons** are Complete: `m.r2-counts` entire, `m.r2-centre` entire, and the two
+lessons of `m.r2-variation` this unit owns.
 
-What is left of S2-12 is outlier effects and skew effects in `m.r2-variation` — a genuinely separate module, not a
-residue of this work.
+**One acceptance criterion is still unmet and is not being claimed:** draggable/editable datasets. The demonstrations
+are control-driven, which meets requirement 4; editable datasets are S2-15.
+
+`m.r2-variation` is now half-written by design. Variance and standard deviation sit ahead of outliers and skew in the
+prerequisite chain and belong to **S2-13** — Region 2 teaches spread before shape, and the unit boundary cuts across
+that module. So these two lessons are finished but not yet reachable by a learner, which is true of every lesson written
+ahead of its prerequisites and is stated here rather than left to be discovered.
 
 ## Relevant files
 
 | File | Change |
 |---|---|
-| `src/content/worlds/curriculum.json` | Fourteen inherited questions re-homed; both centre lessons re-cut; `dem.r2-choosing-measures` rebuilt |
-| `src/content/questions/questions.json` | 212 authored questions, unchanged in count — ten accessibility descriptions, one explanation, one notation fix, one misconception tag |
-| `tests/helpers/staged-inherited.ts` | **New.** The four questions with no lesson to move to yet, declared |
-| `tests/audit/region2-architecture.test.ts` | Six checks bounding staged inheritance |
-| `tests/audit/lesson-structure.test.ts` | Two new checks; requirement 13 widened past the misconception role |
-| `tests/helpers/complete-lessons.ts` | 22 → **24** lessons declared Complete |
-| `tests/integration/*.test.ts` | Four playthroughs repointed at the lessons their questions now live in |
+| `src/content/worlds/curriculum.json` | `l.r2-outliers` and `l.r2-skew` written in full |
+| `src/content/questions/questions.json` | 212 → **222** authored questions (12 written, 2 seeds replaced) |
+| `src/content/questions/misconceptions.json` | 26 → **27** |
+| `src/content/questions/remediations.json` | 25 → **26** |
+| `tests/integration/region2-lessons.test.ts` | **New.** Every Complete Region 2 lesson, played through the session engine |
+| `tests/helpers/complete-lessons.ts` | 24 → **26** lessons declared Complete |
 
 ## Acceptance criteria
 
 | # | Criterion | Met |
 |---|---|---|
 | 1 | Frequency, proportion, percentage | **Yes** (cycle 1) |
-| 2 | Mean, median, mode, measure selection | **Yes** — all four Complete |
-| 3 | Outlier effects, skew effects | No — `m.r2-variation`, a later cycle |
-| 4 | Draggable/editable datasets | No — control-driven demonstrations; editable datasets are S2-15 |
+| 2 | Mean, median, mode, measure selection | **Yes** (cycles 2–3) |
+| 3 | Outlier effects, skew effects | **Yes** |
+| 4 | Draggable/editable datasets | **No** — control-driven demonstrations; editable datasets are S2-15 |
 | 5 | Commit pushed and remote hash verified | Yes — see below |
 
 ## Required tests
@@ -53,7 +56,7 @@ Measured (Node v22.22.2 / npm 10.9.7):
 |---|---|
 | `npm run typecheck` | Pass |
 | `npm run lint` | Pass — 0 errors, 0 warnings |
-| `npm test` | Pass — **474 tests / 36 files** |
+| `npm test` | Pass — **505 tests / 37 files** |
 | `npm run test:statistics` | Pass — 18 tests / 3 files |
 | `npm run test:content` | Pass — 5 tests / 1 file |
 | `npm run build` | Pass |
@@ -63,77 +66,65 @@ Measured (Node v22.22.2 / npm 10.9.7):
 
 ## Work completed
 
-1. **The redistribution.** `l.reading-tallies` and `l.middle-harbor` asked 17 and 14 questions between them, and most
-   taught percentages, bar charts or data literacy rather than centre. Ten moved to the Region 2 lesson whose topic they
-   serve, each gaining that lesson's skill so answering it schedules review. Two objectives moved with their questions:
-   `obj.read-data` to `l.r2-frequency`, `obj.choose-measure` to `l.r2-choosing-measures`. (D-033)
+1. **Outliers is taught as a gap, not a size.** Its demonstration sets the suspect reading beside the highest of the
+   others and measures the space between them. A second boat landing 44 crates makes a reading of 46 unremarkable
+   without the suspect reading changing at all — outlier is a description of a value's position among the others, never
+   a property the number carries alone. That is deliberately *not* the "extreme value drags the mean" demonstration,
+   which `l.r2-choosing-measures` already owns.
 
-2. **Four had nowhere to go, and are staged rather than parked.** Their topics belong to `m.r2-pictures` and
-   `m.r2-judgement`, whose lessons are still seeds. `tests/helpers/staged-inherited.ts` declares them and six new checks
-   bound the exemption: nothing undeclared may sit in a skeleton, nothing declared may be missing, staging may not hold
-   newly authored content, may not grow, and may not survive its lesson being declared Complete. Staged questions are
-   still held to an accessible description and a real explanation. (D-034)
+2. **Skew is taught by how much of the data the average leaves behind.** The readout is the share of readings below the
+   mean: near 50 in a balanced log, 70 in the one on screen. A right tail pushes the mean past the bulk, so the posted
+   average describes almost nobody — which is the argument the lesson opens with.
 
-3. **Both centre lessons re-cut.** The mean is demonstrated by sharing a fixed total across a changing number of days —
-   adding a day the harbour caught nothing on still lowers the average, which is the reading that shows the mean counts
-   every day rather than every catch. The median is demonstrated by the gap between the two middle prices in a sorted
-   row of ten: at zero the median is a price someone paid, and away from zero it is not.
+3. **A new misconception with the teeth to be reported.** `mc.skew-named-by-the-bulk` — naming a distribution after
+   where the crowd sits rather than where the tail runs — is the most common skew error and is exactly backwards. Its
+   detector is `tagged-distractor`, so it sits on a tagged choice (D-025).
 
 ## Corrections made during the unit
 
-1. **A demonstration declared Complete last cycle described a readout its formula never computed.**
-   `dem.r2-choosing-measures` claimed "the mean value across all ten buildings" and a starting value of 436 coins; the
-   formula produced 1600.00. Every existing check passed. Rebuilt on `quotient`, and a new check now requires the
-   readout at the initial settings to be stated in words — which also improved two Region 1 demonstrations that had
-   never said what their panel began at. (D-035)
+1. **Nine Region 2 lessons had been declared Complete without anything ever playing one.** Region 1 has had per-module
+   playthroughs since S2-08. The audits read the content; nothing ran it. Closed by
+   `tests/integration/region2-lessons.test.ts`, which iterates the declared list so S2-13's lessons are covered without
+   the file being edited. (D-037)
 
-2. **A lesson could claim an objective none of its questions practised.** The probe that leaves a stale objective behind
-   failed nothing, which is precisely the slip the redistribution could have left. Now one check. (D-036)
+2. **That new test's first docstring claimed more than the test delivers, and a probe caught it.** Changing a Complete
+   lesson's mastery answer to a wrong number failed nothing: the helper builds each response from the question's own
+   declared answer, so the two move together. The header now states exactly what round-trips through the engine and
+   what does not — authored answers have no independent derivation to check against, unlike generated ones under D-020.
+   The probe is the only reason the stronger claim did not ship. (D-038)
 
-3. **F-6 is closed, and the finding's own diagnosis was wrong.** It recorded `q.error-id-causation` as needing its
-   options redesigned because "the misconception is the correct answer". It is not: a learner who believes correlation
-   establishes causation does not see the causal leap as the flaw, so they pick a different one. Tagging `ch.sample` was
-   the whole fix. All 46 authored misconception declarations are now engine-reportable.
-
-4. **Requirement 13 was widened past the misconception role.** It only ever checked the one question filling that role,
-   so an application or mastery question could carry a tag the engine could never report. Measured before widening: every
-   Complete lesson already passed, so the guard costs no content debt.
-
-5. **The first attempt parked the four homeless questions in skeletons silently**, and the skeleton-honesty guard caught
-   it. The guard was right; the parking was the defect. That episode is what produced D-034.
+3. **A trailing comma made a remediation's `explanation` a list rather than a string.** Caught by the content schema on
+   the first run, before any check that would have read it as prose.
 
 ## Verification that the guards have teeth
 
-Eight deliberate probes, all reverted:
+Ten deliberate probes, all reverted:
 
 | Probe | Result |
 |---|---|
-| An undeclared question appears in a staging lesson | **2 checks fail** |
-| The staging list names a question the lesson does not ask | **4 checks fail** |
-| A staged question stops describing itself in words | **1 check fails** |
-| Newly authored content is staged instead of written into a lesson | **3 checks fail** |
-| A demonstration states a readout its formula does not produce | **1 check fails** |
-| A non-role question's misconception becomes unreportable | **2 checks fail** (nothing before requirement 13 was widened) |
-| A staging lesson is declared Complete without clearing its staged questions | **12 checks fail** |
-| A re-cut lesson keeps an objective none of its questions carries | **0 → 1 check fails** (the probe found the gap; the check was added) |
+| A Complete lesson's mastery answer is changed to a wrong number | **0 checks fail** — the finding above; the header now says so |
+| A teach-back forbids a word it also requires | **4 checks fail**, three naming the lesson |
+| A numeric answer's tolerance excludes its own value | **5 checks fail** (rejected at load) |
+| A choice question names a correct option it does not offer | **5 checks fail** (rejected at load) |
+| The skew misconception loses its tagged distractor | **1 check fails** |
+| The outlier demonstration's stated readout drifts from its formula | **1 check fails** |
+| A control on the skew demonstration stops moving the readout | **5 checks fail** |
+| The skew lesson claims a skill its questions do not carry | **3 checks fail**, two through the save |
+| A re-cut lesson loses its misconception role | **2 checks fail** |
+| A Complete lesson asks a question with no declared role | **2 checks fail** |
 
 ## Remaining work
 
-**2 of S2-12's 9 lessons**: outlier effects and skew effects in `m.r2-variation`. Both are new lessons written from
-their seeds, with no inherited content to redistribute first.
+None inside S2-12 except criterion 4, which is S2-15's. The next unit is **S2-13**.
 
 ## Local commit
 
-`aa48c7c16f48fd4372b27f52681798da0e31054f`
+`PENDING`
 
 ## Remote verification
 
-```
-LOCAL_HEAD  = aa48c7c16f48fd4372b27f52681798da0e31054f
-REMOTE_HEAD = aa48c7c16f48fd4372b27f52681798da0e31054f
-VERIFIED: MATCH
-```
+`PENDING`
 
 ## Next unit
 
-**S2-12 continued — `m.r2-variation`: outlier effects and skew effects.** Not started in this cycle.
+**S2-13 — spread and position lessons.** Not started in this cycle.

@@ -281,3 +281,23 @@ the objective was a claim nothing in the lesson supported. A probe leaving a sta
 now fails one check. The learner-facing cost is what makes it worth a guard rather than a convention: a lesson that
 promises "you will learn to read data" and then asks eight questions about the mean has told them something untrue, and
 their mastery of the promised skill never moves. (S2-12)
+
+**D-037 — A lesson is not finished until something has played it.**
+Nine Region 2 lessons were declared Complete across three cycles, each surviving all 18 structure checks, and not one had
+ever been driven through the session engine. Region 1 has had per-module playthroughs since S2-08; Region 2 had nothing,
+because the audits were written first and read like coverage. They are not: every check in
+`tests/audit/lesson-structure.test.ts` reads the content, and a lesson that cannot be finished is the first failure a
+learner meets. `tests/integration/region2-lessons.test.ts` closes it, and iterates `COMPLETE_LESSONS` rather than naming
+lessons, so the next lesson S2-13 writes is covered without the file being edited. (S2-12)
+
+**D-038 — A playthrough proves round-tripping, not arithmetic, and the distinction has to be written down.**
+The playthrough above was probed with a Complete lesson whose mastery answer was changed to a wrong number. **Nothing
+failed.** `correctResponseFor` builds each response from the question's own declared answer, so changing the answer
+changes the response too and the pair still agrees. What the playthrough genuinely proves is that content round-trips
+through the real evaluator, session and save: the session terminates and completes, each declared answer survives
+normalization, every claimed skill gains an attempt and a review entry, and the misconception surfaces with its
+remediation. It caught a teach-back forbidding a word it also required — a defect no other check sees. What it cannot
+see is an answer that is simply wrong about the mathematics. Authored questions have no independent derivation to check
+against; that is precisely what D-020's family-stated `expectedResponse` buys generated ones, and the asymmetry is now
+recorded in the test's own header rather than left for the next author to discover by trusting it too far. The first
+draft of that header claimed the stronger guarantee, and the probe is the only reason it does not ship. (S2-12)

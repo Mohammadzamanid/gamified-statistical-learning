@@ -3119,46 +3119,226 @@
    "moduleId": "m.r2-variation",
    "title": "The Value That Does Not Belong",
    "objectiveIds": [
-    "obj.r2-outliers"
+    "obj.r2-outliers",
+    "obj.compute-mean",
+    "obj.compute-median"
    ],
    "concepts": [
     {
      "id": "c.r2-outliers",
-     "title": "The Value That Does Not Belong",
-     "summary": "An outlier sits far from the rest of the data, and it does not affect every summary equally.",
-     "body": "One enormous catch pulls the mean towards it and leaves the median almost untouched. Noticing that is the whole of this lesson."
+     "title": "Far from the rest, not far from zero",
+     "summary": "An outlier is a value separated from the others, and separation is judged against the data.",
+     "body": "An outlier is a value that sits well away from the rest of a set. What counts as 'well away' depends entirely on the company it keeps: 46 crates is extraordinary in a log where nothing else passes 12, and unremarkable in one where boats routinely land 44. The same number can be an outlier in one dataset and an ordinary reading in another, so there is no threshold you can memorise. What you look for is a gap — a stretch of empty range between one value and everything else."
+    },
+    {
+     "id": "c.r2-outliers-effect",
+     "title": "What an outlier does to each summary",
+     "summary": "It moves the mean a long way and the median barely at all.",
+     "body": "The mean uses every value, so a reading far from the rest drags it in that direction and keeps dragging however many ordinary values are there to hold it back. The median is decided by position in the sorted row, and one value at the end cannot change which entry sits in the middle. That difference is the practical reason to find outliers before summarising: the two measures will disagree, and the size of their disagreement is itself a measurement of how far the odd value reaches."
+    },
+    {
+     "id": "c.r2-outliers-judgement",
+     "title": "An outlier is not automatically an error",
+     "summary": "Removing one needs a reason from outside the data, not from the number itself.",
+     "body": "A reading can be far from the rest because something unusual genuinely happened, or because a gauge was knocked, a decimal slipped, or a unit changed halfway down the page. The data cannot tell you which. Deleting values because they are inconvenient is how a real finding gets thrown away, so the rule is to investigate first and record what you did: an outlier removed for a stated reason is analysis, and one removed silently is a result nobody can check."
     }
    ],
    "questionIds": [
-    "q.seed.r2-outliers"
+    "q.r2-outliers",
+    "q.r2-outliers-independent",
+    "q.r2-outliers-misconception",
+    "q.r2-outliers-application",
+    "q.r2-outliers-teachback",
+    "q.r2-outliers-mastery"
    ],
    "prerequisites": [
     "l.r2-standard-deviation"
    ],
-   "estimatedMinutes": 15
+   "estimatedMinutes": 16,
+   "narrativeIntro": "One line in the harbour ledger reads 46 crates where every other line reads eight or nine. Before anyone can summarise the week, somebody has to decide what that line is: a record haul, a clerk's slip, or a boat from a different harbour entered on the wrong page. Getting that decision wrong quietly changes every number reported afterwards.",
+   "demonstration": {
+    "id": "dem.r2-outliers",
+    "title": "The gap that makes a value an outlier",
+    "experience": "One suspicious line in the ledger is set beside the highest of the ordinary lines, and the space between them is measured. Move either reading and watch the space open or close — that space, rather than the size of the suspect reading, is what an outlier is made of.",
+    "accessibleDescription": "Two controls. The first sets the suspect reading in crates. The second sets the highest of the other readings in the log. The readout gives how many crates separate them, and starts at 34 with a suspect reading of 46 and a highest other reading of 12.",
+    "controls": [
+     {
+      "id": "ctl.suspect",
+      "label": "The suspect reading, in crates",
+      "min": 0,
+      "max": 120,
+      "step": 1,
+      "initial": 46
+     },
+     {
+      "id": "ctl.highest-other",
+      "label": "The highest of the other readings, in crates",
+      "min": 0,
+      "max": 120,
+      "step": 1,
+      "initial": 12
+     }
+    ],
+    "formula": "difference",
+    "readoutLabel": "Crates between the suspect reading and the next highest",
+    "readoutPrecision": 0,
+    "prediction": {
+     "prompt": "Nothing else in the log passes 12 crates and the suspect line reads 46, so the readout shows 34 — a stretch of empty range with no readings in it. A second boat now lands 44 crates, making 44 the highest of the other readings. What has happened to the suspect line?",
+     "options": [
+      {
+       "id": "opt.still",
+       "text": "It is still an outlier - 46 crates is a large catch"
+      },
+      {
+       "id": "opt.no-longer",
+       "text": "It stops being one - the gap closes to 2 and nothing separates it from the rest"
+      },
+      {
+       "id": "opt.worse",
+       "text": "It becomes a stronger outlier - there are now two large catches"
+      }
+     ],
+     "correctOptionId": "opt.no-longer",
+     "revealNote": "The suspect line did not move: it still reads 46 crates. What changed is the company it keeps. A second boat at 44 fills in the empty range, and with a gap of 2 the reading is now the largest of a group rather than a value standing on its own. Outlier is a description of a value's position among the others, never a property the number carries by itself."
+    },
+    "observation": "Raise the suspect reading and the gap grows; raise the highest of the other readings and it shrinks, passes through 0 and turns negative. A negative readout says the suspect is no longer the largest value in the log at all, which is the plainest possible sign that it was never the odd one out."
+   },
+   "formalTerm": {
+    "term": "Outlier",
+    "definition": "An outlier is a value that lies far from the rest of a set. How far is far is judged against the other values rather than against zero, so the same number can be an outlier in one dataset and ordinary in another. An outlier is not automatically a mistake, and removing one requires a reason that comes from outside the data.",
+    "symbols": []
+   },
+   "guidedQuestionIds": [
+    "q.r2-outliers"
+   ],
+   "independentQuestionIds": [
+    "q.r2-outliers-independent"
+   ],
+   "misconceptionQuestionIds": [
+    "q.r2-outliers-misconception"
+   ],
+   "applicationQuestionIds": [
+    "q.r2-outliers-application"
+   ],
+   "teachBackQuestionIds": [
+    "q.r2-outliers-teachback"
+   ],
+   "masteryCheckQuestionIds": [
+    "q.r2-outliers-mastery"
+   ]
   },
   {
    "id": "l.r2-skew",
    "moduleId": "m.r2-variation",
    "title": "The Long Tail",
    "objectiveIds": [
-    "obj.r2-skew"
+    "obj.r2-skew",
+    "obj.compute-mean",
+    "obj.compute-median"
    ],
    "concepts": [
     {
      "id": "c.r2-skew",
-     "title": "The Long Tail",
-     "summary": "A skewed distribution has a longer tail on one side, and that tail pulls the mean away from the median.",
-     "body": "When the mean sits well above the median, the tail is on the high side — the shape can be read from the two numbers alone."
+     "title": "A tail on one side",
+     "summary": "A skewed set has a longer tail on one side, and the tail is what it is named after.",
+     "body": "In a symmetric set the values fall away from the middle at about the same rate in both directions. In a skewed set one side stretches further than the other, and the distribution is named after the side the long tail runs to: right-skewed when a few very large values stretch the high end, left-skewed when a few very small ones stretch the low end. The name follows the tail, not the bulk — which is worth saying twice, because most of the data sits at the opposite end from the name."
+    },
+    {
+     "id": "c.r2-skew-from-summaries",
+     "title": "Reading the shape from two numbers",
+     "summary": "The gap between mean and median tells you which way the tail runs.",
+     "body": "The tail pulls the mean towards it and leaves the median where the bulk of the data is, so comparing the two is enough to read the shape without seeing a single graph. A mean well above the median says the tail runs to the high side; a mean well below says it runs to the low side; the two sitting together says the set is roughly symmetric. This is why both summaries are worth reporting: on their own each is one number, and side by side they describe a shape."
+    },
+    {
+     "id": "c.r2-skew-consequence",
+     "title": "Why it matters which one you post",
+     "summary": "In a skewed set the mean can describe almost none of the cases.",
+     "body": "When a set is right-skewed, most of its values fall below the mean — often far more than half of them. A summary that nearly everybody's experience sits below is a poor answer to the question 'what is typical?', however correctly it was calculated. The median goes on splitting the data in half whatever the tail does, so a skewed set is exactly the case where the choice between the two measures stops being a matter of taste and starts changing what the reader believes."
     }
    ],
    "questionIds": [
-    "q.seed.r2-skew"
+    "q.r2-skew",
+    "q.r2-skew-independent",
+    "q.r2-skew-misconception",
+    "q.r2-skew-application",
+    "q.r2-skew-teachback",
+    "q.r2-skew-mastery"
    ],
    "prerequisites": [
     "l.r2-outliers"
    ],
-   "estimatedMinutes": 15
+   "estimatedMinutes": 16,
+   "narrativeIntro": "The harbourmaster posts the average wait for a berth as forty minutes, and every skipper who reads it swears the board is wrong, because they have never waited that long. Nobody is lying. A handful of storm days with enormous waits have pulled the average up past almost every reading behind it, and the shape of the data is what explains the argument.",
+   "demonstration": {
+    "id": "dem.r2-skew",
+    "title": "How much of the data the average leaves behind",
+    "experience": "Every wait in the berth log is sorted into one of two piles: shorter than the average, or not. The readout gives what share of the log ends up in the shorter pile. In a balanced log it settles near half; watch what a few enormous waits do to it.",
+    "accessibleDescription": "Two controls. The first sets how many waits in the log are shorter than the mean. The second sets how many waits the log holds in total. The readout gives the share that are shorter than the mean as a percentage to one decimal place, and starts at 70 with 7 short waits out of 10.",
+    "controls": [
+     {
+      "id": "ctl.below",
+      "label": "Waits shorter than the mean",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "initial": 7
+     },
+     {
+      "id": "ctl.total",
+      "label": "Waits in the log",
+      "min": 1,
+      "max": 20,
+      "step": 1,
+      "initial": 10
+     }
+    ],
+    "formula": "share-of",
+    "readoutLabel": "Share of waits shorter than the mean",
+    "readoutPrecision": 1,
+    "prediction": {
+     "prompt": "Seven of the ten waits in this log are shorter than the mean, so the readout shows 70. If the log were symmetric instead — no long tail on either side — roughly what would the readout show?",
+     "options": [
+      {
+       "id": "opt.half",
+       "text": "About 50 - the mean would sit in the middle with about half the waits on each side"
+      },
+      {
+       "id": "opt.same",
+       "text": "Still about 70 - the mean is always above most of the data"
+      },
+      {
+       "id": "opt.all",
+       "text": "About 100 - most waits are always shorter than the mean"
+      }
+     ],
+     "correctOptionId": "opt.half",
+     "revealNote": "A symmetric set puts the mean in the middle, with about half the values on each side, so the readout would settle near 50. A reading of 70 says something has pushed the mean past the bulk of the log: a few very long waits on the high side. That is a right tail, and the readout is measuring how much of everyone's experience the posted average has left behind."
+    },
+    "observation": "Raise the count of short waits and the readout climbs towards 100; raise the size of the log without adding short waits and it falls. Fifty is the balanced reading, and distance from 50 in either direction is the length of a tail. Set more short waits than there are waits in the log and the readout passes 100, which is the panel telling you the two controls have stopped describing the same log."
+   },
+   "formalTerm": {
+    "term": "Skew",
+    "definition": "A distribution is skewed when one of its tails is longer than the other, and it is named after the side the long tail runs to. Right skew stretches the high end, pulls the mean above the median, and leaves most of the data below both. Left skew is the mirror image. A symmetric distribution has its mean and median together in the middle.",
+    "symbols": []
+   },
+   "guidedQuestionIds": [
+    "q.r2-skew"
+   ],
+   "independentQuestionIds": [
+    "q.r2-skew-independent"
+   ],
+   "misconceptionQuestionIds": [
+    "q.r2-skew-misconception"
+   ],
+   "applicationQuestionIds": [
+    "q.r2-skew-application"
+   ],
+   "teachBackQuestionIds": [
+    "q.r2-skew-teachback"
+   ],
+   "masteryCheckQuestionIds": [
+    "q.r2-skew-mastery"
+   ]
   },
   {
    "id": "l.r2-bar-charts",
