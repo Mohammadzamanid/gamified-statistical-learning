@@ -117,11 +117,15 @@ than quietly dropped.
 
 ## Local commit
 
-`PENDING`
+`cf88cd3bb8dace8b5ec1049b9a296ffdc2f7622d`
 
 ## Remote verification
 
-`PENDING`
+```
+LOCAL_HEAD  = cf88cd3bb8dace8b5ec1049b9a296ffdc2f7622d
+REMOTE_HEAD = cf88cd3bb8dace8b5ec1049b9a296ffdc2f7622d
+VERIFIED: MATCH
+```
 
 ## Next unit
 
