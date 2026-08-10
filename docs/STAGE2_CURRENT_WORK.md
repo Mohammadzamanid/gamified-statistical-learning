@@ -114,11 +114,15 @@ S2-14.
 
 ## Local commit
 
-`PENDING`
+`6d43e790d484e9f936b152676ba0f6a78ffa3a13`
 
 ## Remote verification
 
-`PENDING`
+```
+LOCAL_HEAD  = 6d43e790d484e9f936b152676ba0f6a78ffa3a13
+REMOTE_HEAD = 6d43e790d484e9f936b152676ba0f6a78ffa3a13
+VERIFIED: MATCH
+```
 
 ## Next unit
 
