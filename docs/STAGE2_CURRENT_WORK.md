@@ -124,11 +124,15 @@ their seeds, with no inherited content to redistribute first.
 
 ## Local commit
 
-Recorded in the follow-up commit below.
+`aa48c7c16f48fd4372b27f52681798da0e31054f`
 
 ## Remote verification
 
-Recorded in the follow-up commit below.
+```
+LOCAL_HEAD  = aa48c7c16f48fd4372b27f52681798da0e31054f
+REMOTE_HEAD = aa48c7c16f48fd4372b27f52681798da0e31054f
+VERIFIED: MATCH
+```
 
 ## Next unit
 
