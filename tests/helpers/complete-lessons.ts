@@ -60,5 +60,10 @@ export const COMPLETE_LESSONS: readonly string[] = [
   "l.spread-1",
   "l.r2-quartiles",
   "l.r2-percentiles",
-  "l.r2-iqr"
+  "l.r2-iqr",
+  // Region 2, m.r2-variation — the two lessons S2-13 owns in this module
+  // (S2-13 cycle 3). With these, m.r2-variation is Complete entire and no stub
+  // stands between a learner and the outlier and skew lessons.
+  "l.r2-variance",
+  "l.r2-standard-deviation"
 ];

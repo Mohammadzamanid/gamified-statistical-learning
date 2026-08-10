@@ -3489,41 +3489,220 @@
    "concepts": [
     {
      "id": "c.r2-variance",
-     "title": "How Far From the Middle",
-     "summary": "Variance measures how far the values sit from their mean, on average, after squaring.",
-     "body": "Squaring stops distances above and below the mean cancelling out. It also changes the units, which is why the standard deviation follows."
+     "title": "Why the distances cancel",
+     "summary": "Distances from the mean always add to zero, so their average measures nothing.",
+     "body": "The mean is the point where the readings balance: the amounts above it and the amounts below it are equal by construction. So if you measure each reading's distance from the mean, counting the ones below as negative, the total is always exactly zero — for a week where every day landed 5 crates and for one swinging between 0 and 40. An average of those distances is zero too. The first measure of spread anyone reaches for is not merely inaccurate; it carries no information at all."
+    },
+    {
+     "id": "c.r2-variance-squares",
+     "title": "Squaring is the repair",
+     "summary": "A squared distance is positive whichever side of the mean it came from.",
+     "body": "Square each distance before averaging and the cancellation stops, because a negative multiplied by itself is positive. Now a reading far below the mean adds just as much as one far above, which is what you wanted all along: distance from the middle, regardless of direction. The average of those squared distances is the variance. Squaring also weights the far readings more heavily than the near ones — a distance of 4 contributes four times what a distance of 2 does, not twice — which is a real choice about what 'spread' should mean rather than a side effect."
+    },
+    {
+     "id": "c.r2-variance-units",
+     "title": "The units come out wrong",
+     "summary": "Squaring the distances squares the units, and squared crates mean nothing to anyone.",
+     "body": "The repair has a cost. Distances measured in crates become squared crates once multiplied by themselves, so a variance of 9 is nine squared crates — a quantity with no physical meaning that nobody can picture beside a catch figure. The variance is therefore a working number rather than a reportable one, and the next lesson exists entirely to put it back on the scale of the data."
     }
    ],
    "questionIds": [
-    "q.seed.r2-variance"
+    "q.r2-variance",
+    "q.r2-variance-independent",
+    "q.r2-variance-misconception",
+    "q.r2-variance-application",
+    "q.r2-variance-teachback",
+    "q.r2-variance-mastery"
    ],
    "prerequisites": [
     "l.r2-iqr"
    ],
-   "estimatedMinutes": 15
+   "estimatedMinutes": 16,
+   "narrativeIntro": "A clerk is asked how much the week's catches varied and tries the first thing anyone would: measure how far each day sat from the mean, then average those distances. The answer comes out as zero. It comes out as zero for a calm week and for a wild one, and for every ledger anyone brings him — and understanding why is the whole of this lesson.",
+   "demonstration": {
+    "id": "dem.r2-variance",
+    "title": "Why the distances refuse to add up",
+    "experience": "Two days are picked out of the ledger, one above the week's mean and one below it. Each is measured as a distance from the mean, and the readout gives the two distances added together. Move either day as far as you like and watch what the total insists on doing.",
+    "accessibleDescription": "Two controls. The first sets how far the high day sits above the mean, in crates. The second sets how far the low day sits below it, as a negative number of crates. The readout gives the two distances added together, and starts at 0 with the high day 6 crates above the mean and the low day 6 below.",
+    "controls": [
+     {
+      "id": "ctl.above",
+      "label": "How far the high day sits above the mean, in crates",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "initial": 6
+     },
+     {
+      "id": "ctl.below",
+      "label": "How far the low day sits below the mean, in crates",
+      "min": -20,
+      "max": 0,
+      "step": 1,
+      "initial": -6
+     }
+    ],
+    "formula": "sum",
+    "readoutLabel": "The two distances added together",
+    "readoutPrecision": 0,
+    "prediction": {
+     "prompt": "The high day sits 6 crates above the mean and the low day 6 below, so the readout shows 0. Both days now move much further out: the high day to 15 above and the low day to 15 below. What does the readout show?",
+     "options": [
+      {
+       "id": "opt.thirty",
+       "text": "30 - the days are much further apart than they were"
+      },
+      {
+       "id": "opt.zero",
+       "text": "0 - the two distances still balance, as they always do"
+      },
+      {
+       "id": "opt.fifteen",
+       "text": "15 - the readout follows whichever day moved further"
+      }
+     ],
+     "correctOptionId": "opt.zero",
+     "revealNote": "The week has become far more variable and the readout has not moved off zero. It cannot: the mean is the point where the amounts above and below balance, so their distances are equal and opposite by definition. Averaging raw distances does not give a poor measure of spread — it gives no measure at all. Squaring each distance first is what stops the cancelling, and the average of those squares is the variance."
+    },
+    "observation": "Push either control to its extreme and the readout stays at 0 whenever the two are balanced. Unbalance them deliberately — the high day 20 above, the low day only 3 below — and the readout moves, which is the panel telling you that the point you are measuring from is no longer the mean of these two days."
+   },
+   "formalTerm": {
+    "term": "Variance",
+    "definition": "The variance is the average of the squared distances between the readings and their mean. Squaring stops the distances above and below the mean cancelling one another out, and it weights far readings more heavily than near ones. Because the distances are squared, so are the units.",
+    "symbols": []
+   },
+   "guidedQuestionIds": [
+    "q.r2-variance"
+   ],
+   "independentQuestionIds": [
+    "q.r2-variance-independent"
+   ],
+   "misconceptionQuestionIds": [
+    "q.r2-variance-misconception"
+   ],
+   "applicationQuestionIds": [
+    "q.r2-variance-application"
+   ],
+   "teachBackQuestionIds": [
+    "q.r2-variance-teachback"
+   ],
+   "masteryCheckQuestionIds": [
+    "q.r2-variance-mastery"
+   ]
   },
   {
    "id": "l.r2-standard-deviation",
    "moduleId": "m.r2-variation",
    "title": "Spread on the Scale of the Data",
    "objectiveIds": [
-    "obj.r2-standard-deviation"
+    "obj.r2-standard-deviation",
+    "obj.r2-variance"
    ],
    "concepts": [
     {
      "id": "c.r2-standard-deviation",
-     "title": "Spread on the Scale of the Data",
-     "summary": "The standard deviation is the square root of the variance, which puts spread back in the data's own units.",
-     "body": "A variance in squared crates means nothing to a harbourmaster. A standard deviation of three crates does."
+     "title": "Back onto the data's own scale",
+     "summary": "The standard deviation is the square root of the variance, so it is measured in the data's units.",
+     "body": "The variance squared the distances to stop them cancelling, and squared the units along with them. Taking the square root undoes exactly that: a variance of 9 squared crates becomes a standard deviation of 3 crates, which is a quantity a harbourmaster can put beside a catch figure and picture. Nothing about the spread has changed — the two numbers are the same fact written on two scales, and only one of them is in units anyone can use."
+    },
+    {
+     "id": "c.r2-standard-deviation-reading",
+     "title": "Reading it as a typical distance",
+     "summary": "A standard deviation is roughly how far an ordinary reading sits from the mean.",
+     "body": "Because it is back in the data's units, the standard deviation can be read directly: a mean of 12 crates with a standard deviation of 3 says an ordinary day lands somewhere around 3 crates either side of 12. It is not a promise about any particular day, and it is not the largest distance anyone saw — it is a typical one, built from every reading. Reported beside the mean it does the job the range was reaching for, and unlike the range it consults the whole log."
+    },
+    {
+     "id": "c.r2-standard-deviation-growth",
+     "title": "It grows more slowly than the variance",
+     "summary": "Quadruple the variance and the standard deviation only doubles.",
+     "body": "The root compresses the scale, so changes in the variance arrive at the standard deviation softened. A variance rising from 9 to 36 is a fourfold jump, and the standard deviation only moves from 3 to 6. That matters when comparing two harbours: a variance twice as large does not describe a harbour twice as variable, and reading the two measures as if they were interchangeable overstates every difference between datasets."
     }
    ],
    "questionIds": [
-    "q.seed.r2-standard-deviation"
+    "q.r2-standard-deviation",
+    "q.r2-standard-deviation-independent",
+    "q.r2-standard-deviation-misconception",
+    "q.r2-standard-deviation-application",
+    "q.r2-standard-deviation-teachback",
+    "q.r2-standard-deviation-mastery"
    ],
    "prerequisites": [
     "l.r2-variance"
    ],
-   "estimatedMinutes": 15
+   "estimatedMinutes": 15,
+   "narrativeIntro": "A harbourmaster is told the catch varies by nine squared crates and quite reasonably asks what a squared crate is. Nobody has ever landed one, stacked one, or sold one. The number is correct and useless, and the repair is a single step: undo the squaring, and the spread comes back in crates.",
+   "demonstration": {
+    "id": "dem.r2-standard-deviation",
+    "title": "Undoing the squaring",
+    "experience": "The variance from the previous lesson is fed in as it stands, in squared crates, and the readout gives the same spread with the squaring undone — a distance in ordinary crates. Slide the variance and watch how much more slowly the reportable figure moves.",
+    "accessibleDescription": "One control, which sets the variance of the catch in squared crates. The readout gives the standard deviation in crates, to two decimal places, and starts at 3.00 with a variance of 9.",
+    "controls": [
+     {
+      "id": "ctl.variance",
+      "label": "Variance of the catch, in squared crates",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "initial": 9
+     }
+    ],
+    "formula": "square-root",
+    "readoutLabel": "Standard deviation of the catch, in crates",
+    "readoutPrecision": 2,
+    "prediction": {
+     "prompt": "The variance is 9 squared crates, so the readout shows 3.00 crates. The harbour has a wilder season and the variance quadruples to 36. What does the standard deviation become?",
+     "options": [
+      {
+       "id": "opt.six",
+       "text": "6.00 crates - it doubles, because the root softens the change"
+      },
+      {
+       "id": "opt.twelve",
+       "text": "12.00 crates - it quadruples along with the variance"
+      },
+      {
+       "id": "opt.thirtysix",
+       "text": "36.00 crates - the two measures are the same number in different words"
+      }
+     ],
+     "correctOptionId": "opt.six",
+     "revealNote": "A fourfold rise in the variance is a twofold rise in the standard deviation, because the root undoes the squaring rather than scaling it. That is why the two cannot be read interchangeably: describing a harbour as four times as variable because its variance quadrupled overstates the difference a skipper would actually meet, which is a doubling."
+    },
+    "observation": "Raise the variance and the readout climbs, but always more slowly than the control does. At a variance of 0 the readout is 0, which is a season where every day landed exactly the mean. At 100 squared crates the standard deviation is only 10 crates — a hundredfold range on the control has produced a tenfold one on the readout."
+   },
+   "formalTerm": {
+    "term": "Standard deviation",
+    "definition": "The standard deviation is the square root of the variance, which puts the spread back into the units of the data. It reads as roughly how far an ordinary reading sits from the mean, and unlike the range it is built from every reading in the set rather than from the two extremes.",
+    "notation": "√ variance",
+    "symbols": [
+     {
+      "symbol": "√",
+      "meaning": "The square root: the number which, multiplied by itself, gives what is under the sign."
+     },
+     {
+      "symbol": "variance",
+      "meaning": "The average of the squared distances between the readings and their mean."
+     }
+    ]
+   },
+   "guidedQuestionIds": [
+    "q.r2-standard-deviation"
+   ],
+   "independentQuestionIds": [
+    "q.r2-standard-deviation-independent"
+   ],
+   "misconceptionQuestionIds": [
+    "q.r2-standard-deviation-misconception"
+   ],
+   "applicationQuestionIds": [
+    "q.r2-standard-deviation-application"
+   ],
+   "teachBackQuestionIds": [
+    "q.r2-standard-deviation-teachback"
+   ],
+   "masteryCheckQuestionIds": [
+    "q.r2-standard-deviation-mastery"
+   ]
   },
   {
    "id": "l.r2-outliers",

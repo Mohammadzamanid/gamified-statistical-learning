@@ -16,7 +16,7 @@ after Stage 1 was lost because commits were never pushed to a durable remote. Re
 
 - **Stage 1: surviving, verified, green.** Not re-created — the original commit `7add4bc` was carried forward from the
   archive's own `.git` directory, with authorship intact.
-- **Stage 2: in progress, and not recoverable.** Reconstruction began 2026-08-04; S2-01 through S2-08, S2-10 and S2-11 are complete and S2-12 is **Partial** (all 9 lessons Complete, editable datasets deferred to S2-15) and S2-13 is **Partial** (cycle 2, `6d43e79`, remote-verified); S2-09 is **Partial**, and only because §4 is stated over all 22 topics — every Region 1 topic meets it. Nothing
+- **Stage 2: in progress, and not recoverable.** Reconstruction began 2026-08-04; S2-01 through S2-08, S2-10 and S2-11 are complete and S2-12 is **Partial** (all 9 lessons Complete, editable datasets deferred to S2-15) and S2-13 is **Partial** (cycle 3, `PENDING`, remote-verified; all 6 lessons Complete, distribution comparison deferred to S2-14); S2-09 is **Partial**, and only because §4 is stated over all 22 topics — every Region 1 topic meets it. Nothing
   in it is recovered source.
 - **Stages 3–6: not started, and not recoverable.** They must be **reconstructed** from the surviving Stage 1 source,
   the specifications, and the known defect history. They may never be described as recovered source, and no metric may
@@ -37,7 +37,7 @@ after Stage 1 was lost because commits were never pushed to a durable remote. Re
 | Milestone exports | `../gsl-exports/` — source ZIP + git bundle + manifest + SHA-256 checksums |
 | Working tree | clean |
 | Node / npm used | v22.22.2 / 10.9.7 |
-| Test suite | **517 tests / 37 files**, all passing (Stage 1 baseline was 73 / 14) |
+| Test suite | **523 tests / 37 files**, all passing (Stage 1 baseline was 73 / 14) |
 | Build | passing (**538.47 kB, 143.72 kB gzip**; baseline was 285.73 kB / 83.82 kB) |
 | Source modified since baseline | S2-01 … S2-08 — achievements + region completion, three new interactions, the enforced interaction audit, the review queue, the Region 1 topic architecture, and all 17 Region 1 lessons |
 | Curriculum | 2 regions · **6 modules** · **20 lessons** · **23 skills** · **145 questions** (baseline 2/2/3/6/14) |
@@ -105,31 +105,32 @@ branch/tag deletion) are forbidden without explicit owner permission. See `REMOT
 
 ## 5. Next unit
 
-**S2-13 continued — variance and standard deviation.**
+**S2-14 — data-visualization lessons.** Bar charts, histograms, dot plots, box plots, scatterplots, choosing graphs,
+misleading graphs — the five lessons of `m.r2-pictures` and the three of `m.r2-judgement`.
 
-**4 of S2-13's 6 lessons are Complete and `m.r2-spread` is finished entire**: range, quartiles, percentiles, IQR. What
-remains is `l.r2-variance` and `l.r2-standard-deviation`, which are `m.r2-variation`'s first two lessons and the last
-stubs standing between a learner and the outlier and skew lessons S2-12 wrote.
+**S2-12 and S2-13 are both Partial with their lessons finished**, each holding one named unmet criterion: editable
+datasets (S2-15) and distribution comparison (S2-14, below). Every lesson of `m.r2-counts`, `m.r2-centre`,
+`m.r2-spread` and `m.r2-variation` is Complete, so no stub stands between a learner and any written lesson.
 
-**Standard deviation must be visualised as distances → squared distances → their average → square root.** That is the
-original handoff's own instruction for this unit, preserved because the sequence is the teaching. Note the
-demonstration formula list has **no square root**, so either the readout stops at the variance and the root is taken in
-prose, or `DemonstrationFormulaSchema` grows a formula. Decide deliberately and record it; growing the enum means
-`DEMONSTRATION_ARITY` and the readout switch in `src/core/curriculum/demonstration.ts` both change, and the switch is
-exhaustive so the compiler will find the second half for you.
+**S2-14 owes three things beyond its own lessons.**
 
-**Distribution comparison is now a seeded lesson, and S2-14 owns writing it.** `l.r2-comparing-distributions` sits at
-the end of `m.r2-judgement` behind the graph and shape lessons it draws on, with `skill.r2-comparing-distributions`,
-`obj.r2-comparing-distributions` and a declared topic. S2-13's criterion 5 stays **unmet** — the seed makes it possible
-to meet, not met (D-041). Writing it is also what makes the boss's stage 5 legal under D-028.
+1. **`l.r2-comparing-distributions`**, seeded at the end of `m.r2-judgement` with `skill.r2-comparing-distributions`,
+   `obj.r2-comparing-distributions` and a declared topic. Writing it is what meets S2-13's criterion 5 and what makes
+   the boss's stage 5 legal under D-028. It draws on centre, spread, shape and graphs — all of which exist once
+   `m.r2-pictures` is written, so it belongs last.
+2. **The four staged inherited questions.** `q.graph-tallest-bar` and `q.dd-build-bar-chart` in `l.r2-bar-charts`,
+   `q.point-thursday-catch` in `l.r2-scatterplots`, `q.error-id-causation` in `l.r2-misleading-graphs`. Each needs a
+   role when its lesson is written, and its entry in `tests/helpers/staged-inherited.ts` deleted. The audit fails if
+   the lesson is declared Complete with the entry still there, and fails if the entry goes without the question being
+   given a home — neither half can be forgotten.
+3. **A decision about visuals.** These are the graph lessons, so the questions want charts. `visual.kind` already
+   supports `bar-chart`; check what else the renderer honours before writing content that assumes a chart type it
+   cannot draw, and remember requirement 18 wants `visual.accessibleDescription` on every one.
 
-**Four inherited questions are staged, and S2-14 owes their removal**: `q.graph-tallest-bar` and `q.dd-build-bar-chart`
-in `l.r2-bar-charts`, `q.point-thursday-catch` in `l.r2-scatterplots`, `q.error-id-causation` in
-`l.r2-misleading-graphs`. Each needs a role when its lesson is written, and its entry in
-`tests/helpers/staged-inherited.ts` deleted.
-
-**Coverage reads 17 of 41, not 17 of 40.** Adding `skill.r2-comparing-distributions` grew §4's population. Nothing lost
-coverage; do not report the change as a regression.
+**The demonstration model gained a `square-root` formula (D-042).** If a graph lesson needs an operation the enum
+lacks, growing it cost four lines and a guard: the readout switch in `src/core/curriculum/demonstration.ts` is
+exhaustive, so the compiler finds the second half, and the schema has two precedents for constraining a control's
+range to a formula's domain. Narrating around a missing operation is what D-035 forbids.
 
 **A lesson is not finished until something has played it (D-037).** `tests/integration/region2-lessons.test.ts`
 iterates `COMPLETE_LESSONS`, so a lesson you declare is played automatically. Read that file's header before trusting
@@ -149,9 +150,9 @@ what `STAGED_INHERITED` declares, and no demonstration. The moment you grow one 
 `tests/helpers/complete-lessons.ts`, and `tests/audit/lesson-structure.test.ts` will then hold it to all 18 of scope
 §5's requirements. That is the same contract S2-08 worked under for Region 1, and the same guard.
 
-`docs/REGION2_BOSS_SPEC.md` maps the boss's five stages onto this module sequence. Stage 3 draws on range, quartiles,
-IQR and outliers — all now written — so it is worth reading before writing lessons: the case is what the lessons have
-to make answerable.
+`docs/REGION2_BOSS_SPEC.md` maps the boss's five stages onto this module sequence. Stages 4 and 5 are entirely S2-14's
+territory — histograms, box plots, bin width, truncated axes, then the verdict — so it is worth reading before writing
+lessons: the case is what the lessons have to make answerable.
 
 ### Region 2's architecture, and two rules it added
 

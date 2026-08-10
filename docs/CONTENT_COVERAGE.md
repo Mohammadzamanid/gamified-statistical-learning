@@ -48,8 +48,8 @@ Topics come from the **curriculum graph**, never from the set of generator modul
 | Quartiles (`skill.r2-quartiles`) | 10 | 0 | 0 | 0 | 0 | 0 | **10** | **No** |
 | Scatterplots (`skill.r2-scatterplots`) | 1 | 0 | 0 | 0 | 0 | 0 | **1** | **No** |
 | Skew (`skill.r2-skew`) | 6 | 0 | 0 | 0 | 0 | 0 | **6** | **No** |
-| Standard-deviation intuition (`skill.r2-standard-deviation`) | 1 | 0 | 0 | 0 | 0 | 0 | **1** | **No** |
-| Variance intuition (`skill.r2-variance`) | 1 | 0 | 0 | 0 | 0 | 0 | **1** | **No** |
+| Standard-deviation intuition (`skill.r2-standard-deviation`) | 6 | 0 | 0 | 0 | 0 | 0 | **6** | **No** |
+| Variance intuition (`skill.r2-variance`) | 9 | 0 | 0 | 0 | 0 | 0 | **9** | **No** |
 | Range (`skill.range`) | 7 | 0 | 0 | 0 | 0 | 0 | **7** | **No** |
 
 ## Rejections, per topic
@@ -94,8 +94,8 @@ Topics come from the **curriculum graph**, never from the set of generator modul
 | Quartiles | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 10% |
 | Scatterplots | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100% |
 | Skew | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 17% |
-| Standard-deviation intuition | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100% |
-| Variance intuition | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100% |
+| Standard-deviation intuition | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 17% |
+| Variance intuition | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 11% |
 | Range | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 14% |
 
 ## Why combinations were rejected
@@ -316,14 +316,12 @@ Topics come from the **curriculum graph**, never from the set of generator modul
   - 0 reasoning families represented, below the required 4
 - **Standard-deviation intuition** (`skill.r2-standard-deviation`)
   - no generator families produce for this topic
-  - 1 available interactions, below the required 100
+  - 6 available interactions, below the required 100
   - 0 reasoning families represented, below the required 4
-  - 100% of interactions share one reasoning shape, above the 50% ceiling — this is the "numeric variants of one pattern" case
 - **Variance intuition** (`skill.r2-variance`)
   - no generator families produce for this topic
-  - 1 available interactions, below the required 100
+  - 9 available interactions, below the required 100
   - 0 reasoning families represented, below the required 4
-  - 100% of interactions share one reasoning shape, above the 50% ceiling — this is the "numeric variants of one pattern" case
 - **Range** (`skill.range`)
   - no generator families produce for this topic
   - 7 available interactions, below the required 100

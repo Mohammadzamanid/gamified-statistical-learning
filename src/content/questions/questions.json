@@ -6900,48 +6900,6 @@
   "estimatedSeconds": 120
  },
  {
-  "id": "q.seed.r2-variance",
-  "topicId": "t.r2-variance",
-  "objectiveId": "obj.r2-variance",
-  "skillIds": [
-   "skill.r2-variance"
-  ],
-  "difficulty": 2,
-  "interaction": "numeric-input",
-  "prompt": "Two catches: 4 and 8 crates, with a mean of 6. How far is EACH value from the mean?",
-  "answer": {
-   "kind": "numeric",
-   "value": 2,
-   "tolerance": 0,
-   "unit": "crates"
-  },
-  "explanation": "The answer is 2 crates. This lesson is a seed: its full teaching arrives with the Region 2 lesson units.",
-  "accessibilityDescription": "A numeric seed question for a Region 2 lesson that has not been written yet. Enter the answer as a number.",
-  "misconceptionIds": [],
-  "estimatedSeconds": 45
- },
- {
-  "id": "q.seed.r2-standard-deviation",
-  "topicId": "t.r2-standard-deviation",
-  "objectiveId": "obj.r2-standard-deviation",
-  "skillIds": [
-   "skill.r2-standard-deviation"
-  ],
-  "difficulty": 2,
-  "interaction": "numeric-input",
-  "prompt": "A dataset of crate counts has a variance of 9 squared crates. What is its STANDARD DEVIATION, in crates?",
-  "answer": {
-   "kind": "numeric",
-   "value": 3,
-   "tolerance": 0,
-   "unit": "crates"
-  },
-  "explanation": "The answer is 3 crates. This lesson is a seed: its full teaching arrives with the Region 2 lesson units.",
-  "accessibilityDescription": "A numeric seed question for a Region 2 lesson that has not been written yet. Enter the answer as a number.",
-  "misconceptionIds": [],
-  "estimatedSeconds": 45
- },
- {
   "id": "q.seed.r2-bar-charts",
   "topicId": "t.r2-bar-charts",
   "objectiveId": "obj.r2-bar-charts",
@@ -9294,5 +9252,384 @@
   "misconceptionIds": [],
   "accessibilityDescription": "Eight sorted wait times including one very long one; enter the interquartile range in minutes as a number.",
   "estimatedSeconds": 120
+ },
+ {
+  "id": "q.r2-variance",
+  "topicId": "t.r2-variance",
+  "objectiveId": "obj.r2-variance",
+  "skillIds": [
+   "skill.r2-variance"
+  ],
+  "difficulty": 1,
+  "interaction": "numeric-input",
+  "prompt": "Two days landed 2 and 10 crates, so the mean is 6. Square each day's distance from the mean, then average the two squares. What is the variance?",
+  "answer": {
+   "kind": "numeric",
+   "value": 16,
+   "tolerance": 0.01,
+   "unit": "squared crates"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "The distances are 2 minus 6 and 10 minus 6. Square each one before averaging."
+   },
+   {
+    "level": 2,
+    "text": "Both squares come out the same. What is the average of 16 and 16?"
+   }
+  ],
+  "explanation": "The distances from the mean are -4 and 4. Squared, both become 16, and the average of 16 and 16 is 16 squared crates. Notice what squaring bought: the raw distances would have averaged to zero and claimed the two days were identical.",
+  "solutionSteps": [
+   "Find each day's distance from the mean of 6: one is -4, the other is 4.",
+   "Square each distance: both give 16.",
+   "Average the squares: 16 squared crates is the variance."
+  ],
+  "misconceptionIds": [],
+  "accessibilityDescription": "Two catch figures and their mean; enter the variance in squared crates as a number.",
+  "estimatedSeconds": 80
+ },
+ {
+  "id": "q.r2-variance-independent",
+  "topicId": "t.r2-variance",
+  "objectiveId": "obj.r2-variance",
+  "skillIds": [
+   "skill.r2-variance"
+  ],
+  "difficulty": 2,
+  "interaction": "numeric-input",
+  "prompt": "Four days landed 3, 5, 9 and 11 crates. The mean is 7. What is the variance of these four readings?",
+  "answer": {
+   "kind": "numeric",
+   "value": 10,
+   "tolerance": 0.01,
+   "unit": "squared crates"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Square all four distances from 7, then divide the total of the squares by 4."
+   }
+  ],
+  "explanation": "The distances from the mean are -4, -2, 2 and 4. Squared they are 16, 4, 4 and 16, which total 40. Divided by the four readings, the variance is 10 squared crates.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "Four catch figures and their mean; enter the variance in squared crates as a number.",
+  "estimatedSeconds": 110
+ },
+ {
+  "id": "q.r2-variance-misconception",
+  "topicId": "t.r2-variance",
+  "objectiveId": "obj.r2-variance",
+  "skillIds": [
+   "skill.r2-variance"
+  ],
+  "difficulty": 3,
+  "interaction": "numeric-input",
+  "prompt": "Four days landed 1, 5, 9 and 13 crates, a mean of 7. What is the variance of these four readings?",
+  "answer": {
+   "kind": "numeric",
+   "value": 20,
+   "tolerance": 0.01,
+   "unit": "squared crates"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Write out all four distances from 7, keeping the sign of the ones below the mean."
+   },
+   {
+    "level": 2,
+    "text": "Square each distance before adding. Averaging them unsquared gives zero every time."
+   }
+  ],
+  "explanation": "The distances are -6, -2, 2 and 6. Squared they are 36, 4, 4 and 36, totalling 80, so the variance is 20 squared crates. Averaging the distances without squaring gives zero, and not by accident: the mean is the point where the amounts above and below balance, so raw distances cancel for every dataset there is. A method that returns zero whatever the data does is measuring nothing at all.",
+  "misconceptionIds": [
+   "mc.distances-average-to-spread"
+  ],
+  "parameters": {
+   "mc.distances-average-to-spread": {
+    "wrongValue": 0
+   }
+  },
+  "accessibilityDescription": "Four catch figures and their mean; enter the variance in squared crates as a number.",
+  "estimatedSeconds": 110
+ },
+ {
+  "id": "q.r2-variance-application",
+  "topicId": "t.r2-variance",
+  "objectiveId": "obj.r2-variance",
+  "skillIds": [
+   "skill.r2-variance"
+  ],
+  "difficulty": 3,
+  "interaction": "multiple-choice",
+  "prompt": "A report gives a harbour's mean catch as 12 crates and its variance as 9. Why can the variance not be printed beside the mean as 'the usual variation'?",
+  "choices": [
+   {
+    "id": "ch.units",
+    "text": "It is measured in squared crates, so it is not a distance anyone can compare with a catch"
+   },
+   {
+    "id": "ch.small",
+    "text": "It is too small a number to be meaningful next to a mean of 12"
+   },
+   {
+    "id": "ch.wrong",
+    "text": "It was computed incorrectly, because a variance can never be smaller than the mean"
+   }
+  ],
+  "answer": {
+   "kind": "choice",
+   "correctChoiceIds": [
+    "ch.units"
+   ]
+  },
+  "explanation": "Squaring the distances squared the units along with them, so a variance of 9 is nine squared crates — a quantity with no physical meaning beside a catch figure. Nothing is wrong with the number; it is simply on the wrong scale to be read as a variation, which is exactly what the standard deviation fixes.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "Three explanations of why a variance cannot be reported directly beside a mean.",
+  "estimatedSeconds": 90
+ },
+ {
+  "id": "q.r2-variance-teachback",
+  "topicId": "t.r2-variance",
+  "objectiveId": "obj.r2-variance",
+  "skillIds": [
+   "skill.r2-variance"
+  ],
+  "difficulty": 3,
+  "interaction": "short-explanation",
+  "prompt": "Explain in your own words why averaging the distances from the mean gives zero for every dataset, and what squaring them changes. Use the words 'mean' and 'squared'.",
+  "answer": {
+   "kind": "text",
+   "requiredKeywords": [
+    "mean",
+    "squared"
+   ],
+   "forbiddenKeywords": []
+  },
+  "explanation": "The mean is the balance point: the total amount by which readings exceed it equals the total by which others fall short. So the distances, taken with their signs, always sum to zero, and their average is zero whatever the data does. Once each distance is squared it is positive whichever side it came from, so nothing cancels and the average of the squares grows with the spread.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "An open-response question about why raw distances from the mean cancel and what squaring changes.",
+  "estimatedSeconds": 130
+ },
+ {
+  "id": "q.r2-variance-mastery",
+  "topicId": "t.r2-variance",
+  "objectiveId": "obj.r2-variance",
+  "skillIds": [
+   "skill.r2-variance"
+  ],
+  "difficulty": 3,
+  "interaction": "numeric-input",
+  "prompt": "Five days landed 4, 6, 8, 10 and 12 crates, a mean of 8. What is the variance of these five readings?",
+  "answer": {
+   "kind": "numeric",
+   "value": 8,
+   "tolerance": 0.01,
+   "unit": "squared crates"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "The distances from 8 are -4, -2, 0, 2 and 4. Square all five, including the zero."
+   }
+  ],
+  "explanation": "The distances from the mean are -4, -2, 0, 2 and 4. Their squares are 16, 4, 0, 4 and 16, which total 40. Divided by the five readings, the variance is 8 squared crates. The day that landed exactly the mean contributes a squared distance of zero — it counts, and it counts as nothing.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "Five catch figures and their mean; enter the variance in squared crates as a number.",
+  "estimatedSeconds": 130
+ },
+ {
+  "id": "q.r2-standard-deviation",
+  "topicId": "t.r2-standard-deviation",
+  "objectiveId": "obj.r2-standard-deviation",
+  "skillIds": [
+   "skill.r2-standard-deviation"
+  ],
+  "difficulty": 1,
+  "interaction": "numeric-input",
+  "prompt": "A log of catches has a variance of 16 squared crates. What is its standard deviation, in crates?",
+  "answer": {
+   "kind": "numeric",
+   "value": 4,
+   "tolerance": 0.01,
+   "unit": "crates"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "The standard deviation is the square root of the variance."
+   },
+   {
+    "level": 2,
+    "text": "Which number multiplied by itself gives 16?"
+   }
+  ],
+  "explanation": "The standard deviation is the square root of the variance, and 4 multiplied by itself is 16, so the standard deviation is 4 crates. Taking the root undoes the squaring the variance did, which is what puts the figure back into crates rather than squared crates.",
+  "solutionSteps": [
+   "Start from the variance: 16 squared crates.",
+   "Take the square root, which undoes the squaring.",
+   "The square root of 16 is 4, so the standard deviation is 4 crates."
+  ],
+  "misconceptionIds": [],
+  "accessibilityDescription": "A variance in squared crates; enter the standard deviation in crates as a number.",
+  "estimatedSeconds": 60
+ },
+ {
+  "id": "q.r2-standard-deviation-independent",
+  "topicId": "t.r2-standard-deviation",
+  "objectiveId": "obj.r2-standard-deviation",
+  "skillIds": [
+   "skill.r2-standard-deviation",
+   "skill.r2-variance"
+  ],
+  "difficulty": 2,
+  "interaction": "numeric-input",
+  "prompt": "Four days landed 3, 5, 9 and 11 crates, a mean of 7 and a variance of 10 squared crates. What is the standard deviation, to two decimal places?",
+  "answer": {
+   "kind": "numeric",
+   "value": 3.16,
+   "tolerance": 0.01,
+   "unit": "crates"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Take the square root of 10 and round the result to two decimal places."
+   }
+  ],
+  "explanation": "The square root of 10 is 3.16 to two decimal places, so the standard deviation is about 3.16 crates. That reads as a typical day sitting roughly 3 crates either side of the mean of 7, which the ledger bears out: the four readings are 4, 2, 2 and 4 crates away.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "A variance of ten squared crates; enter the standard deviation in crates to two decimal places.",
+  "estimatedSeconds": 90
+ },
+ {
+  "id": "q.r2-standard-deviation-misconception",
+  "topicId": "t.r2-standard-deviation",
+  "objectiveId": "obj.r2-standard-deviation",
+  "skillIds": [
+   "skill.r2-standard-deviation",
+   "skill.r2-variance"
+  ],
+  "difficulty": 3,
+  "interaction": "numeric-input",
+  "prompt": "Five days landed 4, 6, 8, 10 and 12 crates, a mean of 8 and a variance of 8 squared crates. Report the spread as a standard deviation, to two decimal places.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2.83,
+   "tolerance": 0.01,
+   "unit": "crates"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "The variance is the working number. What still has to be done to it?"
+   },
+   {
+    "level": 2,
+    "text": "Check the units: a spread must be in crates, not squared crates."
+   }
+  ],
+  "explanation": "The square root of 8 is 2.83 to two decimal places, so the standard deviation is about 2.83 crates. Reporting 8 stops at the variance, which is in squared crates and so is not a distance at all — the units are what give that away, because a spread has to be measured in the same units as the readings it describes.",
+  "misconceptionIds": [
+   "mc.variance-reported-as-spread"
+  ],
+  "parameters": {
+   "mc.variance-reported-as-spread": {
+    "wrongValue": 8
+   }
+  },
+  "accessibilityDescription": "A variance of eight squared crates; enter the standard deviation in crates to two decimal places.",
+  "estimatedSeconds": 110
+ },
+ {
+  "id": "q.r2-standard-deviation-application",
+  "topicId": "t.r2-standard-deviation",
+  "objectiveId": "obj.r2-standard-deviation",
+  "skillIds": [
+   "skill.r2-standard-deviation"
+  ],
+  "difficulty": 3,
+  "interaction": "multiple-choice",
+  "prompt": "Harbour A has a variance of 9 and Harbour B a variance of 36, in the same units. A report says B is 'four times as variable as A'. Is that a fair description?",
+  "choices": [
+   {
+    "id": "ch.overstates",
+    "text": "No - on the data's own scale B's spread is twice A's, since the standard deviations are 3 and 6"
+   },
+   {
+    "id": "ch.fair",
+    "text": "Yes - the variance is a measure of variability, so four times the variance is four times as variable"
+   },
+   {
+    "id": "ch.understates",
+    "text": "No - it understates the difference, because taking the root makes B further ahead still"
+   }
+  ],
+  "answer": {
+   "kind": "choice",
+   "correctChoiceIds": [
+    "ch.overstates"
+   ]
+  },
+  "explanation": "The variances are 9 and 36, so the standard deviations are 3 and 6 — B's readings sit about twice as far from their mean as A's do, not four times. The root compresses the scale, so differences in variance always look larger than the differences a skipper would actually meet. Comparisons belong on the scale of the data.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "Three judgements of a report comparing two harbours by their variances rather than their standard deviations.",
+  "estimatedSeconds": 100
+ },
+ {
+  "id": "q.r2-standard-deviation-teachback",
+  "topicId": "t.r2-standard-deviation",
+  "objectiveId": "obj.r2-standard-deviation",
+  "skillIds": [
+   "skill.r2-standard-deviation"
+  ],
+  "difficulty": 3,
+  "interaction": "short-explanation",
+  "prompt": "Explain in your own words why a variance of 9 and a standard deviation of 3 describe the same spread, and which of the two belongs in a report. Use the words 'root' and 'units'.",
+  "answer": {
+   "kind": "text",
+   "requiredKeywords": [
+    "root",
+    "units"
+   ],
+   "forbiddenKeywords": []
+  },
+  "explanation": "They are one fact written on two scales. The variance squared the distances to stop them cancelling and squared the units in the process; taking the root undoes both, giving a figure in crates rather than squared crates. The standard deviation is therefore what goes in a report, because it can be compared with the readings and with the mean, and the variance is the working number behind it.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "An open-response question about why a variance and a standard deviation describe one spread, and which to report.",
+  "estimatedSeconds": 130
+ },
+ {
+  "id": "q.r2-standard-deviation-mastery",
+  "topicId": "t.r2-standard-deviation",
+  "objectiveId": "obj.r2-standard-deviation",
+  "skillIds": [
+   "skill.r2-standard-deviation",
+   "skill.r2-variance"
+  ],
+  "difficulty": 3,
+  "interaction": "numeric-input",
+  "prompt": "Four days landed 5, 5, 11 and 11 crates. Work out the mean, then the variance, then the standard deviation. What is the standard deviation, in crates?",
+  "answer": {
+   "kind": "numeric",
+   "value": 3,
+   "tolerance": 0.01,
+   "unit": "crates"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "The mean is 8. How far is each of the four days from it?"
+   },
+   {
+    "level": 2,
+    "text": "Every squared distance is the same here, so the variance is that one square."
+   }
+  ],
+  "explanation": "The mean is 8 crates. Every day sits 3 crates from it, so every squared distance is 9 and the variance is 9 squared crates. The square root of 9 is 3, so the standard deviation is 3 crates — which is exactly right, since every single day really is 3 crates from the mean.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "Four catch figures; work through mean, variance and root, and enter the standard deviation in crates.",
+  "estimatedSeconds": 150
  }
 ]

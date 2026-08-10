@@ -59,6 +59,13 @@ function apply(demo: Demonstration, a: number, b: number): number {
       return a / b;
     case "negate":
       return -a;
+    case "square-root":
+      // The schema forbids a control range reaching below zero for this formula,
+      // so this is never asked for a negative. Guarded anyway rather than
+      // returning NaN: a readout is taught content, and content that quietly
+      // becomes "NaN" on screen is worse than content that fails loudly here.
+      if (a < 0) throw new Error(`demonstration ${demo.id}: square root of negative control value ${a}`);
+      return Math.sqrt(a);
     case "place-value":
       // Deliberately not (10a + b) / 100: the learner is moving a tenths digit
       // and a hundredths digit, and each column's contribution should be

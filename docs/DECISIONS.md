@@ -336,3 +336,15 @@ D-040 records. The criterion is reported **unmet**, with the lesson now existing
 owner. The general rule: when a criterion has no home, create the home in the declared lists — where the audits can see
 it in both directions — rather than either writing the lesson out of order or letting the criterion lapse by going
 unmentioned. (S2-13)
+
+**D-042 — When the teaching sequence needs an operation the model lacks, grow the model rather than narrate around it.**
+The scope's instruction for the standard-deviation lesson is a sequence: distances, then squared distances, then their
+average, then the square root. `DemonstrationFormulaSchema` had no square root, so the demonstration could only have
+shown something else while the prose described the step — which is precisely the divergence D-035 exists to catch, and
+this time it would have been designed in rather than slipped in. `"square-root"` was added instead, with arity 1 like
+`negate`. Two things made it cheap and safe. The readout switch in `src/core/curriculum/demonstration.ts` is exhaustive
+over the enum, so the compiler located the second half of the change the moment the first half landed. And the schema
+already had a precedent for constraining a control's range to a formula's domain — the divide-by-zero guard — so the
+root got the matching one: a control feeding a square root may not reach below zero, because a setting with no answer
+is a defect in the content rather than something the panel should discover at run time and render as NaN. Growing a
+closed enum is the expensive-looking option that turned out to cost four lines and a guard. (S2-13)

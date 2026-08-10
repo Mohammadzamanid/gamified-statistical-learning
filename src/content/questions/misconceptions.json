@@ -238,5 +238,21 @@
   "detector": "known-wrong-answer",
   "detectorParams": {},
   "remediationId": "rem.quartiles-not-ends"
+ },
+ {
+  "id": "mc.distances-average-to-spread",
+  "title": "Spread measured by averaging raw distances",
+  "description": "The learner averages the distances from the mean without squaring them, and reports the result as a measure of spread. The arithmetic is correct and the answer is zero for every dataset, which is what makes it a misconception about what the mean is rather than a slip.",
+  "detector": "known-wrong-answer",
+  "detectorParams": {},
+  "remediationId": "rem.square-before-averaging"
+ },
+ {
+  "id": "mc.variance-reported-as-spread",
+  "title": "The variance reported where the standard deviation was asked for",
+  "description": "The learner computes the variance correctly and stops there, reporting a figure in squared units as though it were a distance. The number is right for a different question, and the units are the only thing that gives it away.",
+  "detector": "known-wrong-answer",
+  "detectorParams": {},
+  "remediationId": "rem.take-the-root"
  }
 ]

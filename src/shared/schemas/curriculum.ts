@@ -35,6 +35,17 @@ export const DemonstrationFormulaSchema = z.enum([
   "quotient",
   /** -a */
   "negate",
+  /**
+   * The square root of a.
+   *
+   * Added by S2-13 for the standard-deviation lesson, whose whole content is the
+   * step from a variance in squared units to a spread on the data's own scale.
+   * The scope's own instruction for that lesson is "distances, then squared
+   * distances, then their average, then the square root" — the last step had no
+   * formula, so the demonstration could only have described it in prose while
+   * showing something else, which is the divergence D-035 exists to prevent.
+   */
+  "square-root",
   /** a tenths plus b hundredths — the decimal point as place value. */
   "place-value",
   /** a percent of b */
@@ -63,6 +74,7 @@ export const DEMONSTRATION_ARITY: Readonly<Record<DemonstrationFormula, number>>
   product: 2,
   quotient: 2,
   negate: 1,
+  "square-root": 1,
   "place-value": 2,
   "percent-of": 2,
   "share-of": 2,
@@ -72,6 +84,16 @@ export const DEMONSTRATION_ARITY: Readonly<Record<DemonstrationFormula, number>>
 
 /** Formulas that divide by the second control, so its range must exclude zero. */
 const DIVIDES_BY_SECOND: ReadonlyArray<DemonstrationFormula> = ["quotient", "share-of"];
+
+/**
+ * Formulas undefined for a negative first control, so its range must exclude
+ * negatives.
+ *
+ * Same reasoning as the divide-by-zero guard above: a control the learner can
+ * drive to a setting with no answer is a defect in the content, not something
+ * the panel should discover at run time and render as NaN.
+ */
+const NEEDS_NON_NEGATIVE_FIRST: ReadonlyArray<DemonstrationFormula> = ["square-root"];
 
 /** Formulas that read from the demonstration's `table` rather than computing. */
 const READS_TABLE: ReadonlyArray<DemonstrationFormula> = ["table-cell", "column-total"];
@@ -209,6 +231,13 @@ export const DemonstrationSchema = z
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         message: `formula ${d.formula} divides by ${d.controls[1].id}, whose minimum must be greater than zero`
+      });
+    }
+
+    if (NEEDS_NON_NEGATIVE_FIRST.includes(d.formula) && d.controls[0] && d.controls[0].min < 0) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: `formula ${d.formula} is undefined for negative values, so ${d.controls[0].id} may not go below zero`
       });
     }
 

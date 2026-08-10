@@ -359,5 +359,29 @@
   "skillIds": [
    "skill.r2-iqr"
   ]
+ },
+ {
+  "id": "rem.square-before-averaging",
+  "title": "Square the distances, then average them",
+  "explanation": "Averaging the raw distances from the mean gives zero for every dataset in existence, because the mean is defined as the point where the amounts above and below it balance. An answer that is zero whatever the data says is not measuring the data. Squaring each distance first makes every contribution positive, so a reading far below the mean counts as much as one far above, and the average of those squares is the variance.",
+  "microLesson": "Catches of 2 and 10 crates have a mean of 6. The distances are -4 and 4, and their average is 0 - which would claim the two days were identical. Square them first: 16 and 16, whose average is 16 squared crates. That is the variance, and it says something true about a week the raw distances insisted was perfectly steady.",
+  "followUpQuestionIds": [
+   "q.r2-variance"
+  ],
+  "skillIds": [
+   "skill.r2-variance"
+  ]
+ },
+ {
+  "id": "rem.take-the-root",
+  "title": "The variance is the working number, not the answer",
+  "explanation": "The variance is measured in squared units, so reporting it where a spread was asked for answers in a quantity nobody can picture: nine squared crates is not nine crates and not any distance at all. The standard deviation is its square root, in the data's own units, and it is what goes beside the mean in a report. Checking the units catches this every time - a spread has to be in the same units as the readings it describes.",
+  "microLesson": "A log has a variance of 16 squared crates. Reporting 16 claims that an ordinary day sits 16 crates from the mean, which for most harbour logs is further than the whole range. The square root of 16 is 4, so the standard deviation is 4 crates - and that is a distance a harbourmaster can check against the ledger.",
+  "followUpQuestionIds": [
+   "q.r2-standard-deviation"
+  ],
+  "skillIds": [
+   "skill.r2-standard-deviation"
+  ]
  }
 ]
