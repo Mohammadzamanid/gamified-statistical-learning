@@ -120,7 +120,15 @@ Six deliberate probes, all reverted. **Five bite, one found a gap now closed and
 
 ## Local commit
 
-Recorded in `STAGE2_RECONSTRUCTION_BACKLOG.md` on the S2-15 row.
+`22e8c981b4754e15fb6bc078aea0711bcfe51e86`
+
+## Remote verification
+
+```
+LOCAL_HEAD  = 22e8c981b4754e15fb6bc078aea0711bcfe51e86
+REMOTE_HEAD = 22e8c981b4754e15fb6bc078aea0711bcfe51e86
+VERIFIED: MATCH
+```
 
 ## Next unit
 
