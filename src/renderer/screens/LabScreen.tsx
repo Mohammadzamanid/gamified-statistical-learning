@@ -4,6 +4,9 @@ import {
   addValue,
   compareExperiments,
   createExperiment,
+  exportSummary,
+  loadExperiment,
+  saveExperiment,
   describeChange,
   describeChart,
   experimentFromDataset,
@@ -24,6 +27,7 @@ import { BoxPlot } from "../components/BoxPlot";
 import { DotPlot } from "../components/DotPlot";
 import { Histogram } from "../components/Histogram";
 import { isLaboratoryUnlocked } from "../../core/curriculum/progress";
+import { LABORATORY_SHELF_LIMIT } from "../../shared/constants/app";
 import { useStore } from "../state/store";
 import { parseUserNumber, roundTo } from "../../shared/utilities/numeric";
 
@@ -91,6 +95,8 @@ export function LabScreen(): JSX.Element {
   const content = useStore((s) => s.content);
   const save = useStore((s) => s.save);
   const navigate = useStore((s) => s.navigate);
+  const shelveExperiment = useStore((s) => s.shelveExperiment);
+  const unshelveExperiment = useStore((s) => s.unshelveExperiment);
   const [experiment, setExperiment] = useState<LabExperiment>(() =>
     createExperiment("Bench readings", STARTING_VALUES)
   );
@@ -98,6 +104,8 @@ export function LabScreen(): JSX.Element {
   const [chartKind, setChartKind] = useState<LabChartKind>("dot-plot");
   const [binWidth, setBinWidth] = useState("");
   const [second, setSecond] = useState<LabExperiment | null>(null);
+  const [shelfNote, setShelfNote] = useState<string | null>(null);
+  const [exported, setExported] = useState<string | null>(null);
 
   const summary = useMemo(() => summarise(experiment.values), [experiment.values]);
   const latest = experiment.log[0];
@@ -365,6 +373,95 @@ export function LabScreen(): JSX.Element {
         </table>
         {summary.count === 1 && (
           <p className="muted">A single reading has no sample spread, so variance and standard deviation are withheld.</p>
+        )}
+      </div>
+
+      <div className="card stack">
+        <h3>Keep this experiment</h3>
+        <p className="faint">
+          Kept experiments are stored in your save file and survive closing the app. The shelf holds{" "}
+          {LABORATORY_SHELF_LIMIT}; the edit log is not kept, because it belongs to the sitting it happened in.
+        </p>
+        <div className="row" style={{ gap: 8, flexWrap: "wrap" }}>
+          <button
+            className="btn primary"
+            disabled={!save}
+            onClick={() => {
+              if (!save) return;
+              const result = saveExperiment(
+                save.savedExperiments,
+                { experiment, chartKind, binWidth: binWidthValue },
+                new Date().toISOString()
+              );
+              if (!result.ok) {
+                setShelfNote(result.reason);
+                return;
+              }
+              shelveExperiment(result.saved);
+              setShelfNote(`Kept "${result.saved.title}".`);
+            }}
+          >
+            Keep it
+          </button>
+          <button
+            className="btn"
+            onClick={() =>
+              setExported(
+                exportSummary({ experiment, chartKind, binWidth: binWidthValue }, new Date().toISOString())
+              )
+            }
+          >
+            Export a summary
+          </button>
+        </div>
+        <p role="status" aria-live="polite" className="faint">
+          {shelfNote ?? ""}
+        </p>
+
+        {save && save.savedExperiments.length > 0 && (
+          <>
+            <h4>On the shelf ({save.savedExperiments.length} of {LABORATORY_SHELF_LIMIT})</h4>
+            <ul className="stack" style={{ listStyle: "none", padding: 0 }}>
+              {save.savedExperiments.map((entry) => (
+                <li key={entry.id} className="row" style={{ gap: 8, alignItems: "center", flexWrap: "wrap" }}>
+                  <span>
+                    {entry.title} — {entry.values.length} readings, drawn as a {CHART_LABELS[entry.chartKind].toLowerCase()}
+                  </span>
+                  <button
+                    className="btn"
+                    onClick={() => {
+                      setExperiment(loadExperiment(entry));
+                      setChartKind(entry.chartKind);
+                      setBinWidth(entry.binWidth === undefined ? "" : String(entry.binWidth));
+                      setShelfNote(`Loaded "${entry.title}". Its edit log starts fresh.`);
+                    }}
+                  >
+                    Load
+                  </button>
+                  <button
+                    className="btn"
+                    aria-label={`Remove ${entry.title} from the shelf`}
+                    onClick={() => {
+                      unshelveExperiment(entry.id);
+                      setShelfNote(`Removed "${entry.title}" from the shelf.`);
+                    }}
+                  >
+                    Remove
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
+
+        {exported !== null && (
+          <div className="field">
+            <label htmlFor="lab-export">Summary — select and copy, or read it here</label>
+            <textarea id="lab-export" className="data" readOnly rows={16} value={exported} />
+            <button className="btn" onClick={() => setExported(null)}>
+              Close the summary
+            </button>
+          </div>
         )}
       </div>
 

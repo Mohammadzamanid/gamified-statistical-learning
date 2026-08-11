@@ -23,7 +23,16 @@ export const MIGRATIONS: Record<number, Migration> = {
    * unlocked something the save has no evidence for. Written explicitly rather
    * than left to the schema default, for the reason the 1 -> 2 note gives.
    */
-  2: (data) => ({ ...data, investigationProgress: {} })
+  2: (data) => ({ ...data, investigationProgress: {} }),
+
+  /**
+   * 3 -> 4 (S2-15): adds `savedExperiments`, the laboratory shelf.
+   *
+   * A version-3 save predates the shelf, so the correct lift is an empty array.
+   * Written explicitly rather than left to the schema default, for the reason
+   * the 1 -> 2 note gives.
+   */
+  3: (data) => ({ ...data, savedExperiments: [] })
 };
 
 export function migrateToVersion(

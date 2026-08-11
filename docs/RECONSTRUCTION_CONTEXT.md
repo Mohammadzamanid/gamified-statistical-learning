@@ -114,6 +114,8 @@ stubbed interaction.
 1. Region-completed achievement trigger is stubbed and always returns false.
 2. Six interaction types are unimplemented; the renderer degrades honestly with a "not yet available" notice.
 3. Laboratory simulation instruments (sampling distribution, CLT explorer) are placeholders.
+   *S2-15: the placeholders are removed and the descriptive bench is a real learning environment. The two simulation
+   instruments named here are still unbuilt, deliberately — scope §3 excludes sampling distributions from Stage 2.*
 4. Only one world of content exists.
 5. `eslint.config.js` emits a cosmetic `MODULE_TYPELESS_PACKAGE_JSON` Node warning (see `DECISIONS.md` D-002).
 

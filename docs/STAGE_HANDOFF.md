@@ -30,22 +30,22 @@ after Stage 1 was lost because commits were never pushed to a durable remote. Re
 | Default branch | `main` |
 | Pristine Stage 1 import | `7add4bc` — pushed and remote-verified |
 | Baseline docs + CI | `1b0a5dd` — pushed and remote-verified |
-| Last unit completed | **S2-14** — Region 2's data-visualization lessons, and with them all 20 Region 2 lessons. **S2-15 is in progress**: the laboratory core landed in cycle 1 (hashes on the backlog rows) |
+| Last unit completed | **S2-15** — the descriptive-statistics laboratory, all 12 criteria, in three cycles (hashes on the S2-15 backlog row) |
 | Head of `main` | read it live: `git rev-parse HEAD` vs `git ls-remote origin refs/heads/main` — these must match |
 | Milestone snapshot commit | `d4e250434c465f85e4307a226a9af2cbc9788c17` — the commit the exports were built from |
 | Stage tag | `stage-1-baseline` — **created locally, NOT on GitHub** (unit R-00d, blocked; see §2.1) |
 | Milestone exports | `../gsl-exports/` — source ZIP + git bundle + manifest + SHA-256 checksums |
 | Working tree | clean |
 | Node / npm used | v22.22.2 / 10.9.7 |
-| Test suite | **612 tests / 44 files**, all passing (Stage 1 baseline was 73 / 14) |
-| Build | passing (**867.65 kB, 222.74 kB gzip**; baseline was 285.73 kB / 83.82 kB) |
+| Test suite | **630 tests / 45 files**, all passing (Stage 1 baseline was 73 / 14) |
+| Build | passing (**871.98 kB, 223.98 kB gzip**; baseline was 285.73 kB / 83.82 kB) |
 | Source modified since baseline | S2-01 … S2-08 — achievements + region completion, three new interactions, the enforced interaction audit, the review queue, the Region 1 topic architecture, and all 17 Region 1 lessons |
 | Curriculum | 2 regions · **10 modules** · **40 lessons** · **42 skills** · **290 questions** (baseline 2/2/3/6/14) |
 | Lessons Complete to scope §5 | **40** — all 17 Region 1 topic lessons, all 20 Region 2 lessons, and the 3 Stage 1 lessons re-cut into Region 2. **No skeletons in either region** |
 | Misconceptions / remediations | **40 / 39** (baseline 8 / 7) |
 | Validated generated interactions | **6,607**, available to spaced review (baseline 0) |
 | Topics meeting scope §4 | **17 of 41** — every Region 1 topic, and no Region 2 topic. Region 2's lessons are written; its generators are S2-17 |
-| Save schema version | **2** (baseline was 1) — migration `1 -> 2` adds `reviewSession` |
+| Save schema version | **4** (baseline was 1) — `1->2` adds `reviewSession`, `2->3` adds `investigationProgress`, `3->4` adds `savedExperiments`. The chain is asserted against this number (D-055) |
 | Interaction types implemented | **14 of 17** (baseline 11); still stubbed: `formula-construction`, `simulation-prediction`, `confidence-rating` |
 | Stage 2 | **in progress** — see `STAGE2_RECONSTRUCTION_SCOPE.md`, `STAGE2_RECONSTRUCTION_BACKLOG.md`, `STAGE2_CURRENT_WORK.md` |
 
@@ -80,7 +80,7 @@ git status
 git rev-parse HEAD
 git ls-remote origin refs/heads/main | awk '{print $1}'   # must match
 npm ci
-npm test            # must stay green: 612/612
+npm test            # must stay green: 630/630
 npm run typecheck && npm run lint
 npm run dev         # renderer + electron dev
 ```
@@ -105,39 +105,42 @@ branch/tag deletion) are forbidden without explicit owner permission. See `REMOT
 
 ## 5. Next unit
 
-**S2-15 continued — saved experiments and exported summaries.** The last two of the unit's twelve criteria.
+**S2-16 — the Region 2 misconception library.** Its criteria: **≥12 named misconceptions reachable**, each remediation
+carrying all **9** required parts, plus reverse validation — no undeclared distractor misconceptions, no orphaned
+remediations, no count-inflating tags.
 
-**Cycles 1 and 2 met ten of them.** The bench holds editable readings and reports what each edit moved (D-050); it
-draws them as a histogram, dot plot or box plot with the bin width as a control; and a second set can be compared on
-centre, spread and shape separately (D-053). What is left needs the save file to change.
+**Start by measuring, not by writing.** The repository currently holds 40 misconceptions and 39 remediations across
+both regions; how many are *Region 2* and *reachable* is a number to compute, not to assume, and the unit may turn out
+to be mostly audit rather than authoring. `tests/audit/interaction-audit.test.ts` already enforces three of the reverse
+rules — every declared misconception exists and has a remediation, every distractor's misconception is declared by its
+question, no remediation is orphaned — so read that block before adding checks that duplicate it.
 
-**Cycle 3 needs a save-schema migration, and that is a contract (see §6).** `SAVE_SCHEMA_VERSION` goes 2 → 3 with a
-migration in `src/core/persistence/migrations.ts` plus round-trip tests — the same path S2-06 took for the review
-queue, which is the worked example to copy. A saved experiment is readings, title, chart kind and bin width; the log
-is a session's trail and does not have to survive a reload, but say which you chose and why.
+**"All 9 required parts" is a claim to verify against the schema.** Read `RemediationSchema` and count what it
+actually requires before asserting a lesson's worth of structure; if the schema requires fewer than nine, say so and
+name the nine from the scope rather than pretending the schema already encodes them.
 
-**Statistics live in one place, and the audit knows their names.** `tests/audit/core-purity.test.ts` bans `.reduce(`,
-`Math.sqrt`/`Math.pow`, and any *definition* named after a computation the core owns, anywhere under `src/renderer`.
-S2-15 cycle 2 found two that had been in views since S2-14 — `buildBins` and `stackDots` — because the audit's list was
-built from what the core already had (D-052). If you add a computation, add its name to that list in the same commit.
+**S2-15 is Complete and the laboratory is real.** The bench reports what each edit moves (D-050), draws through the
+lessons' own chart components with a live description (D-053), compares two sets on centre, spread and shape
+separately, and keeps experiments in the save file with an export in plain text (D-054). Stage 1 defect #3's
+placeholders are gone; the *simulation* instruments it advertised stay unbuilt by design, since scope §3 excludes
+sampling distributions from Stage 2.
 
-**A bench's description is a live claim (D-053).** It is regenerated from the current readings on every edit, so a box
-plot's words carry all five of its numbers (D-049) and a histogram states the bin width a finished histogram never
-shows (D-047). Anything new the bench draws needs the same treatment; a caption written once will be describing the
-chart it was written for.
+**Save-shape changes are checked, not merely contracted (D-055).** `SAVE_SCHEMA_VERSION` is **4**, and the persistence
+suite asserts the registered migrations are exactly steps 1 … version − 1. Bump one without the other and it fails,
+in either direction.
 
-**The bench refuses what it cannot draw honestly.** Bar charts and scatterplots are named as excluded, with reasons,
-because one column of numbers has neither names for bars nor pairs for points (D-046). Adding a kind means adding the
-data it needs, not relaxing the refusal.
+**Statistics live in one place, and the audit knows their names (D-051, D-052).**
+`tests/audit/core-purity.test.ts` bans `.reduce(`, `Math.sqrt`/`Math.pow` and any *definition* named after a
+computation the core owns, anywhere under `src/renderer`. If you add a computation to the core, add its name to that
+list in the same commit — the audit's blind spot last time was precisely the names that had never been centralised.
 
 **Region 2's teaching is finished, and what is *not* finished must not be implied.** All 20 seeded lessons and the 3
-re-cut Stage 1 lessons are Complete to the 18 structure checks. But Region 2 meets **none** of scope §4's per-topic
-interaction counts (S2-17), its misconception library has not been audited against S2-16's criteria, and its boss
-investigation is unwritten (S2-18).
+re-cut Stage 1 lessons are Complete to the 18 structure checks. Region 2 meets **none** of scope §4's per-topic
+interaction counts (S2-17), and its boss investigation is unwritten (S2-18).
 
-**Probe your own work, and report the probes that were wrong.** Cycle 2 ran seven; six bit, and one turned out to
-remove a label while leaving the number in the sentence beside it — no defect, no new guard, recorded as a bad probe.
-That row is worth as much as the others: it is how a guard avoids being widened for a case that never existed.
+**Probe your own tests, not only your code.** Cycle 3's two zero-fail probes were a missing invariant and a *weak test
+of mine* — one that named a property and checked something that held either way. A test that names a property without
+checking it is worse than no test: it occupies the space where the real check would have gone.
 
 ### Region 2's architecture, and two rules it added
 
@@ -241,8 +244,8 @@ Recorded in `docs/INTERACTION_AUDIT.md` §3; each is owned by a later unit and n
 |---|---|---|
 | 1 | Region-completed achievement trigger stubbed `false` | **Fixed in S2-01** |
 | 2 | Six interaction types unimplemented | **Partly fixed** — `step-by-step-calculation` (S2-02), `point-placement` (S2-03) and `drag-and-drop` (S2-04) live; 3 remain |
-| 3 | Laboratory simulations are placeholders | Open — S2-15 |
-| 4 | Only one world of content | Open — S2-07 … S2-14. Region 1 fully authored: **17 of 17** lessons finished. Region 2 remains |
+| 3 | Laboratory simulations are placeholders | **Placeholders removed in S2-15**, and the descriptive bench is a real learning environment. The *simulation* instruments the Stage 1 card advertised — sampling distributions, a CLT explorer — remain unbuilt **by design**: scope §3 excludes them from Stage 2 and assigns them to Stages 3–6. Nothing on screen now claims them |
+| 4 | Only one world of content | **Both regions authored** — 17 of 17 Region 1 topic lessons (S2-08) and all 20 Region 2 lessons (S2-12 … S2-14), each held to scope §5's 18 structure checks. Region 2's §4 interaction counts (S2-17) and its boss (S2-18) are still open |
 | 5 | Cosmetic `MODULE_TYPELESS_PACKAGE_JSON` lint warning | Open by choice (D-002) |
 
 ## 6. Contracts you must not break

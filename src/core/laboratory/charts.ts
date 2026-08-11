@@ -48,6 +48,11 @@ function say(value: number): string {
   return String(Math.round(value * 10000) / 10000);
 }
 
+/** "1 reading", "6 readings" — a bench of one is a real state, not an edge case. */
+function count(n: number, noun: string): string {
+  return `${n} ${noun}${n === 1 ? "" : "s"}`;
+}
+
 /**
  * What the chart on screen shows, in words.
  *
@@ -71,7 +76,7 @@ export function describeChart(
   if (kind === "box-plot") {
     const f = fiveNumberSummary(values);
     return (
-      `Box plot of ${values.length} reading${values.length === 1 ? "" : "s"}: smallest ${say(f.min)}, ` +
+      `Box plot of ${count(values.length, "reading")}: smallest ${say(f.min)}, ` +
       `first quartile ${say(f.q1)}, median ${say(f.median)}, third quartile ${say(f.q3)}, largest ${say(f.max)}. ` +
       `The box spans ${say(f.q1)} to ${say(f.q3)}.`
     );
@@ -83,9 +88,9 @@ export function describeChart(
     let tallest = bins[0]!;
     for (const bin of bins) if (bin.count > tallest.count) tallest = bin;
     return (
-      `Histogram of ${values.length} readings in ${bins.length} interval${bins.length === 1 ? "" : "s"} ` +
+      `Histogram of ${count(values.length, "reading")} in ${count(bins.length, "interval")} ` +
       `of width ${say(width)}. The fullest interval runs ${say(tallest.from)} to ${say(tallest.to)} and holds ` +
-      `${tallest.count} reading${tallest.count === 1 ? "" : "s"}.`
+      `${count(tallest.count, "reading")}.`
     );
   }
 
@@ -95,9 +100,9 @@ export function describeChart(
   const tallest = Math.max(...stacks.map((s) => s.height));
   const peaks = stacks.filter((s) => s.height === tallest).map((s) => s.value);
   return (
-    `Dot plot of ${values.length} readings over ${stacks.length} distinct value` +
-    `${stacks.length === 1 ? "" : "s"} from ${say(stacks[0]!.value)} to ${say(stacks[stacks.length - 1]!.value)}. ` +
+    `Dot plot of ${count(values.length, "reading")} over ${count(stacks.length, "distinct value")} ` +
+    `from ${say(stacks[0]!.value)} to ${say(stacks[stacks.length - 1]!.value)}. ` +
     `The tallest column${peaks.length === 1 ? " is" : "s are"} at ${peaks.map(say).join(" and ")}, ` +
-    `${tallest} dot${tallest === 1 ? "" : "s"} high.`
+    `${count(tallest, "dot")} high.`
   );
 }

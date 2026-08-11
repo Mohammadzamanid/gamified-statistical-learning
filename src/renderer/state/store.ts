@@ -11,7 +11,7 @@ import {
 import type { ContentBundle } from "../../core/curriculum/loader";
 import { registerBuiltInDetectors } from "../../core/misconceptions/detectors";
 import { registerDefaultInteractions } from "../../core/questions/registry";
-import { SettingsSchema, type SaveFile, type Settings, type UserProfile } from "../../shared/schemas";
+import { SettingsSchema, type SaveFile, type SavedExperiment, type Settings, type UserProfile } from "../../shared/schemas";
 import { applyToRoot } from "../../core/accessibility/apply";
 import { createPersistenceClient, type PersistenceClient } from "./persistence-client";
 import {
@@ -77,6 +77,13 @@ interface StoreState {
   submitReview(raw: RawResponse): void;
   nextReview(): void;
   exitReview(): void;
+  /**
+   * Laboratory shelf. Persisted immediately, like a review answer: a learner who
+   * keeps an experiment and closes the app has made a decision, and an autosave
+   * that waited for some later event would lose it.
+   */
+  shelveExperiment(entry: SavedExperiment): void;
+  unshelveExperiment(id: string): void;
   submit(raw: RawResponse): void;
   requestHint(): void;
   next(): void;
@@ -252,6 +259,22 @@ export const useStore = create<StoreState>((set, get) => ({
     const next = advanceReview(save);
     persistSave(client, next);
     set({ save: next, reviewFeedback: null, reviewShownAtMs: Date.now() });
+  },
+
+  shelveExperiment(entry) {
+    const { save, client } = get();
+    if (!save) return;
+    const next = { ...save, savedExperiments: [entry, ...save.savedExperiments] };
+    persistSave(client, next);
+    set({ save: next });
+  },
+
+  unshelveExperiment(id) {
+    const { save, client } = get();
+    if (!save) return;
+    const next = { ...save, savedExperiments: save.savedExperiments.filter((e) => e.id !== id) };
+    persistSave(client, next);
+    set({ save: next });
   },
 
   exitReview() {

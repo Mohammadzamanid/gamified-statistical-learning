@@ -506,3 +506,38 @@ Its comparison asks `l.r2-comparing-distributions`'s three questions separately 
 sets dragged to the same median are told they agree on centre and differ on spread, never that they are alike. Reading
 the shape uses the same rule as `l.r2-skew` — a mean above the median is a tail on the high side — so the bench cannot
 answer a question differently from the lesson that taught it. (S2-15)
+
+**D-054 — A saved experiment keeps the readings and the picture, and deliberately not the trail.**
+Scope §7's "save/reload experiments" makes the laboratory shelf part of the save file, so it is a schema change with a
+migration behind it — `SAVE_SCHEMA_VERSION` 3 → 4, the same path S2-06 took for the review queue. A shelf entry carries
+the readings, the title, the chart kind and the bin width, because an experiment that came back drawn as a different
+picture would have lost half of what was being explored.
+
+It does **not** carry the edit log. The log is the trail of one sitting at the bench (D-050); a reloaded experiment has
+not had those edits made to it, and presenting them as what just changed would be a lie about the readings in front of
+the learner. The bench says so when it loads one.
+
+The shelf is bounded at `LABORATORY_SHELF_LIMIT`, and a full shelf is **refused with the limit named** rather than
+silently rotated. The learner chose to keep every one of those; a save file that grows without limit is a persistence
+defect wearing a feature's clothes.
+
+The export is plain text — every measure, the readings in full, and the chart's description, because words are the only
+form of the picture that survives a paste. It names the quartile convention that produced its numbers: two conventions
+live here on purpose (D-045), and a summary that travels without saying which one is unreadable by anyone checking it
+against a spreadsheet. (S2-15)
+
+**D-055 — The migration chain is checked against the schema version, not trusted to accompany it.**
+Two probes in cycle 3 failed nothing, and both pointed at the same missing invariant. Setting `SAVE_SCHEMA_VERSION`
+back to 3 while `savedExperiments` remained in the schema broke no test, because Zod's `.default([])` filled the field
+in — the version bump and its migration were, for this field, not load-bearing at all. The pairing of "schema change"
+and "migration" was a contract in prose (§6) and a habit in practice, with nothing between it and a save-corrupting
+omission on the first field that has no sensible default.
+
+`tests/integration/persistence.test.ts` now asserts that the registered migrations are exactly the steps 1 …
+`SAVE_SCHEMA_VERSION - 1` — no gaps and nothing beyond. It fails in both directions: a version bumped without a
+migration, and a migration left behind after the version was rolled back.
+
+The other zero-fail probe was a weak test rather than a missing one. "Does not share arrays with the shelf entry"
+checked that adding a reading left the entry unchanged, which passes either way because every bench operation
+allocates. It now asserts identity. **A test that names a property without checking it is worse than no test**: it
+occupies the space where the real check would have gone. (S2-15)

@@ -109,6 +109,27 @@ export const SettingsSchema = z.object({
 });
 export type Settings = z.infer<typeof SettingsSchema>;
 
+/**
+ * One experiment kept on the laboratory shelf (S2-15 cycle 3).
+ *
+ * Readings, title, and how the learner had chosen to draw them — reloading an
+ * experiment that came back as a different picture would lose half of what was
+ * being explored. The edit log is deliberately **not** here: it is the trail of
+ * one sitting at the bench, and a reloaded experiment has not had those edits
+ * made to it. Saving it would let a learner reopen a set and be told what
+ * "just" changed about it hours ago.
+ */
+export const SavedExperimentSchema = z.object({
+  id: IdSchema,
+  title: NonEmptyString,
+  values: z.array(z.number().finite()),
+  chartKind: z.enum(["histogram", "dot-plot", "box-plot"]),
+  /** Absent means the histogram divides the range into five, as the chart does. */
+  binWidth: z.number().positive().optional(),
+  savedAt: IsoDateTime
+});
+export type SavedExperiment = z.infer<typeof SavedExperimentSchema>;
+
 export const SaveFileSchema = z.object({
   schemaVersion: z.number().int().min(1),
   profile: UserProfileSchema,
@@ -120,6 +141,8 @@ export const SaveFileSchema = z.object({
   achievements: z.array(IdSchema).default([]),
   /** Null when no review session is in flight. */
   reviewSession: ReviewSessionStateSchema.nullable().default(null),
+  /** The laboratory shelf. Bounded — see LABORATORY_SHELF_LIMIT. */
+  savedExperiments: z.array(SavedExperimentSchema).default([]),
   xp: z.number().int().min(0).default(0),
   updatedAt: IsoDateTime
 });
