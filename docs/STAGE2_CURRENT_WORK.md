@@ -115,7 +115,15 @@ Seven deliberate probes, all reverted. **Six bite, one was a bad probe and is re
 
 ## Local commit
 
-Recorded in `STAGE2_RECONSTRUCTION_BACKLOG.md` on the S2-15 row.
+`4566d93197cb7c51b61d186a26478984fda66b2d`
+
+## Remote verification
+
+```
+LOCAL_HEAD  = 4566d93197cb7c51b61d186a26478984fda66b2d
+REMOTE_HEAD = 4566d93197cb7c51b61d186a26478984fda66b2d
+VERIFIED: MATCH
+```
 
 ## Next unit
 
