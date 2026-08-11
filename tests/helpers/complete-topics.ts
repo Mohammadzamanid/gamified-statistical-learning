@@ -38,5 +38,12 @@ export const COMPLETE_TOPICS: readonly string[] = [
   "skill.r1-tables",
   "skill.r1-cases",
   "skill.r1-variables",
-  "skill.r1-variable-kinds"
+  "skill.r1-variable-kinds",
+  // Region 2's counts module — the first Region 2 topics to get generators
+  // (S2-17 cycle 1). One corpus of season logs feeds all three, because a
+  // frequency, a proportion and a percentage are three readings of the same
+  // tally.
+  "skill.r2-frequency",
+  "skill.r2-proportion",
+  "skill.r2-percentage"
 ];

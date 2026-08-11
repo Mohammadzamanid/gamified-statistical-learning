@@ -580,3 +580,33 @@ away from the question's own numbers failed nothing and should have: the trigger
 the detector reads, so the machinery stays self-consistent while the content stops making sense. No heuristic was
 added, because one guessing at plausibility would fire on legitimate content — the failure the truncated-axis pattern
 already demonstrated (D-047). (S2-16)
+
+**D-058 — One corpus, three topics: a frequency, a proportion and a percentage are three readings of the same tally.**
+Region 2's counts module is the first to get generators, and it comes first because its three topics share their
+material entirely. Twelve calm mornings out of twenty is a frequency of 12, a proportion of 0.6 and a percentage of
+60%; what separates the topics is what the question asks for, not what it is about. So `counts.ts` carries one corpus
+of season logs and each topic reads it its own way — which is also the misconception the module teaches against, so
+the traps are shared: a proportion reported as a percentage, and a percentage left as a decimal.
+
+This is deliberately *not* Region 1's `parts.ts`, which asks the same three conversions about a quantity stated in the
+prompt ("15 of 60 crates were damaged"). Here the count comes from tallying cases, which is the Region 2 framing and
+the reason these questions sit after data literacy rather than before it. Different topic ids, different skills,
+different corpus.
+
+Three defects surfaced in one run of the validator, and each was found by a check that exists because an earlier unit
+was wrong about something:
+
+ - **24 answer failures** in the chart family: it stated a numeric response for a question that publishes a choice.
+   `expectedResponse` is stated by the family and never read back out of the question (D-020), which is the only
+   reason a mismatch can be seen at all.
+ - **9 exact duplicates** in the application family: it computed the share from the log instead of stating it, so the
+   proportion and percentage versions built the identical question. A family that produces the same question for two
+   topics is not really about either.
+ - **A diagnosis firing on a correct answer**: the error-identification family tagged its *correct* option with the
+   misconception. The learner holding it agrees with the clerk, so the tag belongs on the option that says the clerk
+   was right. (S2-16's D-057 rule is the mirror of this one, and this is the case that rule cannot catch — the tag was
+   triggerable, it was just on the wrong side.)
+
+A fourth was a content ambiguity rather than a bug: where two categories share a column height, "which column is the
+frequency of X" offers two identical options. Those candidates are now invalid with that reason, which is what the
+raw-versus-valid distinction in scope §4 is for. (S2-17)

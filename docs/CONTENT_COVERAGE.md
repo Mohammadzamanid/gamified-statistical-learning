@@ -4,7 +4,7 @@
 
 Topics come from the **curriculum graph**, never from the set of generator modules (`STAGE2_RECONSTRUCTION_SCOPE.md` §4). A topic with no generators appears here as a failure rather than being omitted.
 
-**17 of 41 topics** meet §4: at least 100 validated available interactions spanning at least 4 reasoning families, with nothing unreachable.
+**20 of 41 topics** meet §4: at least 100 validated available interactions spanning at least 4 reasoning families, with nothing unreachable.
 
 ## The seven metrics, per topic
 
@@ -36,15 +36,15 @@ Topics come from the **curriculum graph**, never from the set of generator modul
 | Choosing a graph (`skill.r2-choosing-graphs`) | 6 | 0 | 0 | 0 | 0 | 0 | **6** | **No** |
 | Comparing distributions (`skill.r2-comparing-distributions`) | 6 | 0 | 0 | 0 | 0 | 0 | **6** | **No** |
 | Dot plots (`skill.r2-dot-plots`) | 9 | 0 | 0 | 0 | 0 | 0 | **9** | **No** |
-| Frequency (`skill.r2-frequency`) | 8 | 0 | 0 | 0 | 0 | 0 | **8** | **No** |
+| Frequency (`skill.r2-frequency`) | 8 | 5 | 5 | 120 | 116 | 116 | **124** | Yes |
 | Histograms (`skill.r2-histograms`) | 8 | 0 | 0 | 0 | 0 | 0 | **8** | **No** |
 | Interquartile range (`skill.r2-iqr`) | 8 | 0 | 0 | 0 | 0 | 0 | **8** | **No** |
 | Misleading graphs (`skill.r2-misleading-graphs`) | 7 | 0 | 0 | 0 | 0 | 0 | **7** | **No** |
 | Mode (`skill.r2-mode`) | 8 | 0 | 0 | 0 | 0 | 0 | **8** | **No** |
 | Outliers (`skill.r2-outliers`) | 6 | 0 | 0 | 0 | 0 | 0 | **6** | **No** |
-| Percentage of a dataset (`skill.r2-percentage`) | 8 | 0 | 0 | 0 | 0 | 0 | **8** | **No** |
+| Percentage of a dataset (`skill.r2-percentage`) | 8 | 5 | 5 | 165 | 135 | 135 | **143** | Yes |
 | Percentiles (`skill.r2-percentiles`) | 6 | 0 | 0 | 0 | 0 | 0 | **6** | **No** |
-| Proportion of a dataset (`skill.r2-proportion`) | 8 | 0 | 0 | 0 | 0 | 0 | **8** | **No** |
+| Proportion of a dataset (`skill.r2-proportion`) | 8 | 5 | 5 | 165 | 135 | 135 | **143** | Yes |
 | Quartiles (`skill.r2-quartiles`) | 10 | 0 | 0 | 0 | 0 | 0 | **10** | **No** |
 | Scatterplots (`skill.r2-scatterplots`) | 7 | 0 | 0 | 0 | 0 | 0 | **7** | **No** |
 | Skew (`skill.r2-skew`) | 7 | 0 | 0 | 0 | 0 | 0 | **7** | **No** |
@@ -82,15 +82,15 @@ Topics come from the **curriculum graph**, never from the set of generator modul
 | Choosing a graph | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 17% |
 | Comparing distributions | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 17% |
 | Dot plots | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 11% |
-| Frequency | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 13% |
+| Frequency | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1% |
 | Histograms | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 13% |
 | Interquartile range | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 13% |
 | Misleading graphs | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 14% |
 | Mode | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 13% |
 | Outliers | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 17% |
-| Percentage of a dataset | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 13% |
+| Percentage of a dataset | 30 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2% |
 | Percentiles | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 17% |
-| Proportion of a dataset | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 13% |
+| Proportion of a dataset | 30 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2% |
 | Quartiles | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 10% |
 | Scatterplots | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 14% |
 | Skew | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 14% |
@@ -176,6 +176,22 @@ Topics come from the **curriculum graph**, never from the set of generator modul
 - 32 x with one varying column there is no counting step before the multiplication
 - 8 x too few columns for a constant and more than one variable
 
+**Frequency**
+
+- 2 x another category has the same column height, so two options read identically
+- 1 x this category's frequency equals the number of categories, so the mistake is invisible
+- 1 x two categories tie for most frequent, so there is no single answer
+
+**Percentage of a dataset**
+
+- 19 x the expected number is not whole, and a fractional count of cases reads as an error rather than an estimate
+- 11 x equal totals let the counts be compared directly, so the share is not needed
+
+**Proportion of a dataset**
+
+- 19 x the expected number is not whole, and a fractional count of cases reads as an error rather than an estimate
+- 11 x equal totals let the counts be compared directly, so the share is not needed
+
 ## Reasoning families represented
 
 - **Choosing measures** — 0: _none_
@@ -204,15 +220,15 @@ Topics come from the **curriculum graph**, never from the set of generator modul
 - **Choosing a graph** — 0: _none_
 - **Comparing distributions** — 0: _none_
 - **Dot plots** — 0: _none_
-- **Frequency** — 0: _none_
+- **Frequency** — 5: Calculation · Comparison · Error identification · Multi-step reasoning · Visual interpretation
 - **Histograms** — 0: _none_
 - **Interquartile range** — 0: _none_
 - **Misleading graphs** — 0: _none_
 - **Mode** — 0: _none_
 - **Outliers** — 0: _none_
-- **Percentage of a dataset** — 0: _none_
+- **Percentage of a dataset** — 5: Calculation · Comparison · Multi-step reasoning · Real-world application · Representation conversion
 - **Percentiles** — 0: _none_
-- **Proportion of a dataset** — 0: _none_
+- **Proportion of a dataset** — 5: Calculation · Comparison · Multi-step reasoning · Real-world application · Representation conversion
 - **Quartiles** — 0: _none_
 - **Scatterplots** — 0: _none_
 - **Skew** — 0: _none_
@@ -258,10 +274,6 @@ Topics come from the **curriculum graph**, never from the set of generator modul
   - no generator families produce for this topic
   - 9 available interactions, below the required 100
   - 0 reasoning families represented, below the required 4
-- **Frequency** (`skill.r2-frequency`)
-  - no generator families produce for this topic
-  - 8 available interactions, below the required 100
-  - 0 reasoning families represented, below the required 4
 - **Histograms** (`skill.r2-histograms`)
   - no generator families produce for this topic
   - 8 available interactions, below the required 100
@@ -282,17 +294,9 @@ Topics come from the **curriculum graph**, never from the set of generator modul
   - no generator families produce for this topic
   - 6 available interactions, below the required 100
   - 0 reasoning families represented, below the required 4
-- **Percentage of a dataset** (`skill.r2-percentage`)
-  - no generator families produce for this topic
-  - 8 available interactions, below the required 100
-  - 0 reasoning families represented, below the required 4
 - **Percentiles** (`skill.r2-percentiles`)
   - no generator families produce for this topic
   - 6 available interactions, below the required 100
-  - 0 reasoning families represented, below the required 4
-- **Proportion of a dataset** (`skill.r2-proportion`)
-  - no generator families produce for this topic
-  - 8 available interactions, below the required 100
   - 0 reasoning families represented, below the required 4
 - **Quartiles** (`skill.r2-quartiles`)
   - no generator families produce for this topic

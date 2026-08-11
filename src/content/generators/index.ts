@@ -8,6 +8,7 @@
  */
 import { arithmeticFamilies, type OperationSpec } from "./arithmetic";
 import { fractionText, partsFamilies, type Form, type Part, type PartsTopic } from "./parts";
+import { countsFamilies } from "./counts";
 import { dataFamilies } from "./data";
 import { positionFamilies } from "./position";
 import { ratioFamilies } from "./ratios";
@@ -285,6 +286,7 @@ export function allGeneratorFamilies(): GeneratorFamily[] {
     ...PARTS_TOPICS.flatMap(([topic, form]) => partsFamilies(topic, form)),
     ...ratioFamilies(),
     ...positionFamilies(),
-    ...dataFamilies()
+    ...dataFamilies(),
+    ...countsFamilies()
   ];
 }

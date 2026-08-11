@@ -30,7 +30,7 @@ after Stage 1 was lost because commits were never pushed to a durable remote. Re
 | Default branch | `main` |
 | Pristine Stage 1 import | `7add4bc` — pushed and remote-verified |
 | Baseline docs + CI | `1b0a5dd` — pushed and remote-verified |
-| Last unit completed | **S2-16** — the Region 2 misconception library: mostly audit, two repairs, and one count-inflating tag found and fixed |
+| Last unit completed | **S2-16** — the Region 2 misconception library. **S2-17 is in progress**: 3 of Region 2's 24 topics now meet §4 (hashes on the S2-17 backlog row) |
 | Head of `main` | read it live: `git rev-parse HEAD` vs `git ls-remote origin refs/heads/main` — these must match |
 | Milestone snapshot commit | `d4e250434c465f85e4307a226a9af2cbc9788c17` — the commit the exports were built from |
 | Stage tag | `stage-1-baseline` — **created locally, NOT on GitHub** (unit R-00d, blocked; see §2.1) |
@@ -43,8 +43,8 @@ after Stage 1 was lost because commits were never pushed to a durable remote. Re
 | Curriculum | 2 regions · **10 modules** · **40 lessons** · **42 skills** · **290 questions** (baseline 2/2/3/6/14) |
 | Lessons Complete to scope §5 | **40** — all 17 Region 1 topic lessons, all 20 Region 2 lessons, and the 3 Stage 1 lessons re-cut into Region 2. **No skeletons in either region** |
 | Misconceptions / remediations | **40 / 39** (baseline 8 / 7) — every one reachable, and each held to the nine declared parts (D-056) |
-| Validated generated interactions | **6,607**, available to spaced review (baseline 0) |
-| Topics meeting scope §4 | **17 of 41** — every Region 1 topic, and no Region 2 topic. Region 2's lessons are written; its generators are S2-17 |
+| Validated generated interactions | **6,993**, available to spaced review (baseline 0) |
+| Topics meeting scope §4 | **20 of 41** — every Region 1 topic, plus Region 2's frequency, proportion and percentage (S2-17 cycle 1). The other 21 Region 2 topics still have no generators |
 | Save schema version | **4** (baseline was 1) — `1->2` adds `reviewSession`, `2->3` adds `investigationProgress`, `3->4` adds `savedExperiments`. The chain is asserted against this number (D-055) |
 | Interaction types implemented | **14 of 17** (baseline 11); still stubbed: `formula-construction`, `simulation-prediction`, `confidence-rating` |
 | Stage 2 | **in progress** — see `STAGE2_RECONSTRUCTION_SCOPE.md`, `STAGE2_RECONSTRUCTION_BACKLOG.md`, `STAGE2_CURRENT_WORK.md` |
@@ -105,41 +105,39 @@ branch/tag deletion) are forbidden without explicit owner permission. See `REMOT
 
 ## 5. Next unit
 
-**S2-17 — Region 2 validated content expansion.** Its criterion: **≥100 validated interactions per completed Region 2
-major topic**, with diverse reasoning families.
+**S2-17 continued — the centre module.** Mean, median, mode and choosing measures, to scope §4.
 
-**This is the largest remaining unit, and the only one whose number is currently zero.**
-`npm run report:coverage` says 17 of 41 topics meet scope §4 — every Region 1 topic, and **no** Region 2 topic. Each
-Region 2 topic today has between 6 and 15 authored interactions against a floor of 100, and `0 reasoning families
-represented` against a floor of 4. The gap is not authoring; it is generators.
+**Cycle 1 did the counts module and it is the pattern to copy.** `src/content/generators/counts.ts` carries one corpus
+of ten season logs and ten families, and brings frequency, proportion and percentage to 124, 143 and 143 available
+interactions with five reasoning families each. The measured figure moved 17 → **20 of 41**. Three topics down,
+**21 to go**.
 
-**Read how Region 1 got there before writing anything.** `src/content/generators` and `src/content/generated.ts`
-produce the 6,607 validated interactions the report counts, and the report itself
-(`npm run report:coverage`, output in `docs/CONTENT_COVERAGE.md` and `docs/content-coverage.json`) already reports per
-topic: generator families, reasoning families, raw and valid combinations, rejections with reasons, unreachable
-questions, and largest shape share. That last one matters — a generator emitting a thousand variants of one shape
-should not count as coverage, and the report already measures it.
+**One corpus can serve several topics when they read the same material** (D-058) — a frequency, a proportion and a
+percentage are three readings of one tally. Centre is the same kind of opportunity: mean, median and mode are three
+summaries of one list, and `l.r2-choosing-measures` is about picking between them. Expect one corpus of catch lists to
+feed all four, with the shared traps being the ones the lessons already teach.
 
-**Every generated interaction is validated content and must satisfy the same schema and audits as an authored one.**
-`tests/audit/content-coverage.test.ts` already puts generated questions into the playable bundle and through the
-spaced-review queue, and asserts generation is deterministic — 29 checks, and the slowest file in the suite.
+**Four things went wrong in cycle 1 and every one was caught by a check an earlier unit added.** Read them before
+writing a family:
 
-**Misconceptions are done and enforced (D-056, D-057).** All 40 are reachable and hold the nine declared parts; a
-declaration that no answer can express now fails. If a generator emits questions carrying misconception tags, those
-tags go through the same rule — build the answer the declaration implies, or do not declare it.
+- `expectedResponse` is **stated** by the family and never read back out of the question (D-020). State the wrong
+  *kind* and every candidate becomes an answer failure — which is how a numeric response on a choice question was
+  found.
+- A family that computes what it should state can build the identical question for two topics. Nine exact duplicates
+  came from an application family computing a share instead of giving it in each form's own words.
+- **A misconception tag belongs on an option that is wrong.** The error-identification family tagged its correct
+  option, so the diagnosis fired on a right answer. S2-16's rule (D-057) cannot catch this: the tag was triggerable,
+  it was simply on the wrong side.
+- Ambiguity is an *invalid combination*, not a bug to hide: two categories of equal height give two identical options,
+  and those candidates are rejected with that reason. Scope §4 wants raw and valid reported separately for exactly
+  this.
 
-**Measure before you write.** S2-16 turned out to be audit plus two repairs, and the measurement said so before any
-content was authored. S2-17's measurement is already published in `docs/content-coverage.json`; start there rather
-than from an assumption about what is missing.
+**A topic that passes §4 must be declared in `tests/helpers/complete-topics.ts`, and one that is declared must pass.**
+Both directions are checked, so the list cannot drift from the report.
 
-**A generated question is content, so content rules apply.** Notation the curriculum explains (D-039), a numeric
-answer stated in its own explanation (D-049), a box plot's words carrying its five numbers (D-049), and no arithmetic
-in a view (D-051, D-052).
-
-**Probe your own measurements, not only your code.** S2-16's first measurement read `step.questionId` on investigation
-steps — a field that does not exist, the real one being `questionIds` — and reported zero problems while silently
-skipping every boss question. The typechecker caught it when the same expression reached a checked file. A measurement
-script is not a test and nothing checks it; re-run it inside a typechecked file before believing a zero.
+**Measure before you write, and measure again after.** `npm run report:coverage` writes `docs/CONTENT_COVERAGE.md` and
+`docs/content-coverage.json` with per-topic families, reasoning families, raw and valid combinations, rejections with
+reasons, and the largest-shape share. The ceiling on one shape is 50%; cycle 1's topics came in at 1–2%.
 
 ### Region 2's architecture, and two rules it added
 

@@ -958,15 +958,25 @@
       ],
       "regionId": "r.averages-atoll",
       "authoredRecords": 8,
-      "generatorFamilies": 0,
-      "reasoningFamilies": [],
-      "rawCombinations": 0,
-      "validCombinations": 0,
-      "validatedGenerated": 0,
-      "totalAvailable": 8,
+      "generatorFamilies": 5,
+      "reasoningFamilies": [
+        "calculation",
+        "comparison",
+        "error-identification",
+        "multi-step-reasoning",
+        "visual-interpretation"
+      ],
+      "rawCombinations": 120,
+      "validCombinations": 116,
+      "validatedGenerated": 116,
+      "totalAvailable": 124,
       "rejections": {
-        "invalidCombinations": 0,
-        "invalidReasons": {},
+        "invalidCombinations": 4,
+        "invalidReasons": {
+          "this category's frequency equals the number of categories, so the mistake is invisible": 1,
+          "two categories tie for most frequent, so there is no single answer": 1,
+          "another category has the same column height, so two options read identically": 2
+        },
         "schemaFailures": 0,
         "answerFailures": 0,
         "missingAccessibility": 0,
@@ -975,12 +985,8 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.125,
-      "failures": [
-        "no generator families produce for this topic",
-        "8 available interactions, below the required 100",
-        "0 reasoning families represented, below the required 4"
-      ]
+      "largestShapeShare": 0.008064516129032258,
+      "failures": []
     },
     {
       "skillId": "skill.r2-histograms",
@@ -1156,15 +1162,24 @@
       ],
       "regionId": "r.averages-atoll",
       "authoredRecords": 8,
-      "generatorFamilies": 0,
-      "reasoningFamilies": [],
-      "rawCombinations": 0,
-      "validCombinations": 0,
-      "validatedGenerated": 0,
-      "totalAvailable": 8,
+      "generatorFamilies": 5,
+      "reasoningFamilies": [
+        "calculation",
+        "comparison",
+        "multi-step-reasoning",
+        "real-world-application",
+        "representation-conversion"
+      ],
+      "rawCombinations": 165,
+      "validCombinations": 135,
+      "validatedGenerated": 135,
+      "totalAvailable": 143,
       "rejections": {
-        "invalidCombinations": 0,
-        "invalidReasons": {},
+        "invalidCombinations": 30,
+        "invalidReasons": {
+          "equal totals let the counts be compared directly, so the share is not needed": 11,
+          "the expected number is not whole, and a fractional count of cases reads as an error rather than an estimate": 19
+        },
         "schemaFailures": 0,
         "answerFailures": 0,
         "missingAccessibility": 0,
@@ -1173,12 +1188,8 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.125,
-      "failures": [
-        "no generator families produce for this topic",
-        "8 available interactions, below the required 100",
-        "0 reasoning families represented, below the required 4"
-      ]
+      "largestShapeShare": 0.02097902097902098,
+      "failures": []
     },
     {
       "skillId": "skill.r2-percentiles",
@@ -1220,15 +1231,24 @@
       ],
       "regionId": "r.averages-atoll",
       "authoredRecords": 8,
-      "generatorFamilies": 0,
-      "reasoningFamilies": [],
-      "rawCombinations": 0,
-      "validCombinations": 0,
-      "validatedGenerated": 0,
-      "totalAvailable": 8,
+      "generatorFamilies": 5,
+      "reasoningFamilies": [
+        "calculation",
+        "comparison",
+        "multi-step-reasoning",
+        "real-world-application",
+        "representation-conversion"
+      ],
+      "rawCombinations": 165,
+      "validCombinations": 135,
+      "validatedGenerated": 135,
+      "totalAvailable": 143,
       "rejections": {
-        "invalidCombinations": 0,
-        "invalidReasons": {},
+        "invalidCombinations": 30,
+        "invalidReasons": {
+          "equal totals let the counts be compared directly, so the share is not needed": 11,
+          "the expected number is not whole, and a fractional count of cases reads as an error rather than an estimate": 19
+        },
         "schemaFailures": 0,
         "answerFailures": 0,
         "missingAccessibility": 0,
@@ -1237,12 +1257,8 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.125,
-      "failures": [
-        "no generator families produce for this topic",
-        "8 available interactions, below the required 100",
-        "0 reasoning families represented, below the required 4"
-      ]
+      "largestShapeShare": 0.02097902097902098,
+      "failures": []
     },
     {
       "skillId": "skill.r2-quartiles",
