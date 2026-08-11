@@ -109,7 +109,15 @@ None. S2-14 is Complete.
 
 ## Local commit
 
-Recorded in `STAGE2_RECONSTRUCTION_BACKLOG.md` on the S2-14 row.
+`bc1525de5ba188baa1e130c762b93744d06c50aa`
+
+## Remote verification
+
+```
+LOCAL_HEAD  = bc1525de5ba188baa1e130c762b93744d06c50aa
+REMOTE_HEAD = bc1525de5ba188baa1e130c762b93744d06c50aa
+VERIFIED: MATCH
+```
 
 ## Next unit
 
