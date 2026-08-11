@@ -431,5 +431,17 @@
   "skillIds": [
    "skill.r2-dot-plots"
   ]
+ },
+ {
+  "id": "rem.a-point-carries-two",
+  "title": "Each point is a pair of readings",
+  "explanation": "On every earlier chart a mark stood for one number: a count, a value, a case. On a scatterplot a point stands for one case measured twice, so it needs both of its coordinates read before it says anything. Reading only the horizontal position tells you how long a boat stayed out and nothing about what it caught, which is half a fact - and half a fact here is usually the wrong one.",
+  "microLesson": "Take the dot at 9 hours. Read across only and it is the longest trip of the fleet, which sounds like the best boat. Read up as well and it landed 6 crates, the second-worst catch on the plot. The point was carrying both numbers the whole time; only one of them had been looked at.",
+  "followUpQuestionIds": [
+   "q.point-thursday-catch"
+  ],
+  "skillIds": [
+   "skill.r2-scatterplots"
+  ]
  }
 ]

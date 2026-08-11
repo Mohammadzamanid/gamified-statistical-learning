@@ -387,3 +387,18 @@ on the lessons' own data — so neither can be quietly "fixed" into the other, w
 drift back into contradicting another. The box plot then takes all five of its numbers from one call rather than
 computing the pieces separately, because a chart drawing its median from one rule and its hinges from another is the
 same defect one component further down. (S2-14)
+
+**D-046 — A component that needs two columns must be given them, not left to guess.**
+Every chart built before the scatterplot reads *the first* numeric column of its dataset and ignores the rest, which
+is correct when a picture summarises one variable. The scatterplot is the first that needs two, and the tempting
+implementation — take the first numeric column, then the next, falling back to the first again — fails silently and
+spectacularly: a one-variable dataset plots against itself and draws a flawless diagonal that no reader could tell from
+a real finding. In a lesson whose whole subject is reading a relationship out of a cloud of points, that is the worst
+available failure. `numericPair` therefore returns null rather than a fallback, the component renders its accessible
+description in words instead of a misleading picture, and a unit test pins the refusal so it cannot be "simplified"
+into a fallback later.
+
+The audit gained the matching content-side rule in the same cycle, after a probe pointing a scatter question at a
+one-variable dataset failed **nothing**: a visual's dataset must be able to feed its chart kind, not merely exist.
+That is D-043 one level further in — the schema promised kinds the renderer could not draw, and content could still
+promise a chart the renderer could not draw *from that data*. (S2-14)

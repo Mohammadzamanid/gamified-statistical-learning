@@ -380,6 +380,6 @@ describe("staged inheritance is declared, bounded and temporary", () => {
     // done its job and this whole block should be deleted rather than kept as
     // scaffolding nothing uses.
     expect(STAGED_QUESTION_IDS.length, "STAGED_INHERITED is empty — delete the staging mechanism").toBeGreaterThan(0);
-    expect(STAGED_QUESTION_IDS.length, "staging is growing rather than shrinking").toBeLessThanOrEqual(2);
+    expect(STAGED_QUESTION_IDS.length, "staging is growing rather than shrinking").toBeLessThanOrEqual(1);
   });
 });

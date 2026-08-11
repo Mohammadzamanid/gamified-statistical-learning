@@ -6,6 +6,7 @@ import { BarChart } from "../components/BarChart";
 import { Histogram } from "../components/Histogram";
 import { DotPlot } from "../components/DotPlot";
 import { BoxPlot } from "../components/BoxPlot";
+import { ScatterPlot } from "../components/ScatterPlot";
 import { DifficultyPips } from "../components/MasteryBadge";
 
 export function QuestionScreen(): JSX.Element {
@@ -60,6 +61,10 @@ export function QuestionScreen(): JSX.Element {
 
         {dataset && question.visual.kind === "box-plot" && (
           <BoxPlot dataset={dataset} caption={question.visual.caption} accessibleDescription={question.visual.accessibleDescription} />
+        )}
+
+        {dataset && question.visual.kind === "scatter" && (
+          <ScatterPlot dataset={dataset} caption={question.visual.caption} accessibleDescription={question.visual.accessibleDescription} />
         )}
 
         {/*

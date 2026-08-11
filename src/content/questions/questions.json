@@ -999,7 +999,8 @@
   "topicId": "t.read-data",
   "objectiveId": "obj.read-data",
   "skillIds": [
-   "skill.data-literacy"
+   "skill.data-literacy",
+   "skill.r2-scatterplots"
   ],
   "difficulty": 2,
   "interaction": "point-placement",
@@ -1054,7 +1055,12 @@
    "mc.axes-swapped"
   ],
   "accessibilityDescription": "Plot a point on a grid of day number against fish landed.",
-  "estimatedSeconds": 75
+  "estimatedSeconds": 75,
+  "solutionSteps": [
+   "Read the first number, the day: Thursday is day 4, so go across the bottom axis to 4.",
+   "Read the second number, the catch: 6 fish, so go up from there to 6 on the side axis.",
+   "The point sits where those two meet, at day 4 and 6 fish. Going up first and then across would put it at day 6 and 4 fish, which is a different boat's day entirely."
+  ]
  },
  {
   "id": "q.point-approx-mean",
@@ -6902,27 +6908,6 @@
   "estimatedSeconds": 120
  },
  {
-  "id": "q.seed.r2-scatterplots",
-  "topicId": "t.r2-scatterplots",
-  "objectiveId": "obj.r2-scatterplots",
-  "skillIds": [
-   "skill.r2-scatterplots"
-  ],
-  "difficulty": 2,
-  "interaction": "numeric-input",
-  "prompt": "On a scatterplot of boats out against crates landed, one point sits at (5, 20). How many CRATES does that case record?",
-  "answer": {
-   "kind": "numeric",
-   "value": 20,
-   "tolerance": 0,
-   "unit": "crates"
-  },
-  "explanation": "The answer is 20 crates. This lesson is a seed: its full teaching arrives with the Region 2 lesson units.",
-  "accessibilityDescription": "A numeric seed question for a Region 2 lesson that has not been written yet. Enter the answer as a number.",
-  "misconceptionIds": [],
-  "estimatedSeconds": 45
- },
- {
   "id": "q.seed.r2-choosing-graphs",
   "topicId": "t.r2-choosing-graphs",
   "objectiveId": "obj.r2-choosing-graphs",
@@ -10385,5 +10370,190 @@
   "misconceptionIds": [],
   "accessibilityDescription": "A box plot of twenty channel soundings; enter how many lie between the box's left edge and its median line.",
   "estimatedSeconds": 110
+ },
+ {
+  "id": "q.r2-scatterplots-independent",
+  "topicId": "t.r2-scatterplots",
+  "objectiveId": "obj.r2-scatterplots",
+  "skillIds": [
+   "skill.r2-scatterplots"
+  ],
+  "difficulty": 2,
+  "interaction": "numeric-input",
+  "prompt": "Using the scatterplot of ten trips, how many boats landed more than 15 crates?",
+  "visual": {
+   "kind": "scatter",
+   "datasetId": "ds.trip-length-catch",
+   "caption": "Ten trips: hours at sea against crates landed",
+   "accessibleDescription": "Scatterplot of ten fishing trips, hours at sea across and crates landed up. Nine of the points drift upwards together, from 2 hours and 5 crates to 8 hours and 21 crates. One point sits low and to the right, at 9 hours and 6 crates."
+  },
+  "answer": {
+   "kind": "numeric",
+   "value": 3,
+   "tolerance": 0,
+   "unit": "boats"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Look at the vertical axis and count every point sitting above the 15 mark."
+   }
+  ],
+  "explanation": "Three points sit above 15 crates: the boats landing 16, 20 and 21. Counting on a scatterplot means counting points, because each one is a single boat — the picture never pools cases the way a histogram or a bar chart does.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "A scatterplot of ten trips; enter how many boats landed more than fifteen crates, as a number.",
+  "estimatedSeconds": 80
+ },
+ {
+  "id": "q.r2-scatterplots-misconception",
+  "topicId": "t.r2-scatterplots",
+  "objectiveId": "obj.r2-scatterplots",
+  "skillIds": [
+   "skill.r2-scatterplots"
+  ],
+  "difficulty": 3,
+  "interaction": "multiple-choice",
+  "prompt": "One point on the scatterplot sits furthest to the right, at 9 hours at sea. What does that point tell you about the boat?",
+  "visual": {
+   "kind": "scatter",
+   "datasetId": "ds.trip-length-catch",
+   "caption": "Ten trips: hours at sea against crates landed",
+   "accessibleDescription": "Scatterplot of ten fishing trips, hours at sea across and crates landed up. Nine of the points drift upwards together, from 2 hours and 5 crates to 8 hours and 21 crates. One point sits low and to the right, at 9 hours and 6 crates."
+  },
+  "choices": [
+   {
+    "id": "ch.both",
+    "text": "It stayed out longest and landed only 6 crates, so it did poorly for the time it spent"
+   },
+   {
+    "id": "ch.longest",
+    "text": "It stayed out longest, so it is the most successful boat on the plot",
+    "misconceptionId": "mc.scatter-point-is-one-variable"
+   },
+   {
+    "id": "ch.ninth",
+    "text": "It was the ninth boat to return that day"
+   }
+  ],
+  "answer": {
+   "kind": "choice",
+   "correctChoiceIds": [
+    "ch.both"
+   ]
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "A point carries two readings. You have read one of them."
+   }
+  ],
+  "explanation": "Reading across gives 9 hours, the longest trip on the plot. Reading up gives 6 crates, the second smallest catch. Both readings belong to that one boat, and taking only the horizontal one turns the worst-value trip of the day into the best. A point on a scatterplot is a case measured twice, so it has to be read twice.",
+  "misconceptionIds": [
+   "mc.scatter-point-is-one-variable"
+  ],
+  "accessibilityDescription": "A scatterplot of ten trips; three readings of what the rightmost point says about that boat.",
+  "estimatedSeconds": 100
+ },
+ {
+  "id": "q.r2-scatterplots-application",
+  "topicId": "t.r2-scatterplots",
+  "objectiveId": "obj.r2-scatterplots",
+  "skillIds": [
+   "skill.r2-scatterplots"
+  ],
+  "difficulty": 3,
+  "interaction": "multiple-choice",
+  "prompt": "The cloud on this plot drifts upwards. The harbourmaster concludes that ordering boats to stay out longer will raise the catch. Is that conclusion safe?",
+  "visual": {
+   "kind": "scatter",
+   "datasetId": "ds.trip-length-catch",
+   "caption": "Ten trips: hours at sea against crates landed",
+   "accessibleDescription": "Scatterplot of ten fishing trips, hours at sea across and crates landed up. Nine of the points drift upwards together, from 2 hours and 5 crates to 8 hours and 21 crates. One point sits low and to the right, at 9 hours and 6 crates."
+  },
+  "choices": [
+   {
+    "id": "ch.no",
+    "text": "No - the plot shows the two travel together here, which does not establish that hours cause catch"
+   },
+   {
+    "id": "ch.yes",
+    "text": "Yes - an upward drift is what proves one variable raises the other"
+   },
+   {
+    "id": "ch.no-pattern",
+    "text": "No - there is no pattern on this plot at all, so nothing can be concluded"
+   }
+  ],
+  "answer": {
+   "kind": "choice",
+   "correctChoiceIds": [
+    "ch.no"
+   ]
+  },
+  "explanation": "The drift is real and worth noticing: in this fleet, longer trips did tend to land more. What the picture cannot say is why. Bigger boats may carry more crew and stay out longer, so crew size would explain the pattern with the hours doing nothing. A scatterplot is evidence of association, and turning association into a cause needs an argument the chart cannot supply.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "A scatterplot of ten trips; three judgements of whether an upward drift justifies a claim about cause.",
+  "estimatedSeconds": 110
+ },
+ {
+  "id": "q.r2-scatterplots-teachback",
+  "topicId": "t.r2-scatterplots",
+  "objectiveId": "obj.r2-scatterplots",
+  "skillIds": [
+   "skill.r2-scatterplots",
+   "skill.r2-dot-plots"
+  ],
+  "difficulty": 3,
+  "interaction": "short-explanation",
+  "prompt": "Explain in your own words how a point on a scatterplot differs from a dot on a dot plot. Use the words 'point' and 'axis'.",
+  "answer": {
+   "kind": "text",
+   "requiredKeywords": [
+    "point",
+    "axis"
+   ],
+   "forbiddenKeywords": []
+  },
+  "explanation": "A dot on a dot plot carries one reading: its place along the single axis is the value, and its height in the stack is only how many others share it. A point on a scatterplot carries two, one from each axis, so it is a case measured twice and neither coordinate means anything without the other. That is why one picture answers 'how are these readings spread' and the other 'do these two things travel together'.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "An open-response question contrasting what a scatterplot point carries with what a dot-plot dot carries.",
+  "estimatedSeconds": 130
+ },
+ {
+  "id": "q.r2-scatterplots-mastery",
+  "topicId": "t.r2-scatterplots",
+  "objectiveId": "obj.r2-scatterplots",
+  "skillIds": [
+   "skill.r2-scatterplots"
+  ],
+  "difficulty": 3,
+  "interaction": "numeric-input",
+  "prompt": "Using the scatterplot, how many crates per hour did the boat that stayed out 9 hours land? Give your answer to two decimal places.",
+  "visual": {
+   "kind": "scatter",
+   "datasetId": "ds.trip-length-catch",
+   "caption": "Ten trips: hours at sea against crates landed",
+   "accessibleDescription": "Scatterplot of ten fishing trips, hours at sea across and crates landed up. Nine of the points drift upwards together, from 2 hours and 5 crates to 8 hours and 21 crates. One point sits low and to the right, at 9 hours and 6 crates."
+  },
+  "answer": {
+   "kind": "numeric",
+   "value": 0.67,
+   "tolerance": 0.01,
+   "unit": "crates per hour"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Read both of that point's coordinates before dividing."
+   },
+   {
+    "level": 2,
+    "text": "It landed 6 crates. Divide by the hours it was out."
+   }
+  ],
+  "explanation": "That boat is at 9 hours and 6 crates, so it landed 6 / 9 = 0.67 crates an hour to two decimal places — well under the two or three the rest of the fleet managed. The answer needs both coordinates, which is the discipline this chart asks for: a rate is a relationship between two readings, and one of them alone cannot produce it.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "A scatterplot of ten trips; enter the crates landed per hour for the boat that stayed out nine hours.",
+  "estimatedSeconds": 120
  }
 ]

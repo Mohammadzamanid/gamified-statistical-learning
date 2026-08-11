@@ -71,5 +71,8 @@ export const COMPLETE_LESSONS: readonly string[] = [
   "l.r2-bar-charts",
   "l.r2-histograms",
   "l.r2-dot-plots",
-  "l.r2-box-plots"
+  "l.r2-box-plots",
+  // With this, m.r2-pictures is Complete entire (S2-14 cycle 3), and the only
+  // staged question left is q.error-id-causation in l.r2-misleading-graphs.
+  "l.r2-scatterplots"
 ];

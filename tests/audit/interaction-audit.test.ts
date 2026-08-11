@@ -274,6 +274,26 @@ describe("every visual a question declares can actually be drawn", () => {
     }
   });
 
+  it("gives every shown visual a dataset its chart kind can actually draw", () => {
+    // Existence is not enough. A scatterplot needs two numeric columns; point it
+    // at a one-variable dataset and `numericPair` correctly refuses, so the
+    // learner meets a prompt about a chart and a line of apology instead. The
+    // dataset has to be able to feed the kind, which is the same promise D-043
+    // is about one level further in.
+    const NUMERIC_COLUMNS_NEEDED: Partial<Record<string, number>> = { scatter: 2 };
+    for (const q of reachableQuestions) {
+      if (q.visual.kind === "none") continue;
+      const dataset = content.datasets.get(q.visual.datasetId ?? "");
+      if (!dataset) continue; // the check below reports a missing dataset
+      const numeric = dataset.columns.filter((c) => c.kind === "numeric").length;
+      const needed = NUMERIC_COLUMNS_NEEDED[q.visual.kind] ?? 1;
+      expect(
+        numeric,
+        `${q.id} draws a ${q.visual.kind} from ${dataset.id}, which has ${numeric} numeric column(s) and needs ${needed}`
+      ).toBeGreaterThanOrEqual(needed);
+    }
+  });
+
   it("gives every shown visual a dataset to draw and words to read", () => {
     for (const q of reachableQuestions) {
       if (q.visual.kind === "none") continue;

@@ -4388,24 +4388,113 @@
    "moduleId": "m.r2-pictures",
    "title": "Two Variables at Once",
    "objectiveIds": [
-    "obj.r2-scatterplots"
+    "obj.r2-scatterplots",
+    "obj.read-data",
+    "obj.r2-dot-plots"
    ],
    "concepts": [
     {
      "id": "c.r2-scatterplots",
-     "title": "Two Variables at Once",
-     "summary": "A scatterplot puts one point per case using two variables, and shows how they move together.",
-     "body": "It is the coordinate grid from Region 1 with data on it, and the association it shows is never by itself a cause."
+     "title": "One point, two measurements",
+     "summary": "Each point carries a reading on both axes, so it stands for one case measured twice.",
+     "body": "A scatterplot gives each case a single point, placed by its value on the horizontal axis and its value on the vertical one. A boat that stayed out 5 hours and landed 13 crates is one dot at 5 across and 13 up. That is the whole construction, and it is what lets the picture answer a question about two variables at once: neither axis is a category or a count of cases, so both carry a measurement and the position of a dot is a pair of readings rather than a total."
+    },
+    {
+     "id": "c.r2-scatterplots-pattern",
+     "title": "The pattern lives in the cloud, not the points",
+     "summary": "Whether the dots drift up, down or nowhere is the answer; individual dots are not.",
+     "body": "Read a scatterplot by stepping back from it. If the cloud drifts upwards from left to right, larger values of one variable tend to come with larger values of the other; downwards means the opposite; a shapeless cloud means neither tells you much about the other. 'Tend to' is doing real work in that sentence — a drifting cloud is a statement about the group, and any single boat may sit far off the trend without contradicting it."
+    },
+    {
+     "id": "c.r2-scatterplots-not-cause",
+     "title": "A pattern is not a reason",
+     "summary": "Two things moving together does not establish that one moves the other.",
+     "body": "A cloud drifting upwards says the two measurements travel together in this data. It does not say which one drives the other, and it does not rule out something else driving both — bigger boats might carry more crew and stay out longer, so crew size would explain the pattern without the hours doing anything at all. The picture is evidence of association. Turning that into a claim about cause needs an argument the chart cannot supply."
     }
    ],
    "questionIds": [
-    "q.seed.r2-scatterplots",
-    "q.point-thursday-catch"
+    "q.point-thursday-catch",
+    "q.r2-scatterplots-independent",
+    "q.r2-scatterplots-misconception",
+    "q.r2-scatterplots-application",
+    "q.r2-scatterplots-teachback",
+    "q.r2-scatterplots-mastery"
    ],
    "prerequisites": [
     "l.r2-box-plots"
    ],
-   "estimatedMinutes": 15
+   "estimatedMinutes": 15,
+   "narrativeIntro": "Every chart so far has described one thing at a time: how many boats, how deep the channel, how the season was shaped. The harbourmaster's question is different — does staying out longer actually bring back more fish? That asks about two measurements together, and needs a picture that puts each boat in one place.",
+   "demonstration": {
+    "id": "dem.r2-scatterplots",
+    "title": "Where one boat sits on the plot",
+    "experience": "A single boat is placed on the grid by its two readings: hours at sea across, crates landed up. The readout gives its catch for each hour it stayed out. Move either reading and watch how far the dot travels from the line the rest of the fleet sits on.",
+    "accessibleDescription": "Two controls. The first sets how many crates a boat landed, the second how many hours it stayed at sea. The readout gives crates landed per hour at sea, to two decimal places, and starts at 2.60 with 13 crates over 5 hours.",
+    "controls": [
+     {
+      "id": "ctl.crates",
+      "label": "Crates the boat landed",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "initial": 13
+     },
+     {
+      "id": "ctl.hours",
+      "label": "Hours the boat stayed at sea",
+      "min": 1,
+      "max": 12,
+      "step": 1,
+      "initial": 5
+     }
+    ],
+    "formula": "quotient",
+    "readoutLabel": "Crates landed per hour at sea",
+    "readoutPrecision": 2,
+    "prediction": {
+     "prompt": "This boat landed 13 crates in 5 hours, so the readout shows 2.60 crates an hour — about what the rest of the fleet manages. One boat stayed out 9 hours and came back with 6 crates. Where does its dot sit?",
+     "options": [
+      {
+       "id": "opt.below",
+       "text": "Far below the drift of the others - about 0.67 crates an hour, a long trip with little to show"
+      },
+      {
+       "id": "opt.above",
+       "text": "Above the others, because it stayed out longest of all"
+      },
+      {
+       "id": "opt.same",
+       "text": "On the trend with the rest, since more hours always means more crates"
+      }
+     ],
+     "correctOptionId": "opt.below",
+     "revealNote": "Nine hours for 6 crates is about 0.67 an hour, well under the fleet's rate, so that dot sits low and to the right — away from the drift the others make. The cloud still runs upwards; one boat sitting off it does not contradict the pattern, because a pattern in a scatterplot is a statement about the group rather than a promise about every case."
+    },
+    "observation": "Raise the crates and the readout climbs, which moves the dot up the plot; raise the hours and it falls, which moves the dot right and flattens its rate. Two boats with very different readings can share a readout — 4 crates in 2 hours and 20 in 10 both read 2.00 — and they sit at opposite ends of the same upward drift."
+   },
+   "formalTerm": {
+    "term": "Scatterplot",
+    "definition": "A scatterplot places one point per case, positioned by its values on two numeric variables. It shows whether the two tend to rise together, move oppositely, or neither. What it shows is association within this data, which is not the same as one variable causing the other.",
+    "symbols": []
+   },
+   "guidedQuestionIds": [
+    "q.point-thursday-catch"
+   ],
+   "independentQuestionIds": [
+    "q.r2-scatterplots-independent"
+   ],
+   "misconceptionQuestionIds": [
+    "q.r2-scatterplots-misconception"
+   ],
+   "applicationQuestionIds": [
+    "q.r2-scatterplots-application"
+   ],
+   "teachBackQuestionIds": [
+    "q.r2-scatterplots-teachback"
+   ],
+   "masteryCheckQuestionIds": [
+    "q.r2-scatterplots-mastery"
+   ]
   },
   {
    "id": "l.r2-choosing-graphs",

@@ -286,5 +286,13 @@
   "detector": "tagged-distractor",
   "detectorParams": {},
   "remediationId": "rem.read-along-not-up"
+ },
+ {
+  "id": "mc.scatter-point-is-one-variable",
+  "title": "A scatterplot point read as a single measurement",
+  "description": "The learner reads a point's position on one axis and treats it as the whole reading, or counts points as though the height of a region were a total. Every earlier chart in the curriculum encodes one variable, so carrying that habit across is the natural error.",
+  "detector": "tagged-distractor",
+  "detectorParams": {},
+  "remediationId": "rem.a-point-carries-two"
  }
 ]

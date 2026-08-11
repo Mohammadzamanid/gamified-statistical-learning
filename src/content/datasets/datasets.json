@@ -154,5 +154,64 @@
     12
    ]
   ]
+ },
+ {
+  "id": "ds.trip-length-catch",
+  "title": "Ten trips: hours at sea and crates landed",
+  "description": "How long each of ten boats stayed out, and how much it brought back.",
+  "columns": [
+   {
+    "name": "Hours at sea",
+    "kind": "numeric",
+    "unit": "h"
+   },
+   {
+    "name": "Crates landed",
+    "kind": "numeric",
+    "unit": "crates"
+   }
+  ],
+  "rows": [
+   [
+    2,
+    5
+   ],
+   [
+    3,
+    7
+   ],
+   [
+    3,
+    9
+   ],
+   [
+    4,
+    10
+   ],
+   [
+    5,
+    13
+   ],
+   [
+    5,
+    15
+   ],
+   [
+    6,
+    16
+   ],
+   [
+    7,
+    20
+   ],
+   [
+    8,
+    21
+   ],
+   [
+    9,
+    6
+   ]
+  ]
  }
 ]
