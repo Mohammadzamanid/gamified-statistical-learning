@@ -113,11 +113,15 @@ boss's stage 5 legal under D-028. It needs no new renderer.
 
 ## Local commit
 
-`PENDING`
+`74b091e2c16ee8c02eb210a633ff7fd672921d26`
 
 ## Remote verification
 
-`PENDING`
+```
+LOCAL_HEAD  = 74b091e2c16ee8c02eb210a633ff7fd672921d26
+REMOTE_HEAD = 74b091e2c16ee8c02eb210a633ff7fd672921d26
+VERIFIED: MATCH
+```
 
 ## Next unit
 
