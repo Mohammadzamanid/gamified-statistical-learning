@@ -106,7 +106,15 @@ six graph topics, comparing distributions, misleading graphs, and data literacy.
 
 ## Local commit
 
-Recorded in `STAGE2_RECONSTRUCTION_BACKLOG.md` on the S2-17 row.
+`e81fc2d66bec46fbebf500f002f3d6e37ac6cdb2`
+
+## Remote verification
+
+```
+LOCAL_HEAD  = e81fc2d66bec46fbebf500f002f3d6e37ac6cdb2
+REMOTE_HEAD = e81fc2d66bec46fbebf500f002f3d6e37ac6cdb2
+VERIFIED: MATCH
+```
 
 ## Next unit
 
