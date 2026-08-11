@@ -443,3 +443,33 @@ The first check's limit is written into it rather than left to be found: an answ
 explanation already quotes as an intermediate step still passes, which a paired probe confirmed. It catches drift away
 from the prose, not drift within it. Recording that is the point — a guard whose reach is unstated gets trusted for
 more than it does. (S2-14)
+
+**D-050 — The laboratory's subject is what an edit moves, not what the numbers are.**
+Stage 1's bench took a list and printed a table, which is a calculator: it answers a question a learner already knows
+how to ask. Scope §7 asks for a learning environment instead, and the difference is not more statistics. Every edit on
+the bench is now a logged event carrying the summary either side of it, and the bench reports **both halves** — what
+moved and what held still. Adding one extreme reading drags the mean much harder than the median; sorting rearranges
+the whole picture and changes no measure at all, so its log line reads "No measure changed" rather than nothing at all.
+Those are the facts `l.r2-outliers`, `l.r2-skew` and `l.r2-choosing-measures` teach, and on the bench a learner does
+them instead of reading them.
+
+The same sentence is the accessible output: it goes to a live region verbatim, so a screen-reader user is told what
+changed rather than told that a table exists (scope §6).
+
+The outlier button offers a value derived from the readings on the bench — a further interquartile range past the
+1.5-IQR fence `l.r2-outliers` teaches — and offers **nothing** when the middle half has zero width, because there the
+fence rule is degenerate and any distance would be the bench's own invention. The first draft did invent one, out of
+the maximum, and its own test caught it before it shipped. (S2-15)
+
+**D-051 — Scope §7's centralisation rule is now a test, not a habit.**
+"All statistical computation is centralised in `src/core/statistics`; important quantities are never recomputed inside
+React components" has been true since Stage 1 and checked by nothing. A probe replacing the laboratory's mean with an
+inline fold over the readings failed **no** test — a screen whose headline number came from somewhere other than the
+engine the lessons grade with, and no guard between it and a release.
+
+`tests/audit/core-purity.test.ts` enforces it in the shape the defect takes: no `.reduce(` in a view, since that is
+what every hand-rolled sum, mean and variance is written as; no `Math.sqrt`/`Math.pow`, the signatures of a standard
+deviation; and no *definition* of a symbol named after a measure the core owns. Importing one is the intended path and
+is untouched. All three read zero across `src/renderer` today, so the audit pins current fact rather than aspiring to
+it. With two quartile conventions deliberately in the codebase (D-045), a second implementation is exactly how one of
+them quietly becomes three. (S2-15)

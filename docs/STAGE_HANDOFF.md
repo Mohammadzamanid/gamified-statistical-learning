@@ -30,15 +30,15 @@ after Stage 1 was lost because commits were never pushed to a durable remote. Re
 | Default branch | `main` |
 | Pristine Stage 1 import | `7add4bc` — pushed and remote-verified |
 | Baseline docs + CI | `1b0a5dd` — pushed and remote-verified |
-| Last unit completed | **S2-14** — Region 2's data-visualization lessons, and with them all 20 Region 2 lessons (five cycles, all remote-verified; hashes on the S2-14 backlog row) |
+| Last unit completed | **S2-14** — Region 2's data-visualization lessons, and with them all 20 Region 2 lessons. **S2-15 is in progress**: the laboratory core landed in cycle 1 (hashes on the backlog rows) |
 | Head of `main` | read it live: `git rev-parse HEAD` vs `git ls-remote origin refs/heads/main` — these must match |
 | Milestone snapshot commit | `d4e250434c465f85e4307a226a9af2cbc9788c17` — the commit the exports were built from |
 | Stage tag | `stage-1-baseline` — **created locally, NOT on GitHub** (unit R-00d, blocked; see §2.1) |
 | Milestone exports | `../gsl-exports/` — source ZIP + git bundle + manifest + SHA-256 checksums |
 | Working tree | clean |
 | Node / npm used | v22.22.2 / 10.9.7 |
-| Test suite | **575 tests / 41 files**, all passing (Stage 1 baseline was 73 / 14) |
-| Build | passing (**856.35 kB, 219.19 kB gzip**; baseline was 285.73 kB / 83.82 kB) |
+| Test suite | **599 tests / 43 files**, all passing (Stage 1 baseline was 73 / 14) |
+| Build | passing (**861.47 kB, 220.85 kB gzip**; baseline was 285.73 kB / 83.82 kB) |
 | Source modified since baseline | S2-01 … S2-08 — achievements + region completion, three new interactions, the enforced interaction audit, the review queue, the Region 1 topic architecture, and all 17 Region 1 lessons |
 | Curriculum | 2 regions · **10 modules** · **40 lessons** · **42 skills** · **290 questions** (baseline 2/2/3/6/14) |
 | Lessons Complete to scope §5 | **40** — all 17 Region 1 topic lessons, all 20 Region 2 lessons, and the 3 Stage 1 lessons re-cut into Region 2. **No skeletons in either region** |
@@ -80,7 +80,7 @@ git status
 git rev-parse HEAD
 git ls-remote origin refs/heads/main | awk '{print $1}'   # must match
 npm ci
-npm test            # must stay green: 575/575
+npm test            # must stay green: 599/599
 npm run typecheck && npm run lint
 npm run dev         # renderer + electron dev
 ```
@@ -105,54 +105,45 @@ branch/tag deletion) are forbidden without explicit owner permission. See `REMOT
 
 ## 5. Next unit
 
-**S2-15 — the descriptive-statistics laboratory.**
+**S2-15 continued — charts on the bench, and two datasets side by side.**
 
-**Region 2's teaching is finished.** All 20 seeded lessons and the 3 re-cut Stage 1 lessons are declared Complete and
-held to the 18 structure checks; neither region has a skeleton left. What is *not* finished, and must not be implied:
-Region 2 meets **none** of scope §4's per-topic interaction counts (that is S2-17), its misconception library has not
-been audited against S2-16's criteria, and its boss investigation is unwritten (S2-18).
+**Cycle 1 built the laboratory core and met 7 of the unit's 12 criteria.** `src/core/laboratory` holds the experiment
+model, its edits and the narration; `LabScreen` arranges and announces and computes nothing. Remaining: compare two
+datasets, change graph type, change bin width (cycle 2); save/reload experiments and export summaries (cycle 3).
 
-**S2-15 owns the editable datasets S2-12 named and never built.** The scope asks for a learning environment, not a
-calculator: create and edit datasets, add and remove values, sort, add an outlier and watch what moves, compare two
-datasets, change graph type and bin width, live statistics, save and reload experiments, reset, export summaries, and
-accessible text descriptions throughout. It replaces Stage 1 known defect #3's placeholders.
+**The bench's subject is what an edit moves (D-050).** Every action is a logged event carrying the summary either side
+of it, and `describeChange` reports both halves — what moved and what held still. Sorting is kept precisely because it
+moves nothing and says so. That sentence is also the accessible output: it goes to the live region verbatim. Anything
+added to the bench should extend the log, not sit beside it.
 
-Two things already in place that it must not contradict. `LabScreen` reports quartiles under the **taught** convention
-(D-045) — median-of-halves, the same numbers the lessons teach — while `quartiles` (R-7) stays for spreadsheet
-agreement; anything the lab computes has to keep that agreement. And five visual kinds genuinely draw (`bar-chart`,
-`histogram`, `dot-plot`, `box-plot`, `scatter`), each with its arithmetic exported and tested (`buildBins`,
-`stackDots`, `numericPair`, `fiveNumberSummary`); a lab that changes bin width is driving `buildBins`, not a second
-implementation of it (D-043, D-044).
+**Statistics may not be recomputed in a view, and that is now a test (D-051).** `tests/audit/core-purity.test.ts`
+forbids `.reduce(`, `Math.sqrt`/`Math.pow`, and any *definition* named after a measure the core owns, anywhere under
+`src/renderer`. All three read zero today. Importing from `src/core/statistics` is the intended path. If a view ever
+has an honest need for one, widen the audit deliberately and say why in the same commit — do not delete it.
 
-**How a chart is drawn is content.** `VisualSpec` carries `axisMin` (bar charts) and `binWidth` (histograms), each
-rejected by the schema on kinds it means nothing to, and the audit requires a set value to be stated in the chart's
-words and prose claiming a truncated axis to have the setting behind it (D-047).
+**Cycle 2's charts already exist.** Five visual kinds draw (`bar-chart`, `histogram`, `dot-plot`, `box-plot`,
+`scatter`) with their arithmetic exported and tested — `buildBins`, `stackDots`, `numericPair`, `fiveNumberSummary`.
+A bench that changes bin width is driving `buildBins`, not a second implementation of it (D-043, D-044, D-051). Chart
+descriptions must carry the five numbers for a box plot (D-049).
+
+**Cycle 3 needs a save-schema migration.** Saved experiments change the save shape, so `SAVE_SCHEMA_VERSION` goes 2 → 3
+with a migration in `src/core/persistence/migrations.ts` and round-trip tests — the contract in §6, and the same path
+S2-06 took for the review queue.
+
+**Region 2's teaching is finished, and what is *not* finished must not be implied.** All 20 seeded lessons and the 3
+re-cut Stage 1 lessons are Complete to the 18 structure checks, and neither region has a skeleton. But Region 2 meets
+**none** of scope §4's per-topic interaction counts (S2-17), its misconception library has not been audited against
+S2-16's criteria, and its boss investigation is unwritten (S2-18).
 
 **A number a learner is judged by must be stated in the words beside it (D-049).** A numeric answer must appear in its
-own explanation; a box plot's accessible description must carry all five of its dataset's five-number summary. Both
-were added after probes showed the drift failed nothing. The first check's reach is written into its comment — it
-catches an answer drifting away from the prose, not one swapped for a figure the same prose already quotes.
-
-**A lesson is not finished until something has played it (D-037).** `tests/integration/region2-lessons.test.ts`
-iterates `COMPLETE_LESSONS`, so a lesson you declare is played automatically. It proves the content round-trips
-through the real evaluator, session and save, and **not** that a declared answer is arithmetically right (D-038).
-
-**Read an existing example before writing an unfamiliar shape.** Followed throughout cycle 5 with no corrections
-needed; the cycle before it lost a draft to a guessed `MatchingAnswerSchema`.
-
-**Two probes in a row asserted that a question losing its lesson's headline skill would fail a check, and both were
-wrong.** A lesson may legitimately declare more than one objective, and a question carrying any taught skill satisfies
-requirement 17. Do not add a guard for that — there is no defect there.
+own explanation; a box plot's accessible description must carry all five of its dataset's five-number summary.
 
 **When a temporary rule empties, end it (D-048), and when a guard's subject empties, say so.** Region 2's
-skeleton-honesty loop now iterates nothing and asserts zero explicitly, as Region 1's did at the same point; a loop
-over an empty set is a check that passes without running.
+skeleton-honesty loop asserts zero explicitly rather than iterating nothing.
 
-**Run the demonstration before writing about it (D-035), and use the characters the curriculum explains (D-039).** If a
-demonstration needs an operation the formula enum lacks, grow the enum: the readout switch is exhaustive (D-042).
-
-`docs/REGION2_BOSS_SPEC.md` maps the boss's five stages onto this module sequence. Every skill all five stages draw on
-now exists, so S2-18 is unblocked whenever it is reached.
+**Probe your own work before believing it.** Every cycle since S2-12 has ended with deliberate breakages, and roughly
+one in three has found a guard that failed nothing — including both of this cycle's new audits. Report the zero-fail
+rows; they are the ones that produce the next check.
 
 ### Region 2's architecture, and two rules it added
 
