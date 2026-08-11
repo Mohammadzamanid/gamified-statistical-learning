@@ -9,12 +9,17 @@
       ],
       "regionId": "r.averages-atoll",
       "authoredRecords": 10,
-      "generatorFamilies": 0,
-      "reasoningFamilies": [],
-      "rawCombinations": 0,
-      "validCombinations": 0,
-      "validatedGenerated": 0,
-      "totalAvailable": 10,
+      "generatorFamilies": 4,
+      "reasoningFamilies": [
+        "comparison",
+        "error-identification",
+        "real-world-application",
+        "recognition"
+      ],
+      "rawCombinations": 253,
+      "validCombinations": 253,
+      "validatedGenerated": 253,
+      "totalAvailable": 263,
       "rejections": {
         "invalidCombinations": 0,
         "invalidReasons": {},
@@ -26,12 +31,8 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.1,
-      "failures": [
-        "no generator families produce for this topic",
-        "10 available interactions, below the required 100",
-        "0 reasoning families represented, below the required 4"
-      ]
+      "largestShapeShare": 0.0038022813688212928,
+      "failures": []
     },
     {
       "skillId": "skill.data-literacy",
@@ -80,15 +81,23 @@
       ],
       "regionId": "r.averages-atoll",
       "authoredRecords": 15,
-      "generatorFamilies": 0,
-      "reasoningFamilies": [],
-      "rawCombinations": 0,
-      "validCombinations": 0,
-      "validatedGenerated": 0,
-      "totalAvailable": 15,
+      "generatorFamilies": 4,
+      "reasoningFamilies": [
+        "calculation",
+        "error-identification",
+        "multi-step-reasoning",
+        "prediction"
+      ],
+      "rawCombinations": 138,
+      "validCombinations": 105,
+      "validatedGenerated": 105,
+      "totalAvailable": 120,
       "rejections": {
-        "invalidCombinations": 0,
-        "invalidReasons": {},
+        "invalidCombinations": 33,
+        "invalidReasons": {
+          "the mean does not land on a hundredth, so the answer cannot be typed exactly": 11,
+          "the missing figure is not whole, and a part-crate reads as an error": 22
+        },
         "schemaFailures": 0,
         "answerFailures": 0,
         "missingAccessibility": 0,
@@ -97,12 +106,8 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.06666666666666667,
-      "failures": [
-        "no generator families produce for this topic",
-        "15 available interactions, below the required 100",
-        "0 reasoning families represented, below the required 4"
-      ]
+      "largestShapeShare": 0.016666666666666666,
+      "failures": []
     },
     {
       "skillId": "skill.median",
@@ -114,15 +119,25 @@
       ],
       "regionId": "r.averages-atoll",
       "authoredRecords": 11,
-      "generatorFamilies": 0,
-      "reasoningFamilies": [],
-      "rawCombinations": 0,
-      "validCombinations": 0,
-      "validatedGenerated": 0,
-      "totalAvailable": 11,
+      "generatorFamilies": 4,
+      "reasoningFamilies": [
+        "calculation",
+        "comparison",
+        "error-identification",
+        "ordering"
+      ],
+      "rawCombinations": 322,
+      "validCombinations": 272,
+      "validatedGenerated": 272,
+      "totalAvailable": 283,
       "rejections": {
-        "invalidCombinations": 0,
-        "invalidReasons": {},
+        "invalidCombinations": 50,
+        "invalidReasons": {
+          "the middle of the unsorted list is already the median, so ordering makes no difference": 17,
+          "fewer than four distinct figures makes the ordering trivial": 1,
+          "the two medians are equal, so there is no higher one": 15,
+          "the middle of the list as written is the median here, so the clerk is right": 17
+        },
         "schemaFailures": 0,
         "answerFailures": 0,
         "missingAccessibility": 0,
@@ -131,12 +146,8 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.09090909090909091,
-      "failures": [
-        "no generator families produce for this topic",
-        "11 available interactions, below the required 100",
-        "0 reasoning families represented, below the required 4"
-      ]
+      "largestShapeShare": 0.0035335689045936395,
+      "failures": []
     },
     {
       "skillId": "skill.r1-addition",
@@ -1098,15 +1109,25 @@
       ],
       "regionId": "r.averages-atoll",
       "authoredRecords": 8,
-      "generatorFamilies": 0,
-      "reasoningFamilies": [],
-      "rawCombinations": 0,
-      "validCombinations": 0,
-      "validatedGenerated": 0,
-      "totalAvailable": 8,
+      "generatorFamilies": 4,
+      "reasoningFamilies": [
+        "calculation",
+        "comparison",
+        "recognition",
+        "visual-interpretation"
+      ],
+      "rawCombinations": 345,
+      "validCombinations": 285,
+      "validatedGenerated": 285,
+      "totalAvailable": 293,
       "rejections": {
-        "invalidCombinations": 0,
-        "invalidReasons": {},
+        "invalidCombinations": 60,
+        "invalidReasons": {
+          "this log has more than one mode, so a single-answer question would be wrong": 2,
+          "one of these logs has more than one mode, so there is no single figure to compare": 43,
+          "the two modes are the same figure": 13,
+          "two columns tie for tallest, so no single column is the mode": 2
+        },
         "schemaFailures": 0,
         "answerFailures": 0,
         "missingAccessibility": 0,
@@ -1115,12 +1136,8 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.125,
-      "failures": [
-        "no generator families produce for this topic",
-        "8 available interactions, below the required 100",
-        "0 reasoning families represented, below the required 4"
-      ]
+      "largestShapeShare": 0.0034129692832764505,
+      "failures": []
     },
     {
       "skillId": "skill.r2-outliers",

@@ -8,6 +8,7 @@
  */
 import { arithmeticFamilies, type OperationSpec } from "./arithmetic";
 import { fractionText, partsFamilies, type Form, type Part, type PartsTopic } from "./parts";
+import { centreFamilies } from "./centre";
 import { countsFamilies } from "./counts";
 import { dataFamilies } from "./data";
 import { positionFamilies } from "./position";
@@ -287,6 +288,7 @@ export function allGeneratorFamilies(): GeneratorFamily[] {
     ...ratioFamilies(),
     ...positionFamilies(),
     ...dataFamilies(),
-    ...countsFamilies()
+    ...countsFamilies(),
+    ...centreFamilies()
   ];
 }

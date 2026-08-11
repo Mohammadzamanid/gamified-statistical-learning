@@ -6,43 +6,42 @@ Exactly one Stage 2 unit is active at a time. Rewritten at the start and end of 
 
 ## Current unit
 
-**S2-17 — Region 2 validated content expansion (cycle 1: the counts module)**
+**S2-17 — Region 2 validated content expansion (cycle 2: the centre module)**
 
-Entered from `92206de602b42768ca1143f9668b257203b89b65` (remote-verified, clean tree).
+Entered from `dd6f7e71a67ebdd63055143817f4554cb485a75d` (remote-verified, clean tree).
 
 ## Objective
 
-Bring Region 2's first three topics — frequency, proportion, percentage — to scope §4: at least 100 validated
-available interactions each, across at least four reasoning families, with no single shape above half.
+Bring mean, median, mode and choosing measures to scope §4.
 
 ## Result up front
 
-**S2-17 is Partial: 3 of Region 2's 24 topics now meet §4.** The measured figure moved **17 → 20 of 41 topics**, the
-first Region 2 topics ever to pass. Each of the three has five reasoning families and a largest-shape share of 1–2%,
-far under the 50% ceiling.
+**S2-17 is Partial: 7 of Region 2's 24 topics now meet §4.** The measured figure moved **20 → 24 of 41 topics**.
 
 | Topic | Available | Reasoning families | Largest shape |
 |---|---|---|---|
-| `skill.r2-frequency` | **124** | 5 | 1% |
-| `skill.r2-proportion` | **143** | 5 | 2% |
-| `skill.r2-percentage` | **143** | 5 | 2% |
+| `skill.mean` | **120** | 4 | 2% |
+| `skill.median` | **283** | 4 | 0% |
+| `skill.r2-mode` | **293** | 4 | 0% |
+| `skill.choose-measure` | **263** | 4 | 0% |
 
 ## Relevant files
 
 | File | Change |
 |---|---|
-| `src/content/generators/counts.ts` | **New.** Ten families over one corpus of ten season logs |
+| `src/content/generators/centre.ts` | **New.** Sixteen families over one corpus of 23 catch lists |
 | `src/content/generators/index.ts` | Registers them |
-| `tests/helpers/complete-topics.ts` | 17 → **20** topics declared to meet §4 |
+| `tests/unit/centre-generators.test.ts` | **New** — 9 checks pinning the generators' arithmetic to hand-worked values (D-059) |
+| `tests/helpers/complete-topics.ts` | 20 → **24** topics declared to meet §4 |
 | `docs/{CONTENT_COVERAGE.md,content-coverage.json}` | Regenerated |
 
 ## Acceptance criteria
 
 | # | Criterion | Met |
 |---|---|---|
-| 1 | ≥100 validated interactions per completed Region 2 topic | **Yes for 3 of 24** — frequency, proportion, percentage |
-| 2 | Diverse reasoning families (≥4) | **Yes** — five each |
-| 3 | The remaining 21 Region 2 topics | No — later cycles |
+| 1 | ≥100 validated interactions per completed Region 2 topic | **Yes for 7 of 24** |
+| 2 | Diverse reasoning families (≥4) | **Yes** — four each |
+| 3 | The remaining 17 Region 2 topics | No — later cycles |
 | 4 | Commit pushed and remote hash verified | Yes — see below |
 
 ## Required tests
@@ -53,76 +52,62 @@ Measured (Node v22.22.2 / npm 10.9.7):
 |---|---|
 | `npm run typecheck` | Pass |
 | `npm run lint` | Pass — 0 errors, 0 warnings |
-| `npm test` | Pass — **646 tests / 46 files** |
+| `npm test` | Pass — **655 tests / 47 files** |
 | `npm run test:statistics` | Pass — 18 tests / 3 files |
 | `npm run test:content` | Pass — 5 tests / 1 file |
 | `npm run build` | Pass — 873.48 kB (224.42 kB gzip) |
-| `npm run report:coverage` | Ran — **20 of 41** topics meet §4, up from 17; 6,993 validated generated interactions, 7,334 available |
+| `npm run report:coverage` | Ran — **24 of 41** topics meet §4, up from 20; 7,908 validated generated interactions, 8,249 available |
 
 `test:a11y` was **not** run and is **not** claimed; it arrives in S2-20.
 
 ## Work completed
 
-1. **One corpus, three topics** (D-058). Ten season logs — sea state, gear, berth, grade, weather, crew, buyer,
-   repairs, tide — feed all three, because a frequency, a proportion and a percentage are three readings of the same
-   tally. The traps are shared for the same reason.
+1. **One corpus again** (D-058's pattern): 23 catch lists, because a list has a mean, a median and a mode, and
+   choosing between them is the fourth topic rather than a fourth corpus.
 
-2. **Ten families across six reasoning patterns**: calculation, comparison, multi-step reasoning, error
-   identification, visual interpretation, representation conversion, real-world application. No topic leans on one
-   shape; the highest share is 2%.
+2. **Sixteen families across eight reasoning patterns** — calculation, multi-step reasoning, prediction, error
+   identification, ordering, comparison, recognition, real-world application. Largest single shape: 2%.
 
-3. **Every generated question carries the module's misconception where its detector can report it.**
-   `mc.frequency-counts-categories` is a `known-wrong-answer`, so on the numeric families the wrong value is declared
-   under `parameters`; on the error-identification family it is a tagged distractor.
+3. **The generators' arithmetic is now pinned to hand-worked numbers** (D-059), after two probes showed that two
+   agreeing routes prove agreement rather than correctness.
 
 ## Corrections made during the unit
 
-All four were mine, and each was caught by a check an earlier unit added.
+1. **I repeated the previous cycle's mistake in a new family.** The mean's error-identification family tagged its
+   *correct* option with `mc.sum-not-mean`, firing the diagnosis on a right answer. The same check caught it again.
 
-1. **The chart family stated a numeric response for a question that publishes a choice** — 24 answer failures.
-   Visible only because `expectedResponse` is stated by the family and never read back out of the question (D-020).
+2. **Then the fix was wrong too, for a different reason.** Moving the tag to the option that agrees with the clerk
+   still failed: `mc.sum-not-mean`'s detector is `confused-statistic`, which reads a **number**, so on a choice
+   question it can never fire. The declaration was removed rather than forced — a tag that cannot fire inflates a
+   count and does nothing else (D-025, D-057). It stays on the numeric family, where the wrong value can be typed.
 
-2. **The application family computed the share instead of stating it**, so the proportion and percentage versions
-   built the identical question — 9 exact duplicates. It now gives the share in each form's own language.
-
-3. **The error-identification family tagged its *correct* option with the misconception**, so the diagnosis fired on a
-   right answer. The learner holding it agrees with the clerk, so the tag belongs on the option saying the clerk was
-   right. Note this is the case S2-16's D-057 rule cannot catch: the tag was triggerable, it was on the wrong side.
-
-4. **Two categories of equal column height gave the learner two identical options.** Those candidates are invalid now,
-   with that reason — the raw-versus-valid distinction §4 asks for.
+3. **A rule of mine rejected seven lists out of ten.** The mode family invalidated any list whose first repeated
+   figure was already the mode. The question is sound on those lists; only the declared *mistake* has nowhere to
+   show. It is declared conditionally now, and the candidates are kept.
 
 ## Verification that the guards have teeth
 
-Six deliberate probes, all reverted. **All six bite:**
+Seven deliberate probes, all reverted. **Five bite, one found a gap now closed and re-probed, one is a stated limit:**
 
 | Probe | Result |
 |---|---|
-| A family states an answer its question does not publish | **3 checks fail** |
-| The percentage family reports the proportion instead | **3 checks fail** |
-| The frequency trap value becomes the correct answer | **1 check fails** |
-| A topic with no generator is declared Complete under §4 | **3 checks fail** |
-| The counts families are unregistered | **3 checks fail** |
-| The ambiguous chart candidates come back | **1 check fails** |
+| The mean is computed by dividing by one too few | **4 checks fail** |
+| The mode question stops declaring its wrong value | **1 check fails** |
+| The choose-measure question recommends the mean for a dragged log | **3 checks fail** |
+| A centre topic is declared under §4 without its families | **3 checks fail** |
+| The ordering family publishes a shuffled correct order | **3 checks fail** |
+| The median is taken from the unsorted list | **0 → 1 check fails** — closed by D-059. It failed nothing because the disagreement turned candidates *invalid* rather than into answer failures, and the topic still cleared 100 on its other families |
+| The independent route is replaced by the answer key | **0 checks fail — and no guard was added.** Whether two code paths are independent is a property of how they were written; a test cannot see it. What independence protects — that both are right — is now checked directly |
 
 ## Remaining work
 
-**21 of Region 2's 24 topics.** Centre (mean, median, mode, choosing measures), spread (range, quartiles, percentiles,
-IQR, variance, standard deviation), shape (outliers, skew), the six graph topics, comparing distributions, misleading
-graphs, and data literacy.
+**17 of Region 2's 24 topics**: range, quartiles, percentiles, IQR, variance, standard deviation, outliers, skew, the
+six graph topics, comparing distributions, misleading graphs, and data literacy.
 
 ## Local commit
 
-`3b9e674bfc31e34fb9d6de11bd92488cfa274267`
-
-## Remote verification
-
-```
-LOCAL_HEAD  = 3b9e674bfc31e34fb9d6de11bd92488cfa274267
-REMOTE_HEAD = 3b9e674bfc31e34fb9d6de11bd92488cfa274267
-VERIFIED: MATCH
-```
+Recorded in `STAGE2_RECONSTRUCTION_BACKLOG.md` on the S2-17 row.
 
 ## Next unit
 
-**S2-17 continued — the centre module.** Not started in this cycle.
+**S2-17 continued — the spread module.** Not started in this cycle.

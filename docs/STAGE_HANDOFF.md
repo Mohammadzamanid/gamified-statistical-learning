@@ -37,14 +37,14 @@ after Stage 1 was lost because commits were never pushed to a durable remote. Re
 | Milestone exports | `../gsl-exports/` — source ZIP + git bundle + manifest + SHA-256 checksums |
 | Working tree | clean |
 | Node / npm used | v22.22.2 / 10.9.7 |
-| Test suite | **646 tests / 46 files**, all passing (Stage 1 baseline was 73 / 14) |
+| Test suite | **655 tests / 47 files**, all passing (Stage 1 baseline was 73 / 14) |
 | Build | passing (**873.48 kB, 224.42 kB gzip**; baseline was 285.73 kB / 83.82 kB) |
 | Source modified since baseline | S2-01 … S2-08 — achievements + region completion, three new interactions, the enforced interaction audit, the review queue, the Region 1 topic architecture, and all 17 Region 1 lessons |
 | Curriculum | 2 regions · **10 modules** · **40 lessons** · **42 skills** · **290 questions** (baseline 2/2/3/6/14) |
 | Lessons Complete to scope §5 | **40** — all 17 Region 1 topic lessons, all 20 Region 2 lessons, and the 3 Stage 1 lessons re-cut into Region 2. **No skeletons in either region** |
 | Misconceptions / remediations | **40 / 39** (baseline 8 / 7) — every one reachable, and each held to the nine declared parts (D-056) |
-| Validated generated interactions | **6,993**, available to spaced review (baseline 0) |
-| Topics meeting scope §4 | **20 of 41** — every Region 1 topic, plus Region 2's frequency, proportion and percentage (S2-17 cycle 1). The other 21 Region 2 topics still have no generators |
+| Validated generated interactions | **7,908**, available to spaced review (baseline 0) |
+| Topics meeting scope §4 | **24 of 41** — every Region 1 topic, plus Region 2's counts and centre modules (S2-17 cycles 1–2). The other 17 Region 2 topics still have no generators |
 | Save schema version | **4** (baseline was 1) — `1->2` adds `reviewSession`, `2->3` adds `investigationProgress`, `3->4` adds `savedExperiments`. The chain is asserted against this number (D-055) |
 | Interaction types implemented | **14 of 17** (baseline 11); still stubbed: `formula-construction`, `simulation-prediction`, `confidence-rating` |
 | Stage 2 | **in progress** — see `STAGE2_RECONSTRUCTION_SCOPE.md`, `STAGE2_RECONSTRUCTION_BACKLOG.md`, `STAGE2_CURRENT_WORK.md` |
@@ -80,7 +80,7 @@ git status
 git rev-parse HEAD
 git ls-remote origin refs/heads/main | awk '{print $1}'   # must match
 npm ci
-npm test            # must stay green: 646/646
+npm test            # must stay green: 655/655
 npm run typecheck && npm run lint
 npm run dev         # renderer + electron dev
 ```
@@ -105,39 +105,35 @@ branch/tag deletion) are forbidden without explicit owner permission. See `REMOT
 
 ## 5. Next unit
 
-**S2-17 continued — the centre module.** Mean, median, mode and choosing measures, to scope §4.
+**S2-17 continued — the spread module.** Range, quartiles, percentiles, IQR, variance and standard deviation, to
+scope §4. Then shape (outliers, skew), the six graph topics, comparing distributions, misleading graphs, and data
+literacy: **17 of Region 2's 24 topics** remain.
 
-**Cycle 1 did the counts module and it is the pattern to copy.** `src/content/generators/counts.ts` carries one corpus
-of ten season logs and ten families, and brings frequency, proportion and percentage to 124, 143 and 143 available
-interactions with five reasoning families each. The measured figure moved 17 → **20 of 41**. Three topics down,
-**21 to go**.
+**Two cycles in, the pattern is settled and it works.** One corpus per module, because the topics in a module read
+the same material different ways (D-058): ten season logs took counts to 124/143/143, and 23 catch lists took centre
+to 120/283/293/263. Spread is the same opportunity — a list has a range, quartiles, percentiles, an IQR, a variance
+and a standard deviation — so expect one corpus of six sorted lists to feed all six topics. **Reuse `centre.ts`'s
+corpus if it suits**; two modules sharing lists is cheaper than two corpora, and the questions differ anyway.
 
-**One corpus can serve several topics when they read the same material** (D-058) — a frequency, a proportion and a
-percentage are three readings of one tally. Centre is the same kind of opportunity: mean, median and mode are three
-summaries of one list, and `l.r2-choosing-measures` is about picking between them. Expect one corpus of catch lists to
-feed all four, with the shared traps being the ones the lessons already teach.
+**Read cycle 2's corrections before writing a family.** Every one was a repeat of something already written down:
 
-**Four things went wrong in cycle 1 and every one was caught by a check an earlier unit added.** Read them before
-writing a family:
+- **A misconception tag belongs on a wrong option.** This was got wrong twice, in two different modules.
+- **And only where its detector can fire.** `mc.sum-not-mean` is `confused-statistic`, which reads a number: on a
+  choice question it can never fire, so it is not declared there at all (D-025). Check the detector before tagging.
+- **Do not reject a candidate for a defect in its *trap*.** A mode question whose first repeat is already the mode is
+  a sound question with nowhere to hang the mistake — declare the mistake conditionally and keep the question.
 
-- `expectedResponse` is **stated** by the family and never read back out of the question (D-020). State the wrong
-  *kind* and every candidate becomes an answer failure — which is how a numeric response on a choice question was
-  found.
-- A family that computes what it should state can build the identical question for two topics. Nine exact duplicates
-  came from an application family computing a share instead of giving it in each form's own words.
-- **A misconception tag belongs on an option that is wrong.** The error-identification family tagged its correct
-  option, so the diagnosis fired on a right answer. S2-16's rule (D-057) cannot catch this: the tag was triggerable,
-  it was simply on the wrong side.
-- Ambiguity is an *invalid combination*, not a bug to hide: two categories of equal height give two identical options,
-  and those candidates are rejected with that reason. Scope §4 wants raw and valid reported separately for exactly
-  this.
+**Two agreeing routes prove agreement, not correctness (D-059).** State `expectedResponse` independently, and *also*
+pin the arithmetic to numbers worked out by hand, as `tests/unit/centre-generators.test.ts` does. A probe that broke
+`medianOf` failed nothing until that file existed, because the disagreement became an *invalid* candidate rather than
+an answer failure and the topic still cleared 100 on its other families.
 
 **A topic that passes §4 must be declared in `tests/helpers/complete-topics.ts`, and one that is declared must pass.**
-Both directions are checked, so the list cannot drift from the report.
+Both directions are checked.
 
-**Measure before you write, and measure again after.** `npm run report:coverage` writes `docs/CONTENT_COVERAGE.md` and
-`docs/content-coverage.json` with per-topic families, reasoning families, raw and valid combinations, rejections with
-reasons, and the largest-shape share. The ceiling on one shape is 50%; cycle 1's topics came in at 1–2%.
+**Measure before and after.** `npm run report:coverage` writes per-topic families, reasoning families, raw and valid
+combinations, rejections with reasons, and the largest-shape share. The ceiling on one shape is 50%; these modules
+come in at 0–2%.
 
 ### Region 2's architecture, and two rules it added
 

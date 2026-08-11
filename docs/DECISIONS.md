@@ -610,3 +610,22 @@ was wrong about something:
 A fourth was a content ambiguity rather than a bug: where two categories share a column height, "which column is the
 frequency of X" offers two identical options. Those candidates are now invalid with that reason, which is what the
 raw-versus-valid distinction in scope §4 is for. (S2-17)
+
+**D-059 — Two routes to an answer prove agreement, not correctness. Pin one of them to a hand-worked number.**
+Every generator family states its `expectedResponse` separately from the answer its question publishes, and the
+validator rejects the candidate when the two disagree (D-020). The centre module took that seriously — a mean by
+summing and dividing against a running average, a median by sorting and indexing against peeling the extremes — and
+two probes then showed what the arrangement does *not* cover.
+
+Replacing the independent route with the answer key made the two agree trivially and failed **no** test. Breaking
+`medianOf` so it never sorted also failed no test, for a subtler reason: the disagreement turned its candidates into
+*invalid* ones rather than answer failures, and the topic still cleared 100 interactions on its other four families.
+A rejection path can swallow the very disagreement it exists to report.
+
+`tests/unit/centre-generators.test.ts` closes both by pinning the corpus's means, medians and modes to values worked
+out by hand, and by asserting the two routes agree across every list in one named place rather than only per
+candidate. The unsorted-median probe now fails.
+
+**The first probe still fails nothing, and that is stated rather than fixed.** Whether two code paths are genuinely
+independent is a property of how they were written; a test cannot see it. What the independence was protecting is
+that both are right, and that is now checked directly. (S2-17)

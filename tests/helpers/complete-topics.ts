@@ -45,5 +45,12 @@ export const COMPLETE_TOPICS: readonly string[] = [
   // tally.
   "skill.r2-frequency",
   "skill.r2-proportion",
-  "skill.r2-percentage"
+  "skill.r2-percentage",
+  // Region 2's centre module (S2-17 cycle 2). One corpus of catch lists again:
+  // a list has a mean, a median and a mode, and choosing between them is the
+  // fourth topic rather than a fourth corpus.
+  "skill.mean",
+  "skill.median",
+  "skill.r2-mode",
+  "skill.choose-measure"
 ];
