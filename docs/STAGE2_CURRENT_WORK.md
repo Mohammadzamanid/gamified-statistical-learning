@@ -113,7 +113,15 @@ graphs, and data literacy.
 
 ## Local commit
 
-Recorded in `STAGE2_RECONSTRUCTION_BACKLOG.md` on the S2-17 row.
+`3b9e674bfc31e34fb9d6de11bd92488cfa274267`
+
+## Remote verification
+
+```
+LOCAL_HEAD  = 3b9e674bfc31e34fb9d6de11bd92488cfa274267
+REMOTE_HEAD = 3b9e674bfc31e34fb9d6de11bd92488cfa274267
+VERIFIED: MATCH
+```
 
 ## Next unit
 
