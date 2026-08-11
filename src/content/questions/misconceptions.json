@@ -18,42 +18,42 @@
  {
   "id": "mc.decimal-vs-percent",
   "title": "Decimal given instead of percentage",
-  "description": "The learner answers 0.3 when 30% is expected.",
+  "description": "The learner gives the proportion where the percentage was asked for, answering 0.3 when 30% was wanted. The two are the same quantity in different clothes, and the question's wording is the only thing that distinguishes them.",
   "detector": "decimal-instead-of-percentage",
   "remediationId": "rem.percent-decimal"
  },
  {
   "id": "mc.percent-vs-decimal",
   "title": "Percentage given instead of decimal",
-  "description": "The learner answers 30 when 0.3 is expected.",
+  "description": "The learner gives the percentage figure where the proportion was asked for, answering 30 when 0.3 was wanted. Both describe the same share, so the number is not wrong so much as wearing the wrong form for what the question asked.",
   "detector": "percentage-instead-of-decimal",
   "remediationId": "rem.percent-decimal"
  },
  {
   "id": "mc.reversed-fraction",
   "title": "Fraction reversed",
-  "description": "Numerator and denominator swapped.",
+  "description": "The learner writes the two numbers in the order the question mentioned them rather than the order the fraction needs, so \"3 of the 4 boats\" becomes 4/3. The quantities are both right and only their roles are exchanged, which is why the answer looks reasonable to the learner who wrote it.",
   "detector": "reversed-fraction",
   "remediationId": "rem.fraction-order"
  },
  {
   "id": "mc.outlier-mean",
   "title": "Mean treated as outlier-resistant",
-  "description": "Believing the mean is unaffected by extreme values.",
+  "description": "The learner treats the mean as a fixed description of the group and expects one unusual value to leave it alone. Every value entering the sum is exactly why it does not, but a summary that is meant to stand for a whole set does feel as though it should be steady.",
   "detector": "tagged-distractor",
   "remediationId": "rem.outliers-pull-mean"
  },
  {
   "id": "mc.axis-misread",
   "title": "Chart axis misread",
-  "description": "Reading the wrong axis or bar from a chart.",
+  "description": "The learner compares the bars or points without first checking what each axis measures, and answers about the wrong quantity or the wrong case. A chart invites you to look before you read, and the picture is legible enough that the labels feel optional.",
   "detector": "tagged-distractor",
   "remediationId": "rem.read-axes-first"
  },
  {
   "id": "mc.correlation-causation",
   "title": "Correlation read as causation",
-  "description": "Concluding that association proves cause.",
+  "description": "The learner sees two quantities rising together and concludes that one drives the other. Reading a pattern as an explanation is what patterns are for most of the time, so this is the ordinary habit misapplied rather than a lapse in care — and nothing in the data itself rules the conclusion out.",
   "detector": "tagged-distractor",
   "remediationId": "rem.correlation-not-causation"
  },

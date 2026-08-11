@@ -541,3 +541,42 @@ The other zero-fail probe was a weak test rather than a missing one. "Does not s
 checked that adding a reading left the entry unchanged, which passes either way because every bench operation
 allocates. It now asserts identity. **A test that names a property without checking it is worse than no test**: it
 occupies the space where the real check would have gone. (S2-15)
+
+**D-056 — The nine parts of a misconception are declared, because the original list did not survive.**
+S2-16's criterion reads "each remediation with all 9 required parts". The number is in the backlog cell; **the list is
+in no surviving document** — it went with the original specification. Inventing one and presenting it as recovered
+would be exactly the fabrication this reconstruction forbids, and ignoring the criterion would be worse.
+
+So the nine are declared in `tests/audit/misconception-library.test.ts` as `REQUIRED_PARTS`, marked in the file as a
+reconstruction, and each is checked. Five belong to the misconception — a name, a description of the learner's
+reasoning, a registered detector, the remediation it names, a trigger a learner can reach — and four to the
+remediation: an immediate explanation, a micro-lesson, a follow-up question, and the skills it reinforces. The test of
+whether a "part" is real is that the running app consumes it: the session engine injects the follow-up, mastery and
+the review queue are keyed by the skills, the panel shows the explanation. A field nothing reads would be paperwork.
+
+The count itself is asserted, so a future revision has to change the number deliberately rather than let the list
+drift. (S2-16)
+
+**D-057 — A tag that cannot be triggered is a tag that inflates a count.**
+The unit also asks for reverse validation. Three of its rules — no undeclared distractor misconceptions, no orphaned
+remediations, no dangling detector names — were already enforced in `tests/audit/interaction-audit.test.ts` and are
+deliberately not duplicated. The fourth was not enforced anywhere: a question can list a misconception in
+`misconceptionIds` while offering the learner no way to express it, and the declaration still counts everywhere
+declarations are counted.
+
+It is now checked by construction rather than by inspection. `tests/helpers/misconception-triggers.ts` builds the
+wrong answer each declaration implies — a tagged distractor, a declared wrong point or placement, a step value, a
+`wrongValue` from the merged parameters, or, for the detectors that recognise a wrong answer by its relationship to
+the right one, that arithmetic applied to the expected value — and the audit puts it through the **real** pipeline,
+requiring the engine to name that misconception and hand back its remediation.
+
+It found one: `q.boss.r1-variable` declared `mc.constant-counted-as-variable` with neither distractor tagged, so a
+learner picking either wrong column got no diagnosis at all. Both distractors say the same thing — that a column
+reading "Kirkwall" on every row could still tell two days apart — and both are tagged now.
+
+**The check's limit is written into the file.** It proves a declaration is expressible and diagnosable; it cannot
+prove the declared wrong answer is the one a confused learner would give. A probe moving a `wrongValue` a thousand
+away from the question's own numbers failed nothing and should have: the trigger is derived from the same parameter
+the detector reads, so the machinery stays self-consistent while the content stops making sense. No heuristic was
+added, because one guessing at plausibility would fire on legitimate content — the failure the truncated-axis pattern
+already demonstrated (D-047). (S2-16)

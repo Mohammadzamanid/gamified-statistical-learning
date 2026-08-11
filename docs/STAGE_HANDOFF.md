@@ -30,19 +30,19 @@ after Stage 1 was lost because commits were never pushed to a durable remote. Re
 | Default branch | `main` |
 | Pristine Stage 1 import | `7add4bc` — pushed and remote-verified |
 | Baseline docs + CI | `1b0a5dd` — pushed and remote-verified |
-| Last unit completed | **S2-15** — the descriptive-statistics laboratory, all 12 criteria, in three cycles (hashes on the S2-15 backlog row) |
+| Last unit completed | **S2-16** — the Region 2 misconception library: mostly audit, two repairs, and one count-inflating tag found and fixed |
 | Head of `main` | read it live: `git rev-parse HEAD` vs `git ls-remote origin refs/heads/main` — these must match |
 | Milestone snapshot commit | `d4e250434c465f85e4307a226a9af2cbc9788c17` — the commit the exports were built from |
 | Stage tag | `stage-1-baseline` — **created locally, NOT on GitHub** (unit R-00d, blocked; see §2.1) |
 | Milestone exports | `../gsl-exports/` — source ZIP + git bundle + manifest + SHA-256 checksums |
 | Working tree | clean |
 | Node / npm used | v22.22.2 / 10.9.7 |
-| Test suite | **630 tests / 45 files**, all passing (Stage 1 baseline was 73 / 14) |
-| Build | passing (**871.98 kB, 223.98 kB gzip**; baseline was 285.73 kB / 83.82 kB) |
+| Test suite | **646 tests / 46 files**, all passing (Stage 1 baseline was 73 / 14) |
+| Build | passing (**873.48 kB, 224.42 kB gzip**; baseline was 285.73 kB / 83.82 kB) |
 | Source modified since baseline | S2-01 … S2-08 — achievements + region completion, three new interactions, the enforced interaction audit, the review queue, the Region 1 topic architecture, and all 17 Region 1 lessons |
 | Curriculum | 2 regions · **10 modules** · **40 lessons** · **42 skills** · **290 questions** (baseline 2/2/3/6/14) |
 | Lessons Complete to scope §5 | **40** — all 17 Region 1 topic lessons, all 20 Region 2 lessons, and the 3 Stage 1 lessons re-cut into Region 2. **No skeletons in either region** |
-| Misconceptions / remediations | **40 / 39** (baseline 8 / 7) |
+| Misconceptions / remediations | **40 / 39** (baseline 8 / 7) — every one reachable, and each held to the nine declared parts (D-056) |
 | Validated generated interactions | **6,607**, available to spaced review (baseline 0) |
 | Topics meeting scope §4 | **17 of 41** — every Region 1 topic, and no Region 2 topic. Region 2's lessons are written; its generators are S2-17 |
 | Save schema version | **4** (baseline was 1) — `1->2` adds `reviewSession`, `2->3` adds `investigationProgress`, `3->4` adds `savedExperiments`. The chain is asserted against this number (D-055) |
@@ -80,7 +80,7 @@ git status
 git rev-parse HEAD
 git ls-remote origin refs/heads/main | awk '{print $1}'   # must match
 npm ci
-npm test            # must stay green: 630/630
+npm test            # must stay green: 646/646
 npm run typecheck && npm run lint
 npm run dev         # renderer + electron dev
 ```
@@ -105,42 +105,41 @@ branch/tag deletion) are forbidden without explicit owner permission. See `REMOT
 
 ## 5. Next unit
 
-**S2-16 — the Region 2 misconception library.** Its criteria: **≥12 named misconceptions reachable**, each remediation
-carrying all **9** required parts, plus reverse validation — no undeclared distractor misconceptions, no orphaned
-remediations, no count-inflating tags.
+**S2-17 — Region 2 validated content expansion.** Its criterion: **≥100 validated interactions per completed Region 2
+major topic**, with diverse reasoning families.
 
-**Start by measuring, not by writing.** The repository currently holds 40 misconceptions and 39 remediations across
-both regions; how many are *Region 2* and *reachable* is a number to compute, not to assume, and the unit may turn out
-to be mostly audit rather than authoring. `tests/audit/interaction-audit.test.ts` already enforces three of the reverse
-rules — every declared misconception exists and has a remediation, every distractor's misconception is declared by its
-question, no remediation is orphaned — so read that block before adding checks that duplicate it.
+**This is the largest remaining unit, and the only one whose number is currently zero.**
+`npm run report:coverage` says 17 of 41 topics meet scope §4 — every Region 1 topic, and **no** Region 2 topic. Each
+Region 2 topic today has between 6 and 15 authored interactions against a floor of 100, and `0 reasoning families
+represented` against a floor of 4. The gap is not authoring; it is generators.
 
-**"All 9 required parts" is a claim to verify against the schema.** Read `RemediationSchema` and count what it
-actually requires before asserting a lesson's worth of structure; if the schema requires fewer than nine, say so and
-name the nine from the scope rather than pretending the schema already encodes them.
+**Read how Region 1 got there before writing anything.** `src/content/generators` and `src/content/generated.ts`
+produce the 6,607 validated interactions the report counts, and the report itself
+(`npm run report:coverage`, output in `docs/CONTENT_COVERAGE.md` and `docs/content-coverage.json`) already reports per
+topic: generator families, reasoning families, raw and valid combinations, rejections with reasons, unreachable
+questions, and largest shape share. That last one matters — a generator emitting a thousand variants of one shape
+should not count as coverage, and the report already measures it.
 
-**S2-15 is Complete and the laboratory is real.** The bench reports what each edit moves (D-050), draws through the
-lessons' own chart components with a live description (D-053), compares two sets on centre, spread and shape
-separately, and keeps experiments in the save file with an export in plain text (D-054). Stage 1 defect #3's
-placeholders are gone; the *simulation* instruments it advertised stay unbuilt by design, since scope §3 excludes
-sampling distributions from Stage 2.
+**Every generated interaction is validated content and must satisfy the same schema and audits as an authored one.**
+`tests/audit/content-coverage.test.ts` already puts generated questions into the playable bundle and through the
+spaced-review queue, and asserts generation is deterministic — 29 checks, and the slowest file in the suite.
 
-**Save-shape changes are checked, not merely contracted (D-055).** `SAVE_SCHEMA_VERSION` is **4**, and the persistence
-suite asserts the registered migrations are exactly steps 1 … version − 1. Bump one without the other and it fails,
-in either direction.
+**Misconceptions are done and enforced (D-056, D-057).** All 40 are reachable and hold the nine declared parts; a
+declaration that no answer can express now fails. If a generator emits questions carrying misconception tags, those
+tags go through the same rule — build the answer the declaration implies, or do not declare it.
 
-**Statistics live in one place, and the audit knows their names (D-051, D-052).**
-`tests/audit/core-purity.test.ts` bans `.reduce(`, `Math.sqrt`/`Math.pow` and any *definition* named after a
-computation the core owns, anywhere under `src/renderer`. If you add a computation to the core, add its name to that
-list in the same commit — the audit's blind spot last time was precisely the names that had never been centralised.
+**Measure before you write.** S2-16 turned out to be audit plus two repairs, and the measurement said so before any
+content was authored. S2-17's measurement is already published in `docs/content-coverage.json`; start there rather
+than from an assumption about what is missing.
 
-**Region 2's teaching is finished, and what is *not* finished must not be implied.** All 20 seeded lessons and the 3
-re-cut Stage 1 lessons are Complete to the 18 structure checks. Region 2 meets **none** of scope §4's per-topic
-interaction counts (S2-17), and its boss investigation is unwritten (S2-18).
+**A generated question is content, so content rules apply.** Notation the curriculum explains (D-039), a numeric
+answer stated in its own explanation (D-049), a box plot's words carrying its five numbers (D-049), and no arithmetic
+in a view (D-051, D-052).
 
-**Probe your own tests, not only your code.** Cycle 3's two zero-fail probes were a missing invariant and a *weak test
-of mine* — one that named a property and checked something that held either way. A test that names a property without
-checking it is worse than no test: it occupies the space where the real check would have gone.
+**Probe your own measurements, not only your code.** S2-16's first measurement read `step.questionId` on investigation
+steps — a field that does not exist, the real one being `questionIds` — and reported zero problems while silently
+skipping every boss question. The typechecker caught it when the same expression reached a checked file. A measurement
+script is not a test and nothing checks it; re-run it inside a typechecked file before believing a zero.
 
 ### Region 2's architecture, and two rules it added
 
