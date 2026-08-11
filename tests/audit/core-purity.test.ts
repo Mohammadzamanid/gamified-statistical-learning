@@ -47,12 +47,21 @@ const files = sourceFiles(RENDERER).map((path) => ({
   text: readFileSync(path, "utf8").replace(/\/\*[\s\S]*?\*\//g, "").replace(/\/\/.*$/gm, "")
 }));
 
-/** The measures `src/core/statistics` owns and the renderer may only import. */
+/**
+ * The computations `src/core/statistics` owns and the renderer may only import.
+ *
+ * `buildBins` and `stackDots` joined the list in S2-15 cycle 2, having been
+ * *defined inside chart components* since S2-14 — binning chooses the intervals
+ * a histogram's whole argument turns on, and stacking is a frequency table in
+ * display clothes. The first version of this audit did not catch them because
+ * it only knew the names the core already owned, which is exactly how a rule
+ * about centralisation ends up with undeclared exceptions (D-052).
+ */
 const TAUGHT_MEASURES = [
   "sum", "mean", "weightedMean", "median", "mode", "range", "percentile",
   "quartiles", "quartilesByHalves", "interquartileRange", "interquartileRangeByHalves",
   "fiveNumberSummary", "variance", "standardDeviation", "zScore", "frequencyTable",
-  "proportion", "percentage"
+  "proportion", "percentage", "buildBins", "stackDots"
 ];
 
 describe("statistics stay in one place", () => {

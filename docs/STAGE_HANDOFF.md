@@ -37,8 +37,8 @@ after Stage 1 was lost because commits were never pushed to a durable remote. Re
 | Milestone exports | `../gsl-exports/` — source ZIP + git bundle + manifest + SHA-256 checksums |
 | Working tree | clean |
 | Node / npm used | v22.22.2 / 10.9.7 |
-| Test suite | **599 tests / 43 files**, all passing (Stage 1 baseline was 73 / 14) |
-| Build | passing (**861.47 kB, 220.85 kB gzip**; baseline was 285.73 kB / 83.82 kB) |
+| Test suite | **612 tests / 44 files**, all passing (Stage 1 baseline was 73 / 14) |
+| Build | passing (**867.65 kB, 222.74 kB gzip**; baseline was 285.73 kB / 83.82 kB) |
 | Source modified since baseline | S2-01 … S2-08 — achievements + region completion, three new interactions, the enforced interaction audit, the review queue, the Region 1 topic architecture, and all 17 Region 1 lessons |
 | Curriculum | 2 regions · **10 modules** · **40 lessons** · **42 skills** · **290 questions** (baseline 2/2/3/6/14) |
 | Lessons Complete to scope §5 | **40** — all 17 Region 1 topic lessons, all 20 Region 2 lessons, and the 3 Stage 1 lessons re-cut into Region 2. **No skeletons in either region** |
@@ -80,7 +80,7 @@ git status
 git rev-parse HEAD
 git ls-remote origin refs/heads/main | awk '{print $1}'   # must match
 npm ci
-npm test            # must stay green: 599/599
+npm test            # must stay green: 612/612
 npm run typecheck && npm run lint
 npm run dev         # renderer + electron dev
 ```
@@ -105,45 +105,39 @@ branch/tag deletion) are forbidden without explicit owner permission. See `REMOT
 
 ## 5. Next unit
 
-**S2-15 continued — charts on the bench, and two datasets side by side.**
+**S2-15 continued — saved experiments and exported summaries.** The last two of the unit's twelve criteria.
 
-**Cycle 1 built the laboratory core and met 7 of the unit's 12 criteria.** `src/core/laboratory` holds the experiment
-model, its edits and the narration; `LabScreen` arranges and announces and computes nothing. Remaining: compare two
-datasets, change graph type, change bin width (cycle 2); save/reload experiments and export summaries (cycle 3).
+**Cycles 1 and 2 met ten of them.** The bench holds editable readings and reports what each edit moved (D-050); it
+draws them as a histogram, dot plot or box plot with the bin width as a control; and a second set can be compared on
+centre, spread and shape separately (D-053). What is left needs the save file to change.
 
-**The bench's subject is what an edit moves (D-050).** Every action is a logged event carrying the summary either side
-of it, and `describeChange` reports both halves — what moved and what held still. Sorting is kept precisely because it
-moves nothing and says so. That sentence is also the accessible output: it goes to the live region verbatim. Anything
-added to the bench should extend the log, not sit beside it.
+**Cycle 3 needs a save-schema migration, and that is a contract (see §6).** `SAVE_SCHEMA_VERSION` goes 2 → 3 with a
+migration in `src/core/persistence/migrations.ts` plus round-trip tests — the same path S2-06 took for the review
+queue, which is the worked example to copy. A saved experiment is readings, title, chart kind and bin width; the log
+is a session's trail and does not have to survive a reload, but say which you chose and why.
 
-**Statistics may not be recomputed in a view, and that is now a test (D-051).** `tests/audit/core-purity.test.ts`
-forbids `.reduce(`, `Math.sqrt`/`Math.pow`, and any *definition* named after a measure the core owns, anywhere under
-`src/renderer`. All three read zero today. Importing from `src/core/statistics` is the intended path. If a view ever
-has an honest need for one, widen the audit deliberately and say why in the same commit — do not delete it.
+**Statistics live in one place, and the audit knows their names.** `tests/audit/core-purity.test.ts` bans `.reduce(`,
+`Math.sqrt`/`Math.pow`, and any *definition* named after a computation the core owns, anywhere under `src/renderer`.
+S2-15 cycle 2 found two that had been in views since S2-14 — `buildBins` and `stackDots` — because the audit's list was
+built from what the core already had (D-052). If you add a computation, add its name to that list in the same commit.
 
-**Cycle 2's charts already exist.** Five visual kinds draw (`bar-chart`, `histogram`, `dot-plot`, `box-plot`,
-`scatter`) with their arithmetic exported and tested — `buildBins`, `stackDots`, `numericPair`, `fiveNumberSummary`.
-A bench that changes bin width is driving `buildBins`, not a second implementation of it (D-043, D-044, D-051). Chart
-descriptions must carry the five numbers for a box plot (D-049).
+**A bench's description is a live claim (D-053).** It is regenerated from the current readings on every edit, so a box
+plot's words carry all five of its numbers (D-049) and a histogram states the bin width a finished histogram never
+shows (D-047). Anything new the bench draws needs the same treatment; a caption written once will be describing the
+chart it was written for.
 
-**Cycle 3 needs a save-schema migration.** Saved experiments change the save shape, so `SAVE_SCHEMA_VERSION` goes 2 → 3
-with a migration in `src/core/persistence/migrations.ts` and round-trip tests — the contract in §6, and the same path
-S2-06 took for the review queue.
+**The bench refuses what it cannot draw honestly.** Bar charts and scatterplots are named as excluded, with reasons,
+because one column of numbers has neither names for bars nor pairs for points (D-046). Adding a kind means adding the
+data it needs, not relaxing the refusal.
 
 **Region 2's teaching is finished, and what is *not* finished must not be implied.** All 20 seeded lessons and the 3
-re-cut Stage 1 lessons are Complete to the 18 structure checks, and neither region has a skeleton. But Region 2 meets
-**none** of scope §4's per-topic interaction counts (S2-17), its misconception library has not been audited against
-S2-16's criteria, and its boss investigation is unwritten (S2-18).
+re-cut Stage 1 lessons are Complete to the 18 structure checks. But Region 2 meets **none** of scope §4's per-topic
+interaction counts (S2-17), its misconception library has not been audited against S2-16's criteria, and its boss
+investigation is unwritten (S2-18).
 
-**A number a learner is judged by must be stated in the words beside it (D-049).** A numeric answer must appear in its
-own explanation; a box plot's accessible description must carry all five of its dataset's five-number summary.
-
-**When a temporary rule empties, end it (D-048), and when a guard's subject empties, say so.** Region 2's
-skeleton-honesty loop asserts zero explicitly rather than iterating nothing.
-
-**Probe your own work before believing it.** Every cycle since S2-12 has ended with deliberate breakages, and roughly
-one in three has found a guard that failed nothing — including both of this cycle's new audits. Report the zero-fail
-rows; they are the ones that produce the next check.
+**Probe your own work, and report the probes that were wrong.** Cycle 2 ran seven; six bit, and one turned out to
+remove a label while leaving the number in the sentence beside it — no defect, no new guard, recorded as a bad probe.
+That row is worth as much as the others: it is how a guard avoids being widened for a case that never existed.
 
 ### Region 2's architecture, and two rules it added
 

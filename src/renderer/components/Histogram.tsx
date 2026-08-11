@@ -1,3 +1,4 @@
+import { buildBins } from "../../core/statistics/binning";
 import type { Dataset } from "../../shared/schemas";
 
 /**
@@ -10,10 +11,12 @@ import type { Dataset } from "../../shared/schemas";
  * `BarChart` — a chart drawn with gaps while a lesson explains that histograms
  * have none would be teaching one thing and showing another.
  *
- * Binning happens here rather than in content: the dataset holds readings, and
- * how they are grouped is a property of the picture. `binWidth` is therefore a
- * rendering choice a question can vary while the data stays put, which is
- * exactly the point the misleading-graphs lesson needs later.
+ * Binning is a property of the picture rather than of the content: the dataset
+ * holds readings, and `binWidth` is a rendering choice a question can vary while
+ * the data stays put — exactly the point the misleading-graphs lesson needs.
+ * The arithmetic itself lives in `src/core/statistics/binning.ts`, where the
+ * laboratory bench reads it too; it was defined in this file until S2-15 found
+ * that a view was computing (D-052).
  */
 export function Histogram({
   dataset,
@@ -102,42 +105,7 @@ export function Histogram({
   );
 }
 
-type Bin = { from: number; to: number; count: number };
-
-/**
- * Groups values into adjacent equal-width intervals, each holding its lower
- * bound and excluding its upper — except the last, which includes both so the
- * largest reading has somewhere to go.
- *
- * Exported for the unit tests: binning is the arithmetic behind a taught
- * picture, so it is checked directly rather than inferred from rendered SVG.
- */
-export function buildBins(values: readonly number[], binWidth?: number): Bin[] {
-  if (values.length === 0) return [];
-  const min = Math.min(...values);
-  const max = Math.max(...values);
-  if (min === max) return [{ from: min, to: min, count: values.length }];
-
-  const span = max - min;
-  // Five bins is the default only because it reads well at this size; any
-  // question that cares about bin width says so, and the lesson on misleading
-  // graphs exists because that choice changes what a reader sees.
-  const rawWidth = binWidth && binWidth > 0 ? binWidth : span / 5;
-  const count = Math.max(1, Math.ceil(span / rawWidth));
-
-  const bins: Bin[] = [];
-  for (let i = 0; i < count; i += 1) {
-    const from = min + i * rawWidth;
-    const to = i === count - 1 ? max : from + rawWidth;
-    bins.push({ from, to, count: 0 });
-  }
-  for (const v of values) {
-    const index = Math.min(count - 1, Math.floor((v - min) / rawWidth));
-    bins[index]!.count += 1;
-  }
-  return bins;
-}
-
+/** Axis labels: whole numbers stay whole, the rest get one decimal place. */
 function trim(n: number): string {
   return Number.isInteger(n) ? String(n) : n.toFixed(1);
 }

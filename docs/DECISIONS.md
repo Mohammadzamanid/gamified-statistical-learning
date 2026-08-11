@@ -473,3 +473,36 @@ deviation; and no *definition* of a symbol named after a measure the core owns. 
 is untouched. All three read zero across `src/renderer` today, so the audit pins current fact rather than aspiring to
 it. With two quartile conventions deliberately in the codebase (D-045), a second implementation is exactly how one of
 them quietly becomes three. (S2-15)
+
+**D-052 — Two statistics were living in views, and the audit that should have caught them did not know their names.**
+D-051 had just made scope §7's centralisation rule enforceable, and one cycle later the laboratory needed `buildBins`
+to draw a histogram of its own readings — from the core, which cannot import a `.tsx`. `buildBins` was defined inside
+`Histogram.tsx`, and `stackDots` inside `DotPlot.tsx`. Both are statistics: binning chooses the intervals a histogram's
+whole argument turns on, and stacking is a frequency table wearing display clothes — it counted occurrences a second
+time, next to a `frequencyTable` the core already had.
+
+They moved to `src/core/statistics/binning.ts` rather than being copied; the components import them, the bench imports
+them, and `stackDots` is now built on `frequencyTable`. The audit's banned-definition list gained both names, because
+the reason it missed them is instructive: it knew the names `src/core/statistics` already owned, so a computation could
+evade it simply by never having been centralised. A rule about centralisation that only recognises what is already
+central will always have undeclared exceptions.
+
+The general lesson, and the reason this is a decision rather than a tidy-up: **a guard written from an inventory
+inherits that inventory's gaps.** The probe that found this was not a probe at all — it was the compiler refusing to let
+core import a view. (S2-15)
+
+**D-053 — A bench's chart description is a live claim, not a caption.**
+A lesson's visual is fixed, so its accessible description can be authored once and checked against the dataset
+(D-049). On the bench the picture changes under the learner's hands, so the description is regenerated from the current
+readings on every edit and the two lesson-side rules are kept by construction: a box plot's words carry all five of its
+numbers, and a histogram states the bin width that a finished histogram never shows (D-047).
+
+The bench offers three of the five kinds that draw. A bar chart needs a name for each bar and a scatterplot a second
+measurement per reading; the bench holds one column of numbers and has neither, so it names both exclusions and their
+reasons on screen rather than presenting a control that produces a wrong picture — the refusal `numericPair` makes,
+one level out (D-046).
+
+Its comparison asks `l.r2-comparing-distributions`'s three questions separately and reports each on its own, so two
+sets dragged to the same median are told they agree on centre and differ on spread, never that they are alike. Reading
+the shape uses the same rule as `l.r2-skew` — a mean above the median is a tail on the high side — so the bench cannot
+answer a question differently from the lesson that taught it. (S2-15)

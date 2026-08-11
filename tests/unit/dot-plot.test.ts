@@ -7,7 +7,7 @@
  * not of the SVG, so they are checked here (D-044).
  */
 import { describe, expect, it } from "vitest";
-import { stackDots } from "../../src/renderer/components/DotPlot";
+import { stackDots } from "../../src/core/statistics/binning";
 import { loadShippedContent } from "../../src/content";
 
 describe("dot stacking", () => {

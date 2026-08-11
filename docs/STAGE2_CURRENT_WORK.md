@@ -6,46 +6,46 @@ Exactly one Stage 2 unit is active at a time. Rewritten at the start and end of 
 
 ## Current unit
 
-**S2-15 — Descriptive-statistics laboratory (cycle 1: the bench becomes a learning environment)**
+**S2-15 — Descriptive-statistics laboratory (cycle 2: charts on the bench, and two sets side by side)**
 
-Entered from `8e8e49591e564156357e4c625a9ff59973a7a149` (remote-verified, clean tree).
+Entered from `63f77b31eab1f4e68d5575afef997d85d41bd2fa` (remote-verified, clean tree).
 
 ## Objective
 
-Replace Stage 1's calculator bench with the core of the laboratory the scope asks for: editable readings, and an
-account of what each edit moves.
+Draw the bench's readings, let the learner change how they are drawn, and compare two sets the way
+`l.r2-comparing-distributions` teaches.
 
 ## Result up front
 
-**S2-15 is Partial: 7 of its 12 criteria are met.** The bench now holds readings you can add to, edit, remove, sort and
-push an outlier into, and every one of those actions reports what it moved *and what it left alone* — which is the
-whole difference between a learning environment and a calculator (D-050). Graphs, two-dataset comparison, saved
-experiments and exported summaries are the remaining five and belong to later cycles.
+**S2-15 is Partial: 10 of its 12 criteria are met.** The bench draws its readings as a histogram, dot plot or box
+plot; the bin width is a control; and a second set can be copied, edited and compared on centre, spread and shape
+separately. Only saved experiments and exported summaries remain, and both belong to cycle 3 with the save-schema
+migration they need.
+
+**Two statistics were found living inside chart components** and moved to the core — see Corrections. The audit that
+was supposed to prevent exactly that could not see them (D-052).
 
 ## Relevant files
 
 | File | Change |
 |---|---|
-| `src/core/laboratory/experiment.ts` | **New.** The experiment model, its edits, and the change narration — all pure |
-| `src/core/laboratory/index.ts` | **New.** Barrel |
-| `src/renderer/screens/LabScreen.tsx` | Rewritten against the core; arranges and announces, computes nothing |
-| `tests/unit/laboratory.test.ts` | **New** — 20 checks |
-| `tests/audit/core-purity.test.ts` | **New** — 4 checks enforcing scope §7's centralisation rule (D-051) |
+| `src/core/statistics/binning.ts` | **New.** `buildBins` and `stackDots`, moved out of the two chart components |
+| `src/core/laboratory/charts.ts` | **New.** Which kinds the bench offers, why the other two are refused, and the live description |
+| `src/core/laboratory/comparison.ts` | **New.** The three questions, answered separately |
+| `src/renderer/components/{Histogram,DotPlot}.tsx` | Import their arithmetic instead of defining it |
+| `src/renderer/screens/LabScreen.tsx` | Chart picker, bin-width control, second bench, comparison table |
+| `tests/unit/laboratory-charts.test.ts` | **New** — 13 checks |
+| `tests/audit/core-purity.test.ts` | `buildBins` and `stackDots` added to the banned-definition list |
+| `tests/unit/{histogram,dot-plot}.test.ts` | Import from the core the functions now live in |
 
 ## Acceptance criteria
 
 | # | Criterion | Met |
 |---|---|---|
-| 1 | Create / edit datasets | **Yes** — start blank, from the bench's own set, or from any shipped numeric dataset |
-| 2 | Add / remove values | **Yes** |
-| 3 | Sort | **Yes** — and it reports that no measure changed |
-| 4 | Add outliers | **Yes** — derived from the data's own 1.5-IQR fence |
-| 5 | Live statistics | **Yes** — under the taught quartile convention (D-045) |
-| 6 | Reset | **Yes** — clear the bench, or start again |
-| 7 | Accessible text descriptions | **Yes** for every edit; the chart descriptions arrive with the charts |
-| 8 | Compare two datasets | No — cycle 2 |
-| 9 | Change graph type | No — cycle 2 |
-| 10 | Change bins | No — cycle 2 |
+| 1–7 | Create/edit, add/remove, sort, outliers, live statistics, reset, accessible text | **Yes** (cycle 1) |
+| 8 | Compare two datasets | **Yes** — centre, spread and shape, each reported on its own |
+| 9 | Change graph type | **Yes** — three kinds; the other two are refused with reasons |
+| 10 | Change bins | **Yes** — and the description always states the width it drew |
 | 11 | Save / reload experiments | No — cycle 3; needs a save-schema migration |
 | 12 | Export summaries | No — cycle 3 |
 
@@ -57,79 +57,66 @@ Measured (Node v22.22.2 / npm 10.9.7):
 |---|---|
 | `npm run typecheck` | Pass |
 | `npm run lint` | Pass — 0 errors, 0 warnings |
-| `npm test` | Pass — **599 tests / 43 files** |
+| `npm test` | Pass — **612 tests / 44 files** |
 | `npm run test:statistics` | Pass — 18 tests / 3 files |
 | `npm run test:content` | Pass — 5 tests / 1 file |
-| `npm run build` | Pass — 861.47 kB (220.85 kB gzip) |
-| `npm run report:coverage` | Ran — 17 of 41 topics meet §4, unchanged (no content changed this cycle) |
+| `npm run build` | Pass — 867.65 kB (222.74 kB gzip) |
+| `npm run report:coverage` | Ran — 17 of 41 topics meet §4, unchanged (no content changed) |
 
 `test:a11y` was **not** run and is **not** claimed; it arrives in S2-20.
 
 ## Work completed
 
-1. **Every edit is an event carrying the summary either side of it.** `describeChange` turns one into a sentence
-   naming what moved and what did not. Measured, not paraphrased:
+1. **The bench draws through the components the lessons draw through.** No new drawing code: the readings become a
+   one-column dataset and go to `Histogram`, `DotPlot` or `BoxPlot` (D-043, D-044).
 
-   > Added an outlier at 18.75: sum 25 to 43.75; mean 5 to 7.2917; median 4 to 5; range 7 to 16.75; first quartile 3
-   > to 4; third quartile 7.5 to 9; largest value 9 to 18.75; interquartile range 4.5 to 5; sample variance 7 to
-   > 37.1104; sample standard deviation 2.6458 to 6.0918. **Unchanged: mode, smallest value.**
+2. **Its description is regenerated on every edit** rather than authored once, because the picture changes under the
+   learner's hands. A box plot's words carry all five of its numbers (D-049) and a histogram states its bin width,
+   which a finished histogram never shows (D-047) — both kept by construction, both probed. (D-053)
 
-   The account is complete rather than a selection, which is what makes the "Unchanged" half worth trusting. The same
-   string goes to the live region, so a screen-reader user is told what changed rather than told a table exists
-   (D-050, scope §6).
+3. **Three kinds are offered and two are refused with reasons.** A bar chart needs a name per bar, a scatterplot a
+   second measurement per reading; the bench has neither, so it says so instead of offering a control that draws a
+   wrong picture.
 
-2. **Sorting is kept as an operation precisely because it moves nothing.** Every measure the bench reports is
-   order-independent, so its log line reads "No measure changed — every one of them ignores the order of the
-   readings." A bench that reordered silently would leave a learner guessing whether it mattered.
-
-3. **The outlier button offers the data's own outlier**, a further interquartile range past the 1.5-IQR fence
-   `l.r2-outliers` teaches — and offers nothing when the middle half has zero width, where the rule is degenerate.
-
-4. **The bench withholds rather than substitutes.** One reading has no sample spread, so variance and standard
-   deviation read "—" with a line saying why; reporting 0 would be a population answer wearing a sample label
-   (scope §7).
-
-5. **Scope §7's centralisation rule became a test** after a probe showed an inline fold in the view failed nothing
-   (D-051).
+4. **Comparison asks three questions and answers each separately.** Two channels sharing a median are reported as
+   agreeing on centre and differing on spread — "A comparison that stopped at the agreeing measure would have called
+   them the same." Shape is read as `l.r2-skew` reads it, so the bench cannot contradict the lesson.
 
 ## Corrections made during the unit
 
-1. **The suggested outlier was a number the bench invented.** With a zero-width middle half the fence rule is
-   degenerate, and the first draft fell back on the maximum to pick a distance — arithmetic derived from nothing,
-   in a button whose whole claim is that it comes from the data. Its own test caught it; the bench now declines and
-   the control says why.
+1. **Two statistics were living in views.** `buildBins` was defined in `Histogram.tsx` and `stackDots` in
+   `DotPlot.tsx`. The core cannot import a `.tsx`, so the compiler surfaced it the moment the bench needed to draw its
+   own readings. Both moved to `src/core/statistics/binning.ts`; `stackDots` is now built on the `frequencyTable` it
+   had been duplicating. **D-051's audit did not catch them because it knew only the names the core already owned** —
+   a guard written from an inventory inherits that inventory's gaps (D-052). Both names are now in the list.
+
+2. **My own test asserted guessed quartiles.** Channel B's halves give 7 / 8 / 10 / 13 / 15, not the 7.5 and 14 the
+   first draft expected. The code was right; the expectation was written without doing the arithmetic.
 
 ## Verification that the guards have teeth
 
-Six deliberate probes, all reverted. **Five bite, one found a gap now closed and re-probed twice:**
+Seven deliberate probes, all reverted. **Six bite, one was a bad probe and is reported as such:**
 
 | Probe | Result |
 |---|---|
-| The summary switches to the interpolated quartile convention | **1 check fails** (D-045) |
-| The change report drops the measures that held still | **1 check fails** |
-| Sorting stops being logged | **1 check fails** |
-| The suggested outlier becomes a number of the bench's own choosing | **2 checks fail** |
-| Variance is reported as 0 for a single reading | **1 check fails** |
-| The view folds its own mean instead of asking the core | **0 → 1 check fails** — closed by D-051 |
-| *(re-probe)* The view defines its own `standardDeviation` | **2 checks fail** |
+| The histogram's words stop stating the bin width | **2 checks fail** (D-047) |
+| The description ignores the bin width it was given | **2 checks fail** |
+| The bench offers a bar chart it cannot honestly draw | **1 check fails** |
+| The comparison answers centre and calls that the comparison | **2 checks fail** |
+| Skew is read the wrong way round | **1 check fails** |
+| Binning moves back into the view it came from | **1 check fails** — the rule D-052 widened |
+| The box plot's words drop a quartile | **0 checks fail — the probe was wrong.** It removed the *labels* while the "box spans 8 to 13" sentence still carried both numbers, so nothing was lost |
+| *(paired)* The box plot's words lose the quartile **numbers** | **1 check fails** — the real defect does bite |
 
 ## Remaining work
 
-**5 of S2-15's 12 criteria**: comparison, graph type, bin width (cycle 2); saved experiments and exported summaries
-(cycle 3, which needs a save-schema migration).
+**2 of S2-15's 12 criteria**: saved experiments and exported summaries, in cycle 3, which needs `SAVE_SCHEMA_VERSION`
+2 → 3 and a migration.
 
 ## Local commit
 
-`22e8c981b4754e15fb6bc078aea0711bcfe51e86`
-
-## Remote verification
-
-```
-LOCAL_HEAD  = 22e8c981b4754e15fb6bc078aea0711bcfe51e86
-REMOTE_HEAD = 22e8c981b4754e15fb6bc078aea0711bcfe51e86
-VERIFIED: MATCH
-```
+Recorded in `STAGE2_RECONSTRUCTION_BACKLOG.md` on the S2-15 row.
 
 ## Next unit
 
-**S2-15 continued — charts on the bench, and two datasets side by side.** Not started in this cycle.
+**S2-15 continued — saved experiments and exported summaries.** Not started in this cycle.

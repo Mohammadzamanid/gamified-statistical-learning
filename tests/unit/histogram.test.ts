@@ -9,7 +9,7 @@
  * produces them.
  */
 import { describe, expect, it } from "vitest";
-import { buildBins } from "../../src/renderer/components/Histogram";
+import { buildBins } from "../../src/core/statistics/binning";
 import { loadShippedContent } from "../../src/content";
 
 describe("histogram binning", () => {

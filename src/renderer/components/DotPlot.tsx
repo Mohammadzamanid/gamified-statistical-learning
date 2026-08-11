@@ -1,3 +1,4 @@
+import { stackDots } from "../../core/statistics/binning";
 import type { Dataset } from "../../shared/schemas";
 
 /**
@@ -95,17 +96,4 @@ export function DotPlot({
       {caption && <figcaption className="faint">{caption}</figcaption>}
     </figure>
   );
-}
-
-/**
- * One entry per distinct value, with how many readings share it, ascending.
- *
- * Exported for the unit tests: a dot plot's claim is that the tallest stack is
- * the mode and that every reading is visible, and both are properties of this
- * function rather than of the SVG (D-044).
- */
-export function stackDots(values: readonly number[]): Array<{ value: number; height: number }> {
-  const counts = new Map<number, number>();
-  for (const v of values) counts.set(v, (counts.get(v) ?? 0) + 1);
-  return [...counts.entries()].map(([value, height]) => ({ value, height })).sort((a, b) => a.value - b.value);
 }
