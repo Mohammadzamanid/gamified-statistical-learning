@@ -113,11 +113,15 @@ graphs.
 
 ## Local commit
 
-`PENDING`
+`fa8d39957432384f385ca10680fed3c9c6a07d2c`
 
 ## Remote verification
 
-`PENDING`
+```
+LOCAL_HEAD  = fa8d39957432384f385ca10680fed3c9c6a07d2c
+REMOTE_HEAD = fa8d39957432384f385ca10680fed3c9c6a07d2c
+VERIFIED: MATCH
+```
 
 ## Next unit
 
