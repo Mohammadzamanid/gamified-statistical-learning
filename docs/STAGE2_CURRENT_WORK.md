@@ -114,7 +114,15 @@ data literacy.
 
 ## Local commit
 
-Recorded in `STAGE2_RECONSTRUCTION_BACKLOG.md` on the S2-17 row.
+`7e58cb7a92ed7b76758115a569b3ec22ae024c05`
+
+## Remote verification
+
+```
+LOCAL_HEAD  = 7e58cb7a92ed7b76758115a569b3ec22ae024c05
+REMOTE_HEAD = 7e58cb7a92ed7b76758115a569b3ec22ae024c05
+VERIFIED: MATCH
+```
 
 ## Next unit
 
