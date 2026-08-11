@@ -260,6 +260,12 @@ describe("skeleton honesty", () => {
     // required it to be deleted at that point rather than kept as scaffolding
     // nothing uses (D-034). It was. The rule is back to what it always was.
     const seeded = region2Lessons.filter((l) => l.id.startsWith("l.r2-") && !COMPLETE_LESSONS.includes(l.id));
+    // S2-14 cycle 5 wrote the last of the 20, so this set is now empty and the
+    // loop below would pass without running a single check. Stated as a claim
+    // rather than left vacuous, exactly as Region 1 did on reaching the same
+    // point: if it ever rises above zero, a Region 2 lesson exists that the
+    // structure audit never sees.
+    expect(seeded.length, "the Complete list and the Region 2 content have diverged").toBe(0);
     for (const lesson of seeded) {
       expect(
         lesson.questionIds.length,

@@ -6,36 +6,31 @@ Exactly one Stage 2 unit is active at a time. Rewritten at the start and end of 
 
 ## Current unit
 
-**S2-14 — Data-visualization lessons (cycle 4: choosing graphs, misleading graphs, and the end of a temporary rule)**
+**S2-14 — Data-visualization lessons (cycle 5: comparing distributions, and the end of Region 2's teaching)**
 
-Entered from `c14d5e7c1574c5a8c7817b310dac1284b89588ff` (remote-verified, clean tree).
+Entered from `986f0f783c5476a6ee55f2912dcf38af5cf7fab1` (remote-verified, clean tree).
 
 ## Objective
 
-Write `l.r2-choosing-graphs` and `l.r2-misleading-graphs` to all 18 of scope §5's requirements, and clear the last
-staged inherited question.
+Write `l.r2-comparing-distributions` to all 18 of scope §5's requirements — the last of S2-14's nine lessons, and the
+last unwritten lesson in Region 2.
 
 ## Result up front
 
-**S2-14 is Partial: 8 of its 9 lessons are Complete.** Every graph lesson is written. Only
-`l.r2-comparing-distributions` remains — inherited from S2-13, and belonging last because it draws on everything.
-
-**Staged inheritance is finished, and the mechanism is deleted.** `STAGED_INHERITED` carried an audit clause requiring
-its own removal once empty, and a ceiling tightened at each clearance — 4, then 2, then 1. `q.error-id-causation` took
-the misconception role in `l.r2-misleading-graphs`, the map emptied, and the helper and its whole audit block went with
-it. (D-048)
+**S2-14 is Complete: all 9 lessons are written.** With this one, **Region 2 has no skeletons left** — all 20 seeded
+lessons are declared Complete and held to the 18 structure checks. It also meets **S2-13's outstanding criterion 5**
+(distribution comparison), which is why that unit stayed Partial, and makes the boss's **stage 5** legal under D-028.
 
 ## Relevant files
 
 | File | Change |
 |---|---|
-| `src/shared/schemas/question.ts` | `axisMin` and `binWidth`, each rejected on the kinds they mean nothing to |
-| `src/renderer/components/BarChart.tsx` | Honours `axisMin`; zero stays the default |
-| `tests/audit/interaction-audit.test.ts` | A presentation setting must be stated in the chart's words, both ways |
-| `tests/unit/scatter-plot.test.ts` | The port landings both lessons argue from |
-| `tests/helpers/staged-inherited.ts` | **Deleted**, with its audit block |
-| `src/content/*` | 285 authored questions; 39 misconceptions; 38 remediations; 5 datasets |
-| `tests/helpers/complete-lessons.ts` | 37 → **39** lessons declared Complete |
+| `src/content/worlds/curriculum.json` | The lesson: narrative, three concepts, `dem.r2-comparing-distributions`, formal term, five objectives |
+| `src/content/questions/questions.json` | 285 → **290** authored (six new, one seed deleted) |
+| `src/content/questions/{misconceptions,remediations}.json` | `mc.same-centre-same-data` + `rem.centre-is-not-the-comparison` |
+| `tests/audit/interaction-audit.test.ts` | Two new checks — a numeric answer must be stated in its explanation; a box plot's words must carry its five numbers (D-049) |
+| `tests/audit/region2-architecture.test.ts` | The skeleton set is now empty, and says so rather than looping over nothing |
+| `tests/helpers/complete-lessons.ts` | 39 → **40** lessons declared Complete |
 
 ## Acceptance criteria
 
@@ -44,10 +39,10 @@ it. (D-048)
 | 1 | Bar charts, histograms | **Yes** (cycle 1) |
 | 2 | Dot plots, box plots | **Yes** (cycle 2) |
 | 3 | Scatterplots | **Yes** (cycle 3) |
-| 4 | Graph selection | **Yes** |
-| 5 | Truncated axes, bin-width effects, misleading framing | **Yes** — drawn, not described |
-| 6 | `l.r2-comparing-distributions` (inherited from S2-13) | No — belongs last |
-| 7 | Staged inherited questions cleared | **Yes** — and the mechanism deleted |
+| 4 | Graph selection | **Yes** (cycle 4) |
+| 5 | Truncated axes, bin-width effects, misleading framing | **Yes** (cycle 4) — drawn, not described |
+| 6 | `l.r2-comparing-distributions` (inherited from S2-13) | **Yes** |
+| 7 | Staged inherited questions cleared | **Yes** (cycle 4) — and the mechanism deleted |
 | 8 | Commit pushed and remote hash verified | Yes — see below |
 
 ## Required tests
@@ -58,72 +53,64 @@ Measured (Node v22.22.2 / npm 10.9.7):
 |---|---|
 | `npm run typecheck` | Pass |
 | `npm run lint` | Pass — 0 errors, 0 warnings |
-| `npm test` | Pass — **570 tests / 41 files** |
+| `npm test` | Pass — **575 tests / 41 files** |
 | `npm run test:statistics` | Pass — 18 tests / 3 files |
 | `npm run test:content` | Pass — 5 tests / 1 file |
-| `npm run build` | Pass |
+| `npm run build` | Pass — 856.35 kB (219.19 kB gzip) |
 | `npm run report:coverage` | Ran — 17 of 41 topics meet §4, unchanged |
 
 `test:a11y` was **not** run and is **not** claimed; it arrives in S2-20.
 
 ## Work completed
 
-1. **The misleading-graphs lesson draws a truncated chart rather than describing one.** `VisualSpec` gained `axisMin`
-   and `binWidth` — the two presentation choices the lesson criticises — each rejected by the schema on kinds it means
-   nothing to. Five ports landing 48 to 53 crates are shown from an axis starting at 47, where the tallest bar stands
-   six times the shortest from a real difference of about a tenth, and again from zero, where they are level. (D-047)
+1. **The lesson teaches that a comparison is three comparisons, not one.** Two survey parties report a median depth of
+   ten metres for two channels; one is safe to run at night and the other has grounded three boats. Its three concepts
+   are centre-spread-shape, why a shared centre hides everything, and what a fair comparison requires — the same
+   measures, on the same scale, for both.
 
-2. **Choosing a graph is taught as choosing a loss.** Its demonstration reports how many readings share each distinct
-   value: at 5.00 a dot plot reads clearly, and at 1.00 — the surveyor measuring to the centimetre — every column is
-   one dot high and the picture says nothing. That is the boundary where pooling into intervals stops costing
-   anything, stated as a number rather than a rule of thumb.
+2. **Its demonstration moves the spreads and leaves the medians alone.** Two controls set the width of each channel's
+   middle half, and the readout gives the difference: 2.6 against 0.3 reads 2.3, and dredging Channel A to 2.6 takes it
+   to 0 without a median moving. That is the argument in one control — a report giving only the medians reads
+   identically before and after.
 
-3. **The staging mechanism reached its declared end and was deleted.** Not merely emptied: helper, audit block and the
-   `1 + staged.length` allowance all removed, and skeleton honesty is back to the single line it was before. (D-048)
+3. **Six questions across the six roles**, including a numeric one that computes both interquartile ranges from a box
+   plot of the twenty channel soundings (7.5 against 0.3, so 7.2 metres wider), and a mastery question where centre
+   *and* spread agree and only the mean-against-median gap reveals B's tail.
+
+4. **Region 2's skeleton rule now states its own emptiness.** With all 20 lessons Complete the loop iterated nothing
+   and passed vacuously; it asserts zero explicitly, as Region 1's did on reaching the same point (the D-048 habit).
 
 ## Corrections made during the unit
 
-1. **The matching question was written against the wrong schema shape.** `MatchingAnswerSchema` requires both sides to
-   be declared ids, and the right-hand options live in a `rightItems` array rather than as free text on the pair.
-   Caught before it reached disk by reading an existing matching question rather than assuming.
-
-2. **My own new check flagged the honest chart.** The reverse rule — prose claiming a truncated axis must have the
-   setting behind it — matched "starting at zero", which is the honest default saying so out loud. The pattern was too
-   eager, not the content wrong; it now means a start that is not zero.
+None. The previous cycle's note — read an existing example before writing an unfamiliar shape — was followed for the
+`short-explanation` answer, the `tagged-distractor` misconception and the remediation, and each matched on the first
+attempt.
 
 ## Verification that the guards have teeth
 
-Seven deliberate probes, all reverted. **Four bite, two found gaps now closed and re-probed, one repeated a wrong
-hypothesis from last cycle:**
+Six deliberate probes, all reverted. **Four bite, two found gaps now closed and re-probed:**
 
 | Probe | Result |
 |---|---|
-| `axisMin` is set on a histogram, where it means nothing | **8 checks fail** (rejected at load) |
-| `binWidth` is set on a bar chart, where it means nothing | **8 checks fail** (rejected at load) |
-| The truncated chart is redrawn from zero while the prose still describes it | **0 → 1 check fails** — the gap this cycle's most important guard closes |
-| The port dataset drifts from the figures the lesson quotes | **0 → 2 checks fail** — closed by a dataset test, as for the other four datasets |
-| The promoted causation question loses the lesson's skill | **0 checks fail — the probe was wrong again.** The lesson also declares `obj.read-data`, which that question practises. The same wrong hypothesis as cycle 3; a lesson may teach more than its title |
-| The truncated-axis misconception loses its tagged distractor | **1 check fails** |
-| The last seeded lesson grows past its seed | **1 check fails** — the rule the staging deletion restored |
+| The demonstration's initial readout drifts from the prose describing it | **1 check fails** (D-035) |
+| The misconception question loses its tagged distractor | **1 check fails** |
+| The lesson declares an objective no question practises | **3 checks fail** (D-036) |
+| The finished lesson is left out of `COMPLETE_LESSONS` | **1 check fails** — the emptiness claim added this cycle |
+| The numeric answer drifts from the arithmetic in its own explanation | **0 → 1 check fails** — closed by D-049 |
+| The box plot's words drift from the dataset they describe | **0 → 1 check fails** — closed by D-049 |
+
+The numeric-answer guard's reach was probed as well as its bite: swapping the answer for an intermediate figure the
+same explanation already quotes still passes, and the check says so in its own comment rather than being trusted for
+more than it does.
 
 ## Remaining work
 
-**1 of S2-14's 9 lessons**: `l.r2-comparing-distributions`, which meets S2-13's outstanding criterion 5 and makes the
-boss's stage 5 legal under D-028. It needs no new renderer.
+None. S2-14 is Complete.
 
 ## Local commit
 
-`74b091e2c16ee8c02eb210a633ff7fd672921d26`
-
-## Remote verification
-
-```
-LOCAL_HEAD  = 74b091e2c16ee8c02eb210a633ff7fd672921d26
-REMOTE_HEAD = 74b091e2c16ee8c02eb210a633ff7fd672921d26
-VERIFIED: MATCH
-```
+Recorded in `STAGE2_RECONSTRUCTION_BACKLOG.md` on the S2-14 row.
 
 ## Next unit
 
-**S2-14 continued — `l.r2-comparing-distributions`, the last lesson of Region 2's teaching.** Not started in this
-cycle.
+**S2-15 — the descriptive-statistics laboratory.** Not started in this cycle.

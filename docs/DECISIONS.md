@@ -426,3 +426,20 @@ gave the last staged question a role, and the mechanism was deleted — helper, 
 scaffolding that passes vacuously. The skeleton-honesty rule went back to the single line it was before the exemption
 existed. That the exemption specified its own end condition, and that the end condition fired, is the part worth
 keeping: a temporary rule with no defined exit becomes permanent by default. (S2-14)
+
+**D-049 — A number a learner is judged by must be stated in the words beside it.**
+Two probes in S2-14 cycle 5 failed nothing, and both were the same defect at different addresses. Changing a numeric
+question's declared answer while its explanation went on working to the old figure broke no check: a learner would be
+marked wrong and then shown working that ends somewhere else, in the one place they go to find out why. Changing a box
+plot's accessible description so its median no longer matched the dataset broke no check either: for a reader who
+cannot see the chart that description *is* the chart, so the drift ships two different pictures to two audiences.
+
+Both are now audited. A numeric answer must appear in its own explanation, as digits or as the written word — all 143
+numeric questions state theirs one way or the other today, several as "twelve crates" or "Exactly one of them", so
+accepting both forms costs no exception list. A box plot's words must carry all five of its dataset's five-number
+summary, computed by `fiveNumberSummary` so the convention settled in D-045 is not re-implemented in a test.
+
+The first check's limit is written into it rather than left to be found: an answer swapped for another figure the same
+explanation already quotes as an intermediate step still passes, which a paired probe confirmed. It catches drift away
+from the prose, not drift within it. Recording that is the point — a guard whose reach is unstated gets trusted for
+more than it does. (S2-14)

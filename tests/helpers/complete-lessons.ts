@@ -78,5 +78,9 @@ export const COMPLETE_LESSONS: readonly string[] = [
   // Region 2, m.r2-judgement (S2-14 cycle 4). l.r2-misleading-graphs absorbed
   // the last staged question, which empties STAGED_INHERITED entirely.
   "l.r2-choosing-graphs",
-  "l.r2-misleading-graphs"
+  "l.r2-misleading-graphs",
+  // The last teaching lesson of Region 2 (S2-14 cycle 5). Seeded by S2-13 and
+  // written last because it compares on centre, spread, shape and graphs, all
+  // four of which had to exist first. With this, Region 2 has no skeletons left.
+  "l.r2-comparing-distributions"
 ];

@@ -30,21 +30,21 @@ after Stage 1 was lost because commits were never pushed to a durable remote. Re
 | Default branch | `main` |
 | Pristine Stage 1 import | `7add4bc` — pushed and remote-verified |
 | Baseline docs + CI | `1b0a5dd` — pushed and remote-verified |
-| Last unit completed | **S2-08** — Region 1 lessons and interactions, all 17 topic lessons (`629dd74`, `2f1ec31`, `def8b1d`, `615e7c4`; all remote-verified) |
+| Last unit completed | **S2-14** — Region 2's data-visualization lessons, and with them all 20 Region 2 lessons (five cycles, all remote-verified; hashes on the S2-14 backlog row) |
 | Head of `main` | read it live: `git rev-parse HEAD` vs `git ls-remote origin refs/heads/main` — these must match |
 | Milestone snapshot commit | `d4e250434c465f85e4307a226a9af2cbc9788c17` — the commit the exports were built from |
 | Stage tag | `stage-1-baseline` — **created locally, NOT on GitHub** (unit R-00d, blocked; see §2.1) |
 | Milestone exports | `../gsl-exports/` — source ZIP + git bundle + manifest + SHA-256 checksums |
 | Working tree | clean |
 | Node / npm used | v22.22.2 / 10.9.7 |
-| Test suite | **570 tests / 41 files**, all passing (Stage 1 baseline was 73 / 14) |
-| Build | passing (**538.47 kB, 143.72 kB gzip**; baseline was 285.73 kB / 83.82 kB) |
+| Test suite | **575 tests / 41 files**, all passing (Stage 1 baseline was 73 / 14) |
+| Build | passing (**856.35 kB, 219.19 kB gzip**; baseline was 285.73 kB / 83.82 kB) |
 | Source modified since baseline | S2-01 … S2-08 — achievements + region completion, three new interactions, the enforced interaction audit, the review queue, the Region 1 topic architecture, and all 17 Region 1 lessons |
-| Curriculum | 2 regions · **6 modules** · **20 lessons** · **23 skills** · **145 questions** (baseline 2/2/3/6/14) |
-| Lessons Complete to scope §5 | **17 of 17** Region 1 topic lessons. No skeletons. Two inherited Stage 1 lessons are deliberately excluded — see §5 |
-| Misconceptions / remediations | **24 / 23** (baseline 8 / 7) |
+| Curriculum | 2 regions · **10 modules** · **40 lessons** · **42 skills** · **290 questions** (baseline 2/2/3/6/14) |
+| Lessons Complete to scope §5 | **40** — all 17 Region 1 topic lessons, all 20 Region 2 lessons, and the 3 Stage 1 lessons re-cut into Region 2. **No skeletons in either region** |
+| Misconceptions / remediations | **40 / 39** (baseline 8 / 7) |
 | Validated generated interactions | **6,607**, available to spaced review (baseline 0) |
-| Topics meeting scope §4 | **17 of 40** — every Region 1 topic. The denominator grew at S2-11 when Region 2's 18 topics were declared; their generators are S2-17 |
+| Topics meeting scope §4 | **17 of 41** — every Region 1 topic, and no Region 2 topic. Region 2's lessons are written; its generators are S2-17 |
 | Save schema version | **2** (baseline was 1) — migration `1 -> 2` adds `reviewSession` |
 | Interaction types implemented | **14 of 17** (baseline 11); still stubbed: `formula-construction`, `simulation-prediction`, `confidence-rating` |
 | Stage 2 | **in progress** — see `STAGE2_RECONSTRUCTION_SCOPE.md`, `STAGE2_RECONSTRUCTION_BACKLOG.md`, `STAGE2_CURRENT_WORK.md` |
@@ -80,7 +80,7 @@ git status
 git rev-parse HEAD
 git ls-remote origin refs/heads/main | awk '{print $1}'   # must match
 npm ci
-npm test            # must stay green: 403/403
+npm test            # must stay green: 575/575
 npm run typecheck && npm run lint
 npm run dev         # renderer + electron dev
 ```
@@ -105,48 +105,54 @@ branch/tag deletion) are forbidden without explicit owner permission. See `REMOT
 
 ## 5. Next unit
 
-**S2-14 continued — `l.r2-comparing-distributions`, the last lesson of Region 2's teaching.**
+**S2-15 — the descriptive-statistics laboratory.**
 
-**8 of S2-14's 9 lessons are Complete and every graph lesson is written.** The one remaining lesson is the one S2-13
-seeded and could not write: it draws on centre, spread, shape and graphs, which is why it belongs last. Writing it
-meets **S2-13's outstanding criterion 5** and makes the boss's **stage 5** legal under D-028. It needs no new renderer
-— five kinds draw, and comparing two distributions is exactly what box plots were built for.
+**Region 2's teaching is finished.** All 20 seeded lessons and the 3 re-cut Stage 1 lessons are declared Complete and
+held to the 18 structure checks; neither region has a skeleton left. What is *not* finished, and must not be implied:
+Region 2 meets **none** of scope §4's per-topic interaction counts (that is S2-17), its misconception library has not
+been audited against S2-16's criteria, and its boss investigation is unwritten (S2-18).
 
-**Staged inheritance is over and its mechanism is gone.** `tests/helpers/staged-inherited.ts` and its audit block are
-deleted; skeleton honesty is back to "a seeded lesson holds exactly its seed question". The exemption specified its own
-end condition and the condition fired (D-048) — worth copying if another temporary rule is ever needed.
+**S2-15 owns the editable datasets S2-12 named and never built.** The scope asks for a learning environment, not a
+calculator: create and edit datasets, add and remove values, sort, add an outlier and watch what moves, compare two
+datasets, change graph type and bin width, live statistics, save and reload experiments, reset, export summaries, and
+accessible text descriptions throughout. It replaces Stage 1 known defect #3's placeholders.
 
-**How a chart is drawn is now content.** `VisualSpec` carries `axisMin` (bar charts) and `binWidth` (histograms), each
+Two things already in place that it must not contradict. `LabScreen` reports quartiles under the **taught** convention
+(D-045) — median-of-halves, the same numbers the lessons teach — while `quartiles` (R-7) stays for spreadsheet
+agreement; anything the lab computes has to keep that agreement. And five visual kinds genuinely draw (`bar-chart`,
+`histogram`, `dot-plot`, `box-plot`, `scatter`), each with its arithmetic exported and tested (`buildBins`,
+`stackDots`, `numericPair`, `fiveNumberSummary`); a lab that changes bin width is driving `buildBins`, not a second
+implementation of it (D-043, D-044).
+
+**How a chart is drawn is content.** `VisualSpec` carries `axisMin` (bar charts) and `binWidth` (histograms), each
 rejected by the schema on kinds it means nothing to, and the audit requires a set value to be stated in the chart's
-words and prose claiming a truncated axis to have the setting behind it (D-047). Read that check before writing any
-question whose point is how a picture is drawn.
+words and prose claiming a truncated axis to have the setting behind it (D-047).
 
-**After this lesson, S2-14 is done and S2-15 is next** — the laboratory work, which owns the editable datasets S2-12
-named and never built. Note `LabScreen` now reports quartiles under the taught convention (D-045); anything added
-there must keep that agreement with the lessons.
-
-**Test the arithmetic behind any picture (D-044) and keep one convention per taught number (D-045).** `buildBins`,
-`stackDots`, `numericPair` and `fiveNumberSummary` are exported and tested against shipped datasets, and each dataset a
-lesson quotes by value now has its figures pinned — the port landings were the fourth such test, added after a probe
-showed a drifting dataset failed nothing.
+**A number a learner is judged by must be stated in the words beside it (D-049).** A numeric answer must appear in its
+own explanation; a box plot's accessible description must carry all five of its dataset's five-number summary. Both
+were added after probes showed the drift failed nothing. The first check's reach is written into its comment — it
+catches an answer drifting away from the prose, not one swapped for a figure the same prose already quotes.
 
 **A lesson is not finished until something has played it (D-037).** `tests/integration/region2-lessons.test.ts`
 iterates `COMPLETE_LESSONS`, so a lesson you declare is played automatically. It proves the content round-trips
 through the real evaluator, session and save, and **not** that a declared answer is arithmetically right (D-038).
 
-**Read an existing example before writing an unfamiliar question type.** The matching question this cycle was drafted
-against a guessed schema shape; `MatchingAnswerSchema` needs declared ids on both sides and a `rightItems` array. One
-look at `q.matching-measures` settled it.
+**Read an existing example before writing an unfamiliar shape.** Followed throughout cycle 5 with no corrections
+needed; the cycle before it lost a draft to a guessed `MatchingAnswerSchema`.
 
 **Two probes in a row asserted that a question losing its lesson's headline skill would fail a check, and both were
 wrong.** A lesson may legitimately declare more than one objective, and a question carrying any taught skill satisfies
 requirement 17. Do not add a guard for that — there is no defect there.
 
+**When a temporary rule empties, end it (D-048), and when a guard's subject empties, say so.** Region 2's
+skeleton-honesty loop now iterates nothing and asserts zero explicitly, as Region 1's did at the same point; a loop
+over an empty set is a check that passes without running.
+
 **Run the demonstration before writing about it (D-035), and use the characters the curriculum explains (D-039).** If a
 demonstration needs an operation the formula enum lacks, grow the enum: the readout switch is exhaustive (D-042).
 
-`docs/REGION2_BOSS_SPEC.md` maps the boss's five stages onto this module sequence. With the graph lessons written,
-every skill stages 1 to 4 draw on now exists; stage 5 waits only on the comparing-distributions lesson.
+`docs/REGION2_BOSS_SPEC.md` maps the boss's five stages onto this module sequence. Every skill all five stages draw on
+now exists, so S2-18 is unblocked whenever it is reached.
 
 ### Region 2's architecture, and two rules it added
 

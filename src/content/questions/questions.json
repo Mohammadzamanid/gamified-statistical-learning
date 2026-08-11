@@ -8675,41 +8675,6 @@
   "estimatedSeconds": 110
  },
  {
-  "id": "q.seed.r2-comparing-distributions",
-  "topicId": "t.r2-comparing-distributions",
-  "objectiveId": "obj.r2-comparing-distributions",
-  "skillIds": [
-   "skill.r2-comparing-distributions"
-  ],
-  "difficulty": 3,
-  "interaction": "multiple-choice",
-  "prompt": "Two channels have the same median depth. Channel A has an interquartile range of 0.3 metres and Channel B one of 2.6. Which is the more predictable channel?",
-  "choices": [
-   {
-    "id": "ch.a",
-    "text": "Channel A - its middle half sits within a much narrower band"
-   },
-   {
-    "id": "ch.b",
-    "text": "Channel B - a larger interquartile range means more readings"
-   },
-   {
-    "id": "ch.same",
-    "text": "Neither - they share a median, so they behave the same way"
-   }
-  ],
-  "answer": {
-   "kind": "choice",
-   "correctChoiceIds": [
-    "ch.a"
-   ]
-  },
-  "explanation": "A shared median says only that the two channels have the same centre. Channel A's middle half spans 0.3 metres and Channel B's spans 2.6, so A's depths cluster far more tightly. This lesson is a seed: its full teaching arrives with the Region 2 lesson units.",
-  "accessibilityDescription": "A seed question for a Region 2 lesson that has not been written yet; choose which of two channels is more predictable.",
-  "misconceptionIds": [],
-  "estimatedSeconds": 60
- },
- {
   "id": "q.r2-percentiles",
   "topicId": "t.r2-percentiles",
   "objectiveId": "obj.r2-percentiles",
@@ -10953,5 +10918,245 @@
   "misconceptionIds": [],
   "accessibilityDescription": "The truncated bar chart; enter how many times taller Midpier's bar appears than Northport's.",
   "estimatedSeconds": 100
+ },
+ {
+  "id": "q.r2-comparing-distributions",
+  "topicId": "t.r2-comparing-distributions",
+  "objectiveId": "obj.r2-comparing-distributions",
+  "skillIds": [
+   "skill.r2-comparing-distributions"
+  ],
+  "difficulty": 1,
+  "interaction": "multiple-choice",
+  "prompt": "Two channels both have a median depth of 10 metres. Channel A's middle half spans 0.3 metres and Channel B's spans 2.6. Which is the more predictable channel?",
+  "choices": [
+   {
+    "id": "ch.a",
+    "text": "Channel A - its middle half sits within a much narrower band of depths"
+   },
+   {
+    "id": "ch.same",
+    "text": "Neither - they share a median, so they behave the same way",
+    "misconceptionId": "mc.same-centre-same-data"
+   },
+   {
+    "id": "ch.b",
+    "text": "Channel B - a wider middle half means more soundings were taken"
+   }
+  ],
+  "answer": {
+   "kind": "choice",
+   "correctChoiceIds": [
+    "ch.a"
+   ]
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "The medians agree. What does the width of each middle half tell you beyond that?"
+   },
+   {
+    "level": 2,
+    "text": "Half of every channel's soundings fall inside its middle half. Which band is narrower?"
+   }
+  ],
+  "explanation": "Half of Channel A's soundings fall within 0.3 metres, so a skipper meets much the same depth every night. Half of Channel B's are spread across 2.6 metres, and the outer quarters go further still. The shared median says the two middles agree and says nothing whatever about that difference.",
+  "solutionSteps": [
+   "Note what the medians tell you: both channels sit around 10 metres in the middle.",
+   "Compare the middle halves: A spans 0.3 metres, B spans 2.6.",
+   "The narrower band is the more predictable channel, so Channel A."
+  ],
+  "misconceptionIds": [
+   "mc.same-centre-same-data"
+  ],
+  "accessibilityDescription": "Two channels sharing a median but differing in the width of their middle halves; choose the more predictable one.",
+  "estimatedSeconds": 80
+ },
+ {
+  "id": "q.r2-comparing-distributions-independent",
+  "topicId": "t.r2-comparing-distributions",
+  "objectiveId": "obj.r2-comparing-distributions",
+  "skillIds": [
+   "skill.r2-comparing-distributions",
+   "skill.r2-iqr"
+  ],
+  "difficulty": 2,
+  "interaction": "numeric-input",
+  "prompt": "Channel A has a first quartile of 9.85 metres and a third of 10.15. Channel B, shown here, has a first quartile of 7 and a third of 14.5. How much wider is Channel B's middle half, in metres?",
+  "visual": {
+   "kind": "box-plot",
+   "datasetId": "ds.channel-depths",
+   "caption": "Channel B, five-number summary",
+   "accessibleDescription": "Box plot of Channel B's twenty soundings: smallest 2 metres, first quartile 7, median 10.5, third quartile 14.5, largest 22. The box spans 7 to 14.5 metres."
+  },
+  "answer": {
+   "kind": "numeric",
+   "value": 7.2,
+   "tolerance": 0.01,
+   "unit": "m"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Work out each channel's interquartile range first, then subtract."
+   }
+  ],
+  "explanation": "Channel A's middle half spans 10.15 - 9.85 = 0.3 metres and Channel B's spans 14.5 - 7 = 7.5, so B's is 7.2 metres wider. Comparing spread means computing the same measure on both sets and then setting the two against one another — not reading one and guessing at the other.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "A box plot of Channel B and quartiles for Channel A; enter how much wider B's middle half is, in metres.",
+  "estimatedSeconds": 110
+ },
+ {
+  "id": "q.r2-comparing-distributions-misconception",
+  "topicId": "t.r2-comparing-distributions",
+  "objectiveId": "obj.r2-comparing-distributions",
+  "skillIds": [
+   "skill.r2-comparing-distributions",
+   "skill.mean"
+  ],
+  "difficulty": 3,
+  "interaction": "multiple-choice",
+  "prompt": "A report states that two harbours had the same mean wait for a berth last season, and concludes that the two run equally well. What is missing?",
+  "choices": [
+   {
+    "id": "ch.spread",
+    "text": "The spread and the shape - one harbour could be steady while the other swings between minutes and hours"
+   },
+   {
+    "id": "ch.nothing",
+    "text": "Nothing - equal means is what it means for two harbours to run equally well",
+    "misconceptionId": "mc.same-centre-same-data"
+   },
+   {
+    "id": "ch.count",
+    "text": "The number of boats, since a mean says nothing about how many waited"
+   }
+  ],
+  "answer": {
+   "kind": "choice",
+   "correctChoiceIds": [
+    "ch.spread"
+   ]
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "A mean is one number standing for a whole season. What does standing for a season give up?"
+   }
+  ],
+  "explanation": "Two harbours with the same mean wait can be entirely different places: one where nearly every skipper waits about that long, and one where most are seen at once and a few wait half a day. The mean is identical and the experience is not. A comparison needs the spread and the shape beside it before any claim about how the two run is worth making.",
+  "misconceptionIds": [
+   "mc.same-centre-same-data"
+  ],
+  "accessibilityDescription": "Three accounts of what is missing from a comparison of two harbours based only on their mean wait.",
+  "estimatedSeconds": 100
+ },
+ {
+  "id": "q.r2-comparing-distributions-application",
+  "topicId": "t.r2-comparing-distributions",
+  "objectiveId": "obj.r2-comparing-distributions",
+  "skillIds": [
+   "skill.r2-comparing-distributions",
+   "skill.r2-misleading-graphs"
+  ],
+  "difficulty": 3,
+  "interaction": "multiple-choice",
+  "prompt": "A surveyor compares two channels by drawing a box plot of each, but scales the two charts to fill their own frames. Why is that comparison unsafe?",
+  "choices": [
+   {
+    "id": "ch.scale",
+    "text": "On different scales the eye compares picture sizes rather than depths, so a narrow channel can look as varied as a wide one"
+   },
+   {
+    "id": "ch.box",
+    "text": "Box plots cannot be used for comparison; only histograms can"
+   },
+   {
+    "id": "ch.five",
+    "text": "Five numbers are too few to compare two channels with"
+   }
+  ],
+  "answer": {
+   "kind": "choice",
+   "correctChoiceIds": [
+    "ch.scale"
+   ]
+  },
+  "explanation": "Box plots are built for comparison, and the comparison lives in their positions and widths against a shared scale. Give each its own scale and both boxes fill their frames whatever their depths, so a channel varying by a third of a metre draws exactly like one varying by three. Every number is correct; the pictures are not comparable, which is the same failure a truncated axis makes.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "Three critiques of comparing two channels with box plots drawn on separate scales.",
+  "estimatedSeconds": 110
+ },
+ {
+  "id": "q.r2-comparing-distributions-teachback",
+  "topicId": "t.r2-comparing-distributions",
+  "objectiveId": "obj.r2-comparing-distributions",
+  "skillIds": [
+   "skill.r2-comparing-distributions"
+  ],
+  "difficulty": 3,
+  "interaction": "short-explanation",
+  "prompt": "Explain in your own words why two datasets sharing a median can still be worth telling apart, and what you would ask for next. Use the words 'centre' and 'spread'.",
+  "answer": {
+   "kind": "text",
+   "requiredKeywords": [
+    "centre",
+    "spread"
+   ],
+   "forbiddenKeywords": []
+  },
+  "explanation": "A median is a single value standing for a whole set, so two sets sharing one have agreed about their centre and about nothing else. They may differ in how far the readings reach, in how tightly the bulk holds together, and in whether either has a long tail. The next thing to ask for is the spread — an interquartile range or a range — and then the shape, because a set with an outlier and one without can match on both centre and spread.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "An open-response question about why a shared median leaves two datasets worth telling apart.",
+  "estimatedSeconds": 140
+ },
+ {
+  "id": "q.r2-comparing-distributions-mastery",
+  "topicId": "t.r2-comparing-distributions",
+  "objectiveId": "obj.r2-comparing-distributions",
+  "skillIds": [
+   "skill.r2-comparing-distributions",
+   "skill.r2-skew"
+  ],
+  "difficulty": 3,
+  "interaction": "multiple-choice",
+  "prompt": "Channel A: median 10, interquartile range 0.3, mean 10. Channel B: median 10, interquartile range 0.3, mean 13. Both were sounded twenty times. What does the evidence support?",
+  "choices": [
+   {
+    "id": "ch.skew",
+    "text": "Their middles and middle halves match, but B's mean sitting above its median says B has a long tail of deep soundings"
+   },
+   {
+    "id": "ch.same",
+    "text": "The two channels are the same, since the median and the interquartile range both agree",
+    "misconceptionId": "mc.same-centre-same-data"
+   },
+   {
+    "id": "ch.deeper",
+    "text": "Channel B is uniformly deeper, because its mean is higher"
+   }
+  ],
+  "answer": {
+   "kind": "choice",
+   "correctChoiceIds": [
+    "ch.skew"
+   ]
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Two of the three comparisons agree. Look at what the third one says."
+   },
+   {
+    "level": 2,
+    "text": "A mean well above a median is the signature of a tail on which side?"
+   }
+  ],
+  "explanation": "Centre and spread both match, which is exactly the case where a comparison stopping at two measures would report the channels as identical. The mean is the third reading: B's sits 3 metres above its median while A's sits on it, and a mean above the median means a long tail on the high side. B is not uniformly deeper — most of it matches A — it has a handful of much deeper soundings pulling its mean up. That is the shape, and it is the part only the third comparison found.",
+  "misconceptionIds": [
+   "mc.same-centre-same-data"
+  ],
+  "accessibilityDescription": "Two channels agreeing on median and interquartile range but not on mean; choose what the evidence supports.",
+  "estimatedSeconds": 140
  }
 ]

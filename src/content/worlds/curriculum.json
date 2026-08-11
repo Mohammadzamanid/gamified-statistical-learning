@@ -4729,23 +4729,115 @@
    "moduleId": "m.r2-judgement",
    "title": "Two Accounts of One Season",
    "objectiveIds": [
-    "obj.r2-comparing-distributions"
+    "obj.r2-comparing-distributions",
+    "obj.r2-iqr",
+    "obj.compute-mean",
+    "obj.r2-skew",
+    "obj.r2-misleading-graphs"
    ],
    "concepts": [
     {
      "id": "c.r2-comparing-distributions",
-     "title": "Two Accounts of One Season",
-     "summary": "Comparing two sets means comparing their centre, their spread and their shape, not one number each.",
-     "body": "Two channels can share a median and behave nothing alike. A comparison that reports one summary apiece has not compared the distributions at all."
+     "title": "Three questions, not one",
+     "summary": "Comparing two sets means comparing their centre, their spread and their shape.",
+     "body": "A comparison that reports one summary apiece has not compared the distributions at all. Centre says where each sits; spread says how far each reaches and how tightly its bulk holds; shape says whether either has a long tail or a value standing apart. Two channels can match on any one of the three and differ completely on the others, so a claim about which is deeper, or steadier, or safer needs all three before it is worth anything."
+    },
+    {
+     "id": "c.r2-comparing-distributions-spread",
+     "title": "A shared centre hides everything",
+     "summary": "Equal medians tell you the middles agree and nothing else whatever.",
+     "body": "Two channels with a median of ten metres can have middle halves spanning three tenths of a metre and two and a half metres. The first is the same depth every night; the second is a different channel on different days. The median is silent about that, by construction — it is one value chosen to stand for a whole set, and standing for a set means giving up the differences within it. That is not a fault in the median; it is what a summary is."
+    },
+    {
+     "id": "c.r2-comparing-distributions-fair",
+     "title": "Comparing fairly",
+     "summary": "Same measures, same scale, and the shape of both stated rather than one.",
+     "body": "A comparison can mislead without a single wrong figure. Report the mean for one channel and the median for the other and the reader has no idea which is deeper. Draw two box plots on different scales and the eye compares picture sizes rather than depths. Give a mean and a spread for one and only a mean for the other and the missing half reads as agreement. The discipline is dull and it is the whole of honest comparison: the same measures, on the same scale, for both."
     }
    ],
    "questionIds": [
-    "q.seed.r2-comparing-distributions"
+    "q.r2-comparing-distributions",
+    "q.r2-comparing-distributions-independent",
+    "q.r2-comparing-distributions-misconception",
+    "q.r2-comparing-distributions-application",
+    "q.r2-comparing-distributions-teachback",
+    "q.r2-comparing-distributions-mastery"
    ],
    "prerequisites": [
     "l.r2-misleading-graphs"
    ],
-   "estimatedMinutes": 16
+   "estimatedMinutes": 16,
+   "narrativeIntro": "Two survey parties measured two channels across the same season and both report a median depth of ten metres. One channel is safe to run at night; the other has grounded three boats. Nothing either party wrote down is wrong, and the number they chose to report cannot tell the two apart.",
+   "demonstration": {
+    "id": "dem.r2-comparing-distributions",
+    "title": "Two channels, one median",
+    "experience": "Two channels are set side by side. Both have a median depth of ten metres, and the readout gives how much wider the second channel's middle half is than the first's. The medians never move — only the spreads do.",
+    "accessibleDescription": "Two controls. The first sets the width of Channel B's middle half in metres, the second the width of Channel A's. The readout gives how much wider B's middle half is, to one decimal place, and starts at 2.3 with B spanning 2.6 metres and A spanning 0.3.",
+    "controls": [
+     {
+      "id": "ctl.b",
+      "label": "Width of Channel B's middle half, in metres",
+      "min": 0,
+      "max": 6,
+      "step": 0.1,
+      "initial": 2.6
+     },
+     {
+      "id": "ctl.a",
+      "label": "Width of Channel A's middle half, in metres",
+      "min": 0,
+      "max": 6,
+      "step": 0.1,
+      "initial": 0.3
+     }
+    ],
+    "formula": "difference",
+    "readoutLabel": "How much wider Channel B's middle half is, in metres",
+    "readoutPrecision": 1,
+    "prediction": {
+     "prompt": "Both channels have a median depth of 10 metres. Channel A's middle half spans 0.3 metres and Channel B's spans 2.6, so the readout shows 2.3. Channel A is dredged and its middle half opens out to 2.6 metres as well. What does the readout show, and what has happened to the medians?",
+     "options": [
+      {
+       "id": "opt.zero",
+       "text": "0 - the two middle halves now match, and neither median has moved at all"
+      },
+      {
+       "id": "opt.same",
+       "text": "2.3 - the medians are unchanged, so the comparison cannot have changed"
+      },
+      {
+       "id": "opt.five",
+       "text": "5.2 - both spreads are counted, so the readout doubles"
+      }
+     ],
+     "correctOptionId": "opt.zero",
+     "revealNote": "The readout falls to 0 and not one median moved. Two channels that were as different as a dock and a tidal race now behave alike through their middle halves, and a report giving only the medians would have read identically before and after. That is the whole argument for comparing spread as well as centre: the medians were never the part that differed."
+    },
+    "observation": "Widen B and the readout climbs; widen A and it falls, through 0 and into negative numbers — which is not an error but the reading that says A is now the more variable of the two. At 0 the two middle halves are the same width, which still leaves their shapes and their extremes unexamined."
+   },
+   "formalTerm": {
+    "term": "Comparing distributions",
+    "definition": "Comparing two distributions means setting their centre, their spread and their shape beside one another, using the same measures on the same scale for both. Agreement on any one of the three is not agreement between the datasets, and a comparison reporting only one has not been made.",
+    "symbols": []
+   },
+   "guidedQuestionIds": [
+    "q.r2-comparing-distributions"
+   ],
+   "independentQuestionIds": [
+    "q.r2-comparing-distributions-independent"
+   ],
+   "misconceptionQuestionIds": [
+    "q.r2-comparing-distributions-misconception"
+   ],
+   "applicationQuestionIds": [
+    "q.r2-comparing-distributions-application"
+   ],
+   "teachBackQuestionIds": [
+    "q.r2-comparing-distributions-teachback"
+   ],
+   "masteryCheckQuestionIds": [
+    "q.r2-comparing-distributions-mastery"
+   ]
   }
  ],
  "objectives": [

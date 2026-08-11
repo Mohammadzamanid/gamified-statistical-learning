@@ -22,6 +22,7 @@ import { RENDERED_INTERACTION_TYPES } from "../../src/renderer/components/render
 import { RENDERED_VISUAL_KINDS } from "../../src/renderer/components/rendered-visuals";
 import { VisualSpecSchema } from "../../src/shared/schemas";
 import { evaluateResponse } from "../../src/core/questions/evaluators";
+import { fiveNumberSummary } from "../../src/core/statistics/descriptive";
 import { normalizeResponse } from "../../src/core/questions/normalize";
 import { InteractionTypeSchema, type InteractionType, type Question } from "../../src/shared/schemas";
 import { correctResponseFor, incorrectResponseFor } from "../helpers/responses";
@@ -43,6 +44,34 @@ function reachableOfType(type: InteractionType): Question[] {
 }
 
 const implementedTypes = () => listInteractions().filter((d) => d.implemented).map((d) => d.type);
+
+const NUMBER_WORDS = [
+  "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten",
+  "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen",
+  "nineteen", "twenty"
+];
+
+/**
+ * Whether `text` states `value` — as digits, or as its written word for a whole
+ * number up to twenty.
+ *
+ * The digit match is fenced off from neighbouring digits so that 7 is not found
+ * inside 17 and 2 is not found inside 22, which the channel-soundings figures
+ * would otherwise satisfy by accident. The word match uses word boundaries so
+ * that "one" is not found inside "none".
+ */
+function statesNumber(text: string, value: number): boolean {
+  const digits = new Set<string>([String(value)]);
+  if (!Number.isInteger(value)) {
+    digits.add(value.toFixed(1));
+    digits.add(value.toFixed(2));
+  }
+  for (const form of digits) {
+    if (new RegExp(`(?<![\\d.])${form.replace(".", "\\.")}(?![\\d])`).test(text)) return true;
+  }
+  const word = Number.isInteger(value) && value >= 0 ? NUMBER_WORDS[value] : undefined;
+  return word !== undefined && new RegExp(`\\b${word}\\b`, "i").test(text);
+}
 const stubbedTypes = () => listInteractions().filter((d) => !d.implemented).map((d) => d.type);
 
 describe("registry integrity", () => {
@@ -139,6 +168,30 @@ describe("accessibility coverage", () => {
   it("every reachable question explains itself after the fact", () => {
     for (const q of reachableQuestions) {
       expect(q.explanation.trim().length, `${q.id} explanation`).toBeGreaterThan(0);
+    }
+  });
+
+  it("states the answer it marks correct inside the explanation that follows it", () => {
+    // A numeric question is marked against one value and explained in prose
+    // written beside it, and until now nothing tied the two together. Recompute
+    // a dataset, or fix an arithmetic slip in one place only, and a learner is
+    // told they are wrong and then shown working that ends somewhere else — the
+    // worst place for that to happen, because the explanation is where they go
+    // to find out why.
+    //
+    // Digits or the written word: all 143 numeric questions state their answer
+    // one way or the other today, several as "twelve crates" or "Exactly one of
+    // them", so accepting both costs no exception list.
+    //
+    // Its limit, stated rather than left to be discovered: an answer swapped for
+    // some other figure the same explanation already quotes as an intermediate
+    // step still passes. This catches drift away from the prose, not within it.
+    for (const q of reachableQuestions) {
+      if (q.answer.kind !== "numeric") continue;
+      expect(
+        statesNumber(q.explanation, q.answer.value),
+        `${q.id} is marked against ${q.answer.value}, which its explanation never states`
+      ).toBe(true);
     }
   });
 });
@@ -330,6 +383,33 @@ describe("every visual a question declares can actually be drawn", () => {
         expect(
           words.includes(String(v.binWidth)),
           `${q.id} sets a bin width of ${v.binWidth} but never states it, and bin width is invisible in a finished histogram`
+        ).toBe(true);
+      }
+    }
+  });
+
+  it("gives a box plot's words the five numbers the box plot is drawn from", () => {
+    // A box plot is its five-number summary and nothing else — there is no other
+    // information in the picture. So for a reader who cannot see it, the
+    // accessible description is not a description of the chart, it *is* the
+    // chart, and a figure in it drifting from the dataset is not a wording slip
+    // but a different chart being shown to two audiences.
+    //
+    // Checked against `fiveNumberSummary`, the taught convention, so that the
+    // quartile question S2-13 settled is answered the same way here as on screen
+    // rather than by a second implementation in the test.
+    for (const q of reachableQuestions) {
+      if (q.visual.kind !== "box-plot") continue;
+      const dataset = content.datasets.get(q.visual.datasetId ?? "");
+      if (!dataset) continue; // reported by the check below
+      const column = dataset.columns.findIndex((c) => c.kind === "numeric");
+      const values = dataset.rows.map((row) => Number(row[column]));
+      const words = `${q.visual.accessibleDescription ?? ""} ${q.visual.caption ?? ""}`;
+      const summary = fiveNumberSummary(values);
+      for (const [name, value] of Object.entries(summary)) {
+        expect(
+          statesNumber(words, value),
+          `${q.id} draws a box plot of ${dataset.id} whose ${name} is ${value}, which its words never give`
         ).toBe(true);
       }
     }

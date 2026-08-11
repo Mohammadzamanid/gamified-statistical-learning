@@ -302,5 +302,13 @@
   "detector": "tagged-distractor",
   "detectorParams": {},
   "remediationId": "rem.read-the-axis-first"
+ },
+ {
+  "id": "mc.same-centre-same-data",
+  "title": "Equal centres read as equal datasets",
+  "description": "The learner sees two datasets sharing a mean or a median and concludes they behave alike. The centre is the summary a report leads with, so treating it as the comparison is the natural error rather than a careless one — and it is exactly what a shared median cannot support.",
+  "detector": "tagged-distractor",
+  "detectorParams": {},
+  "remediationId": "rem.centre-is-not-the-comparison"
  }
 ]

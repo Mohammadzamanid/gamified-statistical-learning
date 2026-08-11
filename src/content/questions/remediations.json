@@ -455,5 +455,17 @@
   "skillIds": [
    "skill.r2-misleading-graphs"
   ]
+ },
+ {
+  "id": "rem.centre-is-not-the-comparison",
+  "title": "A shared centre compares the middles, not the data",
+  "explanation": "A median is one value chosen to stand for a whole set, so two sets sharing one have agreed about their middles and about nothing else. They can differ in how far they reach, in how tightly the bulk sits, and in whether either has a long tail. Ask for the spread before believing that two datasets are alike, and ask for the shape before believing the spread.",
+  "microLesson": "Two channels both report a median depth of 10 metres. Channel A's middle half spans 0.3 metres, so almost every sounding is near 10 and a skipper can run it at night. Channel B's spans 2.6, so half its soundings sit anywhere across two and a half metres and the other half are further out still. Identical medians, and one channel has grounded three boats.",
+  "followUpQuestionIds": [
+   "q.r2-comparing-distributions"
+  ],
+  "skillIds": [
+   "skill.r2-comparing-distributions"
+  ]
  }
 ]
