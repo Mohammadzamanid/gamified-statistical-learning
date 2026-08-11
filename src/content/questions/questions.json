@@ -516,7 +516,8 @@
   "topicId": "t.data-literacy",
   "objectiveId": "obj.read-data",
   "skillIds": [
-   "skill.data-literacy"
+   "skill.data-literacy",
+   "skill.r2-misleading-graphs"
   ],
   "difficulty": 2,
   "interaction": "error-identification",
@@ -6908,76 +6909,6 @@
   "estimatedSeconds": 120
  },
  {
-  "id": "q.seed.r2-choosing-graphs",
-  "topicId": "t.r2-choosing-graphs",
-  "objectiveId": "obj.r2-choosing-graphs",
-  "skillIds": [
-   "skill.r2-choosing-graphs"
-  ],
-  "difficulty": 2,
-  "interaction": "multiple-choice",
-  "prompt": "You want to compare how many mornings were calm, choppy and rough. Which graph fits?",
-  "choices": [
-   {
-    "id": "ch.bar",
-    "text": "A bar chart"
-   },
-   {
-    "id": "ch.hist",
-    "text": "A histogram"
-   },
-   {
-    "id": "ch.scatter",
-    "text": "A scatterplot"
-   }
-  ],
-  "answer": {
-   "kind": "choice",
-   "correctChoiceIds": [
-    "ch.bar"
-   ]
-  },
-  "explanation": "Weather is a categorical variable and the question is about counts per category, which is what a bar chart is for. A histogram bins a numerical variable; a scatterplot needs two.",
-  "accessibilityDescription": "A multiple-choice seed question for a Region 2 lesson that has not been written yet. Choose one option.",
-  "misconceptionIds": [],
-  "estimatedSeconds": 45
- },
- {
-  "id": "q.seed.r2-misleading-graphs",
-  "topicId": "t.r2-misleading-graphs",
-  "objectiveId": "obj.r2-misleading-graphs",
-  "skillIds": [
-   "skill.r2-misleading-graphs"
-  ],
-  "difficulty": 2,
-  "interaction": "multiple-choice",
-  "prompt": "A bar chart's vertical axis starts at 90 instead of 0, making a small difference look enormous. What is wrong with it?",
-  "choices": [
-   {
-    "id": "ch.axis",
-    "text": "The axis does not start at zero, so the bars misrepresent the sizes"
-   },
-   {
-    "id": "ch.colour",
-    "text": "The bars are the wrong colour"
-   },
-   {
-    "id": "ch.order",
-    "text": "The categories are in the wrong order"
-   }
-  ],
-  "answer": {
-   "kind": "choice",
-   "correctChoiceIds": [
-    "ch.axis"
-   ]
-  },
-  "explanation": "Every printed number can be correct while the picture lies: a bar's height only means what it appears to mean when the axis starts at zero.",
-  "accessibilityDescription": "A multiple-choice seed question for a Region 2 lesson that has not been written yet. Choose one option.",
-  "misconceptionIds": [],
-  "estimatedSeconds": 45
- },
- {
   "id": "q.r2-frequency",
   "topicId": "t.r2-frequency",
   "objectiveId": "obj.r2-frequency",
@@ -10555,5 +10486,472 @@
   "misconceptionIds": [],
   "accessibilityDescription": "A scatterplot of ten trips; enter the crates landed per hour for the boat that stayed out nine hours.",
   "estimatedSeconds": 120
+ },
+ {
+  "id": "q.r2-choosing-graphs",
+  "topicId": "t.r2-choosing-graphs",
+  "objectiveId": "obj.r2-choosing-graphs",
+  "skillIds": [
+   "skill.r2-choosing-graphs"
+  ],
+  "difficulty": 1,
+  "interaction": "multiple-choice",
+  "prompt": "A clerk has the home port of each of 200 boats and wants to show how many come from each of the six ports. Which picture should they draw?",
+  "choices": [
+   {
+    "id": "ch.bar",
+    "text": "A bar chart - home port is categorical, and the question is a count per group"
+   },
+   {
+    "id": "ch.hist",
+    "text": "A histogram, because there are 200 readings and that is a lot"
+   },
+   {
+    "id": "ch.scatter",
+    "text": "A scatterplot, because there are two things involved: ports and counts"
+   }
+  ],
+  "answer": {
+   "kind": "choice",
+   "correctChoiceIds": [
+    "ch.bar"
+   ]
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Start with the variable: is home port measured on a scale, or does it name groups?"
+   },
+   {
+    "level": 2,
+    "text": "A histogram needs a continuous axis. What would sit between two ports?"
+   }
+  ],
+  "explanation": "Home port names groups rather than measuring anything, so the axis is a list of categories and the picture is a bar chart. The number of boats does not change that: 200 readings across six categories is exactly what a bar chart handles. A histogram would need a scale to cut into intervals, and nothing lies between one port and the next.",
+  "solutionSteps": [
+   "Identify the variable: home port sorts boats into named groups, so it is categorical.",
+   "Identify the question: how many boats per group, which is a count.",
+   "Categorical variable plus a count per group is what a bar chart draws."
+  ],
+  "misconceptionIds": [],
+  "accessibilityDescription": "Three candidate charts for showing counts of boats across six named home ports.",
+  "estimatedSeconds": 70
+ },
+ {
+  "id": "q.r2-choosing-graphs-independent",
+  "topicId": "t.r2-choosing-graphs",
+  "objectiveId": "obj.r2-choosing-graphs",
+  "skillIds": [
+   "skill.r2-choosing-graphs",
+   "skill.r2-scatterplots"
+  ],
+  "difficulty": 2,
+  "interaction": "multiple-choice",
+  "prompt": "A surveyor has, for each of 30 trips, the hours at sea and the crates landed, and wants to know whether longer trips bring back more. Which picture answers that?",
+  "choices": [
+   {
+    "id": "ch.scatter",
+    "text": "A scatterplot - two numeric variables, and the question is about how they travel together"
+   },
+   {
+    "id": "ch.two-hist",
+    "text": "A histogram of the hours and another of the crates, read side by side"
+   },
+   {
+    "id": "ch.box",
+    "text": "A box plot of the crates landed"
+   }
+  ],
+  "answer": {
+   "kind": "choice",
+   "correctChoiceIds": [
+    "ch.scatter"
+   ]
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Count the variables the question involves, then ask which chart places one point per case."
+   }
+  ],
+  "explanation": "The question is about a relationship, and only a scatterplot puts both measurements of a trip in one place. Two separate histograms describe each variable alone and say nothing about which hours went with which catch — the pairing, which is the entire question, is lost the moment the two are drawn apart.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "Three candidate charts for asking whether longer trips land more crates.",
+  "estimatedSeconds": 90
+ },
+ {
+  "id": "q.r2-choosing-graphs-misconception",
+  "topicId": "t.r2-choosing-graphs",
+  "objectiveId": "obj.r2-choosing-graphs",
+  "skillIds": [
+   "skill.r2-choosing-graphs",
+   "skill.r2-dot-plots"
+  ],
+  "difficulty": 3,
+  "interaction": "multiple-choice",
+  "prompt": "A surveyor has 900 depth soundings measured to the centimetre, so almost none repeats. They plan a dot plot because it keeps every reading. What is wrong with that reasoning?",
+  "choices": [
+   {
+    "id": "ch.no-stack",
+    "text": "Nothing would stack, so the plot shows 900 single marks and no shape at all"
+   },
+   {
+    "id": "ch.too-detailed",
+    "text": "Nothing is wrong - keeping every reading is always the better choice",
+    "misconceptionId": "mc.dot-height-read-as-value"
+   },
+   {
+    "id": "ch.decimals",
+    "text": "Dot plots cannot show measurements with decimals"
+   }
+  ],
+  "answer": {
+   "kind": "choice",
+   "correctChoiceIds": [
+    "ch.no-stack"
+   ]
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "A dot plot earns its keep by stacking. What does it show when nothing repeats?"
+   }
+  ],
+  "explanation": "Keeping every reading is a real virtue and it is not free. A dot plot turns readings into shape by stacking those that share a value, so when values almost never repeat there are no stacks and no shape — 900 marks in a row tell a reader less than the list they came from. That is exactly where pooling into intervals starts to pay, which is what a histogram is.",
+  "misconceptionIds": [
+   "mc.dot-height-read-as-value"
+  ],
+  "accessibilityDescription": "Three critiques of choosing a dot plot for 900 readings that almost never repeat.",
+  "estimatedSeconds": 100
+ },
+ {
+  "id": "q.r2-choosing-graphs-application",
+  "topicId": "t.r2-choosing-graphs",
+  "objectiveId": "obj.r2-choosing-graphs",
+  "skillIds": [
+   "skill.r2-choosing-graphs",
+   "skill.r2-box-plots"
+  ],
+  "difficulty": 3,
+  "interaction": "multiple-choice",
+  "prompt": "Four channels must be compared for depth on a single page. Which picture serves best, and what is given up by choosing it?",
+  "choices": [
+   {
+    "id": "ch.box",
+    "text": "Four box plots on one scale - comparable at a glance, at the cost of showing only five numbers each"
+   },
+   {
+    "id": "ch.hist",
+    "text": "Four histograms - the most detail, and the easiest to read against one another"
+   },
+   {
+    "id": "ch.dot",
+    "text": "Four dot plots - every reading kept, with no cost at all"
+   }
+  ],
+  "answer": {
+   "kind": "choice",
+   "correctChoiceIds": [
+    "ch.box"
+   ]
+  },
+  "explanation": "Box plots reduce each channel to the same five marks, which is what makes four of them readable together — and that reduction is the price. Four histograms carry far more detail and are hard to compare, because the eye has to hold four shapes at once. There is no option here without a cost; the answer names one honestly.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "Three ways of comparing four channels on one page, each with a stated cost.",
+  "estimatedSeconds": 100
+ },
+ {
+  "id": "q.r2-choosing-graphs-teachback",
+  "topicId": "t.r2-choosing-graphs",
+  "objectiveId": "obj.r2-choosing-graphs",
+  "skillIds": [
+   "skill.r2-choosing-graphs"
+  ],
+  "difficulty": 3,
+  "interaction": "short-explanation",
+  "prompt": "Explain in your own words why the same variable can want a dot plot in one survey and a histogram in another. Use the words 'readings' and 'shape'.",
+  "answer": {
+   "kind": "text",
+   "requiredKeywords": [
+    "readings",
+    "shape"
+   ],
+   "forbiddenKeywords": []
+  },
+  "explanation": "A dot plot turns readings into shape by stacking those that share a value, so it works while the readings are few enough and coarse enough to repeat. Measure more finely, or measure more often, and nothing stacks: the picture becomes a row of single marks with no shape in it. The variable is the same in both surveys; what changed is how many readings there are and how precisely they were taken.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "An open-response question about why the number and precision of readings changes which chart suits.",
+  "estimatedSeconds": 130
+ },
+ {
+  "id": "q.r2-choosing-graphs-mastery",
+  "topicId": "t.r2-choosing-graphs",
+  "objectiveId": "obj.r2-choosing-graphs",
+  "skillIds": [
+   "skill.r2-choosing-graphs"
+  ],
+  "difficulty": 3,
+  "interaction": "matching",
+  "prompt": "Match each survey to the picture it calls for.",
+  "items": [
+   {
+    "id": "it.ports",
+    "text": "Boats counted by home port, six ports"
+   },
+   {
+    "id": "it.twelve",
+    "text": "Twelve crew sizes, several of them equal"
+   },
+   {
+    "id": "it.thousand",
+    "text": "A thousand depths measured to the centimetre"
+   },
+   {
+    "id": "it.pairs",
+    "text": "Hours at sea and crates landed, for each of thirty trips"
+   }
+  ],
+  "rightItems": [
+   {
+    "id": "rt.bar",
+    "text": "Bar chart"
+   },
+   {
+    "id": "rt.dot",
+    "text": "Dot plot"
+   },
+   {
+    "id": "rt.hist",
+    "text": "Histogram"
+   },
+   {
+    "id": "rt.scatter",
+    "text": "Scatterplot"
+   }
+  ],
+  "answer": {
+   "kind": "matching",
+   "pairs": [
+    {
+     "left": "it.ports",
+     "right": "rt.bar"
+    },
+    {
+     "left": "it.twelve",
+     "right": "rt.dot"
+    },
+    {
+     "left": "it.thousand",
+     "right": "rt.hist"
+    },
+    {
+     "left": "it.pairs",
+     "right": "rt.scatter"
+    }
+   ]
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Ask of each: what kind of variable, how many readings, and how many variables at once?"
+   }
+  ],
+  "explanation": "Home port is categorical, so a bar chart. Twelve crew sizes repeat and are few, so a dot plot keeps every one. A thousand fine measurements never repeat, so they must be pooled into intervals: a histogram. Hours against crates is two numeric variables and a question about their relationship, which is a scatterplot.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "Match four described surveys to the four chart types that suit them.",
+  "estimatedSeconds": 140
+ },
+ {
+  "id": "q.r2-misleading-graphs",
+  "topicId": "t.r2-misleading-graphs",
+  "objectiveId": "obj.r2-misleading-graphs",
+  "skillIds": [
+   "skill.r2-misleading-graphs"
+  ],
+  "difficulty": 1,
+  "interaction": "multiple-choice",
+  "prompt": "The pamphlet's chart shows Midpier's bar towering over Northport's. Look at the value axis. What does the chart actually show?",
+  "visual": {
+   "kind": "bar-chart",
+   "datasetId": "ds.port-landings",
+   "caption": "Crates landed at five ports, drawn from 47",
+   "axisMin": 47,
+   "accessibleDescription": "Bar chart of crates landed at five ports with the value axis starting at 47, not zero. Northport 48, Eastquay 50, Southbar 51, Westhead 52, Midpier 53 — so the bars rise 1, 3, 4, 5 and 6 above the axis and Midpier's appears six times the height of Northport's."
+  },
+  "choices": [
+   {
+    "id": "ch.small",
+    "text": "A difference of 5 crates between 48 and 53, drawn from an axis starting at 47"
+   },
+   {
+    "id": "ch.six",
+    "text": "Midpier landing about six times as many crates as Northport",
+    "misconceptionId": "mc.truncated-axis-read-as-scale"
+   },
+   {
+    "id": "ch.wrong",
+    "text": "Figures that must be wrong, since the bars disagree with the labels"
+   }
+  ],
+  "answer": {
+   "kind": "choice",
+   "correctChoiceIds": [
+    "ch.small"
+   ]
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Find where the numbers on the left-hand axis begin."
+   },
+   {
+    "level": 2,
+    "text": "The bars measure from 47, not from zero. What is 53 minus 48?"
+   }
+  ],
+  "explanation": "Northport landed 48 crates and Midpier 53 — a difference of 5, about a tenth. The axis starts at 47, so the bars show 1 and 6 rather than 48 and 53, and Midpier's looks six times the height. Every figure on the chart is correct. What is wrong is the impression, and it comes entirely from where the axis begins.",
+  "solutionSteps": [
+   "Read the value axis: it starts at 47 crates, not at zero.",
+   "Read the two figures: Northport 48, Midpier 53.",
+   "The bars therefore rise 1 and 6 above the axis, a ratio of 6 from a real difference of 5 crates."
+  ],
+  "misconceptionIds": [
+   "mc.truncated-axis-read-as-scale"
+  ],
+  "accessibilityDescription": "A bar chart of five ports drawn from a value axis starting at 47; three readings of what it shows.",
+  "estimatedSeconds": 90
+ },
+ {
+  "id": "q.r2-misleading-graphs-independent",
+  "topicId": "t.r2-misleading-graphs",
+  "objectiveId": "obj.r2-misleading-graphs",
+  "skillIds": [
+   "skill.r2-misleading-graphs"
+  ],
+  "difficulty": 2,
+  "interaction": "numeric-input",
+  "prompt": "This is the same season drawn from zero. How many more crates did Midpier land than Northport?",
+  "visual": {
+   "kind": "bar-chart",
+   "datasetId": "ds.port-landings",
+   "caption": "Crates landed at five ports, drawn from zero",
+   "accessibleDescription": "Bar chart of crates landed at five ports with the value axis starting at zero: Northport 48, Eastquay 50, Southbar 51, Westhead 52, Midpier 53. The five bars are close to level."
+  },
+  "answer": {
+   "kind": "numeric",
+   "value": 5,
+   "tolerance": 0,
+   "unit": "crates"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Read both bars against the axis, then subtract."
+   }
+  ],
+  "explanation": "Midpier landed 53 crates and Northport 48, so the difference is 5. Drawn from zero the five bars are close to level, which is what a season of 48 to 53 crates looks like. The pamphlet's chart contains these same two numbers.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "A bar chart of five ports drawn from zero; enter how many more crates Midpier landed than Northport.",
+  "estimatedSeconds": 70
+ },
+ {
+  "id": "q.r2-misleading-graphs-application",
+  "topicId": "t.r2-misleading-graphs",
+  "objectiveId": "obj.r2-misleading-graphs",
+  "skillIds": [
+   "skill.r2-misleading-graphs",
+   "skill.r2-histograms"
+  ],
+  "difficulty": 3,
+  "interaction": "multiple-choice",
+  "prompt": "Here are the twenty channel soundings again, this time in two bins ten metres wide instead of five bins four metres wide. What has the wider bin width done?",
+  "visual": {
+   "kind": "histogram",
+   "datasetId": "ds.channel-depths",
+   "binWidth": 10,
+   "caption": "Channel soundings, bins 10 metres wide",
+   "accessibleDescription": "Histogram of the same twenty channel soundings in two wide bins: 2 up to 12 metres holds 11 soundings and 12 up to 22 holds 9. The season looks like a single plain lump."
+  },
+  "choices": [
+   {
+    "id": "ch.smoothed",
+    "text": "Smoothed the season into one plain lump, hiding where the soundings actually cluster"
+   },
+   {
+    "id": "ch.fewer",
+    "text": "Discarded some soundings, since two bins cannot hold what five did"
+   },
+   {
+    "id": "ch.wrong",
+    "text": "Made the chart wrong, because four-metre bins are the correct width for this data"
+   }
+  ],
+  "answer": {
+   "kind": "choice",
+   "correctChoiceIds": [
+    "ch.smoothed"
+   ]
+  },
+  "explanation": "All twenty soundings are still there — 11 in the lower bin and 9 in the upper. What is gone is the shape: the five-bin chart showed the readings peaking between 6 and 10 metres and thinning towards the deep end, and two wide bins flatten that into a near-even pair. Neither width is 'correct'. Both are honest drawings, and a reader who is not told the bin width cannot tell which story they are being shown.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "A histogram of twenty soundings in two wide bins; three readings of what the wider bins did.",
+  "estimatedSeconds": 110
+ },
+ {
+  "id": "q.r2-misleading-graphs-teachback",
+  "topicId": "t.r2-misleading-graphs",
+  "objectiveId": "obj.r2-misleading-graphs",
+  "skillIds": [
+   "skill.r2-misleading-graphs"
+  ],
+  "difficulty": 3,
+  "interaction": "short-explanation",
+  "prompt": "Explain in your own words how a chart can contain no false number and still mislead, and name two things to check before believing one. Use the words 'axis' and 'true'.",
+  "answer": {
+   "kind": "text",
+   "requiredKeywords": [
+    "axis",
+    "true"
+   ],
+   "forbiddenKeywords": []
+  },
+  "explanation": "Every value on a chart can be true while its construction carries a false impression: a value axis starting above zero turns a tenth into a sixfold gap, and a bin width chosen for effect can smooth away a cluster or manufacture spikes. Both are decisions invisible in the finished picture. Checking where the axis starts and what the intervals are catches most of it, and neither check requires assuming the author meant to deceive.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "An open-response question about how an accurate chart can mislead and what to check first.",
+  "estimatedSeconds": 140
+ },
+ {
+  "id": "q.r2-misleading-graphs-mastery",
+  "topicId": "t.r2-misleading-graphs",
+  "objectiveId": "obj.r2-misleading-graphs",
+  "skillIds": [
+   "skill.r2-misleading-graphs"
+  ],
+  "difficulty": 3,
+  "interaction": "numeric-input",
+  "prompt": "On the pamphlet's chart the axis starts at 47, so Northport's bar rises 1 and Midpier's rises 6. How many times taller does Midpier's bar appear than Northport's?",
+  "visual": {
+   "kind": "bar-chart",
+   "datasetId": "ds.port-landings",
+   "caption": "Crates landed at five ports, drawn from 47",
+   "axisMin": 47,
+   "accessibleDescription": "Bar chart of crates landed at five ports with the value axis starting at 47, not zero. Northport 48, Eastquay 50, Southbar 51, Westhead 52, Midpier 53 — so the bars rise 1, 3, 4, 5 and 6 above the axis and Midpier's appears six times the height of Northport's."
+  },
+  "answer": {
+   "kind": "numeric",
+   "value": 6,
+   "tolerance": 0.01,
+   "unit": "times"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Compare the two heights above the axis, not the two landing figures."
+   }
+  ],
+  "explanation": "Six divided by one is 6, so Midpier's bar appears six times the height of Northport's. The landings themselves differ by a factor of about 1.1. That gap between 6 and 1.1 is the whole effect of the truncated axis, and it is produced without a single incorrect number.",
+  "misconceptionIds": [],
+  "accessibilityDescription": "The truncated bar chart; enter how many times taller Midpier's bar appears than Northport's.",
+  "estimatedSeconds": 100
  }
 ]

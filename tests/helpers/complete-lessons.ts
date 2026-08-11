@@ -74,5 +74,9 @@ export const COMPLETE_LESSONS: readonly string[] = [
   "l.r2-box-plots",
   // With this, m.r2-pictures is Complete entire (S2-14 cycle 3), and the only
   // staged question left is q.error-id-causation in l.r2-misleading-graphs.
-  "l.r2-scatterplots"
+  "l.r2-scatterplots",
+  // Region 2, m.r2-judgement (S2-14 cycle 4). l.r2-misleading-graphs absorbed
+  // the last staged question, which empties STAGED_INHERITED entirely.
+  "l.r2-choosing-graphs",
+  "l.r2-misleading-graphs"
 ];

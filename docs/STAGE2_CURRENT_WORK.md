@@ -6,34 +6,36 @@ Exactly one Stage 2 unit is active at a time. Rewritten at the start and end of 
 
 ## Current unit
 
-**S2-14 — Data-visualization lessons (cycle 3: scatterplots, and a chart that would have drawn a perfect lie)**
+**S2-14 — Data-visualization lessons (cycle 4: choosing graphs, misleading graphs, and the end of a temporary rule)**
 
-Entered from `a6c284466110c0b488c36ae41bd784b61cf6bfd3` (remote-verified, clean tree).
+Entered from `c14d5e7c1574c5a8c7817b310dac1284b89588ff` (remote-verified, clean tree).
 
 ## Objective
 
-Build the scatter renderer, write `l.r2-scatterplots` to all 18 of scope §5's requirements, and clear the question
-staged in it since S2-12.
+Write `l.r2-choosing-graphs` and `l.r2-misleading-graphs` to all 18 of scope §5's requirements, and clear the last
+staged inherited question.
 
 ## Result up front
 
-**S2-14 is Partial: 5 of its 9 lessons are Complete, and `m.r2-pictures` is finished entire.** Graph selection,
-misleading graphs and comparing distributions remain.
+**S2-14 is Partial: 8 of its 9 lessons are Complete.** Every graph lesson is written. Only
+`l.r2-comparing-distributions` remains — inherited from S2-13, and belonging last because it draws on everything.
 
-**Staged inheritance is down to one.** `q.point-thursday-catch` became this lesson's guided practice rather than
-being parked in it; only `q.error-id-causation` in `l.r2-misleading-graphs` is left.
+**Staged inheritance is finished, and the mechanism is deleted.** `STAGED_INHERITED` carried an audit clause requiring
+its own removal once empty, and a ceiling tightened at each clearance — 4, then 2, then 1. `q.error-id-causation` took
+the misconception role in `l.r2-misleading-graphs`, the map emptied, and the helper and its whole audit block went with
+it. (D-048)
 
 ## Relevant files
 
 | File | Change |
 |---|---|
-| `src/renderer/components/ScatterPlot.tsx` | **New.** Two columns, resolved explicitly and refused when absent |
-| `src/renderer/components/rendered-visuals.ts` | 4 → **5** drawable kinds |
-| `tests/audit/interaction-audit.test.ts` | A visual's dataset must be able to feed its chart kind |
-| `tests/unit/scatter-plot.test.ts` | **New.** The pairing, and the refusal |
-| `src/content/*` | 276 authored questions; 38 misconceptions; 37 remediations; 4 datasets |
-| `tests/helpers/staged-inherited.ts` | 2 → **1** staged question; ceiling tightened to match |
-| `tests/helpers/complete-lessons.ts` | 36 → **37** lessons declared Complete |
+| `src/shared/schemas/question.ts` | `axisMin` and `binWidth`, each rejected on the kinds they mean nothing to |
+| `src/renderer/components/BarChart.tsx` | Honours `axisMin`; zero stays the default |
+| `tests/audit/interaction-audit.test.ts` | A presentation setting must be stated in the chart's words, both ways |
+| `tests/unit/scatter-plot.test.ts` | The port landings both lessons argue from |
+| `tests/helpers/staged-inherited.ts` | **Deleted**, with its audit block |
+| `src/content/*` | 285 authored questions; 39 misconceptions; 38 remediations; 5 datasets |
+| `tests/helpers/complete-lessons.ts` | 37 → **39** lessons declared Complete |
 
 ## Acceptance criteria
 
@@ -41,11 +43,12 @@ being parked in it; only `q.error-id-causation` in `l.r2-misleading-graphs` is l
 |---|---|---|
 | 1 | Bar charts, histograms | **Yes** (cycle 1) |
 | 2 | Dot plots, box plots | **Yes** (cycle 2) |
-| 3 | Scatterplots | **Yes** |
-| 4 | Graph selection, truncated axes, bin-width effects, misleading framing | No — next cycles; no new renderer needed |
-| 5 | `l.r2-comparing-distributions` (inherited from S2-13) | No — belongs last |
-| 6 | Staged inherited questions cleared | **Partly** — one remains, in misleading graphs |
-| 7 | Commit pushed and remote hash verified | Yes — see below |
+| 3 | Scatterplots | **Yes** (cycle 3) |
+| 4 | Graph selection | **Yes** |
+| 5 | Truncated axes, bin-width effects, misleading framing | **Yes** — drawn, not described |
+| 6 | `l.r2-comparing-distributions` (inherited from S2-13) | No — belongs last |
+| 7 | Staged inherited questions cleared | **Yes** — and the mechanism deleted |
+| 8 | Commit pushed and remote hash verified | Yes — see below |
 
 ## Required tests
 
@@ -55,7 +58,7 @@ Measured (Node v22.22.2 / npm 10.9.7):
 |---|---|
 | `npm run typecheck` | Pass |
 | `npm run lint` | Pass — 0 errors, 0 warnings |
-| `npm test` | Pass — **567 tests / 41 files** |
+| `npm test` | Pass — **570 tests / 41 files** |
 | `npm run test:statistics` | Pass — 18 tests / 3 files |
 | `npm run test:content` | Pass — 5 tests / 1 file |
 | `npm run build` | Pass |
@@ -65,64 +68,58 @@ Measured (Node v22.22.2 / npm 10.9.7):
 
 ## Work completed
 
-1. **A scatter renderer that refuses rather than guesses.** Every other chart reads the first numeric column and
-   ignores the rest; this is the first needing two. Taking "the next numeric column, or the first again" would plot a
-   one-variable dataset against itself and draw a flawless diagonal — in a lesson about reading a relationship out of
-   a cloud, the worst available failure. `numericPair` returns null instead, and a unit test pins the refusal.
-   (D-046)
+1. **The misleading-graphs lesson draws a truncated chart rather than describing one.** `VisualSpec` gained `axisMin`
+   and `binWidth` — the two presentation choices the lesson criticises — each rejected by the schema on kinds it means
+   nothing to. Five ports landing 48 to 53 crates are shown from an axis starting at 47, where the tallest bar stands
+   six times the shortest from a real difference of about a tenth, and again from zero, where they are level. (D-047)
 
-2. **Scatterplots taught as one point carrying two readings**, with the pattern located in the cloud rather than in
-   any point, and association separated from cause. The demonstration reads a boat's catch per hour, so the fleet's
-   odd trip — nine hours for six crates — is a number the learner computes rather than a dot they are told about.
+2. **Choosing a graph is taught as choosing a loss.** Its demonstration reports how many readings share each distinct
+   value: at 5.00 a dot plot reads clearly, and at 1.00 — the surveyor measuring to the centimetre — every column is
+   one dot high and the picture says nothing. That is the boundary where pooling into intervals stops costing
+   anything, stated as a number rather than a rule of thumb.
 
-3. **The staged question was promoted, not just moved.** `q.point-thursday-catch` plots a point on a day-against-catch
-   grid, which is the construction the lesson opens on, so it became the guided practice. That obliged it to gain the
-   worked steps every guided question owes, and the lesson's skill so answering it schedules review.
+3. **The staging mechanism reached its declared end and was deleted.** Not merely emptied: helper, audit block and the
+   `1 + staged.length` allowance all removed, and skeleton honesty is back to the single line it was before. (D-048)
 
 ## Corrections made during the unit
 
-1. **A remediation pointed at a question that does not exist.** `rem.a-point-carries-two` named `q.r2-scatterplots`,
-   an id I never created — the lesson's guided slot is the inherited question. Caught by cross-reference validation on
-   the first run, and repointed at `q.point-thursday-catch`, which is where a learner who read one coordinate should
-   in fact be sent.
+1. **The matching question was written against the wrong schema shape.** `MatchingAnswerSchema` requires both sides to
+   be declared ids, and the right-hand options live in a `rightItems` array rather than as free text on the pair.
+   Caught before it reached disk by reading an existing matching question rather than assuming.
 
-2. **The promoted question had hints but no worked steps**, which requirement 11 demands of guided practice. Written
-   as the two readings a scatterplot point carries, so the steps teach the lesson's own point rather than just
-   satisfying the check.
+2. **My own new check flagged the honest chart.** The reverse rule — prose claiming a truncated axis must have the
+   setting behind it — matched "starting at zero", which is the honest default saying so out loud. The pattern was too
+   eager, not the content wrong; it now means a start that is not zero.
 
 ## Verification that the guards have teeth
 
-Seven deliberate probes, all reverted. **Five bite; one found a gap now closed; one was itself wrong** — recorded
-rather than dressed up:
+Seven deliberate probes, all reverted. **Four bite, two found gaps now closed and re-probed, one repeated a wrong
+hypothesis from last cycle:**
 
 | Probe | Result |
 |---|---|
-| The scatter pairs a single numeric column with itself | **2 checks fail** |
-| A scatter question names a dataset with one numeric column | **0 → 1 check fails** — the gap; the check was added and re-probed |
-| The trip dataset drifts from the readings the lesson quotes | **1 check fails** |
-| The last staging entry is cleared while its question is still parked | **2 checks fail** |
-| The promoted question loses its worked steps | **1 check fails** |
-| The scatter misconception loses its tagged distractor | **1 check fails** |
-| The promoted question loses the lesson's skill | **0 checks fail — the probe was wrong.** The lesson also declares `obj.read-data`, which that question genuinely practises, so it still carries a taught skill. No defect; no guard needed |
+| `axisMin` is set on a histogram, where it means nothing | **8 checks fail** (rejected at load) |
+| `binWidth` is set on a bar chart, where it means nothing | **8 checks fail** (rejected at load) |
+| The truncated chart is redrawn from zero while the prose still describes it | **0 → 1 check fails** — the gap this cycle's most important guard closes |
+| The port dataset drifts from the figures the lesson quotes | **0 → 2 checks fail** — closed by a dataset test, as for the other four datasets |
+| The promoted causation question loses the lesson's skill | **0 checks fail — the probe was wrong again.** The lesson also declares `obj.read-data`, which that question practises. The same wrong hypothesis as cycle 3; a lesson may teach more than its title |
+| The truncated-axis misconception loses its tagged distractor | **1 check fails** |
+| The last seeded lesson grows past its seed | **1 check fails** — the rule the staging deletion restored |
 
 ## Remaining work
 
-**4 of S2-14's 9 lessons**, none of which needs a new renderer: graph selection and misleading graphs choose among the
-five charts now built, and `l.r2-comparing-distributions` goes last. One staged question comes out with misleading
-graphs.
+**1 of S2-14's 9 lessons**: `l.r2-comparing-distributions`, which meets S2-13's outstanding criterion 5 and makes the
+boss's stage 5 legal under D-028. It needs no new renderer.
 
 ## Local commit
 
-`fa8d39957432384f385ca10680fed3c9c6a07d2c`
+`PENDING`
 
 ## Remote verification
 
-```
-LOCAL_HEAD  = fa8d39957432384f385ca10680fed3c9c6a07d2c
-REMOTE_HEAD = fa8d39957432384f385ca10680fed3c9c6a07d2c
-VERIFIED: MATCH
-```
+`PENDING`
 
 ## Next unit
 
-**S2-14 continued — choosing graphs and misleading graphs.** Not started in this cycle.
+**S2-14 continued — `l.r2-comparing-distributions`, the last lesson of Region 2's teaching.** Not started in this
+cycle.

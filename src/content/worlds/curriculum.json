@@ -4501,48 +4501,228 @@
    "moduleId": "m.r2-judgement",
    "title": "Picking the Right Picture",
    "objectiveIds": [
-    "obj.r2-choosing-graphs"
+    "obj.r2-choosing-graphs",
+    "obj.r2-scatterplots",
+    "obj.r2-dot-plots",
+    "obj.r2-box-plots"
    ],
    "concepts": [
     {
      "id": "c.r2-choosing-graphs",
-     "title": "Picking the Right Picture",
-     "summary": "The graph to use follows from the question asked and the kind of variable in hand.",
-     "body": "Categorical counts want bars; one numerical variable's shape wants a histogram; two numerical variables want a scatterplot."
+     "title": "The question and the variable decide",
+     "summary": "What you want to know, and what kind of variable you hold, narrow the choice to one or two.",
+     "body": "Start with the variable. Categorical data — port, boat type, weather — can only be counted into groups, so a bar chart is the picture. Numeric data measured on a scale wants an axis that is a scale: a dot plot while the readings are few, a histogram once they are many, a box plot when several datasets must be set side by side. Two numeric variables together, and the question is about a relationship, which is a scatterplot. The choice is nearly made before any aesthetics enter."
+    },
+    {
+     "id": "c.r2-choosing-graphs-tradeoff",
+     "title": "Every picture gives something up",
+     "summary": "Detail, shape and comparability pull against one another; no chart supplies all three.",
+     "body": "A dot plot keeps every reading and stops working when there are many. A histogram shows the shape of a large set and cannot answer a question inside a bin. A box plot reduces a whole dataset to five numbers, which is a poor picture of one set and the only practical way to compare six. Choosing a graph is therefore choosing a loss, and the honest question to ask is not 'which is best' but 'which of these things can I afford not to see'."
+    },
+    {
+     "id": "c.r2-choosing-graphs-count",
+     "title": "The size of the data changes the answer",
+     "summary": "The same variable wants different pictures at ten readings and at a thousand.",
+     "body": "A dot plot of ten crew sizes is the clearest thing anyone could draw. The same picture of a thousand depth soundings measured to the centimetre is a smear, because nothing stacks when values almost never repeat. Nothing about the variable changed; the number of readings did. So the choice has to be made against the data actually in hand rather than the topic in the abstract."
     }
    ],
    "questionIds": [
-    "q.seed.r2-choosing-graphs"
+    "q.r2-choosing-graphs",
+    "q.r2-choosing-graphs-independent",
+    "q.r2-choosing-graphs-misconception",
+    "q.r2-choosing-graphs-application",
+    "q.r2-choosing-graphs-teachback",
+    "q.r2-choosing-graphs-mastery"
    ],
    "prerequisites": [
     "l.r2-scatterplots",
     "l.r2-skew"
    ],
-   "estimatedMinutes": 15
+   "estimatedMinutes": 14,
+   "narrativeIntro": "Five pictures have been built across this module and none of them is the best one. Each answers a different question about a different kind of variable, and each gives something up to do it. Choosing between them is not a matter of taste or of which looks handsomest on a report — it is deciding what you are willing to lose.",
+   "demonstration": {
+    "id": "dem.r2-choosing-graphs",
+    "title": "When the dots stop stacking",
+    "experience": "Readings are dropped onto a number line and those sharing a value stack up. The readout gives how many readings land on each distinct value — the average height of a column on a dot plot. Watch what happens to it as the readings get more precise.",
+    "accessibleDescription": "Two controls. The first sets how many readings the log holds. The second sets how many different values those readings take. The readout gives how many readings share each distinct value, to two decimal places, and starts at 5.00 with 40 readings taking 8 different values.",
+    "controls": [
+     {
+      "id": "ctl.readings",
+      "label": "Readings in the log",
+      "min": 1,
+      "max": 200,
+      "step": 1,
+      "initial": 40
+     },
+     {
+      "id": "ctl.distinct",
+      "label": "Different values the readings take",
+      "min": 1,
+      "max": 200,
+      "step": 1,
+      "initial": 8
+     }
+    ],
+    "formula": "quotient",
+    "readoutLabel": "Readings sharing each distinct value",
+    "readoutPrecision": 2,
+    "prediction": {
+     "prompt": "Forty readings taking eight different values gives 5.00 per value, so a dot plot stacks five dots in each column and reads clearly. The surveyor now measures to the centimetre and all forty readings come out different. What does the readout show?",
+     "options": [
+      {
+       "id": "opt.one",
+       "text": "1.00 - every column one dot high, so the plot shows no shape at all"
+      },
+      {
+       "id": "opt.forty",
+       "text": "40.00 - all forty readings now stack into one column"
+      },
+      {
+       "id": "opt.same",
+       "text": "5.00 - the number of readings has not changed, so neither has the picture"
+      }
+     ],
+     "correctOptionId": "opt.one",
+     "revealNote": "Forty readings across forty values is one dot each: a row of single marks with no shape to read. The data has not got worse — it has got more precise, and precision is exactly what breaks a dot plot. That is the point at which pooling readings into intervals stops losing anything worth keeping, which is what a histogram does and why it exists."
+    },
+    "observation": "Add readings without adding values and the columns grow; add values without adding readings and they thin out. The readout at 1.00 is the boundary this lesson turns on: below it the dot plot is showing you less than the raw list would, and a histogram or a box plot is the honest picture."
+   },
+   "formalTerm": {
+    "term": "Choosing a graph",
+    "definition": "Choosing a graph means matching the picture to the kind of variable, the question being asked and the number of readings in hand. Every chart discards something — individual readings, shape, or comparability between datasets — so the choice is a decision about which loss is acceptable.",
+    "symbols": []
+   },
+   "guidedQuestionIds": [
+    "q.r2-choosing-graphs"
+   ],
+   "independentQuestionIds": [
+    "q.r2-choosing-graphs-independent"
+   ],
+   "misconceptionQuestionIds": [
+    "q.r2-choosing-graphs-misconception"
+   ],
+   "applicationQuestionIds": [
+    "q.r2-choosing-graphs-application"
+   ],
+   "teachBackQuestionIds": [
+    "q.r2-choosing-graphs-teachback"
+   ],
+   "masteryCheckQuestionIds": [
+    "q.r2-choosing-graphs-mastery"
+   ]
   },
   {
    "id": "l.r2-misleading-graphs",
    "moduleId": "m.r2-judgement",
    "title": "True and Still Misleading",
    "objectiveIds": [
-    "obj.r2-misleading-graphs"
+    "obj.r2-misleading-graphs",
+    "obj.r2-histograms",
+    "obj.read-data"
    ],
    "concepts": [
     {
      "id": "c.r2-misleading-graphs",
-     "title": "True and Still Misleading",
-     "summary": "A graph can be accurate in every value and still lead a reader to a false conclusion.",
-     "body": "A vertical axis that starts at 90 rather than 0 turns a 2% difference into a cliff, without misprinting a single number."
+     "title": "A truncated axis exaggerates every difference",
+     "summary": "Starting the value axis above zero makes small differences fill the frame.",
+     "body": "A bar chart promises that lengths are comparable: a bar twice as tall means twice as much. That promise holds only from a zero baseline. Start the axis at 47 instead and a port landing 53 crates draws a bar six times the height of one landing 48 — a real difference of about a tenth, drawn as sixfold. Every number on the chart is right, every bar is measured correctly, and the impression is false. Reading the axis before the bars is the only defence."
+    },
+    {
+     "id": "c.r2-misleading-graphs-bins",
+     "title": "Bin width shapes a histogram's story",
+     "summary": "Wide bins smooth a gap away; narrow bins turn ordinary variation into spikes.",
+     "body": "A histogram's intervals are chosen, not given. Pool the same soundings into two wide bins and the season looks like a plain lump; cut them fine and it breaks into a row of jagged peaks that suggest structure no reader should trust. Both pictures are accurate drawings of identical data. Since the choice is invisible in the finished chart, a reader is owed the bin width, and an author who tries several and prints the most striking one has made an argument rather than a report."
+    },
+    {
+     "id": "c.r2-misleading-graphs-defence",
+     "title": "What to check before believing a chart",
+     "summary": "Read the axes, the scale and what has been left out before reading the shape.",
+     "body": "The habits are few and they catch most of it. Does the value axis start at zero, and if not, why? What are the units and the bin width? How many cases is this drawn from? What is not shown — a category dropped, a year trimmed off the end, a comparison quietly rescaled? None of these requires suspecting dishonesty. A chart can mislead because its author was persuaded first, and the checks are the same either way."
     }
    ],
    "questionIds": [
-    "q.seed.r2-misleading-graphs",
-    "q.error-id-causation"
+    "q.r2-misleading-graphs",
+    "q.r2-misleading-graphs-independent",
+    "q.error-id-causation",
+    "q.r2-misleading-graphs-application",
+    "q.r2-misleading-graphs-teachback",
+    "q.r2-misleading-graphs-mastery"
    ],
    "prerequisites": [
     "l.r2-choosing-graphs"
    ],
-   "estimatedMinutes": 15
+   "estimatedMinutes": 16,
+   "narrativeIntro": "The five ports landed 48, 50, 51, 52 and 53 crates — as level a season as the atoll has had. The pamphlet arguing that Midpier should take the whole trade prints a chart where Midpier's bar towers over Northport's, and every number on it is correct. Nothing has been falsified. The chart is still an argument.",
+   "demonstration": {
+    "id": "dem.r2-misleading-graphs",
+    "title": "How much taller the tall bar looks",
+    "experience": "Two of the five ports are drawn side by side, and the readout gives how many times taller the taller bar appears. The controls are the heights the bars actually reach above wherever the axis has been started — so moving the axis moves both.",
+    "accessibleDescription": "Two controls. The first sets how far the tallest bar rises above the axis start, the second how far the shortest does. The readout gives how many times taller the tallest bar looks, to two decimal places, and starts at 6.00 with heights of 6 and 1 — an axis beginning at 47 crates.",
+    "controls": [
+     {
+      "id": "ctl.top",
+      "label": "Height of the tallest bar above the axis start",
+      "min": 1,
+      "max": 60,
+      "step": 1,
+      "initial": 6
+     },
+     {
+      "id": "ctl.bottom",
+      "label": "Height of the shortest bar above the axis start",
+      "min": 1,
+      "max": 60,
+      "step": 1,
+      "initial": 1
+     }
+    ],
+    "formula": "quotient",
+    "readoutLabel": "How many times taller the tallest bar looks",
+    "readoutPrecision": 2,
+    "prediction": {
+     "prompt": "With the axis starting at 47 crates, Midpier's bar rises 6 and Northport's rises 1, so Midpier's looks 6.00 times the height. The chart is redrawn from zero, so the bars rise 53 and 48. How many times taller does Midpier's look now?",
+     "options": [
+      {
+       "id": "opt.ten",
+       "text": "1.10 - a tenth taller, which is what the landings actually differ by"
+      },
+      {
+       "id": "opt.six",
+       "text": "6.00 - the bars keep their proportions whatever the axis does"
+      },
+      {
+       "id": "opt.none",
+       "text": "0.91 - the shorter bar becomes the taller one"
+      }
+     ],
+     "correctOptionId": "opt.ten",
+     "revealNote": "Not one landing figure changed and the picture went from sixfold to a tenth. That gap is the whole content of a truncated axis: the bars were measured correctly in both charts, and only one of them keeps the promise a reader assumes — that a bar twice as tall means twice as much."
+    },
+    "observation": "Raise the tallest bar and the readout climbs; raise the shortest and it falls towards 1.00. A readout of 1.00 is two bars of equal height, which is what near-equal ports should look like. The further the axis start is pushed up, the smaller both heights become and the more violently their ratio swings."
+   },
+   "formalTerm": {
+    "term": "Misleading graph",
+    "definition": "A misleading graph is one whose values are all correct and whose construction still leads a reader to a false conclusion — most often through a value axis that does not start at zero, a bin width chosen for effect, or a comparison drawn on rescaled axes.",
+    "symbols": []
+   },
+   "guidedQuestionIds": [
+    "q.r2-misleading-graphs"
+   ],
+   "independentQuestionIds": [
+    "q.r2-misleading-graphs-independent"
+   ],
+   "misconceptionQuestionIds": [
+    "q.error-id-causation"
+   ],
+   "applicationQuestionIds": [
+    "q.r2-misleading-graphs-application"
+   ],
+   "teachBackQuestionIds": [
+    "q.r2-misleading-graphs-teachback"
+   ],
+   "masteryCheckQuestionIds": [
+    "q.r2-misleading-graphs-mastery"
+   ]
   },
   {
    "id": "l.r2-comparing-distributions",

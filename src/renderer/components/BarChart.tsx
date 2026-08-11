@@ -4,10 +4,20 @@ import type { Dataset } from "../../shared/schemas";
  * Accessible SVG bar chart for small categorical/numeric datasets.
  * Uses the first categorical column as labels and first numeric column as values.
  */
-export function BarChart({ dataset, caption, accessibleDescription }: {
+export function BarChart({ dataset, caption, accessibleDescription, axisMin }: {
   dataset: Dataset;
   caption?: string;
   accessibleDescription?: string;
+  /**
+   * Where the value axis starts. Defaults to zero, which is the only setting
+   * that makes bar *lengths* comparable — a bar twice as tall meaning twice as
+   * much is a promise the chart only keeps from a zero baseline.
+   *
+   * A non-zero value is therefore not a styling preference but the subject of
+   * `l.r2-misleading-graphs`: the same honest numbers, drawn so that a small
+   * difference fills the frame.
+   */
+  axisMin?: number;
 }): JSX.Element {
   const labelIdx = dataset.columns.findIndex((c) => c.kind === "categorical");
   const valueIdx = dataset.columns.findIndex((c) => c.kind === "numeric");
@@ -20,7 +30,9 @@ export function BarChart({ dataset, caption, accessibleDescription }: {
   const pad = { top: 16, right: 12, bottom: 34, left: 36 };
   const innerW = width - pad.left - pad.right;
   const innerH = height - pad.top - pad.bottom;
-  const maxVal = Math.max(1, ...rows.map((r) => r.value));
+  const base = axisMin ?? 0;
+  const maxVal = Math.max(base + 1, ...rows.map((r) => r.value));
+  const span = maxVal - base;
   const barW = innerW / rows.length;
 
   return (
@@ -37,13 +49,13 @@ export function BarChart({ dataset, caption, accessibleDescription }: {
             <g key={t}>
               <line x1={pad.left} x2={width - pad.right} y1={y} y2={y} stroke="var(--line)" strokeDasharray="3 4" />
               <text x={pad.left - 6} y={y + 4} textAnchor="end" fontSize="10" fill="var(--ink-faint)" fontFamily="var(--font-data)">
-                {Math.round(maxVal * t)}
+                {Math.round(base + span * t)}
               </text>
             </g>
           );
         })}
         {rows.map((r, i) => {
-          const h = (r.value / maxVal) * innerH;
+          const h = Math.max(0, ((r.value - base) / span) * innerH);
           const x = pad.left + i * barW + barW * 0.18;
           return (
             <g key={r.label + i}>

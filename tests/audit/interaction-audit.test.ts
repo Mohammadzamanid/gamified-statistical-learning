@@ -294,6 +294,47 @@ describe("every visual a question declares can actually be drawn", () => {
     }
   });
 
+  it("says in words how a chart is drawn whenever that is what the lesson is about", () => {
+    // `l.r2-misleading-graphs` turns entirely on its chart being truncated: its
+    // prompt, hints, explanation and accessible description all describe an axis
+    // starting at 47. Drop `axisMin` and every one of those still says so while
+    // the screen draws an honest chart — prose describing something not on
+    // screen, which is what D-035 forbids one level in, at the demonstration.
+    //
+    // So the two presentation settings and the words must agree, both ways: a
+    // setting has to be stated (a screen-reader user has only the words, and the
+    // setting is exactly what changes the picture), and prose claiming a
+    // truncated axis has to have the setting behind it.
+    // "starting at zero" is the honest default and says so out loud, which the
+    // first draft of this pattern flagged as a truncation claim. The claim is a
+    // start that is *not* zero — or the words for it.
+    const CLAIMS_TRUNCATION = /(start(s|ing)? at (?!zero\b)\d)|not (at )?zero|truncat/i;
+    for (const q of reachableQuestions) {
+      const v = q.visual;
+      if (v.kind === "none") continue;
+      const words = `${v.accessibleDescription ?? ""} ${v.caption ?? ""}`;
+
+      if (v.axisMin !== undefined) {
+        expect(
+          words.includes(String(v.axisMin)),
+          `${q.id} draws its bars from ${v.axisMin} but never says so, so a reader who cannot see the chart is told nothing about the truncation`
+        ).toBe(true);
+      } else {
+        expect(
+          CLAIMS_TRUNCATION.test(words),
+          `${q.id} describes a truncated axis but sets no axisMin, so the chart on screen starts at zero`
+        ).toBe(false);
+      }
+
+      if (v.binWidth !== undefined) {
+        expect(
+          words.includes(String(v.binWidth)),
+          `${q.id} sets a bin width of ${v.binWidth} but never states it, and bin width is invisible in a finished histogram`
+        ).toBe(true);
+      }
+    }
+  });
+
   it("gives every shown visual a dataset to draw and words to read", () => {
     for (const q of reachableQuestions) {
       if (q.visual.kind === "none") continue;

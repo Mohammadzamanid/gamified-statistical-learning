@@ -173,10 +173,33 @@ export const VisualSpecSchema = z.object({
   datasetId: IdSchema.optional(),
   caption: z.string().optional(),
   /** Alt description required whenever a visual is shown. */
-  accessibleDescription: z.string().optional()
+  accessibleDescription: z.string().optional(),
+  /**
+   * How a chart is *drawn*, as opposed to what it draws.
+   *
+   * Added by S2-14 for `l.r2-misleading-graphs`, whose subject is precisely
+   * that two honest pictures of identical data can carry opposite impressions.
+   * Teaching that from prose while the screen shows one untruncated chart would
+   * be describing something not on screen, which is what D-035 forbids — so the
+   * presentation choices the lesson criticises are choices the content can
+   * actually make.
+   *
+   * Each applies to one kind and is meaningless on the others, which the
+   * interaction audit enforces rather than leaving to be silently ignored.
+   */
+  /** Histogram only: the width of each interval. Omitted means the component's default. */
+  binWidth: z.number().positive().optional(),
+  /** Bar chart only: where the value axis starts. Omitted means zero, the honest default. */
+  axisMin: z.number().optional()
 }).superRefine((v, ctx) => {
   if (v.kind !== "none" && !v.accessibleDescription) {
     ctx.addIssue({ code: z.ZodIssueCode.custom, message: "visuals require accessibleDescription" });
+  }
+  if (v.binWidth !== undefined && v.kind !== "histogram") {
+    ctx.addIssue({ code: z.ZodIssueCode.custom, message: `binWidth is a histogram setting; this visual is a ${v.kind}` });
+  }
+  if (v.axisMin !== undefined && v.kind !== "bar-chart") {
+    ctx.addIssue({ code: z.ZodIssueCode.custom, message: `axisMin is a bar-chart setting; this visual is a ${v.kind}` });
   }
 });
 export type VisualSpec = z.infer<typeof VisualSpecSchema>;

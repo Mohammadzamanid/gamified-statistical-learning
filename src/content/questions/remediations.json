@@ -443,5 +443,17 @@
   "skillIds": [
    "skill.r2-scatterplots"
   ]
+ },
+ {
+  "id": "rem.read-the-axis-first",
+  "title": "Read where the axis starts before comparing bars",
+  "explanation": "A bar chart's promise is that length stands for amount, and that promise holds only when the value axis starts at zero. Above zero the bars show differences from the axis start rather than amounts, so their ratio can be made as dramatic as anyone likes by pushing the baseline up. Nothing on such a chart is false - the numbers are right and the bars are measured correctly - and the impression is still wrong. Look at the axis before the bars, every time.",
+  "microLesson": "Five ports land 48, 50, 51, 52 and 53 crates. Drawn from zero, the bars are near enough level, which is what the season was. Drawn from 47, they rise 1, 3, 4, 5 and 6 - the tallest six times the shortest, from a real difference of about a tenth. Same five numbers, same measurements, two opposite stories.",
+  "followUpQuestionIds": [
+   "q.r2-misleading-graphs"
+  ],
+  "skillIds": [
+   "skill.r2-misleading-graphs"
+  ]
  }
 ]

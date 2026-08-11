@@ -48,11 +48,11 @@ export function QuestionScreen(): JSX.Element {
         <p style={{ fontSize: "var(--fs-lg)" }}>{question.prompt}</p>
 
         {dataset && question.visual.kind === "bar-chart" && (
-          <BarChart dataset={dataset} caption={question.visual.caption} accessibleDescription={question.visual.accessibleDescription} />
+          <BarChart dataset={dataset} caption={question.visual.caption} accessibleDescription={question.visual.accessibleDescription} axisMin={question.visual.axisMin} />
         )}
 
         {dataset && question.visual.kind === "histogram" && (
-          <Histogram dataset={dataset} caption={question.visual.caption} accessibleDescription={question.visual.accessibleDescription} />
+          <Histogram dataset={dataset} caption={question.visual.caption} accessibleDescription={question.visual.accessibleDescription} binWidth={question.visual.binWidth} />
         )}
 
         {dataset && question.visual.kind === "dot-plot" && (

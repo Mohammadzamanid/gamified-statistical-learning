@@ -16,7 +16,7 @@ after Stage 1 was lost because commits were never pushed to a durable remote. Re
 
 - **Stage 1: surviving, verified, green.** Not re-created — the original commit `7add4bc` was carried forward from the
   archive's own `.git` directory, with authorship intact.
-- **Stage 2: in progress, and not recoverable.** Reconstruction began 2026-08-04; S2-01 through S2-08, S2-10 and S2-11 are complete and S2-12 is **Partial** (all 9 lessons Complete, editable datasets deferred to S2-15) and S2-13 is **Partial** (all 6 lessons Complete, distribution comparison deferred to S2-14) and S2-14 is **Partial** (cycle 3, `fa8d399`, remote-verified); S2-09 is **Partial**, and only because §4 is stated over all 22 topics — every Region 1 topic meets it. Nothing
+- **Stage 2: in progress, and not recoverable.** Reconstruction began 2026-08-04; S2-01 through S2-08, S2-10 and S2-11 are complete and S2-12 is **Partial** (all 9 lessons Complete, editable datasets deferred to S2-15) and S2-13 is **Partial** (all 6 lessons Complete, distribution comparison deferred to S2-14) and S2-14 is **Partial** (cycle 4, `PENDING`, remote-verified); S2-09 is **Partial**, and only because §4 is stated over all 22 topics — every Region 1 topic meets it. Nothing
   in it is recovered source.
 - **Stages 3–6: not started, and not recoverable.** They must be **reconstructed** from the surviving Stage 1 source,
   the specifications, and the known defect history. They may never be described as recovered source, and no metric may
@@ -37,7 +37,7 @@ after Stage 1 was lost because commits were never pushed to a durable remote. Re
 | Milestone exports | `../gsl-exports/` — source ZIP + git bundle + manifest + SHA-256 checksums |
 | Working tree | clean |
 | Node / npm used | v22.22.2 / 10.9.7 |
-| Test suite | **567 tests / 41 files**, all passing (Stage 1 baseline was 73 / 14) |
+| Test suite | **570 tests / 41 files**, all passing (Stage 1 baseline was 73 / 14) |
 | Build | passing (**538.47 kB, 143.72 kB gzip**; baseline was 285.73 kB / 83.82 kB) |
 | Source modified since baseline | S2-01 … S2-08 — achievements + region completion, three new interactions, the enforced interaction audit, the review queue, the Region 1 topic architecture, and all 17 Region 1 lessons |
 | Curriculum | 2 regions · **6 modules** · **20 lessons** · **23 skills** · **145 questions** (baseline 2/2/3/6/14) |
@@ -105,54 +105,48 @@ branch/tag deletion) are forbidden without explicit owner permission. See `REMOT
 
 ## 5. Next unit
 
-**S2-14 continued — choosing graphs and misleading graphs**, then `l.r2-comparing-distributions` last.
+**S2-14 continued — `l.r2-comparing-distributions`, the last lesson of Region 2's teaching.**
 
-**5 of S2-14's 9 lessons are Complete and `m.r2-pictures` is entire**: bar charts, histograms, dot plots, box plots,
-scatterplots. **Neither remaining graph lesson needs a new renderer** — they choose among and criticise the five charts
-already built, which is the first time in this unit that content is the whole cost.
+**8 of S2-14's 9 lessons are Complete and every graph lesson is written.** The one remaining lesson is the one S2-13
+seeded and could not write: it draws on centre, spread, shape and graphs, which is why it belongs last. Writing it
+meets **S2-13's outstanding criterion 5** and makes the boss's **stage 5** legal under D-028. It needs no new renderer
+— five kinds draw, and comparing two distributions is exactly what box plots were built for.
 
-**`l.r2-misleading-graphs` holds the last staged question.** `q.error-id-causation` gets a role when the lesson is
-written, and its entry in `tests/helpers/staged-inherited.ts` goes at the same moment; the audit ceiling is 1 and
-should come down to 0, at which point the staging mechanism has done its job and the whole block should be deleted
-rather than kept as scaffolding nothing uses — the audit says so itself.
+**Staged inheritance is over and its mechanism is gone.** `tests/helpers/staged-inherited.ts` and its audit block are
+deleted; skeleton honesty is back to "a seeded lesson holds exactly its seed question". The exemption specified its own
+end condition and the condition fired (D-048) — worth copying if another temporary rule is ever needed.
 
-**Bin width and truncated axes are in S2-14's scope and belong to misleading graphs.** `Histogram` already takes a
-`binWidth` prop that no content sets, which is the honest hook for the bin-width half; a truncated axis has no support
-at all, so decide deliberately whether to add it to a component or teach it from described charts, and record the
-choice. Do not describe a truncated axis while showing an untruncated one (D-035).
+**How a chart is drawn is now content.** `VisualSpec` carries `axisMin` (bar charts) and `binWidth` (histograms), each
+rejected by the schema on kinds it means nothing to, and the audit requires a set value to be stated in the chart's
+words and prose claiming a truncated axis to have the setting behind it (D-047). Read that check before writing any
+question whose point is how a picture is drawn.
 
-**`l.r2-comparing-distributions` belongs last** — it draws on centre, spread, shape and graphs. Writing it meets
-S2-13's outstanding criterion 5 and makes the boss's stage 5 legal under D-028.
-
-**Read `rendered-visuals.ts` before naming a chart kind, and check the dataset can feed it.** Five kinds draw; `table`
-and `image` are still only schema (D-043). A visual's dataset must also have the columns its kind needs — a scatter
-question pointed at a one-variable dataset now fails the audit rather than rendering an apology (D-046).
+**After this lesson, S2-14 is done and S2-15 is next** — the laboratory work, which owns the editable datasets S2-12
+named and never built. Note `LabScreen` now reports quartiles under the taught convention (D-045); anything added
+there must keep that agreement with the lessons.
 
 **Test the arithmetic behind any picture (D-044) and keep one convention per taught number (D-045).** `buildBins`,
-`stackDots`, `numericPair` and `fiveNumberSummary` are all exported and tested against shipped datasets, because the
-lessons state their outputs in questions *and* in accessible descriptions.
-
-**Promoting a staged question is not just moving it.** `q.point-thursday-catch` became guided practice this cycle and
-had to gain worked steps and the lesson's skill. Expect the same of `q.error-id-causation`, and note it carries
-`mc.correlation-causation`, whose tag S2-12 fixed — so its misconception is already engine-reportable.
+`stackDots`, `numericPair` and `fiveNumberSummary` are exported and tested against shipped datasets, and each dataset a
+lesson quotes by value now has its figures pinned — the port landings were the fourth such test, added after a probe
+showed a drifting dataset failed nothing.
 
 **A lesson is not finished until something has played it (D-037).** `tests/integration/region2-lessons.test.ts`
 iterates `COMPLETE_LESSONS`, so a lesson you declare is played automatically. It proves the content round-trips
 through the real evaluator, session and save, and **not** that a declared answer is arithmetically right (D-038).
 
+**Read an existing example before writing an unfamiliar question type.** The matching question this cycle was drafted
+against a guessed schema shape; `MatchingAnswerSchema` needs declared ids on both sides and a `rightItems` array. One
+look at `q.matching-measures` settled it.
+
+**Two probes in a row asserted that a question losing its lesson's headline skill would fail a check, and both were
+wrong.** A lesson may legitimately declare more than one objective, and a question carrying any taught skill satisfies
+requirement 17. Do not add a guard for that — there is no defect there.
+
 **Run the demonstration before writing about it (D-035), and use the characters the curriculum explains (D-039).** If a
-demonstration needs an operation the formula enum lacks, grow the enum — the readout switch is exhaustive, so the
-compiler finds the second half (D-042).
+demonstration needs an operation the formula enum lacks, grow the enum: the readout switch is exhaustive (D-042).
 
-**The lessons already exist as skeletons — you are filling them in, not creating them.**
-`tests/audit/region2-architecture.test.ts` asserts every seeded lesson still holds exactly its seed question, plus only
-what `STAGED_INHERITED` declares, and no demonstration. The moment you grow one past that, it must go into
-`tests/helpers/complete-lessons.ts`, and `tests/audit/lesson-structure.test.ts` will then hold it to all 18 of scope
-§5's requirements. Delete a seed when you replace it, not just its reference — that has been forgotten twice.
-
-`docs/REGION2_BOSS_SPEC.md` maps the boss's five stages onto this module sequence. Stage 4 turns on truncated axes and
-bin width, which is exactly what misleading graphs owes, and stage 5 on the verdict — so read it before writing the
-last lessons: the case is what they have to make answerable.
+`docs/REGION2_BOSS_SPEC.md` maps the boss's five stages onto this module sequence. With the graph lessons written,
+every skill stages 1 to 4 draw on now exists; stage 5 waits only on the comparing-distributions lesson.
 
 ### Region 2's architecture, and two rules it added
 

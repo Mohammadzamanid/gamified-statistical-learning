@@ -402,3 +402,27 @@ The audit gained the matching content-side rule in the same cycle, after a probe
 one-variable dataset failed **nothing**: a visual's dataset must be able to feed its chart kind, not merely exist.
 That is D-043 one level further in — the schema promised kinds the renderer could not draw, and content could still
 promise a chart the renderer could not draw *from that data*. (S2-14)
+
+**D-047 — How a chart is drawn is content, and has to be sayable, settable and stated.**
+`l.r2-misleading-graphs` teaches that two honest pictures of identical data can carry opposite impressions. Teaching
+that from prose while the screen drew one untruncated chart would be describing something not on screen — D-035's rule,
+one level out from the demonstration. So `VisualSpec` gained the two presentation choices the lesson criticises:
+`axisMin` for a bar chart's baseline and `binWidth` for a histogram's intervals. Each is meaningless on the other
+kinds, which the schema rejects rather than silently ignoring.
+
+Making them settable was not enough, and a probe proved it: removing `axisMin` from the lesson's chart failed
+**nothing**, while the prompt, the hints, the explanation and the accessible description all went on describing an axis
+starting at 47. The check added in response runs both ways — a setting must be stated in the chart's words, because a
+screen-reader user has only those words and the setting is exactly what changes the picture; and words claiming a
+non-zero start must have the setting behind them. Its first draft flagged the *honest* chart, whose description says
+"starting at zero", which is the pattern being too eager rather than the content being wrong; the fix was to make the
+claim mean a start that is not zero. (S2-14)
+
+**D-048 — A declared exemption is finished when it is empty, and finishing it means deleting it.**
+`STAGED_INHERITED` was introduced in S2-12 to hold four inherited questions whose lessons did not exist yet, and its
+own audit carried the clause `expect(STAGED_QUESTION_IDS.length, "STAGED_INHERITED is empty — delete the staging
+mechanism").toBeGreaterThan(0)` plus a ceiling that was tightened at each clearance: 4, then 2, then 1. S2-14 cycle 4
+gave the last staged question a role, and the mechanism was deleted — helper, audit block and all — rather than left as
+scaffolding that passes vacuously. The skeleton-honesty rule went back to the single line it was before the exemption
+existed. That the exemption specified its own end condition, and that the end condition fired, is the part worth
+keeping: a temporary rule with no defined exit becomes permanent by default. (S2-14)

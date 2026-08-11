@@ -61,3 +61,34 @@ describe("choosing the two columns a scatterplot plots", () => {
     expect(rows.filter(([, crates]) => crates! > 15).length, "boats landing more than 15 crates").toBe(3);
   });
 });
+
+/**
+ * The port landings, which two lessons quote by value.
+ *
+ * `l.r2-misleading-graphs` states 48 and 53 in its prompts, its answers and its
+ * accessible descriptions, and the whole truncated-axis argument is arithmetic
+ * on those two numbers. Same reasoning as the histogram and dot-plot dataset
+ * tests: the content asserts what the data is, so the data is checked (D-044).
+ */
+describe("the port landings the misleading-graphs lesson argues from", () => {
+  it("holds the five figures the lesson quotes", () => {
+    const dataset = content.datasets.get("ds.port-landings")!;
+    expect(dataset.rows.map((r) => [String(r[0]), Number(r[1])])).toEqual([
+      ["Northport", 48],
+      ["Eastquay", 50],
+      ["Southbar", 51],
+      ["Westhead", 52],
+      ["Midpier", 53]
+    ]);
+  });
+
+  it("keeps the gap between the two named ports at 5 crates", () => {
+    const dataset = content.datasets.get("ds.port-landings")!;
+    const values = Object.fromEntries(dataset.rows.map((r) => [String(r[0]), Number(r[1])]));
+    expect(values["Midpier"]! - values["Northport"]!, "the difference the independent question asks for").toBe(5);
+    // Truncated at 47 the bars stand 6 and 1, which is the sixfold the lesson
+    // contrasts with the real ratio of about 1.1.
+    expect((values["Midpier"]! - 47) / (values["Northport"]! - 47)).toBeCloseTo(6, 10);
+    expect(values["Midpier"]! / values["Northport"]!).toBeCloseTo(1.1042, 3);
+  });
+});

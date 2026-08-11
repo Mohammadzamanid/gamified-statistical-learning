@@ -213,5 +213,43 @@
     6
    ]
   ]
+ },
+ {
+  "id": "ds.port-landings",
+  "title": "Crates landed at five ports",
+  "description": "One season's landings at each of the atoll's five ports. The five totals are close together.",
+  "columns": [
+   {
+    "name": "Port",
+    "kind": "categorical"
+   },
+   {
+    "name": "Crates landed",
+    "kind": "numeric",
+    "unit": "crates"
+   }
+  ],
+  "rows": [
+   [
+    "Northport",
+    48
+   ],
+   [
+    "Eastquay",
+    50
+   ],
+   [
+    "Southbar",
+    51
+   ],
+   [
+    "Westhead",
+    52
+   ],
+   [
+    "Midpier",
+    53
+   ]
+  ]
  }
 ]

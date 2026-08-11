@@ -32,21 +32,21 @@ Topics come from the **curriculum graph**, never from the set of generator modul
 | Kinds of variable (`skill.r1-variable-kinds`) | 8 | 5 | 5 | 240 | 228 | 208 | **216** | Yes |
 | Variables (`skill.r1-variables`) | 8 | 5 | 5 | 272 | 232 | 228 | **236** | Yes |
 | Bar charts (`skill.r2-bar-charts`) | 8 | 0 | 0 | 0 | 0 | 0 | **8** | **No** |
-| Box plots (`skill.r2-box-plots`) | 6 | 0 | 0 | 0 | 0 | 0 | **6** | **No** |
-| Choosing a graph (`skill.r2-choosing-graphs`) | 1 | 0 | 0 | 0 | 0 | 0 | **1** | **No** |
+| Box plots (`skill.r2-box-plots`) | 7 | 0 | 0 | 0 | 0 | 0 | **7** | **No** |
+| Choosing a graph (`skill.r2-choosing-graphs`) | 6 | 0 | 0 | 0 | 0 | 0 | **6** | **No** |
 | Comparing distributions (`skill.r2-comparing-distributions`) | 1 | 0 | 0 | 0 | 0 | 0 | **1** | **No** |
-| Dot plots (`skill.r2-dot-plots`) | 8 | 0 | 0 | 0 | 0 | 0 | **8** | **No** |
+| Dot plots (`skill.r2-dot-plots`) | 9 | 0 | 0 | 0 | 0 | 0 | **9** | **No** |
 | Frequency (`skill.r2-frequency`) | 8 | 0 | 0 | 0 | 0 | 0 | **8** | **No** |
-| Histograms (`skill.r2-histograms`) | 7 | 0 | 0 | 0 | 0 | 0 | **7** | **No** |
+| Histograms (`skill.r2-histograms`) | 8 | 0 | 0 | 0 | 0 | 0 | **8** | **No** |
 | Interquartile range (`skill.r2-iqr`) | 7 | 0 | 0 | 0 | 0 | 0 | **7** | **No** |
-| Misleading graphs (`skill.r2-misleading-graphs`) | 1 | 0 | 0 | 0 | 0 | 0 | **1** | **No** |
+| Misleading graphs (`skill.r2-misleading-graphs`) | 6 | 0 | 0 | 0 | 0 | 0 | **6** | **No** |
 | Mode (`skill.r2-mode`) | 8 | 0 | 0 | 0 | 0 | 0 | **8** | **No** |
 | Outliers (`skill.r2-outliers`) | 6 | 0 | 0 | 0 | 0 | 0 | **6** | **No** |
 | Percentage of a dataset (`skill.r2-percentage`) | 8 | 0 | 0 | 0 | 0 | 0 | **8** | **No** |
 | Percentiles (`skill.r2-percentiles`) | 6 | 0 | 0 | 0 | 0 | 0 | **6** | **No** |
 | Proportion of a dataset (`skill.r2-proportion`) | 8 | 0 | 0 | 0 | 0 | 0 | **8** | **No** |
 | Quartiles (`skill.r2-quartiles`) | 10 | 0 | 0 | 0 | 0 | 0 | **10** | **No** |
-| Scatterplots (`skill.r2-scatterplots`) | 6 | 0 | 0 | 0 | 0 | 0 | **6** | **No** |
+| Scatterplots (`skill.r2-scatterplots`) | 7 | 0 | 0 | 0 | 0 | 0 | **7** | **No** |
 | Skew (`skill.r2-skew`) | 6 | 0 | 0 | 0 | 0 | 0 | **6** | **No** |
 | Standard-deviation intuition (`skill.r2-standard-deviation`) | 6 | 0 | 0 | 0 | 0 | 0 | **6** | **No** |
 | Variance intuition (`skill.r2-variance`) | 9 | 0 | 0 | 0 | 0 | 0 | **9** | **No** |
@@ -78,21 +78,21 @@ Topics come from the **curriculum graph**, never from the set of generator modul
 | Kinds of variable | 12 | 0 | 0 | 0 | 0 | 0 | 20 | 0 | 0% |
 | Variables | 40 | 0 | 0 | 0 | 0 | 0 | 4 | 0 | 14% |
 | Bar charts | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 13% |
-| Box plots | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 17% |
-| Choosing a graph | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100% |
+| Box plots | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 14% |
+| Choosing a graph | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 17% |
 | Comparing distributions | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100% |
-| Dot plots | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 13% |
+| Dot plots | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 11% |
 | Frequency | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 13% |
-| Histograms | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 14% |
+| Histograms | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 13% |
 | Interquartile range | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 14% |
-| Misleading graphs | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 100% |
+| Misleading graphs | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 17% |
 | Mode | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 13% |
 | Outliers | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 17% |
 | Percentage of a dataset | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 13% |
 | Percentiles | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 17% |
 | Proportion of a dataset | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 13% |
 | Quartiles | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 10% |
-| Scatterplots | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 17% |
+| Scatterplots | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 14% |
 | Skew | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 17% |
 | Standard-deviation intuition | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 17% |
 | Variance intuition | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 11% |
@@ -244,13 +244,12 @@ Topics come from the **curriculum graph**, never from the set of generator modul
   - 0 reasoning families represented, below the required 4
 - **Box plots** (`skill.r2-box-plots`)
   - no generator families produce for this topic
-  - 6 available interactions, below the required 100
+  - 7 available interactions, below the required 100
   - 0 reasoning families represented, below the required 4
 - **Choosing a graph** (`skill.r2-choosing-graphs`)
   - no generator families produce for this topic
-  - 1 available interactions, below the required 100
+  - 6 available interactions, below the required 100
   - 0 reasoning families represented, below the required 4
-  - 100% of interactions share one reasoning shape, above the 50% ceiling — this is the "numeric variants of one pattern" case
 - **Comparing distributions** (`skill.r2-comparing-distributions`)
   - no generator families produce for this topic
   - 1 available interactions, below the required 100
@@ -258,7 +257,7 @@ Topics come from the **curriculum graph**, never from the set of generator modul
   - 100% of interactions share one reasoning shape, above the 50% ceiling — this is the "numeric variants of one pattern" case
 - **Dot plots** (`skill.r2-dot-plots`)
   - no generator families produce for this topic
-  - 8 available interactions, below the required 100
+  - 9 available interactions, below the required 100
   - 0 reasoning families represented, below the required 4
 - **Frequency** (`skill.r2-frequency`)
   - no generator families produce for this topic
@@ -266,7 +265,7 @@ Topics come from the **curriculum graph**, never from the set of generator modul
   - 0 reasoning families represented, below the required 4
 - **Histograms** (`skill.r2-histograms`)
   - no generator families produce for this topic
-  - 7 available interactions, below the required 100
+  - 8 available interactions, below the required 100
   - 0 reasoning families represented, below the required 4
 - **Interquartile range** (`skill.r2-iqr`)
   - no generator families produce for this topic
@@ -274,9 +273,8 @@ Topics come from the **curriculum graph**, never from the set of generator modul
   - 0 reasoning families represented, below the required 4
 - **Misleading graphs** (`skill.r2-misleading-graphs`)
   - no generator families produce for this topic
-  - 1 available interactions, below the required 100
+  - 6 available interactions, below the required 100
   - 0 reasoning families represented, below the required 4
-  - 100% of interactions share one reasoning shape, above the 50% ceiling — this is the "numeric variants of one pattern" case
 - **Mode** (`skill.r2-mode`)
   - no generator families produce for this topic
   - 8 available interactions, below the required 100
@@ -303,7 +301,7 @@ Topics come from the **curriculum graph**, never from the set of generator modul
   - 0 reasoning families represented, below the required 4
 - **Scatterplots** (`skill.r2-scatterplots`)
   - no generator families produce for this topic
-  - 6 available interactions, below the required 100
+  - 7 available interactions, below the required 100
   - 0 reasoning families represented, below the required 4
 - **Skew** (`skill.r2-skew`)
   - no generator families produce for this topic

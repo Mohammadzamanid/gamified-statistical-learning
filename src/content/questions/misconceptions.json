@@ -294,5 +294,13 @@
   "detector": "tagged-distractor",
   "detectorParams": {},
   "remediationId": "rem.a-point-carries-two"
+ },
+ {
+  "id": "mc.truncated-axis-read-as-scale",
+  "title": "Bar heights read as amounts on a truncated axis",
+  "description": "The learner compares bar lengths without checking where the value axis starts, and reads a sixfold difference in height as a sixfold difference in the data. The reading is the one a bar chart normally invites, which is precisely what a truncated axis exploits.",
+  "detector": "tagged-distractor",
+  "detectorParams": {},
+  "remediationId": "rem.read-the-axis-first"
  }
 ]
