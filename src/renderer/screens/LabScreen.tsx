@@ -86,8 +86,8 @@ function summaryRows(s: LabSummary): Array<[string, string]> {
     ["Range", readNumber(s.range)],
     ["Min / Q1 / Q3 / Max", `${readNumber(s.min)} / ${readNumber(s.q1)} / ${readNumber(s.q3)} / ${readNumber(s.max)}`],
     ["IQR", readNumber(s.iqr)],
-    ["Sample variance", readNumber(s.variance)],
-    ["Sample std. dev.", readNumber(s.standardDeviation)]
+    ["Variance", readNumber(s.variance)],
+    ["Standard deviation", readNumber(s.standardDeviation)]
   ];
 }
 
@@ -358,8 +358,9 @@ export function LabScreen(): JSX.Element {
       <div className="card stack">
         <h3>Summary</h3>
         <p className="faint">
-          Quartiles use the rule the lessons teach — the median of each half — so your paper working and the bench
-          agree.
+          Quartiles use the rule the lessons teach — the median of each half — and the variance averages the squared
+          distances, dividing by how many readings there are. Both are the conventions the lessons use, so your paper
+          working and the bench agree.
         </p>
         <table className="data" style={{ borderCollapse: "collapse" }}>
           <tbody>
@@ -372,7 +373,7 @@ export function LabScreen(): JSX.Element {
           </tbody>
         </table>
         {summary.count === 1 && (
-          <p className="muted">A single reading has no sample spread, so variance and standard deviation are withheld.</p>
+          <p className="muted">One reading has a variance of zero: there is nothing for it to differ from.</p>
         )}
       </div>
 

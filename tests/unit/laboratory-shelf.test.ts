@@ -144,7 +144,7 @@ describe("exporting a summary", () => {
   it("carries every measure the screen shows", () => {
     for (const label of [
       "Count", "Sum", "Mean", "Median", "Mode", "Range", "Minimum", "First quartile",
-      "Third quartile", "Maximum", "Interquartile range", "Sample variance", "Sample std. deviation"
+      "Third quartile", "Maximum", "Interquartile range", "Variance", "Standard deviation"
     ]) {
       expect(text, `${label} missing from the export`).toContain(label);
     }
@@ -161,20 +161,21 @@ describe("exporting a summary", () => {
     expect(text).toContain(CHANNEL_B.join(", "));
   });
 
-  it("names the quartile convention it used", () => {
-    // Two conventions live in this codebase on purpose (D-045). An export that
-    // travels without saying which one produced its numbers is unreadable by
-    // anyone checking it against a spreadsheet.
+  it("names both conventions it used", () => {
+    // Two quartile conventions and two variance denominators live in this
+    // codebase on purpose (D-045, D-060). An export that travels without saying
+    // which produced its numbers is unreadable by anyone checking it against a
+    // spreadsheet.
     expect(text).toContain("median-of-halves");
+    expect(text).toContain("divides by the number of readings");
   });
 
-  it("says why variance is absent instead of leaving a blank", () => {
+  it("reports a single reading's variance as the zero it is", () => {
     const one = exportSummary(
       { experiment: createExperiment("Single", [5]), chartKind: "dot-plot" },
       "2026-03-04"
     );
-    expect(one).toMatch(/^Sample variance\s+not available$/m);
-    expect(one).toContain("need at least two readings");
+    expect(one).toMatch(/^Variance\s+0$/m);
   });
 
   it("states the bin width when the picture was a histogram", () => {

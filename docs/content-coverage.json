@@ -1043,15 +1043,22 @@
       ],
       "regionId": "r.averages-atoll",
       "authoredRecords": 8,
-      "generatorFamilies": 0,
-      "reasoningFamilies": [],
-      "rawCombinations": 0,
-      "validCombinations": 0,
-      "validatedGenerated": 0,
-      "totalAvailable": 8,
+      "generatorFamilies": 4,
+      "reasoningFamilies": [
+        "comparison",
+        "error-identification",
+        "multi-step-reasoning",
+        "recognition"
+      ],
+      "rawCombinations": 322,
+      "validCombinations": 302,
+      "validatedGenerated": 302,
+      "totalAvailable": 310,
       "rejections": {
-        "invalidCombinations": 0,
-        "invalidReasons": {},
+        "invalidCombinations": 20,
+        "invalidReasons": {
+          "the two middle halves are the same width": 20
+        },
         "schemaFailures": 0,
         "answerFailures": 0,
         "missingAccessibility": 0,
@@ -1060,12 +1067,8 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.125,
-      "failures": [
-        "no generator families produce for this topic",
-        "8 available interactions, below the required 100",
-        "0 reasoning families represented, below the required 4"
-      ]
+      "largestShapeShare": 0.0032258064516129032,
+      "failures": []
     },
     {
       "skillId": "skill.r2-misleading-graphs",
@@ -1216,15 +1219,24 @@
       ],
       "regionId": "r.averages-atoll",
       "authoredRecords": 6,
-      "generatorFamilies": 0,
-      "reasoningFamilies": [],
-      "rawCombinations": 0,
-      "validCombinations": 0,
-      "validatedGenerated": 0,
-      "totalAvailable": 6,
+      "generatorFamilies": 4,
+      "reasoningFamilies": [
+        "calculation",
+        "comparison",
+        "prediction",
+        "recognition"
+      ],
+      "rawCombinations": 463,
+      "validCombinations": 365,
+      "validatedGenerated": 365,
+      "totalAvailable": 371,
       "rejections": {
-        "invalidCombinations": 0,
-        "invalidReasons": {},
+        "invalidCombinations": 98,
+        "invalidReasons": {
+          "the largest figure stands at the hundredth percentile, which is true of every log and teaches nothing": 23,
+          "the percentile does not land on a hundredth, so it cannot be typed exactly": 60,
+          "the two median as a percentile standings are equal, so there is no greater one": 15
+        },
         "schemaFailures": 0,
         "answerFailures": 0,
         "missingAccessibility": 0,
@@ -1233,12 +1245,8 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.16666666666666666,
-      "failures": [
-        "no generator families produce for this topic",
-        "6 available interactions, below the required 100",
-        "0 reasoning families represented, below the required 4"
-      ]
+      "largestShapeShare": 0.016172506738544475,
+      "failures": []
     },
     {
       "skillId": "skill.r2-proportion",
@@ -1286,15 +1294,22 @@
       ],
       "regionId": "r.averages-atoll",
       "authoredRecords": 10,
-      "generatorFamilies": 0,
-      "reasoningFamilies": [],
-      "rawCombinations": 0,
-      "validCombinations": 0,
-      "validatedGenerated": 0,
-      "totalAvailable": 10,
+      "generatorFamilies": 4,
+      "reasoningFamilies": [
+        "calculation",
+        "comparison",
+        "multi-step-reasoning",
+        "recognition"
+      ],
+      "rawCombinations": 322,
+      "validCombinations": 315,
+      "validatedGenerated": 315,
+      "totalAvailable": 325,
       "rejections": {
-        "invalidCombinations": 0,
-        "invalidReasons": {},
+        "invalidCombinations": 7,
+        "invalidReasons": {
+          "the two third quartiles are equal, so there is no greater one": 7
+        },
         "schemaFailures": 0,
         "answerFailures": 0,
         "missingAccessibility": 0,
@@ -1303,12 +1318,8 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.1,
-      "failures": [
-        "no generator families produce for this topic",
-        "10 available interactions, below the required 100",
-        "0 reasoning families represented, below the required 4"
-      ]
+      "largestShapeShare": 0.003076923076923077,
+      "failures": []
     },
     {
       "skillId": "skill.r2-scatterplots",
@@ -1384,15 +1395,22 @@
       ],
       "regionId": "r.averages-atoll",
       "authoredRecords": 6,
-      "generatorFamilies": 0,
-      "reasoningFamilies": [],
-      "rawCombinations": 0,
-      "validCombinations": 0,
-      "validatedGenerated": 0,
-      "totalAvailable": 6,
+      "generatorFamilies": 4,
+      "reasoningFamilies": [
+        "calculation",
+        "comparison",
+        "real-world-application",
+        "recognition"
+      ],
+      "rawCombinations": 322,
+      "validCombinations": 318,
+      "validatedGenerated": 318,
+      "totalAvailable": 324,
       "rejections": {
-        "invalidCombinations": 0,
-        "invalidReasons": {},
+        "invalidCombinations": 4,
+        "invalidReasons": {
+          "the two standard deviations agree to two places": 4
+        },
         "schemaFailures": 0,
         "answerFailures": 0,
         "missingAccessibility": 0,
@@ -1401,12 +1419,8 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.16666666666666666,
-      "failures": [
-        "no generator families produce for this topic",
-        "6 available interactions, below the required 100",
-        "0 reasoning families represented, below the required 4"
-      ]
+      "largestShapeShare": 0.0030864197530864196,
+      "failures": []
     },
     {
       "skillId": "skill.r2-variance",
@@ -1417,15 +1431,25 @@
       ],
       "regionId": "r.averages-atoll",
       "authoredRecords": 9,
-      "generatorFamilies": 0,
-      "reasoningFamilies": [],
-      "rawCombinations": 0,
-      "validCombinations": 0,
-      "validatedGenerated": 0,
-      "totalAvailable": 9,
+      "generatorFamilies": 5,
+      "reasoningFamilies": [
+        "calculation",
+        "comparison",
+        "error-identification",
+        "prediction",
+        "recognition"
+      ],
+      "rawCombinations": 345,
+      "validCombinations": 329,
+      "validatedGenerated": 329,
+      "totalAvailable": 338,
       "rejections": {
-        "invalidCombinations": 0,
-        "invalidReasons": {},
+        "invalidCombinations": 16,
+        "invalidReasons": {
+          "the mean does not land on a hundredth, so the squared distances cannot be worked by hand": 11,
+          "the variance does not land on a hundredth, so it cannot be typed exactly": 2,
+          "the two variances are equal, so there is no greater one": 3
+        },
         "schemaFailures": 0,
         "answerFailures": 0,
         "missingAccessibility": 0,
@@ -1434,12 +1458,8 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.1111111111111111,
-      "failures": [
-        "no generator families produce for this topic",
-        "9 available interactions, below the required 100",
-        "0 reasoning families represented, below the required 4"
-      ]
+      "largestShapeShare": 0.0029585798816568047,
+      "failures": []
     },
     {
       "skillId": "skill.range",
@@ -1451,15 +1471,22 @@
       ],
       "regionId": "r.averages-atoll",
       "authoredRecords": 8,
-      "generatorFamilies": 0,
-      "reasoningFamilies": [],
-      "rawCombinations": 0,
-      "validCombinations": 0,
-      "validatedGenerated": 0,
-      "totalAvailable": 8,
+      "generatorFamilies": 4,
+      "reasoningFamilies": [
+        "calculation",
+        "comparison",
+        "error-identification",
+        "prediction"
+      ],
+      "rawCombinations": 322,
+      "validCombinations": 299,
+      "validatedGenerated": 299,
+      "totalAvailable": 307,
       "rejections": {
-        "invalidCombinations": 0,
-        "invalidReasons": {},
+        "invalidCombinations": 23,
+        "invalidReasons": {
+          "the two ranges are equal, so there is no greater one": 23
+        },
         "schemaFailures": 0,
         "answerFailures": 0,
         "missingAccessibility": 0,
@@ -1468,12 +1495,8 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.125,
-      "failures": [
-        "no generator families produce for this topic",
-        "8 available interactions, below the required 100",
-        "0 reasoning families represented, below the required 4"
-      ]
+      "largestShapeShare": 0.003257328990228013,
+      "failures": []
     }
   ]
 }

@@ -37,14 +37,14 @@ after Stage 1 was lost because commits were never pushed to a durable remote. Re
 | Milestone exports | `../gsl-exports/` — source ZIP + git bundle + manifest + SHA-256 checksums |
 | Working tree | clean |
 | Node / npm used | v22.22.2 / 10.9.7 |
-| Test suite | **655 tests / 47 files**, all passing (Stage 1 baseline was 73 / 14) |
-| Build | passing (**873.48 kB, 224.42 kB gzip**; baseline was 285.73 kB / 83.82 kB) |
+| Test suite | **660 tests / 47 files**, all passing (Stage 1 baseline was 73 / 14) |
+| Build | passing (**873.56 kB, 224.47 kB gzip**; baseline was 285.73 kB / 83.82 kB) |
 | Source modified since baseline | S2-01 … S2-08 — achievements + region completion, three new interactions, the enforced interaction audit, the review queue, the Region 1 topic architecture, and all 17 Region 1 lessons |
 | Curriculum | 2 regions · **10 modules** · **40 lessons** · **42 skills** · **290 questions** (baseline 2/2/3/6/14) |
 | Lessons Complete to scope §5 | **40** — all 17 Region 1 topic lessons, all 20 Region 2 lessons, and the 3 Stage 1 lessons re-cut into Region 2. **No skeletons in either region** |
 | Misconceptions / remediations | **40 / 39** (baseline 8 / 7) — every one reachable, and each held to the nine declared parts (D-056) |
-| Validated generated interactions | **7,908**, available to spaced review (baseline 0) |
-| Topics meeting scope §4 | **24 of 41** — every Region 1 topic, plus Region 2's counts and centre modules (S2-17 cycles 1–2). The other 17 Region 2 topics still have no generators |
+| Validated generated interactions | **9,836**, available to spaced review (baseline 0) |
+| Topics meeting scope §4 | **30 of 41** — every Region 1 topic, plus Region 2's counts, centre and spread modules (S2-17 cycles 1–3). The other 11 Region 2 topics still have no generators |
 | Save schema version | **4** (baseline was 1) — `1->2` adds `reviewSession`, `2->3` adds `investigationProgress`, `3->4` adds `savedExperiments`. The chain is asserted against this number (D-055) |
 | Interaction types implemented | **14 of 17** (baseline 11); still stubbed: `formula-construction`, `simulation-prediction`, `confidence-rating` |
 | Stage 2 | **in progress** — see `STAGE2_RECONSTRUCTION_SCOPE.md`, `STAGE2_RECONSTRUCTION_BACKLOG.md`, `STAGE2_CURRENT_WORK.md` |
@@ -80,7 +80,7 @@ git status
 git rev-parse HEAD
 git ls-remote origin refs/heads/main | awk '{print $1}'   # must match
 npm ci
-npm test            # must stay green: 655/655
+npm test            # must stay green: 660/660
 npm run typecheck && npm run lint
 npm run dev         # renderer + electron dev
 ```
@@ -105,35 +105,35 @@ branch/tag deletion) are forbidden without explicit owner permission. See `REMOT
 
 ## 5. Next unit
 
-**S2-17 continued — the spread module.** Range, quartiles, percentiles, IQR, variance and standard deviation, to
-scope §4. Then shape (outliers, skew), the six graph topics, comparing distributions, misleading graphs, and data
-literacy: **17 of Region 2's 24 topics** remain.
+**S2-17 continued — the shape and graph topics.** Outliers, skew, the six graph topics, comparing distributions,
+misleading graphs, and data literacy: **11 of Region 2's 24** remain.
 
-**Two cycles in, the pattern is settled and it works.** One corpus per module, because the topics in a module read
-the same material different ways (D-058): ten season logs took counts to 124/143/143, and 23 catch lists took centre
-to 120/283/293/263. Spread is the same opportunity — a list has a range, quartiles, percentiles, an IQR, a variance
-and a standard deviation — so expect one corpus of six sorted lists to feed all six topics. **Reuse `centre.ts`'s
-corpus if it suits**; two modules sharing lists is cheaper than two corpora, and the questions differ anyway.
+**Three cycles in: 13 topics done, and the repository-wide figure has gone 17 → 20 → 24 → 30 of 41.** The pattern is
+one corpus per module (D-058), and cycle 3 reused cycle 2's outright — the same catch list has a mean and a range, a
+median and quartiles. The graph topics can reuse it again: a dot plot, a box plot and a histogram are three pictures
+of one list, exactly as its summaries were three readings of it.
 
-**Read cycle 2's corrections before writing a family.** Every one was a repeat of something already written down:
+**Cycle 3's finding is the one to carry forward. Deciding which convention a generator answers by is how conventions
+get audited.** Choosing the variance denominator for the spread families exposed that the laboratory had reported the
+**sample** variance since S2-15 while `l.r2-variance` teaches the **population** one — D-045's defect in a second
+measure, shipped and unnoticed (D-060). When you write a family for a measure, look up what the lesson publishes and
+answer that; if the app disagrees anywhere, the app is what is wrong.
 
-- **A misconception tag belongs on a wrong option.** This was got wrong twice, in two different modules.
-- **And only where its detector can fire.** `mc.sum-not-mean` is `confused-statistic`, which reads a number: on a
-  choice question it can never fire, so it is not declared there at all (D-025). Check the detector before tagging.
-- **Do not reject a candidate for a defect in its *trap*.** A mode question whose first repeat is already the mode is
-  a sound question with nowhere to hang the mistake — declare the mistake conditionally and keep the question.
+**Read the accumulated corrections before writing a family.** Every cycle has repeated at least one of them:
 
-**Two agreeing routes prove agreement, not correctness (D-059).** State `expectedResponse` independently, and *also*
-pin the arithmetic to numbers worked out by hand, as `tests/unit/centre-generators.test.ts` does. A probe that broke
-`medianOf` failed nothing until that file existed, because the disagreement became an *invalid* candidate rather than
-an answer failure and the topic still cleared 100 on its other families.
+- A misconception tag belongs on a **wrong** option — got wrong twice, in two modules.
+- And only where its **detector** can fire: `confused-statistic` reads a number and cannot fire on a choice (D-025).
+- A declared trap must differ from the correct answer. At the 50th percentile, counting above and counting below give
+  the same number, so the trap is declared conditionally.
+- Do not reject a candidate for a defect in its *trap* — declare the trap conditionally and keep the question.
+- Look the misconception id up. `mc.variance-not-squared` does not exist; the real one is
+  `mc.distances-average-to-spread`.
+
+**Two agreeing routes prove agreement, not correctness (D-059).** Pin the arithmetic to hand-worked numbers in
+`tests/unit/centre-generators.test.ts`, which now covers both the centre and spread generators.
 
 **A topic that passes §4 must be declared in `tests/helpers/complete-topics.ts`, and one that is declared must pass.**
 Both directions are checked.
-
-**Measure before and after.** `npm run report:coverage` writes per-topic families, reasoning families, raw and valid
-combinations, rejections with reasons, and the largest-shape share. The ceiling on one shape is 50%; these modules
-come in at 0–2%.
 
 ### Region 2's architecture, and two rules it added
 

@@ -40,15 +40,27 @@ describe("the summary the bench reports", () => {
     expect(s.iqr).toBeCloseTo(4.5, 10);
   });
 
-  it("reports the sample forms, and withholds them below two readings", () => {
-    expect(summarise(BASE).variance).toBeCloseTo(7, 10);
-    expect(summarise(BASE).standardDeviation).toBeCloseTo(2.6457513, 6);
-    // One reading has no sample spread. Reporting 0 would be a population
-    // answer wearing a sample label, so the bench reports nothing (scope §7).
+  it("reports the denominator the lessons teach, not the sample one", () => {
+    // 2 4 4 6 9, mean 5: squared distances 9, 1, 1, 1, 16 = 28. The average of
+    // those is 28/5 = 5.6, which is what l.r2-variance teaches and what a
+    // learner will do on paper. The sample form would answer 7, and the bench
+    // reported exactly that until S2-17 (D-060).
+    expect(summarise(BASE).variance).toBeCloseTo(5.6, 10);
+    expect(summarise(BASE).standardDeviation).toBeCloseTo(Math.sqrt(5.6), 6);
+    // One reading: zero, which is the definition's own answer rather than a
+    // stand-in for a missing one.
     const one = summarise([5]);
-    expect(one.variance).toBeNull();
-    expect(one.standardDeviation).toBeNull();
+    expect(one.variance).toBe(0);
+    expect(one.standardDeviation).toBe(0);
     expect(one.median).toBe(5);
+  });
+
+  it("agrees with the figures l.r2-variance publishes", () => {
+    // The lesson's own questions, so the bench cannot drift from the teaching
+    // without this failing by name.
+    expect(summarise([3, 5, 9, 11]).variance).toBeCloseTo(10, 10);
+    expect(summarise([4, 6, 8, 10, 12]).variance).toBeCloseTo(8, 10);
+    expect(summarise([4, 6, 8, 10, 12]).standardDeviation).toBeCloseTo(2.8284, 4);
   });
 
   it("reports an empty bench as empty rather than throwing", () => {

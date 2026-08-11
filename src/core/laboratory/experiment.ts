@@ -49,10 +49,19 @@ export type LabMeasure = (typeof LAB_MEASURES)[number];
 /**
  * A summary of one value list.
  *
- * `mode` is a list because a dataset can have several, and `variance` and
- * `standardDeviation` are `null` below two values rather than thrown or faked:
- * the sample forms need two, and a bench that silently reported a population
- * figure instead would teach the wrong denominator (scope §7).
+ * `mode` is a list because a dataset can have several.
+ *
+ * Variance and standard deviation use the **population** denominator — the
+ * average of the squared distances — because that is what `l.r2-variance`
+ * teaches and what a learner will do on paper. The bench reported the *sample*
+ * forms until S2-17, so a learner checking their own working against it got a
+ * different number every time: D-045's defect, in a second measure (D-060).
+ * `variance(data, true)` keeps the sample form available for anything that
+ * needs it.
+ *
+ * They are `null` only for an empty bench. One reading has a population
+ * variance of zero, which is the definition's own answer rather than a stand-in
+ * for a missing one.
  */
 export interface LabSummary {
   readonly count: number;
@@ -100,7 +109,6 @@ export function summarise(values: readonly number[]): LabSummary {
     };
   }
   const five = fiveNumberSummary(values);
-  const enoughForSample = values.length >= 2;
   return {
     count: values.length,
     sum: sum(values),
@@ -113,8 +121,8 @@ export function summarise(values: readonly number[]): LabSummary {
     q3: five.q3,
     max: five.max,
     iqr: interquartileRangeByHalves(values),
-    variance: enoughForSample ? variance(values) : null,
-    standardDeviation: enoughForSample ? standardDeviation(values) : null
+    variance: variance(values, false),
+    standardDeviation: standardDeviation(values, false)
   };
 }
 

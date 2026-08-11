@@ -29,6 +29,13 @@ import {
   modeByScanning,
   modesOf
 } from "../../src/content/generators/centre";
+import {
+  quartilesOf,
+  rangeByWalking,
+  rangeOf,
+  varianceByMomentDifference,
+  varianceOf
+} from "../../src/content/generators/spread";
 
 const byId = new Map(LISTS.map((l) => [l.id, l]));
 
@@ -105,6 +112,47 @@ describe("the centre generators compute what they claim", () => {
     for (const list of LISTS) {
       expect(list.values.length, `${list.id}`).toBeGreaterThanOrEqual(5);
       expect(new Set(list.values).size, `${list.id} has no repeated figure`).toBeLessThan(list.values.length);
+    }
+  });
+});
+
+/**
+ * S2-17 cycle 3: the spread generators' arithmetic, pinned the same way.
+ *
+ * The conventions matter more here than anywhere. Quartiles are the median of
+ * each half (D-045) and the variance divides by how many readings there are
+ * (D-060), because those are what the lessons teach — and the laboratory was
+ * corrected to the second of them in this same cycle, having reported the
+ * sample form since S2-15.
+ */
+describe("the spread generators compute what the lessons teach", () => {
+  it("takes quartiles as the median of each half, not by interpolation", () => {
+    // 4 6 6 8 11: the middle 6 belongs to neither half, so Q1 is the median of
+    // 4 and 6, and Q3 the median of 8 and 11. R-7 would answer 6 and 8.
+    const q = quartilesOf([4, 6, 6, 8, 11]);
+    expect(q.q1).toBe(5);
+    expect(q.q2).toBe(6);
+    expect(q.q3).toBe(9.5);
+  });
+
+  it("divides the squared distances by how many readings there are", () => {
+    // The figures l.r2-variance publishes in its own questions. The sample form
+    // would answer 13.33 and 10 respectively.
+    expect(varianceOf([3, 5, 9, 11])).toBeCloseTo(10, 6);
+    expect(varianceOf([4, 6, 8, 10, 12])).toBeCloseTo(8, 6);
+    expect(varianceOf([2, 10])).toBeCloseTo(16, 6);
+  });
+
+  it("reaches the same variance by the moment difference", () => {
+    for (const list of LISTS) {
+      expect(varianceByMomentDifference(list.values), `${list.id}`).toBeCloseTo(varianceOf(list.values), 3);
+    }
+  });
+
+  it("gets the range right, both ways", () => {
+    expect(rangeOf([4, 6, 6, 8, 11])).toBe(7);
+    for (const list of LISTS) {
+      expect(rangeByWalking(list.values), `${list.id}`).toBe(rangeOf(list.values));
     }
   });
 });

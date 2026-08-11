@@ -52,5 +52,13 @@ export const COMPLETE_TOPICS: readonly string[] = [
   "skill.mean",
   "skill.median",
   "skill.r2-mode",
-  "skill.choose-measure"
+  "skill.choose-measure",
+  // Region 2's spread module (S2-17 cycle 3), reusing the centre module's
+  // corpus: the same list has a mean and a range, a median and quartiles.
+  "skill.range",
+  "skill.r2-quartiles",
+  "skill.r2-percentiles",
+  "skill.r2-iqr",
+  "skill.r2-variance",
+  "skill.r2-standard-deviation"
 ];

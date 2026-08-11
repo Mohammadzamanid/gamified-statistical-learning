@@ -120,8 +120,8 @@ export function exportSummary(input: ShelfEntryInput, exportedAt: string): strin
     line("Third quartile", readNumber(s.q3)),
     line("Maximum", readNumber(s.max)),
     line("Interquartile range", readNumber(s.iqr)),
-    line("Sample variance", readNumber(s.variance)),
-    line("Sample std. deviation", readNumber(s.standardDeviation))
+    line("Variance", readNumber(s.variance)),
+    line("Standard deviation", readNumber(s.standardDeviation))
   ];
   return [
     experiment.title,
@@ -136,8 +136,8 @@ export function exportSummary(input: ShelfEntryInput, exportedAt: string): strin
     `Readings (${experiment.values.length})`,
     experiment.values.join(", "),
     "",
-    "Quartiles use the median-of-halves convention, the one the lessons teach.",
-    s.count < 2 ? "Variance and standard deviation need at least two readings." : ""
+    "Quartiles use the median-of-halves convention and the variance divides by the number of readings —",
+    "both the conventions the lessons teach."
   ]
     .filter((l, i, all) => !(l === "" && all[i - 1] === ""))
     .join("\n")

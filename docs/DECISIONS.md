@@ -629,3 +629,22 @@ candidate. The unsorted-median probe now fails.
 **The first probe still fails nothing, and that is stated rather than fixed.** Whether two code paths are genuinely
 independent is a property of how they were written; a test cannot see it. What the independence was protecting is
 that both are right, and that is now checked directly. (S2-17)
+
+**D-060 — The laboratory reported the sample variance while the lessons taught the population one.**
+`l.r2-variance` teaches the variance as *the average of the squared distances* and publishes the figures that follow
+from it: 3, 5, 9, 11 has a variance of 10; 4, 6, 8, 10, 12 has 8. Those are the population denominator. The bench
+built in S2-15 called `variance(values)`, whose default is the **sample** form, and reported 13.33 and 10 for the same
+lists — so a learner who worked the lesson's own rule on their own readings and checked the bench found a different
+number every time.
+
+This is D-045 exactly, in a second measure, and found the same way: by writing generators for the spread topics and
+having to decide which convention they answer by. Scope §7 is explicit that the population-versus-sample choice must
+be documented and used consistently across lessons and the laboratory, and it was not.
+
+The bench now reports the taught convention, its labels say "Variance" rather than "Sample variance", and the export
+names the denominator beside the quartile rule it already named. `variance(data, true)` keeps the sample form for
+anything that wants it, exactly as `quartiles` (R-7) is kept beside `quartilesByHalves`. Two tests pin the bench to
+the lesson's own published figures, and a probe reverting the bench to the sample form now fails three checks.
+
+One consequence, taken deliberately: a single reading now reports a variance of **0** rather than being withheld.
+Under the population definition that is the definition's own answer, not a stand-in for a missing one. (S2-17)
