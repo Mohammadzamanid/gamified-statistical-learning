@@ -114,7 +114,15 @@ None. S2-16 is Complete.
 
 ## Local commit
 
-Recorded in `STAGE2_RECONSTRUCTION_BACKLOG.md` on the S2-16 row.
+`e84365f299131424df86a948654670dd55f21ee1`
+
+## Remote verification
+
+```
+LOCAL_HEAD  = e84365f299131424df86a948654670dd55f21ee1
+REMOTE_HEAD = e84365f299131424df86a948654670dd55f21ee1
+VERIFIED: MATCH
+```
 
 ## Next unit
 
