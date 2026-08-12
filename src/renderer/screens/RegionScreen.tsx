@@ -43,6 +43,11 @@ export function RegionScreen({ regionId }: { regionId: string }): JSX.Element {
                     <div className="faint">
                       {lesson.questionIds.length} questions · ~{lesson.estimatedMinutes} min
                       {done && <span className="pill gold" style={{ marginLeft: 8 }}>★ completed</span>}
+                      {/* Since S2-19 a lesson records that it was started. The boss
+                          below has shown this since S2-10; a half-finished lesson
+                          looked untouched, because nothing wrote the status this
+                          screen was already reading. */}
+                      {status === "in-progress" && <span className="pill" style={{ marginLeft: 8 }}>in progress</span>}
                     </div>
                   </div>
                   <button
@@ -50,7 +55,7 @@ export function RegionScreen({ regionId }: { regionId: string }): JSX.Element {
                     disabled={!unlocked}
                     onClick={() => navigate({ name: "lesson", lessonId })}
                   >
-                    {!unlocked ? "Locked" : done ? "Revisit" : "Open lesson"}
+                    {!unlocked ? "Locked" : done ? "Revisit" : status === "in-progress" ? "Resume lesson" : "Open lesson"}
                   </button>
                 </div>
               );

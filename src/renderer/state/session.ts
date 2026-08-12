@@ -168,6 +168,41 @@ export function submitAnswer(
     xp: save.xp + (feedback.correct ? (session.hintsUsedThisQuestion > 0 ? 5 : 10) : 1)
   };
 
+  /*
+   * A lesson is recorded as in-progress from its first answer (S2-19).
+   *
+   * `LessonProgressSchema` has carried an `"in-progress"` status since Stage 1
+   * and nothing ever wrote it: the record was created on completion and only
+   * then, so a lesson abandoned half-way was indistinguishable from one never
+   * opened. Everything the learner earned was kept — mastery, the review
+   * schedule and the attempt log are all written just above — but the lesson
+   * itself left no trace, so nothing could say "you were in the middle of this".
+   *
+   * Written from `submitAnswer` rather than from `startLesson`, because opening
+   * a lesson and closing it again is not progress and should not mark the map.
+   *
+   * Never downgrades a completed lesson: revisiting a finished one leaves it
+   * finished, and its `bestAccuracy` and `completedAt` stand until `advance`
+   * writes a better run.
+   */
+  if (!session.investigation) {
+    const previous = save.lessonProgress[session.lessonId];
+    if (previous?.status !== "completed") {
+      nextSave = {
+        ...nextSave,
+        lessonProgress: {
+          ...nextSave.lessonProgress,
+          [session.lessonId]: {
+            lessonId: session.lessonId,
+            status: "in-progress",
+            bestAccuracy: previous?.bestAccuracy ?? 0,
+            completedAt: previous?.completedAt ?? null
+          }
+        }
+      };
+    }
+  }
+
   const earned = evaluateAchievements(nextSave, content.achievements, content.curriculum);
   if (earned.length > 0) nextSave = { ...nextSave, achievements: [...nextSave.achievements, ...earned] };
 

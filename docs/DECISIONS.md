@@ -714,3 +714,45 @@ as they like.
 
 Both guards keep a limit worth naming: a description that states the right numbers in the right order can still
 attach the wrong words to them, and no mechanical check here will see that. (S2-18)
+
+**D-064 — A lesson abandoned half-way was indistinguishable from one never opened.**
+`LessonProgressSchema` has carried a four-value status — locked, available, **in-progress**, completed — since Stage 1,
+and nothing ever wrote the third. The record was created by `advance` when the last question was answered and at no
+other moment, so a learner who answered three of six questions and closed the app left `lessonProgress` empty for that
+lesson. `RegionScreen` compounded it from the other side: it read `lessonStatus(save, lessonId)` into a `status`
+variable and then only ever asked whether it equalled `"completed"`.
+
+Nothing was *lost* — the attempt log, the mastery updates and the review items are written on every answer, and this
+unit's audit proves all three survive the interruption — but nothing could say so. The learner's map showed the lesson
+untouched.
+
+The write goes in `submitAnswer` rather than `startLesson`, because opening a lesson and closing it again is not
+progress and should not mark the map; and it never downgrades a completed lesson, so revisiting a finished one leaves
+its `bestAccuracy` and `completedAt` standing. (S2-19)
+
+**D-065 — Testing that a write left no temporary file behind is not testing that the write was atomic.**
+`StorageAdapter` documents `writeAtomic` as "must be atomic: never leave a partially written file", and the suite's
+only evidence for it was that no `.tmp-` file survives a **successful** write. A probe replaced the adapter's
+temp-file-then-rename with a plain `fs.writeFile` — the exact defect the contract exists to forbid — and **failed
+nothing**, because every other check in the repository only ever observes a completed write.
+
+The mechanism is the guarantee, so the mechanism is now what is checked: `rename` is made to fail, and the target file
+must still hold its previous contents. A write that goes straight onto the target cannot pass that, because the new
+contents would already be there. The manager's side is checked separately — a save whose write throws must leave the
+previous save loadable without recovery.
+
+The limit, stated: this proves the target changes only at the rename, not that `rename` is atomic on every file system
+the app might be installed on. That is the operating system's guarantee and the reason the pattern was chosen. (S2-19)
+
+**D-066 — The same route fed both sides of a comparison again, in the test written to catch it.**
+The review-resume case asserted that the question after a reload was the one `currentReviewQuestion` returned before
+the reload. Both sides call the same function on the same save, so a resume that *recomputed* the question instead of
+reading the frozen queue would have satisfied both at once — and a probe that made it recompute failed nothing.
+
+This is D-059 exactly, in a unit about persistence rather than generation, written by someone who had recorded D-059
+twice. The fix is the same one: compare against the stored value — `reviewSession.questionQueue[currentIndex]` — rather
+than against a recomputation. The probe bites now.
+
+Worth naming as a pattern rather than an incident: **a test that reads its expectation through the code under test is
+not a test.** It appears wherever a value can be derived two ways, and the tell is always the same — a probe that
+breaks the derivation changes the expectation with it, and nothing fails. (S2-19)
