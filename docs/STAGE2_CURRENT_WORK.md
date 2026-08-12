@@ -166,7 +166,15 @@ None. S2-18 is Complete.
 
 ## Local commit
 
-Recorded in the follow-up commit; see `STAGE2_RECONSTRUCTION_BACKLOG.md`.
+`7b993fdfdb3dee22da35c6d669fbe0b781c4177f`
+
+## Remote verification
+
+```
+LOCAL_HEAD  = 7b993fdfdb3dee22da35c6d669fbe0b781c4177f
+REMOTE_HEAD = 7b993fdfdb3dee22da35c6d669fbe0b781c4177f
+VERIFIED: MATCH
+```
 
 ## Next unit
 
