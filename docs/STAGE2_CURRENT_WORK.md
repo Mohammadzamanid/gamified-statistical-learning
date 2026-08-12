@@ -141,7 +141,15 @@ measured and stated in the audit today rather than asserted around, so the gap i
 
 ## Local commit
 
-Recorded in the follow-up commit; see `STAGE2_RECONSTRUCTION_BACKLOG.md`.
+`7425da1791d87fd5b9a13339fbb90aeac5b1db7c`
+
+## Remote verification
+
+```
+LOCAL_HEAD  = 7425da1791d87fd5b9a13339fbb90aeac5b1db7c
+REMOTE_HEAD = 7425da1791d87fd5b9a13339fbb90aeac5b1db7c
+VERIFIED: MATCH
+```
 
 ## Next unit
 
