@@ -40,7 +40,6 @@ function baseOf(
 
 const round2 = (n: number): number => Number(n.toFixed(2));
 const listText = (list: CatchList): string => list.values.join(", ");
-const sortedOf = (list: CatchList): number[] => [...list.values].sort((a, b) => a - b);
 
 /** One dot per reading, stacked over each distinct value. */
 function stacksOf(list: CatchList): Array<{ value: number; height: number }> {
@@ -618,12 +617,6 @@ function scatterFamilies(): GeneratorFamily[] {
 // --------------------------------------------------------------------------
 
 export function pictureFamilies(): GeneratorFamily[] {
-  const outlierOf = (list: CatchList): number => {
-    const q = quartilesOf(list.values);
-    const fence = q.q3 + 1.5 * (q.q3 - q.q1);
-    const beyond = list.values.filter((v) => v > fence);
-    return beyond.length > 0 ? Math.max(...beyond) : Math.max(...list.values);
-  };
   return [
     // ---- Dot plots -------------------------------------------------------
     numericOverLists({
@@ -705,8 +698,8 @@ export function pictureFamilies(): GeneratorFamily[] {
       ask: (l) =>
         `${l.boat}'s dot plot: ${dotPlotWords(l)}. A clerk writes: "The most common catch was ` +
         `${Math.max(...stacksOf(l).map((s) => s.height))} ${l.unit}." What has the clerk done?`,
-      words: (l) => `A clerk reports a column's height as a catch figure. Choose what went wrong.`,
-      choices: (l) => [
+      words: () => `A clerk reports a column's height as a catch figure. Choose what went wrong.`,
+      choices: () => [
         {
           id: "ch.height",
           text: `Read the column's height — how many readings — as though it were the value beneath it`
@@ -1387,8 +1380,12 @@ export function pictureFamilies(): GeneratorFamily[] {
       words: (l) => `A log of ${listText(l)}. Enter how many cases it holds.`,
       value: (l) => l.values.length,
       independently: (l) => {
+        // Counted by walking the readings rather than by reading `length`,
+        // which is the route the family's own answer takes (D-020).
         let count = 0;
-        for (const _ of l.values) count += 1;
+        l.values.forEach(() => {
+          count += 1;
+        });
         return count;
       },
       unit: () => "cases",

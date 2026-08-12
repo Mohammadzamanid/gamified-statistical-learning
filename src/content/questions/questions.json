@@ -11160,5 +11160,701 @@
   ],
   "accessibilityDescription": "Two channels agreeing on median and interquartile range but not on mean; choose what the evidence supports.",
   "estimatedSeconds": 140
+ },
+ {
+  "id": "q.boss.r2-survey-count",
+  "topicId": "t.r2-frequency",
+  "objectiveId": "obj.r2-frequency",
+  "skillIds": [
+   "skill.r2-frequency"
+  ],
+  "difficulty": 2,
+  "interaction": "numeric-input",
+  "prompt": "Both parties surveyed the northern approach and both filed the same twenty soundings, in metres: 3, 4, 4, 9, 10, 10, 11, 11, 11, 12, 12, 12, 12, 13, 13, 13, 14, 14, 15, 16. The harbourmaster's first question is the simplest one. How many soundings came back under 5 metres — shallower than a loaded boat draws?",
+  "answer": {
+   "kind": "numeric",
+   "value": 3,
+   "tolerance": 0,
+   "unit": "soundings"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Count the readings, not the different depths they took."
+   }
+  ],
+  "explanation": "Counting the soundings below 5 metres gives 3, 4 and 4 — three of them. A frequency counts cases, not the different depths those cases took: there are two distinct shallow readings, 3 and 4, and three soundings.",
+  "accessibilityDescription": "A list of twenty approach soundings. Enter how many are under 5 metres.",
+  "estimatedSeconds": 60,
+  "misconceptionIds": [
+   "mc.frequency-counts-categories"
+  ],
+  "parameters": {
+   "mc.frequency-counts-categories": {
+    "wrongValue": 2
+   }
+  }
+ },
+ {
+  "id": "q.boss.r2-survey-share",
+  "topicId": "t.r2-proportion",
+  "objectiveId": "obj.r2-proportion",
+  "skillIds": [
+   "skill.r2-proportion"
+  ],
+  "difficulty": 2,
+  "interaction": "numeric-input",
+  "prompt": "Three of the twenty soundings came back under 5 metres. What proportion of the survey is that? Answer between 0 and 1.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.15,
+   "tolerance": 0.005
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Divide the part by the whole and leave it there."
+   }
+  ],
+  "explanation": "3 out of 20 is 0.15. A proportion sits between 0 and 1; scaling it to a hundred would give 15, which is the percentage and answers the next question rather than this one.",
+  "accessibilityDescription": "Three of twenty soundings are under 5 metres. Enter that as a proportion between 0 and 1.",
+  "estimatedSeconds": 60,
+  "misconceptionIds": [
+   "mc.percent-vs-decimal"
+  ]
+ },
+ {
+  "id": "q.boss.r2-survey-percent",
+  "topicId": "t.r2-percentage",
+  "objectiveId": "obj.r2-percentage",
+  "skillIds": [
+   "skill.r2-percentage"
+  ],
+  "difficulty": 2,
+  "interaction": "numeric-input",
+  "prompt": "The harbourmaster wants the same figure in the form the notice board uses. What percentage of the soundings came back under 5 metres?",
+  "answer": {
+   "kind": "numeric",
+   "value": 15,
+   "tolerance": 0.01,
+   "unit": "%"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "A percentage is the proportion counted per hundred."
+   }
+  ],
+  "explanation": "3 out of 20 is 0.15, and a percentage counts parts per hundred, so it is 15%. The two forms describe the same three soundings; only the notation differs.",
+  "accessibilityDescription": "Enter the percentage of the twenty soundings that are under 5 metres.",
+  "estimatedSeconds": 55,
+  "misconceptionIds": [
+   "mc.decimal-vs-percent"
+  ]
+ },
+ {
+  "id": "q.boss.r2-party-a-mean",
+  "topicId": "t.r2-mean",
+  "objectiveId": "obj.compute-mean",
+  "skillIds": [
+   "skill.mean"
+  ],
+  "difficulty": 3,
+  "interaction": "numeric-input",
+  "prompt": "The first party reports \"a typical depth of about eleven metres\" and shows its working: the mean of all twenty soundings. The soundings are 3, 4, 4, 9, 10, 10, 11, 11, 11, 12, 12, 12, 12, 13, 13, 13, 14, 14, 15, 16. What is the mean, to two decimal places?",
+  "answer": {
+   "kind": "numeric",
+   "value": 10.95,
+   "tolerance": 0.01,
+   "unit": "m"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Total the soundings, then share the total between all twenty."
+   }
+  ],
+  "explanation": "The twenty soundings total 219, and 219 ÷ 20 = 10.95 metres. The party's figure is honest arithmetic on the whole survey — which is exactly why it is worth asking what the whole survey contains.",
+  "accessibilityDescription": "Twenty soundings. Enter their mean to two decimal places.",
+  "estimatedSeconds": 90,
+  "misconceptionIds": [
+   "mc.sum-not-mean"
+  ],
+  "parameters": {
+   "mc.sum-not-mean": {
+    "wrongValue": 219
+   }
+  }
+ },
+ {
+  "id": "q.boss.r2-party-b-median",
+  "topicId": "t.r2-median",
+  "objectiveId": "obj.compute-median",
+  "skillIds": [
+   "skill.median"
+  ],
+  "difficulty": 3,
+  "interaction": "numeric-input",
+  "prompt": "The second party reports \"a typical depth of twelve metres\" and shows different working: the median of the same twenty soundings. What is the median?",
+  "answer": {
+   "kind": "numeric",
+   "value": 12,
+   "tolerance": 0.01,
+   "unit": "m"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "With twenty readings the middle falls between the tenth and the eleventh."
+   }
+  ],
+  "explanation": "In order, the tenth and eleventh soundings are both 12, so the median is 12 metres. Both parties are right about their own figure. Neither is wrong; they are answers to different questions about one list.",
+  "accessibilityDescription": "Twenty soundings in a list. Enter their median.",
+  "estimatedSeconds": 80,
+  "misconceptionIds": []
+ },
+ {
+  "id": "q.boss.r2-party-mode",
+  "topicId": "t.r2-mode",
+  "objectiveId": "obj.r2-mode",
+  "skillIds": [
+   "skill.r2-mode"
+  ],
+  "difficulty": 3,
+  "interaction": "numeric-input",
+  "prompt": "A third summary was filed with neither report. Which depth was sounded most often?",
+  "answer": {
+   "kind": "numeric",
+   "value": 12,
+   "tolerance": 0,
+   "unit": "m"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Count how many times each depth appears, all the way to the end of the list."
+   }
+  ],
+  "explanation": "12 metres comes back four times, more than any other depth, so the mode is 12. Three summaries of this survey — 10.95, 12 and 12 — and not one of them mentions the shallow water. Repeating early is not the same as repeating most: 4 appears twice, and appears sooner.",
+  "accessibilityDescription": "Twenty soundings. Enter the depth that occurs most often.",
+  "estimatedSeconds": 70,
+  "misconceptionIds": [
+   "mc.first-repeat-is-mode"
+  ],
+  "parameters": {
+   "mc.first-repeat-is-mode": {
+    "wrongValue": 4
+   }
+  }
+ },
+ {
+  "id": "q.boss.r2-which-centre",
+  "topicId": "t.r2-choosing-measures",
+  "objectiveId": "obj.r2-choosing-measures",
+  "skillIds": [
+   "skill.choose-measure"
+  ],
+  "difficulty": 3,
+  "interaction": "method-selection",
+  "prompt": "The two parties differ by about a metre and each accuses the other of picking a flattering summary. Which summary describes a typical sounding of this approach better, and why?",
+  "answer": {
+   "kind": "choice",
+   "correctChoiceIds": [
+    "ch.median"
+   ]
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Ask which of the two a single very shallow reading can move."
+   }
+  ],
+  "explanation": "Three soundings sit far below the rest, and every one of them enters the mean and drags it down. The median reports a position in the order, so it barely moves. For a typical sounding the median is the better description — and neither summary is the point of this survey, which is what the next stage shows.",
+  "accessibilityDescription": "Choose which summary better describes a typical sounding, given three unusually shallow readings.",
+  "estimatedSeconds": 90,
+  "misconceptionIds": [
+   "mc.outlier-mean"
+  ],
+  "choices": [
+   {
+    "id": "ch.median",
+    "text": "The median, because three shallow soundings drag the mean and barely move it"
+   },
+   {
+    "id": "ch.mean",
+    "text": "The mean, because it uses every sounding and so cannot be distorted",
+    "misconceptionId": "mc.outlier-mean"
+   },
+   {
+    "id": "ch.either",
+    "text": "Either — a metre between them is too small a difference to matter"
+   }
+  ]
+ },
+ {
+  "id": "q.boss.r2-survey-range",
+  "topicId": "t.spread",
+  "objectiveId": "obj.compute-range",
+  "skillIds": [
+   "skill.range"
+  ],
+  "difficulty": 2,
+  "interaction": "numeric-input",
+  "prompt": "Neither party's report mentions how far apart the soundings were. What is the range of the twenty soundings?",
+  "answer": {
+   "kind": "numeric",
+   "value": 13,
+   "tolerance": 0,
+   "unit": "m"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "The range is a distance between two readings, not one of the readings."
+   }
+  ],
+  "explanation": "The deepest sounding is 16 metres and the shallowest is 3, so the range is 16 − 3 = 13 metres. That is a wide stretch of water to call \"about eleven metres\" and leave it there.",
+  "accessibilityDescription": "Twenty soundings from 3 to 16 metres. Enter the range.",
+  "estimatedSeconds": 55,
+  "misconceptionIds": []
+ },
+ {
+  "id": "q.boss.r2-survey-iqr",
+  "topicId": "t.r2-iqr",
+  "objectiveId": "obj.r2-iqr",
+  "skillIds": [
+   "skill.r2-iqr",
+   "skill.r2-quartiles"
+  ],
+  "difficulty": 4,
+  "interaction": "numeric-input",
+  "prompt": "Put the soundings in order, split at the median, and take the median of each half. The first quartile and the third are 10 and 13. What is the interquartile range?",
+  "answer": {
+   "kind": "numeric",
+   "value": 3,
+   "tolerance": 0.01,
+   "unit": "m"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "It is the width of the middle half, so it is built from the two quartiles."
+   }
+  ],
+  "explanation": "13 − 10 = 3 metres. The middle half of this approach sits within three metres, which is why both parties could honestly call it consistent — the disagreement is not in the middle half at all.",
+  "accessibilityDescription": "First quartile 10 metres, third quartile 13. Enter the interquartile range.",
+  "estimatedSeconds": 75,
+  "misconceptionIds": [
+   "mc.iqr-uses-the-extremes"
+  ],
+  "parameters": {
+   "mc.iqr-uses-the-extremes": {
+    "wrongValue": 13
+   }
+  }
+ },
+ {
+  "id": "q.boss.r2-survey-fence",
+  "topicId": "t.r2-outliers",
+  "objectiveId": "obj.r2-outliers",
+  "skillIds": [
+   "skill.r2-outliers"
+  ],
+  "difficulty": 4,
+  "interaction": "numeric-input",
+  "prompt": "A sounding counts as an outlier below the first quartile minus one and a half interquartile ranges. The first quartile is 10 metres and the interquartile range is 3. Where is that lower fence?",
+  "answer": {
+   "kind": "numeric",
+   "value": 5.5,
+   "tolerance": 0.01,
+   "unit": "m"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "One and a half times 3 first, then take it off the first quartile."
+   }
+  ],
+  "explanation": "One and a half interquartile ranges is 4.5, and 10 − 4.5 = 5.5 metres. The rule is built from the middle half, so the shallow soundings cannot move the fence that judges them.",
+  "accessibilityDescription": "First quartile 10, interquartile range 3. Enter the lower outlier fence.",
+  "estimatedSeconds": 85,
+  "misconceptionIds": []
+ },
+ {
+  "id": "q.boss.r2-survey-outliers",
+  "topicId": "t.r2-outliers",
+  "objectiveId": "obj.r2-outliers",
+  "skillIds": [
+   "skill.r2-outliers"
+  ],
+  "difficulty": 4,
+  "interaction": "numeric-input",
+  "prompt": "The lower fence sits at 5.5 metres. How many of the twenty soundings fall below it?",
+  "answer": {
+   "kind": "numeric",
+   "value": 3,
+   "tolerance": 0,
+   "unit": "soundings"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Read along the ordered soundings until you pass 5.5."
+   }
+  ],
+  "explanation": "3, 4 and 4 all fall below 5.5 metres — the same three soundings the first stage counted. They are outliers by the rule rather than by anyone's judgement, and that is what makes them evidence rather than an opinion.",
+  "accessibilityDescription": "Twenty soundings and a lower fence at 5.5 metres. Enter how many fall below it.",
+  "estimatedSeconds": 70,
+  "misconceptionIds": []
+ },
+ {
+  "id": "q.boss.r2-wide-bins",
+  "topicId": "t.r2-histograms",
+  "objectiveId": "obj.r2-histograms",
+  "skillIds": [
+   "skill.r2-histograms"
+  ],
+  "difficulty": 4,
+  "interaction": "graph-interpretation",
+  "prompt": "The first party's report draws the soundings as the histogram shown, in intervals five metres wide. What does that picture suggest about the shallow soundings?",
+  "answer": {
+   "kind": "choice",
+   "correctChoiceIds": [
+    "ch.tail"
+   ]
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Look at what the left-hand bar is attached to."
+   }
+  ],
+  "explanation": "In five-metre intervals the three shallow soundings become the short left-hand bar of an otherwise ordinary shape — a thin tail, nothing more. Every number in that histogram is correct. The interval width is the decision that made them look like a tail rather than a group.",
+  "accessibilityDescription": "A histogram of the twenty soundings in intervals of five metres: 3 in the first, 10 in the second, 7 in the third. Choose what it suggests.",
+  "estimatedSeconds": 90,
+  "misconceptionIds": [],
+  "choices": [
+   {
+    "id": "ch.tail",
+    "text": "That they are a thin tail of an otherwise ordinary stretch of water"
+   },
+   {
+    "id": "ch.gap",
+    "text": "That they stand apart from the rest of the soundings"
+   },
+   {
+    "id": "ch.none",
+    "text": "That there are no shallow soundings at all"
+   }
+  ],
+  "visual": {
+   "kind": "histogram",
+   "datasetId": "ds.atoll-approach",
+   "binWidth": 5,
+   "caption": "The first party's histogram: intervals 5 metres wide",
+   "accessibleDescription": "Histogram of the twenty soundings in intervals 5 metres wide. The interval from 3 up to 8 metres holds 3 soundings, 8 up to 13 holds 10, and 13 to 16 holds 7. The shallow soundings are one short bar at the left-hand end of an otherwise ordinary shape."
+  }
+ },
+ {
+  "id": "q.boss.r2-narrow-bins",
+  "topicId": "t.r2-histograms",
+  "objectiveId": "obj.r2-histograms",
+  "skillIds": [
+   "skill.r2-histograms"
+  ],
+  "difficulty": 4,
+  "interaction": "graph-interpretation",
+  "prompt": "The second party draws the same twenty soundings in intervals two metres wide, shown here. What does this picture show that the other did not?",
+  "answer": {
+   "kind": "choice",
+   "correctChoiceIds": [
+    "ch.gap"
+   ]
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Two of the intervals are empty. Ask what an empty interval means."
+   }
+  ],
+  "explanation": "Two empty intervals sit between the shallow soundings and everything else. That gap is the finding: the approach is not one run of depths with a tail, it is two separate groups, and one of them is shallower than a loaded boat draws. Same twenty soundings, same arithmetic, a different interval width.",
+  "accessibilityDescription": "A histogram of the same soundings in two-metre intervals, with two empty intervals between the shallow group and the rest. Choose what it shows.",
+  "estimatedSeconds": 95,
+  "misconceptionIds": [],
+  "choices": [
+   {
+    "id": "ch.gap",
+    "text": "An empty stretch separating the shallow soundings from the rest — two groups, not one"
+   },
+   {
+    "id": "ch.more",
+    "text": "That there are more shallow soundings than the first histogram showed"
+   },
+   {
+    "id": "ch.deeper",
+    "text": "That the water is deeper than the first histogram showed"
+   }
+  ],
+  "visual": {
+   "kind": "histogram",
+   "datasetId": "ds.atoll-approach",
+   "binWidth": 2,
+   "caption": "The second party's histogram: intervals 2 metres wide",
+   "accessibleDescription": "Histogram of the same twenty soundings in intervals 2 metres wide. The interval from 3 up to 5 metres holds 3 soundings, 5 up to 7 holds 0, 7 up to 9 holds 0, 9 up to 11 holds 3, 11 up to 13 holds 7, 13 up to 15 holds 5, and 15 to 16 holds 2. Two empty intervals separate the three shallow soundings from everything else."
+  }
+ },
+ {
+  "id": "q.boss.r2-notice-board",
+  "topicId": "t.r2-misleading-graphs",
+  "objectiveId": "obj.r2-misleading-graphs",
+  "skillIds": [
+   "skill.r2-misleading-graphs"
+  ],
+  "difficulty": 4,
+  "interaction": "error-identification",
+  "prompt": "While the case is open, the harbour's notice board carries the chart shown: the two parties' reported typical depths, side by side. What should the harbourmaster say about it?",
+  "answer": {
+   "kind": "choice",
+   "correctChoiceIds": [
+    "ch.baseline"
+   ]
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Check where the value axis begins before comparing the two heights."
+   }
+  ],
+  "explanation": "The value axis begins at 10 metres, so a gap of 1.05 metres between two honest figures fills the whole frame and the second bar stands about twice as tall as the first. Bar lengths only mean amounts when the axis starts at zero. The two parties are barely a metre apart; the chart makes them look like different waters.",
+  "accessibilityDescription": "A bar chart of two reported depths, 10.95 and 12 metres, drawn on an axis beginning at 10. Choose what is wrong with it.",
+  "estimatedSeconds": 95,
+  "misconceptionIds": [
+   "mc.truncated-axis-read-as-scale"
+  ],
+  "choices": [
+   {
+    "id": "ch.baseline",
+    "text": "Its axis begins at 10 metres, so about a metre of difference fills the frame — bar lengths only mean amounts from zero"
+   },
+   {
+    "id": "ch.twice",
+    "text": "Nothing — the second bar is about twice the height, so that party found water about twice as deep",
+    "misconceptionId": "mc.truncated-axis-read-as-scale"
+   },
+   {
+    "id": "ch.figures",
+    "text": "The two reported depths must have been copied down wrongly"
+   }
+  ],
+  "visual": {
+   "kind": "bar-chart",
+   "datasetId": "ds.survey-reports",
+   "axisMin": 10,
+   "caption": "The notice board's chart of the two reported depths, starting at 10 metres",
+   "accessibleDescription": "Bar chart of the two reported typical depths with the value axis starting at 10 metres, not zero. The first party's 10.95 metres rises a little above the axis and the second party's 12 metres rises about twice as far, so a difference of about one metre fills the whole frame."
+  }
+ },
+ {
+  "id": "q.boss.r2-honest-picture",
+  "topicId": "t.r2-misleading-graphs",
+  "objectiveId": "obj.r2-misleading-graphs",
+  "skillIds": [
+   "skill.r2-misleading-graphs"
+  ],
+  "difficulty": 4,
+  "interaction": "error-identification",
+  "prompt": "The first party's report is accurate in every figure it prints, and its histogram hides the gap. Its author insists nothing improper was done. Is that defensible?",
+  "answer": {
+   "kind": "choice",
+   "correctChoiceIds": [
+    "ch.choice"
+   ]
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Ask whether a reader of the finished picture could tell what was decided for them."
+   }
+  ],
+  "explanation": "Nothing in the report is false, and the report still misleads. Interval width is a decision made by whoever draws the chart, invisible in the finished picture, and it decided what a reader could see. Accuracy is not the whole of honesty in a graph — which is why a report should state the width it used.",
+  "accessibilityDescription": "Choose whether an accurate histogram that conceals a gap is defensible.",
+  "estimatedSeconds": 95,
+  "misconceptionIds": [],
+  "choices": [
+   {
+    "id": "ch.choice",
+    "text": "No — the interval width is a choice that decided what the reader could see, and it should be stated"
+   },
+   {
+    "id": "ch.true",
+    "text": "Yes — every figure printed is correct, so the report cannot mislead"
+   },
+   {
+    "id": "ch.numbers",
+    "text": "No — the figures in the report must have been altered"
+   }
+  ]
+ },
+ {
+  "id": "q.boss.r2-box-reading",
+  "topicId": "t.r2-box-plots",
+  "objectiveId": "obj.r2-box-plots",
+  "skillIds": [
+   "skill.r2-box-plots"
+  ],
+  "difficulty": 3,
+  "interaction": "numeric-input",
+  "prompt": "A box plot of the same twenty soundings is filed with the case. How wide is its box, in metres?",
+  "answer": {
+   "kind": "numeric",
+   "value": 3,
+   "tolerance": 0.01,
+   "unit": "m"
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "The box is drawn between the two quartiles, not between the extremes."
+   }
+  ],
+  "explanation": "The box runs from the first quartile at 10 to the third at 13, so it is 3 metres wide and holds the middle half of the soundings. The whisker reaching down to 3 metres is the part of the picture the summaries left out.",
+  "accessibilityDescription": "A box plot with smallest 3, first quartile 10, median 12, third quartile 13, largest 16. Enter the box's width.",
+  "estimatedSeconds": 70,
+  "misconceptionIds": [],
+  "visual": {
+   "kind": "box-plot",
+   "datasetId": "ds.atoll-approach",
+   "caption": "The approach's twenty soundings",
+   "accessibleDescription": "Box plot of the approach's twenty soundings: smallest 3 metres, first quartile 10, median 12, third quartile 13, largest 16. The box spans 10 to 13 metres, and the lower whisker runs a long way down to 3."
+  }
+ },
+ {
+  "id": "q.boss.r2-survey-skew",
+  "topicId": "t.r2-skew",
+  "objectiveId": "obj.r2-skew",
+  "skillIds": [
+   "skill.r2-skew"
+  ],
+  "difficulty": 3,
+  "interaction": "multiple-choice",
+  "prompt": "The mean of the soundings is 10.95 metres and the median is 12. Which way is the distribution skewed, and what does that say?",
+  "answer": {
+   "kind": "choice",
+   "correctChoiceIds": [
+    "ch.left"
+   ]
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "The tail is on the side the mean has been pulled towards."
+   }
+  ],
+  "explanation": "The mean sits below the median, and the mean is the summary an extreme reading drags. So the tail runs to the low side: left-skewed. Here that is not a curiosity — the tail is the shallow water.",
+  "accessibilityDescription": "Mean 10.95, median 12. Choose the direction of skew and what it means.",
+  "estimatedSeconds": 80,
+  "misconceptionIds": [
+   "mc.skew-named-by-the-bulk"
+  ],
+  "choices": [
+   {
+    "id": "ch.left",
+    "text": "Left-skewed — a tail of shallow soundings pulling the mean below the median"
+   },
+   {
+    "id": "ch.right",
+    "text": "Right-skewed — most of the soundings are bunched at the deep end",
+    "misconceptionId": "mc.skew-named-by-the-bulk"
+   },
+   {
+    "id": "ch.none",
+    "text": "Not skewed — a metre between the two is nothing"
+   }
+  ]
+ },
+ {
+  "id": "q.boss.r2-verdict",
+  "topicId": "t.r2-comparing-distributions",
+  "objectiveId": "obj.r2-comparing-distributions",
+  "skillIds": [
+   "skill.r2-comparing-distributions"
+  ],
+  "difficulty": 5,
+  "interaction": "multiple-choice",
+  "prompt": "Both parties reported a centre near twelve metres and called the approach safe for a boat drawing five. On the evidence, what should the harbourmaster conclude?",
+  "answer": {
+   "kind": "choice",
+   "correctChoiceIds": [
+    "ch.unsafe"
+   ]
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Two summaries agreeing is not the same as two summaries covering everything."
+   }
+  ],
+  "explanation": "Both centres are correct and both conclusions are wrong. Three of the twenty soundings — 15% of the survey — sit below a loaded boat's draught, they are outliers by the fence rule, and a two-metre histogram shows them standing apart from the rest. A centre says where the middle is; it cannot say whether the shallow end is safe, and nothing either party reported was ever going to answer that question.",
+  "accessibilityDescription": "Choose the conclusion the survey supports about the approach's safety.",
+  "estimatedSeconds": 120,
+  "misconceptionIds": [
+   "mc.same-centre-same-data"
+  ],
+  "choices": [
+   {
+    "id": "ch.unsafe",
+    "text": "The approach is not safe as reported: 15% of soundings are below the boat's draught, and both summaries were silent about them"
+   },
+   {
+    "id": "ch.safe",
+    "text": "It is safe — the two parties' centres agree, and agreeing centres settle what the soundings behind them were",
+    "misconceptionId": "mc.same-centre-same-data"
+   },
+   {
+    "id": "ch.more",
+    "text": "Nothing can be concluded until a third party surveys the approach again"
+   }
+  ]
+ },
+ {
+  "id": "q.boss.r2-which-graph",
+  "topicId": "t.r2-choosing-graphs",
+  "objectiveId": "obj.r2-choosing-graphs",
+  "skillIds": [
+   "skill.r2-choosing-graphs"
+  ],
+  "difficulty": 4,
+  "interaction": "method-selection",
+  "prompt": "The harbourmaster will pin one picture to the notice board so every skipper sees what the survey found. Which should it be?",
+  "answer": {
+   "kind": "choice",
+   "correctChoiceIds": [
+    "ch.dot"
+   ]
+  },
+  "hints": [
+   {
+    "level": 1,
+    "text": "Which of the three asks the reader to trust a decision they cannot see?"
+   }
+  ],
+  "explanation": "Twenty soundings is few enough to draw every one, and a dot plot pools nothing — the three shallow readings and the empty stretch above them are both visible without anyone choosing an interval width. A histogram would need that choice made for the reader, and a box plot reduces the whole survey to five numbers, which is what let the shallow water go unmentioned in the first place.",
+  "accessibilityDescription": "Choose which chart of twenty soundings should be pinned up for skippers.",
+  "estimatedSeconds": 100,
+  "misconceptionIds": [],
+  "choices": [
+   {
+    "id": "ch.dot",
+    "text": "A dot plot — twenty soundings is few enough to show every one, with no interval width to choose"
+   },
+   {
+    "id": "ch.hist",
+    "text": "A histogram — the same picture both parties drew"
+   },
+   {
+    "id": "ch.box",
+    "text": "A box plot — five numbers is all a skipper needs"
+   }
+  ]
  }
 ]

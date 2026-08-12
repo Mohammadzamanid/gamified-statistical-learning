@@ -251,5 +251,105 @@
     53
    ]
   ]
+ },
+ {
+  "id": "ds.atoll-approach",
+  "title": "The northern approach, twenty soundings",
+  "description": "Every sounding both survey parties took in the atoll's northern approach across one season.",
+  "columns": [
+   {
+    "name": "Depth",
+    "kind": "numeric",
+    "unit": "m"
+   }
+  ],
+  "rows": [
+   [
+    3
+   ],
+   [
+    4
+   ],
+   [
+    4
+   ],
+   [
+    9
+   ],
+   [
+    10
+   ],
+   [
+    10
+   ],
+   [
+    11
+   ],
+   [
+    11
+   ],
+   [
+    11
+   ],
+   [
+    12
+   ],
+   [
+    12
+   ],
+   [
+    12
+   ],
+   [
+    12
+   ],
+   [
+    13
+   ],
+   [
+    13
+   ],
+   [
+    13
+   ],
+   [
+    14
+   ],
+   [
+    14
+   ],
+   [
+    15
+   ],
+   [
+    16
+   ]
+  ]
+ },
+ {
+  "id": "ds.survey-reports",
+  "title": "What each party reported as the typical depth",
+  "description": "The two figures the survey parties filed, as the harbour's notice board drew them.",
+  "columns": [
+   {
+    "name": "Party",
+    "kind": "categorical"
+   },
+   {
+    "name": "Reported typical depth",
+    "kind": "numeric",
+    "unit": "m"
+   }
+  ],
+  "rows": [
+   [
+    "First party",
+    10.95
+   ],
+   [
+    "Second party",
+    12
+   ]
+  ]
  }
 ]

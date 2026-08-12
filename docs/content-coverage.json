@@ -8,7 +8,7 @@
         "l.r2-choosing-measures"
       ],
       "regionId": "r.averages-atoll",
-      "authoredRecords": 10,
+      "authoredRecords": 11,
       "generatorFamilies": 4,
       "reasoningFamilies": [
         "comparison",
@@ -19,7 +19,7 @@
       "rawCombinations": 253,
       "validCombinations": 253,
       "validatedGenerated": 253,
-      "totalAvailable": 263,
+      "totalAvailable": 264,
       "rejections": {
         "invalidCombinations": 0,
         "invalidReasons": {},
@@ -31,7 +31,7 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.0038022813688212928,
+      "largestShapeShare": 0.003787878787878788,
       "failures": []
     },
     {
@@ -83,7 +83,7 @@
         "l.r2-comparing-distributions"
       ],
       "regionId": "r.averages-atoll",
-      "authoredRecords": 15,
+      "authoredRecords": 16,
       "generatorFamilies": 4,
       "reasoningFamilies": [
         "calculation",
@@ -94,7 +94,7 @@
       "rawCombinations": 138,
       "validCombinations": 105,
       "validatedGenerated": 105,
-      "totalAvailable": 120,
+      "totalAvailable": 121,
       "rejections": {
         "invalidCombinations": 33,
         "invalidReasons": {
@@ -109,7 +109,7 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.016666666666666666,
+      "largestShapeShare": 0.01652892561983471,
       "failures": []
     },
     {
@@ -121,7 +121,7 @@
         "l.r2-skew"
       ],
       "regionId": "r.averages-atoll",
-      "authoredRecords": 11,
+      "authoredRecords": 12,
       "generatorFamilies": 4,
       "reasoningFamilies": [
         "calculation",
@@ -132,7 +132,7 @@
       "rawCombinations": 322,
       "validCombinations": 272,
       "validatedGenerated": 272,
-      "totalAvailable": 283,
+      "totalAvailable": 284,
       "rejections": {
         "invalidCombinations": 50,
         "invalidReasons": {
@@ -149,7 +149,7 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.0035335689045936395,
+      "largestShapeShare": 0.0035211267605633804,
       "failures": []
     },
     {
@@ -844,7 +844,7 @@
         "l.r2-choosing-graphs"
       ],
       "regionId": "r.averages-atoll",
-      "authoredRecords": 7,
+      "authoredRecords": 8,
       "generatorFamilies": 4,
       "reasoningFamilies": [
         "calculation",
@@ -855,7 +855,7 @@
       "rawCombinations": 322,
       "validCombinations": 301,
       "validatedGenerated": 301,
-      "totalAvailable": 308,
+      "totalAvailable": 309,
       "rejections": {
         "invalidCombinations": 21,
         "invalidReasons": {
@@ -870,7 +870,7 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.003246753246753247,
+      "largestShapeShare": 0.003236245954692557,
       "failures": []
     },
     {
@@ -880,7 +880,7 @@
         "l.r2-choosing-graphs"
       ],
       "regionId": "r.averages-atoll",
-      "authoredRecords": 6,
+      "authoredRecords": 7,
       "generatorFamilies": 5,
       "reasoningFamilies": [
         "comparison",
@@ -891,7 +891,7 @@
       "rawCombinations": 345,
       "validCombinations": 285,
       "validatedGenerated": 285,
-      "totalAvailable": 291,
+      "totalAvailable": 292,
       "rejections": {
         "invalidCombinations": 60,
         "invalidReasons": {
@@ -905,7 +905,7 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.003436426116838488,
+      "largestShapeShare": 0.003424657534246575,
       "failures": []
     },
     {
@@ -915,7 +915,7 @@
         "l.r2-comparing-distributions"
       ],
       "regionId": "r.averages-atoll",
-      "authoredRecords": 6,
+      "authoredRecords": 7,
       "generatorFamilies": 4,
       "reasoningFamilies": [
         "comparison",
@@ -926,7 +926,7 @@
       "rawCombinations": 322,
       "validCombinations": 302,
       "validatedGenerated": 302,
-      "totalAvailable": 308,
+      "totalAvailable": 309,
       "rejections": {
         "invalidCombinations": 20,
         "invalidReasons": {
@@ -940,7 +940,7 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.003246753246753247,
+      "largestShapeShare": 0.003236245954692557,
       "failures": []
     },
     {
@@ -988,7 +988,7 @@
         "l.r2-frequency"
       ],
       "regionId": "r.averages-atoll",
-      "authoredRecords": 8,
+      "authoredRecords": 9,
       "generatorFamilies": 5,
       "reasoningFamilies": [
         "calculation",
@@ -1000,7 +1000,7 @@
       "rawCombinations": 120,
       "validCombinations": 116,
       "validatedGenerated": 116,
-      "totalAvailable": 124,
+      "totalAvailable": 125,
       "rejections": {
         "invalidCombinations": 4,
         "invalidReasons": {
@@ -1016,7 +1016,7 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.008064516129032258,
+      "largestShapeShare": 0.008,
       "failures": []
     },
     {
@@ -1028,7 +1028,7 @@
         "l.r2-misleading-graphs"
       ],
       "regionId": "r.averages-atoll",
-      "authoredRecords": 8,
+      "authoredRecords": 10,
       "generatorFamilies": 4,
       "reasoningFamilies": [
         "calculation",
@@ -1039,7 +1039,7 @@
       "rawCombinations": 322,
       "validCombinations": 299,
       "validatedGenerated": 299,
-      "totalAvailable": 307,
+      "totalAvailable": 309,
       "rejections": {
         "invalidCombinations": 23,
         "invalidReasons": {
@@ -1053,7 +1053,7 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.003257328990228013,
+      "largestShapeShare": 0.003236245954692557,
       "failures": []
     },
     {
@@ -1065,7 +1065,7 @@
         "l.r2-comparing-distributions"
       ],
       "regionId": "r.averages-atoll",
-      "authoredRecords": 8,
+      "authoredRecords": 9,
       "generatorFamilies": 4,
       "reasoningFamilies": [
         "comparison",
@@ -1076,7 +1076,7 @@
       "rawCombinations": 322,
       "validCombinations": 302,
       "validatedGenerated": 302,
-      "totalAvailable": 310,
+      "totalAvailable": 311,
       "rejections": {
         "invalidCombinations": 20,
         "invalidReasons": {
@@ -1090,7 +1090,7 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.0032258064516129032,
+      "largestShapeShare": 0.003215434083601286,
       "failures": []
     },
     {
@@ -1101,7 +1101,7 @@
         "l.r2-comparing-distributions"
       ],
       "regionId": "r.averages-atoll",
-      "authoredRecords": 7,
+      "authoredRecords": 9,
       "generatorFamilies": 4,
       "reasoningFamilies": [
         "comparison",
@@ -1112,7 +1112,7 @@
       "rawCombinations": 322,
       "validCombinations": 316,
       "validatedGenerated": 316,
-      "totalAvailable": 323,
+      "totalAvailable": 325,
       "rejections": {
         "invalidCombinations": 6,
         "invalidReasons": {
@@ -1128,7 +1128,7 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.0030959752321981426,
+      "largestShapeShare": 0.003076923076923077,
       "failures": []
     },
     {
@@ -1139,7 +1139,7 @@
         "l.r2-dot-plots"
       ],
       "regionId": "r.averages-atoll",
-      "authoredRecords": 8,
+      "authoredRecords": 9,
       "generatorFamilies": 4,
       "reasoningFamilies": [
         "calculation",
@@ -1150,7 +1150,7 @@
       "rawCombinations": 345,
       "validCombinations": 285,
       "validatedGenerated": 285,
-      "totalAvailable": 293,
+      "totalAvailable": 294,
       "rejections": {
         "invalidCombinations": 60,
         "invalidReasons": {
@@ -1167,7 +1167,7 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.0034129692832764505,
+      "largestShapeShare": 0.003401360544217687,
       "failures": []
     },
     {
@@ -1177,7 +1177,7 @@
         "l.r2-outliers"
       ],
       "regionId": "r.averages-atoll",
-      "authoredRecords": 6,
+      "authoredRecords": 8,
       "generatorFamilies": 4,
       "reasoningFamilies": [
         "calculation",
@@ -1188,7 +1188,7 @@
       "rawCombinations": 322,
       "validCombinations": 319,
       "validatedGenerated": 319,
-      "totalAvailable": 325,
+      "totalAvailable": 327,
       "rejections": {
         "invalidCombinations": 3,
         "invalidReasons": {
@@ -1202,7 +1202,7 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.003076923076923077,
+      "largestShapeShare": 0.0030581039755351682,
       "failures": []
     },
     {
@@ -1212,7 +1212,7 @@
         "l.r2-percentage"
       ],
       "regionId": "r.averages-atoll",
-      "authoredRecords": 8,
+      "authoredRecords": 9,
       "generatorFamilies": 5,
       "reasoningFamilies": [
         "calculation",
@@ -1224,7 +1224,7 @@
       "rawCombinations": 165,
       "validCombinations": 135,
       "validatedGenerated": 135,
-      "totalAvailable": 143,
+      "totalAvailable": 144,
       "rejections": {
         "invalidCombinations": 30,
         "invalidReasons": {
@@ -1239,7 +1239,7 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.02097902097902098,
+      "largestShapeShare": 0.020833333333333332,
       "failures": []
     },
     {
@@ -1286,7 +1286,7 @@
         "l.r2-proportion"
       ],
       "regionId": "r.averages-atoll",
-      "authoredRecords": 8,
+      "authoredRecords": 9,
       "generatorFamilies": 5,
       "reasoningFamilies": [
         "calculation",
@@ -1298,7 +1298,7 @@
       "rawCombinations": 165,
       "validCombinations": 135,
       "validatedGenerated": 135,
-      "totalAvailable": 143,
+      "totalAvailable": 144,
       "rejections": {
         "invalidCombinations": 30,
         "invalidReasons": {
@@ -1313,7 +1313,7 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.02097902097902098,
+      "largestShapeShare": 0.020833333333333332,
       "failures": []
     },
     {
@@ -1324,7 +1324,7 @@
         "l.r2-iqr"
       ],
       "regionId": "r.averages-atoll",
-      "authoredRecords": 10,
+      "authoredRecords": 11,
       "generatorFamilies": 4,
       "reasoningFamilies": [
         "calculation",
@@ -1335,7 +1335,7 @@
       "rawCombinations": 322,
       "validCombinations": 315,
       "validatedGenerated": 315,
-      "totalAvailable": 325,
+      "totalAvailable": 326,
       "rejections": {
         "invalidCombinations": 7,
         "invalidReasons": {
@@ -1349,7 +1349,7 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.003076923076923077,
+      "largestShapeShare": 0.003067484662576687,
       "failures": []
     },
     {
@@ -1400,7 +1400,7 @@
         "l.r2-comparing-distributions"
       ],
       "regionId": "r.averages-atoll",
-      "authoredRecords": 7,
+      "authoredRecords": 8,
       "generatorFamilies": 4,
       "reasoningFamilies": [
         "comparison",
@@ -1411,7 +1411,7 @@
       "rawCombinations": 322,
       "validCombinations": 302,
       "validatedGenerated": 302,
-      "totalAvailable": 309,
+      "totalAvailable": 310,
       "rejections": {
         "invalidCombinations": 20,
         "invalidReasons": {
@@ -1427,7 +1427,7 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.003236245954692557,
+      "largestShapeShare": 0.0032258064516129032,
       "failures": []
     },
     {
@@ -1513,7 +1513,7 @@
         "l.r2-box-plots"
       ],
       "regionId": "r.averages-atoll",
-      "authoredRecords": 8,
+      "authoredRecords": 9,
       "generatorFamilies": 4,
       "reasoningFamilies": [
         "calculation",
@@ -1524,7 +1524,7 @@
       "rawCombinations": 322,
       "validCombinations": 299,
       "validatedGenerated": 299,
-      "totalAvailable": 307,
+      "totalAvailable": 308,
       "rejections": {
         "invalidCombinations": 23,
         "invalidReasons": {
@@ -1538,7 +1538,7 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.003257328990228013,
+      "largestShapeShare": 0.003246753246753247,
       "failures": []
     }
   ]

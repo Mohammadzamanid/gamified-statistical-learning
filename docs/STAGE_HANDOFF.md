@@ -30,14 +30,14 @@ after Stage 1 was lost because commits were never pushed to a durable remote. Re
 | Default branch | `main` |
 | Pristine Stage 1 import | `7add4bc` — pushed and remote-verified |
 | Baseline docs + CI | `1b0a5dd` — pushed and remote-verified |
-| Last unit completed | **S2-17** — Region 2 validated content expansion, in four cycles. **Every topic in the curriculum now meets scope §4** |
+| Last unit completed | **S2-18** — the Region 2 boss investigation. **Every region in the curriculum now has a case**, and `REGIONS_OWING_A_BOSS` is empty |
 | Head of `main` | read it live: `git rev-parse HEAD` vs `git ls-remote origin refs/heads/main` — these must match |
 | Milestone snapshot commit | `d4e250434c465f85e4307a226a9af2cbc9788c17` — the commit the exports were built from |
 | Stage tag | `stage-1-baseline` — **created locally, NOT on GitHub** (unit R-00d, blocked; see §2.1) |
 | Milestone exports | `../gsl-exports/` — source ZIP + git bundle + manifest + SHA-256 checksums |
 | Working tree | clean |
 | Node / npm used | v22.22.2 / 10.9.7 |
-| Test suite | **662 tests / 47 files**, all passing (Stage 1 baseline was 73 / 14) |
+| Test suite | **668 tests / 47 files**, all passing (Stage 1 baseline was 73 / 14) |
 | Build | passing (**873.56 kB, 224.47 kB gzip**; baseline was 285.73 kB / 83.82 kB) |
 | Source modified since baseline | S2-01 … S2-08 — achievements + region completion, three new interactions, the enforced interaction audit, the review queue, the Region 1 topic architecture, and all 17 Region 1 lessons |
 | Curriculum | 2 regions · **10 modules** · **40 lessons** · **42 skills** · **290 questions** (baseline 2/2/3/6/14) |
@@ -105,27 +105,48 @@ branch/tag deletion) are forbidden without explicit owner permission. See `REMOT
 
 ## 5. Next unit
 
-**S2-18 — the Region 2 boss investigation.** Its criteria: dataset inspection, summary selection, graph selection,
-misleading-presentation detection, outlier reasoning, distribution comparison, evidence-based conclusion; save and
-resume, adaptive support, remediation, an achievement, and Stage 2 completion.
+**S2-19 — the save, resume and recovery audit.** Its criteria: interruption at a lesson, a multi-step calculation, a
+boss, the review queue and the laboratory; interruption after an achievement award, a mastery update and a settings
+change; multiple profiles, atomic writes, backup rotation, corrupt-primary recovery, migration, invalid import,
+missing save, duplicate-achievement prevention, and persistence of the review schedule and the laboratory state.
 
-**Everything it draws on now exists.** `docs/REGION2_BOSS_SPEC.md` maps its five stages onto the module sequence, and
-every skill all five stages need is written, practised and generated for. Region 1's boss
-(`tests/audit/investigation-structure.test.ts`, `tests/integration/region-completion.test.ts`) is the worked example
-to copy — read it before designing, since save/resume for investigations already exists and has a schema behind it.
+**Everything it must interrupt now exists**, which is why it comes after this unit: the boss is the last resumable
+thing Stage 2 adds. `src/core/investigations/engine.ts` records a case a step at a time for exactly this reason, and
+nothing has ever interrupted one. Duplicate-achievement prevention is already covered for regions by S2-01 — extend
+it to the other award kinds rather than re-testing that one.
 
-**S2-17 is Complete and every topic meets §4 — 41 of 41.** Four cycles, one corpus per module (D-058): season logs
-for counts, catch lists shared by centre, spread and pictures, paired logs for the scatterplots. 12,889 validated
-generated interactions.
+**The save schema is at version 4**, with migrations 1→2 (`reviewSession`), 2→3 (`investigationProgress`) and 3→4
+(`savedExperiments`) in `src/core/persistence/migrations.ts`. Any shape change needs a migration and a round-trip
+test; D-055 checks the chain against the version rather than trusting the two to travel together.
 
-**Read D-061 before writing any generator again.** Three mistakes recurred in *every* cycle despite being written
+**S2-18 is Complete.** `inv.r2-atoll-approach` — *The Northern Approach* — runs in five stages over 19 authored
+questions, exercises 17 skills across all six Region 2 modules, and can report 10 of the region's misconceptions.
+`ach.atoll-charted` had shipped since Stage 1 and been unreachable since S2-10; it is earned now, in an integration
+test that plays all 40 lessons and both cases through the real engine in one save (scope §7).
+
+**Two audit findings are worth reading before touching a test.**
+
+*D-062:* `tests/audit/interaction-audit.test.ts` defined "reachable" as "listed by a lesson", so from S2-10 to S2-18
+no boss question had ever been through its explanation, chart, misconception or accessibility rules — thirty-four
+questions a learner meets. `misconception-library.test.ts` had already made the same widening for itself in S2-16 and
+nobody carried it back. **When a new way to reach content is added, grep for the old definition of reachable.**
+
+*D-063:* two guards over accessible descriptions asked only whether a number appears *somewhere* in the words. A
+probe moved a box plot's first quartile from 10 to 9 and failed nothing, because another sentence still said 10.
+Presence is not attachment. Both now check against the arithmetic the component draws from — `buildBins` for a
+histogram's counts, `fiveNumberSummary` plus ascending first-mention for a box plot's five numbers.
+
+**Read D-061 before writing any generator.** Three mistakes recurred in every cycle of S2-17 despite being written
 down each time: a family stating a response of the wrong kind; a misconception tag that cannot fire where it was put;
-and an answer sharing a route with its own check. Each was caught only because a check exists for it.
+and an answer sharing a route with its own check.
 
-**The unit's largest finding was not about its own topics (D-060).** Choosing which variance convention the
-generators should answer by exposed that the laboratory had reported the *sample* variance since S2-15 while the
-lessons teach the *population* one. When you have to pick a convention, look up what the lesson publishes; if the app
-disagrees anywhere, the app is what is wrong.
+**A tag has to fit, not merely be triggerable.** S2-18's first draft put `mc.truncated-axis-read-as-scale` — *bar
+heights read as amounts on a truncated axis* — on a distractor about a histogram's interval width. Every check passed,
+because the tag was on a choice and so was mechanically expressible; that limit is stated in
+`misconception-library.test.ts` and it is real. The fix was to build the chart the misconception is about.
+
+**Probes must snapshot the working tree, not `git checkout --`.** The baseline being probed is uncommitted by
+definition, so restoring from git reverts the cycle's own work. That happened here and the case had to be rebuilt.
 
 **Two conventions are settled and enforced.** Quartiles are the median of each half (D-045); the variance divides by
 how many readings there are (D-060). Both are pinned to the lessons' own published figures in
@@ -158,7 +179,12 @@ would be the second.
 Its questions belong to no lesson, which is why the orphan-reachability rule has a third route (D-029), and a boss may
 never re-use a lesson's question. `tests/helpers/complete-bosses.ts` splits every region into "has one" and "owes one",
 and the audit fails if a region is missing from both, appears in both, claims a boss it lacks, or quietly acquires one
-while still listed as owing it.
+while still listed as owing it. Since S2-18 the "owes one" list is **empty** — both regions have a case — so the next
+region added to the curriculum has to land in one list or the other before the suite goes green again.
+
+The trap that route created: because boss questions are in no lesson, every audit that filtered on "questions some
+lesson lists" silently skipped them for eight units (D-062). Both files that need the wider set now build it the same
+way, from lessons **and** investigation steps.
 
 **What `parts.ts` learned the hard way, and what it costs to ignore.** Its first version let only the conversion family
 use the topic's form, so four topics emitted *identical* questions and the near-duplicate gate collapsed three of them
@@ -238,7 +264,7 @@ Recorded in `docs/INTERACTION_AUDIT.md` §3; each is owned by a later unit and n
 | 1 | Region-completed achievement trigger stubbed `false` | **Fixed in S2-01** |
 | 2 | Six interaction types unimplemented | **Partly fixed** — `step-by-step-calculation` (S2-02), `point-placement` (S2-03) and `drag-and-drop` (S2-04) live; 3 remain |
 | 3 | Laboratory simulations are placeholders | **Placeholders removed in S2-15**, and the descriptive bench is a real learning environment. The *simulation* instruments the Stage 1 card advertised — sampling distributions, a CLT explorer — remain unbuilt **by design**: scope §3 excludes them from Stage 2 and assigns them to Stages 3–6. Nothing on screen now claims them |
-| 4 | Only one world of content | **Both regions authored** — 17 of 17 Region 1 topic lessons (S2-08) and all 20 Region 2 lessons (S2-12 … S2-14), each held to scope §5's 18 structure checks. Region 2's §4 interaction counts (S2-17) and its boss (S2-18) are still open |
+| 4 | Only one world of content | **Both regions authored** — 17 of 17 Region 1 topic lessons (S2-08) and all 20 Region 2 lessons (S2-12 … S2-14), each held to scope §5's 18 structure checks. Region 2's §4 interaction counts (S2-17) and its boss (S2-18) are both **done**; every topic meets §4 and both regions have a case |
 | 5 | Cosmetic `MODULE_TYPELESS_PACKAGE_JSON` lint warning | Open by choice (D-002) |
 
 ## 6. Contracts you must not break

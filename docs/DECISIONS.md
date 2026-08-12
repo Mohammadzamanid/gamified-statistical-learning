@@ -676,3 +676,41 @@ One audit was rewritten rather than deleted when its subject emptied. "A topic w
 the report as a failure" had no shipped row left to exercise it, so instead of passing over an empty list it now
 proves the rule against a report built from **no** families at all, where every topic is ungenerated. That is D-048's
 habit applied to a check rather than to a temporary rule. (S2-17)
+
+**D-062 — "Reachable" meant "in a lesson", so every boss question had been outside the interaction audit since bosses
+existed.**
+`tests/audit/interaction-audit.test.ts` was written in S2-05, a unit before investigations were designed, and its
+`reachableQuestions` set has been "the questions some lesson lists" ever since. Fifteen checks read that set: the
+explanation-states-its-answer rule, every chart rule, the misconception rules, the accessibility rules. Region 1's
+boss shipped fifteen questions in S2-10 and Region 2's nineteen were about to ship here — thirty-four questions a
+learner meets, none of which any of those checks had ever looked at.
+
+The tell was already in the repository. `tests/audit/misconception-library.test.ts` had to build its own reachable
+set in S2-16, with a comment explaining that a boss step's questions count, and that widening was never carried back
+to the file it was borrowed from. One check must stay narrow and does: "an interaction type has at least one genuine
+curriculum use" is evidence about the curriculum, and a type exercised only inside a boss is not that, so
+`reachableOfType` still reads lessons alone.
+
+Widening it found no defect — Region 1's boss and Region 2's new one both pass all fifteen. That is worth stating
+plainly rather than dressing up: the value here is that the checks now cover what they were always meant to, not that
+they caught something. (S2-18)
+
+**D-063 — A chart's words are checked against the chart's arithmetic, because "the number appears somewhere" is not
+much of a check.**
+Two guards over accessible descriptions were probed in this unit and one of them failed to bite.
+
+The bin-width guard (D-047) asks whether the width is stated in the words. Redraw a histogram at a different width
+and the guard still passes, because a description full of interval bounds almost always contains the new width's
+digits somewhere. What actually changes when the width changes is the **counts**, so those are now checked against
+`buildBins` — the function the component draws from — exactly as a box plot's five numbers have been checked against
+`fiveNumberSummary` since S2-14.
+
+The box-plot guard had the same hole one level down, and the probe walked straight through it: moving a description's
+first quartile from 10 to 9 failed nothing, because "the box spans 10 to 13" still put a 10 in the words. Presence is
+not attachment. The cheap fix that costs the content nothing is order: a box plot's five numbers ascend by definition
+and every shipped description already reads smallest to largest, so the *first* mention of each must now come after
+the last. That catches a figure moved onto the wrong part of the chart while leaving authors free to phrase the rest
+as they like.
+
+Both guards keep a limit worth naming: a description that states the right numbers in the right order can still
+attach the wrong words to them, and no mechanical check here will see that. (S2-18)

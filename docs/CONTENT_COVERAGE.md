@@ -10,10 +10,10 @@ Topics come from the **curriculum graph**, never from the set of generator modul
 
 | Topic | Authored records | Generator families | Reasoning families | Raw combinations | Valid combinations | Validated generated | **Total available** | Meets §4 |
 |---|---:|---:|---:|---:|---:|---:|---:|---|
-| Choosing measures (`skill.choose-measure`) | 10 | 4 | 4 | 253 | 253 | 253 | **263** | Yes |
+| Choosing measures (`skill.choose-measure`) | 11 | 4 | 4 | 253 | 253 | 253 | **264** | Yes |
 | Data literacy (`skill.data-literacy`) | 7 | 4 | 4 | 322 | 272 | 272 | **279** | Yes |
-| Mean (`skill.mean`) | 15 | 4 | 4 | 138 | 105 | 105 | **120** | Yes |
-| Median (`skill.median`) | 11 | 4 | 4 | 322 | 272 | 272 | **283** | Yes |
+| Mean (`skill.mean`) | 16 | 4 | 4 | 138 | 105 | 105 | **121** | Yes |
+| Median (`skill.median`) | 12 | 4 | 4 | 322 | 272 | 272 | **284** | Yes |
 | Addition (`skill.r1-addition`) | 9 | 8 | 8 | 800 | 800 | 800 | **809** | Yes |
 | Cases and observations (`skill.r1-cases`) | 9 | 4 | 4 | 392 | 392 | 304 | **313** | Yes |
 | Coordinates (`skill.r1-coordinates`) | 7 | 6 | 6 | 384 | 322 | 322 | **329** | Yes |
@@ -32,25 +32,25 @@ Topics come from the **curriculum graph**, never from the set of generator modul
 | Kinds of variable (`skill.r1-variable-kinds`) | 8 | 5 | 5 | 240 | 228 | 208 | **216** | Yes |
 | Variables (`skill.r1-variables`) | 8 | 5 | 5 | 272 | 232 | 228 | **236** | Yes |
 | Bar charts (`skill.r2-bar-charts`) | 8 | 4 | 4 | 322 | 312 | 312 | **320** | Yes |
-| Box plots (`skill.r2-box-plots`) | 7 | 4 | 4 | 322 | 301 | 301 | **308** | Yes |
-| Choosing a graph (`skill.r2-choosing-graphs`) | 6 | 5 | 4 | 345 | 285 | 285 | **291** | Yes |
-| Comparing distributions (`skill.r2-comparing-distributions`) | 6 | 4 | 4 | 322 | 302 | 302 | **308** | Yes |
+| Box plots (`skill.r2-box-plots`) | 8 | 4 | 4 | 322 | 301 | 301 | **309** | Yes |
+| Choosing a graph (`skill.r2-choosing-graphs`) | 7 | 5 | 4 | 345 | 285 | 285 | **292** | Yes |
+| Comparing distributions (`skill.r2-comparing-distributions`) | 7 | 4 | 4 | 322 | 302 | 302 | **309** | Yes |
 | Dot plots (`skill.r2-dot-plots`) | 9 | 4 | 4 | 322 | 145 | 145 | **154** | Yes |
-| Frequency (`skill.r2-frequency`) | 8 | 5 | 5 | 120 | 116 | 116 | **124** | Yes |
-| Histograms (`skill.r2-histograms`) | 8 | 4 | 4 | 322 | 299 | 299 | **307** | Yes |
-| Interquartile range (`skill.r2-iqr`) | 8 | 4 | 4 | 322 | 302 | 302 | **310** | Yes |
-| Misleading graphs (`skill.r2-misleading-graphs`) | 7 | 4 | 4 | 322 | 316 | 316 | **323** | Yes |
-| Mode (`skill.r2-mode`) | 8 | 4 | 4 | 345 | 285 | 285 | **293** | Yes |
-| Outliers (`skill.r2-outliers`) | 6 | 4 | 4 | 322 | 319 | 319 | **325** | Yes |
-| Percentage of a dataset (`skill.r2-percentage`) | 8 | 5 | 5 | 165 | 135 | 135 | **143** | Yes |
+| Frequency (`skill.r2-frequency`) | 9 | 5 | 5 | 120 | 116 | 116 | **125** | Yes |
+| Histograms (`skill.r2-histograms`) | 10 | 4 | 4 | 322 | 299 | 299 | **309** | Yes |
+| Interquartile range (`skill.r2-iqr`) | 9 | 4 | 4 | 322 | 302 | 302 | **311** | Yes |
+| Misleading graphs (`skill.r2-misleading-graphs`) | 9 | 4 | 4 | 322 | 316 | 316 | **325** | Yes |
+| Mode (`skill.r2-mode`) | 9 | 4 | 4 | 345 | 285 | 285 | **294** | Yes |
+| Outliers (`skill.r2-outliers`) | 8 | 4 | 4 | 322 | 319 | 319 | **327** | Yes |
+| Percentage of a dataset (`skill.r2-percentage`) | 9 | 5 | 5 | 165 | 135 | 135 | **144** | Yes |
 | Percentiles (`skill.r2-percentiles`) | 6 | 4 | 4 | 463 | 365 | 365 | **371** | Yes |
-| Proportion of a dataset (`skill.r2-proportion`) | 8 | 5 | 5 | 165 | 135 | 135 | **143** | Yes |
-| Quartiles (`skill.r2-quartiles`) | 10 | 4 | 4 | 322 | 315 | 315 | **325** | Yes |
+| Proportion of a dataset (`skill.r2-proportion`) | 9 | 5 | 5 | 165 | 135 | 135 | **144** | Yes |
+| Quartiles (`skill.r2-quartiles`) | 11 | 4 | 4 | 322 | 315 | 315 | **326** | Yes |
 | Scatterplots (`skill.r2-scatterplots`) | 7 | 5 | 5 | 248 | 200 | 200 | **207** | Yes |
-| Skew (`skill.r2-skew`) | 7 | 4 | 4 | 322 | 302 | 302 | **309** | Yes |
+| Skew (`skill.r2-skew`) | 8 | 4 | 4 | 322 | 302 | 302 | **310** | Yes |
 | Standard-deviation intuition (`skill.r2-standard-deviation`) | 6 | 4 | 4 | 322 | 318 | 318 | **324** | Yes |
 | Variance intuition (`skill.r2-variance`) | 9 | 5 | 5 | 345 | 329 | 329 | **338** | Yes |
-| Range (`skill.range`) | 8 | 4 | 4 | 322 | 299 | 299 | **307** | Yes |
+| Range (`skill.range`) | 9 | 4 | 4 | 322 | 299 | 299 | **308** | Yes |
 
 ## Rejections, per topic
 

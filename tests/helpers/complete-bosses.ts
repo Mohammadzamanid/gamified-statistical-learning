@@ -15,14 +15,15 @@
  */
 
 /** Regions whose boss investigation exists and gates their achievement. */
-export const REGIONS_WITH_A_BOSS: readonly string[] = ["r.harbor-tallies"];
+export const REGIONS_WITH_A_BOSS: readonly string[] = ["r.harbor-tallies", "r.averages-atoll"];
 
 /**
  * Regions that still owe a boss.
  *
- * `r.averages-atoll` is the Region 2 inheritance. Its case — dataset inspection,
- * summary and graph selection, misleading-presentation detection, outlier
- * reasoning — is **S2-18**, and it cannot be built before the Region 2 lessons
- * it would draw on exist (S2-11 through S2-17).
+ * Empty since S2-18, which built `inv.r2-atoll-approach` and moved
+ * `r.averages-atoll` across. The list stays because the debt device is what the
+ * audit checks against — a region added to the curriculum without a case has to
+ * land here rather than nowhere, and "every region appears in exactly one of the
+ * two lists" is what makes forgetting it impossible.
  */
-export const REGIONS_OWING_A_BOSS: readonly string[] = ["r.averages-atoll"];
+export const REGIONS_OWING_A_BOSS: readonly string[] = [];

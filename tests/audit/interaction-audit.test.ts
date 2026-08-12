@@ -23,6 +23,7 @@ import { RENDERED_VISUAL_KINDS } from "../../src/renderer/components/rendered-vi
 import { VisualSpecSchema } from "../../src/shared/schemas";
 import { evaluateResponse } from "../../src/core/questions/evaluators";
 import { fiveNumberSummary } from "../../src/core/statistics/descriptive";
+import { buildBins } from "../../src/core/statistics/binning";
 import { normalizeResponse } from "../../src/core/questions/normalize";
 import { InteractionTypeSchema, type InteractionType, type Question } from "../../src/shared/schemas";
 import { correctResponseFor, incorrectResponseFor } from "../helpers/responses";
@@ -37,10 +38,32 @@ beforeAll(() => {
 
 /** Questions reachable from a lesson — the only ones that count as curriculum use. */
 const lessonQuestionIds = new Set(content.curriculum.lessons.flatMap((l) => l.questionIds));
-const reachableQuestions = [...content.questions.values()].filter((q) => lessonQuestionIds.has(q.id));
+
+/**
+ * Every question a learner can actually meet: a lesson's, or a boss step's.
+ *
+ * S2-18 widened this. The file was written in S2-05, before investigations
+ * existed, and "reachable" has meant "in a lesson" ever since — so Region 1's
+ * fifteen boss questions had never been through the explanation rule, the chart
+ * rules or the misconception rules, and Region 2's nineteen would not have been
+ * either. `misconception-library.test.ts` had to make exactly this widening for
+ * itself in S2-16; this is the same correction, in the file that needed it first.
+ *
+ * What must stay narrow is "a genuine curriculum use" below: an interaction type
+ * exercised only by a boss is no evidence that the curriculum teaches with it,
+ * so `reachableOfType` still reads lessons alone.
+ */
+const investigationQuestionIds = new Set(
+  content.curriculum.investigations.flatMap((i) => i.steps.flatMap((s) => s.questionIds))
+);
+const reachableQuestions = [...content.questions.values()].filter(
+  (q) => lessonQuestionIds.has(q.id) || investigationQuestionIds.has(q.id)
+);
 
 function reachableOfType(type: InteractionType): Question[] {
-  return reachableQuestions.filter((q) => q.interaction === type);
+  return [...content.questions.values()].filter(
+    (q) => lessonQuestionIds.has(q.id) && q.interaction === type
+  );
 }
 
 const implementedTypes = () => listInteractions().filter((d) => d.implemented).map((d) => d.type);
@@ -71,6 +94,27 @@ function statesNumber(text: string, value: number): boolean {
   }
   const word = Number.isInteger(value) && value >= 0 ? NUMBER_WORDS[value] : undefined;
   return word !== undefined && new RegExp(`\\b${word}\\b`, "i").test(text);
+}
+
+/**
+ * Where `text` first gives `value` in digits, or null if it never does.
+ *
+ * Digits only, deliberately: this exists to compare *positions* between several
+ * figures, and mixing a digit position with a written-word position would order
+ * two different things.
+ */
+function firstMention(text: string, value: number): number | null {
+  const forms = new Set<string>([String(value)]);
+  if (!Number.isInteger(value)) {
+    forms.add(value.toFixed(1));
+    forms.add(value.toFixed(2));
+  }
+  let earliest: number | null = null;
+  for (const form of forms) {
+    const match = new RegExp(`(?<![\\d.])${form.replace(".", "\\.")}(?![\\d])`).exec(text);
+    if (match && (earliest === null || match.index < earliest)) earliest = match.index;
+  }
+  return earliest;
 }
 const stubbedTypes = () => listInteractions().filter((d) => !d.implemented).map((d) => d.type);
 
@@ -388,6 +432,36 @@ describe("every visual a question declares can actually be drawn", () => {
     }
   });
 
+  it("gives a histogram's words the counts the histogram is drawn with", () => {
+    // The same rule as the box plot's, for the chart whose whole subject is that
+    // its construction is invisible in the finished picture.
+    //
+    // The bin-width check above is not enough on its own, and S2-18 found the
+    // gap while probing it: change a histogram's `binWidth` and the words go on
+    // describing the old intervals, but the check only asks whether the new
+    // width's digits appear *somewhere* in them — and in a description full of
+    // interval bounds they usually do. What actually moves is the counts, so
+    // that is what the words have to state.
+    //
+    // Checked against `buildBins`, the function the component draws from, so a
+    // reader who cannot see the chart is told the bars that are really there
+    // rather than a second author's arithmetic.
+    for (const q of reachableQuestions) {
+      if (q.visual.kind !== "histogram") continue;
+      const dataset = content.datasets.get(q.visual.datasetId ?? "");
+      if (!dataset) continue; // reported by the check below
+      const column = dataset.columns.findIndex((c) => c.kind === "numeric");
+      const values = dataset.rows.map((row) => Number(row[column]));
+      const words = `${q.visual.accessibleDescription ?? ""} ${q.visual.caption ?? ""}`;
+      for (const bin of buildBins(values, q.visual.binWidth)) {
+        expect(
+          statesNumber(words, bin.count),
+          `${q.id} draws a bar holding ${bin.count} readings from ${bin.from} to ${bin.to}, a count its words never give`
+        ).toBe(true);
+      }
+    }
+  });
+
   it("gives a box plot's words the five numbers the box plot is drawn from", () => {
     // A box plot is its five-number summary and nothing else — there is no other
     // information in the picture. So for a reader who cannot see it, the
@@ -410,6 +484,30 @@ describe("every visual a question declares can actually be drawn", () => {
         expect(
           statesNumber(words, value),
           `${q.id} draws a box plot of ${dataset.id} whose ${name} is ${value}, which its words never give`
+        ).toBe(true);
+      }
+
+      // And in order. Presence alone is weak, which S2-18 found by probing it:
+      // moving the description's first quartile from 10 to 9 failed nothing,
+      // because "the box spans 10 to 13" still put a 10 somewhere in the words.
+      // A box plot's five numbers ascend by definition, and every description
+      // that ships reads min → max already, so requiring the *first* mention of
+      // each to ascend costs the content nothing and catches a figure attached
+      // to the wrong part of the chart.
+      //
+      // Digits, therefore, for these five specifically — a position is what is
+      // being compared. The presence rule above still accepts written words.
+      const order = Object.entries(summary).map(([name, value]) => ({ name, value, at: firstMention(words, value) }));
+      for (const entry of order) {
+        expect(
+          entry.at,
+          `${q.id} gives its ${entry.name} (${entry.value}) only in words; a box plot's five numbers are its whole picture and belong in figures`
+        ).not.toBeNull();
+      }
+      for (let i = 1; i < order.length; i += 1) {
+        expect(
+          order[i]!.at! >= order[i - 1]!.at!,
+          `${q.id} names its ${order[i]!.name} (${order[i]!.value}) before its ${order[i - 1]!.name} (${order[i - 1]!.value}), so a reader who cannot see the chart is given the five numbers out of order`
         ).toBe(true);
       }
     }

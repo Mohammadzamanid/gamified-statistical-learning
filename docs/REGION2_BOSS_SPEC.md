@@ -96,3 +96,34 @@ misconceptions rather than have them retrofitted.
    The audit fails if the boss appears without that move, and fails if the move happens without the boss.
 3. Extend the fresh-save playthrough to complete both bosses — scope §7 requires the full playthrough to complete
    "every required lesson and both boss investigations through the real session engine".
+
+---
+
+## 8. What S2-18 actually built
+
+Recorded here so the specification and the case can be compared without reading both.
+
+**Built as specified:** five stages, in the order and with the subjects §4 gives; the "two accounts of one dataset,
+neither of them lying" premise of §3; questions under `q.boss.r2-*`; the move in `complete-bosses.ts`; the
+playthrough extended to both cases.
+
+**Three deliberate departures**, each with its reason:
+
+1. **The water is the northern approach, not the main channel.** `ds.channel-depths` — "twenty depth soundings taken
+   across the season in the main channel of the atoll" — has belonged to `l.r2-misleading-graphs` since S2-14. A
+   second, different twenty for the same channel and season would contradict shipped content, so the case has its
+   own stretch of water and its own dataset, `ds.atoll-approach`.
+
+2. **The truncated axis is a chart, not a tag.** §5 suggests `mc.axis-misread` for stage 4. The misconception that
+   fits what stage 4 argues is `mc.truncated-axis-read-as-scale`, and it means *bar heights read as amounts on a
+   truncated axis* — which cannot be expressed on a question about a histogram's interval width, however apt the
+   words read. So the chart the misconception is about was built: `ds.survey-reports`, two bars, `axisMin: 10`. This
+   is §5's own rule, applied to the tag §5 itself proposed.
+
+3. **The mode is computed, and it is 12 — the same as the median.** §4 lists mode among stage 2's subjects and the
+   dataset was chosen so that all three centres agree at or near 12, because the case turns on three correct
+   summaries all being silent about the same three soundings. `mc.first-repeat-is-mode` sits there, since 4 repeats
+   before 12 does.
+
+**Not built, and not owed:** nothing in §1's criteria list is missing. Stage 4 covers misleading presentation twice
+over — interval width and truncated axis — which is where §4's "bin width, truncated axes" both land. (S2-18)

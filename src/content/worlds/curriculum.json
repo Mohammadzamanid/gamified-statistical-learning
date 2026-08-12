@@ -5547,6 +5547,96 @@
      ]
     }
    ]
+  },
+  {
+   "id": "inv.r2-atoll-approach",
+   "regionId": "r.averages-atoll",
+   "title": "The Northern Approach",
+   "briefing": "Two survey parties measured the atoll's northern approach across the same season and filed the same twenty soundings. Both report a typical depth of about twelve metres. Both conclude the water is safe for a boat drawing five. Three boats have grounded there since. Nobody has lied and nobody has miscalculated: every figure in both reports is correct. Work the case in order — establish what was measured, compute the centres each party chose, find what those centres leave out, compare the pictures drawn from them, and give the harbourmaster a verdict the soundings support.",
+   "debrief": "The disagreement between the parties was never the problem; their agreement was. A mean of 10.95, a median of 12 and a mode of 12 are all correct, and all three are silent about the soundings at 3 and 4 metres — 15% of the survey, every one of them below the lower fence at 5.5, and separated from the rest of the water by two empty intervals that only a two-metre histogram shows. The first party's five-metre intervals turned that gap into a thin tail without printing a single false number, and the notice board's chart turned a metre of honest difference into a chasm by starting its axis at 10. What convicts the reports is not an error in them but what they chose to summarise: a centre answers where the middle is, and the question the harbourmaster actually had was about the shallow end.",
+   "steps": [
+    {
+     "id": "step.r2-what-was-measured",
+     "title": "What was measured",
+     "brief": "Before either account can be tested, establish the survey itself: how many soundings came back shallow, and what share of the whole that is.",
+     "questionIds": [
+      "q.boss.r2-survey-count",
+      "q.boss.r2-survey-share",
+      "q.boss.r2-survey-percent"
+     ],
+     "skillIds": [
+      "skill.r2-frequency",
+      "skill.r2-proportion",
+      "skill.r2-percentage"
+     ]
+    },
+    {
+     "id": "step.r2-the-middle-each-chose",
+     "title": "The middle they each chose",
+     "brief": "Both parties reported a typical depth and got different numbers. Compute every centre this survey has, then decide which one the soundings support.",
+     "questionIds": [
+      "q.boss.r2-party-a-mean",
+      "q.boss.r2-party-b-median",
+      "q.boss.r2-party-mode",
+      "q.boss.r2-which-centre"
+     ],
+     "skillIds": [
+      "skill.mean",
+      "skill.median",
+      "skill.r2-mode",
+      "skill.choose-measure"
+     ]
+    },
+    {
+     "id": "step.r2-what-the-middle-hides",
+     "title": "What the middle hides",
+     "brief": "The summaries agree far more than the soundings do. Measure the spread, then find the readings a rule — not an opinion — calls unusual.",
+     "questionIds": [
+      "q.boss.r2-survey-range",
+      "q.boss.r2-survey-iqr",
+      "q.boss.r2-survey-fence",
+      "q.boss.r2-survey-outliers"
+     ],
+     "skillIds": [
+      "skill.range",
+      "skill.r2-iqr",
+      "skill.r2-quartiles",
+      "skill.r2-outliers"
+     ]
+    },
+    {
+     "id": "step.r2-two-pictures",
+     "title": "Two pictures of one season",
+     "brief": "Each party drew the same soundings and each picture is accurate. Work out what each one's construction lets a reader see, and what it decides for them.",
+     "questionIds": [
+      "q.boss.r2-wide-bins",
+      "q.boss.r2-narrow-bins",
+      "q.boss.r2-notice-board",
+      "q.boss.r2-honest-picture",
+      "q.boss.r2-box-reading"
+     ],
+     "skillIds": [
+      "skill.r2-histograms",
+      "skill.r2-misleading-graphs",
+      "skill.r2-box-plots"
+     ]
+    },
+    {
+     "id": "step.r2-the-verdict",
+     "title": "The verdict",
+     "brief": "Name the shape of the approach, say which account the soundings support, and choose the picture the harbourmaster should pin up.",
+     "questionIds": [
+      "q.boss.r2-survey-skew",
+      "q.boss.r2-verdict",
+      "q.boss.r2-which-graph"
+     ],
+     "skillIds": [
+      "skill.r2-skew",
+      "skill.r2-comparing-distributions",
+      "skill.r2-choosing-graphs"
+     ]
+    }
+   ]
   }
  ],
  "laboratoryUnlock": {
