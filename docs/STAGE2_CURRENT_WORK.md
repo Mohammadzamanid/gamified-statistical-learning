@@ -112,7 +112,15 @@ None. S2-17 is Complete.
 
 ## Local commit
 
-Recorded in `STAGE2_RECONSTRUCTION_BACKLOG.md` on the S2-17 row.
+`d728e47fd395b67cd252ce7588ae258b08cbb2a3`
+
+## Remote verification
+
+```
+LOCAL_HEAD  = d728e47fd395b67cd252ce7588ae258b08cbb2a3
+REMOTE_HEAD = d728e47fd395b67cd252ce7588ae258b08cbb2a3
+VERIFIED: MATCH
+```
 
 ## Next unit
 
