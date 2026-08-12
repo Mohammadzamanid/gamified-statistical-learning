@@ -45,15 +45,22 @@
       ],
       "regionId": "r.averages-atoll",
       "authoredRecords": 7,
-      "generatorFamilies": 0,
-      "reasoningFamilies": [],
-      "rawCombinations": 0,
-      "validCombinations": 0,
-      "validatedGenerated": 0,
-      "totalAvailable": 7,
+      "generatorFamilies": 4,
+      "reasoningFamilies": [
+        "calculation",
+        "comparison",
+        "error-identification",
+        "recognition"
+      ],
+      "rawCombinations": 322,
+      "validCombinations": 272,
+      "validatedGenerated": 272,
+      "totalAvailable": 279,
       "rejections": {
-        "invalidCombinations": 0,
-        "invalidReasons": {},
+        "invalidCombinations": 50,
+        "invalidReasons": {
+          "the two number of casess are equal": 50
+        },
         "schemaFailures": 0,
         "answerFailures": 0,
         "missingAccessibility": 0,
@@ -62,12 +69,8 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.14285714285714285,
-      "failures": [
-        "no generator families produce for this topic",
-        "7 available interactions, below the required 100",
-        "0 reasoning families represented, below the required 4"
-      ]
+      "largestShapeShare": 0.0035842293906810036,
+      "failures": []
     },
     {
       "skillId": "skill.mean",
@@ -805,15 +808,23 @@
       ],
       "regionId": "r.averages-atoll",
       "authoredRecords": 8,
-      "generatorFamilies": 0,
-      "reasoningFamilies": [],
-      "rawCombinations": 0,
-      "validCombinations": 0,
-      "validatedGenerated": 0,
-      "totalAvailable": 8,
+      "generatorFamilies": 4,
+      "reasoningFamilies": [
+        "comparison",
+        "prediction",
+        "recognition",
+        "visual-interpretation"
+      ],
+      "rawCombinations": 322,
+      "validCombinations": 312,
+      "validatedGenerated": 312,
+      "totalAvailable": 320,
       "rejections": {
-        "invalidCombinations": 0,
-        "invalidReasons": {},
+        "invalidCombinations": 10,
+        "invalidReasons": {
+          "two bars tie for tallest": 2,
+          "the two tallest bars are equal": 8
+        },
         "schemaFailures": 0,
         "answerFailures": 0,
         "missingAccessibility": 0,
@@ -822,12 +833,8 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.125,
-      "failures": [
-        "no generator families produce for this topic",
-        "8 available interactions, below the required 100",
-        "0 reasoning families represented, below the required 4"
-      ]
+      "largestShapeShare": 0.003125,
+      "failures": []
     },
     {
       "skillId": "skill.r2-box-plots",
@@ -838,15 +845,23 @@
       ],
       "regionId": "r.averages-atoll",
       "authoredRecords": 7,
-      "generatorFamilies": 0,
-      "reasoningFamilies": [],
-      "rawCombinations": 0,
-      "validCombinations": 0,
-      "validatedGenerated": 0,
-      "totalAvailable": 7,
+      "generatorFamilies": 4,
+      "reasoningFamilies": [
+        "calculation",
+        "comparison",
+        "recognition",
+        "visual-interpretation"
+      ],
+      "rawCombinations": 322,
+      "validCombinations": 301,
+      "validatedGenerated": 301,
+      "totalAvailable": 308,
       "rejections": {
-        "invalidCombinations": 0,
-        "invalidReasons": {},
+        "invalidCombinations": 21,
+        "invalidReasons": {
+          "two of the three cuts coincide, so the options repeat": 1,
+          "the two boxs are equal": 20
+        },
         "schemaFailures": 0,
         "answerFailures": 0,
         "missingAccessibility": 0,
@@ -855,12 +870,8 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.14285714285714285,
-      "failures": [
-        "no generator families produce for this topic",
-        "7 available interactions, below the required 100",
-        "0 reasoning families represented, below the required 4"
-      ]
+      "largestShapeShare": 0.003246753246753247,
+      "failures": []
     },
     {
       "skillId": "skill.r2-choosing-graphs",
@@ -870,15 +881,22 @@
       ],
       "regionId": "r.averages-atoll",
       "authoredRecords": 6,
-      "generatorFamilies": 0,
-      "reasoningFamilies": [],
-      "rawCombinations": 0,
-      "validCombinations": 0,
-      "validatedGenerated": 0,
-      "totalAvailable": 6,
+      "generatorFamilies": 5,
+      "reasoningFamilies": [
+        "comparison",
+        "error-identification",
+        "real-world-application",
+        "recognition"
+      ],
+      "rawCombinations": 345,
+      "validCombinations": 285,
+      "validatedGenerated": 285,
+      "totalAvailable": 291,
       "rejections": {
-        "invalidCombinations": 0,
-        "invalidReasons": {},
+        "invalidCombinations": 60,
+        "invalidReasons": {
+          "the two number of distinct valuess are equal": 60
+        },
         "schemaFailures": 0,
         "answerFailures": 0,
         "missingAccessibility": 0,
@@ -887,12 +905,8 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.16666666666666666,
-      "failures": [
-        "no generator families produce for this topic",
-        "6 available interactions, below the required 100",
-        "0 reasoning families represented, below the required 4"
-      ]
+      "largestShapeShare": 0.003436426116838488,
+      "failures": []
     },
     {
       "skillId": "skill.r2-comparing-distributions",
@@ -902,15 +916,22 @@
       ],
       "regionId": "r.averages-atoll",
       "authoredRecords": 6,
-      "generatorFamilies": 0,
-      "reasoningFamilies": [],
-      "rawCombinations": 0,
-      "validCombinations": 0,
-      "validatedGenerated": 0,
-      "totalAvailable": 6,
+      "generatorFamilies": 4,
+      "reasoningFamilies": [
+        "comparison",
+        "error-identification",
+        "prediction",
+        "recognition"
+      ],
+      "rawCombinations": 322,
+      "validCombinations": 302,
+      "validatedGenerated": 302,
+      "totalAvailable": 308,
       "rejections": {
-        "invalidCombinations": 0,
-        "invalidReasons": {},
+        "invalidCombinations": 20,
+        "invalidReasons": {
+          "the two middle halfs are equal": 20
+        },
         "schemaFailures": 0,
         "answerFailures": 0,
         "missingAccessibility": 0,
@@ -919,12 +940,8 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.16666666666666666,
-      "failures": [
-        "no generator families produce for this topic",
-        "6 available interactions, below the required 100",
-        "0 reasoning families represented, below the required 4"
-      ]
+      "largestShapeShare": 0.003246753246753247,
+      "failures": []
     },
     {
       "skillId": "skill.r2-dot-plots",
@@ -937,15 +954,22 @@
       ],
       "regionId": "r.averages-atoll",
       "authoredRecords": 9,
-      "generatorFamilies": 0,
-      "reasoningFamilies": [],
-      "rawCombinations": 0,
-      "validCombinations": 0,
-      "validatedGenerated": 0,
-      "totalAvailable": 9,
+      "generatorFamilies": 4,
+      "reasoningFamilies": [
+        "comparison",
+        "error-identification",
+        "recognition",
+        "visual-interpretation"
+      ],
+      "rawCombinations": 322,
+      "validCombinations": 145,
+      "validatedGenerated": 145,
+      "totalAvailable": 154,
       "rejections": {
-        "invalidCombinations": 0,
-        "invalidReasons": {},
+        "invalidCombinations": 177,
+        "invalidReasons": {
+          "the two tallest columns are equal": 177
+        },
         "schemaFailures": 0,
         "answerFailures": 0,
         "missingAccessibility": 0,
@@ -954,12 +978,8 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.1111111111111111,
-      "failures": [
-        "no generator families produce for this topic",
-        "9 available interactions, below the required 100",
-        "0 reasoning families represented, below the required 4"
-      ]
+      "largestShapeShare": 0.006493506493506494,
+      "failures": []
     },
     {
       "skillId": "skill.r2-frequency",
@@ -1009,15 +1029,22 @@
       ],
       "regionId": "r.averages-atoll",
       "authoredRecords": 8,
-      "generatorFamilies": 0,
-      "reasoningFamilies": [],
-      "rawCombinations": 0,
-      "validCombinations": 0,
-      "validatedGenerated": 0,
-      "totalAvailable": 8,
+      "generatorFamilies": 4,
+      "reasoningFamilies": [
+        "calculation",
+        "comparison",
+        "prediction",
+        "recognition"
+      ],
+      "rawCombinations": 322,
+      "validCombinations": 299,
+      "validatedGenerated": 299,
+      "totalAvailable": 307,
       "rejections": {
-        "invalidCombinations": 0,
-        "invalidReasons": {},
+        "invalidCombinations": 23,
+        "invalidReasons": {
+          "the two spread across intervalss are equal": 23
+        },
         "schemaFailures": 0,
         "answerFailures": 0,
         "missingAccessibility": 0,
@@ -1026,12 +1053,8 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.125,
-      "failures": [
-        "no generator families produce for this topic",
-        "8 available interactions, below the required 100",
-        "0 reasoning families represented, below the required 4"
-      ]
+      "largestShapeShare": 0.003257328990228013,
+      "failures": []
     },
     {
       "skillId": "skill.r2-iqr",
@@ -1079,15 +1102,24 @@
       ],
       "regionId": "r.averages-atoll",
       "authoredRecords": 7,
-      "generatorFamilies": 0,
-      "reasoningFamilies": [],
-      "rawCombinations": 0,
-      "validCombinations": 0,
-      "validatedGenerated": 0,
-      "totalAvailable": 7,
+      "generatorFamilies": 4,
+      "reasoningFamilies": [
+        "comparison",
+        "error-identification",
+        "prediction",
+        "recognition"
+      ],
+      "rawCombinations": 322,
+      "validCombinations": 316,
+      "validatedGenerated": 316,
+      "totalAvailable": 323,
       "rejections": {
-        "invalidCombinations": 0,
-        "invalidReasons": {},
+        "invalidCombinations": 6,
+        "invalidReasons": {
+          "the readings do not admit a baseline above zero that still shows every bar": 2,
+          "no baseline above zero leaves every bar visible": 2,
+          "the two vulnerability to a raised baselines are equal": 2
+        },
         "schemaFailures": 0,
         "answerFailures": 0,
         "missingAccessibility": 0,
@@ -1096,12 +1128,8 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.14285714285714285,
-      "failures": [
-        "no generator families produce for this topic",
-        "7 available interactions, below the required 100",
-        "0 reasoning families represented, below the required 4"
-      ]
+      "largestShapeShare": 0.0030959752321981426,
+      "failures": []
     },
     {
       "skillId": "skill.r2-mode",
@@ -1150,15 +1178,22 @@
       ],
       "regionId": "r.averages-atoll",
       "authoredRecords": 6,
-      "generatorFamilies": 0,
-      "reasoningFamilies": [],
-      "rawCombinations": 0,
-      "validCombinations": 0,
-      "validatedGenerated": 0,
-      "totalAvailable": 6,
+      "generatorFamilies": 4,
+      "reasoningFamilies": [
+        "calculation",
+        "comparison",
+        "error-identification",
+        "prediction"
+      ],
+      "rawCombinations": 322,
+      "validCombinations": 319,
+      "validatedGenerated": 319,
+      "totalAvailable": 325,
       "rejections": {
-        "invalidCombinations": 0,
-        "invalidReasons": {},
+        "invalidCombinations": 3,
+        "invalidReasons": {
+          "the two distance past the upper fences are equal": 3
+        },
         "schemaFailures": 0,
         "answerFailures": 0,
         "missingAccessibility": 0,
@@ -1167,12 +1202,8 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.16666666666666666,
-      "failures": [
-        "no generator families produce for this topic",
-        "6 available interactions, below the required 100",
-        "0 reasoning families represented, below the required 4"
-      ]
+      "largestShapeShare": 0.003076923076923077,
+      "failures": []
     },
     {
       "skillId": "skill.r2-percentage",
@@ -1330,15 +1361,26 @@
       ],
       "regionId": "r.averages-atoll",
       "authoredRecords": 7,
-      "generatorFamilies": 0,
-      "reasoningFamilies": [],
-      "rawCombinations": 0,
-      "validCombinations": 0,
-      "validatedGenerated": 0,
-      "totalAvailable": 7,
+      "generatorFamilies": 5,
+      "reasoningFamilies": [
+        "calculation",
+        "comparison",
+        "error-identification",
+        "recognition",
+        "visual-interpretation"
+      ],
+      "rawCombinations": 248,
+      "validCombinations": 200,
+      "validatedGenerated": 200,
+      "totalAvailable": 207,
       "rejections": {
-        "invalidCombinations": 0,
-        "invalidReasons": {},
+        "invalidCombinations": 48,
+        "invalidReasons": {
+          "two points share this horizontal position, so naming it does not name a point": 16,
+          "a cloud with no drift gives nobody a cause to claim": 2,
+          "no point sits above this level, so the question has a trivial answer": 11,
+          "both clouds drift the same way, so there is nothing to choose": 19
+        },
         "schemaFailures": 0,
         "answerFailures": 0,
         "missingAccessibility": 0,
@@ -1347,12 +1389,8 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.14285714285714285,
-      "failures": [
-        "no generator families produce for this topic",
-        "7 available interactions, below the required 100",
-        "0 reasoning families represented, below the required 4"
-      ]
+      "largestShapeShare": 0.03864734299516908,
+      "failures": []
     },
     {
       "skillId": "skill.r2-skew",
@@ -1363,15 +1401,24 @@
       ],
       "regionId": "r.averages-atoll",
       "authoredRecords": 7,
-      "generatorFamilies": 0,
-      "reasoningFamilies": [],
-      "rawCombinations": 0,
-      "validCombinations": 0,
-      "validatedGenerated": 0,
-      "totalAvailable": 7,
+      "generatorFamilies": 4,
+      "reasoningFamilies": [
+        "comparison",
+        "prediction",
+        "recognition",
+        "visual-interpretation"
+      ],
+      "rawCombinations": 322,
+      "validCombinations": 302,
+      "validatedGenerated": 302,
+      "totalAvailable": 309,
       "rejections": {
-        "invalidCombinations": 0,
-        "invalidReasons": {},
+        "invalidCombinations": 20,
+        "invalidReasons": {
+          "the mean sits on the median, so there is no tail to name": 2,
+          "the two gap between mean and medians are equal": 16,
+          "no tail to see": 2
+        },
         "schemaFailures": 0,
         "answerFailures": 0,
         "missingAccessibility": 0,
@@ -1380,12 +1427,8 @@
         "nearDuplicates": 0
       },
       "unreachableQuestions": [],
-      "largestShapeShare": 0.14285714285714285,
-      "failures": [
-        "no generator families produce for this topic",
-        "7 available interactions, below the required 100",
-        "0 reasoning families represented, below the required 4"
-      ]
+      "largestShapeShare": 0.003236245954692557,
+      "failures": []
     },
     {
       "skillId": "skill.r2-standard-deviation",

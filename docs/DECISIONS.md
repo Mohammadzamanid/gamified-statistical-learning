@@ -648,3 +648,31 @@ the lesson's own published figures, and a probe reverting the bench to the sampl
 
 One consequence, taken deliberately: a single reading now reports a variance of **0** rather than being withheld.
 Under the population definition that is the definition's own answer, not a stand-in for a missing one. (S2-17)
+
+**D-061 — S2-17 is Complete: every topic in the curriculum meets scope §4, and the same three mistakes were made in
+every cycle.**
+Four cycles, four corpora-sharing modules (D-058), and the measured figure moved **17 → 20 → 24 → 30 → 41 of 41**.
+The smallest topic carries 120 validated available interactions against a floor of 100, every topic spans at least
+four reasoning families, and the largest single-shape share anywhere is 37% against a 50% ceiling.
+
+What is worth recording is not the number but the repetition. Three mistakes recurred across cycles despite being
+written down each time:
+
+ - **A family stating a response of the wrong kind** — a number where the question publishes a choice. Three times,
+   in three modules; 24, then 72 candidates rejected. Caught every time, and only because `expectedResponse` is
+   stated rather than read back out of the question (D-020).
+ - **A misconception tag that cannot fire where it was put** — on a correct option (twice), or with a detector that
+   reads a number placed on a choice question (three times). The rule is in D-025 and D-057 and was still got wrong
+   in every cycle after the one that wrote it.
+ - **An answer and its check sharing a route.** `skewOf` and `directionOf` fed both the question's answer and the
+   family's expected response, so probes reversing either failed nothing — the third and fourth instances of D-059.
+   Both are pinned to hand-worked cases now.
+
+The lesson for whoever writes the next generator module: these are not carelessness that more care would prevent.
+They are the shapes this kind of code fails in, and the reason each was caught is that a check exists for it. Write
+the check first if you are adding a new shape.
+
+One audit was rewritten rather than deleted when its subject emptied. "A topic with zero generators must appear in
+the report as a failure" had no shipped row left to exercise it, so instead of passing over an empty list it now
+proves the rule against a report built from **no** families at all, where every topic is ungenerated. That is D-048's
+habit applied to a check rather than to a temporary rule. (S2-17)

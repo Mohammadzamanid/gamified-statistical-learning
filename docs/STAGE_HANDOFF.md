@@ -30,21 +30,21 @@ after Stage 1 was lost because commits were never pushed to a durable remote. Re
 | Default branch | `main` |
 | Pristine Stage 1 import | `7add4bc` — pushed and remote-verified |
 | Baseline docs + CI | `1b0a5dd` — pushed and remote-verified |
-| Last unit completed | **S2-16** — the Region 2 misconception library. **S2-17 is in progress**: 3 of Region 2's 24 topics now meet §4 (hashes on the S2-17 backlog row) |
+| Last unit completed | **S2-17** — Region 2 validated content expansion, in four cycles. **Every topic in the curriculum now meets scope §4** |
 | Head of `main` | read it live: `git rev-parse HEAD` vs `git ls-remote origin refs/heads/main` — these must match |
 | Milestone snapshot commit | `d4e250434c465f85e4307a226a9af2cbc9788c17` — the commit the exports were built from |
 | Stage tag | `stage-1-baseline` — **created locally, NOT on GitHub** (unit R-00d, blocked; see §2.1) |
 | Milestone exports | `../gsl-exports/` — source ZIP + git bundle + manifest + SHA-256 checksums |
 | Working tree | clean |
 | Node / npm used | v22.22.2 / 10.9.7 |
-| Test suite | **660 tests / 47 files**, all passing (Stage 1 baseline was 73 / 14) |
+| Test suite | **662 tests / 47 files**, all passing (Stage 1 baseline was 73 / 14) |
 | Build | passing (**873.56 kB, 224.47 kB gzip**; baseline was 285.73 kB / 83.82 kB) |
 | Source modified since baseline | S2-01 … S2-08 — achievements + region completion, three new interactions, the enforced interaction audit, the review queue, the Region 1 topic architecture, and all 17 Region 1 lessons |
 | Curriculum | 2 regions · **10 modules** · **40 lessons** · **42 skills** · **290 questions** (baseline 2/2/3/6/14) |
 | Lessons Complete to scope §5 | **40** — all 17 Region 1 topic lessons, all 20 Region 2 lessons, and the 3 Stage 1 lessons re-cut into Region 2. **No skeletons in either region** |
 | Misconceptions / remediations | **40 / 39** (baseline 8 / 7) — every one reachable, and each held to the nine declared parts (D-056) |
-| Validated generated interactions | **9,836**, available to spaced review (baseline 0) |
-| Topics meeting scope §4 | **30 of 41** — every Region 1 topic, plus Region 2's counts, centre and spread modules (S2-17 cycles 1–3). The other 11 Region 2 topics still have no generators |
+| Validated generated interactions | **12,889**, available to spaced review (baseline 0) |
+| Topics meeting scope §4 | **41 of 41** — every topic in the curriculum (S2-17, four cycles). Smallest topic 120 interactions against a floor of 100 |
 | Save schema version | **4** (baseline was 1) — `1->2` adds `reviewSession`, `2->3` adds `investigationProgress`, `3->4` adds `savedExperiments`. The chain is asserted against this number (D-055) |
 | Interaction types implemented | **14 of 17** (baseline 11); still stubbed: `formula-construction`, `simulation-prediction`, `confidence-rating` |
 | Stage 2 | **in progress** — see `STAGE2_RECONSTRUCTION_SCOPE.md`, `STAGE2_RECONSTRUCTION_BACKLOG.md`, `STAGE2_CURRENT_WORK.md` |
@@ -80,7 +80,7 @@ git status
 git rev-parse HEAD
 git ls-remote origin refs/heads/main | awk '{print $1}'   # must match
 npm ci
-npm test            # must stay green: 660/660
+npm test            # must stay green: 662/662
 npm run typecheck && npm run lint
 npm run dev         # renderer + electron dev
 ```
@@ -105,35 +105,35 @@ branch/tag deletion) are forbidden without explicit owner permission. See `REMOT
 
 ## 5. Next unit
 
-**S2-17 continued — the shape and graph topics.** Outliers, skew, the six graph topics, comparing distributions,
-misleading graphs, and data literacy: **11 of Region 2's 24** remain.
+**S2-18 — the Region 2 boss investigation.** Its criteria: dataset inspection, summary selection, graph selection,
+misleading-presentation detection, outlier reasoning, distribution comparison, evidence-based conclusion; save and
+resume, adaptive support, remediation, an achievement, and Stage 2 completion.
 
-**Three cycles in: 13 topics done, and the repository-wide figure has gone 17 → 20 → 24 → 30 of 41.** The pattern is
-one corpus per module (D-058), and cycle 3 reused cycle 2's outright — the same catch list has a mean and a range, a
-median and quartiles. The graph topics can reuse it again: a dot plot, a box plot and a histogram are three pictures
-of one list, exactly as its summaries were three readings of it.
+**Everything it draws on now exists.** `docs/REGION2_BOSS_SPEC.md` maps its five stages onto the module sequence, and
+every skill all five stages need is written, practised and generated for. Region 1's boss
+(`tests/audit/investigation-structure.test.ts`, `tests/integration/region-completion.test.ts`) is the worked example
+to copy — read it before designing, since save/resume for investigations already exists and has a schema behind it.
 
-**Cycle 3's finding is the one to carry forward. Deciding which convention a generator answers by is how conventions
-get audited.** Choosing the variance denominator for the spread families exposed that the laboratory had reported the
-**sample** variance since S2-15 while `l.r2-variance` teaches the **population** one — D-045's defect in a second
-measure, shipped and unnoticed (D-060). When you write a family for a measure, look up what the lesson publishes and
-answer that; if the app disagrees anywhere, the app is what is wrong.
+**S2-17 is Complete and every topic meets §4 — 41 of 41.** Four cycles, one corpus per module (D-058): season logs
+for counts, catch lists shared by centre, spread and pictures, paired logs for the scatterplots. 12,889 validated
+generated interactions.
 
-**Read the accumulated corrections before writing a family.** Every cycle has repeated at least one of them:
+**Read D-061 before writing any generator again.** Three mistakes recurred in *every* cycle despite being written
+down each time: a family stating a response of the wrong kind; a misconception tag that cannot fire where it was put;
+and an answer sharing a route with its own check. Each was caught only because a check exists for it.
 
-- A misconception tag belongs on a **wrong** option — got wrong twice, in two modules.
-- And only where its **detector** can fire: `confused-statistic` reads a number and cannot fire on a choice (D-025).
-- A declared trap must differ from the correct answer. At the 50th percentile, counting above and counting below give
-  the same number, so the trap is declared conditionally.
-- Do not reject a candidate for a defect in its *trap* — declare the trap conditionally and keep the question.
-- Look the misconception id up. `mc.variance-not-squared` does not exist; the real one is
-  `mc.distances-average-to-spread`.
+**The unit's largest finding was not about its own topics (D-060).** Choosing which variance convention the
+generators should answer by exposed that the laboratory had reported the *sample* variance since S2-15 while the
+lessons teach the *population* one. When you have to pick a convention, look up what the lesson publishes; if the app
+disagrees anywhere, the app is what is wrong.
 
-**Two agreeing routes prove agreement, not correctness (D-059).** Pin the arithmetic to hand-worked numbers in
-`tests/unit/centre-generators.test.ts`, which now covers both the centre and spread generators.
+**Two conventions are settled and enforced.** Quartiles are the median of each half (D-045); the variance divides by
+how many readings there are (D-060). Both are pinned to the lessons' own published figures in
+`tests/unit/centre-generators.test.ts` and in the laboratory tests.
 
-**A topic that passes §4 must be declared in `tests/helpers/complete-topics.ts`, and one that is declared must pass.**
-Both directions are checked.
+**When a check's subject empties, rewrite it rather than let it pass over nothing.** "A topic with zero generators
+must be reported as a failure" has no shipped row left to exercise it, so it is proved against a report built from no
+families at all. That is D-048's habit applied to a check.
 
 ### Region 2's architecture, and two rules it added
 

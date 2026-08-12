@@ -10,6 +10,7 @@ import { arithmeticFamilies, type OperationSpec } from "./arithmetic";
 import { fractionText, partsFamilies, type Form, type Part, type PartsTopic } from "./parts";
 import { centreFamilies } from "./centre";
 import { countsFamilies } from "./counts";
+import { pictureFamilies } from "./pictures";
 import { spreadFamilies } from "./spread";
 import { dataFamilies } from "./data";
 import { positionFamilies } from "./position";
@@ -291,6 +292,7 @@ export function allGeneratorFamilies(): GeneratorFamily[] {
     ...dataFamilies(),
     ...countsFamilies(),
     ...centreFamilies(),
-    ...spreadFamilies()
+    ...spreadFamilies(),
+    ...pictureFamilies()
   ];
 }

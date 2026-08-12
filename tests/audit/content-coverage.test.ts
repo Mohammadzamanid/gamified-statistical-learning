@@ -106,9 +106,25 @@ describe("the report is built from the curriculum, not from the generators", () 
   it("reports topics with zero generators as failures rather than omitting them", () => {
     // The scope names this exactly: "A topic with zero generators must appear in
     // the report as a failure, not vanish from it."
-    const ungenerated = reports.filter((r) => r.generatorFamilies === 0);
-    expect(ungenerated.length, "every topic now has a generator — update this check").toBeGreaterThan(0);
-    for (const r of ungenerated) {
+    //
+    // As of S2-17 cycle 4 **every** topic has generators, so the shipped report
+    // has no row left to exercise the rule with. Rather than let the check pass
+    // over an empty list — the vacuous-guard trap D-048 named — the rule is
+    // proved against a report built from *no* families at all, where every topic
+    // is ungenerated and every row must say so.
+    expect(
+      reports.filter((r) => r.generatorFamilies === 0).length,
+      "a topic has lost its generators — the rule below is about to matter again"
+    ).toBe(0);
+
+    const withoutGenerators = buildCoverageReport({
+      curriculum: content.curriculum,
+      authored: [...content.questions.values()],
+      families: [],
+      results: []
+    });
+    expect(withoutGenerators.length).toBe(reports.length);
+    for (const r of withoutGenerators) {
       expect(r.failures.join(" "), `${r.skillId} has no generators but does not say so`).toContain(
         "no generator families"
       );

@@ -36,6 +36,7 @@ import {
   varianceByMomentDifference,
   varianceOf
 } from "../../src/content/generators/spread";
+import { directionOf, skewOf } from "../../src/content/generators/pictures";
 
 const byId = new Map(LISTS.map((l) => [l.id, l]));
 
@@ -154,5 +155,37 @@ describe("the spread generators compute what the lessons teach", () => {
     for (const list of LISTS) {
       expect(rangeByWalking(list.values), `${list.id}`).toBe(rangeOf(list.values));
     }
+  });
+});
+
+/**
+ * S2-17 cycle 4: the picture generators' readings, pinned the same way.
+ *
+ * Two probes failed nothing for the third time in this unit, and for the same
+ * reason both earlier ones did: `skewOf` and `directionOf` feed *both* the
+ * question's answer and the family's expected response, so reversing either
+ * flips them together and the validator sees perfect agreement (D-059).
+ *
+ * Hand-worked cases are the remedy. These are read off the corpus by eye and
+ * written as constants, so a reversed reading fails here by name.
+ */
+describe("the picture generators read shape and direction correctly", () => {
+  it("names the tail from the mean's position, not the bunch's", () => {
+    // Skua 10 12 12 14 32: mean 16, median 12 — the 32 drags the mean above the
+    // median, so the tail is on the high side.
+    expect(skewOf({ id: "x", boat: "b", unit: "crates", occasion: "five trips", values: [10, 12, 12, 14, 32] })).toBe("right");
+    // Mirror image: one very low reading pulls the mean below the median.
+    expect(skewOf({ id: "x", boat: "b", unit: "crates", occasion: "five trips", values: [1, 18, 19, 20, 21] })).toBe("left");
+    // Symmetric: mean and median coincide.
+    expect(skewOf({ id: "x", boat: "b", unit: "crates", occasion: "five trips", values: [4, 6, 8, 10, 12] })).toBe("symmetric");
+  });
+
+  it("reads a cloud's drift from the points rather than from a label", () => {
+    const rising = { id: "r", boat: "b", xName: "x", yName: "y", xUnit: "u", yUnit: "v", points: [[1, 1], [2, 3], [3, 5], [4, 8]] } as const;
+    const falling = { id: "f", boat: "b", xName: "x", yName: "y", xUnit: "u", yUnit: "v", points: [[1, 9], [2, 7], [3, 4], [4, 2]] } as const;
+    const flat = { id: "n", boat: "b", xName: "x", yName: "y", xUnit: "u", yUnit: "v", points: [[1, 5], [2, 3], [3, 6], [4, 4]] } as const;
+    expect(directionOf(rising)).toBe("rising");
+    expect(directionOf(falling)).toBe("falling");
+    expect(directionOf(flat)).toBe("neither");
   });
 });

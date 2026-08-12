@@ -60,5 +60,18 @@ export const COMPLETE_TOPICS: readonly string[] = [
   "skill.r2-percentiles",
   "skill.r2-iqr",
   "skill.r2-variance",
-  "skill.r2-standard-deviation"
+  "skill.r2-standard-deviation",
+  // Region 2's pictures, shape and literacy topics (S2-17 cycle 4). With these,
+  // **every topic in the curriculum** meets §4 — 41 of 41.
+  "skill.r2-bar-charts",
+  "skill.r2-histograms",
+  "skill.r2-dot-plots",
+  "skill.r2-box-plots",
+  "skill.r2-scatterplots",
+  "skill.r2-choosing-graphs",
+  "skill.r2-outliers",
+  "skill.r2-skew",
+  "skill.r2-comparing-distributions",
+  "skill.r2-misleading-graphs",
+  "skill.data-literacy"
 ];

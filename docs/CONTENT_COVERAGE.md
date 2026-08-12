@@ -4,14 +4,14 @@
 
 Topics come from the **curriculum graph**, never from the set of generator modules (`STAGE2_RECONSTRUCTION_SCOPE.md` §4). A topic with no generators appears here as a failure rather than being omitted.
 
-**30 of 41 topics** meet §4: at least 100 validated available interactions spanning at least 4 reasoning families, with nothing unreachable.
+**41 of 41 topics** meet §4: at least 100 validated available interactions spanning at least 4 reasoning families, with nothing unreachable.
 
 ## The seven metrics, per topic
 
 | Topic | Authored records | Generator families | Reasoning families | Raw combinations | Valid combinations | Validated generated | **Total available** | Meets §4 |
 |---|---:|---:|---:|---:|---:|---:|---:|---|
 | Choosing measures (`skill.choose-measure`) | 10 | 4 | 4 | 253 | 253 | 253 | **263** | Yes |
-| Data literacy (`skill.data-literacy`) | 7 | 0 | 0 | 0 | 0 | 0 | **7** | **No** |
+| Data literacy (`skill.data-literacy`) | 7 | 4 | 4 | 322 | 272 | 272 | **279** | Yes |
 | Mean (`skill.mean`) | 15 | 4 | 4 | 138 | 105 | 105 | **120** | Yes |
 | Median (`skill.median`) | 11 | 4 | 4 | 322 | 272 | 272 | **283** | Yes |
 | Addition (`skill.r1-addition`) | 9 | 8 | 8 | 800 | 800 | 800 | **809** | Yes |
@@ -31,23 +31,23 @@ Topics come from the **curriculum graph**, never from the set of generator modul
 | Reading tables (`skill.r1-tables`) | 13 | 5 | 5 | 228 | 228 | 225 | **238** | Yes |
 | Kinds of variable (`skill.r1-variable-kinds`) | 8 | 5 | 5 | 240 | 228 | 208 | **216** | Yes |
 | Variables (`skill.r1-variables`) | 8 | 5 | 5 | 272 | 232 | 228 | **236** | Yes |
-| Bar charts (`skill.r2-bar-charts`) | 8 | 0 | 0 | 0 | 0 | 0 | **8** | **No** |
-| Box plots (`skill.r2-box-plots`) | 7 | 0 | 0 | 0 | 0 | 0 | **7** | **No** |
-| Choosing a graph (`skill.r2-choosing-graphs`) | 6 | 0 | 0 | 0 | 0 | 0 | **6** | **No** |
-| Comparing distributions (`skill.r2-comparing-distributions`) | 6 | 0 | 0 | 0 | 0 | 0 | **6** | **No** |
-| Dot plots (`skill.r2-dot-plots`) | 9 | 0 | 0 | 0 | 0 | 0 | **9** | **No** |
+| Bar charts (`skill.r2-bar-charts`) | 8 | 4 | 4 | 322 | 312 | 312 | **320** | Yes |
+| Box plots (`skill.r2-box-plots`) | 7 | 4 | 4 | 322 | 301 | 301 | **308** | Yes |
+| Choosing a graph (`skill.r2-choosing-graphs`) | 6 | 5 | 4 | 345 | 285 | 285 | **291** | Yes |
+| Comparing distributions (`skill.r2-comparing-distributions`) | 6 | 4 | 4 | 322 | 302 | 302 | **308** | Yes |
+| Dot plots (`skill.r2-dot-plots`) | 9 | 4 | 4 | 322 | 145 | 145 | **154** | Yes |
 | Frequency (`skill.r2-frequency`) | 8 | 5 | 5 | 120 | 116 | 116 | **124** | Yes |
-| Histograms (`skill.r2-histograms`) | 8 | 0 | 0 | 0 | 0 | 0 | **8** | **No** |
+| Histograms (`skill.r2-histograms`) | 8 | 4 | 4 | 322 | 299 | 299 | **307** | Yes |
 | Interquartile range (`skill.r2-iqr`) | 8 | 4 | 4 | 322 | 302 | 302 | **310** | Yes |
-| Misleading graphs (`skill.r2-misleading-graphs`) | 7 | 0 | 0 | 0 | 0 | 0 | **7** | **No** |
+| Misleading graphs (`skill.r2-misleading-graphs`) | 7 | 4 | 4 | 322 | 316 | 316 | **323** | Yes |
 | Mode (`skill.r2-mode`) | 8 | 4 | 4 | 345 | 285 | 285 | **293** | Yes |
-| Outliers (`skill.r2-outliers`) | 6 | 0 | 0 | 0 | 0 | 0 | **6** | **No** |
+| Outliers (`skill.r2-outliers`) | 6 | 4 | 4 | 322 | 319 | 319 | **325** | Yes |
 | Percentage of a dataset (`skill.r2-percentage`) | 8 | 5 | 5 | 165 | 135 | 135 | **143** | Yes |
 | Percentiles (`skill.r2-percentiles`) | 6 | 4 | 4 | 463 | 365 | 365 | **371** | Yes |
 | Proportion of a dataset (`skill.r2-proportion`) | 8 | 5 | 5 | 165 | 135 | 135 | **143** | Yes |
 | Quartiles (`skill.r2-quartiles`) | 10 | 4 | 4 | 322 | 315 | 315 | **325** | Yes |
-| Scatterplots (`skill.r2-scatterplots`) | 7 | 0 | 0 | 0 | 0 | 0 | **7** | **No** |
-| Skew (`skill.r2-skew`) | 7 | 0 | 0 | 0 | 0 | 0 | **7** | **No** |
+| Scatterplots (`skill.r2-scatterplots`) | 7 | 5 | 5 | 248 | 200 | 200 | **207** | Yes |
+| Skew (`skill.r2-skew`) | 7 | 4 | 4 | 322 | 302 | 302 | **309** | Yes |
 | Standard-deviation intuition (`skill.r2-standard-deviation`) | 6 | 4 | 4 | 322 | 318 | 318 | **324** | Yes |
 | Variance intuition (`skill.r2-variance`) | 9 | 5 | 5 | 345 | 329 | 329 | **338** | Yes |
 | Range (`skill.range`) | 8 | 4 | 4 | 322 | 299 | 299 | **307** | Yes |
@@ -57,7 +57,7 @@ Topics come from the **curriculum graph**, never from the set of generator modul
 | Topic | Invalid combinations | Schema failures | Correct-answer failures | Missing a11y | Missing misconception mapping | Exact duplicates | Near duplicates | Unreachable |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
 | Choosing measures | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0% |
-| Data literacy | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 14% |
+| Data literacy | 50 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0% |
 | Mean | 33 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2% |
 | Median | 50 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0% |
 | Addition | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 10% |
@@ -77,28 +77,32 @@ Topics come from the **curriculum graph**, never from the set of generator modul
 | Reading tables | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 0 | 13% |
 | Kinds of variable | 12 | 0 | 0 | 0 | 0 | 0 | 20 | 0 | 0% |
 | Variables | 40 | 0 | 0 | 0 | 0 | 0 | 4 | 0 | 14% |
-| Bar charts | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 13% |
-| Box plots | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 14% |
-| Choosing a graph | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 17% |
-| Comparing distributions | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 17% |
-| Dot plots | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 11% |
+| Bar charts | 10 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0% |
+| Box plots | 21 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0% |
+| Choosing a graph | 60 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0% |
+| Comparing distributions | 20 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0% |
+| Dot plots | 177 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1% |
 | Frequency | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1% |
-| Histograms | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 13% |
+| Histograms | 23 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0% |
 | Interquartile range | 20 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0% |
-| Misleading graphs | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 14% |
+| Misleading graphs | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0% |
 | Mode | 60 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0% |
-| Outliers | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 17% |
+| Outliers | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0% |
 | Percentage of a dataset | 30 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2% |
 | Percentiles | 98 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2% |
 | Proportion of a dataset | 30 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2% |
 | Quartiles | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0% |
-| Scatterplots | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 14% |
-| Skew | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 14% |
+| Scatterplots | 48 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 4% |
+| Skew | 20 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0% |
 | Standard-deviation intuition | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0% |
 | Variance intuition | 16 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0% |
 | Range | 23 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0% |
 
 ## Why combinations were rejected
+
+**Data literacy**
+
+- 50 x the two number of casess are equal
 
 **Mean**
 
@@ -188,15 +192,47 @@ Topics come from the **curriculum graph**, never from the set of generator modul
 - 32 x with one varying column there is no counting step before the multiplication
 - 8 x too few columns for a constant and more than one variable
 
+**Bar charts**
+
+- 8 x the two tallest bars are equal
+- 2 x two bars tie for tallest
+
+**Box plots**
+
+- 20 x the two boxs are equal
+- 1 x two of the three cuts coincide, so the options repeat
+
+**Choosing a graph**
+
+- 60 x the two number of distinct valuess are equal
+
+**Comparing distributions**
+
+- 20 x the two middle halfs are equal
+
+**Dot plots**
+
+- 177 x the two tallest columns are equal
+
 **Frequency**
 
 - 2 x another category has the same column height, so two options read identically
 - 1 x this category's frequency equals the number of categories, so the mistake is invisible
 - 1 x two categories tie for most frequent, so there is no single answer
 
+**Histograms**
+
+- 23 x the two spread across intervalss are equal
+
 **Interquartile range**
 
 - 20 x the two middle halves are the same width
+
+**Misleading graphs**
+
+- 2 x the readings do not admit a baseline above zero that still shows every bar
+- 2 x no baseline above zero leaves every bar visible
+- 2 x the two vulnerability to a raised baselines are equal
 
 **Mode**
 
@@ -204,6 +240,10 @@ Topics come from the **curriculum graph**, never from the set of generator modul
 - 13 x the two modes are the same figure
 - 2 x this log has more than one mode, so a single-answer question would be wrong
 - 2 x two columns tie for tallest, so no single column is the mode
+
+**Outliers**
+
+- 3 x the two distance past the upper fences are equal
 
 **Percentage of a dataset**
 
@@ -225,6 +265,19 @@ Topics come from the **curriculum graph**, never from the set of generator modul
 
 - 7 x the two third quartiles are equal, so there is no greater one
 
+**Scatterplots**
+
+- 19 x both clouds drift the same way, so there is nothing to choose
+- 16 x two points share this horizontal position, so naming it does not name a point
+- 11 x no point sits above this level, so the question has a trivial answer
+- 2 x a cloud with no drift gives nobody a cause to claim
+
+**Skew**
+
+- 16 x the two gap between mean and medians are equal
+- 2 x the mean sits on the median, so there is no tail to name
+- 2 x no tail to see
+
 **Standard-deviation intuition**
 
 - 4 x the two standard deviations agree to two places
@@ -242,7 +295,7 @@ Topics come from the **curriculum graph**, never from the set of generator modul
 ## Reasoning families represented
 
 - **Choosing measures** — 4: Comparison · Error identification · Real-world application · Recognition
-- **Data literacy** — 0: _none_
+- **Data literacy** — 4: Calculation · Comparison · Error identification · Recognition
 - **Mean** — 4: Calculation · Error identification · Multi-step reasoning · Prediction
 - **Median** — 4: Calculation · Comparison · Error identification · Ordering
 - **Addition** — 8: Calculation · Comparison · Error identification · Irrelevant-information filtering · Multi-step reasoning · Ordering · Real-world application · Recognition
@@ -262,70 +315,27 @@ Topics come from the **curriculum graph**, never from the set of generator modul
 - **Reading tables** — 5: Comparison · Error identification · Multi-step reasoning · Transfer to an unfamiliar context · Visual interpretation
 - **Kinds of variable** — 5: Comparison · Error identification · Recognition · Transfer to an unfamiliar context · Visual interpretation
 - **Variables** — 5: Comparison · Error identification · Multi-step reasoning · Recognition · Transfer to an unfamiliar context
-- **Bar charts** — 0: _none_
-- **Box plots** — 0: _none_
-- **Choosing a graph** — 0: _none_
-- **Comparing distributions** — 0: _none_
-- **Dot plots** — 0: _none_
+- **Bar charts** — 4: Comparison · Prediction · Recognition · Visual interpretation
+- **Box plots** — 4: Calculation · Comparison · Recognition · Visual interpretation
+- **Choosing a graph** — 4: Comparison · Error identification · Real-world application · Recognition
+- **Comparing distributions** — 4: Comparison · Error identification · Prediction · Recognition
+- **Dot plots** — 4: Comparison · Error identification · Recognition · Visual interpretation
 - **Frequency** — 5: Calculation · Comparison · Error identification · Multi-step reasoning · Visual interpretation
-- **Histograms** — 0: _none_
+- **Histograms** — 4: Calculation · Comparison · Prediction · Recognition
 - **Interquartile range** — 4: Comparison · Error identification · Multi-step reasoning · Recognition
-- **Misleading graphs** — 0: _none_
+- **Misleading graphs** — 4: Comparison · Error identification · Prediction · Recognition
 - **Mode** — 4: Calculation · Comparison · Recognition · Visual interpretation
-- **Outliers** — 0: _none_
+- **Outliers** — 4: Calculation · Comparison · Error identification · Prediction
 - **Percentage of a dataset** — 5: Calculation · Comparison · Multi-step reasoning · Real-world application · Representation conversion
 - **Percentiles** — 4: Calculation · Comparison · Prediction · Recognition
 - **Proportion of a dataset** — 5: Calculation · Comparison · Multi-step reasoning · Real-world application · Representation conversion
 - **Quartiles** — 4: Calculation · Comparison · Multi-step reasoning · Recognition
-- **Scatterplots** — 0: _none_
-- **Skew** — 0: _none_
+- **Scatterplots** — 5: Calculation · Comparison · Error identification · Recognition · Visual interpretation
+- **Skew** — 4: Comparison · Prediction · Recognition · Visual interpretation
 - **Standard-deviation intuition** — 4: Calculation · Comparison · Real-world application · Recognition
 - **Variance intuition** — 5: Calculation · Comparison · Error identification · Prediction · Recognition
 - **Range** — 4: Calculation · Comparison · Error identification · Prediction
 
 ## Topics that do not meet §4
 
-- **Data literacy** (`skill.data-literacy`)
-  - no generator families produce for this topic
-  - 7 available interactions, below the required 100
-  - 0 reasoning families represented, below the required 4
-- **Bar charts** (`skill.r2-bar-charts`)
-  - no generator families produce for this topic
-  - 8 available interactions, below the required 100
-  - 0 reasoning families represented, below the required 4
-- **Box plots** (`skill.r2-box-plots`)
-  - no generator families produce for this topic
-  - 7 available interactions, below the required 100
-  - 0 reasoning families represented, below the required 4
-- **Choosing a graph** (`skill.r2-choosing-graphs`)
-  - no generator families produce for this topic
-  - 6 available interactions, below the required 100
-  - 0 reasoning families represented, below the required 4
-- **Comparing distributions** (`skill.r2-comparing-distributions`)
-  - no generator families produce for this topic
-  - 6 available interactions, below the required 100
-  - 0 reasoning families represented, below the required 4
-- **Dot plots** (`skill.r2-dot-plots`)
-  - no generator families produce for this topic
-  - 9 available interactions, below the required 100
-  - 0 reasoning families represented, below the required 4
-- **Histograms** (`skill.r2-histograms`)
-  - no generator families produce for this topic
-  - 8 available interactions, below the required 100
-  - 0 reasoning families represented, below the required 4
-- **Misleading graphs** (`skill.r2-misleading-graphs`)
-  - no generator families produce for this topic
-  - 7 available interactions, below the required 100
-  - 0 reasoning families represented, below the required 4
-- **Outliers** (`skill.r2-outliers`)
-  - no generator families produce for this topic
-  - 6 available interactions, below the required 100
-  - 0 reasoning families represented, below the required 4
-- **Scatterplots** (`skill.r2-scatterplots`)
-  - no generator families produce for this topic
-  - 7 available interactions, below the required 100
-  - 0 reasoning families represented, below the required 4
-- **Skew** (`skill.r2-skew`)
-  - no generator families produce for this topic
-  - 7 available interactions, below the required 100
-  - 0 reasoning families represented, below the required 4
+None.
