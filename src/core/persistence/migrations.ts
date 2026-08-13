@@ -32,7 +32,18 @@ export const MIGRATIONS: Record<number, Migration> = {
    * Written explicitly rather than left to the schema default, for the reason
    * the 1 -> 2 note gives.
    */
-  3: (data) => ({ ...data, savedExperiments: [] })
+  3: (data) => ({ ...data, savedExperiments: [] }),
+
+  /**
+   * 4 -> 5 (S2-19): adds `lessonSession`, the persisted in-flight lesson.
+   *
+   * A version-4 save has no lesson position recorded — the field did not exist,
+   * and the app it was written by restarted every interrupted lesson at its
+   * first question. So the correct lift is an explicit null: no lesson in
+   * flight, which is exactly what such a save can evidence. Written out rather
+   * than left to the schema default, for the reason the 1 -> 2 note gives.
+   */
+  4: (data) => ({ ...data, lessonSession: null })
 };
 
 export function migrateToVersion(

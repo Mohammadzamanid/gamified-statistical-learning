@@ -38,6 +38,64 @@ export interface LessonSession {
   newAchievements: string[];
 }
 
+/**
+ * The lesson a learner left in flight, or a fresh one (S2-19 cycle 2).
+ *
+ * `startLesson` stays as it was — starting over is a real thing to want, and the
+ * "sail it again" button after a finished lesson means exactly that. This is the
+ * other entry: the one the map takes, which honours the position the save kept.
+ *
+ * Falls back to a fresh start whenever the record cannot be trusted: a different
+ * lesson, a queue holding a question the content no longer has, or an index past
+ * the end. A resume that lands on nothing is worse than one that starts over,
+ * because the learner cannot tell it happened.
+ */
+export function resumeLesson(
+  content: ContentBundle,
+  save: SaveFile,
+  lessonId: string,
+  nowMs: number
+): LessonSession | null {
+  const fresh = startLesson(content, lessonId, nowMs);
+  if (!fresh) return null;
+
+  const kept = save.lessonSession;
+  if (!kept || kept.lessonId !== lessonId) return fresh;
+  if (kept.currentIndex >= kept.questionQueue.length) return fresh;
+  if (!kept.questionQueue.every((qid) => content.questions.has(qid))) return fresh;
+
+  return {
+    ...fresh,
+    questionQueue: [...kept.questionQueue],
+    currentIndex: kept.currentIndex,
+    correctCount: kept.correctCount,
+    attemptedCount: kept.attemptedCount,
+    startedAtMs: Date.parse(kept.startedAt) || nowMs,
+    questionShownAtMs: nowMs
+  };
+}
+
+/**
+ * What a save should hold for a session in flight, or null when there is
+ * nothing to come back to.
+ *
+ * `nextIndex` is the next **unanswered** question, which is why `submitAnswer`
+ * passes one past the question it just marked: that answer is already banked,
+ * and resuming onto it would log a second attempt for it.
+ */
+function lessonSessionRecord(session: LessonSession, nextIndex: number) {
+  if (session.investigation) return null; // a case resumes by stage (S2-10)
+  if (nextIndex >= session.questionQueue.length) return null; // nothing left to come back to
+  return {
+    lessonId: session.lessonId,
+    startedAt: new Date(session.startedAtMs).toISOString(),
+    questionQueue: [...session.questionQueue],
+    currentIndex: nextIndex,
+    attemptedCount: session.attemptedCount,
+    correctCount: session.correctCount
+  };
+}
+
 export function startLesson(content: ContentBundle, lessonId: string, nowMs: number): LessonSession | null {
   const lesson = content.curriculum.lessons.find((l) => l.id === lessonId);
   if (!lesson) return null;
@@ -203,6 +261,16 @@ export function submitAnswer(
     }
   }
 
+  // Where to come back to (S2-19 cycle 2). One past the question just answered:
+  // it is banked, and the feedback panel is not worth resuming onto.
+  nextSave = {
+    ...nextSave,
+    lessonSession: lessonSessionRecord(
+      { ...session, attemptedCount: session.attemptedCount + 1, correctCount: session.correctCount + (feedback.correct ? 1 : 0) },
+      session.currentIndex + 1
+    )
+  };
+
   const earned = evaluateAchievements(nextSave, content.achievements, content.curriculum);
   if (earned.length > 0) nextSave = { ...nextSave, achievements: [...nextSave.achievements, ...earned] };
 
@@ -272,6 +340,10 @@ export function advance(content: ContentBundle, save: SaveFile, session: LessonS
         }
       };
     }
+    // No clearing needed here, and a probe proved it: `submitAnswer` already
+    // recorded one past the last question, and `lessonSessionRecord` answers
+    // that with null. A line clearing it again could not be made to fail, which
+    // makes it defence nobody can check rather than defence.
     const earnedOnCompletion = evaluateAchievements(nextSave, content.achievements, content.curriculum);
     if (earnedOnCompletion.length > 0) {
       nextSave = { ...nextSave, achievements: [...nextSave.achievements, ...earnedOnCompletion] };
@@ -282,17 +354,22 @@ export function advance(content: ContentBundle, save: SaveFile, session: LessonS
     };
   }
 
+  const nextSession: LessonSession = {
+    ...session,
+    questionQueue: queue,
+    pendingFollowUps: pending,
+    currentIndex: nextIndex,
+    hintsUsedThisQuestion: 0,
+    questionShownAtMs: nowMs,
+    lastFeedback: null,
+    answeredCurrent: false
+  };
+
+  // Written again here, not only in `submitAnswer`, because this is where the
+  // position actually moves — and where a remediation follow-up is spliced into
+  // the queue, which changes what every later index means.
   return {
-    save,
-    session: {
-      ...session,
-      questionQueue: queue,
-      pendingFollowUps: pending,
-      currentIndex: nextIndex,
-      hintsUsedThisQuestion: 0,
-      questionShownAtMs: nowMs,
-      lastFeedback: null,
-      answeredCurrent: false
-    }
+    save: { ...save, lessonSession: lessonSessionRecord(nextSession, nextIndex) },
+    session: nextSession
   };
 }

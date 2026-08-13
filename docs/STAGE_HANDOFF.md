@@ -30,14 +30,14 @@ after Stage 1 was lost because commits were never pushed to a durable remote. Re
 | Default branch | `main` |
 | Pristine Stage 1 import | `7add4bc` — pushed and remote-verified |
 | Baseline docs + CI | `1b0a5dd` — pushed and remote-verified |
-| Last unit completed | **S2-19 cycle 1** — the save, resume and recovery audit. Interruption is now measured at all five points the criteria name |
+| Last unit completed | **S2-19** — the save, resume and recovery audit, in two cycles. Every interruption point is measured, and a lesson now keeps its place |
 | Head of `main` | read it live: `git rev-parse HEAD` vs `git ls-remote origin refs/heads/main` — these must match |
 | Milestone snapshot commit | `d4e250434c465f85e4307a226a9af2cbc9788c17` — the commit the exports were built from |
 | Stage tag | `stage-1-baseline` — **created locally, NOT on GitHub** (unit R-00d, blocked; see §2.1) |
 | Milestone exports | `../gsl-exports/` — source ZIP + git bundle + manifest + SHA-256 checksums |
 | Working tree | clean |
 | Node / npm used | v22.22.2 / 10.9.7 |
-| Test suite | **688 tests / 48 files**, all passing (Stage 1 baseline was 73 / 14) |
+| Test suite | **695 tests / 48 files**, all passing (Stage 1 baseline was 73 / 14) |
 | Build | passing (**873.56 kB, 224.47 kB gzip**; baseline was 285.73 kB / 83.82 kB) |
 | Source modified since baseline | S2-01 … S2-08 — achievements + region completion, three new interactions, the enforced interaction audit, the review queue, the Region 1 topic architecture, and all 17 Region 1 lessons |
 | Curriculum | 2 regions · **10 modules** · **40 lessons** · **42 skills** · **290 questions** (baseline 2/2/3/6/14) |
@@ -105,48 +105,45 @@ branch/tag deletion) are forbidden without explicit owner permission. See `REMOT
 
 ## 5. Next unit
 
-**S2-19 cycle 2 — the lesson's position.** Cycle 1 measured what an interruption costs and closed two defects; the one
-thing it did not close is that an interrupted lesson restarts at its first question. A review session persists its
-frozen queue and index (S2-06) and a boss persists the stage it reached (S2-10); a lesson persists neither.
+**S2-20 — the accessibility harness.** `test:a11y` **does not exist**: accessibility runs today inside `npm test` via
+`tests/unit/accessibility.test.ts`, and every report since S2-14 has said so rather than claiming a script it does not
+have. Adding it means editing `package.json` **and** the CI workflow together, and the script must be genuinely run
+before any report claims it passes.
 
-Closing it is a save-shape change: `SAVE_SCHEMA_VERSION` **4 → 5** with a migration in
-`src/core/persistence/migrations.ts`, plus threading through the store and `LessonScreen`. `ReviewSessionStateSchema`
-is the worked example — it freezes the queue deliberately, and the reasons written on it apply unchanged to a lesson.
-The audit states the gap today rather than asserting around it, so `tests/integration/save-resume.test.ts` will fail
-in the right place when the field arrives, and its "no position is kept" case must be rewritten rather than deleted.
+What already exists to build on: `src/core/accessibility/apply.ts` and the settings that drive it (theme including
+high-contrast, reduced motion, text scale, colour-blind-safe), the accessible-description rules the interaction audit
+enforces on every chart, and the text-equivalent rules the investigation audit enforces on every boss question. The
+gap is that none of it is exercised against a rendered DOM.
 
-**Then S2-20 — the accessibility harness**, where `test:a11y` finally becomes a real script. It does not exist today;
-accessibility runs inside `npm test` via `tests/unit/accessibility.test.ts`, and adding the script means editing
-`package.json` **and** the CI workflow together.
+**The save schema is at version 5.** Migrations 1→2 (`reviewSession`), 2→3 (`investigationProgress`), 3→4
+(`savedExperiments`) and 4→5 (`lessonSession`) live in `src/core/persistence/migrations.ts`. Any shape change needs a
+migration and a round-trip test; D-055 checks the chain against the version rather than trusting the two to travel
+together, and a probe bumping the version without a migration fails six checks.
 
-**What cycle 1 found, worth reading before writing any test.**
+**S2-19 is Complete, in two cycles.** Cycle 1 measured what an interruption costs at all five points the criteria
+name and found two defects — a lesson recorded nothing until it was finished (**D-064**) and the atomicity contract
+was untested (**D-065**). Cycle 2 gave a lesson a position of its own (**D-067**).
 
-*D-064:* a lesson abandoned half-way recorded nothing at all. The `"in-progress"` status has been in the schema since
-Stage 1 with nothing writing it, and `RegionScreen` read the status and then only asked whether it equalled
-`"completed"`. Two halves of one defect, neither visible from the other's side. **A status value nothing ever writes
-is a defect, not a spare.**
+**What to read before writing tests, from both cycles.**
 
-*D-065:* the atomicity contract was untested. Replacing the adapter's temp-then-rename with a plain `fs.writeFile`
-failed nothing, because every check in the repository only ever observed a completed write. The mechanism is the
-guarantee, so the mechanism is what a test has to reach — make the rename fail and require the old contents to still
-be there.
+*D-066 and D-059:* a test that reads its expectation through the code under test is not a test. Compare against the
+stored value.
 
-*D-066:* the review-resume case compared the question after a reload with the one `currentReviewQuestion` returned
-before it — the same function on both sides, so a resume that recomputed rather than read the frozen queue satisfied
-both at once. This is D-059's shape for the third time, now in a persistence unit. **A test that reads its expectation
-through the code under test is not a test**; compare against the stored value.
+*D-068:* when a probe fails nothing, ask **two** questions — is the guard weak, and does any test visit the state this
+breaks? Four probes in cycle 2 failed nothing and three of them were the second: no case had ever been interrupted
+between answering and advancing, no case had *earned* a remediation follow-up rather than hand-building one, and the
+boss assertion sat after a completed stage where the value is null either way. The fourth was a line of defence that
+could not be made to fail at all, and it was removed rather than kept.
 
-*And a probe that fails nothing is not evidence until you have checked where it is pointed.* Two of this cycle's eight
-probes were aimed at code the behaviour does not execute.
+*D-062:* when a new way to reach content is added, grep for the old definition of reachable.
 
-**Probes must snapshot the working tree, not `git checkout --`** (learned in S2-18): the baseline being probed is
-uncommitted by definition, so restoring from git reverts the cycle's own work.
+**Probes must snapshot the working tree, not `git checkout --`** (S2-18): the baseline being probed is uncommitted by
+definition.
 
 **Two conventions are settled and enforced.** Quartiles are the median of each half (D-045); the variance divides by
-how many readings there are (D-060). Both are pinned to the lessons' own published figures in
-`tests/unit/centre-generators.test.ts` and in the laboratory tests.
+how many readings there are (D-060). Both are pinned to the lessons' own published figures.
 
-**Read D-061 before writing any generator**, and D-062 before narrowing any audit to "questions a lesson lists".
+**Read D-061 before writing any generator.**
 
 ### Region 2's architecture, and two rules it added
 

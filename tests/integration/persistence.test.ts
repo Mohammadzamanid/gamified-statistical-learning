@@ -86,6 +86,7 @@ describe("persistence on the node adapter", () => {
         expect(imported.value.reviewSession).toBeNull(); // the real 1 -> 2 step ran
         expect(imported.value.investigationProgress).toEqual({}); // the real 2 -> 3 step ran
         expect(imported.value.savedExperiments).toEqual([]); // the real 3 -> 4 step ran
+        expect(imported.value.lessonSession).toBeNull(); // the real 4 -> 5 step ran
       }
     } finally {
       delete MIGRATIONS[0];
@@ -134,6 +135,22 @@ describe("persistence on the node adapter", () => {
     expect(back.values).toEqual([7, 8, 10, 10, 13, 15]);
     expect(back.title).toBe("Channel B");
     expect(reopened.value.save.savedExperiments[0]!.chartKind).toBe("box-plot");
+  });
+
+  it("gives a save written before lesson resume no lesson in flight, not a missing field", async () => {
+    // S2-19's 4 -> 5 step, exercised on a save that genuinely lacks the field.
+    // The app that wrote a version-4 save restarted every interrupted lesson at
+    // its first question, so it has no position to carry forward and `null` is
+    // the honest lift — not a fabricated index into a lesson it never recorded.
+    const mgr = new SaveManager(new MemoryStorageAdapter());
+    const save = createEmptySave({ id: "p4", name: "Before resume", createdAt: new Date().toISOString(), isGuest: false, avatarSeed: 0 });
+    const { lessonSession, ...withoutSession } = save;
+    expect(lessonSession).toBeNull();
+    const imported = await mgr.importSave(JSON.stringify({ ...withoutSession, schemaVersion: 4 }));
+    expect(imported.ok).toBe(true);
+    if (!imported.ok) return;
+    expect(imported.value.schemaVersion).toBe(SAVE_SCHEMA_VERSION);
+    expect(imported.value.lessonSession).toBeNull();
   });
 
   it("registers exactly one migration per version step up to the current one", () => {

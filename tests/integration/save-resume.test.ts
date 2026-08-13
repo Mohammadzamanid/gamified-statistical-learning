@@ -24,8 +24,12 @@
  *    interruption. Losing it means a learner did work the app forgot.
  *  - **Position** — where in a queue the learner had got to — survives only
  *    where something persists it. A review session freezes its queue and index
- *    (S2-06); a boss records the stage it reached (S2-10). A lesson records
- *    neither, and this file measures that rather than asserting around it.
+ *    (S2-06) and a boss records the stage it reached (S2-10); cycle 1 measured
+ *    that a lesson recorded neither, and cycle 2 gave it a record of its own.
+ *
+ * Cycle 1's "no position is kept" case was not deleted when that stopped being
+ * true — it was rewritten into the cases that now describe what resuming does,
+ * including the fresh start that "start over" still means.
  */
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 import { mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
@@ -34,7 +38,14 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { loadShippedContent } from "../../src/content";
 import { clearDetectors, registerBuiltInDetectors } from "../../src/core/misconceptions/detectors";
-import { advance, currentQuestion, startLesson, submitAnswer } from "../../src/renderer/state/session";
+import {
+  advance,
+  currentQuestion,
+  resumeLesson,
+  startInvestigationStep,
+  startLesson,
+  submitAnswer
+} from "../../src/renderer/state/session";
 import {
   advanceReview,
   currentReviewQuestion,
@@ -50,6 +61,7 @@ import { MAX_BACKUPS, SAVE_FILE_PREFIX } from "../../src/shared/constants/app";
 import { createExperiment, saveExperiment } from "../../src/core/laboratory";
 import type { SaveFile } from "../../src/shared/schemas";
 import { correctResponseFor } from "../helpers/responses";
+import { responseTriggering } from "../helpers/misconception-triggers";
 import { playInvestigationStep } from "../helpers/investigation-playthrough";
 
 const content = loadShippedContent();
@@ -182,6 +194,28 @@ describe("an interruption keeps what was earned", () => {
     expect(progress?.stepAccuracy).toHaveLength(2);
     expect(progress?.stepAccuracy.every((a) => a === 1)).toBe(true);
     expect(progress?.completedAt).toBeNull();
+
+    // A case resumes by stage and only by stage: the lesson position a lesson
+    // keeps must not be written by a boss step, or re-entering the case would
+    // have two disagreeing ideas of where the learner is.
+    //
+    // Checked **mid-stage**, which is the only place it can be checked. After a
+    // completed stage the record is null whether the guard exists or not —
+    // there is nothing left in the queue to come back to — and a probe removing
+    // the guard proved that by failing nothing.
+    let midStage = resumed;
+    const stepSession = startInvestigationStep(content, boss.id, 2, 2_000_000)!;
+    expect(stepSession.questionQueue.length, "stage 3 needs more than one question").toBeGreaterThan(1);
+    const midQuestion = currentQuestion(content, stepSession)!;
+    const answered = submitAnswer(content, midStage, stepSession, correctResponseFor(midQuestion), 2_001_000)!;
+    midStage = advance(content, answered.save, answered.session, 2_002_000).save;
+
+    const midReloaded = await throughDisk(midStage);
+    expect(
+      midReloaded.lessonSession,
+      "a boss step recorded a lesson position; a case resumes by stage"
+    ).toBeNull();
+    expect(midReloaded.investigationProgress[boss.id]?.currentStepIndex).toBe(2);
 
     // Resuming really does continue rather than restart: the remaining stages
     // close the case from the reloaded save.
@@ -329,33 +363,187 @@ describe("what a lesson does not resume, stated rather than assumed", () => {
     });
   });
 
-  it("still restarts that lesson at its first question, because no position is kept", async () => {
-    // The half it did not close, measured rather than asserted around. A review
-    // session persists its queue and index (S2-06) and a boss persists the stage
-    // it reached (S2-10); a lesson persists neither, so a learner who leaves
-    // after two of six answers meets question one again.
-    //
-    // Nothing is *lost* but the position — the cases above prove the answers,
-    // the mastery they moved and the review entries they created all survive,
-    // and the repeated questions are answered again rather than skipped, so the
-    // record stays truthful either way.
+  it("comes back to the question the learner had reached, not to the first", async () => {
+    // Cycle 1 measured this as a gap and said so here rather than asserting
+    // around it; cycle 2 closed it. The position is read from the save, so it is
+    // read after a real round trip through the manager and the disk.
     const start = await newProfile();
     const { save: interrupted } = answerPartOfLesson(start, LESSON, 2, 0);
-    const resumed = await throughDisk(interrupted);
+    const reloaded = await throughDisk(interrupted);
 
-    const session = startLesson(content, LESSON, 10_000)!;
+    expect(reloaded.lessonSession).not.toBeNull();
+    expect(reloaded.lessonSession!.lessonId).toBe(LESSON);
+    expect(reloaded.lessonSession!.currentIndex).toBe(2);
+    expect(reloaded.lessonSession!.attemptedCount).toBe(2);
+    expect(reloaded.lessonSession!.questionQueue).toEqual([...LESSON_QUESTIONS]);
+
+    const resumed = resumeLesson(content, reloaded, LESSON, 10_000)!;
+    expect(resumed.currentIndex).toBe(2);
+    expect(currentQuestion(content, resumed)!.id).toBe(LESSON_QUESTIONS[2]);
+    expect(resumed.attemptedCount).toBe(2);
+  });
+
+  it("does not re-ask what was already answered, so no attempt is logged twice", async () => {
+    // The property that makes resuming safe rather than merely convenient: the
+    // record after finishing a resumed lesson is the record of one run through
+    // it, not one and a bit.
+    const start = await newProfile();
+    const { save: interrupted } = answerPartOfLesson(start, LESSON, 2, 0);
+    const reloaded = await throughDisk(interrupted);
+
+    let save = reloaded;
+    let session = resumeLesson(content, save, LESSON, 10_000)!;
+    let clock = 10_000;
+    let guard = 0;
+    while (!session.finished) {
+      expect(guard++, "resumed lesson did not terminate").toBeLessThan(50);
+      const question = currentQuestion(content, session)!;
+      clock += 1000;
+      const submitted = submitAnswer(content, save, session, correctResponseFor(question), clock)!;
+      save = submitted.save;
+      const next = advance(content, save, submitted.session, clock + 500);
+      save = next.save;
+      session = next.session;
+    }
+
+    expect(save.lessonProgress[LESSON]?.status).toBe("completed");
+    const asked = save.attemptLog.map((a) => a.questionId);
+    expect(asked).toEqual([...LESSON_QUESTIONS]);
+    expect(new Set(asked).size, `a question was asked twice: ${asked.join(", ")}`).toBe(asked.length);
+  });
+
+  it("clears the kept position when the lesson is finished", async () => {
+    const start = await newProfile();
+    let save = start;
+    let session = startLesson(content, LESSON, 0)!;
+    let clock = 0;
+    while (!session.finished) {
+      const question = currentQuestion(content, session)!;
+      clock += 1000;
+      const submitted = submitAnswer(content, save, session, correctResponseFor(question), clock)!;
+      save = submitted.save;
+      const next = advance(content, save, submitted.session, clock + 500);
+      save = next.save;
+      session = next.session;
+    }
+
+    const reloaded = await throughDisk(save);
+    expect(reloaded.lessonSession, "a finished lesson has nothing to come back to").toBeNull();
+    // And opening it again starts from the top rather than from a stale index.
+    expect(resumeLesson(content, reloaded, LESSON, 99_000)!.currentIndex).toBe(0);
+  });
+
+  it("starts fresh rather than landing on nothing when the kept queue no longer fits", async () => {
+    // A save can outlive the content it names — an older save, an edited
+    // curriculum. Resuming onto a question that no longer exists would strand
+    // the learner on a blank screen with no way to tell what happened, so the
+    // fallback is a fresh start.
+    const start = await newProfile();
+    const { save: interrupted } = answerPartOfLesson(start, LESSON, 2, 0);
+
+    const stale = {
+      ...interrupted,
+      lessonSession: { ...interrupted.lessonSession!, questionQueue: ["q.no-longer-shipped", "q.also-gone", "q.third"] }
+    };
+    expect(resumeLesson(content, stale, LESSON, 10_000)!.currentIndex).toBe(0);
+
+    const pastTheEnd = { ...interrupted, lessonSession: { ...interrupted.lessonSession!, currentIndex: 99 } };
+    expect(resumeLesson(content, pastTheEnd, LESSON, 10_000)!.currentIndex).toBe(0);
+
+    const otherLesson = { ...interrupted, lessonSession: { ...interrupted.lessonSession!, lessonId: "l.r1-division" } };
+    expect(resumeLesson(content, otherLesson, LESSON, 10_000)!.currentIndex).toBe(0);
+  });
+
+  it("comes back to the next question when the app dies on the feedback panel", async () => {
+    // The moment between answering and moving on, which is a real place to be
+    // interrupted — the feedback is on screen and the learner reads it. A probe
+    // found nothing here: every other case in this file advances immediately
+    // after submitting, so the position `submitAnswer` writes was always
+    // overwritten before it was read.
+    //
+    // What must hold is that the answered question is *not* re-asked. It is
+    // already in the attempt log, and resuming onto it would log it twice.
+    const start = await newProfile();
+    const { save: afterTwo, session } = answerPartOfLesson(start, LESSON, 2, 0);
+
+    const question = currentQuestion(content, session)!;
+    const submitted = submitAnswer(content, afterTwo, session, correctResponseFor(question), 20_000)!;
+    // ...and nothing else. No `advance`.
+
+    const reloaded = await throughDisk(submitted.save);
+    expect(reloaded.attemptLog).toHaveLength(3);
+    expect(reloaded.lessonSession!.currentIndex, "the answered question must not be re-asked").toBe(3);
+
+    const resumed = resumeLesson(content, reloaded, LESSON, 30_000)!;
+    expect(currentQuestion(content, resumed)!.id).toBe(LESSON_QUESTIONS[3]);
+  });
+
+  it("keeps a remediation follow-up the learner earned by getting one wrong", async () => {
+    // The reason the queue is stored and not only the index. A wrong answer that
+    // expresses a misconception splices that misconception's follow-up in after
+    // the current question, so an index carried back to a queue rebuilt from the
+    // lesson would point at the wrong one.
+    //
+    // The follow-up is *earned* here rather than spliced in by hand: the first
+    // draft built the queue itself, which exercised the resume but not the write
+    // that produces such a queue — and a probe removing that write failed
+    // nothing. Earning it needs the answer that expresses the misconception,
+    // because remediation is recommended on a diagnosed error, not on any miss.
+    const start = await newProfile();
+    expect(start.lessonSession, "a new profile has no lesson in flight").toBeNull();
+
+    const target = "q.r1-addition-misconception";
+    const targetIndex = LESSON_QUESTIONS.indexOf(target);
+    expect(targetIndex, `${LESSON} no longer asks ${target}`).toBeGreaterThanOrEqual(0);
+
+    const misconceptionId = content.questions.get(target)!.misconceptionIds[0]!;
+    const misconception = content.misconceptions.find((m) => m.id === misconceptionId)!;
+    const followUpId = content.remediations.find((r) => r.id === misconception.remediationId)!.followUpQuestionIds[0]!;
+
+    let save = start;
+    let session = startLesson(content, LESSON, 0)!;
+    let clock = 0;
+    for (let i = 0; i < targetIndex; i += 1) {
+      const question = currentQuestion(content, session)!;
+      clock += 1000;
+      const submitted = submitAnswer(content, save, session, correctResponseFor(question), clock)!;
+      save = submitted.save;
+      const next = advance(content, save, submitted.session, clock + 500);
+      save = next.save;
+      session = next.session;
+    }
+
+    const question = currentQuestion(content, session)!;
+    expect(question.id).toBe(target);
+    const trigger = responseTriggering(question, misconceptionId, misconception.detectorParams, misconception.detector)!;
+    expect(trigger, `${target} offers no answer expressing ${misconceptionId}`).not.toBeNull();
+
+    clock += 1000;
+    const wrong = submitAnswer(content, save, session, trigger, clock)!;
+    expect(wrong.feedback.misconception?.id, "the answer should have been diagnosed").toBe(misconceptionId);
+    save = wrong.save;
+    const next = advance(content, save, wrong.session, clock + 500);
+    save = next.save;
+    session = next.session;
+
+    expect(session.questionQueue).toContain(followUpId);
+    expect(currentQuestion(content, session)!.id, "the follow-up comes next").toBe(followUpId);
+    expect(save.lessonSession, "a lesson in flight must be recorded").not.toBeNull();
+    expect(save.lessonSession!.questionQueue, "the kept queue must hold the earned follow-up").toContain(followUpId);
+
+    const reloaded = await throughDisk(save);
+    const resumed = resumeLesson(content, reloaded, LESSON, 100_000)!;
+    expect(currentQuestion(content, resumed)!.id, "the resume skipped past its own follow-up").toBe(followUpId);
+    expect(resumed.questionQueue).toHaveLength(LESSON_QUESTIONS.length + 1);
+  });
+
+  it("still offers a fresh start, which is what starting over means", () => {
+    // `startLesson` is unchanged and is what the "start over" button calls. The
+    // two entries exist because both are things a learner asks for, and only one
+    // of them can be the default.
+    const session = startLesson(content, LESSON, 0)!;
     expect(session.currentIndex).toBe(0);
     expect(session.questionQueue).toEqual([...LESSON_QUESTIONS]);
-
-    // There is no field a resume could read: the save records a lesson's
-    // status, never its position. Asserted against the save's own shape so
-    // adding one makes this case fail and be rewritten deliberately.
-    expect(Object.keys(resumed.lessonProgress[LESSON]!).sort()).toEqual([
-      "bestAccuracy",
-      "completedAt",
-      "lessonId",
-      "status"
-    ]);
   });
 });
 

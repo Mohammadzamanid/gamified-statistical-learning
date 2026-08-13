@@ -756,3 +756,49 @@ than against a recomputation. The probe bites now.
 Worth naming as a pattern rather than an incident: **a test that reads its expectation through the code under test is
 not a test.** It appears wherever a value can be derived two ways, and the tell is always the same — a probe that
 breaks the derivation changes the expectation with it, and nothing fails. (S2-19)
+
+**D-067 — A lesson keeps its place, and "start over" becomes a thing you ask for rather than what always happens.**
+Cycle 1 measured the gap and stated it in the audit; this closes it. `SaveFile` gains `lessonSession` —
+`SAVE_SCHEMA_VERSION` **4 → 5**, with a migration lifting an older save to `null`, because an app that restarted every
+interrupted lesson has no position to carry forward and inventing one would be worse than admitting none.
+
+Three choices worth recording:
+
+**The queue is stored, not only the index.** A wrong answer that expresses a misconception splices that
+misconception's follow-up into the queue, so an index carried back to a queue rebuilt from the lesson would point at a
+different question. `ReviewSessionStateSchema` froze its queue for the same reason in S2-06; the reasoning transferred
+unchanged.
+
+**`currentIndex` is the next *unanswered* question**, so `submitAnswer` records one past the question it just marked.
+Resuming onto an answered question would log a second attempt for one answer, and the feedback panel is not worth
+resuming onto.
+
+**`startLesson` was left alone and `resumeLesson` added beside it.** Changing the existing signature would have
+touched thirty-five call sites across fifteen files and buried the change in churn — but the deeper reason is that
+both behaviours are things a learner asks for. The map resumes; "start over" starts over, and it clears the kept
+position on disk so the next resume does not walk back into the run just abandoned. The screen says which it will do,
+because a "start" that silently drops someone at question four is worse than no resume at all.
+
+Boss steps deliberately do not use it: a case resumes by stage (S2-10), and two records of where the learner is would
+eventually disagree. (S2-19)
+
+**D-068 — Four probes failed nothing, and each one named a moment no test had visited.**
+Not a guard gap this time but a coverage gap, and the shape is worth keeping because it recurs:
+
+- **The position recorded at the answered question rather than past it** failed nothing, because every case in the
+  file advanced immediately after submitting — so the value `submitAnswer` writes was always overwritten before
+  anything read it. The moment between answering and moving on is a real place to be interrupted; the feedback is on
+  screen and the learner is reading it. A case for it now exists.
+- **Advancing stopping recording the position** failed nothing, because the two writes agree except when `advance`
+  splices a follow-up in. The follow-up case had *hand-built* its spliced queue, which exercised the resume but not
+  the write that produces such a queue. It now earns the follow-up by answering with the response that expresses the
+  misconception — remediation is recommended on a diagnosed error, not on any miss, which is why an ordinary wrong
+  answer did not produce one.
+- **Clearing the kept position at completion** could not be made to fail at all: `submitAnswer` had already recorded
+  one past the last question, which is null by construction. That line was defence nobody could check, so it was
+  removed rather than kept.
+- **A boss step persisting a lesson position** failed nothing because the assertion sat after a *completed* stage,
+  where the record is null whether the guard exists or not. It is checked mid-stage now.
+
+The general lesson: when a probe fails nothing, the question is not only "is the guard weak" but "does any test visit
+the state this breaks". Three of these four were the second. (S2-19)

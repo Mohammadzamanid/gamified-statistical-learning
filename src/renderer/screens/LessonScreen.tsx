@@ -16,12 +16,15 @@ export function LessonScreen({ lessonId }: { lessonId: string }): JSX.Element {
   const save = useStore((s) => s.save);
   const session = useStore((s) => s.session);
   const startLesson = useStore((s) => s.startLesson);
+  const restartLesson = useStore((s) => s.restartLesson);
   const navigate = useStore((s) => s.navigate);
   const exitLesson = useStore((s) => s.exitLesson);
   const lesson = content.curriculum.lessons.find((l) => l.id === lessonId);
   if (!lesson || !save) return <p className="muted">Lesson not found.</p>;
 
   const justFinished = session?.finished && session.lessonId === lessonId;
+  /** The position this lesson kept, if the learner left it in flight. */
+  const kept = save.lessonSession?.lessonId === lessonId ? save.lessonSession : null;
   const moduleOf = content.curriculum.modules.find((m) => m.id === lesson.moduleId);
 
   return (
@@ -50,7 +53,7 @@ export function LessonScreen({ lessonId }: { lessonId: string }): JSX.Element {
           })}
           <div className="row" style={{ justifyContent: "center" }}>
             <button className="btn primary" onClick={() => { exitLesson(); }}>Return to the chart</button>
-            <button className="btn" onClick={() => startLesson(lessonId)}>Sail it again</button>
+            <button className="btn" onClick={() => restartLesson(lessonId)}>Sail it again</button>
           </div>
         </div>
       ) : (
@@ -111,10 +114,20 @@ export function LessonScreen({ lessonId }: { lessonId: string }): JSX.Element {
             </div>
           )}
 
+          {/* Since S2-19 cycle 2 an interrupted lesson keeps its place, so the
+              button has to say which it is about to do — a "start" that silently
+              drops the learner back at question four is worse than no resume. */}
           <div className="row" style={{ justifyContent: "center" }}>
             <button className="btn primary" onClick={() => startLesson(lesson.id)}>
-              Start practice · {lesson.questionIds.length} questions
+              {kept
+                ? `Resume practice · question ${kept.currentIndex + 1} of ${kept.questionQueue.length}`
+                : `Start practice · ${lesson.questionIds.length} questions`}
             </button>
+            {kept && (
+              <button className="btn" onClick={() => restartLesson(lesson.id)}>
+                Start over
+              </button>
+            )}
           </div>
         </>
       )}

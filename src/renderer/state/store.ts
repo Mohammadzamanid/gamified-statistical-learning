@@ -16,6 +16,7 @@ import { applyToRoot } from "../../core/accessibility/apply";
 import { createPersistenceClient, type PersistenceClient } from "./persistence-client";
 import {
   advance,
+  resumeLesson,
   startInvestigationStep,
   startLesson,
   submitAnswer,
@@ -67,7 +68,10 @@ interface StoreState {
   updateSettings(patch: Partial<Settings>): Promise<void>;
   resetProgress(): Promise<void>;
 
+  /** Opens a lesson, resuming the position a save kept for it. */
   startLesson(lessonId: string): void;
+  /** Opens a lesson from its first question, discarding any kept position. */
+  restartLesson(lessonId: string): void;
   /** Opens a boss investigation, marking the case in progress without rewinding it. */
   openInvestigation(investigationId: string): void;
   /** Plays one step of a boss investigation through the ordinary session engine. */
@@ -179,8 +183,27 @@ export const useStore = create<StoreState>((set, get) => ({
   },
 
   startLesson(lessonId) {
-    const session = startLesson(get().content, lessonId, Date.now());
+    // Resumes rather than restarts (S2-19 cycle 2). `startLesson` is still the
+    // fresh start, and `restartLesson` below is the button that wants one.
+    const { content, save } = get();
+    const session = save
+      ? resumeLesson(content, save, lessonId, Date.now())
+      : startLesson(content, lessonId, Date.now());
     if (session) set({ session, screen: { name: "question" } });
+  },
+
+  restartLesson(lessonId) {
+    const { content, save, client } = get();
+    const session = startLesson(content, lessonId, Date.now());
+    if (!session) return;
+    // Starting over discards the kept position, and says so on disk: leaving the
+    // old record would send the next resume back into the run just abandoned.
+    if (save) {
+      const cleared = { ...save, lessonSession: null };
+      persistSave(client, cleared);
+      set({ save: cleared });
+    }
+    set({ session, screen: { name: "question" } });
   },
 
   openInvestigation(investigationId) {
@@ -218,7 +241,10 @@ export const useStore = create<StoreState>((set, get) => ({
     const { content, save, session, client } = get();
     if (!save || !session) return;
     const result = advance(content, save, session, Date.now());
-    if (result.session.finished) persistSave(client, result.save);
+    // Persisted on every advance since S2-19 cycle 2, not only at the end: the
+    // position is what moves here, and a position saved only on completion is
+    // not a position at all.
+    persistSave(client, result.save);
     set({ save: result.save, session: result.session });
     if (result.session.finished) {
       set({

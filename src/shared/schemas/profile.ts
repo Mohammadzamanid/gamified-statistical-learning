@@ -53,6 +53,40 @@ export const ReviewSessionStateSchema = z.object({
 });
 export type ReviewSessionState = z.infer<typeof ReviewSessionStateSchema>;
 
+/**
+ * An in-flight lesson, persisted so an interrupted lesson resumes where it
+ * stopped rather than at its first question (S2-19 cycle 2).
+ *
+ * Cycle 1 measured the gap this closes: a review session has frozen its queue
+ * and index since S2-06 and a boss has recorded the stage it reached since
+ * S2-10, while a lesson recorded neither — so a learner who answered three of
+ * six questions and closed the app met question one again. Nothing was lost but
+ * the position; this is the position.
+ *
+ * The **queue** is stored, not only the index, for the same reason the review
+ * session stores its own: remediation follow-ups are injected into it as they
+ * are earned, so a resume that rebuilt the queue from the lesson would set the
+ * index against a different list of questions.
+ *
+ * `currentIndex` is the next **unanswered** question. A question that has been
+ * answered is not re-asked on resume — the feedback panel is not worth
+ * resuming, and re-asking would log a second attempt for one answer.
+ *
+ * Boss steps are deliberately not recorded here. A case resumes at the stage it
+ * reached, which is the unit S2-10 chose, and a half-argued stage is re-argued
+ * from its first question.
+ */
+export const LessonSessionStateSchema = z.object({
+  lessonId: IdSchema,
+  startedAt: IsoDateTime,
+  /** The questions in the order they will be asked, follow-ups included. */
+  questionQueue: z.array(IdSchema).min(1),
+  currentIndex: z.number().int().min(0),
+  attemptedCount: z.number().int().min(0).default(0),
+  correctCount: z.number().int().min(0).default(0)
+});
+export type LessonSessionState = z.infer<typeof LessonSessionStateSchema>;
+
 export const LessonProgressSchema = z.object({
   lessonId: IdSchema,
   status: z.enum(["locked", "available", "in-progress", "completed"]),
@@ -141,6 +175,8 @@ export const SaveFileSchema = z.object({
   achievements: z.array(IdSchema).default([]),
   /** Null when no review session is in flight. */
   reviewSession: ReviewSessionStateSchema.nullable().default(null),
+  /** Null when no lesson is in flight. One at a time, like the review session. */
+  lessonSession: LessonSessionStateSchema.nullable().default(null),
   /** The laboratory shelf. Bounded — see LABORATORY_SHELF_LIMIT. */
   savedExperiments: z.array(SavedExperimentSchema).default([]),
   xp: z.number().int().min(0).default(0),

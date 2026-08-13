@@ -6,68 +6,62 @@ Exactly one Stage 2 unit is active at a time. Rewritten at the start and end of 
 
 ## Current unit
 
-**S2-19 — the save, resume and recovery audit (cycle 1: what an interruption costs)**
+**S2-19 — the save, resume and recovery audit (cycle 2: the lesson's position)**
 
-Entered from `7e71f99ded8c804367ab72e97dc591d5dae047a3` (remote-verified, clean tree).
+Entered from `6198825f2c2792ad6be9434f8b4a8eda44898d2e` (remote-verified, clean tree).
 
 ## Objective
 
-Interrupt the real engine at each of the five places the criteria name — a lesson, a multi-step calculation, a boss,
-the review queue, the laboratory — and at the three moments just after something is earned, then write through a real
-`SaveManager` onto a real directory and measure what comes back. Underneath: several profiles, atomic writes, backup
-rotation, a corrupt primary, an invalid import, a missing save, and duplicate-award prevention for every trigger kind.
+Close the one gap cycle 1 measured and could not close: an interrupted lesson restarted at its first question, while a
+review session had persisted its frozen queue since S2-06 and a boss the stage it reached since S2-10.
 
 ## Result up front
 
-**Cycle 1 is Complete. Two defects found, both fixed; one of them in a test written this cycle.**
+**S2-19 is Complete.** A lesson now keeps its place across an interruption, and "start over" is something a learner
+asks for rather than what always happens.
 
 | Measure | Value |
 |---|---|
-| New audit | `tests/integration/save-resume.test.ts` — **20 checks** |
-| Tests | **688** / 48 files (668 at the start of the unit) |
-| Interruption points covered | **5 of 5**, plus 3 post-award moments |
-| Probes | 8; **6 bit immediately, 2 found gaps now closed and re-probed** |
+| Save schema | **4 → 5**, with a migration lifting older saves to `null` |
+| The audit | `tests/integration/save-resume.test.ts` — 20 → **26 checks** |
+| Tests | **695** / 48 files (688 at the start of the cycle) |
+| Probes | 9; **5 bit immediately, 4 found gaps now closed and re-probed** |
 
-## What survives an interruption, measured
+## What changed
 
-| Interrupted at | Kept | Lost |
-|---|---|---|
-| A lesson, part-way | Every answer, mastery, review schedule, achievements, **and now the in-progress status** | The position in the question queue |
-| A multi-step calculation | Every earlier answer; the question is still answerable afterwards | The half-filled steps (never persisted, by design) |
-| A boss, mid-case | The stage reached and every stage already argued | Nothing |
-| The review queue | The frozen queue, the index, the counts, the same next question | Nothing |
-| The laboratory | The readings, the title, the chart kind and the bin width | The edit trail (deliberate, D-054) |
+`SaveFile` gains `lessonSession`: the lesson id, the question queue, the index of the next **unanswered** question,
+and the counts. Written by `submitAnswer` and again by `advance` — the second is not redundant, because `advance` is
+where a remediation follow-up is spliced into the queue.
+
+`resumeLesson` sits beside `startLesson` rather than replacing it. The map resumes; "start over" starts over and
+clears the kept position on disk. The lesson screen says which it is about to do.
 
 ## Relevant files
 
 | File | Change |
 |---|---|
-| `tests/integration/save-resume.test.ts` | **New.** The audit: 20 checks across interruption, storage and awards |
-| `src/renderer/state/session.ts` | Writes a lesson's `in-progress` status from its first answer (D-064) |
-| `src/renderer/screens/RegionScreen.tsx` | Shows it — the pill and "Resume lesson", which the boss below has had since S2-10 |
+| `src/shared/schemas/profile.ts` | **New.** `LessonSessionStateSchema`, and `lessonSession` on the save |
+| `src/shared/constants/app.ts` | `SAVE_SCHEMA_VERSION` 4 → **5** |
+| `src/core/persistence/migrations.ts` | **New.** The 4 → 5 step, lifting to an explicit `null` |
+| `src/renderer/state/session.ts` | `resumeLesson`; the position written on answer and on advance |
+| `src/renderer/state/store.ts` | The map's entry resumes; `restartLesson` added; every advance is persisted |
+| `src/renderer/screens/LessonScreen.tsx` | "Resume practice · question 3 of 6", with "Start over" beside it |
+| `tests/integration/save-resume.test.ts` | Cycle 1's "no position is kept" case rewritten into six that describe what resuming does |
+| `tests/integration/persistence.test.ts` | The 4 → 5 step on a save that genuinely lacks the field |
 
 ## Acceptance criteria
 
 | # | Criterion | Met |
 |---|---|---|
-| 1 | Interruption at a lesson | **Yes** |
-| 2 | Interruption at a multi-step calculation | **Yes** |
-| 3 | Interruption at a boss | **Yes** |
-| 4 | Interruption at the review queue | **Yes** |
-| 5 | Interruption at the laboratory | **Yes** |
-| 6 | Interruption after an achievement award | **Yes** |
-| 7 | Interruption after a mastery update | **Yes** |
-| 8 | Interruption after a settings change | **Yes** |
-| 9 | Multiple profiles | **Yes** — isolation, and deletion that spares the other |
-| 10 | Atomic writes | **Yes** — the mechanism, not just the absence of leftovers (D-065) |
-| 11 | Backup rotation | **Yes** — bounded at `MAX_BACKUPS`, oldest dropped, primary untouched |
-| 12 | Corrupt-primary recovery | **Yes** — and the other profile is unaffected |
-| 13 | Invalid import | **Yes** — five malformed shapes, none accepted, save undisturbed |
-| 14 | Missing save | **Yes** — an error, not a fabricated empty save |
-| 15 | Duplicate-achievement prevention, all award kinds | **Yes** |
-| 16 | Migration | Covered by `persistence.test.ts` since S2-15; not duplicated |
-| 17 | Review-schedule and laboratory-state persistence | **Yes** |
-| 18 | Commit pushed and remote hash verified | Yes — see below |
+| 1 | An interrupted lesson resumes where it stopped | **Yes** — after a real round trip through the manager |
+| 2 | No answer is logged twice by resuming | **Yes** — the attempt log after a resumed run has no repeats |
+| 3 | An earned remediation follow-up survives the interruption | **Yes** — earned by a diagnosed error, not hand-built |
+| 4 | A finished lesson keeps no position | **Yes** |
+| 5 | An untrustworthy record falls back to a fresh start | **Yes** — wrong lesson, missing questions, index past the end |
+| 6 | A boss still resumes by stage, and only by stage | **Yes** — checked mid-stage, which is the only place it can be |
+| 7 | Save-shape change carries a migration | **Yes** — 4 → 5, exercised on a save without the field |
+| 8 | Starting over is still available and clears the position | **Yes** |
+| 9 | Commit pushed and remote hash verified | Yes — see below |
 
 ## Required tests
 
@@ -77,80 +71,68 @@ Measured (Node v22.22.2 / npm 10.9.7):
 |---|---|
 | `npm run typecheck` | Pass |
 | `npm run lint` | Pass — 0 errors, 0 warnings |
-| `npm test` | Pass — **688 tests / 48 files** |
+| `npm test` | Pass — **695 tests / 48 files** |
 | `npm run test:statistics` | Pass — 18 tests / 3 files |
 | `npm run test:content` | Pass — 5 tests / 1 file |
-| `npm run build` | Pass — 899.57 kB (230.79 kB gzip) |
+| `npm run build` | Pass — 901.05 kB (231.05 kB gzip) |
 | `npm run report:coverage` | Ran — **41 of 41** topics meet §4 |
 
 `test:a11y` was **not** run and is **not** claimed; it arrives in S2-20.
 
 ## Work completed
 
-1. **The audit interrupts rather than constructs.** `persistence.test.ts` builds its saves by hand; every save here is
-   produced by answering questions through the real session engine and then stopping, so what is written is what a
-   learner's save would actually contain.
+1. **The queue is stored, not only the index** (D-067), for the reason the review session stores its own: a follow-up
+   spliced into the queue changes what every later index means.
 
-2. **The distinction the file is built on** — earned state versus position. Earned state must survive any
-   interruption. Position survives only where something persists it, and the table above says exactly where that is.
+2. **The position is the next unanswered question**, so a crash on the feedback panel does not re-ask what was just
+   answered — which would log the attempt twice.
 
-3. **Two defects found and fixed** (D-064, D-065), and a third finding about the tests themselves (D-066).
+3. **Two entry points, because both are things a learner asks for.** `startLesson` is unchanged; `resumeLesson` is
+   new. The screen names which one the button will do.
+
+4. **Cycle 1's honest "no position is kept" case was rewritten, not deleted**, into the six cases that now describe
+   resuming — including the fresh start that "start over" still means.
 
 ## Corrections made during the unit
 
-1. **A lesson recorded nothing until it was finished** (D-064). The `"in-progress"` status has existed since Stage 1
-   and nothing wrote it; `RegionScreen` read the status and then only asked whether it was `"completed"`. Both halves
-   fixed.
+1. **Cycle 1's case was pinned to the wrong function.** It asserted `startLesson` returns index 0 — still true after
+   this cycle — so the whole suite stayed green when resume landed. A test aimed at the path the behaviour does not
+   take proves nothing, which is the second time this unit has said so.
 
-2. **The atomicity test tested the wrong thing** (D-065). Replacing temp-then-rename with a plain write failed
-   nothing. Now the rename is made to fail and the previous contents must still be there.
+2. **A line of defence nobody could check was removed** rather than kept. Clearing the position at completion could
+   not be made to fail: `submitAnswer` had already recorded one past the last question, which is null by construction.
 
-3. **My own resume test read its expectation through the code under test** (D-066) — the third instance of D-059, this
-   time in a persistence unit. Now compared against the stored queue.
+3. **The follow-up case hand-built the queue it was meant to be testing.** It now earns the follow-up by giving the
+   answer that expresses the misconception — an ordinary wrong answer does not produce one, because remediation is
+   recommended on a diagnosed error.
 
-4. **Two probes were aimed at paths the behaviour does not take.** The review probe first patched
-   `startReviewSession`, which a resume never calls. A probe that fails nothing is not evidence until you have checked
-   it is pointed at the right code.
-
-5. **Three mistakes of mine in the first draft**: `shelveExperiment` does not exist (it is `saveExperiment`, and it
-   takes a shelf rather than a save); a review session built from one lesson has a single item and ends on the first
-   answer, so it cannot be interrupted; and `lessonProgress` was asserted mid-lesson before the write that creates it
-   existed — which is how D-064 was found.
+4. **The boss assertion was in the wrong place** — after a completed stage, where the record is null whether the
+   guard exists or not. Moved mid-stage.
 
 ## Verification that the guards have teeth
 
-Eight deliberate probes, all reverted. **Six bite; two found gaps now closed and re-probed:**
+Nine deliberate probes, all reverted. **Five bite; four found coverage gaps now closed and re-probed (D-068):**
 
 | Probe | Result |
 |---|---|
-| A lesson stops recording that it was started | **3 checks fail** |
-| Saving stops backing up the previous file | **3 checks fail** |
-| Backups are never rotated | **1 check fails** |
-| A missing save is answered with a fabricated empty one | **2 checks fail** |
-| Import accepts anything that parses as JSON | **2 checks fail** |
-| A boss stops advancing past the stage just argued | **13 checks fail** |
-| The adapter writes in place instead of temp-then-rename | **0 → 1 check fails** — D-065 |
-| The question on resume is picked afresh, not read from the frozen queue | **0 → 1 check fails** — D-066 |
+| Resuming ignores the kept position | **3 checks fail** |
+| The resumed index is one too far | **3 checks fail** |
+| The queue is rebuilt from the lesson rather than read from the save | **1 check fails** |
+| A kept queue naming missing questions is resumed onto anyway | **1 check fails** |
+| The save version is bumped without a migration | **6 checks fail** |
+| The position is recorded at the question just answered | **0 → 2 checks fail** |
+| Advancing stops recording the new position | **0 → 1 check fails** |
+| Finishing a lesson leaves its position behind | **0 fails — the line was unprovable and was removed** |
+| A boss step starts persisting a position too | **0 → 1 check fails** |
 
 ## Remaining work
 
-**Cycle 2: the lesson's position.** A review session persists its queue and index and a boss persists the stage it
-reached; a lesson persists neither, so an interrupted lesson restarts at question one. Closing that needs a save-shape
-change — `SAVE_SCHEMA_VERSION` 4 → 5 with a migration — and threading through the store and `LessonScreen`. It is
-measured and stated in the audit today rather than asserted around, so the gap is visible in the suite.
+None. S2-19 is Complete.
 
 ## Local commit
 
-`7425da1791d87fd5b9a13339fbb90aeac5b1db7c`
-
-## Remote verification
-
-```
-LOCAL_HEAD  = 7425da1791d87fd5b9a13339fbb90aeac5b1db7c
-REMOTE_HEAD = 7425da1791d87fd5b9a13339fbb90aeac5b1db7c
-VERIFIED: MATCH
-```
+Recorded in the follow-up commit; see `STAGE2_RECONSTRUCTION_BACKLOG.md`.
 
 ## Next unit
 
-**S2-19 cycle 2**, then S2-20 (the accessibility harness, where `test:a11y` becomes real).
+**S2-20 — the accessibility harness**, where `test:a11y` becomes a real script. Not started in this cycle.
