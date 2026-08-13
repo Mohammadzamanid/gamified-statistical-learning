@@ -802,3 +802,41 @@ Not a guard gap this time but a coverage gap, and the shape is worth keeping bec
 
 The general lesson: when a probe fails nothing, the question is not only "is the guard weak" but "does any test visit
 the state this breaks". Three of these four were the second. (S2-19)
+
+**D-069 — `test:a11y` exists now, and what it can see is written on it.**
+Scope §6 asks for a **DOM-capable** accessibility command and forbade naming one until it existed; every report since
+S2-14 said so rather than claiming it. It exists as of S2-20: a separate vitest config (`vitest.a11y.config.ts`,
+jsdom, `tests/a11y/**/*.test.tsx`) with its own environment, because the other 695 checks run in `node` against a pure
+core and a DOM there would be weight without purpose.
+
+**The limits are part of the deliverable, not a caveat on it.** jsdom builds an accessibility tree and dispatches
+events; it computes no layout and resolves no custom properties. So the harness can prove roles, accessible names,
+live regions, tab order, disabled state and keyboard operation, and it cannot prove contrast, paint, or that a focus
+ring is visible to an eye. Two checks are therefore split rather than overstated: a *visible focus* check asserts the
+stylesheet never removes an outline without putting something in its place, and leaves "is it visible" to GUI review;
+a *point-placement* check asserts the step, minimum and maximum a browser would move by, because jsdom does not
+implement a range input's arrow keys at all — a first draft asserted the movement and failed on jsdom rather than on
+the app.
+
+Names are computed by `dom-accessibility-api`'s real algorithm rather than a hand-rolled `aria-label ?? textContent`.
+The hand-rolled version reported the answer field as unnamed; it is named by a `<label for>`, which is the better way
+to do it. **A heuristic that flags correct markup is worse than no check.**
+
+One item of §6 has nothing to test: no modal ships, so focus trapping cannot be exercised. That is a claim, so it is
+defended like every other completeness claim here (D-014) — a check scans the renderer for a dialog role and fails the
+day one appears, naming what is then owed. (S2-20)
+
+**D-070 — A regex matched the very thing it was written to reject.**
+The visible-focus check asked whether a rule replaced the outline it removed, and expressed "an outline that is not
+`none`" as `/outline\s*:\s*(?!none)/`. That matches `outline: none`. The engine backtracks over `\s*`, evaluates the
+lookahead one character early — against `" none"` rather than `"none"` — and the negative lookahead succeeds. The
+probe that removed the app's focus ring failed nothing.
+
+The fix was to stop pattern-matching CSS and parse it: split declarations, compare the `outline` property's value to
+`none` directly, and name the properties that count as painting focus. A page of regex cleverness replaced by a set
+and a string comparison, which cannot be fooled this way.
+
+Worth stating generally, because this is the third guard in three units whose defect was invisible until probed: **a
+guard is not evidence until something has been broken in front of it.** D-063 found two chart guards that asked only
+whether a number appeared somewhere; D-068 found four probes that failed for want of a test visiting the state; this
+one found a guard that actively matched its own counterexample. None of the three were visible by reading. (S2-20)

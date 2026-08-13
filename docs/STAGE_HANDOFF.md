@@ -30,7 +30,7 @@ after Stage 1 was lost because commits were never pushed to a durable remote. Re
 | Default branch | `main` |
 | Pristine Stage 1 import | `7add4bc` — pushed and remote-verified |
 | Baseline docs + CI | `1b0a5dd` — pushed and remote-verified |
-| Last unit completed | **S2-19** — the save, resume and recovery audit, in two cycles. Every interruption point is measured, and a lesson now keeps its place |
+| Last unit completed | **S2-20** — the accessibility harness. `test:a11y` exists, runs 36 checks against the rendered app, and runs in CI |
 | Head of `main` | read it live: `git rev-parse HEAD` vs `git ls-remote origin refs/heads/main` — these must match |
 | Milestone snapshot commit | `d4e250434c465f85e4307a226a9af2cbc9788c17` — the commit the exports were built from |
 | Stage tag | `stage-1-baseline` — **created locally, NOT on GitHub** (unit R-00d, blocked; see §2.1) |
@@ -105,45 +105,38 @@ branch/tag deletion) are forbidden without explicit owner permission. See `REMOT
 
 ## 5. Next unit
 
-**S2-20 — the accessibility harness.** `test:a11y` **does not exist**: accessibility runs today inside `npm test` via
-`tests/unit/accessibility.test.ts`, and every report since S2-14 has said so rather than claiming a script it does not
-have. Adding it means editing `package.json` **and** the CI workflow together, and the script must be genuinely run
-before any report claims it passes.
+**S2-21 — the Stage 2 closure audit**, the last unit in the stage. It checks that everything Stage 2 claimed is true
+of the repository as it stands: every declared-complete list against the curriculum, every scope section against what
+was built, and every "Blocked" or "Partial" row against its stated reason. The declared-list device is everywhere by
+now — `complete-lessons.ts`, `complete-topics.ts`, `complete-bosses.ts`, the nine misconception parts, the no-modals
+claim added by S2-20 — and closure means each of them is checked in both directions.
 
-What already exists to build on: `src/core/accessibility/apply.ts` and the settings that drive it (theme including
-high-contrast, reduced motion, text scale, colour-blind-safe), the accessible-description rules the interaction audit
-enforces on every chart, and the text-equivalent rules the investigation audit enforces on every boss question. The
-gap is that none of it is exercised against a rendered DOM.
+**S2-20 is Complete and `test:a11y` exists.** It is a separate vitest config (`vitest.a11y.config.ts`, jsdom,
+`tests/a11y/**/*.test.tsx`) and runs in CI as its own step. Of scope §6's checklist, 14 items are covered, 2 are
+covered in part with the limit written down, and 1 (modal focus trapping) has nothing to test because no modal ships —
+defended by a check that fails the day one appears.
 
-**The save schema is at version 5.** Migrations 1→2 (`reviewSession`), 2→3 (`investigationProgress`), 3→4
-(`savedExperiments`) and 4→5 (`lessonSession`) live in `src/core/persistence/migrations.ts`. Any shape change needs a
-migration and a round-trip test; D-055 checks the chain against the version rather than trusting the two to travel
-together, and a probe bumping the version without a migration fails six checks.
+**Two things remain GUI review and must never be reported as automated:** contrast at each theme, and a real arrow key
+on a real range input. jsdom computes no layout and implements neither.
 
-**S2-19 is Complete, in two cycles.** Cycle 1 measured what an interruption costs at all five points the criteria
-name and found two defects — a lesson recorded nothing until it was finished (**D-064**) and the atomicity contract
-was untested (**D-065**). Cycle 2 gave a lesson a position of its own (**D-067**).
+**What to read before writing a guard, from the last three units.** A guard is not evidence until something has been
+broken in front of it, and all three of these were invisible by reading:
 
-**What to read before writing tests, from both cycles.**
+- *D-063:* two chart guards asked only whether a number appeared *somewhere* in the words. Moving a box plot's first
+  quartile from 10 to 9 failed nothing, because another sentence still said 10.
+- *D-068:* four probes failed for want of a test that visits the state they break — not for want of a guard.
+- *D-070:* `/outline\s*:\s*(?!none)/` matches `outline: none`. The engine backtracks over the `\s*` and evaluates
+  the lookahead a character early. Parse, do not pattern-match, when the thing being parsed has structure.
 
-*D-066 and D-059:* a test that reads its expectation through the code under test is not a test. Compare against the
-stored value.
+**And a heuristic that flags correct markup is worse than no check** (D-069): the first accessible-name check read
+`aria-label ?? textContent` and reported a properly `<label for>`-ed field as unnamed.
 
-*D-068:* when a probe fails nothing, ask **two** questions — is the guard weak, and does any test visit the state this
-breaks? Four probes in cycle 2 failed nothing and three of them were the second: no case had ever been interrupted
-between answering and advancing, no case had *earned* a remediation follow-up rather than hand-building one, and the
-boss assertion sat after a completed stage where the value is null either way. The fourth was a line of defence that
-could not be made to fail at all, and it was removed rather than kept.
-
-*D-062:* when a new way to reach content is added, grep for the old definition of reachable.
-
-**Probes must snapshot the working tree, not `git checkout --`** (S2-18): the baseline being probed is uncommitted by
-definition.
+**Probes must snapshot the working tree, not `git checkout --`** (S2-18).
 
 **Two conventions are settled and enforced.** Quartiles are the median of each half (D-045); the variance divides by
-how many readings there are (D-060). Both are pinned to the lessons' own published figures.
+how many readings there are (D-060).
 
-**Read D-061 before writing any generator.**
+**Read D-061 before writing any generator**, and D-062 before narrowing any audit to "questions a lesson lists".
 
 ### Region 2's architecture, and two rules it added
 
@@ -295,8 +288,10 @@ From Stage 1, confirmed still relevant:
 
 Added during reconstruction:
 
-- **`test:a11y` does not exist.** Accessibility runs via `tests/unit/accessibility.test.ts` under `npm test`. Adding an
-  a11y script requires editing `package.json` *and* the CI workflow together (unit S2-14).
+- **`test:a11y` exists as of S2-20** and runs in CI. It is a *separate* vitest config
+  (`vitest.a11y.config.ts`, jsdom, `tests/a11y/**/*.test.tsx`) because the other suite runs in `node` on a pure core.
+  It sees roles, accessible names, live regions, tab order and keyboard operation; it does **not** see contrast,
+  layout or paint, and anything needing those stays GUI review.
 - **Windows cannot be validated here.** Reconstruction runs on Linux. `package:win` is configured but never compiled.
   A green CI build proves buildability only, never that the GUI was manually exercised (unit X-02, Blocked).
 - `npm ci` reports 21 dependency advisories in the `electron-builder` toolchain. Left untouched on purpose so the

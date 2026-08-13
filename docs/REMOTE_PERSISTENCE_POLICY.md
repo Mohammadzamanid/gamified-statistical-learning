@@ -147,8 +147,11 @@ npm run test:content
 npm run build
 ```
 
-**`test:a11y` does not exist.** Accessibility is covered by `tests/unit/accessibility.test.ts` under `npm test`. Do not
-invoke a script that is not defined, and do not add one to CI without adding it to `package.json` first.
+**`test:a11y` exists as of S2-20**, and did not before it. It runs `vitest` against `vitest.a11y.config.ts`, which
+renders the real screens into jsdom. The rule that made its absence worth writing down still stands and is the general
+one: **do not invoke a script that is not defined, and do not add one to CI without adding it to `package.json`
+first.** What that script can and cannot prove is written on the harness itself — jsdom sees roles, names, live
+regions and tab order, and does not see paint.
 
 **Never modify a test merely to make the suite green.** If a baseline failure appears: determine whether it is
 environmental or a genuine source defect, document it, apply the smallest evidence-backed correction, re-run the

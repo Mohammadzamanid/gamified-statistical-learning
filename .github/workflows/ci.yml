@@ -3,9 +3,13 @@ name: CI
 # Baseline reconstruction CI.
 #
 # Every step below invokes a script that is actually defined in package.json.
-# NOTE: there is deliberately no `test:a11y` step — that script does not exist.
-# Accessibility is covered by tests/unit/accessibility.test.ts under `npm test`.
-# Adding an a11y step requires adding the script to package.json first (unit S2-14).
+#
+# `test:a11y` exists as of S2-20 and runs here. It renders the real screens into
+# jsdom and drives them by keyboard. What it does NOT do is see paint: jsdom
+# computes no layout and resolves no custom properties, so contrast ratios and
+# "is the focus ring visible" remain GUI review (scope §6, last paragraph). A
+# green a11y step is evidence about roles, names, live regions, tab order and
+# keyboard operability — not about how the app looks.
 #
 # A green run here is evidence of buildability only. It is NOT evidence that the
 # Electron GUI was manually exercised, and never evidence of Windows support.
@@ -70,6 +74,12 @@ jobs:
 
       - name: Content validation
         run: npm run test:content
+
+      # Renders the real screens into jsdom. Separate config, separate
+      # environment: the other 695 checks run in `node` on a pure core, and a
+      # DOM there would be weight without purpose.
+      - name: Accessibility harness
+        run: npm run test:a11y
 
       - name: Production build
         run: npm run build
