@@ -139,7 +139,15 @@ on a real range input. Both belong with X-02.
 
 ## Local commit
 
-Recorded in the follow-up commit; see `STAGE2_RECONSTRUCTION_BACKLOG.md`.
+`c5c85d0f232c65883e97318d237240f3aaed18ef`
+
+## Remote verification
+
+```
+LOCAL_HEAD  = c5c85d0f232c65883e97318d237240f3aaed18ef
+REMOTE_HEAD = c5c85d0f232c65883e97318d237240f3aaed18ef
+VERIFIED: MATCH
+```
 
 ## Next unit
 
