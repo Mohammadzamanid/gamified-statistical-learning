@@ -30,14 +30,14 @@ after Stage 1 was lost because commits were never pushed to a durable remote. Re
 | Default branch | `main` |
 | Pristine Stage 1 import | `7add4bc` — pushed and remote-verified |
 | Baseline docs + CI | `1b0a5dd` — pushed and remote-verified |
-| Last unit completed | **S2-20** — the accessibility harness. `test:a11y` exists, runs 36 checks against the rendered app, and runs in CI |
+| Last unit completed | **S2-21** — the Stage 2 closure audit. **Stage 2 is closed**; see `docs/STAGE2_CLOSURE.md` |
 | Head of `main` | read it live: `git rev-parse HEAD` vs `git ls-remote origin refs/heads/main` — these must match |
 | Milestone snapshot commit | `d4e250434c465f85e4307a226a9af2cbc9788c17` — the commit the exports were built from |
-| Stage tag | `stage-1-baseline` — **created locally, NOT on GitHub** (unit R-00d, blocked; see §2.1) |
+| Stage tags | `stage-1-baseline` and `stage-2-complete` — **both created locally, NEITHER on GitHub** (HTTP 403 on `refs/tags/*`; unit R-00d, blocked). Both are preserved in the exported bundle |
 | Milestone exports | `../gsl-exports/` — source ZIP + git bundle + manifest + SHA-256 checksums |
 | Working tree | clean |
 | Node / npm used | v22.22.2 / 10.9.7 |
-| Test suite | **695 tests / 48 files**, all passing (Stage 1 baseline was 73 / 14) |
+| Test suite | **707 tests / 49 files**, all passing, plus 36 accessibility checks (Stage 1 baseline was 73 / 14) |
 | Build | passing (**873.56 kB, 224.47 kB gzip**; baseline was 285.73 kB / 83.82 kB) |
 | Source modified since baseline | S2-01 … S2-08 — achievements + region completion, three new interactions, the enforced interaction audit, the review queue, the Region 1 topic architecture, and all 17 Region 1 lessons |
 | Curriculum | 2 regions · **10 modules** · **40 lessons** · **42 skills** · **290 questions** (baseline 2/2/3/6/14) |
@@ -105,38 +105,41 @@ branch/tag deletion) are forbidden without explicit owner permission. See `REMOT
 
 ## 5. Next unit
 
-**S2-21 — the Stage 2 closure audit**, the last unit in the stage. It checks that everything Stage 2 claimed is true
-of the repository as it stands: every declared-complete list against the curriculum, every scope section against what
-was built, and every "Blocked" or "Partial" row against its stated reason. The declared-list device is everywhere by
-now — `complete-lessons.ts`, `complete-topics.ts`, `complete-bosses.ts`, the nine misconception parts, the no-modals
-claim added by S2-20 — and closure means each of them is checked in both directions.
+**Stage 2 is closed.** S2-01 through S2-21 are Complete, each with a commit pushed and a remote hash verified before
+it was recorded. `docs/STAGE2_CLOSURE.md` is the measured record: totals computed from the repository, the closing
+validation sweep, scope §10's twelve guards, and — as plainly as the rest — everything that is **not** closed.
 
-**S2-20 is Complete and `test:a11y` exists.** It is a separate vitest config (`vitest.a11y.config.ts`, jsdom,
-`tests/a11y/**/*.test.tsx`) and runs in CI as its own step. Of scope §6's checklist, 14 items are covered, 2 are
-covered in part with the limit written down, and 1 (modal focus trapping) has nothing to test because no modal ships —
-defended by a check that fails the day one appears.
+**Stage 3 has no scope document yet.** Writing one is the first unit. `STAGE2_RECONSTRUCTION_SCOPE.md` is the model to
+follow, and the two sections that earned their keep are §9 (a status vocabulary where **Partial** must name exactly
+what is missing and may never count toward closure) and §10 (closure guards written as conditions a test must *fail*
+on — which is what made them enforceable in S2-21 rather than aspirational).
 
-**Two things remain GUI review and must never be reported as automated:** contrast at each theme, and a real arrow key
-on a real range input. jsdom computes no layout and implements neither.
+**What Stage 3 inherits, and must not silently break.**
 
-**What to read before writing a guard, from the last three units.** A guard is not evidence until something has been
-broken in front of it, and all three of these were invisible by reading:
+- **Two regions, both complete**: 40 lessons, 2 boss investigations, 309 authored questions, 210 generator families,
+  12,889 validated generated interactions, 41 of 41 topics meeting scope §4.
+- **Save schema version 5**, with a migration for every step from 1. Any shape change needs one, and D-055 checks the
+  chain against the version rather than trusting the two to travel together.
+- **Six declared-completeness lists**, each defended in both directions: `complete-lessons.ts`, `complete-topics.ts`,
+  `complete-bosses.ts` (its "owing" list is empty and must stay accounted for), the nine misconception parts, the
+  no-modals claim, and the backlog's own Complete rows.
+- **Nine audit files plus the closure audit.** Adding a region, an interaction type or a chart kind means extending
+  them; scope §10 guards 8, 9 and 3 exist to make forgetting fail loudly.
+- **The laboratory's two conventions**: quartiles by median-of-halves (D-045), variance by the population denominator
+  (D-060). Both are what the lessons teach and both are pinned to the lessons' own published figures.
 
-- *D-063:* two chart guards asked only whether a number appeared *somewhere* in the words. Moving a box plot's first
-  quartile from 10 to 9 failed nothing, because another sentence still said 10.
-- *D-068:* four probes failed for want of a test that visits the state they break — not for want of a guard.
-- *D-070:* `/outline\s*:\s*(?!none)/` matches `outline: none`. The engine backtracks over the `\s*` and evaluates
-  the lookahead a character early. Parse, do not pattern-match, when the thing being parsed has structure.
+**The three habits worth carrying, each of which cost a unit to learn.** They are written out at the end of
+`STAGE2_CLOSURE.md` too, because that is the document a Stage 3 opener will read:
 
-**And a heuristic that flags correct markup is worse than no check** (D-069): the first accessible-name check read
-`aria-label ?? textContent` and reported a properly `<label for>`-ed field as unnamed.
+1. *A guard is not evidence until something has been broken in front of it* — D-063, D-068, D-070 were all guards that
+   read correctly and could not fail.
+2. *A test that reads its expectation through the code under test is not a test* — D-059, D-066.
+3. *A completeness claim is a declared list defended by an audit, not a sentence in a document* — D-014.
 
-**Probes must snapshot the working tree, not `git checkout --`** (S2-18).
-
-**Two conventions are settled and enforced.** Quartiles are the median of each half (D-045); the variance divides by
-how many readings there are (D-060).
-
-**Read D-061 before writing any generator**, and D-062 before narrowing any audit to "questions a lesson lists".
+**And the rule the whole reconstruction exists because of:** a unit is not Complete until its commit is pushed and
+`git rev-parse HEAD` is verified equal to `git ls-remote origin refs/heads/main`. Since S2-21 that is machine-checked
+— guard 11 reads every Complete row out of the backlog and fails if the hashes disagree, are missing, or were never
+verified.
 
 ### Region 2's architecture, and two rules it added
 

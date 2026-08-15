@@ -6,64 +6,50 @@ Exactly one Stage 2 unit is active at a time. Rewritten at the start and end of 
 
 ## Current unit
 
-**S2-20 — the accessibility harness and audit**
+**S2-21 — the Stage 2 closure audit. This is the last unit of the stage.**
 
-Entered from `c85b02fb5bdfb8bdca1f42747823e46a19cd7eb3` (remote-verified, clean tree).
+Entered from `e924dbee625447e3a49a086048bfcf1dce6fcf52` (remote-verified, clean tree).
 
 ## Objective
 
-Add the **real DOM-capable** accessibility command scope §6 requires — which may only be called `test:a11y` once it
-genuinely exists — wire it into CI, and cover §6's checklist against the rendered app rather than against intentions.
+Make scope §10's twelve closure drift guards enforceable, measure the stage's totals from the repository, run the full
+validation sweep, and complete the closure bookkeeping — tag, exports, and an honest record of what is *not* closed.
 
 ## Result up front
 
-**S2-20 is Complete.** `test:a11y` exists, runs 36 checks against the real screens in jsdom, and runs in CI.
+**S2-21 is Complete, and Stage 2 is closed.** The measured record is `docs/STAGE2_CLOSURE.md`.
 
 | Measure | Value |
 |---|---|
-| New command | `npm run test:a11y` — `vitest.a11y.config.ts`, jsdom, `tests/a11y/**/*.test.tsx` |
-| Accessibility checks | **36**, across three files |
-| Suite | **695** tests / 48 files, unchanged — the harness is a separate run |
-| CI | a new **Accessibility harness** step, and the comment saying the script must not appear is gone |
-| Probes | 10; **9 bit immediately, 1 found a guard that matched its own counterexample** |
-
-## Scope §6, item by item
-
-Fourteen covered, two covered in part with the limit stated, one not applicable and defended as such.
-
-| § 6 check | State |
-|---|---|
-| Keyboard-only navigation | **Covered** — every enabled control is reached by tabbing, and the answer submits on Enter |
-| Logical focus order | **Covered** — abandon, then the answer, then the hint |
-| Visible focus | **Partly** — the stylesheet may not remove an outline without replacing it; whether the ring reads to an eye is GUI review |
-| Accessible names | **Covered** — computed by the real algorithm, not a heuristic |
-| Live-region feedback | **Covered** |
-| Error announcements | **Covered** — a wrong step changes what the live region says |
-| Modal focus trapping | **Not applicable** — no modal ships; a check fails the day one appears |
-| Reduced motion | **Covered** — attribute set *and* acted on by the stylesheet |
-| Adjustable text size | **Covered** — all four scales |
-| High contrast | **Covered** |
-| Light and dark themes | **Covered** |
-| Colour-independent correctness | **Covered** — the verdict is words, the ✓/✕ is `aria-hidden` |
-| Accessible chart descriptions | **Covered** — all five chart kinds, name equals the content's description |
-| Point-placement keyboard controls | **Partly** — labelled sliders, correct step/min/max, keyboard submit; jsdom does not implement a range's arrow keys |
-| Drag-and-drop keyboard alternatives | **Covered** — a select per item naming every zone, and a keyboard submit |
-| Focus preservation after feedback | **Covered** — focus stays inside the question |
-| No mouse-only required action | **Covered** |
+| Closure guards enforced | **12 of 12**, each failing independently |
+| Tests | **707** / 49 files (695 at the start of the unit) |
+| Accessibility checks | 36 / 3 files |
+| Topics meeting scope §4 | 41 of 41 |
+| Probes | 9; **all nine bite** |
+| Units in the stage | S2-01 … S2-21, every one with a verified remote hash |
 
 ## Relevant files
 
 | File | Change |
 |---|---|
-| `package.json` | **New.** `test:a11y`, and the devDependencies it needs |
-| `vitest.a11y.config.ts` | **New.** jsdom environment, `.tsx` includes, its own setup |
-| `tests/a11y/setup.ts` | **New.** Loads the real stylesheet into the document; stubs `matchMedia` |
-| `tests/a11y/question-screen.test.tsx` | **New.** Names, focus order, keyboard operation, live feedback |
-| `tests/a11y/presentation.test.tsx` | **New.** Themes, text scale, motion, focus style, chart descriptions |
-| `tests/a11y/interactions.test.tsx` | **New.** Point placement, drag and drop, step calculation, focus after answering |
-| `tests/a11y/dom-accessibility-api.d.ts` | **New.** Typings shim for a package whose `exports` map omits them |
-| `.github/workflows/ci.yml` | The harness runs; the note explaining its absence is replaced by one explaining its limits |
-| `docs/REMOTE_PERSISTENCE_POLICY.md`, `docs/STAGE_HANDOFF.md` | The standing "does not exist" notes corrected |
+| `tests/audit/stage2-closure.test.ts` | **New.** Scope §10's twelve guards, in the scope's own order |
+| `docs/STAGE2_CLOSURE.md` | **New.** The closure record: measured totals, the sweep, what is not closed, and why |
+| `docs/STAGE2_RECONSTRUCTION_BACKLOG.md` | S2-21 closed with its verified hashes |
+
+## Acceptance criteria
+
+| # | Criterion | Met |
+|---|---|---|
+| 1 | Full validation suite run at the closing commit | **Yes** — every command run, none reported from memory |
+| 2 | Measured totals | **Yes** — `STAGE2_CLOSURE.md` §2, computed from the repository |
+| 3 | Fresh-save playthrough | **Yes** — both regions, both cases, one save (S2-18) |
+| 4 | Save/resume audit | **Yes** — S2-19, 26 checks |
+| 5 | Laboratory audit | **Yes** — S2-15, and its shelf is covered by the resume audit |
+| 6 | Remote-persistence audit | **Yes** — guard 11 reads it out of the backlog |
+| 7 | Closure drift guards enforced | **Yes** — 12 of 12 |
+| 8 | Final commit pushed and verified | Yes — see below |
+| 9 | `stage-2-complete` tag pushed **or explicitly marked blocked** | **Marked blocked** — HTTP 403 on `refs/tags/*`, as R-00d |
+| 10 | Source ZIP + git bundle exported outside history | **Yes** — `../gsl-exports/`, checksummed, bundle verified |
 
 ## Required tests
 
@@ -73,82 +59,69 @@ Measured (Node v22.22.2 / npm 10.9.7):
 |---|---|
 | `npm run typecheck` | Pass |
 | `npm run lint` | Pass — 0 errors, 0 warnings |
-| `npm test` | Pass — **695 tests / 48 files** |
-| `npm run test:a11y` | Pass — **36 tests / 3 files** |
+| `npm test` | Pass — **707 tests / 49 files** |
+| `npm run test:a11y` | Pass — 36 tests / 3 files |
 | `npm run test:statistics` | Pass — 18 tests / 3 files |
 | `npm run test:content` | Pass — 5 tests / 1 file |
-| `npm run build` | Pass — 901.05 kB (231.05 kB gzip), unchanged: the harness ships nothing |
-| `npm run report:coverage` | Ran — **41 of 41** topics meet §4 |
-
-**`test:a11y` was run this cycle and is claimed.** That sentence has been the opposite in every report since S2-14.
+| `npm run build` | Pass — 901.05 kB (231.05 kB gzip) |
+| `npm run report:coverage` | Ran — 41 of 41 topics meet §4 |
 
 ## Work completed
 
-1. **A separate config, not a second include.** The existing suite runs in `node` against a pure core; these render
-   React into jsdom. One environment cannot serve both without putting a DOM under 695 checks that do not want one.
+1. **The closure list is enforceable rather than descriptive.** §10 was twelve sentences that several audit files
+   happened to satisfy between them. A rule living in another file can be narrowed by a unit that has no idea §10
+   depends on it, so each guard is exercised here from the closure list's own wording, naming the file that owns the
+   detail.
 
-2. **The real stylesheet is loaded into the test document**, so a check about a focus style or a theme reads the CSS
-   that ships rather than a value the test invented.
+2. **The two document guards had never been checked by anything.** Every Complete backlog row must carry a local hash,
+   a remote hash, the two equal, and a cell recording the verification — read out of the document, because the
+   document is the record. And every `npm run` the CI workflow invokes must exist in `package.json`.
 
-3. **What the harness cannot see is written on the harness** (D-069) — contrast, layout and paint. Two checks are
-   split around that boundary rather than overstated, and the CI comment says the same thing to whoever reads the run.
+3. **The closure record states what is not closed** as plainly as what is: two blocked GitHub operations, one deferred
+   dependency triage, Windows, and two items that stay GUI review.
 
 ## Corrections made during the unit
 
-1. **A regex matched what it was written to reject** (D-070). `/outline\s*:\s*(?!none)/` matches `outline: none`,
-   because the engine backtracks over `\s*` and tests the lookahead a character early. The probe that removed the
-   app's focus ring failed nothing. CSS is parsed now instead of pattern-matched.
+1. **A probe was sharper than the guard it aimed at.** Pointing a region achievement at a missing region is refused by
+   `loadShippedContent` before any check runs — a stronger outcome, and one that never exercises guard 8. Removing the
+   achievement entirely does, and that is the probe now recorded.
 
-2. **A hand-rolled accessible-name check flagged correct markup.** Reading `aria-label ?? textContent` reported the
-   answer field as unnamed — it is named by a `<label for>`, which is the better way to do it. Replaced with the real
-   algorithm.
-
-3. **A first draft asserted an arrow key moves a range input.** jsdom does not implement that; the failure was the
-   harness's, not the app's. Split into what jsdom can prove and what stays GUI review.
-
-4. **Three assumptions about the app were simply wrong** in the first draft: the numeric field is a `textbox`, not a
-   `spinbutton`; the submit button is disabled until something is typed; `applyToRoot` takes the root element as an
-   argument. All found by running it.
-
-5. **The focus-order check flagged `.region-node:focus-visible { outline: none }`** while the very next rule painted
-   the ring on a child element — the pattern being too eager, which is D-047's lesson arriving in a new file.
+2. **Two reads of the coverage report were wrong** in the first draft: `reasoningFamilies` is a list, not a count, and
+   the thresholds live in `report.ts` rather than a `thresholds` module. Both found by running it.
 
 ## Verification that the guards have teeth
 
-Ten deliberate probes, all reverted. **Nine bite; one found a guard that could not fail:**
+Nine deliberate probes, all reverted. **All nine bite:**
 
 | Probe | Result |
 |---|---|
-| The verdict stops being announced | **4 checks fail** |
-| The verdict becomes a symbol and a colour | **1 check fails** |
-| A chart loses its text equivalent | **1 check fails** |
-| The answer field loses its label | **1 check fails** |
-| Point placement leaves only the plot to click | **3 checks fail** |
-| Drag and drop loses its keyboard alternative | **1 check fails** |
-| The step calculation stops pointing at its live region | **2 checks fail** |
-| A theme the settings offer is dropped from the stylesheet | **1 check fails** |
-| The progress bar loses its name | **1 check fails** |
-| Focus is removed with nothing put in its place | **0 → 1 check fails** — D-070 |
+| A completed unit's recorded hashes disagree | **1 check fails** |
+| A completed unit records no hash at all | **1 check fails** |
+| A completed unit is not verified against the remote | **1 check fails** |
+| CI runs a script `package.json` does not define | **1 check fails** |
+| A region loses its completion achievement | **1 check fails** |
+| A skill is classified into a stage that has not begun | **1 check fails** |
+| A region is left owing a boss at closure | **1 check fails** |
+| The fresh-save playthrough stops naming a region | **1 check fails** |
+| A distractor names a misconception its question never declares | **1 check fails** |
 
 ## Remaining work
 
-None. S2-20 is Complete.
-
-Two items stay GUI review and are recorded as such rather than as passes: contrast at each theme, and a real arrow key
-on a real range input. Both belong with X-02.
+None. S2-21 is Complete and **Stage 2 is closed**. See `docs/STAGE2_CLOSURE.md`.
 
 ## Local commit
 
-`c5c85d0f232c65883e97318d237240f3aaed18ef`
+`ff22de27080d7b82f5f3dc9ea6d95b66931fd6cf` (the audit), plus this cycle's documentation commit recorded in the
+backlog.
 
 ## Remote verification
 
 ```
-LOCAL_HEAD  = c5c85d0f232c65883e97318d237240f3aaed18ef
-REMOTE_HEAD = c5c85d0f232c65883e97318d237240f3aaed18ef
+LOCAL_HEAD  = ff22de27080d7b82f5f3dc9ea6d95b66931fd6cf
+REMOTE_HEAD = ff22de27080d7b82f5f3dc9ea6d95b66931fd6cf
 VERIFIED: MATCH
 ```
 
 ## Next unit
 
-**S2-21 — the Stage 2 closure audit.** Not started in this cycle.
+**Stage 3.** Its scope is not written yet; `STAGE_HANDOFF.md` §5 says what a Stage 3 opener needs to read first.
