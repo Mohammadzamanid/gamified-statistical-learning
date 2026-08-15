@@ -111,8 +111,8 @@ None. S2-21 is Complete and **Stage 2 is closed**. See `docs/STAGE2_CLOSURE.md`.
 
 ## Local commit
 
-`ff22de27080d7b82f5f3dc9ea6d95b66931fd6cf` (the audit), plus this cycle's documentation commit recorded in the
-backlog.
+`ff22de27080d7b82f5f3dc9ea6d95b66931fd6cf` (the audit) and `70a406c9d85334a350b5fb88a5dd112f8992ca22` (the closure documents). Both pushed;
+both verified equal to the remote before being recorded here.
 
 ## Remote verification
 
